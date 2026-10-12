@@ -1,0 +1,261 @@
+---
+// Dictionary app — English→Marathi and Hindi→Marathi word lookup over the
+// full curriculum vocabulary. Client-side: vocab is embedded once, search
+// runs instantly in the browser, audio via the shared SayScript TTS.
+import Base from '../../layouts/Base.astro';
+import SayScript from '../../components/SayScript.astro';
+import AppCTA from '../../components/AppCTA.astro';
+import { vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const title = 'English to Marathi Dictionary — Hindi to Marathi Word Search | Bol Marathi';
+const description =
+	'Free Marathi dictionary app: type any English or Hindi word and get the Marathi word instantly — 1,167 curriculum words with pronunciation, Hindi meanings and example sentences.';
+
+// trim to the fields the app needs
+const words = vocab.map((w) => ({
+	mr: w.marathi,
+	tr: w.transliteration,
+	en: w.english,
+	hi: w.hindi,
+	exMr: w.exampleMarathi,
+	exEn: w.exampleEnglish,
+}));
+const dataJson = JSON.stringify(words);
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Dictionary', href: siteUrl('/dictionary/') },
+	]}
+>
+	<div class="prose">
+		<p class="kicker">Marathi Dictionary App</p>
+		<h1>English to Marathi Dictionary</h1>
+		<p class="lede">
+			Type a word in <strong>English</strong> or <strong>Hindi</strong> — get the Marathi word
+			instantly. <strong>{words.length} curriculum words</strong>, every one with pronunciation,
+			Hindi meaning and a real example sentence. Works offline once loaded.
+		</p>
+
+		<div class="dict-app" id="dict-app">
+			<div class="dict-toggle" role="tablist" aria-label="Search direction">
+				<button type="button" class="mode on" data-dir="en" role="tab" aria-selected="true">English → मराठी</button>
+				<button type="button" class="mode" data-dir="hi" role="tab" aria-selected="false">हिंदी → मराठी</button>
+			</div>
+			<div class="dict-search">
+				<input
+					type="text"
+					id="dict-input"
+					placeholder="Type a word… (water, पाणी, paani)"
+					autocomplete="off"
+					aria-label="Search word"
+				/>
+			</div>
+			<p class="dict-count" id="dict-count" aria-live="polite"></p>
+			<div class="dict-results" id="dict-results"></div>
+			<p class="dict-hint">
+				Tip: the 🔊 button reads each word aloud in Marathi. Example sentences come from the real
+				Bol Marathi curriculum.
+			</p>
+		</div>
+
+		<h2>How it works</h2>
+		<p>
+			Every word comes from the Bol Marathi curriculum — the same 1,167 words used across the
+			<a href={siteUrl('/vocabulary/')}>vocabulary lists</a>,
+			<a href={siteUrl('/lessons/')}>lessons</a> and
+			<a href={siteUrl('/games/')}>games</a>. Search matches English meanings, Hindi meanings,
+			Devanagari spellings and romanised pronunciation, so however you think of the word, you find it.
+		</p>
+
+		<h2>More ways to build vocabulary</h2>
+		<ul>
+			<li><a href={siteUrl('/hindi-to-marathi/words/')}>Hindi to Marathi words</a> — grouped by topic</li>
+			<li><a href={siteUrl('/english-to-marathi/words/')}>English to Marathi words</a> — grouped by topic</li>
+			<li><a href={siteUrl('/games/')}>Five Marathi games</a> — make the words stick</li>
+		</ul>
+
+		<p class="guide-cta"><AppCTA variant="general" context="dictionary" /></p>
+	</div>
+</Base>
+
+<SayScript />
+
+<script type="application/json" id="dict-data" set:html={dataJson} />
+
+<style>
+	.dict-app {
+		background: var(--card);
+		border: var(--border);
+		border-radius: var(--radius-lg);
+		padding: 1.25em;
+		margin: 1.5em 0;
+	}
+	.dict-search input {
+		width: 100%;
+		font: inherit;
+		font-size: 1.15rem;
+		padding: 0.75em 1em;
+		border: 2px solid rgb(223 192 183 / 0.7);
+		border-radius: var(--radius);
+		background: var(--paper);
+		color: rgb(var(--black));
+	}
+	.dict-search input:focus-visible {
+		outline: 2px solid var(--accent);
+	}
+	.dict-count {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		margin: 0.75em 0 0.5em 0;
+		min-height: 1.4em;
+	}
+	.dict-results {
+		display: grid;
+		gap: 0.6em;
+	}
+	.dict-row {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 0.9em;
+		align-items: center;
+		background: var(--paper);
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.7em 0.9em;
+	}
+	.dict-mr {
+		font-size: 1.35rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
+	.dict-body .dict-en {
+		font-weight: 600;
+	}
+	.dict-body .dict-hi {
+		color: rgb(var(--gray));
+		font-size: 0.9rem;
+	}
+	.dict-body .dict-ex {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		margin-top: 0.25em;
+	}
+	.dict-hint {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		margin: 1em 0 0 0;
+	}
+	@media (max-width: 560px) {
+		.dict-row {
+			grid-template-columns: 1fr auto;
+		}
+		.dict-row .say {
+			grid-column: 1;
+		}
+	}
+</style>
+
+<script>
+	import { splitGraphemes, normalizeMr } from '../../lib/games/graphemes';
+
+	type W = { mr: string; tr: string; en: string; hi: string; exMr: string; exEn: string };
+
+	function init() {
+		const app = document.getElementById('dict-app');
+		const dataEl = document.getElementById('dict-data');
+		if (!app || !dataEl || app.dataset.bound) return;
+		app.dataset.bound = '1';
+		let words: W[] = [];
+		try {
+			words = JSON.parse(dataEl.textContent || '[]') as W[];
+		} catch {
+			return;
+		}
+
+		const input = document.getElementById('dict-input') as HTMLInputElement;
+		const countEl = document.getElementById('dict-count') as HTMLElement;
+		const results = document.getElementById('dict-results') as HTMLElement;
+		const modes = Array.from(app.querySelectorAll('.mode')) as HTMLButtonElement[];
+		let dir: 'en' | 'hi' = 'en';
+
+		const esc = (s: string) => s.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+
+		function norm(s: string) {
+			return normalizeMr(s.toLowerCase().trim());
+		}
+
+		function search(q: string): W[] {
+			const nq = norm(q);
+			if (!nq) return [];
+			const scored: { w: W; s: number }[] = [];
+			for (const w of words) {
+				const en = w.en.toLowerCase();
+				const hi = norm(w.hi);
+				const mr = norm(w.mr);
+				const tr = w.tr.toLowerCase();
+				let s = 0;
+				if (dir === 'en') {
+					if (en === nq) s = 100;
+					else if (en.startsWith(nq)) s = 80;
+					else if (en.includes(nq)) s = 50;
+					if (nq.length > 2 && tr.startsWith(nq)) s = Math.max(s, 70);
+					if (nq.length > 2 && mr.includes(nq)) s = Math.max(s, 40);
+				} else {
+					if (hi === nq) s = 100;
+					else if (hi.includes(nq)) s = 60;
+					if (nq.length > 2 && mr.includes(nq)) s = Math.max(s, 70);
+					if (nq.length > 2 && en.includes(nq)) s = Math.max(s, 40);
+				}
+				if (s > 0) scored.push({ w, s });
+			}
+			return scored.sort((a, b) => b.s - a.s).slice(0, 30).map((x) => x.w);
+		}
+
+		function render(q: string) {
+			const hits = search(q);
+			countEl.textContent = q.trim()
+				? `${hits.length} match${hits.length === 1 ? '' : 'es'} for “${q.trim()}”`
+				: `${words.length} words — start typing to search`;
+			results.innerHTML = hits.length
+				? hits
+						.map(
+							(w) => `<div class="dict-row">
+				<span class="dict-mr" lang="mr">${esc(w.mr)}</span>
+				<div class="dict-body">
+					<div class="dict-en">${esc(w.en)} <span style="font-weight:400">· ${esc(w.tr)}</span></div>
+					<div class="dict-hi" lang="hi">Hindi: ${esc(w.hi)}</div>
+					<div class="dict-ex"><span lang="mr">${esc(w.exMr)}</span> — ${esc(w.exEn)}</div>
+				</div>
+				<button type="button" class="say" data-say="${esc(w.mr)}" aria-label="Listen: ${esc(w.tr)}">🔊</button>
+			</div>`
+						)
+						.join('')
+				: q.trim()
+					? `<p style="color:rgb(var(--gray))">No match — try a shorter form, or browse the <a href="/learn-marathi/vocabulary/">vocabulary lists</a>.</p>`
+					: '';
+		}
+
+		input.addEventListener('input', () => render(input.value));
+		for (const m of modes) {
+			m.addEventListener('click', () => {
+				dir = (m.dataset.dir as 'en' | 'hi') ?? 'en';
+				for (const o of modes) {
+					o.classList.toggle('on', o === m);
+					o.setAttribute('aria-selected', String(o === m));
+				}
+				input.placeholder = dir === 'en' ? 'Type a word… (water, पाणी, paani)' : 'हिंदी में लिखें… (पानी, नमस्कार)';
+				render(input.value);
+				input.focus();
+			});
+		}
+		render('');
+	}
+
+	init();
+	document.addEventListener('astro:page-load', init);
+</script>
