@@ -8,12 +8,18 @@ export interface Props {
 		name: string;
 	};
 	detail?: boolean;
+	live?: boolean;
 }
-const { project, detail = false } = Astro.props;
+const { project, detail = false, live = false } = Astro.props;
 ---
 
 <div class:list={['project-preview', project.color]} aria-label={`${project.name}: illustrative concept preview`}>
 	<span class="preview-label">CONCEPT PREVIEW</span>
+	{live && (
+		<span class="live-float">
+			<span class="live-dot"></span> Live — play now
+		</span>
+	)}
 	{project.kind === 'marathi' && (
 		<>
 			<div class="marathi-word" lang="mr">नमस्कार<span>Hello, new beginnings.</span></div>

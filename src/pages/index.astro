@@ -63,14 +63,13 @@ const description =
 				))}
 			</div>
 			<div class="project-grid">
-				{
+					{
 					projects.map((project, index) => (
 						<a class="project-card" href={`/projects/${project.slug}/`} data-category={project.category}>
-							<ProjectPreview project={project} />
+							<ProjectPreview project={project} live={project.slug === 'marathi-learning'} />
 							<div class="project-info">
 								<div class="project-meta">
 									<span>{project.category}</span>
-									{project.slug === 'marathi-learning' && <span class="live-pill">● LIVE — TRY IT</span>}
 									<span>0{index + 1} / BUILD</span>
 								</div>
 								<div class="project-title">
@@ -200,9 +199,10 @@ const description =
 	for (const btn of buttons) {
 		btn.addEventListener('click', () => {
 			const f = btn.dataset.filter;
-			for (const b of buttons) b.setAttribute('aria-pressed', String(b === btn));
-			b.classList.toggle('selected', true);
-			for (const other of buttons) if (other !== btn) other.classList.remove('selected');
+			for (const other of buttons) {
+				other.setAttribute('aria-pressed', String(other === btn));
+				other.classList.toggle('selected', other === btn);
+			}
 			for (const card of cards) {
 				card.style.display = f === 'All builds' || card.dataset.category === f ? '' : 'none';
 			}
@@ -265,5 +265,16 @@ const description =
 		background: #eaf6ee;
 		font-weight: 700;
 		letter-spacing: 0.6px;
+	}
+</style>
+
+<style>
+	/* premium card motion */
+	.project-card .project-preview {
+		transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.3s ease;
+	}
+	.project-card:hover .project-preview {
+		transform: translateY(-4px);
+		box-shadow: 0 22px 48px rgba(48, 43, 39, 0.16);
 	}
 </style>
