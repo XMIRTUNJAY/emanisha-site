@@ -1,18 +1,15 @@
-# Deploy to Hostinger — https://emanisha.in
+# Deploy via Git — https://emanisha.in
 #
-# On every push to main: build the Astro site, then FTP the dist/ contents
-# to the hosting root (public_html). This REPLACES the old AI-builder site —
-# make sure it is disconnected in hPanel before the first run.
+# On every push to main: build the site, then publish the finished dist/
+# contents to the `deploy` branch. Hostinger's Git integration (hPanel →
+# Git) is connected to that branch and pulls it into public_html — no FTP.
 #
-# Required repo secrets (Settings → Secrets and variables → Actions → New):
-#   FTP_SERVER    — e.g. ftp.emanisha.in or the Hostinger FTP hostname
-#   FTP_USERNAME  — FTP account username
-#   FTP_PASSWORD  — FTP account password
-#
-# If your FTP account is scoped directly to public_html, change
-# server-dir below to just "/".
+# Hostinger Git settings:
+#   repository : XMIRTUNJAY/emanisha-site
+#   branch     : deploy
+#   target dir : public_html
 
-name: Deploy to Hostinger
+name: Build and publish deploy branch
 
 on:
   push:
@@ -20,7 +17,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-deploy:
@@ -41,13 +38,10 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Deploy dist/ to public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Publish dist/ to the deploy branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps-legacy
-          server-dir: /public_html/
-          local-dir: dist/
-          dangerous-clean-slate: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: deploy
+          force_orphan: true
