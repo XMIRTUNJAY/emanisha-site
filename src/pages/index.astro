@@ -70,6 +70,7 @@ const description =
 							<div class="project-info">
 								<div class="project-meta">
 									<span>{project.category}</span>
+									{project.slug === 'marathi-learning' && <span class="live-pill">● LIVE — TRY IT</span>}
 									<span>0{index + 1} / BUILD</span>
 								</div>
 								<div class="project-title">
@@ -256,3 +257,13 @@ const description =
 		}
 	});
 </script>
+
+<style>
+	.live-pill {
+		color: #1a7f37;
+		border: 1px solid #1a7f37;
+		background: #eaf6ee;
+		font-weight: 700;
+		letter-spacing: 0.6px;
+	}
+</style>
