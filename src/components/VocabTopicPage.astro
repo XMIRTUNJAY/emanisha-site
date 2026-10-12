@@ -1,0 +1,166 @@
+---
+// VocabTopicPage — full page template for data-driven vocabulary topics
+// (src/data/seo/vocab-topics.json). Renders ONLY curriculum-traced words.
+import Learn from '../layouts/Learn.astro';
+import VocabTable from './VocabTable.astro';
+import VocabCard from './VocabCard.astro';
+import QuickPractice from './QuickPractice.astro';
+import MistakeTable from './MistakeTable.astro';
+import AppCTA from './AppCTA.astro';
+import RelatedContent from './RelatedContent.astro';
+import SentenceBuilder from './SentenceBuilder.astro';
+import { getUnit } from '../lib/learn';
+import { wordsFor, relatedFor, type SeoPage, FAMILY_BASE, FAMILY_LABEL } from '../lib/seo';
+import { siteUrl } from '../lib/site';
+
+type Props = { page: SeoPage };
+const { page } = Astro.props;
+
+const words = wordsFor(page);
+const related = relatedFor(page);
+const builders = (page.units ?? [])
+	.flatMap((no) =>
+		getUnit(no).sentenceBuilder.map((b) => ({
+			tokens: b.tokens,
+			answer: b.answer,
+			prompt: b.promptEn || b.prompt,
+			hindi: b.hindi,
+		})),
+	)
+	.slice(0, 5);
+const metaBits = [
+	`${words.length} words`,
+	...(page.units?.length ? [page.units.length > 1 ? `Units ${page.units.join(', ')}` : `Unit ${page.units[0]}`] : []),
+];
+---
+
+<Learn
+	title={page.title}
+	h1={page.h1 ?? page.title}
+	description={page.description}
+	kicker={FAMILY_LABEL[page.family]}
+	crumbs={[
+		{ label: FAMILY_LABEL[page.family], href: siteUrl(FAMILY_BASE[page.family]) },
+		{ label: page.title, href: siteUrl(`${FAMILY_BASE[page.family]}${page.slug}/`) },
+	]}
+	canonicalPath={`${FAMILY_BASE[page.family]}${page.slug}/`}
+	about={[page.primaryKeyword, ...page.secondaryKeywords].join('; ')}
+	meta={metaBits}
+	faq={page.faq ?? []}
+>
+	<h2>What you will learn</h2>
+	{page.intro.map((para) => <p>{para}</p>)}
+	{page.tip && <p class="tip"><strong>Tip:</strong> {page.tip}</p>}
+
+	<h2>The words</h2>
+	<div class="view-toggle" role="tablist" aria-label="View mode">
+		<button type="button" class="view-btn active" role="tab" aria-selected="true" data-view="table">Table</button>
+		<button type="button" class="view-btn" role="tab" aria-selected="false" data-view="cards">Flip Cards</button>
+	</div>
+	<div id="vocab-table" role="tabpanel">
+		<VocabTable words={words} caption={page.title} />
+	</div>
+	<div id="vocab-cards" role="tabpanel" hidden>
+		<div class="vocab-cards-grid">
+			{words.map((word) => <VocabCard word={word} />)}
+		</div>
+	</div>
+
+	{(page.sections ?? []).map((s) => (
+		<section>
+			<h2>{s.heading}</h2>
+			{s.paragraphs.map((para) => <p>{para}</p>)}
+		</section>
+	))}
+
+	<MistakeTable mistakes={page.mistakes ?? []} />
+
+	{builders.length > 0 && <SentenceBuilder builders={builders} />}
+
+	{page.practice && <QuickPractice practice={page.practice} />}
+
+	<AppCTA variant={page.appCtaVariant ?? 'vocabulary'} context={`vocabulary-${page.slug}`} />
+
+	<RelatedContent links={related} />
+
+	{(page.faq ?? []).length > 0 && (
+		<>
+			<h2>Common questions</h2>
+			{page.faq!.map((f) => (
+				<details>
+					<summary>{f.question}</summary>
+					<p>{f.answer}</p>
+				</details>
+			))}
+		</>
+	)}
+</Learn>
+
+<script>
+	// Table / flip-card toggle, same contract as the curated cluster pages.
+	function initVocabView() {
+		const tableBtn = document.querySelector('[data-view="table"]');
+		const cardsBtn = document.querySelector('[data-view="cards"]');
+		const tablePanel = document.getElementById('vocab-table');
+		const cardsPanel = document.getElementById('vocab-cards');
+		if (!tableBtn || !cardsBtn || !tablePanel || !cardsPanel) return;
+		if (tableBtn.hasAttribute('data-view-init')) return;
+		tableBtn.setAttribute('data-view-init', 'true');
+		const show = (view: 'table' | 'cards') => {
+			const isCards = view === 'cards';
+			tableBtn.classList.toggle('active', !isCards);
+			cardsBtn.classList.toggle('active', isCards);
+			(tablePanel as HTMLElement).hidden = isCards;
+			(cardsPanel as HTMLElement).hidden = !isCards;
+		};
+		tableBtn.addEventListener('click', () => show('table'));
+		cardsBtn.addEventListener('click', () => show('cards'));
+		show(window.matchMedia('(max-width: 760px)').matches ? 'cards' : 'table');
+	}
+	initVocabView();
+	document.addEventListener('astro:page-load', initVocabView);
+</script>
+
+<style>
+	.vocab-cards-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1em;
+		margin: 1.5em 0;
+	}
+	.view-toggle {
+		display: flex;
+		gap: 0.5em;
+		margin: 1.5em 0;
+		background: var(--container);
+		border-radius: var(--radius-full);
+		padding: 0.25em;
+	}
+	.view-btn {
+		font: inherit;
+		font-size: 0.9rem;
+		font-weight: 600;
+		padding: 0.6em 1.1em;
+		border-radius: var(--radius-full);
+		border: none;
+		background: transparent;
+		color: rgb(var(--gray));
+		cursor: pointer;
+	}
+	.view-btn.active {
+		background: var(--accent);
+		color: #fff;
+	}
+	details {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 0.9em 1.1em;
+		margin-bottom: 0.6em;
+	}
+	details summary {
+		font-weight: 600;
+		cursor: pointer;
+	}
+	details p { margin: 0.6em 0 0.2em 0; }
+</style>

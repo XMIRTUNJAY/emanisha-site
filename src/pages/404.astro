@@ -1,0 +1,16 @@
+---
+import IndieLayout from '../layouts/IndieLayout.astro';
+const title = 'Page not found — Indie Builds';
+const description = 'This page does not exist. Head back to the project shelf.';
+---
+
+<IndieLayout title={title} description={description} canonicalPath="/404.html">
+	<main class="detail-page rail">
+		<div class="detail-heading">
+			<span class="eyebrow">404</span>
+			<h1>Nothing on this shelf.</h1>
+			<p>The page you were looking for does not exist — but the project shelf does.</p>
+			<p><a class="button" href="/">Back to Indie Builds</a></p>
+		</div>
+	</main>
+</IndieLayout>

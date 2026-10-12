@@ -1,0 +1,111 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Base from '../../../layouts/Base.astro';
+import JsonLd from '../../../components/JsonLd.astro';
+import { units, vocab } from '../../../lib/learn';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'हिंदी से मराठी सीखें — बोल मराठी';
+const description = `बोल मराठी के असली पाठ्यक्रम से रोज़मर्रा के मराठी शब्द, वाक्य और व्याकरण — ${units.length} इकाइयाँ, ${units.length * 6} पाठ और ${vocab.length} शब्द, हिंदी अर्थ, उच्चारण और उदाहरणों के साथ।`;
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+---
+
+<Base title={title} description={description} lang="hi" alternates={[{ lang: 'x-default', href: siteUrl('/') }, { lang: 'en', href: siteUrl('/') }, { lang: 'hi', href: siteUrl('/hi/') }]}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={url}
+		type="WebPage"
+		breadcrumbs={[{ name: 'मराठी सीखें', url: homeUrl }]}
+	/>
+	<div class="prose">
+		<p class="kicker">बोल मराठी · मराठी सीखें</p>
+		<h1>हिंदी से मराठी सीखें।</h1>
+		<p class="lede">{description}</p>
+		<div class="hub-cta">
+			<a class="btn" href={siteUrl('/hi/shabd/')}>शब्द सीखें</a>
+			<a class="btn ghost" href={siteUrl('/hi/vakya/')}>वाक्य सीखें</a>
+			<a class="btn ghost" href={siteUrl('/hi/app/')}>ऐप के बारे में</a>
+		</div>
+	</div>
+
+	<section>
+		<div class="section-head">
+			<div>
+				<p class="kicker">शुरू करें</p>
+				<h2>आपकी भाषा से मराठी तक</h2>
+			</div>
+		</div>
+		<ul class="card-grid">
+			<li>
+				<a class="card" href={siteUrl('/hi/shabd/')}>
+					<img src={pageArt('hi/shabd')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>हिंदी से मराठी शब्द</h3>
+					<p>रोज़ बोले जाने वाले शब्द — मराठी लिपि, उच्चारण और उदाहरण के साथ।</p>
+				</a>
+			</li>
+			<li>
+				<a class="card" href={siteUrl('/hi/vakya/')}>
+					<img src={pageArt('hi/vakya')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>हिंदी से मराठी वाक्य</h3>
+					<p>शब्द-दर-शब्द नक्शे और व्याकरण टिप्पणियों के साथ वाक्य।</p>
+				</a>
+			</li>
+			<li>
+				<a class="card" href={siteUrl('/lessons/01/')}>
+					<img src={pageArt('lessons/01')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>पाठ 01 से शुरू करें</h3>
+					<p>मराठी मूलभूत — अभिवादन, वर्णमाला और पहले शब्द।</p>
+				</a>
+			</li>
+			<li>
+				<a class="card" href={siteUrl('/english-to-marathi/')}>
+					<img src={pageArt('english-to-marathi')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>English → Marathi</h3>
+					<p>अंग्रेज़ी से मराठी सीखने वालों के लिए अलग खंड।</p>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<div class="prose">
+		<AppCTA variant="general" locale="hi" context="hi-hub" />
+	</div>
+</Base>
+
+<style>
+	.hub-cta { display: flex; flex-wrap: wrap; gap: 0.75em; margin: 1.5em 0; }
+	.hub-cta .btn {
+		display: inline-block;
+		min-height: 52px;
+		line-height: 52px;
+		padding: 0 1.5em;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.95rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: var(--radius);
+	}
+	.hub-cta .btn:hover { background: var(--accent); filter: brightness(0.92); color: #fff; }
+	.hub-cta .btn.ghost {
+		background: transparent;
+		color: var(--accent);
+		border: var(--border);
+		line-height: 50px;
+	}
+	section { margin-top: var(--space-5); }
+	.section-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1em;
+		border-bottom: var(--border);
+		padding-bottom: 0.5em;
+		margin-bottom: 0.25em;
+	}
+	.section-head h2 { font-size: 1.4rem; margin: 0; }
+</style>
+

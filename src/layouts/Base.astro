@@ -1,0 +1,258 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import MilestoneToast from '../components/MilestoneToast.astro';
+import { BRAND } from '../data/brand';
+
+// Optional privacy-friendly analytics (Plausible/Umami) via env:
+// PUBLIC_ANALYTICS_SRC=https://plausible.io/js/script.js
+// PUBLIC_ANALYTICS_DOMAIN=example.com (or data-website-id for Umami
+// via PUBLIC_ANALYTICS_ATTRS='{"data-website-id":"..."}').
+// Unset = no tracker loads.
+const analyticsSrc = import.meta.env.PUBLIC_ANALYTICS_SRC as string | undefined;
+const analyticsDomain = import.meta.env.PUBLIC_ANALYTICS_DOMAIN as string | undefined;
+let analyticsAttrs: Record<string, string> = {};
+try {
+	analyticsAttrs = JSON.parse((import.meta.env.PUBLIC_ANALYTICS_ATTRS as string | undefined) ?? '{}');
+} catch {
+	analyticsAttrs = {};
+}
+
+type Props = {
+	title: string;
+	description: string;
+	ogImage?: string;
+	noindex?: boolean;
+	alternates?: { lang: string; href: string }[];
+	lang?: string;
+	crumbs?: { label: string; href: string }[];
+	/** Opt-in: let the page manage its own full-bleed sections (homepage / landing pages). */
+	wide?: boolean;
+};
+
+const { title, description, ogImage, noindex, alternates, lang = 'en', crumbs = [], wide = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<BaseHead title={title} description={description} imageUrl={ogImage} noindex={noindex} alternates={alternates} />
+		{analyticsSrc && (
+			<script src={analyticsSrc} defer data-domain={analyticsDomain} {...analyticsAttrs}></script>
+		)}
+		<script type="application/ld+json" set:html={JSON.stringify([
+			{
+				'@context': 'https://schema.org',
+				'@type': 'WebSite',
+				name: `${BRAND.siteName} — ${BRAND.brandName}`,
+				url: new URL('/learn-marathi/', Astro.site).toString(),
+				inLanguage: ['en', 'mr', 'hi'],
+			},
+			{
+				'@context': 'https://schema.org',
+				'@type': 'Organization',
+				name: BRAND.brandName,
+				url: new URL('/learn-marathi/', Astro.site).toString(),
+			},
+			...(crumbs.length > 0
+				? [
+						{
+							'@context': 'https://schema.org',
+							'@type': 'BreadcrumbList',
+							itemListElement: crumbs.map((c, i) => ({
+								'@type': 'ListItem',
+								position: i + 1,
+								name: c.label,
+								item: new URL(c.href, Astro.site).toString(),
+							})),
+						},
+					]
+				: []),
+		])} />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<div class="scroll-progress" aria-hidden="true"></div>
+		<SiteHeader />
+		<main id="main" class={wide ? 'main--full' : undefined} transition:animate="fade">
+			<slot />
+		</main>
+		<SiteFooter />
+		<MilestoneToast />
+		<div class="shortcuts-modal" id="shortcuts-modal" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title" hidden>
+			<div class="shortcuts-card">
+				<h2 id="shortcuts-title">Keyboard shortcuts</h2>
+				<ul>
+					<li><kbd>/</kbd> Focus search</li>
+					<li><kbd>←</kbd> / <kbd>→</kbd> Previous / next unit</li>
+					<li><kbd>Space</kbd> Play first audio button</li>
+					<li><kbd>R</kbd> Toggle reading mode</li>
+					<li><kbd>?</kbd> This panel</li>
+					<li><kbd>Esc</kbd> Close panel</li>
+				</ul>
+				<button type="button" class="btn" id="shortcuts-close">Close</button>
+			</div>
+		</div>
+		<style>
+			.shortcuts-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: rgb(45 27 21 / 0.45); padding: 1rem; }
+			.shortcuts-modal[hidden] { display: none; }
+			.shortcuts-card { background: var(--card); border: var(--border); border-radius: var(--radius); padding: 1.5rem 1.75rem; max-width: 22rem; width: 100%; box-shadow: 0 16px 40px rgb(45 27 21 / 0.25); }
+			.shortcuts-card h2 { margin: 0 0 0.75rem 0; font-size: 1.1rem; }
+			.shortcuts-card ul { list-style: none; margin: 0 0 1rem 0; padding: 0; display: grid; gap: 0.5rem; font-size: 0.9rem; }
+			.shortcuts-card kbd { font-size: 0.75rem; padding: 0.1em 0.45em; background: var(--container); border-radius: 4px; border: 1px solid rgb(var(--gray) / 0.25); }
+			.shortcuts-card .btn { min-height: 44px; padding: 0 1.25em; }
+		</style>
+	</body>
+	<script is:inline>
+		/* Progressive enhancement flag (pure JS — no TS syntax allowed in is:inline) */
+		try { document.documentElement.classList.add('js'); } catch (e) {}
+
+		/* Scroll progress indicator */
+		(function () {
+			var bar = document.querySelector('.scroll-progress');
+			if (!bar) return;
+			function update() {
+				var st = window.scrollY || document.documentElement.scrollTop;
+				var sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+				bar.style.width = (st / sh * 100) + '%';
+			}
+			window.addEventListener('scroll', update, { passive: true });
+			update();
+		})();
+
+		/* Scroll reveal (IntersectionObserver) */
+		(function () {
+			if (!('IntersectionObserver' in window)) return;
+			var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (prefersReduced) {
+				document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+				return;
+			}
+			var observer = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+			document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+		})();
+
+		/* Image loaded state for lazy images (re-runs on view-transition nav) */
+		(function () {
+			function markLazyImages() {
+				document.querySelectorAll('img[loading="lazy"]:not(.loaded)').forEach(function (img) {
+					if (img.complete && img.naturalWidth !== 0) img.classList.add('loaded');
+					else if (img.complete) img.classList.add('loaded'); // broken src: show alt, don't stay blank
+					else {
+						img.addEventListener('load', function () { img.classList.add('loaded'); }, { once: true });
+						img.addEventListener('error', function () { img.classList.add('loaded'); }, { once: true });
+					}
+				});
+			}
+			markLazyImages();
+			document.addEventListener('astro:page-load', markLazyImages);
+		})();
+
+		/* Service Worker registration */
+		(function () {
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', function () {
+					navigator.serviceWorker.register('/learn-marathi/sw.js', { scope: '/learn-marathi/' })
+						.catch(function () { /* fail silently */ });
+				});
+			}
+		})();
+
+		/* Keyboard shortcuts + help modal */
+		(function () {
+			function modal() { return document.getElementById('shortcuts-modal'); }
+			function openModal() {
+				var m = modal();
+				if (!m) return;
+				m.hidden = false;
+				var c = document.getElementById('shortcuts-close');
+				if (c) c.focus();
+			}
+			function closeModal() {
+				var m = modal();
+				if (!m) return;
+				m.hidden = true;
+			}
+			var closeBtn = document.getElementById('shortcuts-close');
+			if (closeBtn) closeBtn.addEventListener('click', closeModal);
+			var m0 = modal();
+			if (m0) m0.addEventListener('click', function (e) { if (e.target === m0) closeModal(); });
+			var shortcuts = {
+				'/': function () { var s = document.querySelector('[data-search-input]'); if (s) s.focus(); },
+				'?': function () { openModal(); },
+				' ': function (e) { var a = document.querySelector('.say:not([hidden])'); if (a && !a.closest('[hidden]') && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); a.click(); } },
+				'ArrowLeft': function () { var l = document.querySelector('.pager a:not(.next)'); if (l) l.click(); },
+				'ArrowRight': function () { var n = document.querySelector('.pager a.next'); if (n) n.click(); },
+				'r': function () { document.body.classList.toggle('reading-mode'); },
+				'Escape': function () { closeModal(); },
+			};
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') { closeModal(); return; }
+				if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+				var action = shortcuts[e.key];
+				if (action) action(e);
+			});
+		})();
+
+	</script>
+	<script>
+		import { initAnalytics, AnalyticsEvents } from '../lib/analytics';
+
+		// Single analytics entrypoint (page views, outbound links, waitlist).
+		// The lib wrapper respects DNT and no-ops without a provider.
+		function initGlobalAnalytics() {
+			if ((window as unknown as { __globalAnalyticsInit?: boolean }).__globalAnalyticsInit) return;
+			(window as unknown as { __globalAnalyticsInit?: boolean }).__globalAnalyticsInit = true;
+			try { initAnalytics(); } catch { /* ignore */ }
+
+			// CTA clicks (AppCTA + content CTAs carry data-app-cta / data-funnel)
+			document.addEventListener('click', (e) => {
+				const el = (e.target as HTMLElement).closest?.('[data-app-cta], [data-funnel]');
+				if (!el) return;
+				const anchor = (e.target as HTMLElement).closest?.('a');
+				try {
+					AnalyticsEvents.ctaClick(
+						el.getAttribute('data-cta-variant') || el.getAttribute('data-cta') || 'unknown',
+						el.getAttribute('data-cta-context') || 'unknown',
+						anchor?.href || '',
+					);
+				} catch { /* ignore */ }
+			});
+
+			// Milestone toasts (dispatched by MilestoneToast.astro)
+			document.addEventListener('milestone-shown', (e) => {
+				const id = (e as CustomEvent).detail?.id as string | undefined;
+				if (!id) return;
+				const m = id.match(/^(streak|units|words)-(\d+)$/);
+				if (!m) return;
+				try {
+					AnalyticsEvents.milestoneReached(m[1] as 'streak' | 'units' | 'words', parseInt(m[2], 10));
+				} catch { /* ignore */ }
+			});
+
+			// Progress cards (dispatched by ProgressCard.astro)
+			document.addEventListener('progress-card', (e) => {
+				const action = (e as CustomEvent).detail?.action as string | undefined;
+				try {
+					if (action === 'generate') AnalyticsEvents.progressCardGenerate();
+					else if (action === 'download') AnalyticsEvents.progressCardDownload();
+					else if (action === 'share') {
+						AnalyticsEvents.progressCardShare(
+							(e as CustomEvent).detail?.method === 'copy' ? 'copy' : 'native',
+						);
+					}
+				} catch { /* ignore */ }
+			});
+		}
+		initGlobalAnalytics();
+		document.addEventListener('astro:page-load', initGlobalAnalytics);
+	</script>
+</html>

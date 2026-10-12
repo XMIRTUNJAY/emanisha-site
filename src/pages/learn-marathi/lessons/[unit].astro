@@ -1,0 +1,15 @@
+---
+// Lesson pages (all curriculum units, dynamic route)
+import PremiumLessonPage from '../../../components/PremiumLessonPage.astro';
+import { units, getUnit } from '../../../lib/learn';
+
+export async function getStaticPaths() {
+  return units.map((u) => ({ params: { unit: u.unit } }));
+}
+
+const { unit: no } = Astro.params;
+if (!no) throw new Error('Missing unit param');
+const unit = getUnit(no);
+---
+
+<PremiumLessonPage unit={unit} />

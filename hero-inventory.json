@@ -1,0 +1,1395 @@
+[
+ {
+  "route": "/",
+  "title": "Learn Marathi from Hindi or English | Bol Marathi",
+  "h1": "Learn Marathi from Hindi or English.",
+  "desc": "Learn Marathi from Hindi and English: everyday words, phrases, grammar and lessons from the Bol Marathi curriculum.",
+  "hero": "og-start"
+ },
+ {
+  "route": "/about/",
+  "title": "About Bol Marathi",
+  "h1": "About Bol Marathi",
+  "desc": "Bol Marathi is an independent Marathi-learning product: a free learning website plus a practice app with listening, speaking and spaced repetition.",
+  "hero": null
+ },
+ {
+  "route": "/app/",
+  "title": "Bol Marathi — Learn Marathi from Hindi or English",
+  "h1": "Learn Marathi beyond reading.",
+  "desc": "Vocabulary, listening, speaking, sentence-building and spaced repetition — the Bol Marathi app turns these free lessons into usable Marathi.",
+  "hero": null
+ },
+ {
+  "route": "/blog/",
+  "title": "Real-Life Marathi: Situational Guides",
+  "h1": "Situations, not chapters",
+  "desc": "Real-life Marathi guides: autos, markets, doctors, offices, festivals and more — every word verified from the curriculum.",
+  "hero": "og-blog-autorickshaw-taxi"
+ },
+ {
+  "route": "/blog/at-the-doctor/",
+  "title": "At the Doctor in Marathi: Symptoms & Sentences",
+  "h1": "At the Doctor in Marathi: Symptoms & Sentences",
+  "desc": "Describe symptoms in Marathi: body words plus the exact Unit 10 sentences for fever, pain and medicine.",
+  "hero": "og-blog-at-the-doctor"
+ },
+ {
+  "route": "/blog/autorickshaw-taxi/",
+  "title": "Marathi for Autorickshaw & Taxi Rides",
+  "h1": "Marathi for Autorickshaw & Taxi Rides",
+  "desc": "Tell auto drivers where to go in Marathi: directions, stop/go, please-slowly phrases with Hindi meanings.",
+  "hero": "og-blog-autorickshaw-taxi"
+ },
+ {
+  "route": "/blog/bhet-meaning-in-marathi/",
+  "title": "भेट (Bhet) Meaning in Marathi: Meet, Visit &amp; More",
+  "h1": "भेट (Bhet) Meaning in Marathi: Meet, Visit &amp; More",
+  "desc": "भेटणे means to meet — and भेटूया shapes every Marathi goodbye. The bhet family: meaning, forms and when to use each.",
+  "hero": "og-blog-bhet-meaning-in-marathi"
+ },
+ {
+  "route": "/blog/emotions-feelings/",
+  "title": "Say How You Feel in Marathi: Emotion Words",
+  "h1": "Say How You Feel in Marathi: Emotion Words",
+  "desc": "Say how you feel in Marathi: happiness, sorrow, anger, love and more — with Hindi meanings and examples.",
+  "hero": "og-blog-emotions-feelings"
+ },
+ {
+  "route": "/blog/festival-greetings/",
+  "title": "Marathi Festival Greetings Through the Year",
+  "h1": "Marathi Festival Greetings Through the Year",
+  "desc": "Greet every Marathi festival: Ganesh, Diwali, Gudi Padwa and more — what they are and what to say.",
+  "hero": "og-blog-festival-greetings"
+ },
+ {
+  "route": "/blog/first-day-work/",
+  "title": "Marathi for Work: First-Day Office Words",
+  "h1": "Marathi for Work: First-Day Office Words",
+  "desc": "First day at a Maharashtra office: 12 work words with Hindi meanings, pronunciation and examples.",
+  "hero": "og-blog-first-day-work"
+ },
+ {
+  "route": "/blog/grocery-shopping/",
+  "title": "Grocery Shopping in Marathi: Words & Bargaining",
+  "h1": "Grocery Shopping in Marathi: Words & Bargaining",
+  "desc": "Buy vegetables in Marathi: grocery words, quantities and bargaining sentences with Hindi meanings.",
+  "hero": "og-blog-grocery-shopping"
+ },
+ {
+  "route": "/blog/hindi-speaker-traps/",
+  "title": "5 Marathi Traps for Hindi Speakers",
+  "h1": "5 Marathi Traps for Hindi Speakers",
+  "desc": "Hindi speakers beware: काल isn't 'tomorrow', and हा/ही/हे hide a third gender — traps with examples.",
+  "hero": "og-blog-hindi-speaker-traps"
+ },
+ {
+  "route": "/blog/how-are-you-in-marathi/",
+  "title": "How to Say “How Are You?” in Marathi (कसा आहेस?)",
+  "h1": "How to Say “How Are You?” in Marathi (कसा आहेस?)",
+  "desc": "कसा आहेस? meaning, the formal version कसे आहात, and natural replies from मी ठीक आहे to काही हरकत नाही — with Hindi meanings.",
+  "hero": "og-blog-how-are-you-in-marathi"
+ },
+ {
+  "route": "/blog/how-to-say-help-in-marathi/",
+  "title": "How to Say \"Help\" in Marathi: मदत + Emergency Phrases",
+  "h1": "How to Say \"Help\" in Marathi: मदत + Emergency Phrases",
+  "desc": "Learn \"help\" in Marathi — मदत (madat) — with emergency phrases, polite requests, and the critical distinction between मदत and सहाय्य. From Unit 08 & 13.",
+  "hero": "og-blog-how-to-say-help-in-marathi"
+ },
+ {
+  "route": "/blog/how-to-say-i-love-you-in-marathi/",
+  "title": "How to Say \"I Love You\" in Marathi: प्रेम + आवडते + Cultural Context",
+  "h1": "How to Say \"I Love You\" in Marathi: प्रेम + आवडते + Cultural Context",
+  "desc": "Learn \"I love you\" in Marathi — the difference between प्रेम (deep love) and आवडते (like/fancy), cultural etiquette, and the phrases you actually hear. From Unit 18 & Emotions vocab.",
+  "hero": "og-blog-how-to-say-i-love-you-in-marathi"
+ },
+ {
+  "route": "/blog/how-to-say-please-in-marathi/",
+  "title": "How to Say \"Please\" in Marathi: कृपया + Polite Patterns",
+  "h1": "How to Say \"Please\" in Marathi: कृपया + Polite Patterns",
+  "desc": "Learn \"please\" in Marathi -- कृपया, कृपया करा, and polite request patterns with audio, examples, and common mistakes. From Unit 02.",
+  "hero": "og-blog-how-to-say-please-in-marathi"
+ },
+ {
+  "route": "/blog/how-to-say-water-in-marathi/",
+  "title": "How to Say \"Water\" in Marathi: पाणी + Drink Phrases",
+  "h1": "How to Say \"Water\" in Marathi: पाणी + Drink Phrases",
+  "desc": "Learn \"water\" in Marathi — पाणी (pāṇī) — with drink phrases, polite requests, and cultural notes. From Unit 02 & 11.",
+  "hero": "og-blog-how-to-say-water-in-marathi"
+ },
+ {
+  "route": "/blog/how-to-shop-in-marathi/",
+  "title": "How to Shop in Marathi: Words + 6-Line Bargaining Script",
+  "h1": "How to Shop in Marathi: Words + 6-Line Bargaining Script",
+  "desc": "Shop and bargain in Marathi: 12 market words from किंमत to गिऱ्हाईक, plus the exact six-sentence shopping script from Unit 09.",
+  "hero": "og-blog-how-to-shop-in-marathi"
+ },
+ {
+  "route": "/blog/how-to-tell-time-in-marathi/",
+  "title": "How to Tell Time in Marathi: वाजले Explained",
+  "h1": "How to Tell Time in Marathi: वाजले Explained",
+  "desc": "Tell time in Marathi: आता साडे पाच वाजले decoded, all day-part words from सकाळ to रात्र, plus the six Unit 16 time sentences.",
+  "hero": "og-blog-how-to-tell-time-in-marathi"
+ },
+ {
+  "route": "/blog/i-dont-understand-in-marathi/",
+  "title": "“I Don’t Understand” in Marathi: 5 Rescue Lines",
+  "h1": "“I Don’t Understand” in Marathi: 5 Rescue Lines",
+  "desc": "मला समजलं नाही and the four rescue lines around it — say again, speak slowly, what does this mean, how do you say it in Marathi.",
+  "hero": "og-blog-i-dont-understand-in-marathi"
+ },
+ {
+  "route": "/blog/i-like-in-marathi/",
+  "title": "How to Say “I Like…” in Marathi: मला आवडतं",
+  "h1": "How to Say “I Like…” in Marathi: मला आवडतं",
+  "desc": "The आवडतं pattern for likes in Marathi — मला वाचन आवडतं and friends — with Hindi meanings and the six Unit 18 sentences.",
+  "hero": "og-blog-i-like-in-marathi"
+ },
+ {
+  "route": "/blog/money-prices/",
+  "title": "Money & Prices in Marathi: Numbers That Pay",
+  "h1": "Money & Prices in Marathi: Numbers That Pay",
+  "desc": "Handle money in Marathi: numbers 1–10 plus price, cheap, expensive and shop — with Hindi meanings.",
+  "hero": "og-blog-money-prices"
+ },
+ {
+  "route": "/blog/ordering-food/",
+  "title": "Ordering Food in Marathi at Restaurants",
+  "h1": "Ordering Food in Marathi at Restaurants",
+  "desc": "Order food in Marathi: thali, bill, water and tea words plus the exact sentences to use them.",
+  "hero": "og-blog-ordering-food"
+ },
+ {
+  "route": "/blog/polite-marathi/",
+  "title": "Polite Marathi: Please, Thanks & Sorry in Use",
+  "h1": "Polite Marathi: Please, Thanks & Sorry in Use",
+  "desc": "Be polite in Marathi: please, thanks, sorry and greetings with usage notes — when to use each.",
+  "hero": "og-blog-polite-marathi"
+ },
+ {
+  "route": "/blog/pune-newcomer-words/",
+  "title": "New in Pune? Your First 12 Marathi Words",
+  "h1": "New in Pune? Your First 12 Marathi Words",
+  "desc": "New in Pune or Mumbai? 12 Marathi survival words — greetings, water, home, auto, bill — with Hindi meanings.",
+  "hero": "og-blog-pune-newcomer-words"
+ },
+ {
+  "route": "/blog/school-talk/",
+  "title": "Marathi for School: Talk to Teachers",
+  "h1": "Marathi for School: Talk to Teachers",
+  "desc": "Talk to teachers in Marathi: class, exam, homework and question words with Hindi meanings.",
+  "hero": "og-blog-school-talk"
+ },
+ {
+  "route": "/blog/small-talk-intro/",
+  "title": "Marathi Small Talk: Introduce Yourself",
+  "h1": "Marathi Small Talk: Introduce Yourself",
+  "desc": "Introduce yourself in Marathi: name, city, 'I know a little Marathi' — 6 phrases with Hindi meanings.",
+  "hero": "og-blog-small-talk-intro"
+ },
+ {
+  "route": "/blog/thamba-meaning-in-marathi/",
+  "title": "थांबा (Thamba) Meaning in Marathi &amp; When to Say It",
+  "h1": "थांबा (Thamba) Meaning in Marathi &amp; When to Say It",
+  "desc": "थांबा means stop or wait — from halting an auto to asking थांबा एक मिनिट. The थांबणे verb family explained with Hindi meanings.",
+  "hero": "og-blog-thamba-meaning-in-marathi"
+ },
+ {
+  "route": "/blog/this-in-marathi/",
+  "title": "हा, ही, हे — Saying “This” in Marathi Correctly",
+  "h1": "हा, ही, हे — Saying “This” in Marathi Correctly",
+  "desc": "Marathi has three words for this: हा (masculine), ही (feminine), हे (neuter). The simple gender rule, plus इथे/तिथे and असा/तसा.",
+  "hero": "og-blog-this-in-marathi"
+ },
+ {
+  "route": "/blog/train-station-marathi/",
+  "title": "At the Train Station in Marathi: ट्रेन, तिकीट, प्लॅटफॉर्म",
+  "h1": "At the Train Station in Marathi: ट्रेन, तिकीट, प्लॅटफॉर्म",
+  "desc": "Train-station Marathi: which train, booking, platform, hotel — the six Unit 15 sentences plus 12 rail and travel words with Hindi meanings.",
+  "hero": "og-blog-train-station-marathi"
+ },
+ {
+  "route": "/blog/weather-talk/",
+  "title": "Talking About Weather in Marathi",
+  "h1": "Talking About Weather in Marathi",
+  "desc": "Talk weather in Marathi: rain, seasons and sky words with Hindi meanings, pronunciation and examples.",
+  "hero": "og-blog-weather-talk"
+ },
+ {
+  "route": "/blog/yes-no-in-marathi/",
+  "title": "Yes and No in Marathi: हो, नको, बरोबर, चूक",
+  "h1": "Yes and No in Marathi: हो, नको, बरोबर, चूक",
+  "desc": "Saying yes and no in Marathi — हो कृपया vs नको धन्यवाद, correct (बरोबर) vs wrong (चूक), and refusing politely without being rude.",
+  "hero": "og-blog-yes-no-in-marathi"
+ },
+ {
+  "route": "/contact/",
+  "title": "Contact Bol Marathi",
+  "h1": "Contact",
+  "desc": "Contact Bol Marathi: corrections, native-speaker review, and launch waitlist.",
+  "hero": null
+ },
+ {
+  "route": "/downloads/",
+  "title": "Free Marathi Anki Decks: Top 100 Words + Full 1002",
+  "h1": "Free Marathi Anki decks",
+  "desc": "Download free Anki-ready Marathi vocabulary decks from the Bol Marathi curriculum: top 100 starter words or the full 1002-word set.",
+  "hero": "og-vocabulary-beginners"
+ },
+ {
+  "route": "/english-to-marathi/",
+  "title": "English to Marathi",
+  "h1": "English to Marathi",
+  "desc": "Learn Marathi through English: everyday words, sentence bridges and daily conversation — with pronunciation and examples from the Bol Marathi curriculum.",
+  "hero": "og-english-to-marathi"
+ },
+ {
+  "route": "/english-to-marathi/asking-questions/",
+  "title": "English to Marathi: Question Words (काय, कुठे, कधी)",
+  "h1": "English → Marathi: Asking Questions",
+  "desc": "Ask what, where, when, how, who and why in Marathi -- काय, कुठे, कधी, कसे, कोण, का -- with real questions and answers from the curriculum.",
+  "hero": "og-english-to-marathi-asking-questions"
+ },
+ {
+  "route": "/english-to-marathi/daily-needs/",
+  "title": "English to Marathi: Daily Needs & Essentials",
+  "h1": "English → Marathi: Daily Needs & Survival",
+  "desc": "Ask for water, food, help, the bathroom, and say you are hungry or tired -- Unit 02 survival sentences mapped English to Marathi.",
+  "hero": "og-english-to-marathi-daily-needs"
+ },
+ {
+  "route": "/english-to-marathi/directions/",
+  "title": "English to Marathi: Asking & Giving Directions",
+  "h1": "English → Marathi: Directions & Navigation",
+  "desc": "How to ask where something is, understand left/right/straight, and give simple directions -- Unit 08 speaking sentences mapped English to Marathi.",
+  "hero": "og-english-to-marathi-directions"
+ },
+ {
+  "route": "/english-to-marathi/emergency-phrases/",
+  "title": "English to Marathi: Emergency, Doctor & Help Phrases",
+  "h1": "English → Marathi: Emergency & Help",
+  "desc": "Emergency sentences -- call ambulance, describe symptoms, ask for help, find a hospital -- from Units 02, 10 mapped English to Marathi.",
+  "hero": "og-english-to-marathi-emergency-phrases"
+ },
+ {
+  "route": "/english-to-marathi/greetings/",
+  "title": "English to Marathi: Greetings & Introducing Yourself",
+  "h1": "English → Marathi: Greetings & Introductions",
+  "desc": "Say hello, give your name and ask how someone is -- six real Marathi sentences with English meanings, speaking tips and pronunciation support.",
+  "hero": "og-english-to-marathi-greetings"
+ },
+ {
+  "route": "/english-to-marathi/hobbies-freetime/",
+  "title": "English to Marathi: Hobbies, Free Time & Likes",
+  "h1": "English → Marathi: Hobbies & Free Time",
+  "desc": "Talk about what you like to do -- reading, cricket, music, painting -- the मला ... आवडतं pattern and adverbs of frequency from Unit 18.",
+  "hero": "og-english-to-marathi-hobbies-freetime"
+ },
+ {
+  "route": "/english-to-marathi/introductions/",
+  "title": "English to Marathi: Introducing Yourself & Meeting People",
+  "h1": "English → Marathi: Introductions & Meeting People",
+  "desc": "How to say your name, where you are from, what you do, and ask about others -- real Unit 01 & 05 sentences with English meanings.",
+  "hero": "og-english-to-marathi-introductions"
+ },
+ {
+  "route": "/english-to-marathi/nature-landscapes/",
+  "title": "English to Marathi: Nature, Landscapes & Outdoors",
+  "h1": "English → Marathi: Nature & Landscapes",
+  "desc": "Nature and landscape words -- mountains, rivers, trees, flowers, weather -- from Unit 14 speaking mapped English to Marathi.",
+  "hero": "og-english-to-marathi-nature-landscapes"
+ },
+ {
+  "route": "/english-to-marathi/phrases/",
+  "title": "English to Marathi Phrases & Sentences",
+  "h1": "English to Marathi Phrases & Sentences",
+  "desc": "Everyday English sentences translated into Marathi — with word-by-word mapping and grammar notes, from the Bol Marathi bridge lessons.",
+  "hero": "og-english-to-marathi-phrases"
+ },
+ {
+  "route": "/english-to-marathi/shopping-market/",
+  "title": "English to Marathi: Shopping & Bargaining at the Market",
+  "h1": "English → Marathi: Shopping & Market",
+  "desc": "Ask the price, name a quantity, bargain politely, accept, pay, and ask for the bill -- six Unit 09 sentences mapped English to Marathi.",
+  "hero": "og-english-to-marathi-shopping-market"
+ },
+ {
+  "route": "/english-to-marathi/technology-phone/",
+  "title": "English to Marathi: Technology, Phone & Internet",
+  "h1": "English → Marathi: Technology & Phone",
+  "desc": "Tech, phone and internet sentences -- calling, messaging, Wi-Fi, charging, apps -- from Unit 12 speaking mapped English to Marathi.",
+  "hero": "og-english-to-marathi-technology-phone"
+ },
+ {
+  "route": "/english-to-marathi/time-seasons/",
+  "title": "English to Marathi: Time, Clock & Seasons",
+  "h1": "English → Marathi: Time & Seasons",
+  "desc": "Tell time, name day parts, and talk seasons -- clock words, half-hours, monsoon, winter -- Unit 16 sentences mapped English to Marathi.",
+  "hero": "og-english-to-marathi-time-seasons"
+ },
+ {
+  "route": "/english-to-marathi/transport-travel/",
+  "title": "English to Marathi: Transport, Travel & Getting Around",
+  "h1": "English → Marathi: Transport & Travel",
+  "desc": "Trains, buses, autos, tickets, platforms, stations -- Unit 15 travel sentences mapped English to Marathi.",
+  "hero": "og-english-to-marathi-transport-travel"
+ },
+ {
+  "route": "/english-to-marathi/words/",
+  "title": "English to Marathi Words",
+  "h1": "English to Marathi Words",
+  "desc": "Common English words and their Marathi equivalents — with pronunciation, Hindi meanings and examples. From the Bol Marathi curriculum.",
+  "hero": "og-english-to-marathi-workplace_1"
+ },
+ {
+  "route": "/english-to-marathi/workplace/",
+  "title": "English to Marathi: Workplace, Office & Career Talk",
+  "h1": "English → Marathi: Workplace & Career",
+  "desc": "Office sentences -- job, salary, meeting, leave, project, promotion, interview -- Unit 19 speaking mapped English to Marathi.",
+  "hero": "og-english-to-marathi-workplace"
+ },
+ {
+  "route": "/grammar/",
+  "title": "Marathi Grammar",
+  "h1": "Marathi Grammar",
+  "desc": "Marathi grammar made practical: pronouns, verbs and sentence structure — explained with Hindi comparison and real examples.",
+  "hero": "og-grammar"
+ },
+ {
+  "route": "/grammar/ability-obligation/",
+  "title": "Marathi Ability & Obligation: Can, Must, Should",
+  "h1": "Marathi Ability & Obligation (शक्यता आणि कर्तव्य)",
+  "desc": "How to say can, must, should and need-to in Marathi — शकतो, पाहिजे, गरज आहे — with Unit 04 curriculum examples and Hindi comparison.",
+  "hero": "og-grammar-ability-obligation"
+ },
+ {
+  "route": "/grammar/commands-polite/",
+  "title": "Marathi Commands & Polite Requests: या, जा, द्या",
+  "h1": "Marathi Commands, Requests & Polite Speech",
+  "desc": "Marathi imperatives and polite requests — या, द्या, बसा, कृपया — with curriculum examples, Hindi comparison and cultural etiquette notes.",
+  "hero": "og-hindi-to-marathi-sentence-patterns_1"
+ },
+ {
+  "route": "/grammar/compound-verbs/",
+  "title": "Marathi Compound Verbs: Root + Auxiliary Patterns",
+  "h1": "Marathi Compound Verbs (संयुक्त क्रियापद)",
+  "desc": "Marathi compound verbs — give up, start doing, finish doing, try to — root + auxiliary patterns (देऊन द्या, सुरू करा, संपवा, प्रयत्न करा) from Unit 04.",
+  "hero": "og-grammar-compound-verbs"
+ },
+ {
+  "route": "/grammar/counting-quantifiers/",
+  "title": "Marathi Counting & Quantifiers: Numbers, Fractions",
+  "h1": "Marathi Counting & Quantifiers (गणना आणि प्रमाण)",
+  "desc": "Marathi counting, quantifiers and fractions — एक, दोन, तीन, पाव, आधा, दोन किलो — with Unit 03 curriculum examples and Hindi comparison.",
+  "hero": "og-grammar-counting-quantifiers"
+ },
+ {
+  "route": "/grammar/demonstratives/",
+  "title": "Marathi Demonstratives: This, That, Here, There",
+  "h1": "Marathi Demonstratives (संकेतवाचक सर्वनाम)",
+  "desc": "Marathi demonstratives — this/that (हा/ही/हे, तो/ती/ते), here/there (इथे/तिथे) — with Unit 05 examples and gender agreement rules.",
+  "hero": "og-grammar-demonstratives"
+ },
+ {
+  "route": "/grammar/frequency-adverbs/",
+  "title": "Marathi Frequency Adverbs: Always, Never, Sometimes, Daily",
+  "h1": "Marathi Frequency Adverbs (काळजीविशेषण)",
+  "desc": "Marathi frequency adverbs — नेहमी (always), कधीच (never), कधीकधी (sometimes), रोज (daily) — with Unit 18 curriculum examples and sentence position rules.",
+  "hero": "og-grammar-frequency-adverbs"
+ },
+ {
+  "route": "/grammar/negation/",
+  "title": "Marathi Negative Sentences: नाही, नको & Don't",
+  "h1": "Marathi Negative Sentences (नकार कसा करायचा)",
+  "desc": "How to say no, not and don't in Marathi — the आहे→नाही flip and नको for “don't want”, with curriculum examples and Hindi comparison.",
+  "hero": "og-grammar-negation"
+ },
+ {
+  "route": "/grammar/passive-causative/",
+  "title": "Marathi Passive & Causative: केला जाते, खववते",
+  "h1": "Marathi Passive & Causative (कर्मणी आणि प्रेरणार्थ)",
+  "desc": "Marathi passive and causative constructions — passive (केला जाते, खाल्ले जाते), causative (खववते, बोलवते) — from Unit 21 advanced grammar.",
+  "hero": "og-grammar-passive-causative"
+ },
+ {
+  "route": "/grammar/possessives/",
+  "title": "Marathi Possessives: माझा, माझी, माझं Explained",
+  "h1": "Marathi Possessive Pronouns (माझा, माझी, माझं)",
+  "desc": "My, your, his in Marathi: माझा/माझी/माझं agree with the owned noun's gender — with curriculum examples and Hindi comparison.",
+  "hero": "og-grammar-possessives"
+ },
+ {
+  "route": "/grammar/postpositions/",
+  "title": "Marathi Postpositions: In, On, Under, Near & More",
+  "h1": "Marathi Postpositions: In, On, Under, Near & More (with Examples)",
+  "desc": "Marathi location words — मध्ये, वर, खाली, शेजारी and more — with examples from Unit 08.",
+  "hero": "og-grammar-postpositions"
+ },
+ {
+  "route": "/grammar/pronouns/",
+  "title": "Marathi Pronouns",
+  "h1": "Marathi Pronouns (with Examples)",
+  "desc": "I, you, he/she, we, they in Marathi — with Hindi comparison and example sentences from the curriculum.",
+  "hero": "og-grammar-pronouns"
+ },
+ {
+  "route": "/grammar/questions/",
+  "title": "Marathi Question Words: What, Where, When, How, Who, Why",
+  "h1": "Marathi Question Words: What, Where, When, How, Who, Why (with Examples)",
+  "desc": "Ask anything in Marathi: काय, कुठे, कधी, कसे, कोण, का — all six question words with examples from Unit 07.",
+  "hero": "og-grammar-questions"
+ },
+ {
+  "route": "/grammar/sentence-structure/",
+  "title": "Marathi Sentence Structure",
+  "h1": "Marathi Sentence Structure (with Examples)",
+  "desc": "Marathi is Subject–Object–Verb, like Hindi. Learn the pattern with real examples and sentence-building practice.",
+  "hero": "og-grammar-sentence-structure"
+ },
+ {
+  "route": "/grammar/verbs/",
+  "title": "Marathi Verbs & Tenses",
+  "h1": "Marathi Verbs & Tenses (with Examples)",
+  "desc": "How Marathi verbs work — everyday verbs, continuous tense and the SOV sentence pattern, compared with Hindi.",
+  "hero": "og-grammar-verbs"
+ },
+ {
+  "route": "/hi/",
+  "title": "हिंदी से मराठी सीखें — बोल मराठी",
+  "h1": "हिंदी से मराठी सीखें।",
+  "desc": "बोल मराठी के असली पाठ्यक्रम से रोज़मर्रा के मराठी शब्द, वाक्य और व्याकरण — 26 इकाइयाँ, 156 पाठ और 1041 शब्द, हिंदी अर्थ, उच्चारण और उदाहरणों के साथ।",
+  "hero": "og-hi-shabd"
+ },
+ {
+  "route": "/hi/app/",
+  "title": "बोल मराठी ऐप — हिंदी से मराठी सीखें",
+  "h1": "पढ़ने से आगे — मराठी बोलना सीखें।",
+  "desc": "शब्दावली, सुनना, बोलना, वाक्य बनाना और दोहराव — बोल मराठी ऐप मुफ़्त पाठों को काम की मराठी में बदलता है।",
+  "hero": null
+ },
+ {
+  "route": "/hi/shabd/",
+  "title": "हिंदी से मराठी शब्द — उच्चारण और उदाहरण के साथ",
+  "h1": "हिंदी से मराठी शब्द",
+  "desc": "रोज़ बोले जाने वाले हिंदी शब्दों के मराठी अर्थ — उच्चारण, हिंदी मतलब और उदाहरण वाक्यों के साथ। बोल मराठी पाठ्यक्रम से।",
+  "hero": null
+ },
+ {
+  "route": "/hi/vakya/",
+  "title": "हिंदी से मराठी वाक्य — शब्द-दर-शब्द अनुवाद",
+  "h1": "हिंदी से मराठी वाक्य",
+  "desc": "रोज़मर्रा के हिंदी वाक्यों का मराठी अनुवाद — शब्द-दर-शब्द नक्शे और व्याकरण टिप्पणियों के साथ। बोल मराठी ब्रिज पाठों से।",
+  "hero": null
+ },
+ {
+  "route": "/hindi-to-marathi/",
+  "title": "Hindi to Marathi",
+  "h1": "Hindi to Marathi",
+  "desc": "Learn Marathi through Hindi: word pairs, sentence bridges and daily conversation — mapped word-by-word so Hindi speakers get Marathi faster.",
+  "hero": "og-hindi-to-marathi"
+ },
+ {
+  "route": "/hindi-to-marathi/advanced-conversation/",
+  "title": "Hindi to Marathi Advanced Conversation: Idioms, Politeness",
+  "h1": "Hindi → Marathi: Advanced Conversation",
+  "desc": "Advanced conversation patterns mapped Hindi to Marathi — idioms, politeness levels, social nuance, cultural phrases — from Units 25, 26.",
+  "hero": "og-hindi-to-marathi-advanced-conversation"
+ },
+ {
+  "route": "/hindi-to-marathi/advanced-structures/",
+  "title": "Hindi to Marathi Advanced: Passive, Causative",
+  "h1": "Hindi → Marathi: Advanced Structures",
+  "desc": "Advanced structures mapped Hindi to Marathi — passive, causative, relative-correlative, conditionals — from Unit 21.",
+  "hero": "og-hindi-to-marathi-time-seasons_1"
+ },
+ {
+  "route": "/hindi-to-marathi/business/",
+  "title": "Hindi to Marathi Business: Trade, Finance",
+  "h1": "Hindi → Marathi: Business & Finance",
+  "desc": "Business and finance vocabulary mapped Hindi to Marathi — trade, banking, contracts, formal letters — from Units 19, 23.",
+  "hero": "og-hindi-to-marathi-business"
+ },
+ {
+  "route": "/hindi-to-marathi/daily-conversation/",
+  "title": "Hindi to Marathi Daily Conversation: Survival Sentences",
+  "h1": "Hindi → Marathi: Daily Conversation Essentials",
+  "desc": "Everyday survival sentences mapped Hindi to Marathi — तैयार→तयार, मदद→मदत, चाहिए→पाहिजे, नहीं चाहिए→नको — with the grammar behind each pair.",
+  "hero": "og-hindi-to-marathi-time-seasons-clock"
+ },
+ {
+  "route": "/hindi-to-marathi/emotions/",
+  "title": "Hindi to Marathi Emotions: Feelings, Moods, Inner States",
+  "h1": "Hindi → Marathi: Emotions & Feelings",
+  "desc": "Emotions and inner states mapped Hindi to Marathi — आनंद, राग, भीती, काळजी, भूक, तहान — with the मला…आहे pattern from Unit 17.",
+  "hero": "og-hindi-to-marathi-emotions"
+ },
+ {
+  "route": "/hindi-to-marathi/family-home/",
+  "title": "Hindi to Marathi Family & Home: Relations, Rooms, Daily Life",
+  "h1": "Hindi → Marathi: Family & Home",
+  "desc": "Family relations and home vocabulary mapped Hindi to Marathi — relations, rooms, everyday household words — from Units 03, 05, 20.",
+  "hero": "og-hindi-to-marathi-family-home"
+ },
+ {
+  "route": "/hindi-to-marathi/festivals/",
+  "title": "Hindi to Marathi Festivals: Diwali, Ganpati & More",
+  "h1": "Hindi to Marathi: Festivals & Celebrations",
+  "desc": "Festival vocabulary mapped Hindi to Marathi -- Diwali, Ganpati, Gudi Padwa, Holi, Makar Sankranti -- from Unit 13.",
+  "hero": "og-hindi-to-marathi-travel_1"
+ },
+ {
+  "route": "/hindi-to-marathi/greetings/",
+  "title": "Hindi to Marathi Greetings & First Sentences",
+  "h1": "Hindi → Marathi: Greetings & Your First Sentences",
+  "desc": "Bridge your Hindi into Marathi greetings and first sentences: नमस्ते→नमस्कार, मेरा नाम→माझं नाव, मुझे चाहिए→मला पाहिजे — mapping by mapping.",
+  "hero": "og-english-to-marathi-greetings"
+ },
+ {
+  "route": "/hindi-to-marathi/health-body/",
+  "title": "Hindi to Marathi Health & Body: Symptoms, Doctor Visit",
+  "h1": "Hindi → Marathi: Health & Body",
+  "desc": "Health and body vocabulary mapped Hindi to Marathi — body parts, symptoms, doctor sentences — from Units 10, 17.",
+  "hero": "og-hindi-to-marathi-health-body"
+ },
+ {
+  "route": "/hindi-to-marathi/hobbies/",
+  "title": "Hindi to Marathi Hobbies & Leisure: Sports, Arts, Frequency",
+  "h1": "Hindi to Marathi: Hobbies & Leisure",
+  "desc": "Hobbies vocabulary mapped Hindi to Marathi -- sports, arts, frequency, leisure time from Unit 18.",
+  "hero": "og-hindi-to-marathi-hobbies"
+ },
+ {
+  "route": "/hindi-to-marathi/literature-words/",
+  "title": "Hindi to Marathi Literature Terms: Poetry, Drama, Fiction",
+  "h1": "Hindi to Marathi: Literature & Literary Terms",
+  "desc": "Literature vocabulary mapped Hindi to Marathi -- poetry, drama, fiction, awards, digital terms from Unit 22.",
+  "hero": "og-hindi-to-marathi-literature-words"
+ },
+ {
+  "route": "/hindi-to-marathi/media-news/",
+  "title": "Hindi to Marathi Media & News: Politics, Formal Register",
+  "h1": "Hindi → Marathi: Media & News",
+  "desc": "Media and news vocabulary mapped Hindi to Marathi — political terms, report language, formal register words — from Units 23, 24.",
+  "hero": "og-hindi-to-marathi-media-news"
+ },
+ {
+  "route": "/hindi-to-marathi/phrases/",
+  "title": "Hindi to Marathi Phrases & Sentences",
+  "h1": "Hindi to Marathi Phrases & Sentences",
+  "desc": "Everyday Hindi sentences translated into Marathi — with word-by-word mapping and grammar notes, from the Bol Marathi bridge lessons.",
+  "hero": "og-hindi-to-marathi-phrases"
+ },
+ {
+  "route": "/hindi-to-marathi/postpositions/",
+  "title": "Hindi to Marathi Postpositions: Cases, Meanings & Usage",
+  "h1": "Hindi to Marathi: Postpositions & Cases",
+  "desc": "Postpositions mapped Hindi to Marathi -- cases, meanings, and usage from Unit 08. Covers में→मध्ये, पर→वर, नीचे→खाली, पास→जवळ, पीछे→मागे, से→कडून.",
+  "hero": "og-hindi-to-marathi-postpositions"
+ },
+ {
+  "route": "/hindi-to-marathi/pronouns-people/",
+  "title": "Hindi to Marathi Pronouns & People Words: I, You, We, They",
+  "h1": "Hindi → Marathi: Pronouns & People",
+  "desc": "Pronouns and people words mapped Hindi to Marathi — मैं→मी, तू→तू, आप→तुम्ही/आप, वह→तो/ती/ते — with gender, honorifics and case forms from Unit 05.",
+  "hero": "og-hindi-to-marathi-pronouns-people"
+ },
+ {
+  "route": "/hindi-to-marathi/pronunciation-sounds/",
+  "title": "Hindi to Marathi Pronunciation: Sounds, Shifts & Alphabet",
+  "h1": "Hindi to Marathi: Pronunciation & Sounds",
+  "desc": "Sound shifts and pronunciation mapped Hindi to Marathi -- vowel/consonant changes, transliteration rules, the Devanagari alphabet -- from Unit 06.",
+  "hero": "og-hindi-to-marathi-pronunciation-sounds"
+ },
+ {
+  "route": "/hindi-to-marathi/questions/",
+  "title": "Hindi to Marathi Question Words: क्या → काय",
+  "h1": "Hindi → Marathi: Question Words (काय, कुठे, कधी)",
+  "desc": "All six question words mapped Hindi to Marathi — क्या→काय, कहाँ→कुठे, कब→कधी, कैसे→कसे, कौन→कोण, क्यों→का — with example questions.",
+  "hero": "og-hindi-to-marathi-questions"
+ },
+ {
+  "route": "/hindi-to-marathi/review-essentials/",
+  "title": "Hindi to Marathi Review: Grammar & Vocab Recap",
+  "h1": "Hindi → Marathi: Review Essentials",
+  "desc": "Review of essential Hindi-to-Marathi bridges — fused forms, sound shifts, gender, continuous tense, question words — from Units 01–20.",
+  "hero": "og-hindi-to-marathi-review-essentials"
+ },
+ {
+  "route": "/hindi-to-marathi/school-and-study/",
+  "title": "Hindi to Marathi School & Study: Classroom, Subjects, Exams",
+  "h1": "Hindi to Marathi: School & Study",
+  "desc": "Education vocabulary mapped Hindi to Marathi -- classroom, subjects, exams, grades -- from Unit 11 (education half).",
+  "hero": "og-hindi-to-marathi-school-and-study"
+ },
+ {
+  "route": "/hindi-to-marathi/sentence-patterns/",
+  "title": "Hindi to Marathi Sentence Patterns: SOV, Particles, Tense",
+  "h1": "Hindi → Marathi: Sentence Patterns",
+  "desc": "Core sentence patterns mapped Hindi to Marathi — SOV order, particles (ने, को, से), continuous tense (रहा→तो+आहे), possession — from Units 04, 05.",
+  "hero": "og-hindi-to-marathi-sentence-patterns"
+ },
+ {
+  "route": "/hindi-to-marathi/shopping/",
+  "title": "Hindi to Marathi Shopping: Market, Prices, Bargaining",
+  "h1": "Hindi → Marathi: Shopping & Market",
+  "desc": "Shopping vocabulary mapped Hindi to Marathi — prices, quantities, bargaining, payment — from Unit 09.",
+  "hero": "og-hindi-to-marathi-shopping"
+ },
+ {
+  "route": "/hindi-to-marathi/technology/",
+  "title": "Hindi to Marathi Technology: Phone, Internet, Apps",
+  "h1": "Hindi to Marathi: Technology & Internet",
+  "desc": "Technology vocabulary mapped Hindi to Marathi -- phone, internet, apps, social media, devices -- from Unit 12.",
+  "hero": "og-hindi-to-marathi-technology"
+ },
+ {
+  "route": "/hindi-to-marathi/time-seasons/",
+  "title": "Hindi to Marathi Time & Seasons: Clock, Calendar, Weather",
+  "h1": "Hindi → Marathi: Time & Seasons",
+  "desc": "Time, seasons and calendar mapped Hindi to Marathi — clock words, day parts, seasons, dates — from Units 16, 14.",
+  "hero": "og-hindi-to-marathi-shopping_1"
+ },
+ {
+  "route": "/hindi-to-marathi/travel/",
+  "title": "Hindi to Marathi Travel Words: Trains, Tickets & Stays",
+  "h1": "Hindi → Marathi: Travel Words & Transport",
+  "desc": "12 Hindi-to-Marathi travel mappings — transport, booking, stations, hotels and directions — with the vocabulary travellers actually need in Maharashtra.",
+  "hero": "og-english-to-marathi-transport-travel"
+ },
+ {
+  "route": "/hindi-to-marathi/words/",
+  "title": "Hindi to Marathi Words",
+  "h1": "Hindi to Marathi Words",
+  "desc": "Common Hindi words and their Marathi equivalents — with pronunciation and examples. Built for Hindi speakers learning Marathi.",
+  "hero": "og-hindi-to-marathi-words"
+ },
+ {
+  "route": "/hindi-to-marathi/work-career/",
+  "title": "Hindi to Marathi Work & Career: Jobs, Office, Professions",
+  "h1": "Hindi → Marathi: Work & Career",
+  "desc": "Work and career vocabulary mapped Hindi to Marathi — jobs, office, traditional professions, modern roles — from Units 11, 19, 23.",
+  "hero": "og-hindi-to-marathi-work-career"
+ },
+ {
+  "route": "/how-it-works/",
+  "title": "How Bol Marathi Teaches: Method & Learning Loop",
+  "h1": "How Bol Marathi teaches",
+  "desc": "The Bol Marathi method: themed vocabulary, Hindi bridges, listening, speaking, sentence building and spaced repetition.",
+  "hero": null
+ },
+ {
+  "route": "/how-to-say-good-morning-in-marathi/",
+  "title": "How to Say Good Morning in Marathi: शुभ सकाळ",
+  "h1": "How to Say Good Morning in Marathi: शुभ सकाळ",
+  "desc": "Good morning in Marathi is शुभ सकाळ (śubh sakāḷ) — plus good night शुभ रात्री. Pronunciation, examples and usage.",
+  "hero": "og-how-to-say-good-morning-in-marathi"
+ },
+ {
+  "route": "/how-to-say-hello-in-marathi/",
+  "title": "How to Say Hello in Marathi: नमस्कार (With Pronunciation)",
+  "h1": "How to Say Hello in Marathi: नमस्कार (With Pronunciation)",
+  "desc": "Hello in Marathi is नमस्कार (namaskār) — the respectful greeting for any time of day. Pronunciation, Hindi meaning, example and usage.",
+  "hero": "og-how-to-say-hello-in-marathi"
+ },
+ {
+  "route": "/how-to-say-sorry-in-marathi/",
+  "title": "How to Say Sorry in Marathi: माफ करा (With Pronunciation)",
+  "h1": "How to Say Sorry in Marathi: माफ करा (With Pronunciation)",
+  "desc": "Sorry in Marathi is माफ करा (māph karā) — for apologies and getting attention. Pronunciation, Hindi counterpart, example and usage.",
+  "hero": "og-how-to-say-sorry-in-marathi"
+ },
+ {
+  "route": "/how-to-say-thank-you-in-marathi/",
+  "title": "How to Say Thank You in Marathi: धन्यवाद",
+  "h1": "How to Say Thank You in Marathi: धन्यवाद",
+  "desc": "Thank you in Marathi is धन्यवाद (dhanyavād) — same word as Hindi, different music. Pronunciation, example and usage.",
+  "hero": "og-how-to-say-thank-you-in-marathi"
+ },
+ {
+  "route": "/lessons/",
+  "title": "Marathi Lessons — Full Curriculum",
+  "h1": "Marathi Lessons — Full Curriculum",
+  "desc": "All 26 Bol Marathi units, 156 lessons: fundamentals to advanced conversation, each with vocabulary, speaking, listening, grammar and culture.",
+  "hero": "og-lessons"
+ },
+ {
+  "route": "/lessons/01/",
+  "title": "Unit 01: Marathi Fundamentals | Free Marathi Lesson",
+  "h1": "Marathi Basics for Beginners: Greetings, First Words & Sentences",
+  "desc": "Alphabet, greetings and your first 50 words. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-01"
+ },
+ {
+  "route": "/lessons/02/",
+  "title": "Unit 02: Survival Marathi | Free Marathi Lesson",
+  "h1": "Survival Marathi: Essential Verbs & Everyday Questions",
+  "desc": "Possession, questions and verbs for daily situations. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-02"
+ },
+ {
+  "route": "/lessons/03/",
+  "title": "Unit 03: Everyday Vocabulary | Free Marathi Lesson",
+  "h1": "Everyday Marathi Vocabulary: Family, Home & Food Words",
+  "desc": "100+ high-frequency words for home life. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-03"
+ },
+ {
+  "route": "/lessons/04/",
+  "title": "Unit 04: Core Sentence Patterns | Free Marathi Lesson",
+  "h1": "Marathi Sentence Patterns: Build Correct SOV Sentences",
+  "desc": "Movement verbs, compound verbs and ability. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-04"
+ },
+ {
+  "route": "/lessons/05/",
+  "title": "Unit 05: Pronouns & People | Free Marathi Lesson",
+  "h1": "Marathi Pronouns & People: I, You, He, She Explained",
+  "desc": "Full pronoun paradigm plus kinship words. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-05"
+ },
+ {
+  "route": "/lessons/06/",
+  "title": "Unit 06: Marathi Pronunciation | Free Marathi Lesson",
+  "h1": "Marathi Pronunciation Guide: Sounds Hindi Speakers Must Learn",
+  "desc": "Retroflex, nasal, visarga and anusvara. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-06"
+ },
+ {
+  "route": "/lessons/07/",
+  "title": "Unit 07: Questions & Inquiry | Free Marathi Lesson",
+  "h1": "Marathi Questions: Question Words & How to Ask Anything",
+  "desc": "Question words and their everyday usage. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-07"
+ },
+ {
+  "route": "/lessons/08/",
+  "title": "Unit 08: Postpositions | Free Marathi Lesson",
+  "h1": "Marathi Postpositions: Location & Relation Markers",
+  "desc": "The small words that anchor every sentence. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-08"
+ },
+ {
+  "route": "/lessons/09/",
+  "title": "Unit 09: Shopping & Market | Free Marathi Lesson",
+  "h1": "Marathi Shopping Words: Market, Price & Bargaining",
+  "desc": "Price, units and bargaining phrases. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-09"
+ },
+ {
+  "route": "/lessons/10/",
+  "title": "Unit 10: Health & Body | Free Marathi Lesson",
+  "h1": "Marathi Health Words: Body, Symptoms & Doctor Visits",
+  "desc": "Describe symptoms and visit a doctor. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-10"
+ },
+ {
+  "route": "/lessons/11/",
+  "title": "Unit 11: Education & Work | Free Marathi Lesson",
+  "h1": "Marathi for School & Work: Education and Office Words",
+  "desc": "School, interviews and office life. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-11"
+ },
+ {
+  "route": "/lessons/12/",
+  "title": "Unit 12: Technology & Digital | Free Marathi Lesson",
+  "h1": "Marathi Technology Words: Devices, Internet & Safety",
+  "desc": "Talk about phones, internet and safety. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-12"
+ },
+ {
+  "route": "/lessons/13/",
+  "title": "Unit 13: Festivals & Culture | Free Marathi Lesson",
+  "h1": "Marathi Festivals & Culture: Ganesh, Diwali, Gudi Padwa",
+  "desc": "Festival words and cultural context. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-13"
+ },
+ {
+  "route": "/lessons/14/",
+  "title": "Unit 14: Nature & Travel | Free Marathi Lesson",
+  "h1": "Marathi Nature & Travel Words: Sahyadri, Konkan & Wildlife",
+  "desc": "Landscapes, travel and wildlife. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-14"
+ },
+ {
+  "route": "/lessons/15/",
+  "title": "Unit 15: Travel Expanded | Free Marathi Lesson",
+  "h1": "Marathi Travel Phrases: Tickets, Stations & Stays",
+  "desc": "Book, navigate and stay anywhere in Maharashtra. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-15"
+ },
+ {
+  "route": "/lessons/16/",
+  "title": "Unit 16: Time & Seasons | Free Marathi Lesson",
+  "h1": "Marathi Numbers, Time & Seasons: Clock, Calendar, Days",
+  "desc": "Tell time and talk about seasons. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-16"
+ },
+ {
+  "route": "/lessons/17/",
+  "title": "Unit 17: Emotions & Feelings | Free Marathi Lesson",
+  "h1": "Marathi Emotions & Feelings Words: Joy, Sorrow, Empathy",
+  "desc": "Say how you feel, precisely. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-17"
+ },
+ {
+  "route": "/lessons/18/",
+  "title": "Unit 18: Hobbies & Leisure | Free Marathi Lesson",
+  "h1": "Marathi Hobbies & Leisure Words: Sports, Arts & Practice",
+  "desc": "Talk about what you love doing. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-18"
+ },
+ {
+  "route": "/lessons/19/",
+  "title": "Unit 19: Work & Career | Free Marathi Lesson",
+  "h1": "Marathi for Work & Career: Jobs, Interviews & Growth",
+  "desc": "Job search and workplace language. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-19"
+ },
+ {
+  "route": "/lessons/20/",
+  "title": "Unit 20: Review & Mastery | Free Marathi Lesson",
+  "h1": "Marathi Review & Mastery Test: Everything So Far",
+  "desc": "Cumulative review across all topics. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-20"
+ },
+ {
+  "route": "/lessons/21/",
+  "title": "Unit 21: Advanced Grammar | Free Marathi Lesson",
+  "h1": "Advanced Marathi Grammar: Prefixes, Compounds & Voice",
+  "desc": "Take grammar beyond the basics. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-21"
+ },
+ {
+  "route": "/lessons/22/",
+  "title": "Unit 22: Literature & Poetry | Free Marathi Lesson",
+  "h1": "Marathi Literature & Poetry: Saints to Modern Poets",
+  "desc": "Abhanga, ovi and modern poetry. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-22"
+ },
+ {
+  "route": "/lessons/23/",
+  "title": "Unit 23: Business Marathi | Free Marathi Lesson",
+  "h1": "Business Marathi: Trade, Finance & Contracts",
+  "desc": "Professional and commercial language. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-23"
+ },
+ {
+  "route": "/lessons/24/",
+  "title": "Unit 24: Media & News | Free Marathi Lesson",
+  "h1": "Marathi Media & News Words: Press, Broadcast & Social",
+  "desc": "Follow Marathi news and media. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-24"
+ },
+ {
+  "route": "/lessons/25/",
+  "title": "Unit 25: Advanced Conversation | Free Marathi Lesson",
+  "h1": "Advanced Marathi Conversation: Debate & Presentation",
+  "desc": "Argue, present and persuade. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-25"
+ },
+ {
+  "route": "/lessons/26/",
+  "title": "Unit 26: Final Assessment | Free Marathi Lesson",
+  "h1": "Marathi Final Assessment: Mock Exam & Certificate",
+  "desc": "Prove your Marathi end to end. Six lessons: vocabulary, bridges, speaking, grammar and culture.",
+  "hero": "og-lessons-26"
+ },
+ {
+  "route": "/marathi-alphabet/",
+  "title": "Marathi Alphabet & Barakhadi: Vowels, Consonants",
+  "h1": "Marathi Alphabet & Barakhadi: Vowels, Consonants",
+  "desc": "Marathi alphabet: 12 vowels, 33 consonants including ळ, and how barakhadi works — from Unit 01.",
+  "hero": "og-marathi-alphabet"
+ },
+ {
+  "route": "/marathi-days-months/",
+  "title": "Marathi Days of the Week & Months (With Pronunciation)",
+  "h1": "Marathi Days of the Week & Months (With Pronunciation)",
+  "desc": "All 7 Marathi days, all 12 Marathi months, and parts of the day — with pronunciation, Hindi meanings and example sentences.",
+  "hero": "og-marathi-days-months"
+ },
+ {
+  "route": "/marathi-numbers/",
+  "title": "Marathi Numbers 1–20, Tens & Ordinals",
+  "h1": "Marathi Numbers 1–20, Tens & Ordinals",
+  "desc": "Marathi numbers 1 to 20, tens to 90, 100 and ordinals — with pronunciation, Hindi meanings and examples. From the Bol Marathi curriculum.",
+  "hero": "og-marathi-numbers"
+ },
+ {
+  "route": "/marathi-pronunciation/",
+  "title": "Marathi Pronunciation: Key Sounds Guide",
+  "h1": "Marathi Pronunciation: Key Sounds Guide",
+  "desc": "Retroflex consonants, nasals, visarga, anusvara, vowel length and conjuncts — Marathi pronunciation explained with examples from Unit 06.",
+  "hero": "og-marathi-pronunciation"
+ },
+ {
+  "route": "/marathi-vs-hindi/",
+  "title": "Marathi vs Hindi: काल/उद्या & Three Genders",
+  "h1": "Marathi vs Hindi: काल/उद्या & Three Genders",
+  "desc": "Two Marathi–Hindi differences from real data: काल vs उद्या split, and neuter हा/ही/हे Hindi lacks.",
+  "hero": "og-marathi-vs-hindi"
+ },
+ {
+  "route": "/phrases/",
+  "title": "Marathi Phrases for Real Life",
+  "h1": "Marathi Phrases for Real Life",
+  "desc": "Greetings, daily conversation and travel phrases in Marathi — each with Hindi and English meanings, from the Bol Marathi curriculum.",
+  "hero": "og-phrases"
+ },
+ {
+  "route": "/phrases/asking-directions/",
+  "title": "Marathi Phrases for Asking & Giving Directions",
+  "h1": "Marathi Phrases for Directions & Navigation",
+  "desc": "How to ask where something is, understand left/right/straight, and give simple directions — Unit 08 and Unit 14 speaking sentences.",
+  "hero": "og-phrases-asking-directions"
+ },
+ {
+  "route": "/phrases/business-meetings/",
+  "title": "Marathi Phrases for Business Meetings & Presentations",
+  "h1": "Marathi Phrases for Business Meetings",
+  "desc": "Marathi business meeting phrases — agendas, presentations, decisions, follow-ups — from Units 23 and 25 speaking sentences.",
+  "hero": "og-phrases-business-meetings"
+ },
+ {
+  "route": "/phrases/daily/",
+  "title": "Marathi Phrases for Daily Conversation: Free Lesson",
+  "h1": "Marathi Phrases for Daily Conversation (with Hindi & English)",
+  "desc": "Everyday Marathi sentences — introductions, needs, feelings — mapped from Hindi so Hindi speakers get them instantly.",
+  "hero": "og-phrases-daily"
+ },
+ {
+  "route": "/phrases/emergency-phrases/",
+  "title": "Marathi Emergency Phrases: Help, Doctor, Police",
+  "h1": "Marathi Emergency Phrases (आडवा काळातील वाक्य)",
+  "desc": "Marathi emergency phrases — help, call a doctor, call police, I'm hurt, fire — from Unit 10 and Unit 16 speaking sentences.",
+  "hero": "og-phrases-emergency-phrases"
+ },
+ {
+  "route": "/phrases/family-talk/",
+  "title": "Marathi Family Phrases: Talk About People & Home",
+  "h1": "Marathi Phrases for Talking About Family & People",
+  "desc": "12 real Marathi sentences for talking about family and people — with Hindi and English meanings and speaking tips from the Bol Marathi curriculum.",
+  "hero": "og-phrases-family-talk"
+ },
+ {
+  "route": "/phrases/greetings/",
+  "title": "Marathi Greetings & Polite Phrases: Free Lesson",
+  "h1": "Marathi Greetings & Polite Phrases (with Hindi & English)",
+  "desc": "How to greet, thank, apologise and be polite in Marathi — with Hindi and English meanings.",
+  "hero": "og-phrases-greetings"
+ },
+ {
+  "route": "/phrases/making-plans/",
+  "title": "Marathi Phrases for Making Plans & Future Talk",
+  "h1": "Marathi Phrases for Making Plans",
+  "desc": "12 Marathi sentences for making plans, proposing times, and coordinating — with Hindi and English meanings from Units 16 and 18.",
+  "hero": "og-phrases-making-plans"
+ },
+ {
+  "route": "/phrases/office-work/",
+  "title": "Marathi Office Phrases for Work & Daily Use",
+  "h1": "Marathi Phrases for the Office & Work",
+  "desc": "9 Marathi workplace sentences — meetings, interviews, projects and promotions — with Hindi and English meanings and speaking tips.",
+  "hero": "og-phrases-shopping_1"
+ },
+ {
+  "route": "/phrases/phone-and-messaging/",
+  "title": "Marathi Phrases for Phone Calls & Messaging",
+  "h1": "Marathi Phrases for Phone & Messaging",
+  "desc": "Marathi phone and messaging phrases — calling, texting, WhatsApp, signal issues — from Unit 12 and Unit 24 speaking sentences.",
+  "hero": "og-phrases-phone-and-messaging"
+ },
+ {
+  "route": "/phrases/presentations-interviews/",
+  "title": "Marathi Phrases for Presentations & Interviews",
+  "h1": "Marathi Phrases for Presentations & Interviews",
+  "desc": "Marathi presentation and interview phrases — introducing yourself, presenting, Q&A, strengths/weaknesses — from Units 25 and 26 speaking sentences.",
+  "hero": "og-phrases-thanking-apologizing_1"
+ },
+ {
+  "route": "/phrases/shopping/",
+  "title": "Marathi Shopping Phrases: Free Lesson",
+  "h1": "Marathi Shopping Phrases (with Hindi & English)",
+  "desc": "Bargain in Marathi: how much, reduce a little, bill please — real Unit 09 sentences with Hindi and English meanings.",
+  "hero": "og-phrases-business-meetings_1"
+ },
+ {
+  "route": "/phrases/thanking-apologizing/",
+  "title": "Marathi Phrases for Thanking & Apologizing",
+  "h1": "Marathi Phrases for Thanking & Apologizing",
+  "desc": "Marathi thanking and apologizing phrases — thanks, sorry, you're welcome, no problem — from Units 01, 16 and 16 speaking.",
+  "hero": "og-phrases-phone-and-messaging_1"
+ },
+ {
+  "route": "/phrases/travel/",
+  "title": "Marathi Travel Phrases: Free Lesson",
+  "h1": "Marathi Travel Phrases (with Hindi & English)",
+  "desc": "Tickets, stations, stays and directions — the Marathi phrases travellers need, with Hindi meanings.",
+  "hero": "og-english-to-marathi-transport-travel"
+ },
+ {
+  "route": "/privacy/",
+  "title": "Privacy — Bol Marathi Website",
+  "h1": "Privacy",
+  "desc": "Privacy notes for the Bol Marathi learning website: no accounts, no tracking of your learning.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/",
+  "title": "Free Marathi Quizzes by Topic",
+  "h1": "Test yourself: Marathi quizzes",
+  "desc": "Free 10-question Marathi quizzes — vocabulary topics with instant feedback. A sample of the Bol Marathi practice loop.",
+  "hero": "og-quiz-beginners"
+ },
+ {
+  "route": "/quiz/beginners/",
+  "title": "Marathi Quiz: Beginners | Bol Marathi",
+  "h1": "100+ Marathi Words for Beginners: quiz",
+  "desc": "10 questions on 100+ marathi words for beginners with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/colors/",
+  "title": "Marathi Quiz: Colors | Bol Marathi",
+  "h1": "Marathi Colors: quiz",
+  "desc": "10 questions on marathi colors with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/daily-life/",
+  "title": "Marathi Quiz: Daily Life | Bol Marathi",
+  "h1": "Marathi Words for Daily Life: quiz",
+  "desc": "10 questions on marathi words for daily life with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/family/",
+  "title": "Marathi Quiz: Family | Bol Marathi",
+  "h1": "Marathi Family Words: quiz",
+  "desc": "10 questions on marathi family words with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/food/",
+  "title": "Marathi Quiz: Food | Bol Marathi",
+  "h1": "Marathi Food Words: quiz",
+  "desc": "10 questions on marathi food words with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/numbers-time/",
+  "title": "Marathi Quiz: Numbers Time | Bol Marathi",
+  "h1": "Marathi Numbers, Time & Days: quiz",
+  "desc": "10 questions on marathi numbers, time & days with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/shopping/",
+  "title": "Marathi Quiz: Shopping | Bol Marathi",
+  "h1": "Marathi Shopping & Market Words: quiz",
+  "desc": "10 questions on marathi shopping & market words with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/travel/",
+  "title": "Marathi Quiz: Travel | Bol Marathi",
+  "h1": "Marathi Travel Words & Phrases: quiz",
+  "desc": "10 questions on marathi travel words & phrases with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/quiz/verbs/",
+  "title": "Marathi Quiz: Verbs | Bol Marathi",
+  "h1": "Essential Marathi Verbs: quiz",
+  "desc": "10 questions on essential marathi verbs with instant feedback, plus sentence building. Free Marathi quiz.",
+  "hero": null
+ },
+ {
+  "route": "/review/",
+  "title": "Review Before You Forget | Bol Marathi",
+  "h1": "Review before you forget",
+  "desc": "Spaced repetition review: weakest-word practice scheduled before you forget.",
+  "hero": null
+ },
+ {
+  "route": "/search/",
+  "title": "Search | Bol Marathi",
+  "h1": "Search Bol Marathi",
+  "desc": "Search Marathi vocabulary, phrases, lessons, and grammar.",
+  "hero": null
+ },
+ {
+  "route": "/start/",
+  "title": "New to Marathi? Start Here — 6 Steps",
+  "h1": "New to Marathi? Start here.",
+  "desc": "A beginner path into Marathi: essential words, greetings, first sentences, Hindi bridges, your first lesson, then practice in the app.",
+  "hero": "og-vocabulary-beginners"
+ },
+ {
+  "route": "/vocabulary/",
+  "title": "Marathi Vocabulary by Topic",
+  "h1": "Marathi Vocabulary by Topic",
+  "desc": "Learn Marathi words by topic — beginners, food, family, travel, verbs and daily life — each with Hindi and English meanings, pronunciation and examples.",
+  "hero": "og-vocabulary"
+ },
+ {
+  "route": "/vocabulary/abstract-concepts/",
+  "title": "Marathi Abstract Concepts: World, Time, Values & Ideas",
+  "h1": "Marathi Abstract Words (निर्मित संकल्पना)",
+  "desc": "36 Marathi abstract words - जग, देश, भाषा, धर्म, भविष्य, मूल्य, गुणवत्ता, धैर्य, अनुभव - with Hindi meanings and philosophical examples.",
+  "hero": "og-vocabulary-abstract-concepts"
+ },
+ {
+  "route": "/vocabulary/adjectives/",
+  "title": "Marathi Adjectives: 68 Describing Words",
+  "h1": "Marathi Adjectives (विशेषण)",
+  "desc": "68 Marathi adjectives — size, quality, temperature, difficulty, opposites — with Hindi meanings, pronunciation, gender agreement, examples from Unit 3.",
+  "hero": "og-vocabulary-adjectives"
+ },
+ {
+  "route": "/vocabulary/adverbs/",
+  "title": "Marathi Adverbs: Always, Never, Slowly, Together",
+  "h1": "Marathi Adverbs (क्रियाविशेषण)",
+  "desc": "30 Marathi adverbs — frequency, time, manner, degree — with Hindi meanings, pronunciation and Unit 18 sentence examples.",
+  "hero": "og-vocabulary-adverbs"
+ },
+ {
+  "route": "/vocabulary/animals/",
+  "title": "Marathi Animal Names: 40 Animals with Hindi & English",
+  "h1": "Marathi Animal Names (प्राणी आणि पक्षी)",
+  "desc": "40 Marathi animal names — pets, farm animals, wildlife and birds — with Hindi meanings, pronunciation and example sentences.",
+  "hero": "og-vocabulary-adjectives_1"
+ },
+ {
+  "route": "/vocabulary/beginners/",
+  "title": "100+ Marathi Words for Beginners | Free Lesson",
+  "h1": "100+ Marathi Words for Beginners (with Hindi & English)",
+  "desc": "The first Marathi words to learn: greetings, yes/no, please, numbers and everyday essentials with Hindi and English meanings.",
+  "hero": "og-vocabulary-beginners"
+ },
+ {
+  "route": "/vocabulary/birds/",
+  "title": "Marathi Bird Names: 12 Birds from Sparrow to Peacock",
+  "h1": "Marathi Bird Names (पक्षी)",
+  "desc": "12 Marathi bird names — चिमणी, मोर, कोयल, पोपट, कोबळ, गरुड — with Hindi meanings, pronunciation, examples and cultural notes.",
+  "hero": "og-vocabulary-birds"
+ },
+ {
+  "route": "/vocabulary/body-parts/",
+  "title": "Marathi Body Parts: 43 Words from Head to Toe",
+  "h1": "Marathi Body Parts & Health Words (शरीर)",
+  "desc": "43 Marathi body-part and health words — डोकं to टाच, plus symptoms and doctor-visit vocabulary — with Hindi meanings, pronunciation and examples.",
+  "hero": "og-vocabulary-abstract-concepts_1"
+ },
+ {
+  "route": "/vocabulary/city-places/",
+  "title": "Marathi City Places: Stations, Markets, Hospitals & More",
+  "h1": "Marathi City Places (शहरातील ठिकाणे)",
+  "desc": "25 Marathi city place words - station, market, hospital, bank, temple, bridge - with Hindi meanings.",
+  "hero": "og-vocabulary-city-places"
+ },
+ {
+  "route": "/vocabulary/clothing/",
+  "title": "Marathi Clothes Vocabulary: Clothing & Jewellery Words",
+  "h1": "Marathi Clothing Words (कपडे)",
+  "desc": "38 Marathi clothing words — everyday wear, traditional clothes like साडी, धोतर and पगडी, plus jewellery — with Hindi, English, pronunciation and examples.",
+  "hero": "og-vocabulary-transport_1"
+ },
+ {
+  "route": "/vocabulary/colors/",
+  "title": "Marathi Colors | Free Lesson",
+  "h1": "Marathi Colors (with Hindi & English)",
+  "desc": "Marathi color words — with Hindi meanings, pronunciation and example sentences from the Bol Marathi curriculum.",
+  "hero": "og-vocabulary-colors"
+ },
+ {
+  "route": "/vocabulary/connectors/",
+  "title": "Marathi Connectors: And, But, Because & More",
+  "h1": "Marathi Connectors & Grammar Words (संयोजक)",
+  "desc": "32 Marathi conjunctions and connectors — pronouns, demonstratives — with Hindi meanings, pronunciation and examples.",
+  "hero": "og-vocabulary-connectors"
+ },
+ {
+  "route": "/vocabulary/culture-festivals/",
+  "title": "Marathi Festival & Culture Words: Diwali to Gudi Padwa",
+  "h1": "Marathi Festival & Culture Words (संस्कृती आणि सण)",
+  "desc": "32 Marathi festival words — गुढीपाडवा, गणपती, वारी, रांगोळी and more — with Hindi meanings, pronunciation, examples from Unit 13.",
+  "hero": "og-vocabulary-culture-festivals"
+ },
+ {
+  "route": "/vocabulary/daily-life/",
+  "title": "Marathi Words for Daily Life | Free Lesson",
+  "h1": "Marathi Words for Daily Life (with Hindi & English)",
+  "desc": "Marathi words for home, routine, body and everyday objects — the vocabulary daily conversation is built from.",
+  "hero": "og-vocabulary-daily-life"
+ },
+ {
+  "route": "/vocabulary/directions-locations/",
+  "title": "Marathi Direction Words: Left, Right, Here, There & Beyond",
+  "h1": "Marathi Direction & Location Words (दिशा आणि ठिकाण)",
+  "desc": "16 Marathi direction words - left, right, here, there - with Hindi meanings and navigation examples.",
+  "hero": "og-vocabulary-directions-locations"
+ },
+ {
+  "route": "/vocabulary/education/",
+  "title": "Marathi School & Education Words: 38 Terms",
+  "h1": "Marathi Education Words (शिक्षण)",
+  "desc": "Marathi school words — classroom, exams, subjects, degrees — with Hindi meanings, pronunciation, examples from Unit 11.",
+  "hero": "og-vocabulary-education"
+ },
+ {
+  "route": "/vocabulary/emotions/",
+  "title": "Marathi Emotion Words: Say How You Feel",
+  "h1": "Marathi Emotions & Feelings Words (भावना)",
+  "desc": "20 Marathi words for emotions and inner states — आनंद, राग, भीती, काळजी — with Hindi meanings, pronunciation, examples and the मला…आहे pattern.",
+  "hero": "og-vocabulary-emotions"
+ },
+ {
+  "route": "/vocabulary/family/",
+  "title": "Marathi Family Words | Free Lesson",
+  "h1": "Marathi Family Words (with Hindi & English)",
+  "desc": "Marathi words for family members and people — with Hindi meanings, pronunciation and examples.",
+  "hero": "og-vocabulary-family"
+ },
+ {
+  "route": "/vocabulary/feelings-adverbs-phrases/",
+  "title": "Marathi Daily Expressions: Feelings, Adverbs & Ready Phrases",
+  "h1": "Marathi Daily Expressions (दैनंदिन वाक्य)",
+  "desc": "46 Marathi phrases - feelings, adverbs, daily expressions - with Hindi meanings and examples.",
+  "hero": "og-vocabulary-feelings-adverbs-phrases"
+ },
+ {
+  "route": "/vocabulary/food/",
+  "title": "Marathi Food Words | Free Lesson",
+  "h1": "Marathi Food Words (with Hindi & English)",
+  "desc": "Marathi words for food, vegetables, grains and eating — with Hindi meanings, pronunciation and example sentences.",
+  "hero": "og-vocabulary-adjectives-2"
+ },
+ {
+  "route": "/vocabulary/fruits-vegetables/",
+  "title": "Marathi Fruits & Vegetables: Names You'll Actually Hear",
+  "h1": "Marathi Fruits & Vegetables (फळे आणि भाजी)",
+  "desc": "10 Marathi fruits and vegetables names — केळं to बटाटा — with Hindi meanings, pronunciation, market examples from Units 3 and 9.",
+  "hero": "og-vocabulary-fruits-vegetables"
+ },
+ {
+  "route": "/vocabulary/health-symptoms/",
+  "title": "Marathi Health Symptoms: Pain, Fever, Cough & More",
+  "h1": "Marathi Health Symptoms (लक्षण आणि आजार)",
+  "desc": "16 Marathi symptom and health words - दुखणं, ताप, खोकला, सर्दी, उलटी - with Hindi meanings, pronunciation and doctor-visit examples from Units 10 and 17.",
+  "hero": "og-vocabulary-health-symptoms"
+ },
+ {
+  "route": "/vocabulary/household-items/",
+  "title": "Marathi Household Items: 25 Home & Everyday Words",
+  "h1": "Marathi Household Items (घरची वस्तू)",
+  "desc": "25 Marathi household items — घर, खोली, दार, टेबल, खुर्ची, पलंग and more — with Hindi meanings, pronunciation and examples from Units 2 and 3.",
+  "hero": "og-vocabulary-household-items"
+ },
+ {
+  "route": "/vocabulary/kitchen-items/",
+  "title": "Marathi Kitchen Items: Cooking, Utensils & Appliances",
+  "h1": "Marathi Kitchen Words (स्वयंपाकघर आणि साधन)",
+  "desc": "40 Marathi kitchen words - rooms, utensils, appliances, cooking verbs - with Hindi meanings, pronunciation and examples from Unit 03 and Food category.",
+  "hero": "og-vocabulary-kitchen-items"
+ },
+ {
+  "route": "/vocabulary/money-shopping/",
+  "title": "Marathi Money & Shopping: Prices, Payment & Bargaining",
+  "h1": "Marathi Money & Shopping Words (पैसे आणि खरेदी)",
+  "desc": "Marathi money and shopping words - prices, quantities, bargaining - with Hindi meanings and market examples.",
+  "hero": "og-vocabulary-money-shopping"
+ },
+ {
+  "route": "/vocabulary/nature/",
+  "title": "Marathi Nature Words: Trees, Rivers, Sky & Earth",
+  "h1": "Marathi Nature Words (पर्यावरण)",
+  "desc": "47 Marathi nature words — plants, landforms, water, sky and soil — with Hindi meanings, pronunciation and example sentences from Unit 14.",
+  "hero": "og-vocabulary-nature"
+ },
+ {
+  "route": "/vocabulary/numbers-time/",
+  "title": "Marathi Numbers, Time & Days | Free Lesson",
+  "h1": "Marathi Numbers, Time & Days (with Hindi & English)",
+  "desc": "Marathi numbers, clock time, days and seasons — with Hindi meanings and pronunciation.",
+  "hero": "og-vocabulary-numbers-time"
+ },
+ {
+  "route": "/vocabulary/people-occupations/",
+  "title": "Marathi People & Occupations: Professions, Roles & Relations",
+  "h1": "Marathi People & Occupations (व्यवसाय आणि लोक)",
+  "desc": "30+ Marathi occupation and people words - traditional professions, modern roles, family relations.",
+  "hero": "og-vocabulary-people-occupations"
+ },
+ {
+  "route": "/vocabulary/personality-words/",
+  "title": "Marathi Personality Adjectives: Traits, Moods & Character",
+  "h1": "Marathi Personality Words (स्वभावाचे विशेषण)",
+  "desc": "Selected Marathi personality adjectives - traits, moods, character - with Hindi meanings.",
+  "hero": "og-vocabulary-personality-words"
+ },
+ {
+  "route": "/vocabulary/shapes/",
+  "title": "Marathi Shapes & Geometry: Circle, Square, Triangle & More",
+  "h1": "Marathi Shapes (आकारे)",
+  "desc": "12 Marathi shape words — गोल, चौकोन, त्रिकोण, आयत, वर्तुळ, अष्टकोण — with Hindi meanings, pronunciation, examples and geometry terms.",
+  "hero": "og-vocabulary-shapes"
+ },
+ {
+  "route": "/vocabulary/shopping/",
+  "title": "Marathi Shopping & Market Words | Free Lesson",
+  "h1": "Marathi Shopping & Market Words (with Hindi & English)",
+  "desc": "Marathi words for shopping, price, bargaining and the market — with numbers for prices.",
+  "hero": "og-vocabulary-abstract-concepts-2"
+ },
+ {
+  "route": "/vocabulary/technology/",
+  "title": "Marathi Technology Words: Phone, Internet, Apps & Devices",
+  "h1": "Marathi Technology Words (तंत्रज्ञान)",
+  "desc": "15 Marathi technology words — मोबाईल, संगणक, इंटरनेट, व्हायफाय, ऐप, व्हाट्सअॅप — with Hindi meanings, pronunciation, examples from Unit 12.",
+  "hero": "og-vocabulary-technology"
+ },
+ {
+  "route": "/vocabulary/time-expressions/",
+  "title": "Marathi Time Expressions: Clock & Calendar",
+  "h1": "Marathi Time Expressions (वेळचे व्यक्तीकरण)",
+  "desc": "Marathi time vocabulary - clock, durations, frequency, calendar - with Hindi meanings and examples from Units 16, 18.",
+  "hero": "og-vocabulary-time-expressions"
+ },
+ {
+  "route": "/vocabulary/transport/",
+  "title": "Marathi Transport Words: Train, Bus, Auto & More",
+  "h1": "Marathi Transport Words (वाहतूक)",
+  "desc": "25 Marathi transport words — train, bus, auto, ticket, platform and direction words — with Hindi meanings, pronunciation and Unit 15 travel sentences.",
+  "hero": "og-vocabulary-transport"
+ },
+ {
+  "route": "/vocabulary/travel/",
+  "title": "Marathi Travel Words & Phrases | Free Lesson",
+  "h1": "Marathi Travel Words & Phrases (with Hindi & English)",
+  "desc": "Marathi words for travel, directions, tickets and stays — plus the phrases travellers actually use.",
+  "hero": "og-vocabulary-travel"
+ },
+ {
+  "route": "/vocabulary/verbs/",
+  "title": "Essential Marathi Verbs | Free Lesson",
+  "h1": "Essential Marathi Verbs (with Hindi & English)",
+  "desc": "The most useful Marathi verbs — eat, drink, go, come, do — with Hindi meanings and sentence examples.",
+  "hero": "og-vocabulary-verbs"
+ },
+ {
+  "route": "/vocabulary/weather/",
+  "title": "Marathi Weather Words: Rain, Seasons & Climate",
+  "h1": "Marathi Weather & Season Words (हवामान)",
+  "desc": "16 Marathi weather and season words — पाऊस, ऊन, वारा, हवामान and the four seasons — with Hindi meanings, pronunciation and example sentences.",
+  "hero": "og-vocabulary-weather"
+ },
+ {
+  "route": "/vocabulary/work-office/",
+  "title": "Marathi Office & Work Words: Jobs, Salary, Meetings",
+  "h1": "Marathi Work & Office Words (काम आणि कार्यालय)",
+  "desc": "42 Marathi office vocabulary words — नोकरी, पगार, traditional occupations — with Hindi meanings, pronunciation, examples from Units 11, 19.",
+  "hero": "og-vocabulary-work-office"
+ }
+]

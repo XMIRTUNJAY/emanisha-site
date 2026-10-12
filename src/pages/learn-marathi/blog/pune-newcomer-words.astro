@@ -1,0 +1,43 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const pack = wordsByMarathi(['नमस्कार', 'धन्यवाद', 'कृपया', 'माफ करा', 'हो', 'नाही', 'पाणी', 'चहा', 'घर', 'रिक्षा', 'बिल', 'थाळी']);
+---
+
+<Learn
+	title="New in Pune? Your First 12 Marathi Words"
+	description="New in Pune or Mumbai? 12 Marathi survival words — greetings, water, home, auto, bill — with Hindi meanings."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Pune newcomer pack', href: siteUrl('/blog/pune-newcomer-words/') },
+	]}
+	canonicalPath="/blog/pune-newcomer-words/"
+	about="marathi survival words newcomers pune"
+	meta={['12 survival words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Landed in Pune or Mumbai with zero Marathi? Twelve words buy you
+		surprisingly much: greet, thank, apologise, agree, ask for water and
+		tea, name home, hail an auto, and handle the bill. Each with Hindi
+		meaning, pronunciation and an example.
+	</p>
+
+	<VocabTable words={pack} caption="First 12 Marathi words" />
+
+	<AppCTA variant="vocabulary" context="blog-newcomer" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Beginner words', href: siteUrl('/vocabulary/beginners/') },
+			{ label: 'New to Marathi? Start here', href: siteUrl('/start/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+</Learn>

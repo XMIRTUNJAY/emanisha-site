@@ -1,0 +1,35 @@
+---
+interface Props {
+	streak: number;
+	size?: number;
+	stroke?: number;
+}
+const { streak, size = 44, stroke = 4 } = Astro.props;
+const radius = size / 2 - stroke;
+const circumference = 2 * Math.PI * radius;
+const pct = Math.min(streak / 7, 1);
+const offset = circumference * (1 - pct);
+---
+<div class="progress-ring" title={`Streak: ${streak} day${streak !== 1 ? 's' : ''}`} aria-label={`Streak: ${streak} day${streak !== 1 ? 's' : ''}`}>
+	<svg width={size} height={size} style="transform: rotate(-90deg)" aria-hidden="true">
+		<circle class="bg" cx={size/2} cy={size/2} r={radius} fill="none" stroke="var(--container)" stroke-width={stroke} />
+		<circle class="fg" cx={size/2} cy={size/2} r={radius} fill="none" stroke="var(--accent)" stroke-width={stroke} stroke-dasharray={circumference} stroke-dashoffset={offset} stroke-linecap="round" style="transition: stroke-dashoffset 0.5s ease" />
+	</svg>
+	<span class="streak-count">{streak}</span>
+</div>
+
+<style>
+	.progress-ring {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.streak-count {
+		position: absolute;
+		font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+		font-weight: 700;
+		color: var(--accent);
+		line-height: 1;
+	}
+</style>

@@ -1,0 +1,303 @@
+[
+  {
+    "slug": "technology",
+    "title": "Marathi Technology Words: Phone, Internet, Apps & Devices",
+    "description": "15 Marathi technology words — मोबाईल, संगणक, इंटरनेट, व्हायफाय, ऐप, व्हाट्सअॅप — with Hindi meanings, pronunciation, examples from Unit 12.",
+    "h1": "Marathi Technology Words (तंत्रज्ञान)",
+    "searchIntent": "vocabulary",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["technology", "daily-life", "internet"],
+    "primaryKeyword": "marathi technology words",
+    "secondaryKeywords": ["technology in marathi", "phone words marathi", "internet vocabulary marathi", "mobile in marathi"],
+    "intro": [
+      "Fifteen Marathi technology words from Unit 12 — the everyday digital vocabulary you need for phones, internet, apps and devices. Each entry has Hindi and English meanings, pronunciation and a real example sentence from the curriculum.",
+      "Most tech words are English loans written in Devanagari — the Marathi part is the spelling conventions (मोबाईल, व्हायफाय, व्हाट्सअॅप, बॅटरी) and the verb frames (फोन करा, मेसेज पाठवा, चार्ज करा, डाउनलोड करा). Learn the nouns once, add the verbs, and you have the full digital toolkit."
+    ],
+    "tip": "मोबाईल, इंटरनेट, चार्ज, ऐप, बॅटरी — these are the same words, just Devanagari. The Marathi magic is in the verbs: फोन करा, मेसेज पाठवा, चार्ज करा, डाउनलोड करा।",
+    "categories": ["Technology"],
+    "units": ["12"],
+    "sections": [
+      {
+        "heading": "Devices & connections — the nouns you already know",
+        "paragraphs": [
+          "मोबाईल (mobile), संगणक (computer), इंटरनेट (internet), व्हायफाय (WiFi), कॅमरा (camera), बॅटरी (battery), चार्जर (charger), स्क्रीन (screen), सिम कार्ड (SIM card) — these are English loans in Devanagari. The spelling flags: मोबाईल (ि + ल), व्हायफाय (ॅ), व्हाट्सअॅप (ॅ), बॅटरी (ॅ), कॅमरा (ॅ)."
+        ]
+      },
+      {
+        "heading": "Actions — the Marathi verb frames",
+        "paragraphs": [
+          "फोन करा (call), मेसेज पाठवा (send message), चार्ज करा (charge), डाउनलोड करा (download), इंस्टॉल करा (install), डिलीट करा (delete), सर्च करा (search), रीस्टार्ट करा (restart), कनेक्ट करा (connect), लॉगिन करा (login). Pattern: noun + करा. The noun is the loanword; करा does the work."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Writing मोबाइल for mobile",
+        "right": "मोबाईल — with ि and ल",
+        "why": "Marathi writes the English loan as मोबाईल; the Hindi spelling मोबाइल uses the wrong vowel sign."
+      },
+      {
+        "wrong": "Saying इंटरनेट काम करत आहे for \"internet is working\"",
+        "right": "इंटरनेट चालू आहे",
+        "why": "चालू = on/working; बंद = off. चालू/बंद is the standard on/off pair."
+      },
+      {
+        "wrong": "Writing व्हाट्सएप for WhatsApp",
+        "right": "व्हाट्सअॅप — with ॅ",
+        "why": "Marathi uses ॅ (short e) for the English 'a' in WhatsApp; व्हाट्सएप uses Hindi vowel."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Call me in Marathi?",
+          "options": ["मला फोन करा", "मी फोन करतो", "फोन करा मी", "माझा फोन करा"],
+          "answer": 0,
+          "explanation": "मला फोन करा — to me, call (dative + verb)."
+        },
+        {
+          "question": "My battery is low in Marathi?",
+          "options": ["माझी बॅटरी कमी आहे", "बॅटरी लो आहे", "माझी बॅटरी डाउन आहे", "बॅटरी लो"],
+          "answer": 0,
+          "explanation": "माझी बॅटरी कमी आहे — battery is feminine, so माझी/कमी."
+        },
+        {
+          "question": "Download the app in Marathi?",
+          "options": ["ऐप डाउनलोड करा", "ऐप लोड करा", "ऐप घेऊन या", "ऐप मिळवा"],
+          "answer": 0,
+          "explanation": "ऐप डाउनलोड करा — loanword + करा."
+        }
+      ],
+      "translate": [
+        {
+          "source": "Charge your phone.",
+          "answer": "तुमचा फोन चार्ज करा.",
+          "note": "Imperative with loanword + करा."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/technology/",
+      "/lessons/12/",
+      "/blog/how-to-shop-in-marathi/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say mobile in Marathi?",
+        "answer": "मोबाईल — with ि and ल, not मोबाइल. The candrabindu is not used here; just the spelling convention."
+      },
+      {
+        "question": "What is WhatsApp in Marathi?",
+        "answer": "व्हाट्सअॅप — with ॅ (short e) for the English 'a' sound."
+      }
+    ],
+    "appCtaVariant": "vocabulary",
+    "status": "published"
+  },
+  {
+    "slug": "birds",
+    "title": "Marathi Bird Names: 12 Birds from Sparrow to Peacock",
+    "description": "12 Marathi bird names — चिमणी, मोर, कोयल, पोपट, कोबळ, गरुड — with Hindi meanings, pronunciation, examples and cultural notes.",
+    "h1": "Marathi Bird Names (पक्षी)",
+    "searchIntent": "vocabulary",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["animals", "nature", "birds"],
+    "primaryKeyword": "marathi bird names",
+    "secondaryKeywords": ["birds in marathi", "peacock in marathi", "sparrow in marathi", "parrot in marathi"],
+    "intro": [
+      "Twelve Marathi bird names from the Bol Marathi curriculum — from the everyday चिमणी (sparrow) and कोबळ (pigeon) to the majestic मोर (peacock) and गरुड (eagle). Each entry has Hindi and English meanings, pronunciation and a real example sentence.",
+      "Several Hindi bird names shift systematically in Marathi: कबूतर → कोबळ, तोता → पोपट, उल्लू → उड्डाण, कौवा → काक. The table below maps each shift so you learn the pattern once."
+    ],
+    "tip": "कोबळ, पोपट, काक, शकुन — these four shifts cover the most common birds. Learn the pattern once: retroflex + vowel shift.",
+    "categories": ["Birds"],
+    "units": ["14"],
+    "sections": [
+      {
+        "heading": "Everyday birds you will see",
+        "paragraphs": [
+          "चिमणी (sparrow), कोबळ (pigeon), काक (crow) — these three are everywhere in Maharashtra. चिमणी छोटी आहे (the sparrow is small), कोबळ खिडकीवर बसले (pigeon sat on the window), काक कावतो (crow caws) — the curriculum sentences put them in daily life."
+        ]
+      },
+      {
+        "heading": "Cultural & iconic birds",
+        "paragraphs": [
+          "मोर (peacock) — India's national bird, नाचतो आहे in monsoon. कोयल (koel) — the spring singer, बसंतऋतूचे प्रतीक. गरुड (eagle) — mythological vehicle of Vishnu. शकुन (kite/hawk) — high flier. Each carries cultural weight beyond vocabulary."
+        ]
+      },
+      {
+        "heading": "The systematic shifts",
+        "paragraphs": [
+          "कबूतर → कोबळ, तोता → पोपट, उल्लू → उड्डाण, कौवा → काक, बगुला → बगळा. The pattern: Hindi retroflex + vowel shifts to Marathi ळ or ण or shortened form. Learn these five; the rest are identical (मोर, हंस, कोयल, गरुड, पक्षी)."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Saying कबूतर for pigeon",
+        "right": "कोबळ — the Marathi word",
+        "why": "Systematic shift: Hindi कबूतर → Marathi कोबळ. The retroflex + vowel change is regular."
+      },
+      {
+        "wrong": "Using तोता for parrot",
+        "right": "पोपट — the Marathi word",
+        "why": "तोता → पोपट follows the same retroflex shift pattern."
+      },
+      {
+        "wrong": "Calling any bird पक्षी",
+        "right": "पक्षी = bird (generic); use species names",
+        "why": "पक्षी is the category word. For specific birds, use कोबळ, पोपट, मोर, etc."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "How do you say \"peacock\" in Marathi?",
+          "options": ["मोर", "कोयल", "पोपट", "गरुड"],
+          "answer": 0,
+          "explanation": "मोर (mor) — national bird, identical to Hindi."
+        },
+        {
+          "question": "What is पोपट?",
+          "options": ["Pigeon", "Sparrow", "Parrot", "Crow"],
+          "answer": 2,
+          "explanation": "पोपट (popaṭ) = parrot; Hindi तोता shifts to पोपट."
+        },
+        {
+          "question": "Which bird is कोयल?",
+          "options": ["Peacock", "Koel/cuckoo", "Eagle", "Sparrow"],
+          "answer": 1,
+          "explanation": "कोयल (koyal) = koel/cuckoo, the spring singer."
+        }
+      ],
+      "translate": [
+        {
+          "source": "The peacock is dancing.",
+          "answer": "मोर नाचतो आहे.",
+          "note": "Monsoon behaviour — Unit 14 sentence."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/animals/",
+      "/vocabulary/nature/",
+      "/hindi-to-marathi/festivals/",
+      "/lessons/14/"
+    ],
+    "faq": [
+      {
+        "question": "How many bird words are on this page?",
+        "answer": "12 — from everyday birds (sparrow, pigeon, crow) to cultural icons (peacock, koel, eagle), each with Hindi meaning, pronunciation and a sentence."
+      },
+      {
+        "question": "What is the Marathi word for parrot?",
+        "answer": "पोपट (popaṭ) — Hindi तोता shifts to पोपट in Marathi."
+      }
+    ],
+    "appCtaVariant": "vocabulary",
+    "status": "published"
+  },
+  {
+    "slug": "shapes",
+    "title": "Marathi Shapes & Geometry: Circle, Square, Triangle & More",
+    "description": "12 Marathi shape words — गोल, चौकोन, त्रिकोण, आयत, वर्तुळ, अष्टकोण — with Hindi meanings, pronunciation, examples and geometry terms.",
+    "h1": "Marathi Shapes (आकारे)",
+    "searchIntent": "vocabulary",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["shapes", "geometry", "math", "daily-life"],
+    "primaryKeyword": "marathi shapes",
+    "secondaryKeywords": ["shapes in marathi", "circle in marathi", "triangle in marathi", "geometry words marathi"],
+    "intro": [
+      "Twelve Marathi shape and geometry words — from the basic गोल (circle) and चौकोन (square) to polygons like त्रिकोण (triangle), षट्कोण (hexagon), अष्टकोण (octagon), plus the formal terms वर्तुळ (circle) and कोन (angle). Each entry has Hindi and English meanings, pronunciation and a real example sentence.",
+      "Several Hindi shape words shift in Marathi: चौकोर → चौकोन, वृत्त → वर्तुळ, कोण → कोन. The Sanskrit-rooted terms (त्रिकोण, अष्टकोण, षट्कोण) are identical. The table below maps each so you learn the shifts and the shared terms together."
+    ],
+    "tip": "त्रिकोण, षट्कोण, अष्टकोण — the -कोण (angle) suffix builds polygon names: त्रि(3)+कोण, षट्(6)+कोण, अष्ट(8)+कोण. Learn the numbers; the shapes follow.",
+    "categories": ["Shapes"],
+    "units": ["03"],
+    "sections": [
+      {
+        "heading": "Basic shapes — everyday vocabulary",
+        "paragraphs": [
+          "गोल (circle/round), चौकोन (square), त्रिकोण (triangle), आयत (rectangle), अंडाकृती (oval), अर्धवर्तुळ (semicircle). These are the shapes you use daily — चेंडू गोल आहे (ball is round), मेज चौकोन आहे (table is square), अंडी अंडाकृती आहे (egg is oval)."
+        ]
+      },
+      {
+        "heading": "Formal geometry terms",
+        "paragraphs": [
+          "वर्तुळ (circle — formal), कोन (angle/corner), त्रिभुज (triangle — alt), षट्कोण (hexagon), अष्टकोण (octagon). The -कोण suffix means angle/corner: त्रि(3)+कोण, षट्(6)+कोण, अष्ट(8)+कोण. Hindi shares these Sanskrit forms identically."
+        ]
+      },
+      {
+        "heading": "The systematic shifts",
+        "paragraphs": [
+          "चौकोर → चौकोन (ण shift), वृत्त → वर्तुळ (ळ shift), कोण → कोन (shortening). These three shifts cover the core geometry vocabulary differences from Hindi."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using चौकोर for square",
+        "right": "चौकोन — with ण",
+        "why": "Hindi चौकोर → Marathi चौकोन. The ण shift is systematic in geometry words."
+      },
+      {
+        "wrong": "Saying वृत्त for circle",
+        "right": "वर्तुळ — the formal Marathi term",
+        "why": "वृत्त → वर्तुळ (ळ shift). गोल is the everyday word; वर्तुळ is the geometry term."
+      },
+      {
+        "wrong": "Confusing आकार (shape) with गोल (circle)",
+        "right": "आकार = shape/size (generic); गोल = circle (specific)",
+        "why": "आकार is the category word. गोल is one specific shape."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "How do you say \"triangle\" in Marathi?",
+          "options": ["गोल", "चौकोन", "त्रिकोण", "आयत"],
+          "answer": 2,
+          "explanation": "त्रिकोण (trikon) — tri(3) + कोण(angle). Identical to Hindi."
+        },
+        {
+          "question": "What is वर्तुळ?",
+          "options": ["Square", "Circle (formal)", "Triangle", "Rectangle"],
+          "answer": 1,
+          "explanation": "वर्तुळ (vartul) — formal geometry term for circle; everyday word is गोल."
+        },
+        {
+          "question": "Hexagon in Marathi?",
+          "options": ["त्रिकोण", "षट्कोण", "अष्टकोण", "चौकोन"],
+          "answer": 1,
+          "explanation": "षट्कोण (ṣaṭkoṇ) — षट्(6) + कोण(angle)."
+        }
+      ],
+      "translate": [
+        {
+          "source": "The table is square.",
+          "answer": "मेज चौकोन आहे.",
+          "note": "चौकोन = square (Marathi spelling with ण)."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/numbers-time/",
+      "/lessons/03/",
+      "/vocabulary/education/"
+    ],
+    "faq": [
+      {
+        "question": "How many shape words are on this page?",
+        "answer": "12 — basic shapes (circle, square, triangle, rectangle, oval) plus formal geometry terms (circle, angle, hexagon, octagon), each with Hindi meaning and sentence."
+      },
+      {
+        "question": "What is the Marathi word for circle?",
+        "answer": "गोल (gol) for everyday use; वर्तुळ (vartul) for formal geometry. The Hindi वृत्त shifts to वर्तुळ in Marathi."
+      }
+    ],
+    "appCtaVariant": "vocabulary",
+    "status": "published"
+  }
+]

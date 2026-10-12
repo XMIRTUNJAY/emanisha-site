@@ -1,0 +1,95 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const replies = wordsByMarathi([
+	'नमस्कार', 'कसे आहात', 'मी ठीक आहे', 'ठीक आहे',
+	'काही हरकत नाही', 'बरोबर',
+]);
+const howAreYou = getUnit('01').speaking.filter((s) => s.sentence.includes('कसा'));
+---
+
+<Learn
+	title="How to Say “How Are You?” in Marathi (कसा आहेस?)"
+	description="कसा आहेस? meaning, the formal version कसे आहात, and natural replies from मी ठीक आहे to काही हरकत नाही — with Hindi meanings."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'How are you in Marathi', href: siteUrl('/blog/how-are-you-in-marathi/') },
+	]}
+	canonicalPath="/blog/how-are-you-in-marathi/"
+	about="how are you in marathi; kasa aahes meaning"
+	meta={['Formal + informal', 'Real replies', 'Unit 01']}
+	faq={[
+		{
+			question: 'What does "kasa aahes" mean?',
+			answer: 'तू कसा आहेस? is "how are you?" said to a friend or someone younger — तू is informal "you". The respectful version from the curriculum is कसे आहात? — use it with elders, colleagues and anyone you have just met.',
+		},
+		{
+			question: 'What is the polite way to ask "how are you" in Marathi?',
+			answer: 'Say कसे आहात? — the -आहात ending makes it formal, the version to use with elders, colleagues and strangers.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		To a friend: <span class="mr" lang="mr">तू कसा आहेस?</span> — that's
+		the exact Unit 01 line. To anyone senior:
+		<span class="mr" lang="mr">कसे आहात?</span> The informal answers and
+		the question change together; the table below has both halves.
+	</p>
+
+	<h2>Asking and answering</h2>
+	<p>
+		The whole conversation in one table — open with
+		<span class="mr" lang="mr">नमस्कार</span>, ask, answer with
+		<span class="mr" lang="mr">मी ठीक आहे</span> (I'm fine) or the very
+		Marathi <span class="mr" lang="mr">काही हरकत नाही</span> (nothing's
+		wrong / it's alright), and close with
+		<span class="mr" lang="mr">बरोबर</span> (correct / right).
+	</p>
+	<VocabTable words={replies} caption="How-are-you words and replies" />
+
+	<h2>The exact greeting line (Unit 01)</h2>
+	<div class="table-scroll" role="region" aria-label="How are you" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{howAreYou.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<h2>One question, two registers</h2>
+	<p>
+		Marathi splits the question by whom you are asking.
+		<span class="mr" lang="mr">तू कसा आहेस?</span> is the friendly,
+		informal version — the exact line from Unit 01.
+		<span class="mr" lang="mr">कसे आहात?</span> is its respectful twin,
+		safe with elders, strangers and offices. When in doubt, always reach
+		for <span class="mr" lang="mr">कसे आहात?</span> — formality never
+		offends.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-how-are-you" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+			{ label: 'Marathi small talk guide', href: siteUrl('/blog/small-talk-intro/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+</Learn>

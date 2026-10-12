@@ -1,0 +1,49 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Base from '../../layouts/Base.astro';
+import { pageArt } from '../../lib/art';
+import { siteUrl } from '../../lib/site';
+import { vocab } from '../../lib/learn';
+
+const title = `Free Marathi Anki Decks: Top 100 Words + Full ${vocab.length}`;
+const description = `Download free Anki-ready Marathi vocabulary decks from the Bol Marathi curriculum: top 100 starter words or the full ${vocab.length}-word set.`;
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Anki decks', href: siteUrl('/downloads/') }]}>
+	<div class="prose">
+		<p class="kicker">Downloads</p>
+		<h1>Free Marathi Anki decks</h1>
+		<p class="lede">
+			The Bol Marathi vocabulary as Anki-ready files — Marathi, pronunciation,
+			Hindi, English and example sentences. Free, no signup.
+		</p>
+		<ul class="card-grid">
+			<li>
+				<a class="card" href={siteUrl('/downloads/marathi-top-100.tsv')} download data-funnel="deck_download">
+					<img src={pageArt('vocabulary/beginners')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>Top 100 starter words</h3>
+					<p>Greetings, phrases and numbers — the fastest first deck.</p>
+				</a>
+			</li>
+			<li>
+				<a class="card" href={siteUrl('/downloads/marathi-full-1002.tsv')} download data-funnel="deck_download">
+					<img src={pageArt('vocabulary')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>{`Full ${vocab.length}-word set`}</h3>
+					<p>Every word in the curriculum, one file.</p>
+				</a>
+			</li>
+		</ul>
+		<h2>Import into Anki (2 minutes)</h2>
+		<ol>
+			<li>Download a file above.</li>
+			<li>Anki → File → Import, choose the file.</li>
+			<li>Fields arrive in order: Marathi, Pronunciation, Hindi, English, Example, Example English.</li>
+			<li>Pick a note type with 6 fields (e.g. "Basic (optional reversed card)" duplicated) and map them in order.</li>
+		</ol>
+		<p>
+			Want reviews scheduled for you, plus listening and speaking?
+			That is what the app's practice loop does.
+		</p>
+		<AppCTA variant="general" context="downloads" />
+	</div>
+</Base>

@@ -1,0 +1,140 @@
+---
+// GuideAudio — "listen to this guide" bar. Plays the whole guide as a TTS
+// playlist: English narration in an English voice, Devanagari rows in the
+// visitor's Marathi voice (Hindi fallback — same script). Uses the device
+// speechSynthesis, no network or keys, mirroring SayScript's voice rules.
+// Removes itself when speech synthesis is unavailable.
+export interface Props {
+	/** Ordered playlist: lang is 'en' or 'mr'. */
+	segments: { lang: 'en' | 'mr'; text: string }[];
+}
+const { segments } = Astro.props;
+const playlist = JSON.stringify(segments);
+---
+
+<div class="guide-audio" id="guide-audio" hidden>
+	<button type="button" class="btn" id="guide-audio-play" aria-label="Listen to this guide">▶ Listen to this guide</button>
+	<button type="button" class="btn ghost" id="guide-audio-stop" hidden>⏹ Stop</button>
+	<span class="guide-audio-hint">Hands-free: the guide reads itself aloud.</span>
+</div>
+
+<script type="application/json" id="guide-audio-data" set:html={playlist} />
+
+<script>
+	function initGuideAudio() {
+		const bar = document.getElementById('guide-audio');
+		const dataEl = document.getElementById('guide-audio-data');
+		if (!bar || !dataEl || (bar as HTMLElement).dataset.bound) return;
+		(bar as HTMLElement).dataset.bound = '1';
+		if (!('speechSynthesis' in window)) return; // stay hidden
+		bar.removeAttribute('hidden');
+
+		type Seg = { lang: 'en' | 'mr'; text: string };
+		let segs: Seg[] = [];
+		try {
+			segs = JSON.parse(dataEl.textContent || '[]') as Seg[];
+		} catch {
+			return;
+		}
+		if (!segs.length) return;
+
+		const playBtn = document.getElementById('guide-audio-play') as HTMLButtonElement;
+		const stopBtn = document.getElementById('guide-audio-stop') as HTMLButtonElement;
+		let stopped = true;
+
+		function voiceFor(lang: 'en' | 'mr'): SpeechSynthesisVoice | null {
+			try {
+				const voices = window.speechSynthesis.getVoices() || [];
+				if (lang === 'mr') {
+					return (
+						voices.find((v) => (v.lang || '').toLowerCase().startsWith('mr')) ||
+						voices.find((v) => (v.lang || '').toLowerCase().startsWith('hi')) ||
+						null
+					);
+				}
+				return voices.find((v) => (v.lang || '').toLowerCase().startsWith('en')) || null;
+			} catch {
+				return null;
+			}
+		}
+
+		function speakNext(i: number) {
+			if (stopped || i >= segs.length) {
+				stop();
+				return;
+			}
+			const seg = segs[i]!;
+			try {
+				const u = new SpeechSynthesisUtterance(seg.text);
+				u.lang = seg.lang === 'mr' ? 'mr-IN' : 'en-US';
+				const v = voiceFor(seg.lang);
+				if (v) u.voice = v;
+				u.rate = seg.lang === 'mr' ? 0.85 : 1;
+				u.onend = () => speakNext(i + 1);
+				u.onerror = () => stop();
+				window.speechSynthesis.speak(u);
+			} catch {
+				stop();
+			}
+		}
+
+		function stop() {
+			stopped = true;
+			try {
+				window.speechSynthesis.cancel();
+			} catch {
+				/* ignore */
+			}
+			playBtn.textContent = '▶ Listen to this guide';
+			stopBtn.hidden = true;
+		}
+
+		playBtn.addEventListener('click', () => {
+			if (!stopped) {
+				// toggle pause/resume
+				try {
+					if (window.speechSynthesis.paused) {
+						window.speechSynthesis.resume();
+						playBtn.textContent = '⏸ Pause';
+					} else {
+						window.speechSynthesis.pause();
+						playBtn.textContent = '▶ Resume';
+					}
+				} catch {
+					/* ignore */
+				}
+				return;
+			}
+			stopped = false;
+			playBtn.textContent = '⏸ Pause';
+			stopBtn.hidden = false;
+			speakNext(0);
+		});
+		stopBtn.addEventListener('click', stop);
+		document.addEventListener('visibilitychange', () => {
+			if (document.hidden) stop();
+		});
+		// leaving the page via view transitions should not keep speaking
+		document.addEventListener('astro:before-swap', stop);
+	}
+
+	initGuideAudio();
+	document.addEventListener('astro:page-load', initGuideAudio);
+</script>
+
+<style>
+	.guide-audio {
+		display: flex;
+		gap: 0.6em;
+		align-items: center;
+		flex-wrap: wrap;
+		margin: 0.75em 0 1em 0;
+	}
+	.guide-audio-hint {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+	}
+	.guide-audio[hidden] {
+		display: none;
+	}
+</style>

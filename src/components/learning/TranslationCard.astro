@@ -1,0 +1,183 @@
+---
+// TranslationCard — Visual Hindi→Marathi mapping card
+// Shows the bridge from Hindi to Marathi with clear visual hierarchy
+import { siteUrl } from '../../lib/site';
+import AudioPlayer from './AudioPlayer.astro';
+
+interface Props {
+  hindi: string;
+  marathi: string;
+  transliteration: string;
+  english: string;
+  hindiAudio?: string;
+  marathiAudio?: string;
+  showArrows?: boolean;
+}
+
+const {
+  hindi,
+  marathi,
+  transliteration,
+  english,
+  hindiAudio,
+  marathiAudio,
+  showArrows = true,
+} = Astro.props;
+---
+
+<div class="translation-card">
+  <div class="translation-card__row">
+    <div class="translation-card__cell translation-card__cell--hindi">
+      <span class="translation-card__label">Hindi</span>
+      <div class="translation-card__text" lang="hi">{hindi}</div>
+      {hindiAudio && (
+        <AudioPlayer
+          src={hindiAudio}
+          text={hindi}
+          size="sm"
+          showText={false}
+          class="translation-card__audio"
+        />
+      )}
+    </div>
+
+    {showArrows && (
+      <div class="translation-card__arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" aria-hidden="true">
+          <path d="M12 5v14M19 12H5"/>
+        </svg>
+      </div>
+    )}
+
+    <div class="translation-card__cell translation-card__cell--marathi">
+      <span class="translation-card__label">Marathi</span>
+      <div class="translation-card__text translation-card__text--marathi" lang="mr">{marathi}</div>
+      <div class="translation-card__transliteration">{transliteration}</div>
+      {marathiAudio && (
+        <AudioPlayer
+          src={marathiAudio}
+          text={marathi}
+          transliteration={transliteration}
+          translation={english}
+          size="sm"
+          showText={false}
+          class="translation-card__audio"
+        />
+      )}
+    </div>
+  </div>
+
+  <div class="translation-card__english">
+    <span class="translation-card__label">English</span>
+    <span class="translation-card__text">{english}</span>
+  </div>
+</div>
+
+<style>
+  .translation-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    padding: var(--space-5);
+    margin: var(--space-4) 0;
+  }
+
+  .translation-card__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .translation-card__cell {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--color-container-low);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+  }
+
+  .translation-card__cell--hindi {
+    border-color: var(--color-primary-fixed);
+    background: var(--color-primary-fixed);
+  }
+
+  .translation-card__cell--marathi {
+    border-color: var(--color-success-bg);
+    background: var(--color-success-bg);
+  }
+
+  .translation-card__label {
+    font-size: var(--text-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .translation-card__cell--hindi .translation-card__label { color: var(--color-primary-dark); }
+  .translation-card__cell--marathi .translation-card__label { color: var(--color-success); }
+
+  .translation-card__text {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+
+  .translation-card__text--marathi {
+    font-size: var(--text-marathi-word);
+  }
+
+  .translation-card__transliteration {
+    font-family: var(--font-mono);
+    font-size: var(--text-transliteration);
+    color: var(--color-text-muted);
+  }
+
+  .translation-card__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .translation-card__audio {
+    align-self: flex-start;
+  }
+
+  .translation-card__english {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .translation-card__english .translation-card__label {
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .translation-card__english .translation-card__text {
+    font-size: var(--text-body);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 560px) {
+    .translation-card__row { flex-direction: column; }
+    .translation-card__arrow {
+      transform: rotate(90deg);
+      margin: var(--space-2) 0;
+    }
+  }
+</style>

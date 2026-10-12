@@ -1,0 +1,83 @@
+---
+// BaseHead: global metadata (Notebook pattern, standalone version).
+import '../styles/global.css';
+import { BRAND } from '../data/brand';
+import { pageArtSocial } from '../lib/art';
+import { siteUrl } from '../lib/site';
+import ogManifest from '../data/og-manifest.json';
+
+interface Props {
+	title: string;
+	description: string;
+	imageUrl?: string;
+	noindex?: boolean;
+	alternates?: { lang: string; href: string }[];
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const base = '/learn-marathi/'.replace(/\/$/, '');
+const { title, description, imageUrl, noindex = false, alternates = [] } = Astro.props;
+// Per-page share cards resolve through src/lib/art.ts — the single source of
+// truth for page art — so the social card always matches the visible hero.
+// Explicit imageUrl still wins; routes without art fall back to a section card.
+const segs = Astro.url.pathname.replace(base || '/', '').split('/').filter(Boolean);
+const route = segs.join('/');
+const manifestRoutes = (ogManifest as { routes: string[] }).routes;
+// Social cards are 1200x630 JPEG (art.ts pageArtSocial): universally
+// supported by preview crawlers and ~10x smaller than the legacy PNGs.
+const resolvedImage =
+	imageUrl ??
+	(manifestRoutes.includes(route) ? pageArtSocial(route) : `${base}/og-default.jpg`);
+const ogImage = new URL(resolvedImage, Astro.site).toString();
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Mukta: warm, distinctive Devanagari + Latin — the primary display/body face
+     chosen in the design system. Noto Sans Devanagari is kept as a coverage
+     fallback for rare conjuncts. Previously only Noto was loaded, so the whole
+     --font-display/--font-body stack silently fell back. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" />
+<link rel="icon" type="image/svg+xml" href={siteUrl('/favicon.svg')} />
+<link rel="apple-touch-icon" href={siteUrl('/icons/icon-192.png')} />
+<link rel="manifest" href={siteUrl('/manifest.webmanifest')} />
+<link rel="sitemap" href={siteUrl('/sitemap-index.xml')} />
+<link rel="alternate" type="application/rss+xml" title={`${BRAND.siteName} — ${BRAND.brandName}`} href={siteUrl('/rss.xml')} />
+<meta name="theme-color" content="#8e2d12" />
+<meta name="generator" content={Astro.generator} />
+<meta name="google-site-verification" content="7RAq3l4Nmd6Oj-HBCFbjzJLIM-4NveQQ6KkbGkSVPyk" />
+<meta name="msvalidate.01" content="DBB4E131CB5E9E907D0AAF88BA0F2ADA" />
+{noindex && <meta name="robots" content="noindex, follow" />}
+<meta name="astro-view-transitions-enabled" content="true" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+{alternates.map((a) => (
+	<link rel="alternate" hreflang={a.lang} href={new URL(a.href, Astro.site).toString()} />
+))}
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:site_name" content={`${BRAND.siteName} — ${BRAND.brandName}`} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={title} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />

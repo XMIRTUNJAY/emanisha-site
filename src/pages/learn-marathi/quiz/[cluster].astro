@@ -1,0 +1,839 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { clusters, getUnit, wordsByCategory } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+export async function getStaticPaths() {
+	return clusters.map((c) => ({ params: { cluster: c.slug } }));
+}
+
+const { cluster: slug } = Astro.params;
+const cluster = clusters.find((c) => c.slug === slug);
+if (!cluster) throw new Error(`Unknown cluster: ${slug}`);
+const words = wordsByCategory(cluster.categories).map((w) => ({
+	id: w.id,
+	mr: w.marathi,
+	en: w.english,
+	hi: w.hindi,
+	tr: w.transliteration,
+}));
+const builders = cluster.unitRefs.flatMap((no) =>
+	getUnit(no).sentenceBuilder.map((b) => ({
+		tokens: b.tokens,
+		answer: b.answer,
+		prompt: b.promptEn || b.prompt,
+		hindi: b.hindi,
+	})),
+).slice(0, 10);
+const dataJson = JSON.stringify({ words, builders });
+
+const cap = (s: string) => s.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+const title = `Marathi Quiz: ${cap(slug ?? '')} | Bol Marathi`;
+const description = `10 questions on ${cluster.title.toLowerCase()} with instant feedback, plus sentence building. Free Marathi quiz.`;
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Quizzes', href: siteUrl('/quiz/') }, { label: cluster.title, href: siteUrl(`/quiz/${cluster.slug}/`) }]}>
+	<div class="prose">
+		<p class="kicker">Marathi Quiz</p>
+		<h1>{cluster.title}: quiz</h1>
+		<p class="lede">Two ways to test yourself — pick word meanings, then arrange real Marathi sentences. Free, instant feedback.</p>
+
+		<div class="modes" role="tablist" aria-label="Quiz modes">
+			<button type="button" class="mode on" id="tab-words" role="tab" aria-selected="true" aria-controls="pane-words">1 · Word meanings</button>
+			<button type="button" class="mode" id="tab-arrange" role="tab" aria-selected="false" aria-controls="pane-arrange">2 · Arrange sentences</button>
+		</div>
+
+		<section id="pane-words" role="tabpanel" aria-labelledby="tab-words">
+			<div class="dir" role="group" aria-label="Answer language">
+				<span>Answers in:</span>
+				<button type="button" class="chip on" id="dir-en">English</button>
+				<button type="button" class="chip" id="dir-hi" lang="hi">हिंदी</button>
+			</div>
+			<div id="quiz" data-funnel="quiz_start">
+				<div class="progress" aria-hidden="true"><span id="qbar"></span></div>
+				<p class="qmeta"><span id="qpos">Question 1/10</span> · <span id="qscore">Score 0</span></p>
+				<p class="qword" id="qword" lang="mr">…</p>
+				<p class="qtr" id="qtr">…</p>
+				<div class="qopts" id="qopts" role="group" aria-label="Answer options"></div>
+				<p class="qfb" id="qfb" aria-live="polite"></p>
+				<p><button class="btn" id="qnext" type="button" hidden>Next →</button></p>
+			</div>
+		</section>
+
+		<section id="pane-arrange" role="tabpanel" aria-labelledby="tab-arrange" hidden>
+			<div id="arrange" data-funnel="quiz_arrange_start">
+				<div class="progress" aria-hidden="true"><span id="abar"></span></div>
+				<p class="qmeta"><span id="apos">Sentence 1</span> · <span id="ascore">Score 0</span></p>
+				<p class="aprompt" id="aprompt">…</p>
+				<p class="qtr" id="ahindi" lang="hi">…</p>
+				<div class="abuild" id="aanswer" aria-label="Your sentence"></div>
+				<div class="abank" id="abank" aria-label="Available words"></div>
+				<p class="qfb" id="afb" aria-live="polite"></p>
+				<p>
+					<button class="btn" id="acheck" type="button">Check</button>
+					<button class="btn ghost" id="anext" type="button" hidden>Next →</button>
+				</p>
+			</div>
+		</section>
+
+		<div id="qdone" hidden>
+			<h2 id="qdone-h">Round complete</h2>
+			<p id="qdone-p"></p>
+			<p>
+				<a class="btn" href={siteUrl(`/vocabulary/${cluster.slug}/`)} data-funnel="quiz_review">Review these words</a>
+				<a class="btn ghost" href={siteUrl('/games/marathi-wordle/')} data-funnel="game_start">Play the daily Wordle →</a>
+				<a class="btn ghost" href={siteUrl('/app/')} data-funnel="app_cta_click" data-app-cta data-cta-variant="quiz">Continue in the app</a>
+			</p>
+		</div>
+	</div>
+</Base>
+
+<script type="application/json" id="quiz-data" set:html={dataJson} />
+<script is:inline>
+	(function () {
+		try {
+			var data = JSON.parse(document.getElementById('quiz-data').textContent || '{"words":[],"builders":[]}');
+			var words = data.words || [];
+			var builders = data.builders || [];
+			if (!words.length) return;
+
+			/* ---------- tabs ---------- */
+			var tabW = document.getElementById('tab-words'), tabA = document.getElementById('tab-arrange');
+			var paneW = document.getElementById('pane-words'), paneA = document.getElementById('pane-arrange');
+			function show(which) {
+				var w = which === 'words';
+				tabW.classList.toggle('on', w); tabA.classList.toggle('on', !w);
+				tabW.setAttribute('aria-selected', String(w)); tabA.setAttribute('aria-selected', String(!w));
+				paneW.hidden = !w; paneA.hidden = w;
+			}
+			tabW.addEventListener('click', function () { show('words'); });
+			tabA.addEventListener('click', function () { show('arrange'); });
+
+			/* ---------- mode 1: word meanings ---------- */
+			var dirEn = document.getElementById('dir-en'), dirHi = document.getElementById('dir-hi');
+			var lang = 'en';
+			function setDir(l) {
+				lang = l;
+				dirEn.classList.toggle('on', l === 'en'); dirHi.classList.toggle('on', l === 'hi');
+				restartWords();
+			}
+			dirEn.addEventListener('click', function () { setDir('en'); });
+			dirHi.addEventListener('click', function () { setDir('hi'); });
+
+			var order = [], i = 0, score = 0, locked = false, total = 0;
+			var pos = document.getElementById('qpos'), sc = document.getElementById('qscore'), bar = document.getElementById('qbar');
+			var qw = document.getElementById('qword'), qt = document.getElementById('qtr');
+			var opts = document.getElementById('qopts'), fb = document.getElementById('qfb');
+			var next = document.getElementById('qnext');
+			function meaning(w) { return lang === 'hi' ? w.hi : w.en; }
+			function shuffle(a) { return a.sort(function () { return Math.random() - 0.5; }); }
+			function restartWords() {
+				order = shuffle(words.slice()).slice(0, 10);
+				total = order.length; i = 0; score = 0;
+				sc.textContent = 'Score 0';
+				document.getElementById('quiz').hidden = false;
+				document.getElementById('qdone').hidden = true;
+				ask();
+			}
+			function ask() {
+				locked = false;
+				var q = order[i];
+				pos.textContent = 'Question ' + (i + 1) + '/' + total;
+				bar.style.width = (i / total * 100) + '%';
+				qw.textContent = q.mr;
+				qt.textContent = q.tr;
+				fb.textContent = '';
+				fb.className = 'qfb';
+				next.hidden = true;
+				var pool = shuffle(words.filter(function (w) { return meaning(w) !== meaning(q); }))
+					.slice(0, 3).map(meaning);
+				var seen = {};
+				var choices = shuffle(pool.concat([meaning(q)]).filter(function (c) {
+					if (seen[c]) return false; seen[c] = true; return true;
+				})).slice(0, 4);
+				opts.innerHTML = '';
+				choices.forEach(function (c, n) {
+					var b = document.createElement('button');
+					b.type = 'button';
+					b.className = 'qopt';
+					var label = 'ABCD'[n];
+					b.innerHTML = '<span class="k">' + label + '.</span><span class="qopt-text"></span>';
+					b.querySelector('.qopt-text').textContent = c;
+					if (lang === 'hi') b.querySelector('.qopt-text').lang = 'hi';
+					b.addEventListener('click', function () { answer(b, c === meaning(q), q); });
+					opts.appendChild(b);
+				});
+			}
+			function answer(btn, ok, q) {
+				if (locked) return;
+				locked = true;
+				if (ok) { score++; sc.textContent = 'Score ' + score; }
+				opts.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+				btn.classList.add(ok ? 'ok' : 'bad');
+				fb.textContent = ok ? 'Correct!' : 'Not quite — ' + q.mr + ' means "' + meaning(q) + '".';
+				fb.className = 'qfb ' + (ok ? 'ok' : 'bad');
+				try {
+					if (!ok && q && q.id) {
+						document.dispatchEvent(new CustomEvent('srs-add', { detail: { wordId: q.id, grade: 'again' } }));
+					}
+					document.dispatchEvent(new CustomEvent('quiz-answer', { detail: { ok: !!ok } }));
+				} catch (e) { /* listeners optional */ }
+				if (i === total - 1) next.textContent = 'See results →'; else next.textContent = 'Next →';
+				next.hidden = false;
+			}
+			next.addEventListener('click', function () {
+				i++;
+				if (i >= total) finish('words', score, total);
+				else ask();
+			});
+			restartWords();
+
+			/* ---------- mode 2: arrange sentences ---------- */
+			var apane = document.getElementById('arrange');
+			if (!builders.length) {
+				tabA.disabled = true;
+				tabA.textContent = '2 · Arrange sentences (coming soon)';
+			}
+			var bi = 0, ascore = 0, btotal = builders.length;
+			var apos = document.getElementById('apos'), asc = document.getElementById('ascore'), abar = document.getElementById('abar');
+			var aprompt = document.getElementById('aprompt'), ahindi = document.getElementById('ahindi');
+			var aanswer = document.getElementById('aanswer'), abank = document.getElementById('abank');
+			var afb = document.getElementById('afb'), acheck = document.getElementById('acheck'), anext = document.getElementById('anext');
+			var picked = [];
+			function bstep() {
+				var b = builders[bi];
+				apos.textContent = 'Sentence ' + (bi + 1) + '/' + btotal;
+				abar.style.width = (bi / btotal * 100) + '%';
+				aprompt.textContent = b.prompt;
+				ahindi.textContent = b.hindi;
+				afb.textContent = '';
+				afb.className = 'qfb';
+				acheck.hidden = false; anext.hidden = true;
+				picked = [];
+				renderBank(shuffle(b.tokens.slice()), b);
+			}
+			function tokenBtn(t, inAnswer) {
+				var btn = document.createElement('button');
+				btn.type = 'button';
+				btn.className = 'tok';
+				btn.textContent = t;
+				btn.lang = 'mr';
+				btn.addEventListener('click', function () {
+					if (anext.hidden === false) return;
+					btn.remove();
+					if (inAnswer) {
+						var idx = picked.indexOf(t);
+						if (idx >= 0) picked.splice(idx, 1);
+						abank.appendChild(tokenBtn(t, false));
+					} else {
+						picked.push(t);
+						aanswer.appendChild(tokenBtn(t, true));
+					}
+					afb.textContent = '';
+					renderState();
+				});
+				return btn;
+			}
+			function renderBank(tokens) {
+				aanswer.innerHTML = '';
+				abank.innerHTML = '';
+				tokens.forEach(function (t) { abank.appendChild(tokenBtn(t, false)); });
+				renderState();
+			}
+			function renderState() {
+				var ph = aanswer.querySelector('.ph');
+				if (ph && picked.length) ph.remove();
+				if (!picked.length && !aanswer.children.length) {
+					var ph2 = document.createElement('span');
+					ph2.className = 'ph';
+					ph2.textContent = 'Tap words below in order…';
+					aanswer.appendChild(ph2);
+				}
+			}
+			acheck.addEventListener('click', function () {
+				var b = builders[bi];
+				var ok = picked.length === b.answer.length && picked.every(function (t, n) { return t === b.answer[n]; });
+				if (ok) { ascore++; asc.textContent = 'Score ' + ascore; }
+				afb.textContent = ok ? 'Correct! ' + b.answer.join(' ') : 'Not quite — correct order: ' + b.answer.join(' ');
+				afb.className = 'qfb ' + (ok ? 'ok' : 'bad');
+				acheck.hidden = true; anext.hidden = false;
+			});
+			anext.addEventListener('click', function () {
+				bi++;
+				if (bi >= btotal) finish('arrange', ascore, btotal);
+				else bstep();
+			});
+			function finish(mode, s, t) {
+				document.getElementById('quiz').hidden = true;
+				apane.hidden = true;
+				var done = document.getElementById('qdone');
+				done.hidden = false;
+				document.getElementById('qdone-p').textContent =
+					(mode === 'words' ? 'Word meanings' : 'Sentence building') +
+					': you scored ' + s + '/' + t + '. The app schedules these for review before you forget them.';
+				var bar2 = mode === 'words' ? bar : abar;
+				bar2.style.width = '100%';
+				try {
+					document.dispatchEvent(new CustomEvent('quiz-complete', { detail: { mode: mode, score: s, total: t } }));
+				} catch (e) { /* listeners optional */ }
+			}
+			if (builders.length) bstep();
+		} catch (e) { /* quiz unavailable — word lists still teach */ }
+	})();
+</script>
+
+<script>
+	import { addWord } from '../../../lib/srs';
+	import { AnalyticsEvents } from '../../../lib/analytics';
+
+	// Feed wrong answers into SRS + track quiz events (listeners for
+	// CustomEvents dispatched by the inline quiz engine above).
+	function initQuizIntegrations() {
+		if ((window as unknown as { __quizIntegInit?: boolean }).__quizIntegInit) return;
+		(window as unknown as { __quizIntegInit?: boolean }).__quizIntegInit = true;
+
+		document.addEventListener('srs-add', (e) => {
+			const d = (e as CustomEvent).detail as { wordId: string; grade: 'again' | 'hard' | 'good' | 'easy' };
+			if (!d?.wordId) return;
+			addWord(d.wordId, d.grade || 'again').catch(() => {});
+		});
+
+		const slug = window.location.pathname.split('/').filter(Boolean).pop() || 'unknown';
+		let started = false;
+		function ensureStart() {
+			if (started) return;
+			started = true;
+			try {
+				const data = JSON.parse(document.getElementById('quiz-data')?.textContent || '{"words":[]}');
+				AnalyticsEvents.quizStart(slug, (data.words || []).length);
+			} catch { /* ignore */ }
+		}
+		ensureStart();
+
+		document.addEventListener('quiz-complete', (e) => {
+			const d = (e as CustomEvent).detail as { mode: string; score: number; total: number };
+			if (!d) return;
+			let timeMs = 0;
+			try { timeMs = Math.round(performance.now()); } catch { /* ignore */ }
+			AnalyticsEvents.quizComplete(`${slug}:${d.mode}`, d.score, d.total, timeMs);
+		});
+	}
+	initQuizIntegrations();
+	document.addEventListener('astro:page-load', initQuizIntegrations);
+</script>
+
+<style>
+	/* ===== Quiz Premium Styles ===== */
+	.modes {
+		display: flex;
+		gap: 0.5em;
+		margin: 1.5em 0 0 0;
+		background: var(--container);
+		border-radius: var(--radius-full);
+		padding: 0.25em;
+	}
+	.mode {
+		font: inherit;
+		font-size: 0.9rem;
+		font-weight: 600;
+		padding: 0.6em 1.1em;
+		border-radius: var(--radius-full);
+		border: none;
+		background: transparent;
+		color: rgb(var(--gray));
+		cursor: pointer;
+		transition: color 0.15s ease, background 0.15s ease;
+		position: relative;
+	}
+	.mode.on {
+		background: var(--accent);
+		color: #fff;
+		box-shadow: 0 2px 8px rgb(142 45 18 / 0.25);
+	}
+	.mode:disabled {
+		opacity: 0.45;
+		cursor: default;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.mode { transition: none; }
+	}
+
+	.dir {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		margin: 1.5em 0 0.5em 0;
+		font-size: 0.88rem;
+		color: rgb(var(--gray));
+	}
+	.chip {
+		font: inherit;
+		font-size: 0.82rem;
+		font-weight: 600;
+		padding: 0.4em 0.95em;
+		border-radius: var(--radius-full);
+		border: var(--border);
+		background: var(--card);
+		cursor: pointer;
+		color: rgb(var(--gray-dark));
+		transition: all 0.15s ease;
+	}
+	.chip.on {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: #fff;
+		box-shadow: 0 2px 6px rgb(142 45 18 / 0.2);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.chip { transition: none; }
+	}
+
+	/* Question card */
+	#quiz {
+		background: var(--card);
+		border: var(--border);
+		border-radius: var(--radius-lg);
+		padding: 1.75em 1.5em;
+		box-shadow: 0 1px 3px rgb(45 27 21 / 0.04), 0 4px 12px rgb(45 27 21 / 0.03);
+	}
+
+	.progress {
+		height: 10px;
+		border-radius: var(--radius-full);
+		background: var(--container);
+		margin: 0 0 0.75em 0;
+		overflow: hidden;
+		position: relative;
+	}
+	.progress::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: repeating-linear-gradient(
+			90deg,
+			transparent,
+			transparent calc(10% - 1px),
+			rgb(223 192 183 / 0.5) calc(10% - 1px),
+			rgb(223 192 183 / 0.5) 10%
+		);
+		pointer-events: none;
+	}
+	.progress span {
+		display: block;
+		height: 100%;
+		width: 0;
+		border-radius: var(--radius-full);
+		background: linear-gradient(90deg, var(--accent), var(--accent-container));
+		transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.progress span { transition: none; }
+	}
+	.qmeta {
+		display: flex;
+		justify-content: space-between;
+		font-size: 0.82rem;
+		color: rgb(var(--gray));
+		margin-bottom: 1em;
+		font-weight: 500;
+	}
+
+	.qword {
+		font-size: clamp(1.75rem, 4.5vw, 2.4rem);
+		font-weight: 700;
+		color: rgb(var(--black));
+		margin: 0.25em 0 0.5em 0;
+		line-height: 1.45;
+		background: linear-gradient(180deg, var(--card) 0%, var(--container-low) 100%);
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.7em 1em 0.6em 1em;
+		text-align: center;
+		box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6);
+		animation: qword-in 0.35s ease-out;
+	}
+	@keyframes qword-in {
+		from { opacity: 0; transform: translateY(6px); }
+		to { opacity: 1; transform: none; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.qword { animation: none; }
+	}
+
+	.qtr {
+		color: rgb(var(--gray));
+		margin: 0.35em 0 0.75em 0;
+		text-align: center;
+		font-size: 0.95rem;
+		letter-spacing: 0.02em;
+	}
+
+	.qopts {
+		display: grid;
+		gap: 0.65em;
+		margin: 1.1em 0 0.75em 0;
+	}
+	/* NOTE: .qopt / .tok / .ph styles live in the <style is:global> block below,
+	   because those elements are created by JS (document.createElement) and so
+	   never receive Astro's scoped [data-astro-cid-*] attribute. */
+
+	/* Feedback panel */
+	.qfb {
+		font-weight: 600;
+		font-size: 0.95rem;
+		min-height: 1.6em;
+		margin-top: 0.75em;
+	}
+	.qfb:not(:empty) {
+		background: var(--container-low);
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.85em 1.1em;
+		animation: fb-slide 0.3s ease-out;
+		display: flex;
+		align-items: center;
+		gap: 0.6em;
+	}
+	.qfb:not(:empty)::before {
+		content: '';
+		flex: none;
+		width: 1.2em;
+		height: 1.2em;
+		border-radius: 50%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.75rem;
+	}
+	/* :has-text() / :contains() are not real CSS selectors — those rules were
+	   invalid and dropped, so the feedback icon never appeared. The quiz JS now
+	   sets .ok / .bad on the feedback element instead. */
+	.qfb.ok { color: var(--success); }
+	.qfb.ok:not(:empty)::before {
+		background: var(--success);
+		color: #fff;
+		content: '✓';
+	}
+	.qfb.bad { color: var(--accent); }
+	.qfb.bad:not(:empty)::before {
+		background: var(--accent);
+		color: #fff;
+		content: '✕';
+	}
+	@keyframes fb-slide {
+		from { opacity: 0; transform: translateY(-6px); }
+		to { opacity: 1; transform: none; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.qfb:not(:empty) { animation: none; }
+	}
+
+	/* Sentence builder */
+	.abuild, .abank {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		min-height: 3.6em;
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.85em;
+		margin: 0.75em 0;
+		transition: border-color 0.15s ease, box-shadow 0.15s ease;
+	}
+	.abuild {
+		background: var(--card);
+		border-style: solid;
+	}
+	.abuild.active {
+		border-color: var(--accent);
+		box-shadow: 0 0 0 3px rgb(142 45 18 / 0.12);
+	}
+	.abank {
+		background: var(--container-low);
+		border-style: dashed;
+	}
+	/* .abuild .ph lives in the <style is:global> block below (JS-created placeholder). */
+
+
+	/* .tok lives in the <style is:global> block below (JS-created tokens). */
+
+	/* Buttons */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5em;
+		min-height: 52px;
+		line-height: 1;
+		padding: 0 1.5em;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.95rem;
+		font-weight: 600;
+		text-decoration: none;
+		border: none;
+		border-radius: var(--radius);
+		margin-top: 0.5em;
+		margin-right: 0.5em;
+		cursor: pointer;
+		transition: all 0.15s ease;
+		box-shadow: 0 2px 6px rgb(142 45 18 / 0.2);
+	}
+	.btn:hover {
+		background: var(--accent);
+		filter: brightness(0.95);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 14px rgb(142 45 18 / 0.25);
+	}
+	.btn:active { transform: translateY(0); }
+	.btn:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.btn.ghost {
+		background: transparent;
+		color: var(--accent);
+		border: var(--border);
+		box-shadow: none;
+		padding: 0 1.5em;
+		line-height: 50px;
+	}
+	.btn.ghost:hover {
+		background: var(--accent-fixed);
+		color: var(--accent-on-fixed);
+		border-color: var(--accent);
+		filter: none;
+		transform: none;
+		box-shadow: none;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.btn { transition: none; }
+	}
+
+	/* Completion */
+	#qdone {
+		text-align: center;
+		padding: 2.5em 1.5em;
+		background: var(--card);
+		border: var(--border);
+		border-radius: var(--radius-lg);
+		margin-top: 1.5em;
+		animation: done-in 0.5s ease-out;
+	}
+	@keyframes done-in {
+		from { opacity: 0; transform: translateY(12px) scale(0.98); }
+		to { opacity: 1; transform: none; }
+	}
+	#qdone h2 {
+		font-size: 1.6rem;
+		margin: 0 0 0.5em 0;
+		background: linear-gradient(90deg, var(--accent), var(--accent-container));
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	#qdone p {
+		color: rgb(var(--gray));
+		font-size: 1.02rem;
+		line-height: 1.7;
+		margin: 0 0 1.5em 0;
+		max-width: 40ch;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#qdone .btn { margin-top: 0.75em; }
+
+	/* Confetti burst (CSS-only, reduced-motion safe) */
+	@keyframes confetti {
+		0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+		100% { opacity: 0; transform: translateY(-120px) rotate(720deg) scale(0); }
+	}
+	#qdone::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		z-index: 9999;
+		background-image:
+			radial-gradient(circle at 20% 30%, var(--accent-fixed) 4px, transparent 4px),
+			radial-gradient(circle at 40% 25%, var(--success-bg) 3px, transparent 3px),
+			radial-gradient(circle at 60% 35%, var(--accent) 3px, transparent 3px),
+			radial-gradient(circle at 80% 28%, var(--accent-fixed) 4px, transparent 4px),
+			radial-gradient(circle at 30% 40%, var(--success) 3px, transparent 3px),
+			radial-gradient(circle at 70% 45%, var(--accent-container) 3px, transparent 3px);
+		background-repeat: no-repeat;
+		background-size: 200% 200%;
+		opacity: 0;
+		animation: confetti-burst 1.2s ease-out forwards;
+	}
+	@keyframes confetti-burst {
+		0% { opacity: 0; transform: scale(0.5); }
+		15% { opacity: 1; transform: scale(1); }
+		100% { opacity: 0; transform: scale(1.3); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		#qdone { animation: none; }
+		#qdone::before { display: none; }
+	}
+
+	/* Smooth tab panel switch */
+	section[role="tabpanel"] {
+		animation: pane-in 0.25s ease-out;
+	}
+	@keyframes pane-in {
+		from { opacity: 0; transform: translateX(8px); }
+		to { opacity: 1; transform: none; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		section[role="tabpanel"] { animation: none; }
+	}
+</style>
+
+<!--
+  Dynamic quiz UI (answer options, sentence tokens, builder placeholder) is
+  created with document.createElement in the inline engine above. Astro scopes
+  the <style> above with a [data-astro-cid-*] attribute, which those runtime
+  elements never receive — so their rules must be global or they are silently
+  dropped (this is why the options previously rendered as unstyled buttons).
+-->
+<style is:global>
+	/* ===== Answer options ===== */
+	.qopt {
+		font: inherit;
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		width: 100%;
+		text-align: left;
+		background: var(--card);
+		border: 2px solid rgb(223 192 183 / 0.5);
+		border-radius: var(--radius);
+		padding: 1em 1.25em;
+		cursor: pointer;
+		color: rgb(var(--gray-dark));
+		font-size: 1.02rem;
+		transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+		position: relative;
+		overflow: hidden;
+	}
+	.qopt::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, var(--accent-fixed) 0%, transparent 50%);
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+	.qopt:hover:not(:disabled) {
+		border-color: var(--accent);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgb(142 45 18 / 0.08);
+	}
+	.qopt:hover:not(:disabled)::before { opacity: 1; }
+	.qopt:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.qopt:disabled { cursor: default; }
+	.qopt:not(.ok):not(.bad):disabled { opacity: 0.55; }
+	.qopt .k {
+		flex: none;
+		width: 2.4em;
+		height: 2.4em;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--radius);
+		background: var(--accent-fixed);
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: var(--accent-on-fixed);
+		transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+		font-variant-numeric: tabular-nums;
+	}
+	.qopt-text { flex: 1; line-height: 1.6; font-weight: 500; }
+	.qopt.ok {
+		border-color: var(--success);
+		background: var(--success-bg);
+		animation: opt-pop 0.25s ease-out;
+	}
+	.qopt.ok .k { background: var(--success); color: #fff; transform: scale(1.1); }
+	.qopt.bad {
+		border-color: var(--accent);
+		background: var(--accent-fixed);
+		animation: opt-shake 0.35s ease-out;
+	}
+	.qopt.bad .k { background: var(--accent); color: #fff; }
+	.qopt.ok .qopt-text,
+	.qopt.bad .qopt-text { color: inherit; }
+	@keyframes opt-pop {
+		0% { transform: scale(0.98); }
+		50% { transform: scale(1.01); }
+		100% { transform: none; }
+	}
+	@keyframes opt-shake {
+		0%, 100% { transform: translateX(0); }
+		20% { transform: translateX(-4px); }
+		40% { transform: translateX(4px); }
+		60% { transform: translateX(-3px); }
+		80% { transform: translateX(3px); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.qopt, .qopt .k { transition: none; }
+		.qopt.ok, .qopt.bad { animation: none; }
+	}
+
+	/* ===== Sentence-building tokens ===== */
+	.tok {
+		font: inherit;
+		font-size: 1.02rem;
+		background: var(--card);
+		border: var(--border);
+		border-radius: 10px;
+		padding: 0.5em 0.85em;
+		cursor: pointer;
+		color: rgb(var(--gray-dark));
+		line-height: 1.6;
+		transition: border-color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+		box-shadow: 0 1px 2px rgb(45 27 21 / 0.04);
+	}
+	.tok:hover {
+		border-color: var(--accent);
+		transform: translateY(-1px);
+		box-shadow: 0 3px 8px rgb(142 45 18 / 0.08);
+	}
+	.tok:active { transform: scale(0.98); }
+	.tok:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+	.tok.in-answer {
+		background: var(--accent-fixed);
+		border-color: var(--accent);
+		color: var(--accent-on-fixed);
+	}
+	/* tokens placed into the answer row read as "used" */
+	.abuild .tok {
+		background: var(--accent-fixed);
+		border-color: var(--accent);
+		color: var(--accent-on-fixed);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tok { transition: none; }
+	}
+
+	/* ===== Sentence-builder placeholder ===== */
+	.abuild .ph {
+		color: rgb(var(--gray));
+		font-size: 0.9rem;
+		align-self: center;
+		animation: ph-pulse 1.8s ease-in-out infinite;
+	}
+	@keyframes ph-pulse {
+		0%, 100% { opacity: 0.5; }
+		50% { opacity: 1; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.abuild .ph { animation: none; opacity: 0.6; }
+	}
+</style>

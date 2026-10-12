@@ -1,0 +1,98 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const marketWords = wordsByMarathi([
+	'किंमत', 'स्वस्त', 'महाग', 'सूट', 'दुकान', 'रोख',
+	'पावती', 'खरेदी', 'विकणे', 'सवलत देणे', 'झोळी', 'गिऱ्हाईक',
+]);
+const script = getUnit('09').speaking;
+---
+
+<Learn
+	title="How to Shop in Marathi: Words + 6-Line Bargaining Script"
+	description="Shop and bargain in Marathi: 12 market words from किंमत to गिऱ्हाईक, plus the exact six-sentence shopping script from Unit 09."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'How to shop in Marathi', href: siteUrl('/blog/how-to-shop-in-marathi/') },
+	]}
+	canonicalPath="/blog/how-to-shop-in-marathi/"
+	about="how to shop in marathi; bargaining in marathi"
+	meta={['12 market words', '6-line script', 'Unit 09']}
+	faq={[
+		{
+			question: 'How do you ask the price in Marathi?',
+			answer: 'Say "हे किती आहे?" — literally "this, how much is?" The vendor answers with a number and रुपये (rupees).',
+		},
+		{
+			question: 'How do you bargain politely in Marathi?',
+			answer: 'Say "थोडं कमी करा, कृपया" — reduce (it) a little, please. The कृपया keeps it friendly and is always worth saying.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		Six sentences cover a whole market transaction in Marathi: ask the price
+		(<span class="mr" lang="mr">हे किती आहे?</span>), name a quantity, bargain
+		politely (<span class="mr" lang="mr">थोडं कमी करा, कृपया</span>), accept,
+		pay and ask for the bill. All six are in the script below — every one from
+		the curriculum, nothing invented.
+	</p>
+
+	<h2>Market words to recognize</h2>
+	<p>
+		These twelve words appear constantly in shops and on signs — note the
+		pair <span class="mr" lang="mr">सूट</span> (discount) vs
+		<span class="mr" lang="mr">सवलत देणे</span> (to give a discount): one
+		names the deal, the other is the act of offering it.
+	</p>
+	<VocabTable words={marketWords} caption="Marathi shopping words" />
+
+	<h2>The six-line script (Unit 09)</h2>
+	<p>
+		Say them in order and you have a complete, polite purchase — from
+		sightseeing to receipt.
+	</p>
+	<div class="table-scroll" role="region" aria-label="Shopping script" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{script.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<h2>Using it in the wild</h2>
+	<p>
+		<span class="mr" lang="mr">मी ऑनलाइन देनार</span> (I'll pay online) is
+		word-for-word what Pune and Mumbai vendors hear daily — QR-code India
+		speaks this sentence. Pair it with
+		<span class="mr" lang="mr">बिल द्या, कृपया</span> (or
+		<span class="mr" lang="mr">पावती</span> for a receipt) and the
+		transaction is done. Vegetables have their own dedicated guide (linked
+		below) because quantities work differently there.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-how-to-shop" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Shopping phrases', href: siteUrl('/phrases/shopping/') },
+			{ label: 'Grocery shopping & vegetables', href: siteUrl('/blog/grocery-shopping/') },
+			{ label: 'Unit 09 — Shopping & Market', href: siteUrl('/lessons/09/') },
+		]}
+	/>
+</Learn>

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Mascot from '../../components/Mascot.astro';
+import { siteUrl } from '../../lib/site';
+---
+
+<Base title="Page not found — Learn Marathi" description="The page you are looking for does not exist. Find Marathi words, phrases, grammar and lessons instead." noindex={true}>
+	<div class="prose">
+		<p class="kicker">404</p>
+		<div class="notfound-hero">
+			<Mascot pose="think" size="lg" ariaLabel="Mascot confused about the missing page" />
+		</div>
+		<h1>That page doesn't exist.</h1>
+		<p class="lede">Try one of these instead:</p>
+		<ul>
+			<li><a href={siteUrl('/')}>Learn Marathi home</a></li>
+			<li><a href={siteUrl('/vocabulary/')}>Vocabulary by topic</a></li>
+			<li><a href={siteUrl('/phrases/')}>Phrases</a></li>
+			<li><a href={siteUrl('/hindi-to-marathi/')}>Hindi → Marathi</a></li>
+			<li><a href={siteUrl('/grammar/')}>Grammar</a></li>
+			<li><a href={siteUrl('/lessons/')}>Lessons</a></li>
+		</ul>
+	</div>
+</Base>
+
+<style>
+	.notfound-hero { display: flex; justify-content: center; margin: 1rem 0; }
+</style>

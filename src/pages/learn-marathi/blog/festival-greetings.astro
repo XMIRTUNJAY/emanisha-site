@@ -1,0 +1,52 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const festivals = getUnit('13').cultural;
+const wish = wordsByMarathi(['शुभेच्छा']);
+---
+
+<Learn
+	title="Marathi Festival Greetings Through the Year"
+	description="Greet every Marathi festival: Ganesh, Diwali, Gudi Padwa and more — what they are and what to say."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Festival greetings', href: siteUrl('/blog/festival-greetings/') },
+	]}
+	canonicalPath="/blog/festival-greetings/"
+	about="marathi festival greetings"
+	meta={['6 festivals', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Maharashtra celebrates loudly and often. Know the six big festivals
+		from Unit 13's culture notes, plus the one word — शुभेच्छा (best
+		wishes) — that covers every greeting.
+	</p>
+
+	<h2>The festival year (Unit 13)</h2>
+	<ul>
+		{festivals.map((c) => (
+			<li><strong>{c.titleEn}</strong> — {c.textEn}</li>
+		))}
+	</ul>
+
+	<h2>The word that covers everything</h2>
+	<VocabTable words={wish} caption="शुभेच्छा" />
+	<p>वाढदिवसाच्या शुभेच्छा — best wishes for your birthday — shows the pattern: occasion + शुभेच्छा.</p>
+
+	<AppCTA variant="phrase" context="blog-festivals" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Days of the week & months', href: siteUrl('/marathi-days-months/') },
+			{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+			{ label: 'Unit 13 — Festivals & Culture', href: siteUrl('/lessons/13/') },
+		]}
+	/>
+</Learn>

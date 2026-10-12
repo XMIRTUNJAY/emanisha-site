@@ -1,0 +1,31 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Base from '../../../layouts/Base.astro';
+import { clusters, wordsByCategory } from '../../../lib/learn';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'Free Marathi Quizzes by Topic';
+const description = 'Free 10-question Marathi quizzes — vocabulary topics with instant feedback. A sample of the Bol Marathi practice loop.';
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Quizzes', href: siteUrl('/quiz/') }]}>
+	<div class="prose">
+		<p class="kicker">Marathi Quiz</p>
+		<h1>Test yourself: Marathi quizzes</h1>
+		<p class="lede">Pick a topic: answer 10 word-meaning questions in English or Hindi, then arrange real Marathi sentences. Instant feedback, free — and the app turns one round into scheduled reviews.</p>
+		<p>Finished a round? <a href={siteUrl('/review/')}>Review before you forget</a> — the spaced-repetition queue shows which words are due, and <a href={siteUrl('/search/')}>search</a> finds any word, phrase or lesson directly.</p>
+		<ul class="card-grid">
+			{clusters.map((c) => (
+				<li>
+					<a class="card" href={siteUrl(`/quiz/${c.slug}/`)} data-funnel="quiz_start">
+						<img src={pageArt(`quiz/${c.slug}`)} alt="" loading="lazy" width="1200" height="630" />
+						<h3>Quiz: {c.title}</h3>
+						<p>{wordsByCategory(c.categories).length} words · 10 questions</p>
+					</a>
+				</li>
+			))}
+		</ul>
+		<AppCTA variant="general" context="quiz-index" />
+	</div>
+</Base>

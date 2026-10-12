@@ -1,0 +1,117 @@
+---
+// SectionHead — one consistent, restrained section header used across the site.
+// Replaces the ad-hoc `.shead` markup (which every section repeated with a
+// border-bottom + right link, making the page feel boxed-in and repetitive).
+//
+// Layout: kicker → heading (+ optional lede) on the left, optional action link right.
+
+interface Props {
+  kicker?: string;
+  title: string;
+  lede?: string;
+  actionLabel?: string;
+  actionHref?: string;
+  id?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  kicker,
+  title,
+  lede,
+  actionLabel,
+  actionHref,
+  id,
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+---
+
+<header class={`shead ${align === 'center' ? 'shead--center' : ''} ${className}`}>
+  <div class="shead__main">
+    {kicker && <p class="shead__kicker kicker">{kicker}</p>}
+    <h2 id={id} class="shead__title">{title}</h2>
+    {lede && <p class="shead__lede">{lede}</p>}
+  </div>
+  {actionLabel && actionHref && (
+    <a class="shead__action" href={actionHref}>
+      {actionLabel}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  )}
+</header>
+
+<style>
+  .shead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+
+  .shead__main {
+    max-width: 640px;
+  }
+
+  .shead__kicker {
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  .shead__title {
+    margin: 0;
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+
+  .shead__lede {
+    margin: var(--space-3) 0 0 0;
+    font-size: var(--text-body);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    text-wrap: pretty;
+  }
+
+  .shead__action {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    min-height: 44px;
+    padding: 0 1em;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+  }
+
+  .shead__action svg { transition: transform var(--duration-fast) var(--ease-out); }
+  .shead__action:hover {
+    color: var(--color-primary-dark);
+    border-color: var(--color-primary);
+    background: var(--color-primary-fixed);
+  }
+  .shead__action:hover svg { transform: translateX(3px); }
+
+  .shead--center { flex-direction: column; align-items: center; text-align: center; }
+  .shead--center .shead__main { margin: 0 auto; }
+
+  @media (max-width: 760px) {
+    .shead {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .shead--center { align-items: center; }
+  }
+</style>

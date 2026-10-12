@@ -1,0 +1,681 @@
+---
+// Bol Marathi — Homepage
+//
+// "A premium Marathi-learning product that happens to have an excellent SEO library."
+//
+// Structure (alternating surfaces for rhythm, no duplicated sections):
+//   1. Hero                (cream, soft terracotta wash)  ← live word-card demo
+//   2. The journey         (surface)  ← learning path START → SPEAK
+//   3. Where you start     (muted)    ← English / Hindi / Continue
+//   4. How it works        (surface)  ← Learn → Practice → Remember
+//   5. The curriculum      (muted)    ← all units + feature set
+//   6. Why it works        (surface)  ← audited source + practice loop
+//   7. FAQ                 (cream)
+//   8. App bridge          (muted)
+//
+// Every claim about numbers is derived from the single curriculum source.
+
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { grammarTopics, clusters, units, vocab } from '../../lib/learn';
+import { pageArt, pageLQIP } from '../../lib/art';
+import { siteUrl } from '../../lib/site';
+
+// Layout + design system
+import PremiumHero from '../../components/layout/PremiumHero.astro';
+import WordShowcase from '../../components/layout/WordShowcase.astro';
+import SectionHead from '../../components/layout/SectionHead.astro';
+import LearningPath from '../../components/layout/LearningPath.astro';
+import EntryPoints from '../../components/layout/EntryPoints.astro';
+import PracticeCTA from '../../components/learning/PracticeCTA.astro';
+import Icon from '../../components/design-system/Icon.astro';
+import SayScript from '../../components/SayScript.astro';
+
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+
+const lessonCount = units.length * 6;
+
+/* ---- How it works: the method ---- */
+const method = [
+  {
+    icon: 'book',
+    title: 'Learn',
+    body: 'Read real words and sentences from the curriculum — each with Hindi and English meanings, audio and a worked example.',
+    href: siteUrl('/vocabulary/'),
+    cta: 'Browse vocabulary',
+  },
+  {
+    icon: 'target',
+    title: 'Practice',
+    body: 'Listen, say it aloud, flip cards to test recall, and take short quizzes with instant feedback.',
+    href: siteUrl('/quiz/'),
+    cta: 'Take a quiz',
+  },
+  {
+    icon: 'refresh',
+    title: 'Remember',
+    body: 'Weakest-word-first review and spaced repetition make each word stick instead of fading by tomorrow.',
+    href: siteUrl('/review/'),
+    cta: 'Start reviewing',
+  },
+] as const;
+
+/* ---- Curriculum: first six units ---- */
+const preview = units.slice(0, 6).map((u) => ({
+  slug: siteUrl(`/lessons/${u.unit}/`),
+  unit: u.unit,
+  title: u.titleEn,
+  subtitle: u.subtitleEn,
+  goals: u.goalsEn.slice(0, 2),
+  art: pageArt(`lessons/${u.unit}`),
+  lqip: pageLQIP(`lessons/${u.unit}`),
+}));
+
+/* ---- Feature set ---- */
+const features = [
+  { icon: 'headphones', label: 'Audio on every word' },
+  { icon: 'cards', label: 'Spaced-repetition review' },
+  { icon: 'mic', label: 'Pronunciation & speaking' },
+  { icon: 'grid', label: 'Sentence building' },
+  { icon: 'flame', label: 'Streaks & progress' },
+  { icon: 'package', label: 'Free Anki decks' },
+] as const;
+
+/* ---- Why it works ---- */
+const why = [
+  'Weakest words first — review targets what you keep forgetting.',
+  'Review before you forget — scheduled repetition with recall tracking.',
+  'Listen and speak — quizzes, mic checks and Marathi voice setup.',
+  'Build sentences — arrange words into correct Marathi order.',
+  'Stay consistent — streaks, XP, levels and reminders.',
+] as const;
+
+/* ---- Explore hubs ---- */
+const hubs = [
+  { icon: 'book', title: 'Vocabulary', desc: `${vocab.length.toLocaleString('en-IN')} words in themed sets.`, href: siteUrl('/vocabulary/') },
+  { icon: 'chat', title: 'Phrases', desc: 'Everyday sentences you can use today.', href: siteUrl('/phrases/') },
+  { icon: 'grid', title: 'Grammar', desc: `${grammarTopics.length} patterns, explained simply.`, href: siteUrl('/grammar/') },
+] as const;
+
+/* ---- FAQ ---- */
+const faqs = [
+  { q: 'Can I learn Marathi from Hindi?', a: 'Yes — start with Hindi → Marathi words and sentence bridges, which map each Hindi pattern onto Marathi word by word.' },
+  { q: 'Can I learn Marathi from English?', a: 'Yes — every word and lesson carries English meanings, and there is a dedicated English → Marathi section.' },
+  { q: 'Is Bol Marathi free?', a: `All ${vocab.length.toLocaleString('en-IN')} words and ${units.length} unit lessons on this site are free. App pricing will be announced at launch.` },
+  { q: 'How many lessons are there?', a: `${units.length} units and ${lessonCount} lessons, from Marathi Fundamentals to a final assessment.` },
+  { q: 'Does Bol Marathi teach speaking?', a: 'The website teaches reading knowledge; the app adds listening, speaking checks, sentence building and spaced repetition.' },
+  { q: 'How is the app different from this website?', a: 'The website gives you the knowledge. The app gives you the practice loop — listen, speak, build, review, remember — plus streaks, XP and weakest-word recommendations.' },
+] as const;
+---
+
+<Base
+  wide
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  alternates={[
+    { lang: 'x-default', href: siteUrl('/') },
+    { lang: 'en', href: siteUrl('/') },
+    { lang: 'hi', href: siteUrl('/hi/') }
+  ]}
+>
+  <JsonLd
+    headline={SITE_TITLE}
+    description={SITE_DESCRIPTION}
+    url={homeUrl}
+    type="WebPage"
+    breadcrumbs={[]}
+  />
+  <JsonLd
+    headline="Learn Marathi — frequently asked questions"
+    description="Answers about learning Marathi from Hindi or English with Bol Marathi."
+    url={homeUrl}
+    type="FAQPage"
+    faq={faqs.map(f => ({ question: f.q, answer: f.a }))}
+    breadcrumbs={[]}
+  />
+
+  <!-- 1 · HERO -->
+  <section class="section section--hero">
+    <div class="container-wide">
+      <PremiumHero
+        kicker="Bol Marathi · Learn Marathi"
+        title="Learn Marathi the way it's actually spoken."
+        subtitle={`One audited curriculum takes you from your first word to confident conversation — ${units.length} units, ${lessonCount} lessons and ${vocab.length.toLocaleString('en-IN')}+ words, each with audio, Hindi and English.`}
+        primaryCTA={{ label: 'Start learning free', href: siteUrl('/start/') }}
+        secondaryCTA={{ label: 'See the curriculum', href: siteUrl('/lessons/') }}
+        stats={[
+          { value: String(units.length), label: 'Units' },
+          { value: String(lessonCount), label: 'Lessons' },
+          { value: `${vocab.length.toLocaleString('en-IN')}+`, label: 'Words' },
+          { value: 'Free', label: 'No signup' },
+        ]}
+      >
+        <WordShowcase slot="visual" class="animate-in" />
+      </PremiumHero>
+    </div>
+  </section>
+
+  <!-- 2 · THE JOURNEY -->
+  <section class="section section--surface" aria-labelledby="journey-title">
+    <div class="container-wide">
+      <SectionHead
+        id="journey-title"
+        kicker="The path"
+        title="From your first word to fluent Marathi"
+        lede="A single, ordered route — no guesswork about what to learn next. Tap any step to jump in."
+      />
+      <div class="reveal">
+        <LearningPath currentStep={0} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · WHERE YOU START -->
+  <section class="section section--muted" aria-labelledby="entry-points-title">
+    <div class="container-wide">
+      <EntryPoints class="reveal" />
+    </div>
+  </section>
+
+  <!-- 4 · HOW IT WORKS -->
+  <section class="section section--surface" aria-labelledby="method-title">
+    <div class="container-wide">
+      <SectionHead
+        id="method-title"
+        kicker="How it works"
+        title="Learn → Practice → Remember"
+        lede="Three loops, repeated until Marathi becomes automatic."
+      />
+      <ol class="method-grid">
+        {method.map((m, i) => (
+          <li class={`method-card reveal reveal-delay-${i + 1}`}>
+            <a class="method-card__link" href={m.href} data-funnel="method_click">
+              <span class="method-card__icon" aria-hidden="true"><Icon name={m.icon} size={22} /></span>
+              <span class="method-card__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="method-card__title">{m.title}</h3>
+              <p class="method-card__body">{m.body}</p>
+              <span class="method-card__cta">{m.cta} <Icon name="arrow-right" size={16} /></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4b · GAMES -->
+  <section class="section section--muted" aria-labelledby="games-title">
+    <div class="container-wide">
+      <SectionHead
+        id="games-title"
+        kicker="Marathi games"
+        title="Practice that plays like a game"
+        lede="Five small games built on the same curriculum — a daily Wordle, picture guessing, a crossword, word chains and sentence building."
+        actionLabel="All games"
+        actionHref={siteUrl('/games/')}
+      />
+      <ul class="card-grid">
+        {
+          [
+            { href: siteUrl('/games/marathi-wordle/'), icon: 'grid', name: 'Marathi Wordle', desc: 'The daily Marathi word — six tries, one akshara per tile.' },
+            { href: siteUrl('/games/picture-guess/'), icon: 'eye', name: 'Picture Guess', desc: 'Guess the word behind the picture, with hints and audio.' },
+            { href: siteUrl('/games/marathi-crossword/'), icon: 'clipboard', name: 'Marathi Crossword', desc: 'Curated grids where every cell is a full akshara.' },
+            { href: siteUrl('/games/word-chain/'), icon: 'link', name: 'Word Chain', desc: 'Chain words end-to-end — शब्दसाखळी with 800+ words.' },
+            { href: siteUrl('/games/sentence-scramble/'), icon: 'cards', name: 'Sentence Scramble', desc: 'Rebuild real curriculum sentences from shuffled tiles.' },
+          ].map((g, i) => (
+            <li class={`reveal reveal-delay-${i + 1}`}>
+              <a class="card" href={g.href} data-funnel="game_start">
+                <span class="game-chip" aria-hidden="true"><Icon name={g.icon} size={20} /></span>
+                <h3>{g.name}</h3>
+                <p>{g.desc}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 · THE CURRICULUM -->
+  <section class="section section--muted" aria-labelledby="curriculum-title">
+    <div class="container-wide">
+      <SectionHead
+        id="curriculum-title"
+        kicker="The curriculum"
+        title={`${units.length} units, built to be finished`}
+        lede="Each unit pairs new vocabulary with grammar, listening, speaking and a sentence builder."
+        actionLabel={`All ${units.length} units`}
+        actionHref={siteUrl('/lessons/')}
+      />
+      <ul class="unit-grid">
+        {preview.map((u, i) => (
+          <li class={`unit-card reveal reveal-delay-${i + 1}`}>
+            <a class="unit-card__link" href={u.slug}>
+              <div class="unit-card__media" style={`background-image: url('${u.lqip || u.art}'); background-size: cover;`}>
+                <img src={u.art} alt="" loading="lazy" width="1200" height="630" />
+              </div>
+              <div class="unit-card__body">
+                <span class="unit-card__unit">Unit {u.unit}</span>
+                <h3 class="unit-card__title">{u.title}</h3>
+                <p class="unit-card__goals">{u.goals.join(' · ')}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <ul class="feature-row">
+        {features.map((f) => (
+          <li class="feature-chip">
+            <Icon name={f.icon} size={18} />
+            <span>{f.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6 · WHY IT WORKS -->
+  <section class="section section--surface" aria-labelledby="why-title">
+    <div class="container-wide">
+      <SectionHead
+        id="why-title"
+        kicker="Why it works"
+        title="One curriculum, audited — plus a practice loop"
+        lede={`Every page comes from the same ${units.length}-unit Bol Marathi curriculum (${vocab.length.toLocaleString('en-IN')} words): synced, versioned and language-checked, never invented for the web.`}
+        actionLabel="Methodology"
+        actionHref={siteUrl('/how-it-works/')}
+      />
+      <div class="why-layout">
+        <ul class="why-list">
+          {why.map((w) => (
+            <li class="why-item">
+              <span class="why-item__mark" aria-hidden="true"><Icon name="check" size={16} /></span>
+              <span>{w}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="hubs">
+          {hubs.map((h) => (
+            <a class="hub-card reveal" href={h.href}>
+              <span class="hub-card__icon" aria-hidden="true"><Icon name={h.icon} size={20} /></span>
+              <span class="hub-card__text">
+                <strong>{h.title}</strong>
+                <span>{h.desc}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · FAQ -->
+  <section class="section section--cream" aria-labelledby="faq-title">
+    <div class="container-wide">
+      <SectionHead id="faq-title" kicker="FAQ" title="Common questions" />
+      <div class="faq-grid">
+        {faqs.map((f) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq-item__chevron" aria-hidden="true"><Icon name="arrow-right" size={18} /></span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · APP BRIDGE -->
+  <section class="section section--muted" aria-label="Practice in the app">
+    <div class="container-wide">
+      <PracticeCTA variant="general" context="homepage" />
+    </div>
+  </section>
+</Base>
+
+<SayScript />
+
+<script>
+  // Reveal-on-scroll (respects reduced motion; re-runs on view-transition nav).
+  function initReveal() {
+    const els = document.querySelectorAll('.reveal:not(.visible), .animate-in:not(.visible)');
+    if (!els.length) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach((el) => el.classList.add('visible'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
+    els.forEach((el) => observer.observe(el));
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+</script>
+
+<style>
+  /* ---------- Method ---------- */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: method;
+  }
+
+  .method-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: transform var(--duration-base) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .method-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+  }
+
+  .method-card__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    height: 100%;
+    padding: var(--space-5);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .method-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    background: var(--color-primary-fixed);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .method-card__num {
+    font-size: var(--text-caption);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+  }
+
+  .method-card__title {
+    margin: 0;
+    font-size: var(--text-h3);
+    font-weight: 700;
+  }
+
+  .method-card__body {
+    margin: 0;
+    flex: 1;
+    font-size: var(--text-body-sm);
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .method-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    margin-top: var(--space-3);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .method-card:hover .method-card__cta :global(.icon) { transform: translateX(3px); }
+  .method-card__cta :global(.icon) { transition: transform var(--duration-fast) var(--ease-out); }
+
+  @media (max-width: 860px) {
+    .method-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Curriculum ---------- */
+  .unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .unit-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-base) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .unit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+  }
+
+  .unit-card__link { display: block; text-decoration: none; color: inherit; height: 100%; }
+
+  .unit-card__media {
+    aspect-ratio: 1200 / 630;
+    position: relative;
+    background: var(--color-container-low);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .unit-card__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .unit-card__body { padding: var(--space-4); }
+
+  .unit-card__unit {
+    font-size: var(--text-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+  }
+
+  .unit-card__title {
+    margin: var(--space-1) 0 var(--space-2);
+    font-size: var(--text-h4);
+    font-weight: 700;
+  }
+
+  .unit-card__goals {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .feature-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+    padding: var(--space-6) 0 0;
+    margin: var(--space-3) 0 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .feature-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 0.5em 0.9em;
+  }
+
+  .feature-chip :global(.icon) { color: var(--color-primary); }
+
+  /* ---------- Why it works ---------- */
+  .why-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .why-layout { grid-template-columns: 1fr; }
+  }
+
+  .why-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .why-item {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    font-size: var(--text-body);
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .why-item__mark {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-top: 0.15em;
+    border-radius: 50%;
+    background: var(--color-success-bg);
+    color: var(--color-success);
+  }
+
+  .hubs {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .hub-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-container-low);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out);
+  }
+
+  .hub-card:hover { border-color: var(--color-primary); background: var(--color-primary-fixed); }
+
+  .hub-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .hub-card__text { display: flex; flex-direction: column; gap: 0.1em; }
+  .hub-card__text strong { font-size: var(--text-body); font-weight: 700; }
+  .hub-card__text span { font-size: var(--text-body-sm); color: var(--color-text-muted); }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-3);
+    align-items: start;
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space-4) var(--space-5);
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .faq-item[open] { border-color: var(--color-primary); }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 44px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item__chevron {
+    display: inline-flex;
+    color: var(--color-text-muted);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .faq-item[open] .faq-item__chevron { transform: rotate(90deg); color: var(--color-primary); }
+
+  .faq-item p {
+    margin: var(--space-3) 0 0 0;
+    font-size: var(--text-body-sm);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .game-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 10px;
+    background: var(--accent-fixed);
+    color: var(--accent-on-fixed);
+    margin-bottom: 0.4em;
+  }
+</style>

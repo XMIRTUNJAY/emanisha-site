@@ -1,0 +1,55 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Learn from '../../layouts/Learn.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import VocabTable from '../../components/VocabTable.astro';
+import { vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+// काल/उद्या split and हा/ही/हे neuter row are verified curriculum data.
+const kal = vocab.find((w) => w.id === 'v-time-03');
+const udya = vocab.find((w) => w.id === 'v-time-02');
+const ha = vocab.find((w) => w.marathi === 'हा');
+const hi = vocab.find((w) => w.marathi === 'ही');
+const he = vocab.find((w) => w.marathi === 'हे');
+if (!kal || !udya || !ha || !hi || !he) throw new Error('vs-hindi data missing');
+---
+
+<Learn
+	title="Marathi vs Hindi: काल/उद्या & Three Genders"
+	description="Two Marathi–Hindi differences from real data: काल vs उद्या split, and neuter हा/ही/हे Hindi lacks."
+	kicker="Marathi Guide"
+	crumbs={[
+		{ label: 'Grammar', href: siteUrl('/grammar/') },
+		{ label: 'Marathi vs Hindi', href: siteUrl('/marathi-vs-hindi/') },
+	]}
+	canonicalPath="/marathi-vs-hindi/"
+	about="marathi vs hindi differences"
+	meta={['2 differences', 'With examples']}
+>
+	<h2>1. काल means only yesterday</h2>
+	<p>
+		Hindi कल covers both yesterday and tomorrow. Marathi splits them —
+		and both halves are in the curriculum:
+	</p>
+	<VocabTable words={[kal, udya]} caption="काल vs उद्या" />
+
+	<h2>2. Three genders, not two</h2>
+	<p>
+		Hindi has masculine and feminine. Marathi adds neuter — visible right
+		in the demonstratives:
+	</p>
+	<VocabTable words={[ha, hi, he]} caption="हा ही हे" />
+
+	<AppCTA variant="grammar" context="marathi-vs-hindi" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi pronouns', href: siteUrl('/grammar/pronouns/') },
+			{ label: 'Sentence structure', href: siteUrl('/grammar/sentence-structure/') },
+			{ label: 'Hindi to Marathi words', href: siteUrl('/hindi-to-marathi/words/') },
+		]}
+	/>
+
+	<AppCTA variant="general" context="marathi-vs-hindi-end" />
+</Learn>

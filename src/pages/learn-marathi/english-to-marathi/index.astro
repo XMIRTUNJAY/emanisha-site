@@ -1,0 +1,57 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import SeoCards from '../../../components/SeoCards.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+---
+
+<Learn
+	title="English to Marathi"
+	description="Learn Marathi through English: everyday words, sentence bridges and daily conversation — with pronunciation and examples from the Bol Marathi curriculum."
+	kicker="English → Marathi"
+	crumbs={[{ label: 'English → Marathi', href: siteUrl('/english-to-marathi/') }]}
+	canonicalPath="/english-to-marathi/"
+	about="english to marathi"
+>
+	<p>
+		Learning Marathi from English? Start with high-frequency words, then
+		see how English sentences map onto Marathi's subject–object–verb
+		shape — one pattern at a time.
+	</p>
+
+	<ul class="card-grid">
+			<li>
+				<a class="card" href={siteUrl('/english-to-marathi/words/')}>
+					<img src={pageArt('english-to-marathi/words')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>English to Marathi words</h3>
+					<p>Everyday words with Marathi meanings, pronunciation and examples.</p>
+				</a>
+			</li>
+			<li>
+				<a class="card" href={siteUrl('/english-to-marathi/phrases/')}>
+					<img src={pageArt('english-to-marathi/phrases')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>English to Marathi phrases</h3>
+					<p>Sentence bridges with word-by-word maps and grammar notes.</p>
+				</a>
+			</li>
+		<li>
+			<a class="card" href={siteUrl('/phrases/daily/')}>
+				<img src={pageArt('phrases/daily')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Daily conversation</h3>
+				<p>Everyday Marathi sentences with English meanings.</p>
+			</a>
+		</li>
+		<li>
+			<a class="card" href={siteUrl('/hindi-to-marathi/')}>
+				<img src={pageArt('hindi-to-marathi')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Learning from Hindi instead?</h3>
+				<p>Hindi → Marathi words and sentences, mapped word-by-word.</p>
+			</a>
+		</li>
+	</ul>
+
+	<SeoCards family="english-path" heading="English → Marathi by topic" />
+
+	<AppCTA variant="general" context="english-index" />
+</Learn>

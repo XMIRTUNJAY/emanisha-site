@@ -1,0 +1,478 @@
+[
+  {
+    "slug": "family-talk",
+    "title": "Marathi Family Phrases: Talk About People & Home",
+    "description": "12 real Marathi sentences for talking about family and people — with Hindi and English meanings and speaking tips from the Bol Marathi curriculum.",
+    "h1": "Marathi Phrases for Talking About Family & People",
+    "searchIntent": "conversation",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["family", "conversation", "daily-life"],
+    "primaryKeyword": "marathi family phrases",
+    "secondaryKeywords": ["talk about family in marathi", "marathi sentences for family", "introduce family in marathi"],
+    "intro": [
+      "Twelve complete Marathi sentences from Units 03 and 05 for the most common small-talk subject there is: your family and the people around you. Each phrase carries its Hindi meaning, English meaning and a speaking tip — these are real curriculum sentences, not word-list fragments.",
+      "Read each Marathi sentence aloud, compare it with the Hindi column, and notice the pattern: माझं कुटुंब मोठं आहे maps almost word-for-word on मेरा परिवार बड़ा है — but the possessive and the verb ending are where Marathi does its own thing."
+    ],
+    "tip": "Pick the three sentences that are true about your own family and memorize those first.",
+    "speakingUnits": ["03", "05"],
+    "units": ["03", "05"],
+    "sections": [
+      {
+        "heading": "What these phrases teach",
+        "paragraphs": [
+          "Two patterns carry most family talk: possession with माझा/माझी/माझं agreeing with the thing owned (माझी बहीण, माझं कुटुंब), and having-family with माझ्याकडे … आहेत (माझ्याकडे पाच भाऊ आहेत — I have five brothers). Hindi speakers know the logic; the endings are the new part.",
+          "Unit 05 supplies the people-words and pronouns these phrases point at; Unit 03 supplies the family nouns themselves. Both units are linked below."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "माझा कुटुंब for \"my family\"", "right": "माझं कुटुंब — कुटुंब is neuter", "why": "Marathi possessives agree with the noun's gender, and Marathi has a neuter gender Hindi lacks." },
+      { "wrong": "मेरे पास for \"I have (brothers)\"", "right": "माझ्याकडे पाच भाऊ आहेत", "why": "Having family/money uses -कडे, not a literal पास translation." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "कोण आला आहे? means…", "options": ["Where has he gone?", "Who has come?", "When will you come?", "What happened?"], "answer": 1, "explanation": "कोण = who. From Unit 05." }
+      ],
+      "translate": [
+        { "source": "My family is big.", "answer": "माझं कुटुंब मोठं आहे.", "note": "Neuter possessive माझं — the classic three-gender checkpoint." },
+        { "source": "This is my sister.", "answer": "ही माझी बहीण आहे.", "note": "Feminine: ही … माझी बहीण." }
+      ]
+    },
+    "relatedPages": ["/vocabulary/family/", "/lessons/03/", "/lessons/05/"],
+    "faq": [
+      { "question": "How do you introduce your family in Marathi?", "answer": "Start with माझं कुटुंब मोठं आहे (my family is big) and ही माझी बहीण आहे (this is my sister) — the 12 sentences above cover introductions, counts and where relatives live." },
+      { "question": "Are these phrases formal or casual?", "answer": "Everyday spoken Marathi. For elders and strangers, add the polite forms — Unit 05 covers honorifics like राव, कसे आहात?" }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "office-work",
+    "title": "Marathi Office Phrases for Work & Daily Use",
+    "description": "9 Marathi workplace sentences — meetings, interviews, projects and promotions — with Hindi and English meanings and speaking tips.",
+    "h1": "Marathi Phrases for the Office & Work",
+    "searchIntent": "conversation",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["work", "conversation", "office"],
+    "primaryKeyword": "marathi office phrases",
+    "secondaryKeywords": ["marathi work phrases", "office marathi sentences", "marathi for workplace"],
+    "intro": [
+      "Nine Marathi sentences for working life, drawn from Unit 19 (Work & Career) and Unit 11 (Education & Work): meetings and deadlines, interviews, projects finishing, promotions arriving. Each has Hindi and English meanings plus a speaking tip.",
+      "Notice how English loanwords do the heavy lifting in office Marathi — मीटिंग, इंटरव्हू, प्रोजेक्ट, प्रमोशन. The Marathi you supply is the grammar around them: उद्या मीटिंग आहे, तयार राहा."
+    ],
+    "tip": "Learn the frame, swap the loanword: उद्या ___ आहे works for मीटिंग, इंटरव्हू, प्रेझेंटेशन alike.",
+    "speakingUnits": ["19"],
+    "speakingPicks": [{ "unit": "11", "lessons": [2, 3, 4] }],
+    "units": ["11", "19"],
+    "sections": [
+      {
+        "heading": "Loanwords + Marathi grammar = office Marathi",
+        "paragraphs": [
+          "Workplace Marathi in Maharashtra's cities runs on English nouns inside Marathi sentence frames. मी ऑफिसमध्ये काम करतो keeps the verb-final order; प्रोजेक्ट पूर्ण झालं uses the past with झालं. Learn the frames on this page and any English job-word slots in.",
+          "For interviews and applications, the unit sentences cover the arc: मी नोकरीसाठी अर्ज केला (I applied) → माझं इंटरव्हू उद्या आहे (interview tomorrow) → मला प्रमोशन मिळालं (I got promoted)."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Dropping postpositions around loanwords", "right": "ऑफिसमध्ये, नोकरीसाठी, मीटिंगमध्ये", "why": "Loanwords still take Marathi postpositions: -मध्ये (in), -साठी (for)." },
+      { "wrong": "मला प्रमोशन केला", "right": "मला प्रमोशन मिळालं", "why": "Promotions are received (मिळालं), not done. Hindi speakers calque करना too often." }
+    ],
+    "practice": {
+      "translate": [
+        { "source": "Meeting tomorrow, stay ready.", "answer": "उद्या मीटिंग आहे, तयार राहा.", "note": "From Unit 19 — notice the verb-final राहा." },
+        { "source": "I work in an office.", "answer": "मी ऑफिसमध्ये काम करतो.", "note": "From Unit 11 — ऑफिस + मध्ये." }
+      ],
+      "fill": [
+        { "sentence": "मला ___ मिळालं. (I got a promotion.)", "answer": "प्रमोशन", "hint": "From Unit 19 — received, so मिळालं." }
+      ]
+    },
+    "relatedPages": ["/blog/first-day-work/", "/lessons/19/", "/lessons/11/"],
+    "faq": [
+      { "question": "Do I need \"pure\" Marathi at the office?", "answer": "No — workplace Marathi freely uses loanwords (मीटिंग, प्रोजेक्ट, प्रमोशन). What marks your Marathi is the grammar: verb-final order and postpositions like -साठी and -मध्ये." },
+      { "question": "Where do these phrases come from?", "answer": "Units 11 and 19 of the Bol Marathi curriculum — each row is a real lesson sentence with Hindi and English meanings." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "making-plans",
+    "title": "Marathi Phrases for Making Plans & Future Talk",
+    "description": "12 Marathi sentences for making plans, proposing times, and coordinating — with Hindi and English meanings from Units 16 and 18.",
+    "h1": "Marathi Phrases for Making Plans",
+    "searchIntent": "conversation",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["planning", "conversation", "daily-life"],
+    "primaryKeyword": "marathi phrases for making plans",
+    "secondaryKeywords": ["marathi future sentences", "planning in marathi", "when to meet in marathi"],
+    "intro": [
+      "Twelve Marathi sentences for making plans, from Units 16 and 18: proposing a time, confirming a day, saying you will come, and handling changes. Each has Hindi and English meanings plus a speaking tip.",
+      "The grammar is simpler than English future: Marathi uses the simple present for near-future plans — मी उद्या येतो (I come tomorrow) works for both \"I come tomorrow\" and \"I will come tomorrow\". The verb-final order and the adverb (उद्या, परवा, आठवड्यात) do the time work."
+    ],
+    "tip": "मी उद्या येतो covers \"I come tomorrow\" and \"I will come tomorrow\". Adverb + present verb = future plan.",
+    "speakingUnits": ["16", "18"],
+    "units": ["16", "18"],
+    "sections": [
+      {
+        "heading": "Proposing and confirming",
+        "paragraphs": [
+          "उद्या भेटूया? (Shall we meet tomorrow?) — the simplest plan proposal. परवा भेटूया? (Shall we meet the day after?) and आठवड्यात भेटूया? (Shall we meet this week?) follow the same pattern. Confirmation is मी येतो (I will come) or मी येईन (I will come — slightly more formal)."
+        ]
+      },
+      {
+        "heading": "Handling changes",
+        "paragraphs": [
+          "मी नाही येतो (I am not coming) and मला उशिरा होत आहे (I am running late) cover the two most common plan changes. The adverb उशिरा + होत आहे (is happening) = running late — a ready-made phrase worth memorizing."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using फ्यूचर tense like \"मी येईल\"", "right": "मी येतो / मी येईन — present verb works for near future", "why": "Marathi near-future plans use present tense + time adverb. The future form (येईल) exists but is less common for concrete plans." },
+      { "wrong": "Translating \"Shall we?\" as \"शल वी?\"", "right": "भेटूया? / जाऊया? — the inclusive imperative", "why": "The Marathi \"let's\" is the imperative plural: भेटूया (let's meet), जाऊया (let's go). No modal verb needed." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"I will come tomorrow\" in Marathi?", "options": ["मी उद्या येतो", "मी उद्या येईल", "उद्या मी येते", "उद्या येईन मी"], "answer": 0, "explanation": "मी उद्या येतो — adverb + present verb." },
+        { "question": "\"Let's meet this week\" in Marathi?", "options": ["आठवड्यात भेटूया", "आठवड्यात भेटतो", "आठवड्यात मी भेटतो", "भेटूया आठवड्यात"], "answer": 0, "explanation": "आठवड्यात भेटूया — let's meet = भेटूया." },
+        { "question": "\"I am running late\" in Marathi?", "options": ["मला उशिरा होत आहे", "मी उशिरा आहे", "उशिरा मी आहे", "माझं उशिरा आहे"], "answer": 0, "explanation": "मला उशिरा होत आहे — late is happening to me." }
+      ],
+      "translate": [
+        { "source": "Let's meet the day after tomorrow.", "answer": "परवा भेटूया.", "note": "परवा = day after tomorrow; भेटूया = let's meet." }
+      ]
+    },
+    "relatedPages": ["/english-to-marathi/time-seasons/", "/hindi-to-marathi/time-seasons/", "/lessons/16/", "/lessons/18/"],
+    "faq": [
+      { "question": "How do you say \"Let's meet tomorrow\" in Marathi?", "answer": "उद्या भेटूया? — the inclusive imperative भेटूया means \"let's meet\". Add ? for the proposal." },
+      { "question": "How do you say \"I'm running late\" in Marathi?", "answer": "मला उशिरा होत आहे — literally \"to me, late is happening\"." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "phone-and-messaging",
+    "title": "Marathi Phrases for Phone Calls & Messaging",
+    "description": "Marathi phone phrases for calls and messaging — texting, WhatsApp, signal issues — from Unit 12 and Unit 24 speaking sentences.",
+    "h1": "Marathi Phrases for Phone & Messaging",
+    "searchIntent": "conversation",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["technology", "phone", "messaging", "daily-life"],
+    "primaryKeyword": "marathi phone phrases",
+    "secondaryKeywords": ["marathi call phrases", "whatsapp in marathi", "call me in marathi"],
+    "intro": [
+      "Phone and messaging phrases from Units 12 and 24: making a call, asking to call back, sending a message, WhatsApp, signal problems, and battery low. Each maps the English situation to the Marathi sentence with Hindi meaning and a speaking tip.",
+      "Most tech nouns are English loans in Devanagari: मोबाईल, व्हाट्सअॅप, मेसेज, कॉल, नेटवर्क, सिग्नल. The Marathi you add is the verb frame: फोन करा, मेसेज पाठवा, कॉल वेट करा."
+    ],
+    "tip": "मोबाईल, व्हाट्सअॅप, मेसेज, कॉल, सिग्नल — tech nouns are loans. The Marathi part is the verb: फोन करा, मेसेज पाठवा, चार्ज करा.",
+    "speakingUnits": ["12", "24"],
+    "units": ["12", "24"],
+    "sections": [
+      {
+        "heading": "Making and receiving calls",
+        "paragraphs": [
+          "फोन करा (make a call), कॉल वेट करा (wait on the line), कॉल मिळालं (call received), कॉल कट केलं (call ended). The verb करा (do/make) and मिळालं (received) / केलं (did) carry the action."
+        ]
+      },
+      {
+        "heading": "Messaging & apps",
+        "paragraphs": [
+          "मेसेज पाठवा (send a message), व्हाट्सअॅपवर मेसेज करा (message on WhatsApp), मेसेज वाचलं (read the message), रिप्लाय करा (reply). The verbs पाठवा (send), वाच (read), करा (do) attach to the loanword nouns."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Writing मोबाइल for mobile", "right": "मोबाईल — with ि and ल", "why": "Marathi writes the loan as मोबाईल; the Hindi spelling मोबाइल uses the wrong vowel sign." },
+      { "wrong": "Saying इंटरनेट चालू आहे for \"internet is working\"", "right": "इंटरनेट चालू आहे — correct! But सिग्नल आहे for signal", "why": "चालू/बंद for internet; सिग्नल आहे/नाही for signal. Distinguish the noun." },
+      { "wrong": "Saying मेसेज भेजो for \"send message\"", "right": "मेसेज पाठवा — पाठवा = send", "why": "Hindi भेजो → Marathi पाठवा. The loan noun stays, the verb is Marathi." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"Call me\" in Marathi?", "options": ["मला फोन करा", "मी फोन करतो", "फोन करा मी", "माझा फोन करा"], "answer": 0, "explanation": "मला फोन करा — to me, call (dative + verb)." },
+        { "question": "\"Send a message on WhatsApp\"?", "options": ["व्हाट्सअॅपवर मेसेज पाठवा", "व्हाट्सअॅप मेसेज करा", "मेसेज व्हाट्सअॅप", "व्हाट्सअॅप पाठवा"], "answer": 0, "explanation": "व्हाट्सअॅपवर मेसेज पाठवा — on WhatsApp, message send." },
+        { "question": "\"Signal is weak\" in Marathi?", "options": ["सिग्नल कम आहे", "नेटवर्क कम आहे", "सिग्नल वीक आहे", "नेटवर्क डाउन आहे"], "answer": 0, "explanation": "सिग्नल कम आहे — signal is less." }
+      ],
+      "translate": [
+        { "source": "Message me on WhatsApp.", "answer": "मला व्हाट्सअॅपवर मेसेज पाठवा.", "note": "Dative + loanword noun + Marathi verb." }
+      ]
+    },
+    "relatedPages": ["/english-to-marathi/technology-phone/", "/hindi-to-marathi/phrases/", "/lessons/12/", "/lessons/24/"],
+    "faq": [
+      { "question": "How do you say \"call me\" in Marathi?", "answer": "मला फोन करा — to me, call. The dative मला makes it a request to you." },
+      { "question": "What is \"WhatsApp\" in Marathi?", "answer": "व्हाट्सअॅप — same word, Devanagari script. The verb is मेसेज पाठवा." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "business-meetings",
+    "title": "Marathi Phrases for Business Meetings & Presentations",
+    "description": "Marathi business meeting phrases — agendas, presentations, decisions, follow-ups — from Units 23 and 25 speaking sentences.",
+    "h1": "Marathi Phrases for Business Meetings",
+    "searchIntent": "conversation",
+    "level": "advanced",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["business", "meetings", "formal", "conversation"],
+    "primaryKeyword": "marathi business meeting phrases",
+    "secondaryKeywords": ["marathi presentation phrases", "formal marathi meeting", "agenda in marathi"],
+    "intro": [
+      "Business meeting phrases from Units 23 and 25: opening a meeting, presenting an agenda, asking for opinions, making decisions, assigning action items, and closing with follow-ups. Each sentence has Hindi and English meanings plus a speaking tip.",
+      "Formal Marathi in meetings prefers native terms for structure: अजेंडा (agenda), प्रेझेंटेशन (presentation), निर्णय (decision), कार्यवाही (minutes/action items). The ergative (कंपनीने, मीने) appears in past-tense reports: कंपनीने निर्णय घेतलं."
+    ],
+    "tip": "अजेंडा सुरू करा (start agenda), प्रेझेंटेशन सुरू करा (start presentation), निर्णय घेतलं (decision taken), फॉलोअप करा (follow up). The verb घेतलं (took) marks formal decisions.",
+    "speakingUnits": ["23", "25"],
+    "units": ["23", "25"],
+    "sections": [
+      {
+        "heading": "Opening & agenda",
+        "paragraphs": [
+          "मीटिंग सुरू करा (start the meeting), अजेंडा वाचा (read the agenda), अजेंडा सुरू करा (start agenda). The verb करा (do/start) attaches to the loanword nouns."
+        ]
+      },
+      {
+        "heading": "Decisions & action items",
+        "paragraphs": [
+          "निर्णय घेतलं (decision taken — ergative past), कार्यवाही लिही (write minutes), फॉलोअप करा (follow up), जबाबदारी निश्चित करा (assign responsibility). The formal verb घेतलं (took) marks decisions as institutional acts."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using मी निर्णय केले for \"I decided\" formally", "right": "मीने निर्णय घेतलं — ergative + घेतलं", "why": "Formal decisions use the ergative (मीने) + घेतलं (took), not the active केले (did)." },
+      { "wrong": "Saying मीटिंग एंड for \"meeting end\"", "right": "मीटिंग संपवा — संपवा = end/finish", "why": "English \"end\" → Marathi संपवा. The loanword मीटिंग takes Marathi verb." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"Let's start the meeting\" in Marathi?", "options": ["मीटिंग सुरू करा", "मीटिंग चालू करा", "मीटिंग आरंभ करा", "सब बरोबर"], "answer": 0, "explanation": "मीटिंग सुरू करा — start the meeting." },
+        { "question": "\"Decision taken\" in formal Marathi?", "options": ["निर्णय केले", "निर्णय घेतलं", "मी निर्णय केले", "निर्णय आलं"], "answer": 1, "explanation": "निर्णय घेतलं — ergative past passive, standard formal register." },
+        { "question": "\"Follow up\" in Marathi?", "options": ["फॉलोअप करा", "पुढील करा", "मागोवा घ्या", "पाठिंबा द्या"], "answer": 0, "explanation": "फॉलोअप करा — loanword + Marathi verb." }
+      ],
+      "translate": [
+        { "source": "Please read the agenda.", "answer": "कृपया अजेंडा वाचा.", "note": "Polite + loanword noun + Marathi verb." }
+      ]
+    },
+    "relatedPages": ["/hindi-to-marathi/business/", "/english-to-marathi/workplace/", "/lessons/23/", "/lessons/25/"],
+    "faq": [
+      { "question": "How do you say \"meeting minutes\" in Marathi?", "answer": "कार्यवाही (kāryavāhī) — the formal term; मीटिंग नोंद is also understood." },
+      { "question": "How do you say \"We decided\" in formal Marathi?", "answer": "आम्हीने निर्णय घेतलं — ergative plural आम्हीने + घेतलं." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "asking-directions",
+    "title": "Marathi Phrases for Asking & Giving Directions",
+    "description": "Marathi directions phrases for asking and giving — where is it, left, right, straight — from Unit 08 and Unit 14 speaking sentences.",
+    "h1": "Marathi Phrases for Directions & Navigation",
+    "searchIntent": "conversation",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["directions", "travel", "daily-life"],
+    "primaryKeyword": "marathi directions phrases",
+    "secondaryKeywords": ["ask directions in marathi", "left right in marathi", "where is in marathi"],
+    "intro": [
+      "Direction phrases from Units 08 and 14: asking where something is, understanding left/right/straight/stop, and giving simple landmark-based directions. Each sentence has Hindi and English meanings plus a speaking tip.",
+      "The four navigation words are the core: डावा (left), उजवा (right), सरळ (straight), थांबा (stop). Every direction sentence in Units 08 and 14 builds from these four."
+    ],
+    "tip": "डावा = left, उजवा = right, सरळ = straight, थांबा = stop. Say them while walking — muscle memory beats flashcards.",
+    "speakingUnits": ["08", "14"],
+    "units": ["08", "14"],
+    "sections": [
+      {
+        "heading": "Asking where",
+        "paragraphs": [
+          "कुठे आहे? (Where is it?) works for anything — स्टेशन कुठे आहे?, शौचालय कुठे आहे?, होटेल कुठे आहे? The answer will use the four core words: सरळ जा, डावीकडे वळा, उजवीकडे आहे."
+        ]
+      },
+      {
+        "heading": "Giving directions",
+        "paragraphs": [
+          "सरळ जा (go straight), डावीकडे वळा (turn left), उजवीकडे वळा (turn right), थांबा (stop). Add landmarks: मंदिर उजवीकडे आहे (temple is on the right), बँक डावीकडे आहे (bank is on the left)."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using बायाँ/दायाँ from Hindi", "right": "डावा/उजवा — no sound overlap, must learn fresh", "why": "Hindi बायाँ/दायाँ and Marathi डावा/उजवा share zero phonetics. This is pure vocabulary learning." },
+      { "wrong": "Saying थांब for stop", "right": "थांबा — the imperative ends in ा", "why": "थांब is the root; the spoken command is थांबा (stop!) or थांबा एक मिनिट (wait a minute)." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "Left in Marathi?", "options": ["उजवा", "डावा", "सरळ", "थांबा"], "answer": 1, "explanation": "डावा = left; उजवा = right." },
+        { "question": "\"Turn right\" in Marathi?", "options": ["डावा वळा", "उजवा वळा", "उजवीकडे वळा", "सरळ वळा"], "answer": 2, "explanation": "उजवीकडे वळा — right-side turn." },
+        { "question": "\"Where is the station?\" in Marathi?", "options": ["स्टेशन कुठे?", "कुठे स्टेशन?", "स्टेशन कधी?", "कुठे आहे स्टेशन?"], "answer": 0, "explanation": "स्टेशन कुठे आहे? — question word + subject + आहे." }
+      ],
+      "fill": [
+        { "sentence": "_____ जा, मंदिर उजवीकडे आहे.", "answer": "सरळ", "hint": "Go straight, temple is on the right." }
+      ]
+    },
+    "relatedPages": ["/vocabulary/travel/", "/hindi-to-marathi/travel/", "/blog/autorickshaw-taxi/", "/lessons/08/", "/lessons/14/"],
+    "faq": [
+      { "question": "How do you ask \"Where is the station?\" in Marathi?", "answer": "स्टेशन कुठे आहे? — the standard where-is-it frame." },
+      { "question": "How do you say \"turn left\" in Marathi?", "answer": "डावीकडे वळा — left-side turn. The verb वळणे (to turn) takes the direction word + एकडे." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "presentations-interviews",
+    "title": "Marathi Phrases for Presentations & Interviews",
+    "description": "Marathi interview phrases and presentation lines — introducing yourself, presenting, Q&A, strengths and weaknesses — from Units 25 and 26.",
+    "h1": "Marathi Phrases for Presentations & Interviews",
+    "searchIntent": "conversation",
+    "level": "advanced",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["business", "interview", "presentation", "formal"],
+    "primaryKeyword": "marathi interview phrases",
+    "secondaryKeywords": ["marathi presentation phrases", "job interview in marathi", "self introduction marathi"],
+    "intro": [
+      "Presentation and interview phrases from Units 25 and 26: introducing yourself formally, presenting a topic, handling Q&A, describing strengths and weaknesses, and closing professionally. Each sentence has Hindi and English meanings plus a speaking tip.",
+      "Formal Marathi in interviews uses the ergative for past achievements: मीने प्रोजेक्ट पूर्ण केले (I completed the project). The politeness ladder applies: तुम्ही (respectful) for interviewers, मी (I) for yourself."
+    ],
+    "tip": "Formal intro: नमस्कार, माझं नाव ... आहे, मी ... मध्ये काम करतो. Interviewers use तुम्ही; you use मी. Achievements use ergative: मीने प्रोजेक्ट पूर्ण केले.",
+    "speakingUnits": ["25", "26"],
+    "units": ["25", "26"],
+    "sections": [
+      {
+        "heading": "Formal introduction",
+        "paragraphs": [
+          "नमस्कार, माझं नाव ... आहे, मी ... मध्ये काम करतो (I work in ...). For senior roles: माझा अनुभव ... वर्षांचे आहे (My experience is ... years). The ergative मीने appears in achievement statements: मीने प्रोजेक्ट पूर्ण केले (I completed the project)."
+        ]
+      },
+      {
+        "heading": "Q&A and strengths",
+        "paragraphs": [
+          "तुम्ही कशामुळे इथे काम करायचा? (Why do you want to work here?) — answer: माझी ताकद ... आहे (My strength is ...), माझी कमजोरी ... आहे (My weakness is ...). The possessive agrees with the noun: ताकद (fem) → माझी, कमजोरी (fem) → माझी."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using मी for achievements in formal context", "right": "मीने for past achievements: मीने प्रोजेक्ट पूर्ण केले", "why": "Ergative मीने marks the agent in past transitive sentences — formal standard." },
+      { "wrong": "Using तू with interviewers", "right": "तुम्ही — always respectful with interviewers", "why": "तू with a stranger is rude. Interviewers use तुम्ही; you use मी for yourself." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"I completed the project\" in formal Marathi?", "options": ["मी प्रोजेक्ट पूर्ण केले", "मीने प्रोजेक्ट पूर्ण केले", "माझं प्रोजेक्ट पूर्ण झालं", "प्रोजेक्ट मी केले"], "answer": 1, "explanation": "मीने प्रोजेक्ट पूर्ण केले — ergative मीने + पूर्ण केले." },
+        { "question": "\"My strength is...\" in Marathi?", "options": ["माझा ताकद ... आहे", "माझी ताकद ... आहे", "माझं ताकद ... आहे", "ताकद माझी आहे"], "answer": 1, "explanation": "ताकद is feminine → माझी ताकद." },
+        { "question": "How do you address interviewers?", "options": ["तू", "तुम्ही", "आप", "मी"], "answer": 1, "explanation": "तुम्ही — respectful you for interviewers and elders." }
+      ],
+      "translate": [
+        { "source": "Why do you want to work here?", "answer": "तुम्ही कशामुळे इथे काम करायचा?", "note": "Formal question — Unit 25 interview sentence." }
+      ]
+    },
+    "relatedPages": ["/hindi-to-marathi/advanced-conversation/", "/english-to-marathi/workplace/", "/blog/first-day-work/", "/lessons/25/", "/lessons/26/"],
+    "faq": [
+      { "question": "How do you introduce yourself in a Marathi job interview?", "answer": "नमस्कार, माझं नाव ... आहे, मी ... मध्ये काम करतो, माझा अनुभव ... वर्षांचे आहे. Use तुम्ही for the interviewer, मी for yourself." },
+      { "question": "How do you say \"I completed the project\" formally?", "answer": "मीने प्रोजेक्ट पूर्ण केले — ergative मीने + पूर्ण केले." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "thanking-apologizing",
+    "title": "Marathi Phrases for Thanking & Apologizing",
+    "description": "Marathi thank you sorry phrases — thanks, apologizing, you are welcome, no problem — from Units 01 and 16 speaking.",
+    "h1": "Marathi Phrases for Thanking & Apologizing",
+    "searchIntent": "conversation",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["politeness", "conversation", "daily-life"],
+    "primaryKeyword": "marathi thank you sorry phrases",
+    "secondaryKeywords": ["thank you in marathi", "sorry in marathi", "apologize in marathi", "you're welcome marathi"],
+    "intro": [
+      "Thanking and apologizing phrases from Units 01 and 16: धन्यवाद (thank you), शुभेच्छा (best wishes), माफ करा (sorry/excuse me), कृपया (please), नको धन्यवाद (no thank you), काही हरकत नाही (it's alright/no problem). Each has Hindi and English meanings plus a speaking tip.",
+      "The politeness ladder: धन्यवाद (standard thank you), खूप धन्यवाद (thank you very much), शुभेच्छा (best wishes for occasions). Apologies: माफ करा (sorry/excuse me — universal), क्षमा करा (forgive me — more formal)."
+    ],
+    "tip": "धन्यवाद is the universal thank you. माफ करा covers both \"sorry\" and \"excuse me\". For \"you're welcome\", say काही हरकत नाही (it's alright) or स्वागत आहे (welcome).",
+    "speakingUnits": ["01", "16"],
+    "units": ["01", "16"],
+    "sections": [
+      {
+        "heading": "Thanking — levels",
+        "paragraphs": [
+          "धन्यवाद (standard), खूप धन्यवाद (thank you very much), शुभेच्छा (best wishes — for festivals, milestones). The response to धन्यवाद is काही हरकत नाही (no problem / it's alright) or स्वागत आहे (you're welcome)."
+        ]
+      },
+      {
+        "heading": "Apologizing — register matters",
+        "paragraphs": [
+          "माफ करा (sorry / excuse me — universal), क्षमा करा (forgive me — more formal, for serious mistakes). The response to माफ करा is काही हरकत नाही or बरोबर (okay)."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using थॅंक्स in Marathi", "right": "धन्यवाद — the standard Marathi thank you", "why": "थॅंक्स marks you as an English speaker; धन्यवाद is one syllable more and fully Marathi." },
+      { "wrong": "Saying सॉरी for sorry", "right": "माफ करा — the standard Marathi apology", "why": "सॉरी is an English loan; माफ करा is the Marathi word used at all registers." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"Thank you\" in Marathi?", "options": ["थॅंक्स", "धन्यवाद", "शुक्रिया", "कृपया"], "answer": 1, "explanation": "धन्यवाद (dhan'yavād) — the standard Marathi thank you." },
+        { "question": "\"Sorry\" in Marathi?", "options": ["सॉरी", "माफ करा", "क्षमा", "एक्सक्यूज़ मी"], "answer": 1, "explanation": "माफ करा (māph karā) — universal sorry/excuse me." },
+        { "question": "\"You're welcome\" in Marathi?", "options": ["स्वागत आहे", "काही हरकत नाही", "दोनही", "नको"], "answer": 2, "explanation": "काही हरकत नाही (it's alright) and स्वागत आहे (welcome) — both used." }
+      ],
+      "translate": [
+        { "source": "Sorry for the delay.", "answer": "उशिरा झाल्याबरोबरच माफ करा.", "note": "Unit 16 — delay apology." }
+      ]
+    },
+    "relatedPages": ["/blog/polite-marathi/", "/hindi-to-marathi/greetings/", "/phrases/greetings/", "/lessons/01/", "/lessons/16/"],
+    "faq": [
+      { "question": "How do you say \"thank you\" in Marathi?", "answer": "धन्यवाद — the standard, universal thank you. For \"thank you very much\": खूप धन्यवाद." },
+      { "question": "How do you apologize in Marathi?", "answer": "माफ करा — works for both \"sorry\" and \"excuse me\". For a formal apology: क्षमा करा." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "emergency-phrases",
+    "title": "Marathi Emergency Phrases: Help, Doctor, Police",
+    "description": "Marathi emergency phrases — help, call a doctor, call police, I'm hurt, fire — from Unit 10 and Unit 16 speaking sentences.",
+    "h1": "Marathi Emergency Phrases (आडवा काळातील वाक्य)",
+    "searchIntent": "conversation",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["emergency", "health", "safety", "daily-life"],
+    "primaryKeyword": "marathi emergency phrases",
+    "secondaryKeywords": ["help in marathi", "call doctor in marathi", "emergency marathi", "call police marathi"],
+    "intro": [
+      "Emergency phrases from Units 10 and 16: asking for help, calling a doctor, calling police, saying you are hurt, reporting a fire, and asking for an ambulance. Each sentence has Hindi and English meanings plus a speaking tip.",
+      "The universal help cry: मदत! (Help!) — one word, universal. मला डॉक्टर पाहिजे (I need a doctor), पोलिस कॉल करा (call the police), अंब्युलन्स कॉल करा (call an ambulance). The verb कॉल करा (call) attaches to the service noun."
+    ],
+    "tip": "मदत! = Help! — one word, universal. मला डॉक्टर पाहिजे, पोलिस कॉल करा, अंब्युलन्स कॉल करा — the three calls you might need.",
+    "speakingUnits": ["10", "16"],
+    "units": ["10", "16"],
+    "sections": [
+      {
+        "heading": "The three calls",
+        "paragraphs": [
+          "मला डॉक्टर पाहिजे (I need a doctor), पोलिस कॉल करा (call the police), अंब्युलन्स कॉल करा (call an ambulance). The verb कॉल करा (call) attaches to the service noun."
+        ]
+      },
+      {
+        "heading": "Describing the emergency",
+        "paragraphs": [
+          "मला दुखते (I am hurt / it hurts me — dative), आग आहे (there is a fire), मला श्वास घेणं अवघड आहे (I have trouble breathing). The dative मला covers hurt, breath, and symptoms; the existential आहे covers fire and situations."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Saying मदद for help", "right": "मदत — Marathi ends in त", "why": "Hindi मदद → Marathi मदत. The final द becomes त — a systematic shift." },
+      { "wrong": "Saying डॉक्टर को बुलाओ for \"call a doctor\"", "right": "डॉक्टर कॉल करा — loanword + Marathi verb", "why": "Hindi बुलाओ → Marathi कॉल करा. The English loan कॉल + करा is the standard pattern." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"Help!\" in Marathi?", "options": ["मदद", "मदत", "बचाव", "सहायता"], "answer": 1, "explanation": "मदत (madat) — one word, universal emergency cry." },
+        { "question": "\"Call an ambulance\" in Marathi?", "options": ["अंब्युलन्स बुलाओ", "अंब्युलन्स कॉल करा", "अंब्युलन्स आणा", "वाहन कॉल करा"], "answer": 1, "explanation": "अंब्युलन्स कॉल करा — loanword + Marathi verb." },
+        { "question": "\"There's a fire\" in Marathi?", "options": ["आग आहे", "आग लावली", "फायर आहे", "आग आहे का?"], "answer": 0, "explanation": "आग आहे — existential आहे, simple and clear." }
+      ],
+      "translate": [
+        { "source": "I need a doctor immediately.", "answer": "मला लगेच डॉक्टर पाहिजे.", "note": "लगेच = immediately; Unit 10 urgency pattern." }
+      ]
+    },
+    "relatedPages": ["/blog/at-the-doctor/", "/vocabulary/body-parts/", "/lessons/10/", "/lessons/16/"],
+    "faq": [
+      { "question": "What is the Marathi word for \"help\"?", "answer": "मदत — one word, universal. Hindi मदद shifts to Marathi मदत (final द → त)." },
+      { "question": "How do you call an ambulance in Marathi?", "answer": "अंब्युलन्स कॉल करा — the loanword + कॉल करा pattern." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  }
+]

@@ -1,0 +1,64 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Base from '../../layouts/Base.astro';
+import { vocab, units } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const title = 'How Bol Marathi Teaches: Method & Learning Loop';
+const description = 'The Bol Marathi method: themed vocabulary, Hindi bridges, listening, speaking, sentence building and spaced repetition.';
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Method', href: siteUrl('/how-it-works/') }]}>
+	<div class="prose">
+		<p class="kicker">Methodology</p>
+		<h1>How Bol Marathi teaches</h1>
+		<p class="lede">
+			One source of truth, two products. The website never invents words —
+			everything teachable here comes from the app's curriculum.
+		</p>
+
+		<h2>The learning loop</h2>
+		<ol class="loop">
+			<li><strong>Vocabulary</strong> — words grouped into themes (food, family, travel), because themes are easier to remember than alphabets.</li>
+			<li><strong>Context</strong> — every word sits inside its category and lesson, not alone on a list.</li>
+			<li><strong>Examples</strong> — each word carries a real Marathi sentence with Hindi and English meanings.</li>
+			<li><strong>Listening</strong> — hear the word and pick it out; pronunciation you can't hear, you can't reproduce.</li>
+			<li><strong>Speaking</strong> — say real sentences with microphone checks and Marathi voice setup.</li>
+			<li><strong>Sentence construction</strong> — arrange words into Marathi's subject–object–verb order until it feels natural.</li>
+			<li><strong>Spaced repetition</strong> — reviews arrive before you forget, weakest words first.</li>
+			<li><strong>Long-term retention</strong> — streaks, XP, levels and reminders keep the loop turning.</li>
+		</ol>
+
+		<h2>Why Hindi → Marathi comparisons</h2>
+		<p>
+			Hindi speakers already know Marathi's sentence shape and hundreds of
+			shared words. Bridge lessons map each Hindi pattern onto Marathi word
+			by word, so prior knowledge transfers instead of starting from zero.
+			English meanings ride along for everyone else.
+		</p>
+
+		<h2>How the curriculum progresses</h2>
+		<p>
+			{units.length} units × 6 lessons ({units.length * 6} lessons): greetings
+			and alphabet first, then survival phrases, everyday vocabulary, sentence
+			patterns, pronunciation, questions, postpositions — up through advanced
+			grammar, literature, business Marathi and a final assessment. Each unit
+			adds vocabulary, speaking, listening, bridges, sentence building,
+			grammar and culture.
+		</p>
+
+		<h2>What the website provides</h2>
+		<p>Discover, understand, read, search, explore: {vocab.length} words, phrases, grammar and all {units.length} units as free study pages. No signup.</p>
+
+		<h2>What the app adds</h2>
+		<p>Practice, listen, speak, build, review, remember, track: the interactive loop plus streaks, weakest-word recommendations and reminders. Static pages never pretend to be interactive lessons.</p>
+
+		<p><em>Curated by xmirtunjay. Reviewer: pending native-speaker review. Linguistic review status is tracked openly; uncertain constructions are flagged, not faked.</em></p>
+		<AppCTA variant="general" context="method" />
+	</div>
+</Base>
+
+<style>
+	.loop { padding-left: 1.3em; }
+	.loop li { margin-bottom: 0.6em; }
+</style>

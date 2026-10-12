@@ -1,0 +1,203 @@
+---
+// LessonHeader — Reusable lesson/unit header (brief #8 + #20).
+// Answers "What will I learn?" before the content: unit identity, title,
+// objective blurb, key metrics, lesson rail and an optional progress bar.
+
+interface MetaItem {
+  value: string | number;
+  label: string;
+}
+
+interface RailLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  unitNo?: string | number;
+  marathiTitle?: string;
+  title: string;
+  blurb?: string;
+  meta?: MetaItem[];
+  rail?: RailLink[];
+  railLabel?: string;
+  progressPct?: number;        // 0-100, optional
+  progressLabel?: string;
+  class?: string;
+}
+
+const {
+  unitNo,
+  marathiTitle,
+  title,
+  blurb,
+  meta = [],
+  rail = [],
+  railLabel = 'Lessons:',
+  progressPct,
+  progressLabel = 'Unit progress',
+  class: className = '',
+} = Astro.props;
+
+const hasProgress = typeof progressPct === 'number';
+---
+
+<header class={`lesson-header-block {className}`}>
+  {marathiTitle && <p class="lesson-header-block__marathi" lang="mr">{marathiTitle}</p>}
+  {unitNo && <p class="lesson-header-block__unit kicker">Unit {unitNo}</p>}
+  <h1 class="lesson-header-block__title">{title}</h1>
+  {blurb && <p class="lesson-header-block__blurb">{blurb}</p>}
+
+  {meta.length > 0 && (
+    <ul class="lesson-header-block__meta" aria-label="Unit facts">
+      {meta.map((m) => (
+        <li class="lesson-header-block__meta-item">
+          <strong>{m.value}</strong> {m.label}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {hasProgress && (
+    <div class="lesson-header-block__progress" role="group" aria-label={progressLabel}>
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={Math.round(progressPct as number)}
+      >
+        <span class="progress-fill" style={`width:${Math.max(0, Math.min(100, progressPct as number))}%`}></span>
+      </div>
+      <span class="progress-caption">{Math.round(progressPct as number)}% complete</span>
+    </div>
+  )}
+
+  {rail.length > 0 && (
+    <nav class="lesson-header-block__rail" aria-label="Jump to lesson">
+      <span class="lesson-header-block__rail-label">{railLabel}</span>
+      {rail.map((r) => (
+        <a href={r.href}>{r.label}</a>
+      ))}
+    </nav>
+  )}
+</header>
+
+<style>
+  .lesson-header-block {
+    margin-bottom: var(--space-7);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .lesson-header-block__marathi {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-2);
+  }
+
+  .lesson-header-block__unit {
+    margin: 0 0 var(--space-1);
+  }
+
+  .lesson-header-block__title {
+    font-size: var(--text-h1);
+    margin: 0 0 var(--space-3);
+    letter-spacing: -0.02em;
+  }
+
+  .lesson-header-block__blurb {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-5);
+    max-width: var(--measure);
+  }
+
+  .lesson-header-block__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-5);
+  }
+
+  .lesson-header-block__meta-item {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+  }
+
+  .lesson-header-block__meta-item strong {
+    color: var(--color-text);
+    font-size: var(--text-body);
+  }
+
+  .lesson-header-block__progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .progress-track {
+    flex: 1;
+    max-width: 320px;
+    height: 8px;
+    background: var(--color-container);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+    border-radius: var(--radius-full);
+    transition: width var(--duration-slow) var(--ease-out-expo);
+  }
+
+  .progress-caption {
+    font-size: var(--text-caption);
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .lesson-header-block__rail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .lesson-header-block__rail-label {
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+    margin-right: var(--space-2);
+  }
+
+  .lesson-header-block__rail a {
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--color-primary-fixed);
+    color: var(--color-primary-on-fixed, var(--color-primary-dark));
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  }
+
+  .lesson-header-block__rail a:hover,
+  .lesson-header-block__rail a:focus-visible {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }
+
+  @media (max-width: 600px) {
+    .lesson-header-block__meta { gap: var(--space-3); }
+    .lesson-header-block__title { font-size: 1.75rem; }
+  }
+</style>

@@ -1,0 +1,1602 @@
+{
+  "generated": "2026-09-24",
+  "totals": {
+    "datasetPages": 16,
+    "published": 16,
+    "draft": 0,
+    "curatedPages": 18,
+    "lessons": 26,
+    "words": 1002
+  },
+  "pages": [
+    {
+      "slug": "animals",
+      "url": "/vocabulary/animals/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "animals",
+      "topics": [
+        "animals",
+        "nature"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi animal names",
+      "secondaryKeywords": [
+        "animals in marathi",
+        "marathi bird names",
+        "pet names in marathi"
+      ],
+      "curriculumUnits": [
+        "14"
+      ],
+      "relatedPages": [
+        "/lessons/14/",
+        "/vocabulary/travel/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "weather",
+      "url": "/vocabulary/weather/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "weather",
+      "topics": [
+        "weather",
+        "seasons",
+        "nature"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi weather words",
+      "secondaryKeywords": [
+        "weather in marathi",
+        "marathi seasons",
+        "rain in marathi"
+      ],
+      "curriculumUnits": [
+        "14",
+        "16"
+      ],
+      "relatedPages": [
+        "/blog/weather-talk/",
+        "/lessons/16/",
+        "/vocabulary/numbers-time/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "clothing",
+      "url": "/vocabulary/clothing/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "clothing",
+      "topics": [
+        "clothing",
+        "shopping",
+        "daily-life"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi clothes vocabulary",
+      "secondaryKeywords": [
+        "clothes in marathi",
+        "marathi dress names",
+        "sari dhoti marathi words"
+      ],
+      "curriculumUnits": [
+        "03",
+        "09"
+      ],
+      "relatedPages": [
+        "/vocabulary/shopping/",
+        "/lessons/09/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "emotions",
+      "url": "/vocabulary/emotions/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "emotions",
+      "topics": [
+        "emotions",
+        "daily-life",
+        "conversation"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi emotion words",
+      "secondaryKeywords": [
+        "feelings in marathi",
+        "happy sad angry in marathi",
+        "marathi emotion vocabulary"
+      ],
+      "curriculumUnits": [
+        "17"
+      ],
+      "relatedPages": [
+        "/blog/emotions-feelings/",
+        "/lessons/17/",
+        "/vocabulary/daily-life/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "body-parts",
+      "url": "/vocabulary/body-parts/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "body",
+      "topics": [
+        "body",
+        "health",
+        "daily-life"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi body parts",
+      "secondaryKeywords": [
+        "body parts in marathi",
+        "marathi health words",
+        "doctor vocabulary marathi"
+      ],
+      "curriculumUnits": [
+        "10"
+      ],
+      "relatedPages": [
+        "/blog/at-the-doctor/",
+        "/lessons/10/",
+        "/vocabulary/daily-life/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "family-talk",
+      "url": "/phrases/family-talk/",
+      "type": "phrases",
+      "primaryIntent": "conversation",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "family",
+      "topics": [
+        "family",
+        "conversation",
+        "daily-life"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi family phrases",
+      "secondaryKeywords": [
+        "talk about family in marathi",
+        "marathi sentences for family",
+        "introduce family in marathi"
+      ],
+      "curriculumUnits": [
+        "03",
+        "05"
+      ],
+      "relatedPages": [
+        "/vocabulary/family/",
+        "/lessons/03/",
+        "/lessons/05/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "office-work",
+      "url": "/phrases/office-work/",
+      "type": "phrases",
+      "primaryIntent": "conversation",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "work",
+      "topics": [
+        "work",
+        "conversation",
+        "office"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": "marathi office phrases",
+      "secondaryKeywords": [
+        "marathi work phrases",
+        "office marathi sentences",
+        "marathi for workplace"
+      ],
+      "curriculumUnits": [
+        "11",
+        "19"
+      ],
+      "relatedPages": [
+        "/blog/first-day-work/",
+        "/lessons/19/",
+        "/lessons/11/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "negation",
+      "url": "/grammar/negation/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "grammar",
+      "topics": [
+        "grammar",
+        "negation",
+        "sentences"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi negative sentences",
+      "secondaryKeywords": [
+        "how to say no in marathi",
+        "nahi nako in marathi",
+        "marathi negation grammar"
+      ],
+      "curriculumUnits": [
+        "02"
+      ],
+      "relatedPages": [
+        "/grammar/questions/",
+        "/grammar/sentence-structure/",
+        "/lessons/02/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "commands-polite",
+      "url": "/grammar/commands-polite/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "grammar",
+      "topics": [
+        "grammar",
+        "politeness",
+        "conversation"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi imperative",
+      "secondaryKeywords": [
+        "polite marathi phrases",
+        "marathi commands",
+        "please in marathi kripaya"
+      ],
+      "curriculumUnits": [
+        "02",
+        "13"
+      ],
+      "relatedPages": [
+        "/phrases/greetings/",
+        "/blog/polite-marathi/",
+        "/lessons/02/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "possessives",
+      "url": "/grammar/possessives/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "grammar",
+      "topics": [
+        "grammar",
+        "pronouns",
+        "gender"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "marathi possessive pronouns",
+      "secondaryKeywords": [
+        "my in marathi",
+        "maza majhi mazha marathi",
+        "marathi gender agreement"
+      ],
+      "curriculumUnits": [
+        "02",
+        "03"
+      ],
+      "relatedPages": [
+        "/grammar/pronouns/",
+        "/vocabulary/family/",
+        "/lessons/02/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "greetings",
+      "url": "/hindi-to-marathi/greetings/",
+      "type": "hindi-bridge",
+      "primaryIntent": "comparison",
+      "languagePath": [
+        "hindi"
+      ],
+      "topic": "greetings",
+      "topics": [
+        "greetings",
+        "conversation",
+        "daily-life"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "hindi to marathi greetings",
+      "secondaryKeywords": [
+        "namaste in marathi",
+        "hindi to marathi translation sentences",
+        "learn marathi from hindi"
+      ],
+      "curriculumUnits": [
+        "01"
+      ],
+      "relatedPages": [
+        "/hindi-to-marathi/words/",
+        "/phrases/greetings/",
+        "/lessons/01/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "daily-conversation",
+      "url": "/hindi-to-marathi/daily-conversation/",
+      "type": "hindi-bridge",
+      "primaryIntent": "comparison",
+      "languagePath": [
+        "hindi"
+      ],
+      "topic": "daily-life",
+      "topics": [
+        "daily-life",
+        "conversation"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "hindi to marathi daily conversation",
+      "secondaryKeywords": [
+        "hindi to marathi common sentences",
+        "hindi to marathi sentence translation",
+        "marathi for hindi speakers"
+      ],
+      "curriculumUnits": [
+        "02"
+      ],
+      "relatedPages": [
+        "/hindi-to-marathi/greetings/",
+        "/phrases/daily/",
+        "/lessons/02/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "questions",
+      "url": "/hindi-to-marathi/questions/",
+      "type": "hindi-bridge",
+      "primaryIntent": "comparison",
+      "languagePath": [
+        "hindi"
+      ],
+      "topic": "questions",
+      "topics": [
+        "questions",
+        "grammar",
+        "conversation"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "hindi to marathi question words",
+      "secondaryKeywords": [
+        "marathi question words",
+        "what where when in marathi",
+        "hindi to marathi kay kuthe"
+      ],
+      "curriculumUnits": [
+        "07"
+      ],
+      "relatedPages": [
+        "/grammar/questions/",
+        "/hindi-to-marathi/phrases/",
+        "/lessons/07/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "travel",
+      "url": "/hindi-to-marathi/travel/",
+      "type": "hindi-bridge",
+      "primaryIntent": "comparison",
+      "languagePath": [
+        "hindi"
+      ],
+      "topic": "travel",
+      "topics": [
+        "travel",
+        "transport",
+        "directions"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": "hindi to marathi travel words",
+      "secondaryKeywords": [
+        "marathi travel vocabulary",
+        "train ticket marathi",
+        "directions in marathi"
+      ],
+      "curriculumUnits": [
+        "14",
+        "15"
+      ],
+      "relatedPages": [
+        "/vocabulary/travel/",
+        "/phrases/travel/",
+        "/lessons/15/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "greetings",
+      "url": "/english-to-marathi/greetings/",
+      "type": "english-path",
+      "primaryIntent": "translate",
+      "languagePath": [
+        "english"
+      ],
+      "topic": "greetings",
+      "topics": [
+        "greetings",
+        "conversation"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "english to marathi greetings",
+      "secondaryKeywords": [
+        "hello in marathi",
+        "introduce yourself in marathi",
+        "my name is in marathi"
+      ],
+      "curriculumUnits": [
+        "01"
+      ],
+      "relatedPages": [
+        "/phrases/greetings/",
+        "/how-to-say-hello-in-marathi/",
+        "/lessons/01/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "asking-questions",
+      "url": "/english-to-marathi/asking-questions/",
+      "type": "english-path",
+      "primaryIntent": "translate",
+      "languagePath": [
+        "english"
+      ],
+      "topic": "questions",
+      "topics": [
+        "questions",
+        "conversation",
+        "grammar"
+      ],
+      "level": "beginner",
+      "primaryKeyword": "english to marathi question words",
+      "secondaryKeywords": [
+        "what in marathi",
+        "where in marathi kuthe",
+        "how to ask questions in marathi"
+      ],
+      "curriculumUnits": [
+        "07"
+      ],
+      "relatedPages": [
+        "/grammar/questions/",
+        "/hindi-to-marathi/questions/",
+        "/lessons/07/"
+      ],
+      "status": "published"
+    },
+    {
+      "slug": "beginners",
+      "url": "/vocabulary/beginners/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "learn marathi for beginners",
+        "marathi words for beginners"
+      ],
+      "level": null,
+      "primaryKeyword": "learn marathi for beginners",
+      "secondaryKeywords": [
+        "marathi words for beginners"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "colors",
+      "url": "/vocabulary/colors/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi colors",
+        "marathi colour names"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi colors",
+      "secondaryKeywords": [
+        "marathi colour names"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "food",
+      "url": "/vocabulary/food/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi food words",
+        "marathi food vocabulary"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi food words",
+      "secondaryKeywords": [
+        "marathi food vocabulary"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "family",
+      "url": "/vocabulary/family/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi family words",
+        "marathi relations"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi family words",
+      "secondaryKeywords": [
+        "marathi relations"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "travel",
+      "url": "/vocabulary/travel/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi travel words",
+        "marathi travel phrases"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi travel words",
+      "secondaryKeywords": [
+        "marathi travel phrases"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "shopping",
+      "url": "/vocabulary/shopping/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi shopping words",
+        "marathi market phrases"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi shopping words",
+      "secondaryKeywords": [
+        "marathi market phrases"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "numbers-time",
+      "url": "/vocabulary/numbers-time/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi numbers",
+        "marathi time",
+        "marathi days"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi numbers",
+      "secondaryKeywords": [
+        "marathi time",
+        "marathi days"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "verbs",
+      "url": "/vocabulary/verbs/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi verbs",
+        "marathi action words"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi verbs",
+      "secondaryKeywords": [
+        "marathi action words"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "daily-life",
+      "url": "/vocabulary/daily-life/",
+      "type": "vocabulary",
+      "primaryIntent": "vocabulary",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi daily use words",
+        "marathi home words"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi daily use words",
+      "secondaryKeywords": [
+        "marathi home words"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "greetings",
+      "url": "/phrases/greetings/",
+      "type": "phrases",
+      "primaryIntent": "phrases",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi greetings",
+        "namaskar in marathi"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi greetings",
+      "secondaryKeywords": [
+        "namaskar in marathi"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "daily",
+      "url": "/phrases/daily/",
+      "type": "phrases",
+      "primaryIntent": "phrases",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi daily conversation",
+        "daily use marathi sentences"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi daily conversation",
+      "secondaryKeywords": [
+        "daily use marathi sentences"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "travel",
+      "url": "/phrases/travel/",
+      "type": "phrases",
+      "primaryIntent": "phrases",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi travel phrases"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi travel phrases",
+      "secondaryKeywords": [],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "shopping",
+      "url": "/phrases/shopping/",
+      "type": "phrases",
+      "primaryIntent": "phrases",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi shopping phrases",
+        "bargaining in marathi"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi shopping phrases",
+      "secondaryKeywords": [
+        "bargaining in marathi"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "pronouns",
+      "url": "/grammar/pronouns/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi pronouns",
+        "mi tu to in marathi"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi pronouns",
+      "secondaryKeywords": [
+        "mi tu to in marathi"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "verbs",
+      "url": "/grammar/verbs/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi verbs grammar",
+        "marathi tenses"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi verbs grammar",
+      "secondaryKeywords": [
+        "marathi tenses"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "sentence-structure",
+      "url": "/grammar/sentence-structure/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi sentence structure",
+        "marathi grammar"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi sentence structure",
+      "secondaryKeywords": [
+        "marathi grammar"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "questions",
+      "url": "/grammar/questions/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi question words",
+        "how to ask questions in marathi"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi question words",
+      "secondaryKeywords": [
+        "how to ask questions in marathi"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "postpositions",
+      "url": "/grammar/postpositions/",
+      "type": "grammar",
+      "primaryIntent": "grammar",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": null,
+      "topics": [
+        "marathi postpositions",
+        "location words in marathi"
+      ],
+      "level": null,
+      "primaryKeyword": "marathi postpositions",
+      "secondaryKeywords": [
+        "location words in marathi"
+      ],
+      "curriculumUnits": [],
+      "relatedPages": [],
+      "status": "published",
+      "source": "learn.ts"
+    },
+    {
+      "slug": "01",
+      "url": "/lessons/01/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Marathi Fundamentals",
+      "topics": [
+        "Learn the alphabet and sounds",
+        "Basic greetings",
+        "First 50 words"
+      ],
+      "level": "beginner",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "01"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "02",
+      "url": "/lessons/02/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Survival Marathi",
+      "topics": [
+        "Survive in daily situations",
+        "Build basic greeting skills",
+        "Learn 50 high-frequency words"
+      ],
+      "level": "beginner",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "02"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "03",
+      "url": "/lessons/03/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Everyday Vocabulary",
+      "topics": [
+        "Learn 100+ high-frequency words",
+        "Family home food vocabulary",
+        "Use words in sentences"
+      ],
+      "level": "beginner",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "03"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "04",
+      "url": "/lessons/04/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Core Sentence Patterns",
+      "topics": [
+        "Understand sentence structure",
+        "Create sentences for common situations",
+        "Combine patterns with new words"
+      ],
+      "level": "beginner",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "04"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "05",
+      "url": "/lessons/05/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Pronouns & People",
+      "topics": [
+        "Use pronouns correctly",
+        "Choose pronouns by context",
+        "Understand kinship"
+      ],
+      "level": "beginner",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "05"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "06",
+      "url": "/lessons/06/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Marathi Pronunciation",
+      "topics": [
+        "Recognize nasal retroflex sounds",
+        "Pronounce visarga anusvara",
+        "Identify nasal sounds"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "06"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "07",
+      "url": "/lessons/07/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Questions & Inquiry",
+      "topics": [
+        "Question words meaning & usage",
+        "Yes/No questions",
+        "WH-question formation"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "07"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "08",
+      "url": "/lessons/08/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Postpositions",
+      "topics": [
+        "Locative postpositions",
+        "Direction & distance",
+        "Usage in sentences"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "08"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "09",
+      "url": "/lessons/09/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Shopping & Market",
+      "topics": [
+        "Shopping vocabulary",
+        "Asking price",
+        "Measurement units"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "09"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "10",
+      "url": "/lessons/10/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Health & Body",
+      "topics": [
+        "Body parts",
+        "Describe symptoms",
+        "Talk to doctor"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "10"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "11",
+      "url": "/lessons/11/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Education & Work",
+      "topics": [
+        "Educational vocabulary",
+        "Job interview",
+        "Office conversation"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "11"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "12",
+      "url": "/lessons/12/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Technology & Digital",
+      "topics": [
+        "Technical vocabulary",
+        "Digital conversation",
+        "Social media language"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "12"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "13",
+      "url": "/lessons/13/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Festivals & Culture",
+      "topics": [
+        "Major festival names & meanings",
+        "Describe festival traditions",
+        "Festival conversation"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "13"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "14",
+      "url": "/lessons/14/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Nature & Travel",
+      "topics": [
+        "Geographical vocabulary",
+        "Describe travel",
+        "Nature conversation"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "14"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "15",
+      "url": "/lessons/15/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Travel Expanded",
+      "topics": [
+        "Transport vocabulary",
+        "Book tickets",
+        "Travel planning"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "15"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "16",
+      "url": "/lessons/16/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Time & Seasons",
+      "topics": [
+        "Tell time",
+        "Read calendar",
+        "Describe seasons"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "16"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "17",
+      "url": "/lessons/17/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Emotions & Feelings",
+      "topics": [
+        "Emotion vocabulary",
+        "Express feelings",
+        "Show empathy"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "17"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "18",
+      "url": "/lessons/18/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Hobbies & Leisure",
+      "topics": [
+        "Describe hobbies",
+        "Leisure conversation",
+        "Express skills"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "18"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "19",
+      "url": "/lessons/19/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Work & Career",
+      "topics": [
+        "Find job",
+        "Start business",
+        "Career planning"
+      ],
+      "level": "intermediate",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "19"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "20",
+      "url": "/lessons/20/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Review & Mastery",
+      "topics": [
+        "Review all units",
+        "Identify weak areas",
+        "Build confidence"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "20"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "21",
+      "url": "/lessons/21/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Advanced Grammar",
+      "topics": [
+        "Prefix-suffix",
+        "Compound analysis",
+        "Figure of speech"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "21"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "22",
+      "url": "/lessons/22/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Literature & Poetry",
+      "topics": [
+        "Saint literature intro",
+        "Modern poetry style",
+        "Literary vocabulary"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "22"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "23",
+      "url": "/lessons/23/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Business Marathi",
+      "topics": [
+        "Business vocabulary",
+        "Financial conversation",
+        "Read contracts"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "23"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "24",
+      "url": "/lessons/24/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Media & News",
+      "topics": [
+        "Read news",
+        "Media vocabulary",
+        "Social media language"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "24"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "25",
+      "url": "/lessons/25/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Advanced Conversation",
+      "topics": [
+        "Debate skills",
+        "Presentation style",
+        "Interview prep"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "25"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    },
+    {
+      "slug": "26",
+      "url": "/lessons/26/",
+      "type": "lesson",
+      "primaryIntent": "learn",
+      "languagePath": [
+        "hindi",
+        "english"
+      ],
+      "topic": "Final Assessment",
+      "topics": [
+        "Cumulative review all units",
+        "Take mock exam",
+        "Earn certificate"
+      ],
+      "level": "advanced",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "curriculumUnits": [
+        "26"
+      ],
+      "relatedPages": [],
+      "status": "published",
+      "source": "units.json"
+    }
+  ]
+}

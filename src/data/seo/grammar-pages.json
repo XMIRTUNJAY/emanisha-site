@@ -1,0 +1,496 @@
+[
+  {
+    "slug": "negation",
+    "title": "Marathi Negative Sentences: नाही, नको & Don't",
+    "description": "How to say no, not and don't in Marathi — the आहे→नाही flip and नको for “don't want”, with curriculum examples and Hindi comparison.",
+    "h1": "Marathi Negative Sentences (नकार कसा करायचा)",
+    "searchIntent": "grammar",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "negation", "sentences"],
+    "primaryKeyword": "marathi negative sentences",
+    "secondaryKeywords": ["how to say no in marathi", "nahi nako in marathi", "marathi negation grammar"],
+    "intro": [
+      "Marathi negation has three everyday tools: नाही (is not / no — the opposite of आहे), नको (don't want), and नका (don't — the negative command). The grammar notes below come straight from Unit 02 of the Bol Marathi curriculum, where असणे (to be) is taught first positive, then negative.",
+      "Hindi speakers: the skeleton is familiar — आहे flips to नाही the way है flips to नहीं. The Marathi-specific parts are नको (want-negation is its own word, not नाही पाहिजे) and word-final placement in commands."
+    ],
+    "tip": "Learn the pair together: पाहिजे (need/want) ↔ नको (don't want). They are used hundreds of times a day.",
+    "grammarPicks": [{ "unit": "02", "lessons": [1, 2] }],
+    "units": ["02"],
+    "sections": [
+      {
+        "heading": "नाही — the आहे flip",
+        "paragraphs": [
+          "Positive: मी तयार आहे (I am ready). Negative: मी तयार नाही. The verb-be negates in place; nothing else in the sentence moves. Unit 06 even drills the question form: कळतंय का? — नाही, कळत नाही (Understood? — No, didn’t understand).",
+          "This is the single highest-frequency transformation in spoken Marathi. Get आहे ↔ नाही automatic and half of survival Marathi opens up."
+        ]
+      },
+      {
+        "heading": "नको — don't want is one word",
+        "paragraphs": [
+          "Hindi splits it: नहीं चाहिए. Marathi fuses it: नको. The real Unit 02 sentence मला चहा नको, पाणी द्या (no tea, give water) shows the pair in action: पाहिजे for “need”, नको for “don't want”. Saying मला चहा नाही पाहिजे is understandable but not what people say.",
+          "For telling someone not to do something, the negative imperative is नका: that form appears in Unit 02’s imperative lessons alongside polite requests."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "मला चहा नाही पाहिजे for “I don't want tea”", "right": "मला चहा नको", "why": "नको is its own word — it is not assembled from नाही + पाहिजे." },
+      { "wrong": "Moving नाही to the front like English “not”", "right": "Keep नाही where आहे stood: मी तयार नाही", "why": "Marathi negates the verb in place; the sentence order stays verb-final." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "“I am not ready” in Marathi?", "options": ["मी तयार आहे", "मी तयार नाही", "मला तयार नको", "मी नाही तयार"], "answer": 1, "explanation": "आहे flips to नाही in place." },
+        { "question": "Which word means “don't want”?", "options": ["पाहिजे", "नका", "नको", "नाही"], "answer": 2, "explanation": "नको = don't want; नका = don't (command); नाही = is not." }
+      ],
+      "translate": [
+        { "source": "मुझे चाय नहीं चाहिए, पानी दीजिए।", "sourceLang": "hi", "answer": "मला चहा नको, पाणी द्या.", "note": "The real Unit 02 sentence — नको carries the whole negation." }
+      ]
+    },
+    "relatedPages": ["/grammar/questions/", "/grammar/sentence-structure/", "/lessons/02/"],
+    "faq": [
+      { "question": "How do you say “no” in Marathi?", "answer": "नाही (nāhī). To negate a sentence, flip आहे to नाही: मी तयार आहे → मी तयार नाही." },
+      { "question": "What is the difference between नको and नाही?", "answer": "नाही negates “is” (आहे → नाही). नको means “don't want” (पाहिजे → नको). And नका means “don't” in commands." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "commands-polite",
+    "title": "Marathi Commands & Polite Requests: या, जा, द्या",
+    "description": "Marathi imperatives and polite requests — या, द्या, बसा, कृपया — with curriculum examples, Hindi comparison and cultural etiquette notes.",
+    "h1": "Marathi Commands, Requests & Polite Speech",
+    "searchIntent": "grammar",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "politeness", "conversation"],
+    "primaryKeyword": "marathi imperative",
+    "secondaryKeywords": ["polite marathi phrases", "marathi commands", "please in marathi kripaya"],
+    "intro": [
+      "Marathi commands are short and verb-first-feeling: या (come), जा (go), खा (eat), द्या (give). Add कृपया (please) or use the polite request forms and blunt commands become courteous ones. The notes below are the verified Unit 02 imperative and polite-request lessons, plus Unit 13's cultural-etiquette note.",
+      "Hindi speakers: the roots look familiar (आइए/जाइए/खाइए → या/जा/खा), but Marathi polite forms are terser. The tune of politeness comes from कृपया placement and the honorific तुम्ही rather than long verb endings."
+    ],
+    "tip": "Default to कृपया with strangers and elders; bare imperatives are for friends, children and urgency.",
+    "grammarPicks": [{ "unit": "02", "lessons": [5, 6] }, { "unit": "13", "lessons": [6] }],
+    "units": ["02", "13"],
+    "sections": [
+      {
+        "heading": "From blunt to polite",
+        "paragraphs": [
+          "या! (come!) works in an emergency; कृपया इथे या (please come here) works with a stranger — the real Unit 02 sentence. बसा (sit) becomes respectful as राव, कसे आहात? कृपया बस्या from Unit 05's honorific lesson.",
+          "Festival and home etiquette (Unit 13) layers on top: greetings, taking blessings, and the softeners that keep commands sounding like invitations."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using bare imperatives with elders", "right": "Add कृपया or the honorific tone: कृपया बसा", "why": "Marathi marks respect through कृपया, तुम्ही and honorific address rather than Hindi-style -इए endings alone." },
+      { "wrong": "Negative command with नाही", "right": "Use नका: इथे जाऊ नका (don't go here)", "why": "नाही negates statements; नका negates commands." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "Which word turns a blunt command into a polite request?", "options": ["नको", "कृपया", "नाही", "का"], "answer": 1, "explanation": "कृपया = please — बिल द्या, कृपया." }
+      ],
+      "fill": [
+        { "sentence": "कृपया इथे ___. (Please come here.)", "answer": "या", "hint": "The Unit 02 sentence — imperative of येणे." }
+      ],
+      "translate": [
+        { "source": "Give the bill, please.", "answer": "बिल द्या, कृपया.", "note": "From Unit 09 — command + कृपया, polite anywhere." }
+      ]
+    },
+    "relatedPages": ["/phrases/greetings/", "/blog/polite-marathi/", "/lessons/02/"],
+    "faq": [
+      { "question": "How do you say “please” in Marathi?", "answer": "कृपया (kr̥payā) — same word as Hindi. Place it before or after the command: कृपया इथे या / बिल द्या, कृपया." },
+      { "question": "How do Marathi imperatives differ from Hindi?", "answer": "Roots overlap (या/जा/खा), but Marathi polite requests are shorter; respect is carried by कृपया and the तुम्ही form instead of long -इए endings." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "possessives",
+    "title": "Marathi Possessives: माझा, माझी, माझं Explained",
+    "description": "My, your, his in Marathi: माझा/माझी/माझं agree with the owned noun's gender — with curriculum examples and Hindi comparison.",
+    "h1": "Marathi Possessive Pronouns (माझा, माझी, माझं)",
+    "searchIntent": "grammar",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "pronouns", "gender"],
+    "primaryKeyword": "marathi possessive pronouns",
+    "secondaryKeywords": ["my in marathi", "maza majhi mazha marathi", "marathi gender agreement"],
+    "intro": [
+      "Marathi has three genders — masculine, feminine and neuter — and possessives agree with the thing owned, not the owner: माझा भाऊ (my brother), माझी बहीण (my sister), माझं पुस्तक (my book). The notes below come from Unit 02's possession lesson and Unit 03's adjective-agreement lesson.",
+      "Hindi speakers already know agreement (मेरा/मेरी); the new work is the third gender. नाव, पुस्तक, कुटुंब, पाणी are all neuter and take माझं."
+    ],
+    "tip": "Learn every new noun together with its possessive: माझं पुस्तक, माझी बहीण — gender comes free that way.",
+    "grammarPicks": [{ "unit": "02", "lessons": [3] }, { "unit": "03", "lessons": [6] }],
+    "units": ["02", "03"],
+    "sections": [
+      {
+        "heading": "The three-way split",
+        "paragraphs": [
+          "माझा for masculine nouns, माझी for feminine, माझं for neuter. The curriculum sentences make it concrete: हे माझं पुस्तक आहे (this is my book — neuter), ही माझी बहीण आहे (this is my sister — feminine), माझं कुटुंब मोठं आहे (my family is big — neuter again).",
+          "Unit 03's adjective-agreement note extends the same logic to describing words — once possessives agree, adjectives follow the same three genders."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "माझा नाव for “my name”", "right": "माझं नाव — नाव is neuter", "why": "Hindi मेरा नाम misleads: Marathi नाव takes the neuter possessive." },
+      { "wrong": "Agreement with the owner instead of the noun", "right": "A woman says माझा भाऊ too — the brother is masculine", "why": "The possessive matches the owned thing's gender, not the speaker's — same logic as Hindi, one more gender." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "“My book” in Marathi?", "options": ["माझा पुस्तक", "माझी पुस्तक", "माझं पुस्तक", "माझे पुस्तक"], "answer": 2, "explanation": "पुस्तक is neuter → माझं." },
+        { "question": "Which is correct for “my sister”?", "options": ["माझा बहीण", "माझी बहीण", "माझं बहीण", "माझे बहीण"], "answer": 1, "explanation": "बहीण is feminine → माझी." }
+      ],
+      "fill": [
+        { "sentence": "हे ___ पुस्तक आहे. (This is MY book.)", "answer": "माझं", "hint": "From Unit 02 — book is neuter." }
+      ],
+      "translate": [
+        { "source": "My family is big.", "answer": "माझं कुटुंब मोठं आहे.", "note": "From Unit 03 — कुटुंब is neuter." }
+      ]
+    },
+    "relatedPages": ["/grammar/pronouns/", "/vocabulary/family/", "/lessons/02/"],
+    "faq": [
+      { "question": "How many genders does Marathi have?", "answer": "Three: masculine, feminine and neuter — and possessives (माझा/माझी/माझं) agree with the gender of the thing owned." },
+      { "question": "Is माझं for plural?", "answer": "No — माझं is neuter singular. Plural possessives (माझे/माझ्या/माझीं) are covered inside Units 02–03 along with the agreement rules." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "ability-obligation",
+    "title": "Marathi Ability & Obligation: Can, Must, Should",
+    "description": "Marathi can must should — ability and obligation (शकतो, पाहिजे, गरज आहे) with Unit 04 curriculum examples and Hindi comparison.",
+    "h1": "Marathi Ability & Obligation (शक्यता आणि कर्तव्य)",
+    "searchIntent": "grammar",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "modals", "conversation"],
+    "primaryKeyword": "marathi can must should",
+    "secondaryKeywords": ["marathi ability", "marathi obligation", "must in marathi", "should in marathi"],
+    "intro": [
+      "Three modal patterns from Unit 04 (Lessons 5-6) mapped English to Marathi: ability (शकतो), obligation (पाहिजे/गरज आहे), and recommendation (करावं). Each maps the English modal to the Marathi construction with the grammar note.",
+      "English can/must/should each split into distinct Marathi forms: शकतो (can/able to), पाहिजे (must/need to), गरज आहे (necessary), करावं (should). The grammar is verb-root based, not auxiliary-based like English."
+    ],
+    "tip": "शकतो = can (ability), पाहिजे = must (need), करावं = should. Learn the verb-root pattern: करणे → करावं, येणे → यावं, जाणे → जावं.",
+    "grammarPicks": [{ "unit": "04", "lessons": [5, 6] }],
+    "units": ["04"],
+    "sections": [
+      {
+        "heading": "Can / able to — शकतो",
+        "paragraphs": [
+          "English \"I can swim\" → Marathi मी पवणे शकतो. The pattern: subject + verb-infinitive + शकतो (masc) / शकते (fem) / शकते (neut). The verb stays in infinitive; शकणे takes the agreement."
+        ]
+      },
+      {
+        "heading": "Must / have to — पाहिजे / गरज आहे",
+        "paragraphs": [
+          "English \"I must go\" → मी जावं पाहिजे (or मी जावं गरज आहे). The pattern: verb-root + व + पाहिजे (जावं, खावं, बोलावं). गरज आहे is slightly more formal; both mean obligation."
+        ]
+      },
+      {
+        "heading": "Should / ought to — करावं",
+        "paragraphs": [
+          "English \"You should study\" → तुम्ही अभ्यास करावं. The pattern: verb-root + व + करावं (करावं, जावं, खावं). This is the recommendation/advice form — softer than पाहिजे."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using कैन/काण्ट from English", "right": "शकतो / शकत नाही", "why": "English can/can't are auxiliaries; Marathi uses the verb शकणे with infinitive." },
+      { "wrong": "Saying मी जाऊ पाहिजे for must", "right": "मी जावं पाहिजे — root + व", "why": "The obligation form adds व to the root before पाहिजे: जा → जावं, खा → खावं, कर → करावं." },
+      { "wrong": "Using चहिए from Hindi", "right": "पाहिजे / गरज आहे — चहिए has no Marathi life", "why": "Hindi चाहिए maps to पाहिजे or गरज आहे; there is no direct cognate." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"I can speak Marathi\" in Marathi?", "options": ["मी मराठी बोलू शकतो", "मी मराठी बोलतो", "मला मराठी येते", "मी मराठी बोलावं"], "answer": 0, "explanation": "मी मराठी बोलू शकतो — infinitive + शकतो." },
+        { "question": "\"You must study\" in Marathi?", "options": ["तुम्ही अभ्यास करावं", "तुम्ही अभ्यास पाहिजे", "तुम्ही अभ्यास गरज आहे", "सब बरोबर"], "answer": 1, "explanation": "तुम्ही अभ्यास पाहिजे — obligation takes पाहिजे." },
+        { "question": "\"He should eat\" in Marathi?", "options": ["तो खावं करावं", "तो खावं पाहिजे", "तो खातो पाहिजे", "तो खावं शकतो"], "answer": 0, "explanation": "तो खावं करावं — should takes root+व+करावं." }
+      ],
+      "translate": [
+        { "source": "Can you help me?", "answer": "तुम्ही मला मदत करणे शकता का?", "note": "Ability question — Unit 04 pattern." },
+        { "source": "You must come tomorrow.", "answer": "तुम्ही उद्या यावं पाहिजे.", "note": "Obligation — root य् + व + पाहिजे = यावं." }
+      ]
+    },
+    "relatedPages": ["/grammar/commands-polite/", "/hindi-to-marathi/sentence-patterns/", "/lessons/04/"],
+    "faq": [
+      { "question": "How do you say \"can\" in Marathi?", "answer": "Use verb + शकतो (masc) / शकते (fem/neut): करणे → करू शकतो, येणे → येऊ शकते." },
+      { "question": "What is the difference between पाहिजे and करावं?", "answer": "पाहिजे = must/need (obligation). करावं = should/ought to (recommendation). पाहिजे is stronger." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "compound-verbs",
+    "title": "Marathi Compound Verbs: Root + Auxiliary Patterns",
+    "description": "Marathi compound verbs — give up, start doing, finish doing, try to — root + auxiliary patterns (देऊन द्या, सुरू करा, संपवा, प्रयत्न करा) from Unit 04.",
+    "h1": "Marathi Compound Verbs (संयुक्त क्रियापद)",
+    "searchIntent": "grammar",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "verbs", "conversation"],
+    "primaryKeyword": "marathi compound verbs",
+    "secondaryKeywords": ["marathi verb patterns", "give up in marathi", "start doing in marathi", "finish in marathi"],
+    "intro": [
+      "Marathi builds complex meanings by pairing a main verb with an auxiliary: देऊन द्या (give up/hand over), सुरू करा (start), संपवा (finish), प्रयत्न करा (try). Unit 04 (Lessons 3-4) teaches these as ready-to-use patterns — the main verb takes the -ऊन/-ून form, then the auxiliary carries the tense.",
+      "Hindi speakers recognize the logic (दे देना, शुरू करना, समाप्त करना) — the Marathi forms are देऊन द्या, सुरू करा, संपवा, प्रयत्न करा. The auxiliaries are द्या, करा, संपवा, प्रयत्न करा."
+    ],
+    "tip": "Verb + -ऊन/-ून + auxiliary: खाऊन द्या (eat up), सुरू करा (start), संपवा (finish), प्रयत्न करा (try). The -ऊन form is the Marathi conjunctive participle.",
+    "grammarPicks": [{ "unit": "04", "lessons": [3, 4] }],
+    "units": ["04"],
+    "sections": [
+      {
+        "heading": "The four everyday compounds",
+        "paragraphs": [
+          "1) देऊन द्या — give up / hand over / let go: मला कागद देऊन द्या (hand me the paper). 2) सुरू करा — start: सुरू करा वाचणे (start reading). 3) संपवा — finish: संपवा वाचणे (finish reading). 4) प्रयत्न करा — try: प्रयत्न करा वाचण्याचा (try reading)."
+        ]
+      },
+      {
+        "heading": "The -ऊन form — the connector",
+        "paragraphs": [
+          "The main verb takes -ऊन (करून, खाऊन, बोलून, वाचून) and the auxiliary carries the tense: खाऊन दिला (gave to eat / fed), सुरू केले (started), संपवले (finished), प्रयत्न केले (tried). The auxiliary (द्या, करा, संपवा, प्रयत्न करा) conjugates normally."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using bare verb + auxiliary", "right": "Main verb must take -ऊन: खाऊन द्या (not खा द्या)", "why": "The -ऊन form is the conjunctive participle — it connects the action to the auxiliary. Omitting it breaks the grammar." },
+      { "wrong": "Using खा द्या for \"feed\"", "right": "खाऊन द्या — feed = eat + give", "why": "The logic is action + transfer. खाऊन द्या = eat + give = feed someone. खा द्या is ungrammatical." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"Start reading\" in Marathi?", "options": ["वाचणे सुरू करा", "वाचून सुरू करा", "वाच सुरू करा", "वाचले सुरू करा"], "answer": 1, "explanation": "वाचून सुरू करा — verb + ऊन + सुरू करा." },
+        { "question": "\"Finish eating\" in Marathi?", "options": ["खाऊन संपवा", "खा संपवा", "खाले संपवा", "खाणे संपवा"], "answer": 0, "explanation": "खाऊन संपवा — खाऊन + संपवा." },
+        { "question": "\"Try to speak\" in Marathi?", "options": ["बोलून प्रयत्न करा", "बोल प्रयत्न करा", "बोले प्रयत्न करा", "प्रयत्न करा बोलणे"], "answer": 0, "explanation": "बोलून प्रयत्न करा — verb + ऊन + प्रयत्न करा." }
+      ],
+      "translate": [
+        { "source": "Give me the book.", "answer": "मला पुस्तक देऊन द्या.", "note": "Compound: देऊन + द्या = hand over." },
+        { "source": "Try to understand.", "answer": "समजून प्रयत्न करा.", "note": "समजून + प्रयत्न करा — Unit 04 pattern." }
+      ]
+    },
+    "relatedPages": ["/grammar/commands-polite/", "/vocabulary/verbs/", "/lessons/04/"],
+    "faq": [
+      { "question": "What is the -ऊन form in Marathi?", "answer": "The conjunctive participle — connects main verb to auxiliary: करून, खाऊन, बोलून, वाचून. It means \"having done X\" and attaches to auxiliaries like द्या, करा, संपवा." },
+      { "question": "How do you say \"start doing\" in Marathi?", "answer": "सुरू करा + verb-ऊन: वाचून सुरू करा (start reading), खाऊन सुरू करा (start eating)." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "counting-quantifiers",
+    "title": "Marathi Counting & Quantifiers: Numbers, Fractions",
+    "description": "Marathi counting, quantifiers and fractions — एक, दोन, तीन, पाव, आधा, दोन किलो — with Unit 03 curriculum examples and Hindi comparison.",
+    "h1": "Marathi Counting & Quantifiers (गणना आणि प्रमाण)",
+    "searchIntent": "grammar",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "numbers", "quantifiers", "daily-life"],
+    "primaryKeyword": "marathi counting quantifiers",
+    "secondaryKeywords": ["marathi numbers", "quantifiers in marathi", "fractions in marathi", "marathi counting words"],
+    "intro": [
+      "Marathi counting and quantifiers from Unit 03 (Lessons 4-5): cardinal numbers, fractions (पाव, आधा, दोन तिसरा), classifiers for people/things, and the agreement rules with nouns. The notes come from Unit 03's counting and quantifier lessons.",
+      "Hindi speakers: the numbers are nearly identical (एक, दोन, तीन, चार, पाच...). The new work is the fractions (पाव = 1/4, आधा = 1/2, सवा = 1.25, डेढ = 1.5) and the classifier agreement (दोन माणस = two people, दोन पुस्तके = two books)."
+    ],
+    "tip": "पाव = 1/4, आधा = 1/2, सवा = 1¼, डेढ = 1½ — these combine with numbers: सवा दोन = 2.25, डेढ तीन = 3.5. The pattern is the same as Hindi.",
+    "grammarPicks": [{ "unit": "03", "lessons": [4, 5] }],
+    "units": ["03"],
+    "sections": [
+      {
+        "heading": "Fractions — the daily-use ones",
+        "paragraphs": [
+          "पाव (1/4), आधा (1/2), सवा (1¼), डेढ (1½). They combine with whole numbers: सवा दोन (2.25), डेढ तीन (3.5), पाव चार (3.75). The pattern matches Hindi exactly — पाव, आधा, सवा, डेढ."
+        ]
+      },
+      {
+        "heading": "Classifiers — people vs things",
+        "paragraphs": [
+          "दोन माणस (two people — human classifier), दोन पुस्तके (two books — neuter plural), तीन कुटुंब (three families — neuter). The classifier agreement follows the noun gender, not the number itself."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using एक for all \"one\"", "right": "एक (masc), एक (fem — same form), एक (neut — same form) — form is same, agreement shows on adjective/noun", "why": "एक is invariant; the gender shows on what follows: एक मोठा घर, एक मोठी बहीण, एक मोठं पुस्तक." },
+      { "wrong": "Saying दोन आदमी for two men", "right": "दोन माणस — माणस is the human classifier", "why": "आदमी is Hindi; माणस is the Marathi human classifier used with numbers." },
+      { "wrong": "Writing सवा दोन for 2.25", "right": "सवा दोन — correct; but सवा दोन is 2.25, सवा तीन is 3.25", "why": "सवा + number = number + 1/4. सवा दोन = 2 + 0.25 = 2.25. The pattern is consistent." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "Two and a half in Marathi?", "options": ["दोन आधा", "डेढ दोन", "डेढ", "सवा दोन"], "answer": 2, "explanation": "डेढ = 1.5, but for 2.5 the pattern is सवा दोन? Wait — 2.5 = ढाई (Hindi) / अढाई (Marathi). The course teaches सवा/डेढ/पाव/आधा for fractions with whole numbers." },
+        { "question": "Quarter kilo in Marathi?", "options": ["पाव किलो", "आधा किलो", "सवा किलो", "डेढ किलो"], "answer": 0, "explanation": "पाव = 1/4, आधा = 1/2, सवा = 1.25, डेढ = 1.5." },
+        { "question": "Two people in Marathi?", "options": ["दोन आदमी", "दोन माणस", "दोन लोक", "दोन जन"], "answer": 1, "explanation": "दोन माणस — माणस is the human classifier." }
+      ],
+      "translate": [
+        { "source": "Two and a half kilos.", "answer": "अढाई किलो.", "note": "2.5 = अढाई (Marathi) / ढाई (Hindi)." },
+        { "source": "Three books.", "answer": "तीन पुस्तके.", "note": "पुस्तक neuter → पुस्तके plural." }
+      ]
+    },
+    "relatedPages": ["/marathi-numbers/", "/vocabulary/numbers-time/", "/lessons/03/"],
+    "faq": [
+      { "question": "What are the main Marathi fractions?", "answer": "पाव (1/4), आधा (1/2), सवा (1.25), डेढ (1.5) — they combine with whole numbers: सवा दोन (2.25), डेढ तीन (3.5)." },
+      { "question": "How do you say \"two people\" in Marathi?", "answer": "दोन माणस — माणस is the human classifier used with numbers instead of आदमी." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "passive-causative",
+    "title": "Marathi Passive & Causative: केला जाते, खववते",
+    "description": "Marathi passive and causative constructions — passive (केला जाते, खाल्ले जाते), causative (खववते, बोलवते) — from Unit 21 advanced grammar.",
+    "h1": "Marathi Passive & Causative (कर्मणी आणि प्रेरणार्थ)",
+    "searchIntent": "grammar",
+    "level": "advanced",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "passive", "causative", "advanced"],
+    "primaryKeyword": "marathi passive causative",
+    "secondaryKeywords": ["passive in marathi", "causative in marathi", "marathi passive voice", "marathi causative verbs"],
+    "intro": [
+      "Passive and causative from Unit 21 (Lessons 5-6): passive voice (केला जाते — is done, खाल्ले जाते — is eaten) and causative (खववते — makes eat, बोलवते — makes speak). Each construction maps the Hindi pattern to the Marathi morphology with the grammar shift.",
+      "Passive: past participle + याचे + जाते (केला जाते, खाल्ले जाते, लिहिले जाते). Causative: verb-root + व/वव + ते (खववते = makes eat, बोलवते = makes speak, लिहवते = makes write). The relative-correlative pair is जो…तो (not जो…वह)."
+    ],
+    "tip": "Passive = past participle + याचे + जाते. Causative = root + व/वव + ते. Relative = जो…तो. Three patterns, infinite sentences.",
+    "grammarPicks": [{ "unit": "21", "lessons": [5, 6] }],
+    "units": ["21"],
+    "sections": [
+      {
+        "heading": "Passive — the याचे+जाते frame",
+        "paragraphs": [
+          "Hindi किया जाता है → Marathi केला जाते. The pattern: past participle (केला, खाल्ले, केले, लिहिले) + याचे + जाते. The agent (by whom) uses कडून: मी कडून केला जाते (done by me). The passive verb agrees with the object (केला जाते — masc, केली जाते — fem, केले जाते — neut)."
+        ]
+      },
+      {
+        "heading": "Causative — the व/वव marker",
+        "paragraphs": [
+          "Hindi करवाता है → Marathi करवते. खववते (makes eat = खा + वव + ते), बोलवते (makes speak = बोल + व + ते), लिहवते (makes write = लिही + व + ते), पडवते (makes fall/read). The causative marker व/वव attaches to the verb root before the tense ending. Some verbs are inherently causative (बोलवणे = to make speak); adding another व creates double causative — ungrammatical."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using किया जाता है structure directly", "right": "केला जाते — past participle + याचे + जाते", "why": "Marathi passive is not a word-for-word translation of Hindi passive; the morphology is different." },
+      { "wrong": "जो…वह for relative clauses", "right": "जो…तो — the correlative is तो, not वह", "why": "Marathi's relative-correlative pair is जो…तो. वह never appears as the correlate." },
+      { "wrong": "Adding causative to already-causative verbs", "right": "Check if the verb is already causative (बोलवणे = to make speak); double causative is ungrammatical", "why": "Some verbs are inherently causative; adding another व creates nonsense." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "Passive of \"to do\" in Marathi?", "options": ["करा जाते", "केला जाते", "करणे जाते", "करते जाते"], "answer": 1, "explanation": "केला जाते — past participle केला + याचे + जाते." },
+        { "question": "Causative of \"to eat\" (खाणे)?", "options": ["खववते", "खावते", "खवते", "खवावते"], "answer": 0, "explanation": "खववते — root खा + वव + ते = makes eat." },
+        { "question": "Relative-correlative pair in Marathi?", "options": ["जो…वह", "जो…तो", "जे…ते", "जे…वह"], "answer": 1, "explanation": "जो…तो — जो introduces, तो correlates." }
+      ],
+      "fill": [
+        { "sentence": "काम ___ गेला. (The work got done.)", "answer": "केला जाते", "hint": "Passive frame from Unit 21." }
+      ]
+    },
+    "relatedPages": ["/grammar/ability-obligation/", "/hindi-to-marathi/advanced-structures/", "/lessons/21/"],
+    "faq": [
+      { "question": "How do you form the passive in Marathi?", "answer": "Past participle + याचे + जाते — e.g., केला जाते (is done), खाल्ले जाते (is eaten), लिहिले जाते (is written)." },
+      { "question": "What is the causative of \"to speak\" (बोलणे)?", "answer": "बोलवते — root बोल + व + ते = makes speak." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "frequency-adverbs",
+    "title": "Marathi Frequency Adverbs: Always, Never, Sometimes, Daily",
+    "description": "Marathi frequency adverbs — नेहमी (always), कधीच (never), कधीकधी (sometimes), रोज (daily) — with Unit 18 curriculum examples and sentence position rules.",
+    "h1": "Marathi Frequency Adverbs (काळजीविशेषण)",
+    "searchIntent": "grammar",
+    "level": "intermediate",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "adverbs", "conversation"],
+    "primaryKeyword": "marathi frequency adverbs",
+    "secondaryKeywords": ["always never in marathi", "daily in marathi", "sometimes in marathi", "marathi adverbs of frequency"],
+    "intro": [
+      "Frequency adverbs from Unit 18 (Lesson 5) and the Adverbs vocabulary category (30 words): नेहमी (always), कधीच (never), कधीकधी (sometimes), रोज (daily), लगेच (immediately), हळूहळू (slowly), पुन्हा (again), अजून (still/yet). Each shows the Marathi, English, Hindi, and the sentence-position rule.",
+      "The position rule is absolute: frequency adverbs sit immediately before the verb. मी रोज क्रिकेट खेळतो (I play cricket daily) — never मी क्रिकेट खेळतो रोज. The Adverbs vocabulary category (30 words) includes मुद्दाम (deliberately), चुकून (by mistake), एकत्र (together), एकटा (alone) and directional adverbs (बाहेरून, आतून, वरून, खालून, समोरून)."
+    ],
+    "tip": "Position rule: adverb immediately before verb. मी रोज खेळतो — never मी खेळतो रोज. कधीच (never) = कधी (when) + च (negating particle).",
+    "grammarPicks": [{ "unit": "18", "lessons": [5] }],
+    "units": ["18"],
+    "sections": [
+      {
+        "heading": "The frequency ladder",
+        "paragraphs": [
+          "नेहमी (always) → रोज (daily) → कधीकधी (sometimes) → कधीच (never). The च particle negates: कधी (when) → कधीच (never). नेहमी and कधीच are opposites; रोज and कधीकधी fill the middle."
+        ]
+      },
+      {
+        "heading": "Position rule — absolute",
+        "paragraphs": [
+          "Adverb immediately before the verb: मी रोज क्रिकेट खेळतो, मी कधीकधी चित्रकला करतो. Never at the end. This rule holds for all 30 adverbs in the category — directionals too: बाहेरून आला (came from outside)."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Placing adverb after the verb", "right": "Adverb before verb: मी रोज खेळतो (not मी खेळतो रोज)", "why": "Unit 18 pattern — adverbs pre-verb, consistently. This is the single most common word-order error." },
+      { "wrong": "Using कधी for never", "right": "कधी = when; कधीच = never", "why": "The च particle negates — a tiny suffix, a total meaning flip." },
+      { "wrong": "Confusing अजून (still) and अजूनही (yet/still emphatic)", "right": "अजून = still; अजूनही = yet/still (emphatic)", "why": "The emphatic ही adds the \"up to now\" nuance." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "Always in Marathi?", "options": ["नेहमी", "कधीच", "कधीकधी", "रोज"], "answer": 0, "explanation": "नेहमी (nehmi) = always." },
+        { "question": "Never in Marathi?", "options": ["नेहमी", "कधीच", "कधीकधी", "रोज"], "answer": 1, "explanation": "कधीच (kadhīc) = never (कधी + च)." },
+        { "question": "Which means \"sometimes\"?", "options": ["नेहमी", "कधीच", "कधीकधी", "रोज"], "answer": 2, "explanation": "कधीकधी (kadhīkadhī) = sometimes." }
+      ],
+      "translate": [
+        { "source": "I play cricket daily.", "answer": "मी रोज क्रिकेट खेळतो.", "note": "Unit 18 sentence — adverb रोज before verb खेळतो." }
+      ]
+    },
+    "relatedPages": ["/vocabulary/adverbs/", "/hindi-to-marathi/time-seasons/", "/blog/i-like-in-marathi/", "/lessons/18/"],
+    "faq": [
+      { "question": "Where do frequency adverbs go in a Marathi sentence?", "answer": "Immediately before the verb — मी रोज खेळतो, मी कधीकधी खेळतो. Never at the end." },
+      { "question": "How do you say \"never\" in Marathi?", "answer": "कधीच — from कधी (when) + च (negating particle). The opposite of नेहमी (always)." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "demonstratives",
+    "title": "Marathi Demonstratives: This, That, Here, There",
+    "description": "Marathi demonstratives — this/that (हा/ही/हे, तो/ती/ते), here/there (इथे/तिथे) — with Unit 05 examples and gender agreement rules.",
+    "h1": "Marathi Demonstratives (संकेतवाचक सर्वनाम)",
+    "searchIntent": "grammar",
+    "level": "beginner",
+    "languagePaths": ["hindi", "english"],
+    "topics": ["grammar", "pronouns", "demonstratives"],
+    "primaryKeyword": "marathi demonstratives",
+    "secondaryKeywords": ["this that in marathi", "here there in marathi", "ha hi he marathi", "ta ti te marathi"],
+    "intro": [
+      "Demonstratives from Unit 05 (Lesson 2): this/that (हा/ही/हे, तो/ती/ते), here/there (इथे/तिथे), like-this/like-that (असा/तसा). Each set agrees in gender — masculine, feminine, neuter — matching the noun they point to.",
+      "Hindi speakers: the near/far split (यह/वह, यहाँ/वहाँ) maps directly. The new work is the neuter gender (हे/ते) and the consistent gender agreement across all sets (हा/ही/हे, तो/ती/ते, इथे/तिथे, असा/तसा)."
+    ],
+    "tip": "Gender follows the noun: हा पेन (masc), ही बहीण (fem), हे पाणी (neut). The same split applies to तो/ती/ते, इथे/तिथे, असा/तसा.",
+    "grammarPicks": [{ "unit": "05", "lessons": [2] }],
+    "units": ["05"],
+    "sections": [
+      {
+        "heading": "The three-gender grid",
+        "paragraphs": [
+          "Near (this/here/like-this): हा (masc), ही (fem), हे (neut), इथे (here), असा (like-this). Far (that/there/like-that): तो (masc), ती (fem), ते (neut), तिथे (there), तसा (like-that). The gender is always marked on the demonstrative, never on the noun alone."
+        ]
+      },
+      {
+        "heading": "Agreement chain — possessives, adjectives, demonstratives",
+        "paragraphs": [
+          "Once you know हा/ही/हे for a noun, the same gender carries to possessives (माझा/माझी/माझं), adjectives (मोठा/मोठी/मोठे), and relatives (जो/जी/जे). The grid is one system, not three separate memorizations."
+        ]
+      }
+    ],
+    "mistakes": [
+      { "wrong": "Using हा for a feminine noun", "right": "ही for feminine: ही बहीण, ही खुर्ची, ही पुस्तक", "why": "The demonstrative must match the noun's gender. हा बहीण is ungrammatical — the sister is feminine, so ही." },
+      { "wrong": "Assuming इथे/तिथे have gender", "right": "इथे/तिथे are locative — no gender, just near/far", "why": "इथे = here (near speaker), तिथे = there (away). They don't agree with a noun; they point to location." },
+      { "wrong": "Using असा for a masculine noun", "right": "असा matches the noun: असा पेन (masc), अशी बहीण (fem), असे पाणी (neut)", "why": "Like-this/like-that carries gender too — the same split as हा/ही/हे." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "\"This book\" (neuter) in Marathi?", "options": ["हा पुस्तक", "ही पुस्तक", "हे पुस्तक", "हो पुस्तक"], "answer": 2, "explanation": "पुस्तक is neuter → हे पुस्तक." },
+        { "question": "\"That\" (feminine) in Marathi?", "options": ["तो", "ती", "ते", "त"], "answer": 1, "explanation": "ती = that (feminine)." },
+        { "question": "\"Here\" in Marathi?", "options": ["इथे", "तिथे", "इथ", "इकडे"], "answer": 0, "explanation": "इथे = here (near speaker). तिथे = there." }
+      ],
+      "fill": [
+        { "sentence": "___ पाणी शीत आहे. (This water is cold.)", "answer": "हे", "hint": "पाणी is neuter → हे." }
+      ]
+    },
+    "relatedPages": ["/grammar/pronouns/", "/grammar/possessives/", "/hindi-to-marathi/pronouns-people/", "/lessons/05/"],
+    "faq": [
+      { "question": "How many genders do Marathi demonstratives have?", "answer": "Three — masculine (हा/तो), feminine (ही/ती), neuter (हे/ते). The demonstrative always matches the noun's gender." },
+      { "question": "What is the difference between इथे and तिथे?", "answer": "इथे = here (near the speaker), तिथे = there (away from the speaker). They are locative and do not carry gender." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  }
+]

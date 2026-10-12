@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import Search from '../../components/Search.astro';
+import { siteUrl } from '../../lib/site';
+---
+
+<Base title="Search | Bol Marathi" description="Search Marathi vocabulary, phrases, lessons, and grammar." crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Search', href: siteUrl('/search/') }]}>
+	<div class="prose">
+		<p class="kicker">Search</p>
+		<h1>Search Bol Marathi</h1>
+		<p class="lede">Find words, phrases, lessons, and grammar topics instantly. Type at least 2 characters to search.</p>
+		<Search />
+	</div>
+</Base>
+
+<style>
+	main { padding-top: 4rem; }
+</style>

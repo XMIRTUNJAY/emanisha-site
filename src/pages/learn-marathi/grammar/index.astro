@@ -1,0 +1,56 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import SeoCards from '../../../components/SeoCards.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { grammarTopics } from '../../../lib/learn';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+---
+
+<Learn
+	title="Marathi Grammar"
+	description="Marathi grammar made practical: pronouns, verbs and sentence structure — explained with Hindi comparison and real examples."
+	kicker="Marathi Grammar"
+	crumbs={[{ label: 'Grammar', href: siteUrl('/grammar/') }]}
+	canonicalPath="/grammar/"
+	about="marathi grammar"
+>
+	<p>Patterns, not rules. Each topic uses real lesson notes from the Bol Marathi curriculum.</p>
+
+	<ul class="card-grid">
+		{grammarTopics.map((g) => (
+			<li>
+				<a class="card" href={siteUrl(`/grammar/${g.slug}/`)}>
+					<img src={pageArt(`grammar/${g.slug}`)} alt="" loading="lazy" width="1200" height="630" />
+					<h3>{g.title}</h3>
+					<p>{g.description}</p>
+				</a>
+			</li>
+		))}
+		<li>
+			<a class="card" href={siteUrl('/marathi-pronunciation/')}>
+				<img src={pageArt('marathi-pronunciation')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Pronunciation guide</h3>
+				<p>Retroflex, nasals, visarga and vowel length from Unit 06.</p>
+			</a>
+		</li>
+		<li>
+			<a class="card" href={siteUrl('/marathi-alphabet/')}>
+				<img src={pageArt('marathi-alphabet')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Alphabet & barakhadi</h3>
+				<p>Vowels, consonants and the barakhadi pattern.</p>
+			</a>
+		</li>
+		<li>
+			<a class="card" href={siteUrl('/marathi-vs-hindi/')}>
+				<img src={pageArt('marathi-vs-hindi')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Marathi vs Hindi</h3>
+				<p>काल/उद्या split and the neuter gender.</p>
+			</a>
+		</li>
+	</ul>
+
+	<SeoCards family="grammar" heading="More grammar topics" />
+
+	<AppCTA variant="general" context="grammar-index" />
+</Learn>

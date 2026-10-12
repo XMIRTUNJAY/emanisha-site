@@ -1,0 +1,100 @@
+[
+  {
+    "slug": "emergency-phrases",
+    "title": "English to Marathi: Emergency, Doctor & Help Phrases",
+    "description": "Emergency sentences -- call ambulance, describe symptoms, ask for help, find a hospital -- from Units 02, 10 mapped English to Marathi.",
+    "h1": "English \u2192 Marathi: Emergency & Help",
+    "searchIntent": "translate",
+    "level": "beginner",
+    "languagePaths": ["english"],
+    "topics": ["emergency", "health", "doctor", "survival"],
+    "primaryKeyword": "english to marathi emergency phrases",
+    "secondaryKeywords": ["emergency in marathi", "ambulance in marathi", "doctor marathi", "help me marathi"],
+    "intro": [
+      "Three critical emergency sentences from the Bol Marathi curriculum: calling an ambulance, describing pain to a doctor, and asking for help. Each maps the English to the Marathi with the exact words you need in a crisis.",
+      "The grammar is survival-focused: the dative pattern मला ... पाहिजे (I need...) and the imperative कॉल करा (call...). No complex structures -- just the three sentences that get you help."
+    ],
+    "tip": "आंबुलन्स कॉल करा, लवकर -- say it loud, say it fast. The verb कॉल करा attaches to any emergency service: पोलिस कॉल करा, फायर कॉल करा.",
+    "speakingUnits": ["02", "10"],
+    "units": ["02", "10"],
+    "sections": [
+      {
+        "heading": "The three survival sentences",
+        "paragraphs": [
+          "1) मला मदत पाहिजे -- I need help (the universal need frame). 2) डॉक्टर, माझं पोट दुखते -- Doctor, my stomach hurts (body part + दुखते). 3) आंबुलन्स कॉल करा, लवकर -- Call ambulance, quickly (imperative + urgency adverb)."
+        ]
+      },
+      {
+        "heading": "Extending the frames",
+        "paragraphs": [
+          "The body-part frame: माझं डोके दुखते (head), माझं पाठ दुखते (back), माझं पाय दुखते (leg). The need frame: मला पाणी पाहिजे, मला दवा पाहिजे, मला आंबुलन्स पाहिजे. The call frame: पोलिस कॉल करा, फायर कॉल करा, मदत कॉल करा."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Saying मदत करो (Hindi imperative)",
+        "right": "मदत करा / मला मदत पाहिजे",
+        "why": "Marathi imperative ends in -आ (करा), not -ओ (करो). The need frame मला मदत पाहिजे is more standard."
+      },
+      {
+        "wrong": "Using एम्बुलेंस (Hindi spelling)",
+        "right": "आंबुलन्स -- Marathi spelling",
+        "why": "The course uses आंबुलन्स in Unit 10. Hindi एम्बुलेंस differs in the first vowel."
+      },
+      {
+        "wrong": "Saying मेरा पेट दर्द कर रहा है (Hindi)",
+        "right": "माझं पोट दुखते -- body part as subject",
+        "why": "Marathi says the body part hurts (पोट दुखते), not that pain is happening in it. The verb दुखते agrees with the body part."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "\"I need help\" in Marathi?",
+          "options": ["मदत करा", "मला मदत पाहिजे", "मी मदत हवे", "माझी मदत आहे"],
+          "answer": 1,
+          "explanation": "मला मदत पाहिजे -- the standard need frame from Unit 02."
+        },
+        {
+          "question": "\"Call an ambulance\" in Marathi?",
+          "options": ["एम्बुलेंस कॉल करा", "आंबुलन्स कॉल करा", "आंबुलन्स बुलवा", "एम्बुलेंस बुलाओ"],
+          "answer": 1,
+          "explanation": "आंबुलन्स कॉल करा -- Unit 10 exact spelling."
+        },
+        {
+          "question": "\"Doctor, my head hurts\" in Marathi?",
+          "options": ["डॉक्टर, माझं डोके दुखते", "डॉक्टर, मेरा सिर दुखता है", "डॉक्टर, डोके दुखते माझे", "डॉक्टर, माझं डोके आहे"],
+          "answer": 0,
+          "explanation": "माझं डोके दुखते -- body part as subject, verb agrees (दुखते)."
+        }
+      ],
+      "translate": [
+        {
+          "source": "Help! Call an ambulance quickly.",
+          "answer": "मदत! आंबुलन्स कॉल करा, लवकर.",
+          "note": "Combines Unit 02 (help) + Unit 10 (ambulance + लवकर)."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/blog/at-the-doctor/",
+      "/hindi-to-marathi/health-body/",
+      "/vocabulary/health-symptoms/",
+      "/lessons/02/",
+      "/lessons/10/"
+    ],
+    "faq": [
+      {
+        "question": "What is the Marathi word for ambulance?",
+        "answer": "आंबुलन्स -- same word, Devanagari spelling used in Unit 10."
+      },
+      {
+        "question": "How do you say \"I am in pain\" in Marathi?",
+        "answer": "Use the body-part frame: माझं डोके दुखते (head), माझं पोट दुखते (stomach), माझं पाय दुखते (leg) -- the body part is the subject."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  }
+]

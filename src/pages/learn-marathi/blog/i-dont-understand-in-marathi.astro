@@ -1,0 +1,82 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const rescue = wordsByMarathi([
+	'मला समजलं नाही', 'पुन्हा सांगा', 'हळू बोला', 'याचा अर्थ काय',
+	'मराठीत कसं म्हणतात', 'पुन्हा', 'हळूहळू',
+]);
+---
+
+<Learn
+	title="“I Don’t Understand” in Marathi: 5 Rescue Lines"
+	description="मला समजलं नाही and the four rescue lines around it — say again, speak slowly, what does this mean, how do you say it in Marathi."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: "I don't understand in Marathi", href: siteUrl('/blog/i-dont-understand-in-marathi/') },
+	]}
+	canonicalPath="/blog/i-dont-understand-in-marathi/"
+	about="i dont understand in marathi; samjala nahi meaning"
+	meta={['5 rescue lines', '2 helper adverbs']}
+	faq={[
+		{
+			question: 'How do you say "I don\'t understand" in Marathi?',
+			answer: 'मला समजलं नाही — मला (to me) + समजलं (understood) + नाही (not). It is polite, complete, and native speakers respond to it by slowing down.',
+		},
+		{
+			question: 'How do you ask someone to repeat in Marathi?',
+			answer: 'पुन्हा सांगा — say (it) again. Pair it with हळू बोला (speak slowly) when the speed is the problem.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		<span class="mr" lang="mr">मला समजलं नाही</span> — I didn't
+		understand. Memorize this one line and every Marathi conversation
+		becomes safe: you always have a way out.
+	</p>
+
+	<h2>The five rescue lines</h2>
+	<p>
+		These are complete spoken lines (plus two helper adverbs,
+		<span class="mr" lang="mr">पुन्हा</span> "again" and
+		<span class="mr" lang="mr">हळूहळू</span> "slowly, gradually") — the
+		kit that keeps you inside a conversation instead of switching to
+		English or Hindi.
+	</p>
+	<VocabTable words={rescue} caption="Rescue lines" />
+
+	<h2>How a rescue actually goes</h2>
+	<p>
+		The lines chain naturally. Lost the sentence?
+		<span class="mr" lang="mr">मला समजलं नाही</span>. Want it repeated?
+		<span class="mr" lang="mr">पुन्हा सांगा</span>. Too fast?
+		<span class="mr" lang="mr">हळू बोला</span>. Stuck on one word?
+		<span class="mr" lang="mr">याचा अर्थ काय</span> (what does this
+		mean?). Need to produce a word yourself?
+		<span class="mr" lang="mr">मराठीत कसं म्हणतात?</span> — how do you
+		say it in Marathi?
+	</p>
+	<p>
+		The endings do the politeness work: the
+		<span class="mr" lang="mr">-आ</span> imperative
+		(<span class="mr" lang="mr">सांगा</span>,
+		<span class="mr" lang="mr">बोला</span>) is the respectful form, the
+		same register as saying <span class="mr" lang="mr">कृपया</span>.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-dont-understand" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi small talk guide', href: siteUrl('/blog/small-talk-intro/') },
+			{ label: 'Commands & politeness levels', href: siteUrl('/grammar/commands-polite/') },
+			{ label: 'Daily conversation phrases', href: siteUrl('/phrases/daily/') },
+		]}
+	/>
+</Learn>

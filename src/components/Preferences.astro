@@ -1,0 +1,292 @@
+---
+/**
+ * Preferences.astro
+ *
+ * Font size, line height, and reading mode preferences.
+ * Persists to localStorage and syncs across tabs.
+ */
+
+const DEFAULT_PREFS = {
+  fontSize: 'medium',     // 'small' | 'medium' | 'large' | 'xl'
+  lineHeight: 'normal',   // 'compact' | 'normal' | 'relaxed'
+  readingMode: false,     // boolean
+};
+
+const FONT_SIZES = {
+  small: '15px',
+  medium: '17px',
+  large: '19px',
+  xl: '21px',
+} as const;
+
+const LINE_HEIGHTS = {
+  compact: '1.5',
+  normal: '1.65',
+  relaxed: '1.85',
+} as const;
+---
+
+<div class="preferences-wrapper" data-prefs-root>
+  <button
+    type="button"
+    class="prefs-btn"
+    aria-label="Display preferences"
+    aria-expanded="false"
+    aria-controls="prefs-panel"
+    data-prefs-btn
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" fill="none" stroke="currentColor" stroke-width="2" />
+    </svg>
+  </button>
+
+  <div class="prefs-panel" id="prefs-panel" role="dialog" aria-label="Display preferences" hidden>
+    <div class="prefs-section">
+      <h3>Font size</h3>
+      <div class="prefs-options" role="radiogroup" aria-label="Font size">
+        <label class="pref-option">
+          <input type="radio" name="font-size" value="small" data-pref-font-size>
+          <span>A</span>
+          <span class="pref-label">Small</span>
+        </label>
+        <label class="pref-option active">
+          <input type="radio" name="font-size" value="medium" checked data-pref-font-size>
+          <span>A</span>
+          <span class="pref-label">Medium</span>
+        </label>
+        <label class="pref-option">
+          <input type="radio" name="font-size" value="large" data-pref-font-size>
+          <span>A</span>
+          <span class="pref-label">Large</span>
+        </label>
+        <label class="pref-option">
+          <input type="radio" name="font-size" value="xl" data-pref-font-size>
+          <span>A</span>
+          <span class="pref-label">XL</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="prefs-section">
+      <h3>Line spacing</h3>
+      <div class="prefs-options" role="radiogroup" aria-label="Line spacing">
+        <label class="pref-option">
+          <input type="radio" name="line-height" value="compact" data-pref-line-height>
+          <span class="pref-label">Compact</span>
+        </label>
+        <label class="pref-option active">
+          <input type="radio" name="line-height" value="normal" checked data-pref-line-height>
+          <span class="pref-label">Normal</span>
+        </label>
+        <label class="pref-option">
+          <input type="radio" name="line-height" value="relaxed" data-pref-line-height>
+          <span class="pref-label">Relaxed</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="prefs-section">
+      <h3>Reading mode</h3>
+      <label class="pref-toggle">
+        <input type="checkbox" data-pref-reading-mode>
+        <span class="toggle-slider"></span>
+        <span class="toggle-label">Focus reading (hides nav, wider text)</span>
+        <kbd class="toggle-hint">R</kbd>
+      </label>
+    </div>
+
+    <div class="prefs-footer">
+      <button type="button" class="prefs-reset" data-prefs-reset>Reset to defaults</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .preferences-wrapper {
+    position: relative;
+  }
+
+  .prefs-btn {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    color: rgb(var(--gray-dark));
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .prefs-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .prefs-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .prefs-panel {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    min-width: 280px;
+    max-width: 90vw;
+    background: var(--card);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 32px rgb(45 27 21 / 0.14);
+    padding: 1rem;
+    z-index: 100;
+    animation: prefs-slide-in 0.15s ease-out;
+  }
+
+  @keyframes prefs-slide-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .prefs-panel[hidden] { display: none; }
+
+  .prefs-section {
+    border-bottom: var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .prefs-section:last-of-type { border-bottom: none; margin-bottom: 0.5rem; }
+
+  .prefs-section h3 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(var(--gray));
+    margin: 0 0 0.75rem 0;
+  }
+
+  .prefs-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pref-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-full);
+    background: var(--card);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .pref-option:hover { border-color: var(--accent); }
+
+  .pref-option input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .pref-option input:checked + span + .pref-label,
+  .pref-option input:checked + span { color: var(--accent); }
+
+  .pref-option.active,
+  .pref-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-fixed);
+  }
+
+  .pref-option span:first-of-type {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: rgb(var(--black));
+  }
+
+  .pref-label { font-size: 0.85rem; color: rgb(var(--gray-dark)); }
+
+  .pref-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+  }
+
+  .pref-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 26px;
+    border-radius: var(--radius-full);
+    background: var(--container);
+    border: var(--border);
+    transition: all 0.15s ease;
+  }
+
+  .toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 4px rgb(45 27 21 / 0.15);
+    transition: transform 0.15s ease;
+  }
+
+  .pref-toggle input:checked + .toggle-slider {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .pref-toggle input:checked + .toggle-slider::after {
+    transform: translateX(18px);
+  }
+
+  .toggle-label { font-size: 0.9rem; color: rgb(var(--gray-dark)); }
+
+  .toggle-hint {
+    font-size: 0.65rem;
+    padding: 0.1em 0.4em;
+    background: var(--container);
+    border-radius: 4px;
+    color: rgb(var(--gray));
+  }
+
+  .prefs-footer { display: flex; justify-content: flex-end; margin-top: 0.5rem; }
+
+  .prefs-reset {
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(var(--gray));
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem 0;
+  }
+
+  .prefs-reset:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .prefs-panel {
+      right: -1rem;
+      min-width: calc(100vw - 2rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prefs-panel { animation: none; }
+    .pref-option, .toggle-slider, .toggle-slider::after { transition: none; }
+  }
+</style>
+
+<script type="module">
+	import './PreferencesClient.ts';
+</script>

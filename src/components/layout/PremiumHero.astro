@@ -1,0 +1,252 @@
+---
+// PremiumHero — hero section for the homepage and major landing pages.
+//
+// Two-column editorial layout: a copy column (kicker → title → subtitle → CTAs →
+// stats) and an optional visual column. The visual can be supplied either as an
+// `illustration` image OR via the `visual` named slot (used by the homepage to
+// show a live word-card demo instead of a picture).
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  kicker?: string;
+  primaryCTA?: {
+    label: string;
+    href: string;
+    variant?: 'primary' | 'ghost';
+  };
+  secondaryCTA?: {
+    label: string;
+    href: string;
+  };
+  illustration?: {
+    src: string;
+    alt: string;
+  };
+  stats?: Array<{
+    value: string;
+    label: string;
+  }>;
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  kicker,
+  primaryCTA,
+  secondaryCTA,
+  illustration,
+  stats,
+  class: className = '',
+} = Astro.props;
+
+const hasVisualSlot = Astro.slots.has('visual');
+---
+
+<header class={`premium-hero ${className}`}>
+  <div class="premium-hero__content">
+    {kicker && <p class="premium-hero__kicker kicker">{kicker}</p>}
+    <h1 class="premium-hero__title">{title}</h1>
+    {subtitle && <p class="premium-hero__subtitle">{subtitle}</p>}
+
+    {(primaryCTA || secondaryCTA) && (
+      <div class="premium-hero__actions">
+        {primaryCTA && (
+          <a
+            class={`premium-hero__btn premium-hero__btn--${primaryCTA.variant ?? 'primary'}`}
+            href={primaryCTA.href}
+          >
+            {primaryCTA.label}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        )}
+        {secondaryCTA && (
+          <a class="premium-hero__btn premium-hero__btn--ghost" href={secondaryCTA.href}>
+            {secondaryCTA.label}
+          </a>
+        )}
+      </div>
+    )}
+
+    {stats && stats.length > 0 && (
+      <ul class="premium-hero__stats" aria-label="Key facts">
+        {stats.map((stat) => (
+          <li class="premium-hero__stat">
+            <strong class="premium-hero__stat-value">{stat.value}</strong>
+            <span class="premium-hero__stat-label">{stat.label}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+
+  {(hasVisualSlot || illustration) && (
+    <div class="premium-hero__visual" transition:name="hero-visual">
+      {hasVisualSlot ? (
+        <slot name="visual" />
+      ) : (
+        <img src={illustration!.src} alt={illustration!.alt} loading="eager" width="400" height="400" />
+      )}
+    </div>
+  )}
+</header>
+
+<style>
+  .premium-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+    align-items: center;
+    padding: var(--space-8) 0 var(--space-7);
+  }
+
+  @media (min-width: 960px) {
+    .premium-hero {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--space-8);
+      padding: var(--space-8) 0;
+    }
+  }
+
+  .premium-hero__content {
+    max-width: 34rem;
+  }
+
+  .premium-hero__kicker {
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .premium-hero__title {
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    margin: 0 0 var(--space-4) 0;
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+
+  .premium-hero__subtitle {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0 0 var(--space-6) 0;
+    max-width: 32rem;
+    text-wrap: pretty;
+  }
+
+  .premium-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-7);
+  }
+
+  .premium-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    min-height: 54px;
+    padding: 0 var(--space-5);
+    font-size: var(--text-button);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius);
+    transition: background var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
+  }
+
+  .premium-hero__btn svg { transition: transform var(--duration-fast) var(--ease-out); }
+
+  .premium-hero__btn--primary {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    box-shadow: var(--shadow-primary);
+  }
+
+  .premium-hero__btn--primary:hover {
+    background: var(--color-primary-dark);
+    color: var(--color-text-on-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(142, 45, 18, 0.32);
+  }
+  .premium-hero__btn--primary:hover svg { transform: translateX(3px); }
+
+  .premium-hero__btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .premium-hero__btn--ghost:hover {
+    background: var(--color-surface);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+  }
+
+  .premium-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    list-style: none;
+    padding: var(--space-5) 0 0 0;
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .premium-hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+
+  .premium-hero__stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .premium-hero__stat-label {
+    font-size: var(--text-caption);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-text-muted);
+  }
+
+  .premium-hero__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .premium-hero__visual img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 959px) {
+    .premium-hero__title { font-size: clamp(2rem, 7vw, 2.75rem); }
+    .premium-hero__visual { order: 2; }
+  }
+
+  @media (max-width: 560px) {
+    .premium-hero__actions { flex-direction: column; align-items: stretch; }
+    .premium-hero__btn { width: 100%; }
+    .premium-hero__stats { gap: var(--space-5); }
+    .premium-hero__stat-value { font-size: 1.5rem; }
+  }
+</style>

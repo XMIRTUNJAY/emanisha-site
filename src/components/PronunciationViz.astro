@@ -1,0 +1,126 @@
+---
+interface Props {
+	waveform?: number[];
+	pitch?: number[];
+	audioSrc?: string;
+	/** Marathi text to speak via device TTS when no pre-generated audio exists. */
+	sayText?: string;
+	label?: string;
+}
+const { waveform = [], pitch = [], audioSrc, sayText, label = 'Pronunciation example' } = Astro.props;
+const waveJson = JSON.stringify(waveform);
+const pitchJson = JSON.stringify(pitch);
+---
+<div class="pronunciation-viz" data-audio={audioSrc} data-say={sayText} data-waveform={waveJson} data-pitch={pitchJson}>
+	<p class="viz-label">{label}</p>
+	<canvas class="waveform-canvas" aria-label="Waveform visualization"></canvas>
+	<canvas class="pitch-canvas" aria-label="Pitch contour"></canvas>
+	<div class="viz-controls">
+		<button class="btn viz-play" aria-label={`Play: ${label}`}>▶ Listen</button>
+		<input type="range" class="viz-speed" min="0.5" max="2" step="0.25" value="1" aria-label="Playback speed">
+	</div>
+</div>
+
+<style>
+	.pronunciation-viz { display: flex; flex-direction: column; gap: 0.75em; margin: 1.5em 0; padding: 1em; border: var(--border); border-radius: var(--radius); background: var(--card); }
+	.viz-label { margin: 0; font-size: 0.85rem; font-weight: 600; color: rgb(var(--gray-dark)); }
+	.waveform-canvas, .pitch-canvas { width: 100%; height: 80px; background: var(--container-low); border-radius: var(--radius); border: var(--border); }
+	.viz-controls { display: flex; align-items: center; gap: 1em; }
+	.viz-speed { flex: 1; max-width: 200px; }
+	.viz-play { min-height: 44px; }
+</style>
+
+<script>
+	(function () {
+		function initViz() {
+			document.querySelectorAll('.pronunciation-viz:not([data-viz-init])').forEach(function (viz) {
+				viz.setAttribute('data-viz-init', 'true');
+				var audioSrc = viz.getAttribute('data-audio');
+				var sayText = viz.getAttribute('data-say');
+				var waveform = JSON.parse(viz.getAttribute('data-waveform') || '[]');
+				var pitch = JSON.parse(viz.getAttribute('data-pitch') || '[]');
+				var waveCanvas = viz.querySelector('.waveform-canvas');
+				var pitchCanvas = viz.querySelector('.pitch-canvas');
+				var playBtn = viz.querySelector('.viz-play');
+				var speedInput = viz.querySelector('.viz-speed');
+				if (!waveCanvas || !pitchCanvas || !playBtn) return;
+
+				var waveCtx = waveCanvas.getContext('2d');
+				var pitchCtx = pitchCanvas.getContext('2d');
+				var audio = audioSrc ? new Audio(audioSrc) : null;
+
+				function speed() { return speedInput ? parseFloat(speedInput.value) || 1 : 1; }
+				function resize() {
+					var w = viz.clientWidth - 32;
+					if (w < 100) w = 300;
+					waveCanvas.width = w; waveCanvas.height = 80;
+					pitchCanvas.width = w; pitchCanvas.height = 80;
+					drawWave(); drawPitch();
+				}
+				function drawWave() {
+					if (!waveCtx) return;
+					waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+					if (!waveform.length) return;
+					var mid = waveCanvas.height / 2;
+					waveCtx.beginPath();
+					for (var i = 0; i < waveform.length; i++) {
+						var x = (i / waveform.length) * waveCanvas.width;
+						var y = mid - waveform[i] * mid * 0.8;
+						if (i === 0) waveCtx.moveTo(x, y); else waveCtx.lineTo(x, y);
+					}
+					waveCtx.strokeStyle = '#8e2d12';
+					waveCtx.lineWidth = 2;
+					waveCtx.stroke();
+				}
+				function drawPitch() {
+					if (!pitchCtx) return;
+					pitchCtx.clearRect(0, 0, pitchCanvas.width, pitchCanvas.height);
+					if (!pitch.length) return;
+					pitchCtx.beginPath();
+					for (var i = 0; i < pitch.length; i++) {
+						var x = (i / pitch.length) * pitchCanvas.width;
+						var y = pitchCanvas.height - (pitch[i] / 500) * pitchCanvas.height * 0.8;
+						if (i === 0) pitchCtx.moveTo(x, y); else pitchCtx.lineTo(x, y);
+					}
+					pitchCtx.strokeStyle = '#2e7d5b';
+					pitchCtx.lineWidth = 2;
+					pitchCtx.stroke();
+				}
+				function speakTts() {
+					try {
+						if (!('speechSynthesis' in window) || !sayText) return false;
+						window.speechSynthesis.cancel();
+						var u = new SpeechSynthesisUtterance(sayText);
+						u.lang = 'mr-IN';
+						u.rate = 0.85 * speed();
+						window.speechSynthesis.speak(u);
+						return true;
+					} catch (e) { return false; }
+				}
+				playBtn.addEventListener('click', function () {
+					if (audio) {
+						if (audio.paused) {
+							audio.playbackRate = speed();
+							audio.play().catch(function () { speakTts(); });
+							playBtn.textContent = '⏸ Pause';
+						} else {
+							audio.pause();
+							playBtn.textContent = '▶ Listen';
+						}
+					} else if (sayText) {
+						playBtn.textContent = '🔊 Speaking…';
+						speakTts();
+						window.setTimeout(function () { playBtn.textContent = '▶ Listen'; }, 3000);
+					}
+				});
+				if (audio) audio.addEventListener('ended', function () { playBtn.textContent = '▶ Listen'; });
+				if (speedInput) speedInput.addEventListener('input', function () { if (audio) audio.playbackRate = parseFloat(this.value) || 1; });
+				if (!audio && !sayText) playBtn.setAttribute('disabled', '');
+				window.addEventListener('resize', resize);
+				resize();
+			});
+		}
+		initViz();
+		document.addEventListener('astro:page-load', initViz);
+	})();
+</script>

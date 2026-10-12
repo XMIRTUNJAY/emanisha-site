@@ -1,0 +1,371 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GameShell from '../../../components/games/GameShell.astro';
+import GameIntro from '../../../components/games/GameIntro.astro';
+import GameResult from '../../../components/games/GameResult.astro';
+import AppCTA from '../../../components/AppCTA.astro';
+import { vocab as words } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+import chainData from '../../../data/games/chain.json';
+import { dailyIndex, todayISO } from '../../../lib/games/daily';
+
+const byId = new Map(words.map((w) => [w.id, w]));
+const dictionary = chainData.dictionary.map((id: string) => {
+	const w = byId.get(id);
+	if (!w) throw new Error(`chain: unknown vocab id "${id}"`);
+	return {
+		id: w.id,
+		mr: w.marathi,
+		en: w.english,
+		hi: w.hindi,
+		tr: w.transliteration,
+		exMr: w.exampleMarathi,
+	};
+});
+const seed = dictionary[dailyIndex(todayISO(), 1, dictionary.length)];
+
+const audio = (f: string) => siteUrl(`/games/audio/${f}`);
+const dataJson = JSON.stringify({
+	rule: chainData.rule,
+	seed,
+	dictionary,
+	shareUrl: siteUrl('/games/word-chain/'),
+	sfx: {
+		key: audio('ui/click_soft.mp3'),
+		correct: audio('feedback/correct_soft.mp3'),
+		wrong: audio('feedback/incorrect.mp3'),
+		hint: audio('feedback/hint.mp3'),
+		round: audio('fanfare/round_complete.mp3'),
+		over: audio('fanfare/game_over.mp3'),
+	},
+});
+
+const title = 'Marathi Word Chain — Shabd Sakhali Word Game | Bol Marathi';
+const description =
+	'Free Marathi word chain game (शब्दसाखळी): each word must begin with the last letter of the previous one. 800+ curriculum words, hints, streaks — play solo.';
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Games', href: siteUrl('/games/') },
+		{ label: 'Word Chain', href: siteUrl('/games/word-chain/') },
+	]}
+>
+	<GameShell active="word-chain">
+		<div class="prose">
+			<p class="kicker">Marathi Word Chain · शब्दसाखळी</p>
+			<h1>Word Chain</h1>
+			<p class="lede">
+				Chain Marathi words end-to-end: each new word must begin with the <strong>last letter</strong> of the
+				previous one — <span lang="mr">घर</span> → <span lang="mr">रंग</span>. Words come from the curriculum
+				vocabulary, so the chain is always real.
+			</p>
+			<div class="game-startbar">
+				<button type="button" class="btn btn-play" data-play>▶ Play</button>
+				<button type="button" class="btn ghost game-howto" data-howto>How to play</button>
+			</div>
+			<GameIntro
+				steps={[
+					'Each turn shows four words — pick the one that follows the chain rule.',
+					`Rule: the next word's first letter must match the previous word's last letter (vowel signs don't count): <span lang="mr">घर → रंग</span>, <span lang="mr">बाई → ईश</span>.`,
+					'Prefer typing? Switch to <strong>Type mode</strong> and write any word from the dictionary in Devanagari.',
+					'A run lasts 10 turns. Stuck? Ask for a hint.',
+				]}
+			/>
+			<div class="game-stage">
+				<div id="chain-root" data-game>
+				<div class="modes" role="tablist" aria-label="Chain modes">
+					<button type="button" class="mode on" id="tab-pick" role="tab" aria-selected="true">Pick</button>
+					<button type="button" class="mode" id="tab-type" role="tab" aria-selected="false">Type</button>
+				</div>
+				<p class="wl-meta" id="wc-meta"></p>
+				<p class="wc-word" id="wc-word" lang="mr"></p>
+				<p class="hint-box" id="wc-hint" aria-live="polite"></p>
+				<div class="wc-chain" id="wc-chain" aria-label="Chain so far"></div>
+				<div class="wc-cands" id="wc-cands" role="group" aria-label="Word options"></div>
+				<div class="wc-entry" id="wc-entry" hidden>
+					<input
+						type="text"
+						id="wc-input"
+						lang="mr"
+						autocomplete="off"
+						placeholder="लिहा… (type a Marathi word)"
+						aria-label="Type a Marathi word"
+					/>
+					<button type="button" class="btn" id="wc-go">Play</button>
+				</div>
+				<p class="wl-msg" id="wc-msg" aria-live="polite"></p>
+				<div class="game-actions">
+					<button type="button" class="btn ghost" id="wc-hintbtn">Hint</button>
+					<button type="button" class="btn ghost" id="wc-end" hidden>Finish run</button>
+				</div>
+			</div>
+			<GameResult id="wc-done" heading="Run complete">
+				<p class="game-actions" style="justify-content:center">
+					<a class="btn" href={siteUrl('/vocabulary/')} data-funnel="game_review">Browse vocabulary</a>
+					<AppCTA variant="general" context="game-chain" />
+				</p>
+			</GameResult>
+			</div>
+		</div>
+	</GameShell>
+</Base>
+
+<script type="application/json" id="chain-data" set:html={dataJson} />
+
+<script>
+	import { normalizeMr } from '../../../lib/games/graphemes';
+	import { canFollow, findContinuations, baseOfFirst, baseOfLast } from '../../../lib/games/chain';
+	import { makeStorage } from '../../../lib/games/storage';
+	import { makeSfx, sfxMuted, buzz } from '../../../lib/games/sfx';
+	import { dailyIndex, todayISO } from '../../../lib/games/daily';
+
+	type CWord = { id: string; mr: string; en: string; hi: string; tr: string; exMr: string };
+
+	const TURN_LIMIT = 10;
+
+	function init() {
+		const root = document.getElementById('chain-root');
+		if (!root || (root as HTMLElement).dataset.bound) return;
+		(root as HTMLElement).dataset.bound = '1';
+		const dataEl = document.getElementById('chain-data');
+		if (!dataEl) return;
+		let data: {
+			rule: string;
+			seed: CWord;
+			dictionary: CWord[];
+			shareUrl: string;
+			sfx: Record<string, string>;
+		};
+		try {
+			data = JSON.parse(dataEl.textContent || '{}');
+		} catch {
+			return;
+		}
+		const dict = data.dictionary ?? [];
+		if (dict.length < 2) return;
+
+		const store = makeStorage('bol-game-chain-');
+		const sfx = makeSfx(data.sfx ?? {}, { storage: store });
+
+		const wordEl = document.getElementById('wc-word') as HTMLElement;
+		const chainEl = document.getElementById('wc-chain') as HTMLElement;
+		const candsEl = document.getElementById('wc-cands') as HTMLElement;
+		const entryEl = document.getElementById('wc-entry') as HTMLElement;
+		const inputEl = document.getElementById('wc-input') as HTMLInputElement;
+		const msg = document.getElementById('wc-msg') as HTMLElement;
+		const meta = document.getElementById('wc-meta') as HTMLElement;
+		const hintEl = document.getElementById('wc-hint') as HTMLElement;
+		const hintBtn = document.getElementById('wc-hintbtn') as HTMLButtonElement;
+		const endBtn = document.getElementById('wc-end') as HTMLButtonElement;
+		const done = document.getElementById('wc-done') as HTMLElement;
+		const tabPick = document.getElementById('tab-pick') as HTMLButtonElement;
+		const tabType = document.getElementById('tab-type') as HTMLButtonElement;
+
+		let mode: 'pick' | 'type' = 'pick';
+		let seedWord: CWord = dict[dailyIndex(todayISO(), 1, dict.length)] as CWord;
+		let current: CWord = seedWord;
+		let used = new Set<string>([normalizeMr(current.mr)]);
+		let turn = 1;
+		let score = 0;
+		let streak = 0;
+		let best = parseInt(store.get('best') || '0', 10);
+		let over = false;
+		let candidates: CWord[] = [];
+
+		function renderMeta() {
+			meta.textContent = `Turn ${turn}/${TURN_LIMIT} · Score ${score} · Streak ${streak} · Best ${best}`;
+		}
+
+		function renderChain() {
+			chainEl.innerHTML = '';
+			chainEl.appendChild(tok(seedWord.mr));
+			for (const m of chainHistory) chainEl.appendChild(tok(m));
+			function tok(t: string) {
+				const b = document.createElement('span');
+				b.className = 'tok';
+				b.lang = 'mr';
+				b.textContent = t;
+				return b;
+			}
+		}
+
+		let chainHistory: string[] = [];
+
+		function renderCandidates() {
+			candsEl.innerHTML = '';
+			for (const c of candidates) {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = 'qopt';
+				b.innerHTML = '<span class="qopt-text"></span>';
+				const text = b.querySelector('.qopt-text') as HTMLElement;
+				text.lang = 'mr';
+				text.textContent = c.mr;
+				b.title = c.tr;
+				b.addEventListener('click', () => pick(c, b));
+				candsEl.appendChild(b);
+			}
+		}
+
+		function deal() {
+			// ≥1 valid continuation + 3 decoys, shuffled
+			const valids = findContinuations(current.mr, dict.map((w) => w.mr), used);
+			if (!valids.length) {
+				finish('No word in the dictionary continues this chain — your run is complete!');
+				return;
+			}
+			const valid = valids[Math.floor(Math.random() * valids.length)] as string;
+			const decoys = dict
+				.map((w) => w.mr)
+				.filter((m) => !canFollow(current.mr, m) && !used.has(normalizeMr(m)))
+				.sort(() => Math.random() - 0.5)
+				.slice(0, 3);
+			const pool = [valid, ...decoys].sort(() => Math.random() - 0.5);
+			candidates = pool.map((m) => dict.find((w) => w.mr === m) as CWord);
+			renderCandidates();
+			renderMeta();
+		}
+
+		function pick(c: CWord, btn: HTMLButtonElement) {
+			if (over) return;
+			if (canFollow(current.mr, c.mr) && !used.has(normalizeMr(c.mr))) {
+				sfx.play('correct');
+				btn.classList.add('ok');
+				advance(c);
+			} else {
+				sfx.play('wrong');
+				btn.classList.add('bad');
+				streak = 0;
+				const need = baseOfLast(current.mr);
+				msg.textContent = `Needs a word starting with “${need}…” — ${c.mr} starts with “${baseOfFirst(c.mr)}”.`;
+				msg.className = 'wl-msg bad';
+				renderMeta();
+			}
+		}
+
+		function submitTyped() {
+			if (over) return;
+			const raw = inputEl.value.trim();
+			if (!raw) return;
+			const key = normalizeMr(raw);
+			const found = dict.find((w) => normalizeMr(w.mr) === key);
+			if (!found) {
+				sfx.play('wrong');
+				msg.textContent = `“${raw}” is not in the curated word list (${dict.length} words from the curriculum).`;
+				msg.className = 'wl-msg bad';
+				return;
+			}
+			if (used.has(key)) {
+				sfx.play('wrong');
+				msg.textContent = `“${raw}” was already used in this chain.`;
+				msg.className = 'wl-msg bad';
+				return;
+			}
+			if (!canFollow(current.mr, found.mr)) {
+				sfx.play('wrong');
+				msg.textContent = `“${raw}” doesn't fit — the chain needs a word starting with “${baseOfLast(current.mr)}”.`;
+				msg.className = 'wl-msg bad';
+				return;
+			}
+			sfx.play('correct');
+			inputEl.value = '';
+			advance(found);
+		}
+
+		function advance(next: CWord) {
+			chainHistory.push(next.mr);
+			used.add(normalizeMr(next.mr));
+			current = next;
+			score += 1;
+			streak += 1;
+			buzz(15);
+			if (score > best) {
+				best = score;
+				store.set('best', String(best));
+			}
+			msg.textContent = '';
+			msg.className = 'wl-msg';
+			hintEl.textContent = '';
+			wordEl.classList.remove('flip-in', 'ok-flash');
+			void wordEl.offsetWidth; // restart animation
+			wordEl.classList.add('flip-in', 'ok-flash');
+			wordEl.textContent = next.mr;
+			wordEl.lang = 'mr';
+			renderChain();
+			if (turn >= TURN_LIMIT) {
+				finish(`You chained ${TURN_LIMIT} words — nicely done.`);
+				return;
+			}
+			turn += 1;
+			deal();
+		}
+
+		hintBtn.addEventListener('click', () => {
+			if (over) return;
+			sfx.play('hint');
+			const valids = findContinuations(current.mr, dict.map((w) => w.mr), used);
+			if (!valids.length) {
+				finish('No word continues this chain — run complete!');
+				return;
+			}
+			const v = valids[Math.floor(Math.random() * valids.length)] as string;
+			hintEl.textContent = `Try a word starting with “${baseOfFirst(v)}” — or type one yourself.`;
+		});
+
+		endBtn.addEventListener('click', () => finish('Run ended — see your chain above.'));
+
+		function finish(reason: string) {
+			over = true;
+			sfx.play('round');
+			done.hidden = false;
+			done.classList.add('confetti', 'bounce-in');
+			const scoreEl = done.querySelector('.gr-score') as HTMLElement;
+			const body = done.querySelector('.gr-body') as HTMLElement;
+			scoreEl.textContent = `Chain length ${score} · Best ${best}`;
+			const last = chainHistory[chainHistory.length - 1];
+			const reveal = current
+				? `<p class="gr-word" lang="mr">${current.mr}</p>` +
+					`<p class="gr-tr">${current.tr}</p>` +
+					`<p><strong>EN:</strong> ${current.en} · <strong lang="hi">HI:</strong> <span lang="hi">${current.hi}</span></p>` +
+					(current.exMr ? `<p lang="mr">${current.exMr}</p>` : '')
+				: '';
+			body.innerHTML = `<p>${reason}</p>` + reveal;
+			hintBtn.disabled = true;
+			endBtn.disabled = true;
+			done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+			void last;
+		}
+
+		function setMode(m: 'pick' | 'type') {
+			mode = m;
+			tabPick.classList.toggle('on', m === 'pick');
+			tabType.classList.toggle('on', m === 'type');
+			tabPick.setAttribute('aria-selected', String(m === 'pick'));
+			tabType.setAttribute('aria-selected', String(m !== 'pick'));
+			entryEl.hidden = m !== 'type';
+			candsEl.hidden = m !== 'pick';
+		}
+
+		tabPick.addEventListener('click', () => setMode('pick'));
+		tabType.addEventListener('click', () => setMode('type'));
+		document.getElementById('wc-go')?.addEventListener('click', submitTyped);
+		inputEl.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter') {
+				e.preventDefault();
+				submitTyped();
+			}
+		});
+
+		if (sfxMuted()) sfx.setMuted(true);
+		wordEl.textContent = current.mr;
+		renderChain();
+		deal();
+	}
+
+	init();
+	document.addEventListener('astro:page-load', init);
+</script>

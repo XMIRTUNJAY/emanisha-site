@@ -1,0 +1,32 @@
+{
+  "_comment": "Website-only corrections layered over synced snapshots (never hand-edit src/data/learn/*.json). Applied by tools/sync-learn-marathi.mjs, logged on every sync. Each entry must ALSO be fixed upstream in bol_marathi/ — see REPORT.md. needsReview=true means a native speaker must confirm.",
+  "vocab": {
+    "v-spi-02": {
+      "exampleHindi": "गोडा मसाला डालो।",
+      "exampleEnglish": "Add goda masala (Maharashtrian sweet-spice blend).",
+      "needsReview": true,
+      "reason": "Source example glossed गोडा मसाला as 'garam masala'. Goda masala is a distinct sweet-spice blend; blend description needs native confirmation."
+    },
+    "v-spi-28": {
+      "noteEn": "Monsoon snack. Fritters in general — compare कांदा भजी (onion fritters).",
+      "needsReview": false,
+      "reason": "Differentiate from v-snk-07 (duplicate-headword triage LM-DUP)."
+    },
+    "v-snk-07": {
+      "noteEn": "Monsoon snack. Specifically onion fritters — compare भजी (fritters in general).",
+      "needsReview": false,
+      "reason": "Differentiate from v-spi-28 (duplicate-headword triage LM-DUP)."
+    },
+    "v-snk-09": {
+      "noteEn": "Same in both languages. South Indian dish name commonly used in Marathi.",
+      "needsReview": false,
+      "reason": "Loanword transparency (reviewer finding, verified in data)."
+    },
+    "v-snk-10": {
+      "noteEn": "Same in both languages. South Indian dish name commonly used in Marathi.",
+      "needsReview": false,
+      "reason": "Loanword transparency (reviewer finding, verified in data)."
+    }
+  },
+  "units": {}
+}

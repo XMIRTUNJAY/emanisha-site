@@ -1,0 +1,237 @@
+---
+import { siteUrl } from '../lib/site';
+import WaitlistForm from './WaitlistForm.astro';
+
+// Hindi pages get a Hindi footer; everything else stays English.
+const hi = Astro.url.pathname.includes('/hi/');
+const t = hi
+	? {
+			heading: 'सबसे पहले जानें',
+			sub: 'लॉन्च की एक ईमेल — Play Store पर आते ही ख़बर।',
+			placeholder: 'aap@example.com',
+			button: 'सूचित करें',
+			learn: 'सीखें',
+			paths: 'मार्ग',
+			product: 'उत्पाद',
+			tagline: 'बोल मराठी पाठ्यक्रम से मुफ़्त मराठी पाठ। ऐप में सुनना, बोलना और दोहराव जुड़ता है।',
+			translate: 'अपनी भाषा में पढ़ें:',
+		}
+	: {
+			heading: 'Be first to know',
+			sub: 'Launch updates, nothing else. One email when Bol Marathi hits the Play Store.',
+			placeholder: 'you@example.com',
+			button: 'Notify me',
+			learn: 'Learn',
+			paths: 'Paths',
+			product: 'Product',
+			tagline: 'Free Marathi lessons from the Bol Marathi curriculum. The app adds listening, speaking and spaced repetition.',
+			translate: 'Read in your language:',
+		};
+---
+
+<footer class="site-footer">
+	<div class="foot-cta">
+		<div>
+			<h2>{t.heading}</h2>
+			<p>{t.sub}</p>
+		</div>
+		<WaitlistForm context="footer" locale={hi ? 'hi' : 'en'} />
+	</div>
+
+	<div class="foot-grid">
+		<nav aria-label="Learn">
+			<h3>{t.learn}</h3>
+			<a href={siteUrl('/start/')}>Start here</a>
+			<a href={siteUrl('/vocabulary/')}>Vocabulary</a>
+			<a href={siteUrl('/phrases/')}>Phrases</a>
+			<a href={siteUrl('/grammar/')}>Grammar</a>
+			<a href={siteUrl('/lessons/')}>Lessons</a>
+			<a href={siteUrl('/quiz/')}>Quizzes</a>
+			<a href={siteUrl('/review/')}>Review</a>
+			<a href={siteUrl('/blog/')}>Blog</a>
+			<a href={siteUrl('/downloads/')}>Anki decks</a>
+			<a href={siteUrl('/search/')}>Search</a>
+		</nav>
+		<nav aria-label="Paths">
+			<h3>{t.paths}</h3>
+			<a href={siteUrl('/hindi-to-marathi/')}>Hindi → Marathi</a>
+			<a href={siteUrl('/english-to-marathi/')}>English → Marathi</a>
+			{hi ? (
+				<a href={siteUrl('/')} lang="en">Read in English</a>
+			) : (
+				<a href={siteUrl('/hi/')} lang="hi">हिंदी में सीखें</a>
+			)}
+		</nav>
+		<nav aria-label="Product">
+			<h3>{t.product}</h3>
+			<a href={siteUrl('/app/')}>App</a>
+			<a href={siteUrl('/about/')}>About</a>
+			<a href={siteUrl('/how-it-works/')}>Method</a>
+			<a href={siteUrl('/contact/')}>Contact</a>
+			<a href={siteUrl('/privacy/')}>Privacy</a>
+		</nav>
+	</div>
+
+	<div class="foot-base">
+		<p>{t.tagline}</p>
+		<div class="translate">
+			<span id="translate-label">{t.translate}</span>
+			<span id="google_translate_element" role="region" aria-labelledby="translate-label">हिन्दी · मराठी</span>
+		</div>
+	</div>
+</footer>
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+<script is:inline>
+	function googleTranslateElementInit() {
+		try {
+			// @ts-ignore — loaded from Google CDN above
+			new google.translate.TranslateElement(
+				{ pageLanguage: 'en', includedLanguages: 'hi,mr', autoDisplay: false },
+				'google_translate_element',
+			);
+		} catch (e) {
+			/* translate unavailable offline — footer links still work */
+		}
+	}
+</script>
+
+<style>
+	.site-footer {
+		width: var(--measure-wide);
+		max-width: calc(100% - 2em);
+		margin: auto;
+		padding: var(--space-6) 1em var(--space-5) 1em;
+		border-top: var(--border);
+		margin-top: var(--space-6);
+	}
+	.foot-cta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--container-low);
+		padding: var(--space-5);
+		margin-bottom: var(--space-5);
+	}
+	.foot-cta h2 {
+		margin: 0 0 0.25em 0;
+		font-size: 1.25rem;
+	}
+	.foot-cta p {
+		margin: 0;
+		font-size: 0.92rem;
+		color: rgb(var(--gray));
+	}
+	.waitlist {
+		display: flex;
+		gap: 0.5em;
+		flex: 1 1 280px;
+		max-width: 420px;
+	}
+	.waitlist input[type='email'] {
+		flex: 1;
+		min-width: 0;
+		font: inherit;
+		font-size: 1rem;
+		color: rgb(var(--gray-dark));
+		background: var(--card);
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.7em 1em;
+		min-height: 52px;
+	}
+	.waitlist button,
+	.foot-cta .btn {
+		font: inherit;
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: #fff;
+		background: var(--accent);
+		border: none;
+		border-radius: var(--radius);
+		padding: 0 1.5em;
+		min-height: 52px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-block;
+		line-height: 52px;
+		white-space: nowrap;
+	}
+	.waitlist button:hover,
+	.foot-cta .btn:hover {
+		filter: brightness(0.92);
+		color: #fff;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+	}
+	.foot-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 1.5em;
+		margin-bottom: var(--space-5);
+	}
+	.foot-grid nav {
+		display: grid;
+		gap: 0.45em;
+		align-content: start;
+	}
+	.foot-grid h3 {
+		margin: 0 0 0.25em 0;
+		font-size: 0.78rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: rgb(var(--gray));
+	}
+	.foot-grid a {
+		color: rgb(var(--gray-dark));
+		text-decoration: none;
+		font-size: 0.92rem;
+	}
+	.foot-grid a:hover {
+		color: var(--accent);
+	}
+	.foot-base {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75em;
+		border-top: var(--border);
+		padding-top: var(--space-4);
+	}
+	.foot-base p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		max-width: 36em;
+	}
+	.translate {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+	}
+	.translate select {
+		font: inherit;
+		color: rgb(var(--gray-dark));
+		background: var(--card);
+		border: var(--border);
+		border-radius: 8px;
+		padding: 0.35em 0.6em;
+	}
+	/* Hide Google's injected top banner frame shift */
+	body {
+		top: 0 !important;
+	}
+</style>

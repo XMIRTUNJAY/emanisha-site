@@ -1,0 +1,66 @@
+---
+// ExampleSentence — Single example sentence with Marathi, Hindi, English, and audio
+
+interface Props {
+  marathi: string;
+  hindi?: string;
+  english: string;
+  audio?: string;
+}
+
+const { marathi, hindi, english, audio } = Astro.props;
+---
+
+<div class="example-sentence">
+  <div class="example-sentence__marathi" lang="mr">{marathi}</div>
+  {hindi && <div class="example-sentence__hindi" lang="hi">{hindi}</div>}
+  <div class="example-sentence__english">{english}</div>
+  {audio && (
+    <AudioPlayer
+      src={audio}
+      text={marathi}
+      size="sm"
+      showText={false}
+      class="example-sentence__audio"
+    />
+  )}
+</div>
+
+<style>
+  .example-sentence {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .example-sentence__marathi {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .example-sentence__hindi {
+    font-family: var(--font-display);
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .example-sentence__english {
+    font-size: var(--text-body-sm);
+    color: var(--color-text);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .example-sentence__audio {
+    align-self: flex-start;
+    margin-top: var(--space-1);
+  }
+</style>

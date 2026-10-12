@@ -1,0 +1,107 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Icon from '../../../components/design-system/Icon.astro';
+import Base from '../../../layouts/Base.astro';
+import GameShell from '../../../components/games/GameShell.astro';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'Free Marathi Games — Wordle, Crossword & More | Bol Marathi';
+const description =
+	'Five free Marathi games: daily Wordle with akshara tiles, picture vocabulary guessing, Marathi crossword, word chain and sentence scramble. Learn by playing.';
+
+const games = [
+	{
+		href: siteUrl('/games/marathi-wordle/'),
+		icon: 'grid',
+		name: 'Marathi Wordle',
+		desc: 'Guess the daily Marathi word in six tries — one akshara per tile, with meanings and examples.',
+		meta: 'Daily · Practice mode',
+	},
+	{
+		href: siteUrl('/games/picture-guess/'),
+		icon: 'eye',
+		name: 'Picture Guess',
+		desc: 'See a picture, guess the Marathi word. Progressive hints, three difficulty levels.',
+		meta: '40 pictures · Easy → challenge',
+	},
+	{
+		href: siteUrl('/games/marathi-crossword/'),
+		icon: 'clipboard',
+		name: 'Marathi Crossword',
+		desc: 'Small curated grids where every cell is a full akshara — across and down.',
+		meta: '2 puzzles · With meanings',
+	},
+	{
+		href: siteUrl('/games/word-chain/'),
+		icon: 'link',
+		name: 'Word Chain',
+		desc: 'Chain words end-to-end: each new word starts with the last letter of the previous one.',
+		meta: '820+ words · Endless runs',
+	},
+	{
+		href: siteUrl('/games/sentence-scramble/'),
+		icon: 'cards',
+		name: 'Sentence Scramble',
+		desc: 'Rebuild real curriculum sentences from shuffled tiles — with translations and pattern notes.',
+		meta: 'Curriculum sentences · 3 levels',
+	},
+] as const;
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Games', href: siteUrl('/games/') }]}
+>
+	<GameShell active="hub">
+		<div class="prose">
+			<p class="kicker">Marathi Games</p>
+			<h1>Learn Marathi by playing</h1>
+			<p class="lede">
+				Five small games built on the Bol Marathi curriculum. A few minutes a day makes words stick — every
+				game ends with meanings, examples and a link back to the lesson behind it.
+			</p>
+			<ul class="card-grid">
+				{games.map((g) => (
+					<li>
+						<a class="card game-card" href={g.href} data-funnel="game_start">
+							<span class="game-icon"><Icon name={g.icon} size={22} /></span>
+							<h3>{g.name}</h3>
+							<p>{g.desc}</p>
+							<p class="game-meta">{g.meta}</p>
+						</a>
+					</li>
+				))}
+			</ul>
+			<p>
+				New to Marathi? Start with the <a href={siteUrl('/vocabulary/beginners/')}>beginner word list</a> or the
+				<a href={siteUrl('/quiz/')}>topic quizzes</a> — then come back and play.
+			</p>
+			<AppCTA variant="general" context="games-index" />
+		</div>
+	</GameShell>
+</Base>
+
+<style>
+	.game-card {
+		display: block;
+		height: 100%;
+	}
+	.game-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.6em;
+		height: 2.6em;
+		border-radius: 10px;
+		background: var(--accent-fixed);
+		color: var(--accent-on-fixed);
+		margin-bottom: 0.4em;
+	}
+	.game-meta {
+		font-size: 0.8rem;
+		color: rgb(var(--gray));
+		margin: 0.35em 0 0 0;
+		font-weight: 600;
+	}
+</style>

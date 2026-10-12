@@ -1,0 +1,504 @@
+---
+// PremiumLessonPage — Premium lesson page template using new design system
+// Replaces the existing lesson page with enhanced UX, visual hierarchy, and app bridge
+
+import Learn from '../layouts/Learn.astro';
+import AudioPlayer from '../components/learning/AudioPlayer.astro';
+import PracticeCTA from '../components/learning/PracticeCTA.astro';
+import MiniQuiz from '../components/learning/MiniQuiz.astro';
+import LessonHeader from '../components/layout/LessonHeader.astro';
+import RelatedLessons from '../components/layout/RelatedLessons.astro';
+import SectionNav from '../components/layout/SectionNav.astro';
+import { getUnit, units, unitSeo } from '../lib/learn';
+import { siteUrl } from '../lib/site';
+import { getUnitProgress, setUnitComplete } from '../lib/progress';
+
+type Props = { unit: import('../../lib/learn').Unit };
+const { unit } = Astro.props;
+
+const seo = unitSeo[unit.unit] ?? { h1: `Unit ${unit.unit} — ${unit.titleEn}`, blurb: unit.subtitleEn };
+const idx = units.findIndex((u) => u.unit === unit.unit);
+const prev = idx > 0 ? units[idx - 1] : null;
+const next = idx < units.length - 1 ? units[idx + 1] : null;
+const lessonNos = [...new Set(unit.speaking.map((s) => s.lesson))].sort((a, b) => a - b);
+const progress = getUnitProgress(unit.unit);
+
+// Build a short "Try saying it" quiz from the unit's own speaking sentences.
+// Pool of English answers doubles as distractors so every option is unit-accurate.
+const _quizPool = [...new Set(unit.speaking.map((s) => s.english))];
+const _quizSeed = unit.speaking.filter((s) => s.english && s.sentence);
+const _quizStep = Math.max(1, Math.floor(_quizSeed.length / 3));
+const quizQuestions = _quizSeed
+  .filter((_, i) => i % _quizStep === 0)
+  .slice(0, 3)
+  .map((s) => {
+    const distractors = _quizPool.filter((e) => e !== s.english).slice(0, 2);
+    const options = [s.english, ...distractors]
+      .map((text) => ({ text, correct: text === s.english }))
+      // deterministic-ish shuffle by first char so order varies but SSR-stable
+      .sort((a, b) => (a.text.charCodeAt(0) % 7) - (b.text.charCodeAt(0) % 7));
+    return {
+      prompt: s.sentence,
+      promptSub: s.translit,
+      options,
+      explanation: s.english,
+    };
+  });
+
+const unitSections = [
+  { id: 'objectives-title', label: 'Objectives' },
+  { id: 'speaking-title', label: 'Speaking practice' },
+  ...(quizQuestions.length >= 2 ? [{ id: 'try-it', label: 'Try saying it' }] : []),
+  { id: 'bridges-title', label: 'Hindi → Marathi' },
+  { id: 'grammar-title', label: 'Grammar' },
+  { id: 'culture-title', label: 'Culture' },
+  { id: 'practice-title', label: 'How to practice' },
+];
+---
+
+<Learn
+  title={`Unit ${unit.unit}: ${unit.titleEn} | Free Marathi Lesson`}
+  h1={seo.h1}
+  description={`${seo.blurb} Six lessons: vocabulary, bridges, speaking, grammar and culture.`}
+  kicker={`Unit ${unit.unit} of the Bol Marathi curriculum`}
+  crumbs={[
+    { label: 'Lessons', href: siteUrl('/lessons/') },
+    { label: `Unit ${unit.unit}`, href: siteUrl(`/lessons/${unit.unit}/`) },
+  ]}
+  canonicalPath={`/lessons/${unit.unit}/`}
+  about={unit.titleEn}
+  meta={[`${unit.lessons} lessons`, unit.subtitleEn]}
+  hideHeading
+>
+  <!-- UNIT HEADER (page owns the single H1) -->
+  <LessonHeader
+    unitNo={unit.unit}
+    marathiTitle={`${unit.title} · ${unit.subtitle}`}
+    title={seo.h1}
+    blurb={seo.blurb}
+    progressPct={progress.completed ? 100 : 0}
+    meta={[
+      { value: unit.lessons, label: 'lessons' },
+      { value: lessonNos.length, label: 'speaking lessons' },
+      { value: unit.bridge.length, label: 'Hindi→Marathi bridges' },
+      { value: unit.grammar.length, label: 'grammar notes' },
+    ]}
+    rail={lessonNos.map((n) => ({ label: `Lesson ${n}`, href: `#lesson-${n}` }))}
+    railLabel="Lessons:"
+  />
+
+  <!-- SECTION NAV — jump to section (sticky) -->
+  <SectionNav sections={unitSections} label="On this unit" />
+
+  <!-- LEARNING OBJECTIVES -->
+  <section class="lesson-objective" aria-labelledby="objectives-title">
+    <h2 id="objectives-title">What you will learn</h2>
+    <p lang="mr">{unit.intro}</p>
+    <ul class="lesson-objectives">
+      {unit.goalsEn.map((g, i) => (
+        <li>{g}{unit.goals[i] && unit.goals[i] !== g ? <span lang="mr"> · {unit.goals[i]}</span> : null}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- SPEAKING PRACTICE SENTENCES -->
+  <section class="core-lesson" aria-labelledby="speaking-title">
+    <header class="lesson-header">
+      <h2 id="speaking-title">Speaking practice sentences</h2>
+    </header>
+
+    {lessonNos.map((n) => (
+      <section id={`lesson-${n}`} class="lesson-block">
+        <h3 class="lesson-block__title">Lesson {n}</h3>
+        <div class="phrase-card-grid">
+          {unit.speaking.filter((s) => s.lesson === n).map((s) => (
+            <article class="phrase-card phrase-card--lesson">
+              <div class="phrase-card__content">
+                <div class="phrase-card__marathi" lang="mr">{s.sentence}</div>
+                <AudioPlayer
+                  src={`data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAA`}
+                  text={s.sentence}
+                  size="sm"
+                  showText={false}
+                  class="phrase-card__audio"
+                  data-tts={s.sentence}
+                />
+                {s.hindi && <div class="phrase-card__hindi" lang="hi">{s.hindi}</div>}
+                <div class="phrase-card__english">{s.english}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+
+  <!-- TRY SAYING IT — inline practice (website → app bridge) -->
+  {quizQuestions.length >= 2 && (
+    <div id="try-it">
+      <MiniQuiz
+        questions={quizQuestions}
+        kicker="Practice"
+        title="Try saying it"
+      />
+    </div>
+  )}
+
+  <!-- HINDI → MARATHI BRIDGES -->
+  <section class="core-lesson" aria-labelledby="bridges-title">
+    <header class="lesson-header">
+      <h2 id="bridges-title">Hindi → Marathi bridges</h2>
+    </header>
+    <ul class="bridge-list">
+      {unit.bridge.map((b) => (
+        <li>
+          <span lang="hi">{b.hindi}</span> → <strong lang="mr">{b.marathi}</strong> — {b.grammarEn}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- GRAMMAR NOTES -->
+  <section class="core-lesson" aria-labelledby="grammar-title">
+    <header class="lesson-header">
+      <h2 id="grammar-title">Grammar notes</h2>
+    </header>
+    {unit.grammar.map((g) => (
+      <section class="grammar-note">
+        <h3>{g.titleEn}</h3>
+        <p lang="mr">{g.text}</p>
+        <p>{g.textEn}</p>
+      </section>
+    ))}
+  </section>
+
+  <!-- CULTURE NOTES -->
+  <section class="core-lesson" aria-labelledby="culture-title">
+    <header class="lesson-header">
+      <h2 id="culture-title">Culture notes</h2>
+    </header>
+    <ul class="culture-list">
+      {unit.cultural.map((c) => (
+        <li><strong>{c.titleEn}</strong> — {c.textEn}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- HOW TO PRACTICE -->
+  <section class="practice-guide" aria-labelledby="practice-title">
+    <h2 id="practice-title">How to practice this unit</h2>
+    <p>
+      Read each Marathi sentence aloud, check it against the Hindi, then
+      cover the Marathi and recall it from the English. In the app the same
+      unit adds listening quizzes, speaking checks, sentence building and
+      review before you forget.
+    </p>
+  </section>
+
+  <!-- UNIT COMPLETION -->
+  <div class="completion-toggle" aria-label="Unit completion">
+    {progress.completed ? (
+      <button class="btn ghost" disabled>✓ Unit {unit.unit} completed</button>
+    ) : (
+      <button class="btn" id="mark-complete" data-unit={unit.unit}>Mark Unit {unit.unit} Complete</button>
+    )}
+    <p class="completion-note">Progress saved locally — syncs across devices when you sign in.</p>
+  </div>
+
+  <!-- PRACTICE CTA - Contextual app bridge -->
+  <PracticeCTA variant="lesson" context={`unit-${unit.unit}`} lessonSlug={unit.unit} />
+
+  <!-- NAVIGATION -->
+  <nav class="pager" aria-label="Units">
+    {prev ? <a href={siteUrl(`/lessons/${prev.unit}/`)}>&larr; Unit {prev.unit} — {prev.titleEn}</a> : <span />}
+    {next ? <a class="next" href={siteUrl(`/lessons/${next.unit}/`)}>Unit {next.unit} — {next.titleEn} &rarr;</a> : <span />}
+  </nav>
+
+  <!-- RELATED LESSONS -->
+  <RelatedLessons links={[
+    { slug: siteUrl('/lessons/'), title: 'All units', family: 'Lessons' },
+    { slug: siteUrl('/vocabulary/'), title: 'Marathi vocabulary', family: 'Vocabulary' },
+    { slug: siteUrl('/phrases/daily/'), title: 'Daily conversation phrases', family: 'Phrases' },
+  ]} max={3} title="Continue learning" />
+</Learn>
+
+<style>
+  /* Anchor clearance for the sticky section nav */
+  #objectives-title,
+  #speaking-title,
+  #bridges-title,
+  #grammar-title,
+  #culture-title,
+  #practice-title,
+  #try-it { scroll-margin-top: 5.5rem; }
+
+  .lesson-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .lesson-objective {
+    margin: var(--space-7) 0;
+    padding: var(--space-5);
+    background: var(--color-container-low);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .lesson-objective h2 { margin: 0 0 var(--space-3) 0; }
+
+  .lesson-objectives {
+    margin: var(--space-3) 0 0 0;
+    padding-left: var(--space-4);
+  }
+
+  .lesson-objectives li { margin-bottom: var(--space-2); }
+
+  .core-lesson {
+    margin: var(--space-7) 0;
+  }
+
+  .lesson-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .lesson-header h2 { margin: 0; font-size: var(--text-h2); }
+
+  .lesson-block {
+    margin-bottom: var(--space-5);
+  }
+
+  .lesson-block__title {
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin: 0 0 var(--space-3) 0;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .phrase-card--lesson {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .phrase-card--lesson .phrase-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .phrase-card--lesson .phrase-card__marathi {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .phrase-card--lesson .phrase-card__hindi {
+    font-family: var(--font-display);
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+  }
+
+  .phrase-card--lesson .phrase-card__english {
+    font-size: var(--text-body-sm);
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .phrase-card--lesson .phrase-card__audio {
+    align-self: flex-start;
+  }
+
+  .bridge-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .bridge-list li {
+    padding: var(--space-4);
+    background: var(--color-primary-fixed);
+    border: 1px solid var(--color-primary-fixed);
+    border-radius: var(--radius);
+  }
+
+  .bridge-list li span:first-child {
+    display: block;
+    font-size: var(--text-body);
+    color: var(--color-primary-dark);
+    margin-bottom: var(--space-1);
+  }
+
+  .bridge-list li strong {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    color: var(--color-primary);
+  }
+
+  .bridge-list li > span:last-child {
+    display: block;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+  }
+
+  .grammar-note {
+    margin-bottom: var(--space-5);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .grammar-note h3 {
+    margin: 0 0 var(--space-2) 0;
+    font-size: var(--text-h3);
+  }
+
+  .grammar-note p:first-of-type { margin-bottom: var(--space-2); }
+  .grammar-note p:last-of-type { margin-bottom: 0; }
+
+  .culture-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .culture-list li {
+    padding: var(--space-4);
+    background: var(--color-warning-bg);
+    border: 1px solid var(--color-warning-bg);
+    border-radius: var(--radius);
+  }
+
+  .culture-list li strong { color: var(--color-warning); }
+
+  .practice-guide {
+    margin: var(--space-7) 0;
+    padding: var(--space-5);
+    background: var(--color-success-bg);
+    border: 1px solid var(--color-success-bg);
+    border-radius: var(--radius-lg);
+  }
+
+  .practice-guide h2 { margin: 0 0 var(--space-2) 0; }
+  .practice-guide p { margin: 0; }
+
+  .completion-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin: var(--space-6) 0;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-container-low);
+  }
+
+  .completion-note {
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pager .next { margin-left: auto; }
+
+  .pager a {
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .pager a:hover { color: var(--color-primary-dark); }
+
+  @media (max-width: 600px) {
+    .completion-toggle { flex-direction: column; align-items: flex-start; }
+    .pager { flex-direction: column; }
+    .pager .next { margin-left: 0; margin-top: var(--space-3); }
+  }
+</style>
+
+<script>
+  import { AnalyticsEvents } from '../lib/analytics';
+
+  // Track lesson start + unit completion events
+  function initLessonAnalytics() {
+    if ((window as unknown as { __lessonAnalyticsInit?: boolean }).__lessonAnalyticsInit) return;
+    (window as unknown as { __lessonAnalyticsInit?: boolean }).__lessonAnalyticsInit = true;
+    const btn = document.getElementById('mark-complete');
+    const unit = btn?.getAttribute('data-unit') || window.location.pathname.split('/').filter(Boolean).pop() || 'unknown';
+    try { AnalyticsEvents.lessonStart(unit); } catch { /* ignore */ }
+    btn?.addEventListener('click', () => {
+      try { AnalyticsEvents.unitComplete(unit, 0); } catch { /* ignore */ }
+      try { AnalyticsEvents.lessonComplete(unit, Math.round(performance.now())); } catch { /* ignore */ }
+    });
+    // Audio plays on this page
+    document.addEventListener('click', (e) => {
+      const say = (e.target as HTMLElement).closest?.('.say');
+      if (say) {
+        try { AnalyticsEvents.vocabAudioPlay((say.getAttribute('data-say') || 'lesson-audio').slice(0, 50)); } catch { /* ignore */ }
+      }
+    });
+  }
+  initLessonAnalytics();
+  document.addEventListener('astro:page-load', () => {
+    (window as unknown as { __lessonAnalyticsInit?: boolean }).__lessonAnalyticsInit = false;
+    initLessonAnalytics();
+  });
+</script>
+
+<script>
+  // Mark unit complete (uses same localStorage format as progress.ts)
+  const btn = document.getElementById('mark-complete');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      const unit = this.getAttribute('data-unit');
+      if (!unit) return;
+      try {
+        const STORAGE_KEY = 'bol-marathi-progress';
+        const STREAK_KEY = 'bol-marathi-streak-date';
+        const STREAK_COUNT_KEY = 'bol-marathi-streak-count';
+        const progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        if (!progress[unit]?.completed) {
+          progress[unit] = { completed: true, completedAt: Date.now() };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+          // Update streak
+          const today = new Date().toDateString();
+          const last = localStorage.getItem(STREAK_KEY);
+          let count = parseInt(localStorage.getItem('bol-marathi-streak-count') || '0', 10);
+          if (last !== today) {
+            const yesterday = new Date(Date.now() - 864e5).toDateString();
+            count = last === yesterday ? count + 1 : 1;
+            localStorage.setItem(STREAK_KEY, today);
+            localStorage.setItem('bol-marathi-streak-count', String(count));
+          }
+          this.disabled = true;
+          this.textContent = '✓ Unit ' + unit + ' completed';
+          this.classList.remove('btn');
+          this.classList.add('btn', 'ghost');
+        }
+      } catch (e) { /* ignore */ }
+    });
+  }
+</script>

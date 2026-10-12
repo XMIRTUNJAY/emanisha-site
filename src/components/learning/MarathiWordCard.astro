@@ -1,0 +1,318 @@
+---
+// MarathiWordCard — Premium flip card for vocabulary learning
+// Replaces VocabCard with better visual hierarchy and interactions
+import { Word } from '../../lib/learn';
+import { simpleRespelling } from '../../lib/simple';
+import audioManifest from '../../data/audio-manifest.json';
+import { siteUrl } from '../../lib/site';
+
+interface Props {
+  word: Word;
+  roman?: 'diacritic' | 'simple' | 'none';
+  size?: 'sm' | 'md' | 'lg';
+  showSRS?: boolean;
+}
+
+const { word, roman = 'diacritic', size = 'md', showSRS = true } = Astro.props;
+const files = (audioManifest as { files?: Record<string, { word?: string }> }).files ?? {};
+const audioSrc = files[word.id]?.word ? siteUrl(`/audio/${files[word.id].word}`) : null;
+const showSimpleFirst = roman === 'simple';
+---
+
+<article class="marathi-word-card marathi-word-card--{size}" tabindex="0" role="button" aria-label={`Flip to see meaning of ${word.marathi}`} data-word-id={word.id}>
+  <div class="marathi-word-card__inner">
+    <!-- Front: Marathi word + audio -->
+    <div class="marathi-word-card__face marathi-word-card__face--front">
+      <div class="marathi-word-card__marathi" lang="mr">{word.marathi}</div>
+      <div class="marathi-word-card__hint">Tap to reveal</div>
+      {audioSrc && (
+        <AudioPlayer
+          src={audioSrc}
+          text={word.marathi}
+          transliteration={showSimpleFirst ? simpleRespelling(word.transliteration) : word.transliteration}
+          translation={word.english}
+          size="sm"
+          showText={false}
+          class="marathi-word-card__audio"
+        />
+      )}
+    </div>
+
+    <!-- Back: Full details -->
+    <div class="marathi-word-card__face marathi-word-card__face--back">
+      <div class="marathi-word-card__marathi" lang="mr">{word.marathi}</div>
+
+      {roman !== 'none' && (
+        <div class="marathi-word-card__transliteration">
+          <span class="r-a">{showSimpleFirst ? simpleRespelling(word.transliteration) : word.transliteration}</span>
+          <span class="r-b" hidden>{showSimpleFirst ? word.transliteration : simpleRespelling(word.transliteration)}</span>
+        </div>
+      )}
+
+      <div class="marathi-word-card__meanings">
+        <span class="marathi-word-card__hindi" lang="hi">{word.hindi}</span>
+        <span class="marathi-word-card__english">{word.english}</span>
+      </div>
+
+      <div class="marathi-word-card__example">
+        <span lang="mr" class="marathi-word-card__example-mr">{word.exampleMarathi}</span>
+        <small class="marathi-word-card__example-en">{word.exampleEnglish}</small>
+      </div>
+
+      {audioSrc && (
+        <AudioPlayer
+          src={audioSrc}
+          text={word.marathi}
+          transliteration={showSimpleFirst ? simpleRespelling(word.transliteration) : word.transliteration}
+          translation={word.english}
+          size="sm"
+          showText={false}
+          class="marathi-word-card__audio"
+        />
+      )}
+
+      {showSRS && (
+        <div class="marathi-word-card__srs" data-srs-actions={word.id}>
+          <button type="button" class="srs-btn srs-btn--again" data-srs-grade="again" aria-label={`Review ${word.marathi} later`}>↻ Review</button>
+          <button type="button" class="srs-btn srs-btn--easy" data-srs-grade="easy" aria-label={`I know ${word.marathi}`}>✓ Know it</button>
+          <span class="srs-fb" aria-live="polite" hidden>Saved!</span>
+        </div>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .marathi-word-card {
+    perspective: 1000px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 140px;
+    cursor: pointer;
+    --card-bg: var(--color-surface);
+    --card-border: var(--color-border);
+  }
+
+  .marathi-word-card--sm { min-height: 120px; }
+  .marathi-word-card--lg { min-height: 180px; }
+
+  .marathi-word-card__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s var(--ease-out);
+    transform-style: preserve-3d;
+  }
+
+  .marathi-word-card.flipped .marathi-word-card__inner {
+    transform: rotateY(180deg);
+  }
+
+  .marathi-word-card__face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    text-align: center;
+  }
+
+  .marathi-word-card__face--back {
+    transform: rotateY(180deg);
+    gap: var(--space-3);
+    align-items: stretch;
+  }
+
+  .marathi-word-card__marathi {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-word);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+
+  .marathi-word-card--sm .marathi-word-card__marathi { font-size: 1.5rem; }
+  .marathi-word-card--lg .marathi-word-card__marathi { font-size: 2.25rem; }
+
+  .marathi-word-card__hint {
+    font-size: var(--text-label);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .marathi-word-card__transliteration {
+    font-family: var(--font-mono);
+    font-size: var(--text-transliteration);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .r-b { display: none; }
+
+  .marathi-word-card__meanings {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    text-align: center;
+  }
+
+  .marathi-word-card__hindi {
+    font-family: var(--font-display);
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .marathi-word-card__english {
+    font-size: var(--text-body);
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .marathi-word-card__example {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+    margin-top: var(--space-1);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .marathi-word-card__example-mr {
+    font-family: var(--font-display);
+    font-size: var(--text-body-sm);
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .marathi-word-card__example-en {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .marathi-word-card__audio {
+    align-self: center;
+  }
+
+  .marathi-word-card__srs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .srs-btn {
+    font: inherit;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    padding: 0.5em 1em;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: var(--color-container-low);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .srs-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .srs-btn--easy:hover {
+    background: var(--color-success-bg);
+    border-color: var(--color-success);
+    color: var(--color-success);
+  }
+
+  .srs-fb {
+    font-size: var(--text-caption);
+    color: var(--color-success);
+    font-weight: 600;
+  }
+
+  .marathi-word-card:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marathi-word-card__inner { transition: none; }
+  }
+
+  /* Grid layout for multiple cards */
+  .marathi-word-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-5) 0;
+  }
+</style>
+
+<script>
+  import { addWord } from '../../lib/srs';
+  import { AnalyticsEvents } from '../../lib/analytics';
+
+  // Flip on click/Enter/Space
+  function initMarathiWordCards() {
+    document.querySelectorAll('.marathi-word-card:not([data-flip-init])').forEach(card => {
+      card.setAttribute('data-flip-init', 'true');
+
+      function flip() {
+        const nowFlipped = card.classList.toggle('flipped');
+        if (nowFlipped) {
+          try {
+            const label = card.getAttribute('aria-label') || 'word';
+            const word = label.replace('Flip to see meaning of ', '').slice(0, 50);
+            AnalyticsEvents.vocabFlipCard(word);
+          } catch { /* ignore */ }
+        }
+      }
+
+      card.addEventListener('click', flip);
+      card.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          flip();
+        }
+      });
+    });
+
+    // SRS grading buttons
+    document.querySelectorAll('[data-srs-actions]:not([data-srs-init])').forEach(zone => {
+      zone.setAttribute('data-srs-init', 'true');
+      const wordId = zone.getAttribute('data-srs-actions');
+      if (!wordId) return;
+
+      zone.querySelectorAll('[data-srs-grade]').forEach(btn => {
+        btn.addEventListener('click', (e: MouseEvent) => {
+          e.stopPropagation();
+          const grade = btn.getAttribute('data-srs-grade') as 'again' | 'easy';
+          addWord(wordId, grade === 'easy' ? 'easy' : 'again').catch(() => {});
+          const fb = zone.querySelector('.srs-fb');
+          if (fb) {
+            fb.removeAttribute('hidden');
+            window.setTimeout(() => fb.setAttribute('hidden', ''), 2000);
+          }
+        });
+      });
+    });
+  }
+
+  initMarathiWordCards();
+  document.addEventListener('astro:page-load', initMarathiWordCards);
+</script>

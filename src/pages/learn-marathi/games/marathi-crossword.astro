@@ -1,0 +1,532 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GameShell from '../../../components/games/GameShell.astro';
+import GameIntro from '../../../components/games/GameIntro.astro';
+import GameResult from '../../../components/games/GameResult.astro';
+import AppCTA from '../../../components/AppCTA.astro';
+import { vocab as words } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+import { splitGraphemes } from '../../../lib/games/graphemes';
+import crosswordData from '../../../data/games/crossword.json';
+
+// Precompute per-word akshara cells + clue numbers at build time.
+type Word = {
+	id: string;
+	num: number;
+	row: number;
+	col: number;
+	dir: 'across' | 'down';
+	cells: string[];
+	answer: string;
+	clue: string;
+	clueHi?: string;
+	meaning: string;
+	meaningHi: string;
+	example: string;
+};
+const puzzles = crosswordData.puzzles.map((p) => {
+	const starts = new Map<string, number>();
+	const sorted = [...p.words].sort((a, b) => a.row - b.row || a.col - b.col);
+	let num = 0;
+	for (const w of sorted) {
+		const key = w.row + ':' + w.col;
+		if (!starts.has(key)) starts.set(key, ++num);
+	}
+	const resolved: Word[] = p.words.map((w) => {
+		const v = crosswordData._provenance ? words.find((x) => x.id === w.vocabId) : undefined;
+		const byMr = v ?? words.find((x) => x.marathi === w.answer);
+		if (!byMr) throw new Error(`crossword: no vocab entry for "${w.answer}"`);
+		return {
+			id: w.id,
+			num: starts.get(w.row + ':' + w.col) as number,
+			row: w.row,
+			col: w.col,
+			dir: w.dir as 'across' | 'down',
+			cells: splitGraphemes(w.answer),
+			answer: w.answer,
+			clue: w.clue,
+			clueHi: w.clueHi,
+			meaning: byMr.english,
+			meaningHi: byMr.hindi,
+			example: byMr.exampleMarathi,
+		};
+	});
+	return {
+		id: p.id,
+		title: p.title,
+		titleHi: p.titleHi,
+		rows: p.rows,
+		cols: p.cols,
+		words: resolved,
+	};
+});
+
+const audio = (f: string) => siteUrl(`/games/audio/${f}`);
+const dataJson = JSON.stringify({
+	puzzles,
+	sfx: {
+		key: audio('ui/click_soft.mp3'),
+		correct: audio('feedback/correct_soft.mp3'),
+		wrong: audio('feedback/incorrect.mp3'),
+		round: audio('fanfare/game_complete.mp3'),
+	},
+});
+
+const title = 'Marathi Crossword Puzzle — Akshara Word Game | Bol Marathi';
+const description =
+	'Free Marathi crossword with curated grids: one full akshara per cell, across and down clues with Hindi, meanings and examples. Two hand-made puzzles.';
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Games', href: siteUrl('/games/') },
+		{ label: 'Crossword', href: siteUrl('/games/marathi-crossword/') },
+	]}
+>
+	<GameShell active="marathi-crossword">
+		<div class="prose">
+			<p class="kicker">Marathi Crossword</p>
+			<h1>Marathi Crossword</h1>
+			<p class="lede">
+				Small hand-made grids — every cell holds one full <strong>akshara</strong>, so conjuncts like
+				<span lang="mr">ब्द</span> stay whole. Answers come from the curriculum.
+			</p>
+			<div class="game-startbar">
+				<button type="button" class="btn btn-play" data-play>▶ Play</button>
+				<button type="button" class="btn ghost game-howto" data-howto>How to play</button>
+			</div>
+			<GameIntro
+				steps={[
+					'Tap a cell to select it, then tap letters on the keypad to fill it.',
+					'Arrow keys move between cells; <kbd>Backspace</kbd> clears.',
+					'<kbd>Check</kbd> marks wrong cells; <kbd>Reveal letter</kbd> fills the selected cell.',
+					'Every clue carries the answer\'s meaning — the puzzle is the lesson.',
+				]}
+			/>
+			<div class="game-stage">
+				<div id="cw-root" data-game>
+				<div class="modes" id="cw-tabs" role="tablist" aria-label="Puzzles"></div>
+				<p class="wl-meta" id="cw-meta"></p>
+				<div class="cw-grid" id="cw-grid"></div>
+				<p class="wl-msg" id="cw-msg" aria-live="polite"></p>
+				<div id="cw-keys" class="wl-keys" role="group" aria-label="Marathi keypad"></div>
+				<div class="cw-clues" id="cw-clues"></div>
+				<div class="game-actions">
+					<button type="button" class="btn" id="cw-check">Check</button>
+					<button type="button" class="btn ghost" id="cw-reveal">Reveal letter</button>
+				</div>
+			</div>
+			<GameResult id="cw-done" heading="Puzzle solved">
+				<p class="game-actions" style="justify-content:center">
+					<a class="btn" href={siteUrl('/vocabulary/food/')} data-funnel="game_review">Food & everyday words</a>
+					<AppCTA variant="vocabulary" context="game-crossword" />
+				</p>
+			</GameResult>
+			</div>
+		</div>
+	</GameShell>
+</Base>
+
+<script type="application/json" id="cw-data" set:html={dataJson} />
+
+<script>
+	import { makeStorage } from '../../../lib/games/storage';
+	import { makeSfx, sfxMuted, buzz } from '../../../lib/games/sfx';
+	import { romanize } from '../../../lib/games/mrKeys';
+
+	type Word = {
+		id: string;
+		num: number;
+		row: number;
+		col: number;
+		dir: 'across' | 'down';
+		cells: string[];
+		answer: string;
+		clue: string;
+		clueHi?: string;
+		meaning: string;
+		meaningHi: string;
+		example: string;
+	};
+	type Puzzle = {
+		id: string;
+		title: string;
+		titleHi?: string;
+		rows: number;
+		cols: number;
+		words: Word[];
+	};
+
+	function init() {
+		const root = document.getElementById('cw-root');
+		if (!root || (root as HTMLElement).dataset.bound) return;
+		(root as HTMLElement).dataset.bound = '1';
+		const dataEl = document.getElementById('cw-data');
+		if (!dataEl) return;
+		let data: { puzzles: Puzzle[]; sfx: Record<string, string> };
+		try {
+			data = JSON.parse(dataEl.textContent || '{}');
+		} catch {
+			return;
+		}
+		const puzzles: Puzzle[] = data.puzzles ?? [];
+		if (!puzzles.length) return;
+
+		const store = makeStorage('bol-game-crossword-');
+		const sfx = makeSfx(data.sfx ?? {}, { storage: store });
+
+		const tabsEl = document.getElementById('cw-tabs') as HTMLElement;
+		const meta = document.getElementById('cw-meta') as HTMLElement;
+		const gridEl = document.getElementById('cw-grid') as HTMLElement;
+		const keysEl = document.getElementById('cw-keys') as HTMLElement;
+		const cluesEl = document.getElementById('cw-clues') as HTMLElement;
+		const msg = document.getElementById('cw-msg') as HTMLElement;
+		const checkBtn = document.getElementById('cw-check') as HTMLButtonElement;
+		const revealBtn = document.getElementById('cw-reveal') as HTMLButtonElement;
+		const done = document.getElementById('cw-done') as HTMLElement;
+
+		let puzzle: Puzzle = puzzles[0] as Puzzle;
+		let entries = new Map<string, string>();
+		let sel: { row: number; col: number } | null = null;
+		let cells = new Map<string, HTMLElement>();
+
+		const key = (r: number, c: number) => r + ':' + c;
+
+		// keypad: every akshara in the puzzle, romanization order
+		const keySet = new Set<string>();
+		for (const w of puzzle.words) for (const a of w.cells) keySet.add(a);
+		const keys = [...keySet].sort((a, b) => romanize(a).localeCompare(romanize(b)));
+
+		function solutionAt(r: number, c: number): string | null {
+			for (const w of puzzle.words) {
+				for (let i = 0; i < w.cells.length; i++) {
+					const wr = w.dir === 'across' ? w.row : w.row + i;
+					const wc = w.dir === 'across' ? w.col + i : w.col;
+					if (wr === r && wc === c) return w.cells[i] ?? null;
+				}
+			}
+			return null;
+		}
+
+		function isFilled(r: number, c: number): boolean {
+			return solutionAt(r, c) !== null;
+		}
+
+		function renderTabs() {
+			tabsEl.innerHTML = '';
+			for (const p of puzzles) {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = 'mode' + (p.id === puzzle.id ? ' on' : '');
+				b.setAttribute('role', 'tab');
+				b.setAttribute('aria-selected', String(p.id === puzzle.id));
+				b.textContent = p.title;
+				b.addEventListener('click', () => {
+					if (p.id !== puzzle.id) {
+						puzzle = p;
+						startPuzzle();
+					}
+				});
+				tabsEl.appendChild(b);
+			}
+		}
+
+		function renderGrid() {
+			gridEl.innerHTML = '';
+			gridEl.style.gridTemplateColumns = `repeat(${puzzle.cols}, auto)`;
+			cells = new Map();
+			// clue numbers on start cells
+			const nums = new Map<string, number>();
+			for (const w of puzzle.words) nums.set(key(w.row, w.col), w.num);
+			for (let r = 0; r < puzzle.rows; r++) {
+				for (let c = 0; c < puzzle.cols; c++) {
+					const wrap = document.createElement('div');
+					wrap.className = 'cw-cell' + (isFilled(r, c) ? ' letter' : ' block');
+					if (isFilled(r, c)) {
+						const btn = document.createElement('button');
+						btn.type = 'button';
+						btn.className = 'cw-inner';
+						btn.setAttribute('aria-label', `Cell row ${r + 1} column ${c + 1}`);
+						btn.lang = 'mr';
+						const n = nums.get(key(r, c));
+						if (n) {
+							const num = document.createElement('span');
+							num.className = 'cw-num';
+							num.textContent = String(n);
+							btn.appendChild(num);
+						}
+						const val = document.createElement('span');
+						val.className = 'cw-val';
+						val.textContent = entries.get(key(r, c)) ?? '';
+						btn.appendChild(val);
+						btn.addEventListener('click', () => {
+							select(r, c);
+						});
+						wrap.appendChild(btn);
+						cells.set(key(r, c), val);
+					}
+					gridEl.appendChild(wrap);
+				}
+			}
+			// restyle: selection lives on the inner button
+			for (const [k, val] of cells) {
+				const btn = val.parentElement as HTMLElement;
+				btn.classList.add('cw-letter-btn');
+			}
+		}
+
+		function highlightWord(r: number, c: number) {
+			// softly highlight every cell of the across/down word through (r, c)
+			const wordHere = puzzle.words.find((x) => {
+				for (let i = 0; i < x.cells.length; i++) {
+					const wr = x.dir === 'across' ? x.row : x.row + i;
+					const wc = x.dir === 'across' ? x.col + i : x.col;
+					if (wr === r && wc === c) return true;
+				}
+				return false;
+			});
+			for (const [k, val] of cells) {
+				const btn = val.parentElement as HTMLElement;
+				btn.classList.remove('wordhl');
+				if (!wordHere) continue;
+				const [rr, cc] = k.split(':').map(Number);
+				for (let i = 0; i < wordHere.cells.length; i++) {
+					const wr = wordHere.dir === 'across' ? wordHere.row : wordHere.row + i;
+					const wc = wordHere.dir === 'across' ? wordHere.col + i : wordHere.col;
+					if (wr === rr && wc === cc) {
+						btn.classList.add('wordhl');
+						break;
+					}
+				}
+			}
+		}
+
+		function select(r: number, c: number) {
+			if (!isFilled(r, c)) return;
+			sel = { row: r, col: c };
+			for (const [k, val] of cells) {
+				const btn = val.parentElement as HTMLElement;
+				const [rr, cc] = k.split(':').map(Number);
+				btn.classList.toggle('selected', rr === r && cc === c);
+			}
+			highlightWord(r, c);
+		}
+
+		function move(dr: number, dc: number) {
+			if (!sel) return;
+			let r = sel.row;
+			let c = sel.col;
+			for (let i = 0; i < Math.max(puzzle.rows, puzzle.cols); i++) {
+				r += dr;
+				c += dc;
+				if (r < 0 || c < 0 || r >= puzzle.rows || c >= puzzle.cols) return;
+				if (isFilled(r, c)) {
+					select(r, c);
+					return;
+				}
+			}
+		}
+
+		function fill(ak: string) {
+			if (!sel) return;
+			entries.set(key(sel.row, sel.col), ak);
+			const val = cells.get(key(sel.row, sel.col));
+			if (val) {
+				val.textContent = ak;
+				const btn = val.parentElement as HTMLElement;
+				btn.classList.remove('pop');
+				void btn.offsetWidth; // restart animation
+				btn.classList.add('pop');
+			}
+			sfx.play('key');
+			// advance to the next cell of the word through the selection (prefer across)
+			const wordHere = puzzle.words.find((x) => {
+				for (let i = 0; i < x.cells.length; i++) {
+					const wr = x.dir === 'across' ? x.row : x.row + i;
+					const wc = x.dir === 'across' ? x.col + i : x.col;
+					if (wr === sel!.row && wc === sel!.col) return true;
+				}
+				return false;
+			});
+			if (wordHere) {
+				const idx = wordHere.cells.findIndex((_, i) => {
+					const wr = wordHere.dir === 'across' ? wordHere.row : wordHere.row + i;
+					const wc = wordHere.dir === 'across' ? wordHere.col + i : wordHere.col;
+					return wr === sel!.row && wc === sel!.col;
+				});
+				const next = wordHere.cells[idx + 1];
+				if (next) {
+					const nr = wordHere.dir === 'across' ? wordHere.row : wordHere.row + (idx + 1);
+					const nc = wordHere.dir === 'across' ? wordHere.col + (idx + 1) : wordHere.col;
+					select(nr, nc);
+					return;
+				}
+			}
+			move(0, 1);
+		}
+
+		function renderKeys() {
+			keysEl.innerHTML = '';
+			for (const k of keys) {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = 'wl-key';
+				b.textContent = k;
+				b.title = romanize(k);
+				b.addEventListener('click', () => fill(k));
+				keysEl.appendChild(b);
+			}
+			const del = document.createElement('button');
+			del.type = 'button';
+			del.className = 'wl-key wide';
+			del.textContent = '⌫';
+			del.title = 'Backspace';
+			del.addEventListener('click', () => {
+				if (!sel) return;
+				entries.delete(key(sel.row, sel.col));
+				const val = cells.get(key(sel.row, sel.col));
+				if (val) val.textContent = '';
+			});
+			keysEl.appendChild(del);
+		}
+
+		function renderClues() {
+			cluesEl.innerHTML = '';
+			const mk = (title: string, dir: 'across' | 'down') => {
+				const sec = document.createElement('div');
+				const h = document.createElement('h3');
+				h.textContent = title;
+				sec.appendChild(h);
+				const ol = document.createElement('ol');
+				for (const w of puzzle.words.filter((x) => x.dir === dir)) {
+					const li = document.createElement('li');
+					li.className = 'cw-clue';
+					li.value = w.num;
+					li.innerHTML = `<span lang="en"></span> <em>(<span lang="hi"></span>)</em>`;
+					(li.querySelector('span[lang="en"]') as HTMLElement).textContent = w.clue;
+					(li.querySelector('em span') as HTMLElement).textContent = w.clueHi ?? '';
+					ol.appendChild(li);
+				}
+				sec.appendChild(ol);
+				return sec;
+			};
+			cluesEl.appendChild(mk('Across', 'across'));
+			cluesEl.appendChild(mk('Down', 'down'));
+		}
+
+		function renderMeta() {
+			const filled = [...entries.keys()].filter((k) => {
+				const [r, c] = k.split(':').map(Number);
+				return entries.get(k) && solutionAt(r, c);
+			}).length;
+			void filled;
+			meta.textContent = `${puzzle.title} — ${puzzle.words.length} words`;
+		}
+
+		checkBtn.addEventListener('click', () => {
+			let wrong = 0;
+			let empty = 0;
+			for (const w of puzzle.words) {
+				for (let i = 0; i < w.cells.length; i++) {
+					const r = w.dir === 'across' ? w.row : w.row + i;
+					const c = w.dir === 'across' ? w.col + i : w.col;
+					const btn = (cells.get(key(r, c))?.parentElement as HTMLElement) ?? null;
+					if (!btn) continue;
+					btn.classList.remove('ok', 'bad');
+					const got = entries.get(key(r, c));
+					if (!got) {
+						empty += 1;
+					} else if (got !== w.cells[i]) {
+						wrong += 1;
+						btn.classList.add('bad');
+					} else {
+						btn.classList.add('ok');
+					}
+				}
+			}
+			if (wrong === 0 && empty === 0) {
+				sfx.play('round');
+				buzz([30, 40, 60]);
+				msg.textContent = 'Everything checks out!';
+				msg.className = 'wl-msg ok';
+				done.classList.add('confetti', 'bounce-in');
+				finish();
+			} else {
+				sfx.play('wrong');
+				msg.textContent = `${wrong} wrong, ${empty} empty — keep going!`;
+				msg.className = 'wl-msg bad';
+			}
+		});
+
+		revealBtn.addEventListener('click', () => {
+			if (!sel) return;
+			const sol = solutionAt(sel.row, sel.col);
+			if (sol) fill(sol);
+		});
+
+		function finish() {
+			done.hidden = false;
+			const body = done.querySelector('.gr-body') as HTMLElement;
+			body.innerHTML = puzzle.words
+				.map(
+					(w) =>
+						`<p style="margin:0.4em 0"><strong lang="mr">${w.answer}</strong> — ${w.meaning} · <span lang="hi">${w.meaningHi}</span><br><span class="gr-ex" lang="mr">${w.example}</span></p>`
+				)
+				.join('');
+			done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		}
+
+		document.addEventListener(
+			'keydown',
+			(e) => {
+				const t = e.target as HTMLElement | null;
+				if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+				const Arrows: Record<string, [number, number]> = {
+					ArrowLeft: [0, -1],
+					ArrowRight: [0, 1],
+					ArrowUp: [-1, 0],
+					ArrowDown: [1, 0],
+				};
+				if (Arrows[e.key] && sel) {
+					e.preventDefault();
+					e.stopPropagation();
+					const [dr, dc] = Arrows[e.key] as [number, number];
+					move(dr, dc);
+				} else if (e.key === 'Backspace' && sel) {
+					e.preventDefault();
+					e.stopPropagation();
+					entries.delete(key(sel.row, sel.col));
+					const val = cells.get(key(sel.row, sel.col));
+					if (val) val.textContent = '';
+				}
+			},
+			true
+		);
+
+		function startPuzzle() {
+			entries = new Map();
+			sel = null;
+			done.hidden = true;
+			done.classList.remove('confetti', 'bounce-in');
+			msg.textContent = '';
+			msg.className = 'wl-msg';
+			renderTabs();
+			renderMeta();
+			renderGrid();
+			renderKeys();
+			renderClues();
+			// preselect the first letter cell so the keypad works immediately
+			const first = puzzle.words.find((w) => w.dir === 'across') ?? puzzle.words[0];
+			if (first) select(first.row, first.col);
+		}
+
+		if (sfxMuted()) sfx.setMuted(true);
+		startPuzzle();
+	}
+
+	init();
+	document.addEventListener('astro:page-load', init);
+</script>

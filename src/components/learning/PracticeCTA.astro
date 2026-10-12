@@ -1,0 +1,197 @@
+---
+// PracticeCTA — Contextual app bridge CTA
+// "Learn here. Practice in the app."
+
+interface Props {
+  variant?: 'vocabulary' | 'phrase' | 'grammar' | 'hindi-bridge' | 'lesson' | 'general';
+  context?: string;           // Analytics context
+  lessonSlug?: string;        // Deep-link to specific app lesson
+  customTitle?: string;
+  customBody?: string;
+  customCTA?: string;
+}
+
+const {
+  variant = 'general',
+  context = 'practice-cta',
+  lessonSlug,
+  customTitle,
+  customBody,
+  customCTA,
+} = Astro.props;
+
+const variants = {
+  vocabulary: {
+    title: 'You\'ve learned the words.',
+    body: 'Now make them stick with spaced repetition, listening, and speaking practice.',
+    cta: 'Practice this vocabulary in Bol Marathi →',
+  },
+  phrase: {
+    title: 'You\'ve learned the phrases.',
+    body: 'Practice saying them aloud, get pronunciation feedback, and build fluency.',
+    cta: 'Practice these phrases in Bol Marathi →',
+  },
+  grammar: {
+    title: 'You\'ve learned the pattern.',
+    body: 'Build your own sentences, get instant feedback, and master the grammar.',
+    cta: 'Practice this grammar in Bol Marathi →',
+  },
+  'hindi-bridge': {
+    title: 'You\'ve bridged Hindi → Marathi.',
+    body: 'Practice the mappings, reinforce the patterns, and speak naturally.',
+    cta: 'Practice Hindi→Marathi in Bol Marathi →',
+  },
+  lesson: {
+    title: 'Lesson complete.',
+    body: 'You\'ve covered the core concepts. Now practice what you learned.',
+    cta: 'Continue in Bol Marathi →',
+  },
+  general: {
+    title: 'Learn here. Practice in the app.',
+    body: 'The website teaches. The app makes it stick with review loops, speaking, and streaks.',
+    cta: 'Open Bol Marathi →',
+  },
+};
+
+const content = customTitle || customBody || customCTA
+  ? { title: customTitle, body: customBody, cta: customCTA }
+  : variants[variant];
+
+const deepLink = lessonSlug
+  ? `bolmarathi://lesson/${lessonSlug}`
+  : 'https://bolmarathi.app';
+---
+
+<div class={`practice-cta practice-cta--${variant}`}>
+  <div class="practice-cta__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
+      <rect x="2" y="3" width="20" height="18" rx="2" ry="2"/>
+      <path d="M8 12h8M12 8v8"/>
+    </svg>
+  </div>
+  <div class="practice-cta__content">
+    <h3 class="practice-cta__title">{content.title}</h3>
+    <p class="practice-cta__body">{content.body}</p>
+  </div>
+  <a
+    class="practice-cta__btn btn"
+    href={deepLink}
+    data-funnel={`practice_cta_${variant}`}
+    data-context={context}
+    target="_blank"
+    rel="noopener"
+  >
+    {content.cta}
+  </a>
+</div>
+
+<style>
+  .practice-cta {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-container-low) 100%);
+    padding: var(--space-5);
+    margin: var(--space-6) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .practice-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary);
+  }
+
+  .practice-cta__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--color-primary-fixed);
+    border-radius: var(--radius);
+    color: var(--color-primary);
+  }
+
+  .practice-cta__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .practice-cta__title {
+    margin: 0 0 var(--space-1) 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .practice-cta__body {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .practice-cta__btn {
+    flex-shrink: 0;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 var(--space-5);
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-size: var(--text-button);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius);
+    margin-top: var(--space-2);
+    transition: background var(--duration-fast) var(--ease-out), filter var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+  }
+
+  .practice-cta__btn:hover {
+    filter: brightness(0.92);
+    color: var(--color-text-on-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .practice-cta__btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Variant-specific styling */
+  .practice-cta--vocabulary::before { background: var(--color-primary); }
+  .practice-cta--phrase::before { background: var(--color-success); }
+  .practice-cta--grammar::before { background: var(--color-warning); }
+  .practice-cta--hindi-bridge::before { background: var(--color-primary); }
+  .practice-cta--lesson::before { background: var(--color-primary-light); }
+  .practice-cta--general::before { background: var(--color-primary); }
+
+  .practice-cta--phrase .practice-cta__icon { background: var(--color-success-bg); color: var(--color-success); }
+  .practice-cta--grammar .practice-cta__icon { background: var(--color-warning-bg); color: var(--color-warning); }
+  .practice-cta--hindi-bridge .practice-cta__icon { background: var(--color-primary-fixed); color: var(--color-primary); }
+  .practice-cta--lesson .practice-cta__icon { background: var(--color-primary-fixed); color: var(--color-primary); }
+
+  @media (max-width: 560px) {
+    .practice-cta {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+    .practice-cta__icon { margin: 0 auto; }
+    .practice-cta__btn { width: 100%; }
+  }
+</style>

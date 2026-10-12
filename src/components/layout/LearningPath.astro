@@ -1,0 +1,303 @@
+---
+// LearningPath — the route from first word to speaking, as an interactive stepper.
+//
+// - Every href goes through siteUrl() so it carries the deploy base path.
+//   (Previously these were plain "/start/" strings, which 404'd under
+//   /learn-marathi/ — and two steps pointed at routes that don't exist.)
+// - Horizontally scroll-snapped with prev/next controls when it overflows.
+// - Hover/focus highlights the node, its label and the connecting rail.
+//
+// Targets verified against the built site (tools/check-links.mjs).
+
+import Icon from '../design-system/Icon.astro';
+import { siteUrl } from '../../lib/site';
+
+interface Props {
+  currentStep?: number;  // index of the step to mark as active
+  class?: string;
+}
+
+const { currentStep = 0, class: className = '' } = Astro.props;
+
+const steps = [
+  { id: 'start', label: 'Start', icon: 'sprout', desc: 'First words', href: siteUrl('/start/') },
+  { id: 'essential', label: 'Essential', icon: 'book', desc: 'Core vocabulary', href: siteUrl('/vocabulary/') },
+  { id: 'everyday', label: 'Everyday', icon: 'home', desc: 'Daily words', href: siteUrl('/vocabulary/daily-life/') },
+  { id: 'phrases', label: 'Phrases', icon: 'chat', desc: 'Useful sentences', href: siteUrl('/phrases/') },
+  { id: 'sentences', label: 'Sentences', icon: 'grid', desc: 'Build your own', href: siteUrl('/grammar/') },
+  { id: 'conversations', label: 'Conversations', icon: 'speech', desc: 'Real dialogue', href: siteUrl('/phrases/daily/') },
+  { id: 'speak', label: 'Speak', icon: 'spark', desc: 'Fluent Marathi', href: siteUrl('/app/') },
+] as const;
+---
+
+<nav class={`path ${className}`} aria-label="Learning journey" data-path>
+  <div class="path__controls">
+    <p class="path__hint">
+      <span class="path__hint-from">First word</span>
+      <span class="path__hint-arrow" aria-hidden="true"><Icon name="arrow-right" size={14} /></span>
+      <span class="path__hint-to">Speaking</span>
+    </p>
+    <div class="path__buttons">
+      <button type="button" class="path__scroll" data-path-prev aria-label="Scroll path left">
+        <Icon name="arrow-left" size={18} />
+      </button>
+      <button type="button" class="path__scroll" data-path-next aria-label="Scroll path right">
+        <Icon name="arrow-right" size={18} />
+      </button>
+    </div>
+  </div>
+
+  <div class="path__viewport">
+    <ol class="path__steps">
+      {steps.map((step, i) => {
+        const isActive = i === currentStep;
+        const isCompleted = i < currentStep;
+        return (
+          <li
+            class={`path__step ${isActive ? 'path__step--active' : ''} ${isCompleted ? 'path__step--completed' : ''}`}
+            data-step={step.id}
+          >
+            <a href={step.href} class="path__link" aria-label={`${step.label} — ${step.desc}`}>
+              <span class="path__node" aria-current={isActive ? 'step' : undefined}>
+                <span class="path__icon"><Icon name={step.icon} size={22} /></span>
+                {isCompleted && <span class="path__check" aria-hidden="true"><Icon name="check" size={22} /></span>}
+              </span>
+              <span class="path__label">{step.label}</span>
+              <span class="path__desc">{step.desc}</span>
+              {isActive && <span class="path__badge">Start here</span>}
+            </a>
+            {i < steps.length - 1 && <span class="path__rail" aria-hidden="true"></span>}
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</nav>
+
+<style>
+  .path { width: 100%; max-width: 100%; }
+
+  .path__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .path__hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--color-text-muted);
+  }
+
+  .path__hint-from { color: var(--color-text); }
+  .path__hint-to { color: var(--color-primary); }
+  .path__hint-arrow { display: inline-flex; color: var(--color-border); }
+
+  .path__buttons { display: flex; gap: var(--space-2); }
+
+  .path__scroll {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .path__scroll:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .path__scroll[disabled] { opacity: 0.35; cursor: default; }
+  .path__scroll[disabled]:hover { border-color: var(--color-border); color: var(--color-text); }
+
+  .path__viewport {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: var(--space-2);
+  }
+
+  .path__steps {
+    display: flex;
+    align-items: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0 var(--space-3);
+    min-width: max-content;
+  }
+
+  .path__step {
+    position: relative;
+    flex: 0 0 auto;
+    width: 132px;
+    scroll-snap-align: center;
+  }
+
+  .path__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--radius);
+    transition: transform var(--duration-base) var(--ease-spring-gentle);
+  }
+
+  .path__node {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    color: var(--color-text-muted);
+    transition: transform var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) var(--ease-out),
+                background var(--duration-base) var(--ease-out),
+                color var(--duration-base) var(--ease-out),
+                box-shadow var(--duration-base) var(--ease-out);
+  }
+
+  /* connecting rail */
+  .path__rail {
+    position: absolute;
+    top: 33px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--color-border);
+    z-index: 1;
+    transition: background var(--duration-base) var(--ease-out);
+  }
+
+  .path__step--active .path__node,
+  .path__step--completed .path__node {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .path__step--active .path__node {
+    box-shadow: 0 0 0 5px var(--color-primary-fixed);
+  }
+
+  .path__step--completed .path__node { background: var(--color-success); border-color: var(--color-success); }
+
+  .path__step--active .path__rail,
+  .path__step--completed .path__rail { background: linear-gradient(90deg, var(--color-primary), var(--color-border)); }
+
+  .path__check { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .path__icon { display: flex; }
+  .path__step--completed .path__icon { visibility: hidden; }
+
+  .path__label {
+    font-size: var(--text-body-sm);
+    font-weight: 700;
+    color: var(--color-text);
+    text-align: center;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .path__desc {
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .path__step--active .path__label { color: var(--color-primary); }
+
+  .path__badge {
+    margin-top: 0.15em;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background: var(--color-primary-fixed);
+    border-radius: var(--radius-full);
+    padding: 0.2em 0.6em;
+    white-space: nowrap;
+  }
+
+  /* Interactive: lift + highlight node and rail on hover/focus */
+  .path__link:hover .path__node,
+  .path__link:focus-visible .path__node {
+    transform: translateY(-4px) scale(1.06);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .path__link:hover .path__label { color: var(--color-primary); }
+  .path__step:hover .path__rail { background: var(--color-primary); }
+
+  .path__link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; }
+
+  /* active step should not lose its filled look on hover */
+  .path__step--active .path__link:hover .path__node,
+  .path__step--completed .path__link:hover .path__node { color: #fff; }
+
+  @media (max-width: 640px) {
+    .path__step { width: 112px; }
+    .path__node { width: 50px; height: 50px; }
+    .path__rail { top: 29px; }
+    .path__label { font-size: 0.8rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .path__link, .path__node, .path__rail { transition: none; }
+  }
+</style>
+
+<script>
+  // Prev/next scroll controls for the horizontal path. Progressive enhancement:
+  // the strip is natively scrollable without JS, so these are a convenience.
+  function initPath() {
+    document.querySelectorAll('[data-path]').forEach((root) => {
+      if (!(root instanceof HTMLElement) || root.dataset.pathReady) return;
+      const strip = root.querySelector('.path__viewport');
+      const prev = root.querySelector('[data-path-prev]');
+      const next = root.querySelector('[data-path-next]');
+      if (!(strip instanceof HTMLElement) || !(prev instanceof HTMLElement) || !(next instanceof HTMLElement)) return;
+      root.dataset.pathReady = '1';
+
+      const step = () => Math.max(strip.clientWidth * 0.7, 160);
+      const sync = () => {
+        const max = strip.scrollWidth - strip.clientWidth - 1;
+        prev.disabled = strip.scrollLeft <= 0;
+        next.disabled = strip.scrollLeft >= max || max <= 0;
+      };
+      prev.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }));
+      strip.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
+    });
+  }
+  initPath();
+  document.addEventListener('astro:page-load', initPath);
+</script>

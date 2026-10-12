@@ -1,0 +1,89 @@
+---
+// Phrase set/topic page - Premium version
+// Uses PremiumPhrasePage for data-driven SEO pages, Learn for curated sets
+
+import AppCTA from '../../../components/AppCTA.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import Learn from '../../../layouts/Learn.astro';
+import PremiumPhrasePage from '../../../components/PremiumPhrasePage.astro';
+import { phraseSets, phrasesFor } from '../../../lib/learn';
+import { seoPagesByFamily } from '../../../lib/seo';
+import { siteUrl } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  return [
+    ...phraseSets.map((p) => ({ params: { set: p.slug } })),
+    // Data-driven situational phrase pages (src/data/seo/phrase-pages.json)
+    ...seoPagesByFamily('phrases').map((p) => ({ params: { set: p.slug }, props: { seoPage: p } })),
+  ];
+}
+
+const { set: slug } = Astro.params;
+const seoPage = Astro.props.seoPage as import('../../../lib/seo').SeoPage | undefined;
+const set = phraseSets.find((p) => p.slug === slug);
+if (!set && !seoPage) throw new Error(`Unknown phrase set: ${slug}`);
+const phrases = set ? phrasesFor(set) : [];
+---
+
+{seoPage ? (
+  <PremiumPhrasePage page={seoPage} />
+) : set && (
+<Learn
+  title={`${set.title}: Free Lesson`}
+  h1={`${set.title} (with Hindi & English)`}
+  description={set.description}
+  kicker="Marathi Phrases"
+  crumbs={[
+    { label: 'Phrases', href: siteUrl('/phrases/') },
+    { label: set.title, href: siteUrl(`/phrases/${set.slug}/`) },
+  ]}
+  canonicalPath={`/phrases/${set.slug}/`}
+  about={set.intent}
+  meta={[`${phrases.length} phrases`, set.unitRefs.length > 1 ? `Units ${set.unitRefs.join(', ')}` : `Unit ${set.unitRefs[0]}`]}
+>
+  <script>
+    import { AnalyticsEvents } from '../../../lib/analytics';
+    try {
+      const slug = window.location.pathname.split('/').filter(Boolean).pop() || 'unknown';
+      const count = document.querySelectorAll('table.vocab tbody tr').length;
+      AnalyticsEvents.phraseView(slug, count);
+    } catch { /* ignore */ }
+  </script>
+
+  <h2>What you will learn</h2>
+  <p>
+    {phrases.length} real Marathi sentences from the Bol Marathi curriculum —
+    each with its Hindi meaning, English meaning and a speaking tip.
+    Say each one aloud before moving on.
+  </p>
+  <p>{set.intro}</p>
+  {set.tip && <p class="tip"><strong>Tip:</strong> {set.tip}</p>}
+
+  <div class="table-scroll" role="region" aria-label={set.title} tabindex="0">
+    <table class="vocab">
+      <thead>
+        <tr>
+          <th scope="col">Marathi</th>
+          <th scope="col">Hindi</th>
+          <th scope="col">English</th>
+          <th scope="col">Tip</th>
+        </tr>
+      </thead>
+      <tbody>
+        {phrases.map((p) => (
+          <tr>
+            <td class="mr" lang="mr">{p.sentence}</td>
+            <td lang="hi">{p.hindi}</td>
+            <td>{p.english}</td>
+            <td>{p.tip}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <AppCTA variant="phrase" context={`phrases-${set.slug}`} />
+
+  <RelatedContent links={set.related} />
+</Learn>
+)}

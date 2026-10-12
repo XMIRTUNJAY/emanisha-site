@@ -1,0 +1,465 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GameShell from '../../../components/games/GameShell.astro';
+import GameIntro from '../../../components/games/GameIntro.astro';
+import GameResult from '../../../components/games/GameResult.astro';
+import AppCTA from '../../../components/AppCTA.astro';
+import { units } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+import { isAccepted } from '../../../lib/games/scramble';
+import { makeStorage } from '../../../lib/games/storage';
+import scrambleData from '../../../data/games/scramble.json';
+
+// Resolve referenced sentenceBuilder rows at build time (fails loudly if the
+// curriculum changed and a row disappeared).
+type Item = {
+	prompt: string;
+	promptPattern: string;
+	tokens: string[];
+	answer: string[];
+	alternates: string[][];
+	hindi: string;
+	hindiEn: string;
+	unit: string;
+	lesson: number;
+	level: 'easy' | 'medium' | 'challenge';
+};
+const items: Item[] = scrambleData.items.map((ref) => {
+	const u = units.find((x) => x.unit === ref.unit);
+	if (!u) throw new Error(`scramble: unknown unit ${ref.unit}`);
+	const row = u.sentenceBuilder.find(
+		(b) => b.lesson === ref.lesson && b.promptEn === ref.promptEn
+	);
+	if (!row) throw new Error(`scramble: missing row ${ref.unit} lesson ${ref.lesson} "${ref.promptEn}"`);
+	const n = row.answer.length;
+	return {
+		prompt: row.promptEn.replace(/^Pattern:.*→\s*Build:\s*/, ''),
+		promptPattern: row.promptEn.replace(/\s*→\s*Build:.*$/, '').replace(/^Pattern:\s*/, ''),
+		tokens: row.tokens,
+		answer: row.answer,
+		alternates: ref.alternates,
+		hindi: row.hindi,
+		hindiEn: row.hindiEn,
+		unit: ref.unit,
+		lesson: ref.lesson,
+		level: n <= 3 ? 'easy' : n === 4 ? 'medium' : 'challenge',
+	};
+});
+if (items.length < 12) throw new Error('scramble: too few resolved items');
+
+const audio = (f: string) => siteUrl(`/games/audio/${f}`);
+const dataJson = JSON.stringify({
+	items,
+	sfx: {
+		pick: audio('sentence_builder/word_pick.mp3'),
+		place: audio('sentence_builder/word_place.mp3'),
+		remove: audio('sentence_builder/word_remove.mp3'),
+		correct: audio('sentence_builder/sentence_correct.mp3'),
+		wrong: audio('sentence_builder/sentence_wrong.mp3'),
+		round: audio('fanfare/round_complete.mp3'),
+	},
+});
+
+const title = 'Marathi Sentence Scramble — Build Marathi Sentences | Bol Marathi';
+const description =
+	'Free Marathi sentence-building game: rebuild real Bol Marathi curriculum sentences from shuffled tiles, with Hindi and English translations and grammar pattern notes.';
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Games', href: siteUrl('/games/') },
+		{ label: 'Sentence Scramble', href: siteUrl('/games/sentence-scramble/') },
+	]}
+>
+	<GameShell active="sentence-scramble">
+		<div class="prose">
+			<p class="kicker">Marathi Sentence Scramble</p>
+			<h1>Sentence Scramble</h1>
+			<p class="lede">
+				Real sentences from the Bol Marathi curriculum, shuffled. Put the tiles back in order — Marathi runs
+				<strong>subject → object → verb</strong>, so the verb lands last.
+			</p>
+			<div class="game-startbar">
+				<button type="button" class="btn btn-play" data-play>▶ Play</button>
+				<button type="button" class="btn ghost game-howto" data-howto>How to play</button>
+			</div>
+			<GameIntro
+				steps={[
+					'Read the English prompt, then tap tiles to move them between the bank and your sentence.',
+					'Reorder inside your sentence by dragging a tile or focusing it and using <kbd>←</kbd>/<kbd>→</kbd>.',
+					'<kbd>Check</kbd> compares against the curriculum order (plus any accepted alternatives).',
+					'Stuck? <kbd>Hint</kbd> shows the grammar pattern, then places the first tile.',
+				]}
+			/>
+			<div class="game-stage">
+				<div id="ss-root" data-game>
+				<div class="modes" role="tablist" aria-label="Difficulty">
+					<button type="button" class="mode on" data-level="easy" role="tab" aria-selected="true">Easy (3 tiles)</button>
+					<button type="button" class="mode" data-level="medium" role="tab" aria-selected="false">Medium (4)</button>
+					<button type="button" class="mode" data-level="challenge" role="tab" aria-selected="false">Challenge (5)</button>
+				</div>
+				<p class="wl-meta" id="ss-meta"></p>
+				<p class="ss-prompt" id="ss-prompt"></p>
+				<p class="hint-box" id="ss-hint" aria-live="polite"></p>
+				<div class="ss-build" id="ss-build" aria-label="Your sentence"></div>
+				<div class="ss-bank" id="ss-bank" aria-label="Word bank"></div>
+				<p class="wl-msg" id="ss-msg" aria-live="polite"></p>
+				<p class="qtr" id="ss-hindi" lang="hi" hidden></p>
+				<div class="game-actions">
+					<button type="button" class="btn" id="ss-check">Check</button>
+					<button type="button" class="btn ghost" id="ss-hintbtn">Hint</button>
+					<button type="button" class="btn ghost" id="ss-next" hidden>Next →</button>
+				</div>
+			</div>
+			<GameResult id="ss-done" heading="Round complete">
+				<p class="game-actions" style="justify-content:center">
+					<a class="btn" href={siteUrl('/grammar/sentence-structure/')} data-funnel="game_review">Sentence structure lesson</a>
+					<AppCTA variant="grammar" context="game-scramble" />
+				</p>
+			</GameResult>
+			</div>
+		</div>
+	</GameShell>
+</Base>
+
+<script type="application/json" id="ss-data" set:html={dataJson} />
+
+<script>
+	import { isAccepted } from '../../../lib/games/scramble';
+	import { makeStorage } from '../../../lib/games/storage';
+	import { makeSfx, sfxMuted, buzz } from '../../../lib/games/sfx';
+
+	type Item = {
+		prompt: string;
+		promptPattern: string;
+		tokens: string[];
+		answer: string[];
+		alternates: string[][];
+		hindi: string;
+		hindiEn: string;
+		unit: string;
+		lesson: number;
+		level: string;
+	};
+
+	const ROUND = 6;
+
+	function init() {
+		const root = document.getElementById('ss-root');
+		if (!root || (root as HTMLElement).dataset.bound) return;
+		(root as HTMLElement).dataset.bound = '1';
+		const dataEl = document.getElementById('ss-data');
+		if (!dataEl) return;
+		let data: { items: Item[]; sfx: Record<string, string> };
+		try {
+			data = JSON.parse(dataEl.textContent || '{}');
+		} catch {
+			return;
+		}
+		const all: Item[] = data.items ?? [];
+		if (!all.length) return;
+
+		const store = makeStorage('bol-game-scramble-');
+		const sfx = makeSfx(data.sfx ?? {}, { storage: store });
+
+		const meta = document.getElementById('ss-meta') as HTMLElement;
+		const promptEl = document.getElementById('ss-prompt') as HTMLElement;
+		const hindiEl = document.getElementById('ss-hindi') as HTMLElement;
+		const buildEl = document.getElementById('ss-build') as HTMLElement;
+		const bankEl = document.getElementById('ss-bank') as HTMLElement;
+		const msg = document.getElementById('ss-msg') as HTMLElement;
+		const hintEl = document.getElementById('ss-hint') as HTMLElement;
+		const checkBtn = document.getElementById('ss-check') as HTMLButtonElement;
+		const hintBtn = document.getElementById('ss-hintbtn') as HTMLButtonElement;
+		const nextBtn = document.getElementById('ss-next') as HTMLButtonElement;
+		const done = document.getElementById('ss-done') as HTMLElement;
+
+		let level = 'easy';
+		let round: Item[] = [];
+		let idx = 0;
+		let score = 0;
+		let placed: { id: number; text: string }[] = [];
+		let bank: { id: number; text: string }[] = [];
+		let locked = false;
+		let hintStage = 0;
+		let nextId = 1;
+
+		function render(animateLast = false) {
+			buildEl.innerHTML = '';
+			bankEl.innerHTML = '';
+			if (!placed.length && !locked) {
+				const ph = document.createElement('span');
+				ph.className = 'ph';
+				ph.textContent = 'Tap words below in order…';
+				buildEl.appendChild(ph);
+			}
+			for (const t of placed) buildEl.appendChild(tile(t, 'placed'));
+			for (const t of bank) bankEl.appendChild(tile(t, 'bank'));
+			if (animateLast && placed.length) {
+				const lastPlaced = buildEl.querySelector('.tok:last-of-type') as HTMLElement | null;
+				lastPlaced?.classList.add('pop');
+			}
+		}
+
+		function tile(t: { id: number; text: string }, zone: 'placed' | 'bank') {
+			const b = document.createElement('button');
+			b.type = 'button';
+			b.className = 'tok';
+			b.lang = 'mr';
+			b.textContent = t.text;
+			b.dataset.id = String(t.id);
+			b.setAttribute('aria-label', `${zone === 'placed' ? 'Remove' : 'Place'} ${t.text}`);
+			b.addEventListener('click', () => {
+				if (locked || suppressClick) return;
+				if (zone === 'bank') {
+					sfx.play('pick');
+					move(t, bank, placed);
+					render(true);
+				} else {
+					sfx.play('remove');
+					move(t, placed, bank);
+					render(true);
+				}
+			});
+			attachDrag(b, t, zone);
+			// keyboard reorder within the current zone
+			b.addEventListener('keydown', (e) => {
+				if (locked) return;
+				if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+					e.preventDefault();
+					const list = zone === 'placed' ? placed : bank;
+					const i = list.findIndex((x) => x.id === t.id);
+					const j = e.key === 'ArrowLeft' ? i - 1 : i + 1;
+					if (i >= 0 && j >= 0 && j < list.length) {
+						const [moved] = list.splice(i, 1);
+						list.splice(j, 0, moved as { id: number; text: string });
+						render(true);
+						const again = (zone === 'placed' ? buildEl : bankEl).querySelector(
+							`[data-id="${t.id}"]`
+						) as HTMLElement | null;
+						again?.focus();
+					}
+				}
+			});
+			return b;
+		}
+
+		// Pointer-based drag & drop — works with mouse, pen and touch.
+		let suppressClick = false;
+		function attachDrag(b: HTMLButtonElement, t: { id: number; text: string }, zone: 'placed' | 'bank') {
+			let startX = 0;
+			let startY = 0;
+			let dragging = false;
+			let moved = false;
+
+			b.addEventListener('pointerdown', (e) => {
+				if (locked) return;
+				if (zone !== 'placed') return; // reorder only inside the sentence row
+				if (e.pointerType === 'mouse' && e.button !== 0) return;
+				startX = e.clientX;
+				startY = e.clientY;
+				dragging = false;
+				moved = false;
+				// capture immediately: after the pointer leaves the button we still
+				// receive pointermove/pointerup (without this, drags die instantly)
+				try { b.setPointerCapture(e.pointerId); } catch { /* ignore */ }
+			});
+			b.addEventListener('pointermove', (e) => {
+				if (locked || zone !== 'placed') return;
+				if (!dragging) {
+					if (Math.hypot(e.clientX - startX, e.clientY - startY) < 8) return;
+					dragging = true;
+					moved = true;
+					b.classList.add('dragging');
+				}
+				const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+				const overTok = target?.closest('#ss-build .tok') as HTMLElement | null;
+				for (const el of buildEl.querySelectorAll('.tok.drop-target')) el.classList.remove('drop-target');
+				if (overTok && overTok !== b) overTok.classList.add('drop-target');
+			});
+			const finishDrag = (e: PointerEvent) => {
+				const wasDragging = dragging;
+				dragging = false;
+				b.classList.remove('dragging');
+				for (const el of buildEl.querySelectorAll('.tok.drop-target')) el.classList.remove('drop-target');
+				if (!wasDragging) return;
+				const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+				const overTok = target?.closest('#ss-build .tok') as HTMLElement | null;
+				if (overTok && overTok !== b) {
+					const fromId = parseInt(b.dataset.id ?? '', 10);
+					const toId = parseInt(overTok.dataset.id ?? '', 10);
+					const from = placed.findIndex((x) => x.id === fromId);
+					const to = placed.findIndex((x) => x.id === toId);
+					if (from >= 0 && to >= 0 && from !== to) {
+						const [movedTile] = placed.splice(from, 1);
+						placed.splice(to, 0, movedTile as { id: number; text: string });
+						sfx.play('place');
+					}
+				}
+				suppressClick = true;
+				setTimeout(() => {
+					suppressClick = false;
+				}, 50);
+				render(true);
+			};
+			b.addEventListener('pointerup', finishDrag);
+			b.addEventListener('pointercancel', finishDrag);
+		}
+
+		function move(t: { id: number; text: string }, from: { id: number; text: string }[], to: { id: number; text: string }[]) {
+			const i = from.findIndex((x) => x.id === t.id);
+			if (i >= 0) {
+				const [moved] = from.splice(i, 1);
+				if (moved) to.push(moved);
+			}
+		}
+
+		function startRound() {
+			round = all
+				.filter((it) => it.level === level)
+				.sort(() => Math.random() - 0.5)
+				.slice(0, Math.min(ROUND, 6));
+			idx = 0;
+			score = 0;
+			done.hidden = true;
+			done.classList.remove('confetti', 'bounce-in');
+			nextBtn.hidden = true;
+			renderMeta();
+			load();
+		}
+
+		function renderMeta() {
+			meta.textContent = round.length
+				? `Sentence ${Math.min(idx + 1, round.length)}/${round.length} · Score ${score}`
+				: 'Select a level';
+		}
+
+		function load() {
+			const it = round[idx];
+			if (!it) {
+				finish();
+				return;
+			}
+			locked = false;
+			hintStage = 0;
+			hintEl.textContent = '';
+			msg.textContent = '';
+			msg.className = 'wl-msg';
+			hindiEl.hidden = true;
+			checkBtn.hidden = false;
+			nextBtn.hidden = true;
+			promptEl.textContent = it.prompt;
+			placed = [];
+			bank = it.tokens
+				.slice()
+				.sort(() => Math.random() - 0.5)
+				.map((text) => ({ id: nextId++, text }));
+			renderMeta();
+			render();
+		}
+
+		checkBtn.addEventListener('click', () => {
+			if (locked) return;
+			const it = round[idx];
+			if (!it) return;
+			if (placed.length !== it.answer.length) {
+				msg.textContent = 'All tiles must be in your sentence first.';
+				msg.className = 'wl-msg bad';
+				buildEl.classList.remove('wrong-shake');
+				void buildEl.offsetWidth;
+				buildEl.classList.add('wrong-shake');
+				return;
+			}
+			const texts = placed.map((t) => t.text);
+			const ok = isAccepted({ answer: it.answer, alternates: it.alternates }, texts);
+			locked = true;
+			sfx.play(ok ? 'correct' : 'wrong');
+			buzz(ok ? [20, 30, 40] : 60);
+			if (ok) {
+				score += 1;
+				hindiEl.hidden = false;
+				hindiEl.textContent = `${it.hindi} · ${it.hindiEn}`;
+				msg.textContent = `Correct — pattern: ${it.promptPattern}`;
+				msg.className = 'wl-msg ok';
+			} else {
+				msg.textContent = `Not quite — the curriculum order: ${it.answer.join(' ')}`;
+				msg.className = 'wl-msg bad';
+			}
+			renderMeta();
+			render();
+			checkBtn.hidden = true;
+			nextBtn.hidden = false;
+			nextBtn.textContent = idx === round.length - 1 ? 'See results →' : 'Next →';
+		});
+
+		hintBtn.addEventListener('click', () => {
+			const it = round[idx];
+			if (!it || locked) return;
+			sfx.play('pick');
+			if (hintStage === 0) {
+				hintStage = 1;
+				hintEl.textContent = `Pattern: ${it.promptPattern}`;
+			} else if (hintStage === 1) {
+				hintStage = 2;
+				// place the first tile of the curriculum answer if it's still in the bank
+				const first = it.answer[0];
+				const inBank = bank.find((t) => t.text === first);
+				const inPlaced = placed.find((t) => t.text === first);
+				if (inBank) {
+					move(inBank, bank, placed);
+					render();
+					hintEl.textContent = `First tile placed: ${first}`;
+				} else if (inPlaced) {
+					hintEl.textContent = `The sentence starts with “${first}” — move it to the front.`;
+				}
+			}
+		});
+
+		nextBtn.addEventListener('click', () => {
+			idx += 1;
+			if (idx >= round.length) finish();
+			else load();
+		});
+
+		function finish() {
+			sfx.play('round');
+			done.hidden = false;
+			done.classList.add('confetti', 'bounce-in');
+			const best = Math.max(score, parseInt(store.get('best-' + level) || '0', 10));
+			store.set('best-' + level, String(best));
+			const scoreEl = done.querySelector('.gr-score') as HTMLElement;
+			const body = done.querySelector('.gr-body') as HTMLElement;
+			scoreEl.textContent = `${score}/${round.length} at ${level} level · Best ${best}`;
+			body.innerHTML = `<p>Sentences come straight from the Bol Marathi curriculum — review them any time.</p>`;
+			done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		}
+
+		for (const btn of document.querySelectorAll('#ss-root .mode')) {
+			btn.addEventListener('click', () => {
+				level = (btn as HTMLElement).dataset.level ?? 'easy';
+				for (const b of document.querySelectorAll('#ss-root .mode')) {
+					b.classList.toggle('on', b === btn);
+					b.setAttribute('aria-selected', String(b === btn));
+				}
+				startRound();
+			});
+		}
+
+		if (sfxMuted()) sfx.setMuted(true);
+		startRound();
+	}
+
+	init();
+	document.addEventListener('astro:page-load', init);
+</script>
+
+<style>
+	.ss-prompt {
+		font-weight: 700;
+		font-size: 1.05rem;
+		margin: 0.5em 0;
+	}
+</style>

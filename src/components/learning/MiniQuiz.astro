@@ -1,0 +1,348 @@
+---
+// MiniQuiz — Inline practice interaction embedded in lesson pages.
+// Powers "Try saying it", "Test your recall" and the website→app practice bridge.
+// Pure progressive enhancement: renders a static, crawlable question list and
+// upgrades to an interactive quiz once JS loads (#23 empty/loading states, #22 a11y).
+
+interface QuizOption {
+  text: string;
+  correct?: boolean;
+}
+
+interface QuizQuestion {
+  prompt: string;          // Marathi word or phrase
+  promptSub?: string;      // transliteration
+  options: QuizOption[];
+  explanation?: string;
+}
+
+interface Props {
+  questions: QuizQuestion[];
+  title?: string;
+  kicker?: string;
+  class?: string;
+}
+
+const {
+  questions,
+  title = 'Try saying it',
+  kicker = 'Practice',
+  class: className = '',
+} = Astro.props;
+
+const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
+const total = questions.length;
+---
+
+<section class="mini-quiz {className}" data-mini-quiz aria-labelledby={`${quizId}-title`}>
+  <header class="mini-quiz__head">
+    <p class="mini-quiz__kicker kicker">{kicker}</p>
+    <h3 class="mini-quiz__title" id={`${quizId}-title`}>{title}</h3>
+    <p class="mini-quiz__count">
+      <span data-quiz-progress>1</span> / {total}
+    </p>
+  </header>
+
+  <form class="mini-quiz__form" data-quiz-form novalidate>
+    {questions.map((q, qi) => (
+      <fieldset
+        class="mini-quiz__question"
+        data-question
+        data-index={qi}
+        hidden={qi !== 0}
+        data-explanation={q.explanation ?? ''}
+      >
+        <legend class="mini-quiz__prompt">
+          <span class="mini-quiz__prompt-text" lang="mr">{q.prompt}</span>
+          {q.promptSub && <span class="mini-quiz__prompt-sub">{q.promptSub}</span>}
+        </legend>
+        <ul class="mini-quiz__options">
+          {q.options.map((opt) => (
+            <li>
+              <label class="mini-quiz__option">
+                <input
+                  type="radio"
+                  name={`${quizId}-q${qi}`}
+                  value={opt.text}
+                  data-correct={opt.correct ? 'true' : 'false'}
+                />
+                <span class="mini-quiz__option-text">{opt.text}</span>
+                <span class="mini-quiz__option-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+              </label>
+            </li>
+          ))}
+        </ul>
+        <p class="mini-quiz__feedback" data-feedback role="status" aria-live="polite"></p>
+      </fieldset>
+    ))}
+
+    <div class="mini-quiz__footer">
+      <button type="button" class="mini-quiz__btn mini-quiz__btn--primary btn" data-quiz-next>
+        Check answer
+      </button>
+      <button type="reset" class="mini-quiz__btn mini-quiz__btn--ghost" data-quiz-reset hidden>
+        Try again
+      </button>
+    </div>
+  </form>
+
+  <div class="mini-quiz__done" data-quiz-done hidden>
+    <p class="mini-quiz__done-title">Nice work — you finished the set.</p>
+    <p class="mini-quiz__done-body">Reading teaches. Practice makes it stick.</p>
+    <a class="mini-quiz__btn mini-quiz__btn--primary btn" href="https://bolmarathi.app" data-funnel="quiz_practice" target="_blank" rel="noopener">
+      Practice in Bol Marathi →
+    </a>
+  </div>
+
+  <noscript>
+    <p class="mini-quiz__noscript">Answers are revealed as you review the list above.</p>
+  </noscript>
+</section>
+
+<style>
+  .mini-quiz {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    padding: var(--space-5);
+    margin: var(--space-5) 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mini-quiz__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .mini-quiz__kicker { margin: 0; }
+  .mini-quiz__title {
+    font-size: var(--text-h3);
+    margin: 0;
+    flex: 1;
+  }
+  .mini-quiz__count {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+  }
+
+  .mini-quiz__question {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mini-quiz__prompt {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: 0;
+    margin-bottom: var(--space-4);
+  }
+
+  .mini-quiz__prompt-text {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-word);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .mini-quiz__prompt-sub {
+    font-family: var(--font-mono);
+    font-size: var(--text-transliteration);
+    color: var(--color-text-muted);
+  }
+
+  .mini-quiz__options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .mini-quiz__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+  }
+
+  .mini-quiz__option:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .mini-quiz__option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mini-quiz__option-text {
+    flex: 1;
+    font-size: var(--text-body);
+    color: var(--color-text);
+  }
+
+  .mini-quiz__option-mark {
+    display: none;
+    color: var(--color-success);
+  }
+
+  .mini-quiz__option:has(input:focus-visible) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .mini-quiz__option.is-correct {
+    border-color: var(--color-success);
+    background: var(--color-success-bg);
+  }
+  .mini-quiz__option.is-correct .mini-quiz__option-mark { display: inline-flex; }
+
+  .mini-quiz__option.is-wrong {
+    border-color: var(--color-error);
+    background: color-mix(in srgb, var(--color-error) 10%, transparent);
+  }
+
+  .mini-quiz__feedback {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-body-sm);
+    min-height: 1.4em;
+  }
+  .mini-quiz__feedback.is-correct { color: var(--color-success); }
+  .mini-quiz__feedback.is-wrong { color: var(--color-error); }
+
+  .mini-quiz__footer {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .mini-quiz__btn { cursor: pointer; }
+
+  .mini-quiz__done {
+    text-align: center;
+    padding: var(--space-4);
+  }
+  .mini-quiz__done-title {
+    font-size: var(--text-h3);
+    font-weight: 700;
+    margin: 0 0 var(--space-1);
+  }
+  .mini-quiz__done-body {
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-4);
+  }
+
+  .mini-quiz__noscript {
+    font-size: var(--text-caption);
+    color: var(--color-text-muted);
+    margin: var(--space-3) 0 0;
+  }
+
+  [hidden] { display: none !important; }
+</style>
+
+<script>
+  function initMiniQuizzes() {
+    document.querySelectorAll('[data-mini-quiz]:not([data-quiz-init])').forEach((quiz) => {
+      quiz.setAttribute('data-quiz-init', 'true');
+      const questions = Array.from(quiz.querySelectorAll('[data-question]'));
+      const nextBtn = quiz.querySelector('[data-quiz-next]');
+      const resetBtn = quiz.querySelector('[data-quiz-reset]');
+      const done = quiz.querySelector('[data-quiz-done]');
+      const progress = quiz.querySelector('[data-quiz-progress]');
+      const form = quiz.querySelector('[data-quiz-form]');
+
+      let index = 0;
+      let answered = false;
+
+      function current() { return questions[index]; }
+
+      function showFeedback(q, isCorrect) {
+        const fb = q.querySelector('[data-feedback]');
+        const explanation = q.getAttribute('data-explanation') || '';
+        if (isCorrect) {
+          fb.textContent = explanation ? `Correct — ${explanation}` : 'Correct.';
+          fb.className = 'mini-quiz__feedback is-correct';
+        } else {
+          fb.textContent = explanation ? `Not quite — ${explanation}` : 'Not quite — try again.';
+          fb.className = 'mini-quiz__feedback is-wrong';
+        }
+      }
+
+      function check() {
+        const q = current();
+        const selected = q.querySelector('input:checked');
+        if (!selected || answered) return;
+        answered = true;
+
+        const isCorrect = selected.getAttribute('data-correct') === 'true';
+        selected.closest('.mini-quiz__option').classList.add(isCorrect ? 'is-correct' : 'is-wrong');
+
+        // Also mark the correct option so the learner sees the answer.
+        if (!isCorrect) {
+          q.querySelectorAll('input[data-correct="true"]').forEach((inp) => {
+            inp.closest('.mini-quiz__option').classList.add('is-correct');
+          });
+        }
+
+        showFeedback(q, isCorrect);
+        resetBtn.hidden = false;
+        nextBtn.textContent = index === questions.length - 1 ? 'Finish' : 'Continue learning →';
+      }
+
+      function advance() {
+        if (!answered) { check(); return; }
+        if (index < questions.length - 1) {
+          current().hidden = true;
+          index += 1;
+          current().hidden = false;
+          answered = false;
+          nextBtn.textContent = 'Check answer';
+          resetBtn.hidden = true;
+          if (progress) progress.textContent = String(index + 1);
+        } else {
+          if (form) form.hidden = true;
+          done.hidden = false;
+        }
+      }
+
+      function reset() {
+        const q = current();
+        q.querySelectorAll('.mini-quiz__option').forEach((el) => el.classList.remove('is-correct', 'is-wrong'));
+        q.querySelectorAll('input').forEach((inp) => { inp.checked = false; });
+        const fb = q.querySelector('[data-feedback]');
+        fb.textContent = '';
+        fb.className = 'mini-quiz__feedback';
+        answered = false;
+        resetBtn.hidden = true;
+        nextBtn.textContent = 'Check answer';
+      }
+
+      nextBtn?.addEventListener('click', advance);
+      resetBtn?.addEventListener('click', (e) => { e.preventDefault(); reset(); });
+      form?.addEventListener('change', () => { if (!answered) check(); });
+      form?.addEventListener('submit', (e) => e.preventDefault());
+    });
+  }
+
+  initMiniQuizzes();
+  document.addEventListener('astro:page-load', initMiniQuizzes);
+</script>

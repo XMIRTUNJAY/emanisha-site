@@ -1,0 +1,370 @@
+---
+// GrammarPattern — Visual grammar pattern with examples and interactive practice
+// Shows pattern → examples → try it flow
+
+interface Props {
+  pattern: string;           // e.g., "मी + ___ + करतो."
+  patternHindi?: string;     // e.g., "मैं + ___ + करता हूँ।"
+  patternEnglish: string;    // e.g., "I + ___ + do."
+  examples: Array<{
+    marathi: string;
+    hindi?: string;
+    english: string;
+    audio?: string;
+  }>;
+  slots?: string[];          // Words that fit the blank
+  showTryIt?: boolean;
+}
+
+const {
+  pattern,
+  patternHindi,
+  patternEnglish,
+  examples,
+  slots = [],
+  showTryIt = true,
+} = Astro.props;
+---
+
+<div class="grammar-pattern">
+  <div class="grammar-pattern__header">
+    <span class="grammar-pattern__kicker kicker">Grammar Pattern</span>
+    <h3 class="grammar-pattern__title">How to build this sentence</h3>
+  </div>
+
+  <div class="grammar-pattern__pattern">
+    <div class="grammar-pattern__row">
+      <code class="grammar-pattern__code" lang="mr">{pattern}</code>
+      {patternHindi && <code class="grammar-pattern__code grammar-pattern__code--hindi" lang="hi">{patternHindi}</code>}
+    </div>
+    <div class="grammar-pattern__row">
+      <code class="grammar-pattern__code grammar-pattern__code--english">{patternEnglish}</code>
+    </div>
+  </div>
+
+  <div class="grammar-pattern__examples">
+    <h4 class="grammar-pattern__examples-title">Examples</h4>
+    <div class="grammar-pattern__examples-grid">
+      {examples.map((ex, i) => (
+        <div class="grammar-pattern__example" data-example-index={i}>
+          <div class="grammar-pattern__example-marathi" lang="mr">{ex.marathi}</div>
+          {ex.hindi && <div class="grammar-pattern__example-hindi" lang="hi">{ex.hindi}</div>}
+          <div class="grammar-pattern__example-english">{ex.english}</div>
+          {ex.audio && (
+            <AudioPlayer
+              src={ex.audio}
+              text={ex.marathi}
+              size="sm"
+              showText={false}
+              class="grammar-pattern__example-audio"
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {showTryIt && slots.length > 0 && (
+    <div class="grammar-pattern__try-it">
+      <h4 class="grammar-pattern__try-it-title">Try building your own</h4>
+      <p class="grammar-pattern__try-it-prompt">Tap a word to complete the pattern:</p>
+
+      <div class="grammar-pattern__pattern-display">
+        <code class="grammar-pattern__code">{pattern}</code>
+      </div>
+
+      <div class="grammar-pattern__slots" role="group" aria-label="Choose a word to complete the sentence">
+        {slots.map((slot, i) => (
+          <button
+            type="button"
+            class="grammar-pattern__slot"
+            data-slot={slot}
+            data-index={i}
+            aria-label={`Try: ${slot}`}
+          >
+            {slot}
+          </button>
+        ))}
+      </div>
+
+      <div class="grammar-pattern__result" aria-live="polite" hidden>
+        <code class="grammar-pattern__code grammar-pattern__code--result" lang="mr"></code>
+        <div class="grammar-pattern__result-english"></div>
+        <button type="button" class="grammar-pattern__reset" aria-label="Try another word">Try another</button>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .grammar-pattern {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    padding: var(--space-5);
+    margin: var(--space-5) 0;
+  }
+
+  .grammar-pattern__header {
+    margin-bottom: var(--space-4);
+  }
+
+  .grammar-pattern__title {
+    margin: var(--space-2) 0 0 0;
+    font-size: var(--text-h3);
+  }
+
+  .grammar-pattern__pattern {
+    background: var(--color-container-low);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin: var(--space-4) 0;
+  }
+
+  .grammar-pattern__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .grammar-pattern__code {
+    font-family: var(--font-display);
+    font-size: var(--text-body-lg);
+    font-weight: 500;
+    color: var(--color-text);
+    background: transparent;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+
+  .grammar-pattern__code--hindi {
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+  }
+
+  .grammar-pattern__code--english {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .grammar-pattern__examples {
+    margin-top: var(--space-5);
+  }
+
+  .grammar-pattern__examples-title {
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin: 0 0 var(--space-3) 0;
+    color: var(--color-text);
+  }
+
+  .grammar-pattern__examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .grammar-pattern__example {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space-3);
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .grammar-pattern__example:hover {
+    border-color: var(--color-primary);
+  }
+
+  .grammar-pattern__example-marathi {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: var(--space-1);
+  }
+
+  .grammar-pattern__example-hindi {
+    font-family: var(--font-display);
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .grammar-pattern__example-english {
+    font-size: var(--text-body-sm);
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .grammar-pattern__example-audio {
+    margin-top: var(--space-2);
+    align-self: flex-start;
+  }
+
+  /* Try It Section */
+  .grammar-pattern__try-it {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .grammar-pattern__try-it-title {
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin: 0 0 var(--space-1) 0;
+  }
+
+  .grammar-pattern__try-it-prompt {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .grammar-pattern__pattern-display {
+    background: var(--color-container);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    margin-bottom: var(--space-4);
+    text-align: center;
+  }
+
+  .grammar-pattern__slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .grammar-pattern__slot {
+    font: inherit;
+    font-size: var(--text-body-sm);
+    font-weight: 500;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .grammar-pattern__slot:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-fixed);
+  }
+
+  .grammar-pattern__slot:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .grammar-pattern__result {
+    background: var(--color-success-bg);
+    border: 1px solid var(--color-success);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    text-align: center;
+  }
+
+  .grammar-pattern__code--result {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-success);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .grammar-pattern__result-english {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .grammar-pattern__reset {
+    font: inherit;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-success);
+    background: transparent;
+    color: var(--color-success);
+    cursor: pointer;
+  }
+
+  .grammar-pattern__reset:hover {
+    background: var(--color-success);
+    color: white;
+  }
+</style>
+
+<script>
+  // GrammarPattern interactive "Try it" functionality
+  function initGrammarPatterns() {
+    document.querySelectorAll('.grammar-pattern:not([data-pattern-init])').forEach(container => {
+      container.setAttribute('data-pattern-init', 'true');
+
+      const slots = container.querySelectorAll('.grammar-pattern__slot');
+      const result = container.querySelector('.grammar-pattern__result');
+      const resultCode = container.querySelector('.grammar-pattern__code--result');
+      const resultEnglish = container.querySelector('.grammar-pattern__result-english');
+      const resetBtn = container.querySelector('.grammar-pattern__reset');
+      const patternCode = container.querySelector('.grammar-pattern__pattern-display code');
+
+      if (!slots.length || !result || !resultCode || !patternCode) return;
+
+      // Get the base pattern text
+      const basePattern = patternCode.textContent || '';
+      const blankRegex = /___|\+\s*\+\s*/;
+
+      slots.forEach(slot => {
+        slot.addEventListener('click', () => {
+          const word = slot.getAttribute('data-slot');
+          if (!word) return;
+
+          // Replace the blank in the pattern
+          let filledPattern = basePattern.replace('___', word).replace('+ +', `+ ${word} +`);
+          if (filledPattern === basePattern) {
+            // Try to find the blank position
+            filledPattern = basePattern.replace(/\+\s*___\s*\+\s*/, `+ ${word} +`);
+          }
+
+          resultCode.textContent = filledPattern;
+          resultCode.lang = 'mr';
+
+          // Find the English translation for this slot
+          const exampleIndex = parseInt(slot.getAttribute('data-index') || '0', 10);
+          const example = container.querySelectorAll('.grammar-pattern__example')[exampleIndex];
+          if (example) {
+            const english = example.querySelector('.grammar-pattern__example-english')?.textContent;
+            if (english) resultEnglish.textContent = english;
+          }
+
+          result.hidden = false;
+          slots.forEach(s => s.disabled = true);
+        });
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          result.hidden = true;
+          slots.forEach(s => s.disabled = false);
+        });
+      }
+    });
+  }
+
+  initGrammarPatterns();
+  document.addEventListener('astro:page-load', initGrammarPatterns);
+</script>

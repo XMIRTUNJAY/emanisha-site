@@ -1,0 +1,136 @@
+---
+// PhraseCard — Conversational phrase presentation card
+// Replaces PhraseTable with better visual hierarchy for conversations
+import type { SpeakingRow } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+import audioManifest from '../../data/audio-manifest.json';
+
+interface Props {
+  phrase: SpeakingRow & { unit: string };
+  englishFirst?: boolean;
+  showAudio?: boolean;
+}
+
+const { phrase, englishFirst = false, showAudio = true } = Astro.props;
+const files = (audioManifest as { files?: Record<string, { word?: string }> }).files ?? {};
+const audioSrc = files[phrase.id]?.word ? siteUrl(`/audio/${files[phrase.id].word}`) : null;
+---
+
+<article class="phrase-card" data-phrase-id={phrase.id}>
+  <div class="phrase-card__content">
+    {englishFirst ? (
+      <>
+        <div class="phrase-card__english">{phrase.english}</div>
+        <div class="phrase-card__arrow" aria-hidden="true">↓</div>
+        <div class="phrase-card__marathi" lang="mr">{phrase.sentence}</div>
+        {phrase.hindi && <div class="phrase-card__hindi" lang="hi">{phrase.hindi}</div>}
+      </>
+    ) : (
+      <>
+        <div class="phrase-card__marathi" lang="mr">{phrase.sentence}</div>
+        {phrase.hindi && <div class="phrase-card__hindi" lang="hi">{phrase.hindi}</div>}
+        <div class="phrase-card__english">{phrase.english}</div>
+      </>
+    )}
+  </div>
+
+  {showAudio && audioSrc && (
+    <AudioPlayer
+      src={audioSrc}
+      text={phrase.sentence}
+      transliteration={phrase.transliteration}
+      translation={phrase.english}
+      size="sm"
+      showText={false}
+      class="phrase-card__audio"
+    />
+  )}
+
+  {phrase.tip && (
+    <div class="phrase-card__tip">
+      <span class="phrase-card__tip-icon" aria-hidden="true">💡</span>
+      <span class="phrase-card__tip-text">{phrase.tip}</span>
+    </div>
+  )}
+</article>
+
+<style>
+  .phrase-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space-4);
+    margin: var(--space-3) 0;
+    transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .phrase-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .phrase-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .phrase-card__marathi {
+    font-family: var(--font-display);
+    font-size: var(--text-marathi-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+
+  .phrase-card__hindi {
+    font-family: var(--font-display);
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .phrase-card__english {
+    font-size: var(--text-body);
+    color: var(--color-text);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .phrase-card__arrow {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    text-align: center;
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  .phrase-card__audio {
+    align-self: flex-start;
+    margin-top: var(--space-1);
+  }
+
+  .phrase-card__tip {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    background: var(--color-primary-fixed);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-primary-fixed);
+  }
+
+  .phrase-card__tip-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  .phrase-card__tip-text {
+    font-size: var(--text-body-sm);
+    color: var(--color-primary-dark);
+    line-height: 1.6;
+  }
+</style>

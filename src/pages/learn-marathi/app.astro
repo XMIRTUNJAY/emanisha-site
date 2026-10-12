@@ -1,0 +1,238 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import WaitlistForm from '../../components/WaitlistForm.astro';
+import ProgressCard from '../../components/ProgressCard.astro';
+import { BOL_MARATHI_APP } from '../../data/app';
+import { units, vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const title = `${BOL_MARATHI_APP.name} — Learn Marathi from Hindi or English`;
+const description = 'Vocabulary, listening, speaking, sentence-building and spaced repetition — the Bol Marathi app turns these free lessons into usable Marathi.';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+
+const storeHref = !BOL_MARATHI_APP.comingSoon && BOL_MARATHI_APP.playStoreUrl ? BOL_MARATHI_APP.playStoreUrl : null;
+const betaHref = BOL_MARATHI_APP.betaOptInUrl;
+
+const faqs = [
+	{ question: 'Is Bol Marathi free?', answer: 'The learning content on this site is free. App pricing will be announced at launch.' },
+	{ question: 'I speak Hindi. Is Marathi hard for me?', answer: 'Hindi speakers have a head start: Marathi shares the subject–object–verb order and many words. The Hindi → Marathi bridges on this site show the exact patterns.' },
+	{ question: 'Can I learn from English instead of Hindi?', answer: 'Yes. Every word and bridge lesson has English meanings too — see the English → Marathi section — and the app supports an English-learner mode.' },
+	{ question: 'How is the app different from this website?', answer: 'Learn the words here. Practise listening and speaking in the app — with feedback, sentence-building exercises and spaced repetition so you remember words.' },
+	{ question: 'How do I get the app?', answer: `${BOL_MARATHI_APP.comingSoonNote} Join the waitlist below and you'll hear first.` },
+];
+
+---
+
+<Base title={title} description={description} alternates={[{ lang: 'x-default', href: siteUrl('/app/') }, { lang: 'en', href: siteUrl('/app/') }, { lang: 'hi', href: siteUrl('/hi/app/') }]}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={url}
+		type="FAQPage"
+		faq={faqs}
+		breadcrumbs={[{ name: 'Learn Marathi', url: homeUrl }, { name: 'App', url }]}
+	/>
+	{!BOL_MARATHI_APP.comingSoon && BOL_MARATHI_APP.playStoreUrl && (
+		<script type="application/ld+json" set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'MobileApplication',
+			name: BOL_MARATHI_APP.name,
+			operatingSystem: 'Android',
+			applicationCategory: 'EducationalApplication',
+			offers: { '@type': 'Offer', price: '0' },
+			installUrl: BOL_MARATHI_APP.playStoreUrl,
+		})} />
+	)}
+	<div class="prose">
+		<p class="kicker">Bol Marathi · The App</p>
+		<h1>Learn Marathi beyond reading.</h1>
+		<p class="lede">
+			This site gives you {vocab.length} words and {units.length * 6} lessons of real
+			curriculum. {BOL_MARATHI_APP.name} turns that knowledge into usable Marathi —
+			listening, speaking, sentence-building and spaced repetition.
+		</p>
+	<div class="stats" role="list" aria-label="Bol Marathi in numbers">
+			<div role="listitem"><strong>{vocab.length}</strong><span>words</span></div>
+			<div role="listitem"><strong>{units.length * 6}</strong><span>lessons</span></div>
+			<div role="listitem"><strong>{units.length}</strong><span>units</span></div>
+			<div role="listitem"><strong>6</strong><span>practice modes</span></div>
+		</div>
+		{storeHref ? (
+			<p><a class="btn" href={storeHref} data-funnel="download_click" data-app-cta data-cta-variant="app-hero">Download Bol Marathi</a></p>
+		) : betaHref ? (
+			<p><a class="btn" href={betaHref} data-funnel="beta_click" data-app-cta data-cta-variant="app-hero">Join the beta</a></p>
+		) : (
+			<div class="cta">
+				<h2>Join the waitlist</h2>
+				<p>{BOL_MARATHI_APP.comingSoonNote}</p>
+				<p>Currently in closed testing — waitlist members get beta invites first.</p>
+				<WaitlistForm context="app-hero" />
+				<p class="note">One email — we'll tell you the moment it's on the Play Store. No spam, ever.</p>
+				<p class="joined-note" id="joined">You're on the list — watch your inbox for launch news.</p>
+			</div>
+		)}
+	</div>
+
+	<div class="prose">
+		<h2>Inside the app</h2>
+		<p>One flow, four tabs — swipe through a real walkthrough: learn today's lesson, practice it, watch progress grow, tune your profile.</p>
+	</div>
+	<div class="flow" role="region" aria-label="Bol Marathi app walkthrough" tabindex="0">
+		{BOL_MARATHI_APP.screenshots.map((s) => (
+			<figure>
+				<img src={siteUrl(s.src)} alt={s.alt} loading="lazy" width="720" height="1568" />
+				<figcaption><strong>{s.step}</strong><span>{s.alt}</span></figcaption>
+			</figure>
+		))}
+	</div>
+
+	<div class="prose">
+		<h2>Who it is for</h2>
+		<ul>
+			<li>Hindi speakers who want to learn Marathi fast through comparison.</li>
+			<li>English speakers starting from zero — every lesson has English meanings.</li>
+			<li>Beginners starting from greetings and the alphabet.</li>
+			<li>Travellers, shoppers and workers who need usable daily Marathi.</li>
+		</ul>
+
+		<h2>How learning works</h2>
+		<ol>
+			<li><strong>Vocabulary</strong> — {vocab.length} words with Hindi and English meanings, pronunciation and examples.</li>
+			<li><strong>Listening</strong> — listen-and-pick quizzes with instant right/wrong feedback.</li>
+			<li><strong>Speaking</strong> — say real sentences; microphone check and Marathi voice setup built in.</li>
+			<li><strong>Sentence building</strong> — arrange words into correct SOV Marathi sentences.</li>
+			<li><strong>Spaced repetition</strong> — reviews scheduled so words stick, with streaks and daily goals.</li>
+		</ol>
+
+		<h2>It finds your weakest words</h2>
+		<p>
+			Bol Marathi tracks every word — retention percentage, scheduled reviews,
+			mastered words — and puts your weakest words first with
+			<strong>"Recommended for you"</strong>. Reviews arrive before you forget
+			("0 words before you forget • 94% recall"), not on a fixed schedule.
+		</p>
+		<figure class="inline-shot">
+			<img src={siteUrl('/screenshots/flow-practice.webp')} alt="Practice Hub showing retention stats and weakest-word recommendations" loading="lazy" width="720" height="1568" />
+			<figcaption>Practice Hub: retention, scheduled reviews and weakest-first recommendations.</figcaption>
+		</figure>
+
+		<h2>Streaks, XP and levels keep you coming back</h2>
+		<p>
+			Daily goals, streaks with at-risk reminders, XP, levels, badges and a
+			skill map across vocabulary, listening, grammar, speaking and fluency —
+			plus six practice modes (listening, speaking, sentence building,
+			Hindi–Marathi bridge, grammar drills, mixed challenges) and custom sets
+			built from any words you choose.
+		</p>
+		<figure class="inline-shot">
+			<img src={siteUrl('/screenshots/flow-progress.webp')} alt="Progress screen with streak, XP, weekly practice and skill map" loading="lazy" width="720" height="1568" />
+			<figcaption>Progress: streak, XP, weekly goal and per-skill mastery.</figcaption>
+		</figure>
+
+		<h2>Curriculum</h2>
+		<p>
+			{units.length} units from Marathi Fundamentals to Advanced Conversation and a
+			final assessment — <a href={siteUrl('/lessons/')}>browse all units</a> free on this site.
+		</p>
+
+		<h2>Example lesson</h2>
+		<p>
+			Try <a href={siteUrl('/lessons/01/')}>Unit 01 — Marathi Fundamentals</a>:
+			greetings, first words, Hindi bridges and sentence order. Then continue in the app.
+		</p>
+
+		<h2>FAQ</h2>
+		{faqs.map((f) => (
+			<section>
+				<h3>{f.question}</h3>
+				<p>{f.answer}</p>
+			</section>
+		))}
+
+<div class="cta">
+				<h2>{storeHref ? 'Download Bol Marathi' : betaHref ? 'Join the beta' : 'Join the waitlist'}</h2>
+				<p>{storeHref ? 'Start practicing today.' : BOL_MARATHI_APP.comingSoonNote}</p>
+				{storeHref ? (
+					<a class="btn" href={storeHref} data-funnel="download_click" data-app-cta data-cta-variant="app-end">Download Bol Marathi</a>
+				) : betaHref ? (
+					<a class="btn" href={betaHref} data-funnel="beta_click" data-app-cta data-cta-variant="app-end">Join the beta</a>
+				) : (
+					<WaitlistForm context="app-end" />
+				)}
+			</div>
+
+		<ProgressCard variant="app" />
+	</div>
+</Base>
+
+<style>
+	.btn {
+		display: inline-block;
+		min-height: 52px;
+		line-height: 52px;
+		padding: 0 1.5em;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.95rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: var(--radius);
+		margin-top: 0.5em;
+	}
+	.btn:hover { background: var(--accent); filter: brightness(0.92); color: #fff; }
+	.joined-note {
+		display: none;
+		border: 1px solid var(--success, #2e7d5b);
+		border-radius: var(--radius);
+		background: var(--success-bg, #e8f4ec);
+		padding: 0.8em 1em;
+		font-weight: 600;
+	}
+	.joined-note:target { display: block; }
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0.75em;
+		margin: 1.5em 0 0.5em 0;
+	}
+	.stats div {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		text-align: center;
+		padding: 0.9em 0.25em;
+	}
+	.stats strong {
+		display: block;
+		font-size: 1.4rem;
+		color: var(--accent);
+	}
+	.stats span {
+		font-size: 0.78rem;
+		color: rgb(var(--gray));
+	}
+	.inline-shot {
+		margin: 1.5em auto;
+		max-width: 320px;
+		border: var(--border);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		background: var(--card);
+	}
+	.inline-shot img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.inline-shot figcaption {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		padding: 0.75em 1em;
+		border-top: var(--border);
+	}
+	@media (max-width: 560px) {
+		.stats { grid-template-columns: repeat(2, 1fr); }
+	}
+</style>

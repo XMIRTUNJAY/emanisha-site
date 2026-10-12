@@ -1,0 +1,14 @@
+---
+// English → Marathi path pages (src/data/seo/english-paths.json).
+// Renders unit speaking rows English-first.
+import PremiumEnglishPathPage from '../../../components/PremiumEnglishPathPage.astro';
+import { seoPagesByFamily } from '../../../lib/seo';
+
+export async function getStaticPaths() {
+  return seoPagesByFamily('english-path').map((p) => ({ params: { slug: p.slug }, props: { page: p } }));
+}
+
+const page = Astro.props.page as import('../../../lib/seo').SeoPage;
+---
+
+<PremiumEnglishPathPage page={page} />

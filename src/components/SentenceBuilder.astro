@@ -1,0 +1,118 @@
+---
+interface Props {
+	builders: Array<{
+		tokens: string[];
+		answer: string[];
+		prompt: string;
+		hindi: string;
+	}>;
+}
+const { builders } = Astro.props;
+const dataJson = JSON.stringify(builders.slice(0, 5));
+---
+<section class="sentence-builder" aria-label="Sentence practice">
+	<h3>Build sentences with these words</h3>
+	<div id="sb-arrange" data-builders={dataJson}>
+		<div class="progress"><span id="sb-bar"></span></div>
+		<p class="qmeta"><span id="sb-pos">Sentence 1/5</span></p>
+		<p class="aprompt" id="sb-prompt">…</p>
+		<p class="qtr" id="sb-hindi" lang="hi">…</p>
+		<div class="abuild" id="sb-answer" aria-label="Your sentence"></div>
+		<div class="abank" id="sb-bank" aria-label="Available words"></div>
+		<p class="qfb" id="sb-fb" aria-live="polite"></p>
+		<p>
+			<button class="btn" id="sb-check" type="button">Check</button>
+			<button class="btn ghost" id="sb-next" type="button" hidden>Next →</button>
+		</p>
+	</div>
+</section>
+
+<script is:inline>
+	(function () {
+		try {
+			var data = JSON.parse(document.getElementById('sb-arrange').getAttribute('data-builders') || '[]');
+			if (!data.length) return;
+			var builders = data;
+			var bi = 0, score = 0, btotal = builders.length;
+			var apos = document.getElementById('sb-pos'), asc = document.getElementById('ascore') || document.getElementById('sb-pos'), abar = document.getElementById('sb-bar');
+			var aprompt = document.getElementById('sb-prompt'), ahindi = document.getElementById('sb-hindi');
+			var aanswer = document.getElementById('sb-answer'), abank = document.getElementById('sb-bank');
+			var afb = document.getElementById('sb-fb'), acheck = document.getElementById('sb-check'), anext = document.getElementById('sb-next');
+			var picked = [];
+
+			function shuffle(a) { return a.sort(function () { return Math.random() - 0.5; }); }
+
+			function tokenBtn(t, inAnswer) {
+				var btn = document.createElement('button');
+				btn.type = 'button';
+				btn.className = 'tok' + (inAnswer ? ' in-answer' : '');
+				btn.textContent = t;
+				btn.lang = 'mr';
+				btn.addEventListener('click', function () {
+					if (anext.hidden === false) return;
+					btn.remove();
+					if (inAnswer) {
+						var idx = picked.indexOf(t);
+						if (idx >= 0) picked.splice(idx, 1);
+						abank.appendChild(tokenBtn(t, false));
+					} else {
+						picked.push(t);
+						aanswer.appendChild(tokenBtn(t, true));
+					}
+					afb.textContent = '';
+					renderState();
+				});
+				return btn;
+			}
+
+			function renderBank(tokens) {
+				aanswer.innerHTML = '';
+				abank.innerHTML = '';
+				tokens.forEach(function (t) { abank.appendChild(tokenBtn(t, false)); });
+				renderState();
+			}
+
+			function renderState() {
+				var ph = aanswer.querySelector('.ph');
+				if (ph && picked.length) ph.remove();
+				if (!picked.length && !aanswer.children.length) {
+					var ph2 = document.createElement('span');
+					ph2.className = 'ph';
+					ph2.textContent = 'Tap words below in order…';
+					aanswer.appendChild(ph2);
+				}
+			}
+
+			function bstep() {
+				var b = builders[bi];
+				apos.textContent = 'Sentence ' + (bi + 1) + '/' + btotal;
+				abar.style.width = (bi / btotal * 100) + '%';
+				aprompt.textContent = b.prompt;
+				ahindi.textContent = b.hindi;
+				afb.textContent = '';
+				acheck.hidden = false; anext.hidden = true;
+				picked = [];
+				renderBank(shuffle(b.tokens.slice()));
+			}
+
+			acheck.addEventListener('click', function () {
+				var b = builders[bi];
+				var ok = picked.length === b.answer.length && picked.every(function (t, n) { return t === b.answer[n]; });
+				if (ok) { score++; }
+				afb.textContent = ok ? 'Correct! ' + b.answer.join(' ') : 'Not quite — correct order: ' + b.answer.join(' ');
+				acheck.hidden = true; anext.hidden = false;
+			});
+
+			anext.addEventListener('click', function () {
+				bi++;
+				if (bi >= btotal) {
+					document.getElementById('sb-arrange').innerHTML = '<p class="qfb" style="padding:1em;background:var(--success-bg);border:var(--border);border-radius:var(--radius);">Practice complete! You scored ' + score + '/' + btotal + '.</p>';
+					return;
+				}
+				bstep();
+			});
+
+			if (builders.length) bstep();
+		} catch (e) { /* sentence builder unavailable */ }
+	})();
+</script>

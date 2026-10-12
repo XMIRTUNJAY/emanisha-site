@@ -1,0 +1,77 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const bhetWords = wordsByMarathi([
+	'भेटणे', 'भेटूया', 'लवकर भेटू', 'चला जाऊया', 'काळजी घे', 'शुभ प्रवास',
+]);
+---
+
+<Learn
+	title="भेट (Bhet) Meaning in Marathi: Meet, Visit &amp; More"
+	description="भेटणे means to meet — and भेटूया shapes every Marathi goodbye. The bhet family: meaning, forms and when to use each."
+	kicker="Word meaning"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'भेट meaning', href: siteUrl('/blog/bhet-meaning-in-marathi/') },
+	]}
+	canonicalPath="/blog/bhet-meaning-in-marathi/"
+	about="bhet meaning in marathi; bhetuya meaning"
+	meta={['1 verb family', 'Every goodbye uses it']}
+	faq={[
+		{
+			question: 'What does bhet mean in Marathi?',
+			answer: 'The verb भेटणे means "to meet / to visit". Its everyday forms carry most farewells: भेटूया (let us meet) and लवकर भेटू (see you soon).',
+		},
+		{
+			question: 'How do you say "see you" in Marathi?',
+			answer: 'Say भेटूया — "let\'s meet (again)". For a warmer close: लवकर भेटू — see you soon.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		<span class="mr" lang="mr">भेटणे</span> (bheṭaṇe) is the verb "to
+		meet / to visit". You hear its forms at the end of nearly every
+		Marathi conversation: <span class="mr" lang="mr">भेटूया</span>
+		(let's meet) and <span class="mr" lang="mr">लवकर भेटू</span>
+		(see you soon).
+	</p>
+
+	<h2>The bhet family</h2>
+	<p>
+		Every row below is a phrase you can say as-is — notice how the last
+		four make up a complete, warm goodbye sequence.
+	</p>
+	<VocabTable words={bhetWords} caption="भेटणे and the goodbye cluster" />
+
+	<h2>How it works in a real goodbye</h2>
+	<p>
+		A natural sequence, using only the rows above:
+		<span class="mr" lang="mr">चला जाऊया</span> (let's go) →
+		<span class="mr" lang="mr">लवकर भेटू</span> (see you soon) →
+		<span class="mr" lang="mr">काळजी घे</span> (take care). To someone
+		leaving town, swap in <span class="mr" lang="mr">शुभ प्रवास</span>
+		(have a good trip).
+	</p>
+	<p>
+		One caution for Hindi speakers: the Hindi word
+		<span lang="hi">भेंट</span> means "gift" — do not let it colour these
+		Marathi forms. In the rows above, भेट always belongs to the meeting
+		verb.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-bhet-meaning" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi greetings & goodbyes', href: siteUrl('/phrases/greetings/') },
+			{ label: 'थांबा meaning', href: siteUrl('/blog/thamba-meaning-in-marathi/') },
+			{ label: 'Essential verbs', href: siteUrl('/vocabulary/verbs/') },
+		]}
+	/>
+</Learn>

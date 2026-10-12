@@ -1,0 +1,43 @@
+---
+import Learn from '../../layouts/Learn.astro';
+import WordGuide from '../../components/WordGuide.astro';
+import { vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const w = vocab.find((x) => x.id === 'v-greet-02');
+if (!w) throw new Error('missing v-greet-02');
+---
+
+<Learn
+	title="How to Say Thank You in Marathi: धन्यवाद"
+	description="Thank you in Marathi is धन्यवाद (dhanyavād) — same word as Hindi, different music. Pronunciation, example and usage."
+	kicker="Marathi Phrases"
+	crumbs={[
+		{ label: 'Phrases', href: siteUrl('/phrases/') },
+		{ label: 'How to say thank you', href: siteUrl('/how-to-say-thank-you-in-marathi/') },
+	]}
+	canonicalPath="/how-to-say-thank-you-in-marathi/"
+	about="how to say thank you in marathi"
+	meta={['Quick answer', 'Beginner']}
+>
+	<WordGuide
+		word={w}
+		context="say-thank-you"
+		answer="Say धन्यवाद (dhanyavād) — the same word as Hindi, so you already know it. Add the reason: मदतीबद्दल धन्यवाद (thanks for the help)."
+		usage={[
+			'Same spelling as Hindi धन्यवाद — one less word to memorize.',
+			'Attach it to the reason with -बद्दल (about/for): मदतीबद्दल धन्यवाद.',
+		]}
+		faq={[
+			{ q: 'Is धन्यवाद too formal for friends?', a: 'It is polite-neutral — fine everywhere, and never wrong. To reply, say हरकत नाही (no problem).' },
+			{ q: 'How do I reply to thank you?', a: 'हरकत नाही (no problem) — also in the greetings list.' },
+		]}
+		related={[
+			{ label: 'Marathi greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+			{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+			{ label: 'How to say sorry', href: siteUrl('/how-to-say-sorry-in-marathi/') },
+			{ label: 'Beginner words', href: siteUrl('/vocabulary/beginners/') },
+		]}
+	/>
+</Learn>
+

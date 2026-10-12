@@ -1,0 +1,21 @@
+---
+// GameResult — consistent end-of-game screen. The game engine fills
+// .gr-score (score line) and .gr-body (reveal: word/sentence, meanings,
+// example). The slot carries static per-game content: related lesson links
+// and the app CTA. Hidden until the engine reveals it.
+interface Props {
+	id: string;
+	heading?: string;
+}
+
+const { id, heading = 'Round complete' } = Astro.props;
+---
+
+<div id={id} class="game-result" role="status" aria-live="polite" hidden>
+	<h2>{heading}</h2>
+	<p class="gr-score"></p>
+	<div class="gr-body"></div>
+	<div class="gr-static">
+		<slot />
+	</div>
+</div>

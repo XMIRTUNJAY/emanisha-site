@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import WaitlistForm from '../../components/WaitlistForm.astro';
+import { siteUrl } from '../../lib/site';
+
+const title = 'Contact Bol Marathi';
+const description = 'Contact Bol Marathi: corrections, native-speaker review, and launch waitlist.';
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Contact', href: siteUrl('/contact/') }]}>
+	<div class="prose">
+		<p class="kicker">Contact</p>
+		<h1>Contact</h1>
+		<p>
+			Corrections, native-speaker review offers and waitlist signups —
+			all through one form. Tell us which page you mean and what you saw.
+		</p>
+		<WaitlistForm context="contact" layout="stacked" showMessage={true} buttonLabel="Send" />
+		<p class="note">Corrections go to the curriculum maintainers. Waitlist mail goes nowhere else — ever.</p>
+	</div>
+</Base>
+
+<style>
+	.note {
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
+	}
+</style>

@@ -1,0 +1,94 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const railWords = wordsByMarathi([
+	'स्टेशन', 'तिकीट', 'प्लॅटफॉर्म', 'आगगाडी', 'रेल्वे', 'प्रवास',
+	'प्रवासी', 'निघणे', 'पोहोचणे', 'बस', 'रिक्षा', 'टॅक्सी',
+]);
+const stationTalk = getUnit('15').speaking;
+---
+
+<Learn
+	title="At the Train Station in Marathi: ट्रेन, तिकीट, प्लॅटफॉर्म"
+	description="Train-station Marathi: which train, booking, platform, hotel — the six Unit 15 sentences plus 12 rail and travel words with Hindi meanings."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Train station Marathi', href: siteUrl('/blog/train-station-marathi/') },
+	]}
+	canonicalPath="/blog/train-station-marathi/"
+	about="marathi train station words; marathi travel sentences"
+	meta={['12 travel words', '6 station sentences', 'Unit 15']}
+	faq={[
+		{
+			question: 'What is "train" in Marathi?',
+			answer: 'Two words work: आगगाडी (the native word) and रेल्वे. In daily speech people just say ट्रेन. "Which train goes to Mumbai?" is "मुंबईला जाणारा ट्रेन कोणता?"',
+		},
+		{
+			question: 'How do you announce a platform in Marathi?',
+			answer: 'प्लॅटफॉर्म नंबर पाच आहे — platform number + आहे (is). Swap in the number you hear on the announcement.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		At a station you need six sentences: which train, how you booked, the
+		platform, how the journey went, where you're staying, and how you'll
+		leave. Unit 15 has all six — below, with Hindi and English for each.
+	</p>
+
+	<h2>Station and travel words</h2>
+	<p>
+		Watch for <span class="mr" lang="mr">निघणे</span> (to depart) vs
+		<span class="mr" lang="mr">पोहोचणे</span> (to arrive) — the pair
+		station announcements are built from.
+		<span class="mr" lang="mr">आगगाडी</span> is the native word for train;
+		<span class="mr" lang="mr">ट्रेन</span> and
+		<span class="mr" lang="mr">रेल्वे</span> are just as correct in
+		everyday Marathi.
+	</p>
+	<VocabTable words={railWords} caption="Rail and travel words" />
+
+	<h2>The six sentences you'll actually say (Unit 15)</h2>
+	<div class="table-scroll" role="region" aria-label="Train station sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{stationTalk.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<h2>One pattern to steal</h2>
+	<p>
+		<span class="mr" lang="mr">मुंबईला जाणारा ट्रेन कोणता?</span> is built
+		from two reusable pieces: the destination with
+		<span class="mr" lang="mr">-ला</span> ("to Mumbai") and
+		<span class="mr" lang="mr">जाणारा</span> ("going"). Learn the frame
+		exactly as it appears in Unit 15 and swap in whatever city you need —
+		that is most of station small talk.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-train-station" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Travel vocabulary', href: siteUrl('/vocabulary/travel/') },
+			{ label: 'Travel phrases', href: siteUrl('/phrases/travel/') },
+			{ label: 'Unit 15 — Travel Expanded', href: siteUrl('/lessons/15/') },
+		]}
+	/>
+</Learn>

@@ -1,0 +1,61 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Learn from '../../layouts/Learn.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import { getUnit } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+// DRAFT (needsReview): vowels/consonants from Unit 01 grammar notes;
+// क-row barakhadi shown as the pattern example only.
+const u1 = getUnit('01');
+const vowels = u1.grammar.find((g) => g.lesson === 1);
+const consonants = u1.grammar.find((g) => g.lesson === 2);
+if (!vowels || !consonants) throw new Error('unit 01 alphabet rows missing');
+const kaRow = ['क', 'का', 'कि', 'की', 'कु', 'कू', 'के', 'कै', 'को', 'कौ', 'कं', 'कः'];
+---
+
+<Learn
+	title="Marathi Alphabet & Barakhadi: Vowels, Consonants"
+	description="Marathi alphabet: 12 vowels, 33 consonants including ळ, and how barakhadi works — from Unit 01."
+	kicker="Marathi Guide"
+	crumbs={[
+		{ label: 'Grammar', href: siteUrl('/grammar/') },
+		{ label: 'Alphabet', href: siteUrl('/marathi-alphabet/') },
+	]}
+	canonicalPath="/marathi-alphabet/"
+	about="marathi alphabet barakhadi"
+	meta={['Unit 01', 'Beginner']}
+>
+	<h2>Vowels (स्वर)</h2>
+	<p lang="mr">{vowels.text}</p>
+	<p>{vowels.textEn}</p>
+	{vowels.note && <p><em>Note:</em> {vowels.note}</p>}
+
+	<h2>Consonants (व्यंजन)</h2>
+	<p lang="mr">{consonants.text}</p>
+	<p>{consonants.textEn}</p>
+	{consonants.note && <p><em>Note:</em> {consonants.note}</p>}
+
+	<h2>How barakhadi works (pattern)</h2>
+	<p>
+		Barakhadi attaches each vowel to a consonant. The क row shows the
+		pattern every consonant follows:
+	</p>
+	<p class="ka" lang="mr">{kaRow.join(' · ')}</p>
+
+	<AppCTA variant="grammar" context="marathi-alphabet" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+			{ label: 'Marathi pronunciation guide', href: siteUrl('/marathi-pronunciation/') },
+			{ label: 'Beginner words', href: siteUrl('/vocabulary/beginners/') },
+		]}
+	/>
+
+	<AppCTA variant="general" context="marathi-alphabet-end" />
+</Learn>
+
+<style>
+	.ka { font-size: 1.25rem; line-height: 2; }
+</style>

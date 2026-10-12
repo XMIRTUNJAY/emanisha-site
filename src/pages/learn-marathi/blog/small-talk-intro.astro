@@ -1,0 +1,50 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const lines = wordsByMarathi(['तुमचं नाव काय', 'तुम्ही कुठे राहता', 'मी पुण्यात राहतो', 'मला थोडं मराठी येतं', 'पुन्हा सांगा', 'हळू बोला']);
+---
+
+<Learn
+	title="Marathi Small Talk: Introduce Yourself"
+	description="Introduce yourself in Marathi: name, city, 'I know a little Marathi' — 6 phrases with Hindi meanings."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Small talk', href: siteUrl('/blog/small-talk-intro/') },
+	]}
+	canonicalPath="/blog/small-talk-intro/"
+	about="marathi small talk introduction"
+	meta={['6 phrases', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Small talk runs on six lines: your name, where you live, a humble
+		admission about your Marathi — plus two rescue lines for when speech
+		comes too fast. All six are real curriculum phrases with Hindi and
+		English meanings.
+	</p>
+
+	<VocabTable words={lines} caption="Marathi small talk lines" />
+
+	<h2>The rescue lines</h2>
+	<p>
+		पुन्हा सांगा (please say again) and हळू बोला (please speak slowly)
+		are the two most useful sentences a beginner owns. Use them freely —
+		Marathi speakers slow down gladly.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-smalltalk" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+</Learn>

@@ -1,0 +1,383 @@
+---
+/**
+ * MilestoneToast.astro
+ *
+ * Shows celebratory toasts for learning milestones.
+ * Checks localStorage for progress and shows appropriate toasts.
+ * Persists shown milestones to avoid repeats.
+ */
+
+const MILESTONES = [
+  // Streak milestones
+  { id: 'streak-3', type: 'streak', threshold: 3, title: '3-Day Streak!', message: 'You\'ve learned Marathi 3 days in a row. 🔥', icon: '🔥' },
+  { id: 'streak-7', type: 'streak', threshold: 7, title: 'Week Streak!', message: '7 days straight — consistency is paying off!', icon: '📅' },
+  { id: 'streak-14', type: 'streak', threshold: 14, title: 'Fortnight Streak!', message: 'Two weeks of daily practice. Amazing!', icon: '🗓️' },
+  { id: 'streak-30', type: 'streak', threshold: 30, title: 'Monthly Streak!', message: '30 days of Marathi — you\'re building a habit!', icon: '🏆' },
+  { id: 'streak-60', type: 'streak', threshold: 60, title: '60-Day Streak!', message: 'Two months! You\'re a Marathi learning machine.', icon: '💪' },
+  { id: 'streak-100', type: 'streak', threshold: 100, title: 'Century Streak!', message: '100 days straight — legendary dedication!', icon: '👑' },
+
+  // Unit completion milestones
+  { id: 'units-1', type: 'units', threshold: 1, title: 'First Unit Complete!', message: 'You finished your first unit. परीक्षक!', icon: '🎓' },
+  { id: 'units-5', type: 'units', threshold: 5, title: '5 Units Done!', message: 'A quarter of the curriculum — steady progress.', icon: '⭐' },
+  { id: 'units-10', type: 'units', threshold: 10, title: '10 Units Complete!', message: 'Halfway through the curriculum!', icon: '🌟' },
+  { id: 'units-15', type: 'units', threshold: 15, title: '15 Units Done!', message: 'More than halfway — keep going!', icon: '🚀' },
+  { id: 'units-20', type: 'units', threshold: 20, title: '20 Units Complete!', message: 'Almost there — just 11 more units!', icon: '🏁' },
+  { id: 'units-31', type: 'units', threshold: 31, title: 'Curriculum Complete!', message: 'All 31 units finished — you\'ve mastered the curriculum!', icon: '🎉' },
+
+  // Word count milestones
+  { id: 'words-100', type: 'words', threshold: 100, title: '100 Words Learned!', message: 'Your Marathi vocabulary is growing!', icon: '📚' },
+  { id: 'words-500', type: 'words', threshold: 500, title: '500 Words Learned!', message: 'Half the curriculum vocabulary — impressive!', icon: '📖' },
+  { id: 'words-1000', type: 'words', threshold: 1000, title: '1000 Words Learned!', message: 'You know 1000+ Marathi words — fluent territory!', icon: '🧠' },
+] as const;
+
+const STORAGE_KEY = 'bol-marathi-milestones-shown';
+const PROGRESS_KEY = 'bol-marathi-progress';
+const STREAK_KEY = 'bol-marathi-streak-count';
+const WEAK_KEY = 'bol-marathi-weak-words';
+
+function getShownMilestones(): Set<string> {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? new Set(JSON.parse(stored)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function markMilestoneShown(id: string): void {
+  try {
+    const shown = getShownMilestones();
+    shown.add(id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...shown]));
+  } catch { /* ignore */ }
+}
+
+function getStreak(): number {
+  try { return parseInt(localStorage.getItem(STREAK_KEY) || '0', 10); } catch { return 0; }
+}
+
+function getCompletedUnits(): number {
+  try {
+    const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+    return Object.values(progress).filter((u: any) => u?.completed).length;
+  } catch { return 0; }
+}
+
+function getTotalWordsLearned(): number {
+  try {
+    const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+    const weakIds = new Set(JSON.parse(localStorage.getItem(WEAK_KEY) || '[]'));
+    const completedWords = Object.keys(progress).filter(id => progress[id]?.completed).length;
+    // Include weak words that were practiced (even if not "completed" in progress)
+    return completedWords + weakIds.size;
+  } catch { return 0; }
+}
+
+function checkMilestones(): Array<{ id: string; title: string; message: string; icon: string }> {
+  const shown = getShownMilestones();
+  const streak = getStreak();
+  const units = getCompletedUnits();
+  const words = getTotalWordsLearned();
+  const due: Array<{ id: string; title: string; message: string; icon: string }> = [];
+
+  for (const ms of MILESTONES) {
+    if (shown.has(ms.id)) continue;
+
+    let reached = false;
+    if (ms.type === 'streak' && streak >= ms.threshold) reached = true;
+    if (ms.type === 'units' && units >= ms.threshold) reached = true;
+    if (ms.type === 'words' && words >= ms.threshold) reached = true;
+
+    if (reached) {
+      due.push({ id: ms.id, title: ms.title, message: ms.message, icon: ms.icon });
+    }
+  }
+
+  return due;
+}
+---
+
+<div id="milestone-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<style>
+  #milestone-toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: none;
+    max-width: 380px;
+  }
+
+  .milestone-toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--card);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 16px 40px rgb(45 27 21 / 0.18), 0 4px 12px rgb(45 27 21 / 0.1);
+    animation: toast-slide-in 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: bottom right;
+  }
+
+  .milestone-toast.hiding {
+    animation: toast-slide-out 0.3s ease-in forwards;
+  }
+
+  @keyframes toast-slide-in {
+    from { opacity: 0; transform: translateX(120%) scale(0.95); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes toast-slide-out {
+    from { opacity: 1; transform: none; }
+    to { opacity: 0; transform: translateX(120%) scale(0.95); }
+  }
+
+  .toast-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgb(142 45 18 / 0.2));
+  }
+
+  .toast-content { flex: 1; min-width: 0; }
+
+  .toast-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: rgb(var(--black));
+    margin: 0 0 0.25rem 0;
+  }
+
+  .toast-message {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgb(var(--gray));
+    margin: 0;
+  }
+
+  .toast-close {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border: none;
+    background: transparent;
+    color: rgb(var(--gray));
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.15s ease;
+    margin-top: -0.25rem;
+    margin-right: -0.5rem;
+  }
+
+  .toast-close:hover {
+    background: var(--accent-fixed);
+    color: var(--accent);
+  }
+
+  .toast-close:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Confetti burst */
+  .milestone-toast::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 20% 0%, var(--accent) 4px, transparent 4px),
+      radial-gradient(circle at 80% 0%, var(--accent-container) 4px, transparent 4px),
+      radial-gradient(circle at 40% 0%, #FFD700 3px, transparent 3px),
+      radial-gradient(circle at 60% 0%, #fff 3px, transparent 3px);
+    background-size: 30px 30px;
+    animation: confetti-fall 1.2s ease-out forwards;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .milestone-toast.show-confetti::before {
+    opacity: 1;
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateX(-50%) translateY(60px) scale(0.5); opacity: 0; }
+  }
+
+  @media (max-width: 640px) {
+    #milestone-toast-container {
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      max-width: none;
+    }
+    .milestone-toast { width: 100%; box-sizing: border-box; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .milestone-toast,
+    .milestone-toast.hiding,
+    .milestone-toast::before {
+      animation: none;
+    }
+    .milestone-toast.hiding { display: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const STORAGE_KEY = 'bol-marathi-milestones-shown';
+    const PROGRESS_KEY = 'bol-marathi-progress';
+    const STREAK_KEY = 'bol-marathi-streak-count';
+    const WEAK_KEY = 'bol-marathi-weak-words';
+
+    const MILESTONES = [
+      { id: 'streak-3', type: 'streak', threshold: 3, title: '3-Day Streak!', message: 'You\'ve learned Marathi 3 days in a row. 🔥', icon: '🔥' },
+      { id: 'streak-7', type: 'streak', threshold: 7, title: 'Week Streak!', message: '7 days straight — consistency is paying off!', icon: '📅' },
+      { id: 'streak-14', type: 'streak', threshold: 14, title: 'Fortnight Streak!', message: 'Two weeks of daily practice. Amazing!', icon: '🗓️' },
+      { id: 'streak-30', type: 'streak', threshold: 30, title: 'Monthly Streak!', message: '30 days of Marathi — you\'re building a habit!', icon: '🏆' },
+      { id: 'streak-60', type: 'streak', threshold: 60, title: '60-Day Streak!', message: 'Two months! You\'re a Marathi learning machine.', icon: '💪' },
+      { id: 'streak-100', type: 'streak', threshold: 100, title: 'Century Streak!', message: '100 days straight — legendary dedication!', icon: '👑' },
+      { id: 'units-1', type: 'units', threshold: 1, title: 'First Unit Complete!', message: 'You finished your first unit. परीक्षक!', icon: '🎓' },
+      { id: 'units-5', type: 'units', threshold: 5, title: '5 Units Done!', message: 'A quarter of the curriculum — steady progress.', icon: '⭐' },
+      { id: 'units-10', type: 'units', threshold: 10, title: '10 Units Complete!', message: 'Halfway through the curriculum!', icon: '🌟' },
+      { id: 'units-15', type: 'units', threshold: 15, title: '15 Units Done!', message: 'More than halfway — keep going!', icon: '🚀' },
+      { id: 'units-20', type: 'units', threshold: 20, title: '20 Units Complete!', message: 'Almost there — just 11 more units!', icon: '🏁' },
+      { id: 'units-31', type: 'units', threshold: 31, title: 'Curriculum Complete!', message: 'All 31 units finished — you\'ve mastered the curriculum!', icon: '🎉' },
+      { id: 'words-100', type: 'words', threshold: 100, title: '100 Words Learned!', message: 'Your Marathi vocabulary is growing!', icon: '📚' },
+      { id: 'words-500', type: 'words', threshold: 500, title: '500 Words Learned!', message: 'Half the curriculum vocabulary — impressive!', icon: '📖' },
+      { id: 'words-1000', type: 'words', threshold: 1000, title: '1000 Words Learned!', message: 'You know 1000+ Marathi words — fluent territory!', icon: '🧠' },
+    ];
+
+    function getShownMilestones() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? new Set(JSON.parse(stored)) : new Set();
+      } catch { return new Set(); }
+    }
+
+    function markMilestoneShown(id) {
+      try {
+        const shown = getShownMilestones();
+        shown.add(id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...shown]));
+      } catch { /* ignore */ }
+    }
+
+    function getStreak() {
+      try { return parseInt(localStorage.getItem(STREAK_KEY) || '0', 10); } catch { return 0; }
+    }
+
+    function getCompletedUnits() {
+      try {
+        const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+        return Object.values(progress).filter((u) => u?.completed).length;
+      } catch { return 0; }
+    }
+
+    function getTotalWordsLearned() {
+      try {
+        const progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
+        const weakIds = new Set(JSON.parse(localStorage.getItem(WEAK_KEY) || '[]'));
+        const completedWords = Object.keys(progress).filter(id => progress[id]?.completed).length;
+        return completedWords + weakIds.size;
+      } catch { return 0; }
+    }
+
+    function checkMilestones() {
+      const shown = getShownMilestones();
+      const streak = getStreak();
+      const units = getCompletedUnits();
+      const words = getTotalWordsLearned();
+      const due = [];
+
+      for (const ms of MILESTONES) {
+        if (shown.has(ms.id)) continue;
+        let reached = false;
+        if (ms.type === 'streak' && streak >= ms.threshold) reached = true;
+        if (ms.type === 'units' && units >= ms.threshold) reached = true;
+        if (ms.type === 'words' && words >= ms.threshold) reached = true;
+        if (reached) due.push(ms);
+      }
+      return due;
+    }
+
+    function showToast(milestone) {
+      const container = document.getElementById('milestone-toast-container');
+      if (!container) return;
+
+      try {
+        document.dispatchEvent(new CustomEvent('milestone-shown', { detail: { id: milestone.id } }));
+      } catch (e) { /* analytics listener optional */ }
+
+      const toast = document.createElement('div');
+      toast.className = 'milestone-toast show-confetti';
+      toast.innerHTML = `
+        <span class="toast-icon" aria-hidden="true">${milestone.icon}</span>
+        <div class="toast-content">
+          <h4 class="toast-title">${milestone.title}</h4>
+          <p class="toast-message">${milestone.message}</p>
+        </div>
+        <button class="toast-close" aria-label="Dismiss" type="button">×</button>
+      `;
+
+      container.appendChild(toast);
+
+      const closeBtn = toast.querySelector('.toast-close');
+      const dismiss = () => {
+        toast.classList.remove('show-confetti');
+        toast.classList.add('hiding');
+        toast.addEventListener('animationend', () => toast.remove(), { once: true });
+        markMilestoneShown(milestone.id);
+      };
+
+      closeBtn.addEventListener('click', dismiss);
+
+      // Auto-dismiss after 8 seconds
+      setTimeout(dismiss, 8000);
+    }
+
+    function checkAndShow() {
+      const due = checkMilestones();
+      due.forEach((ms, i) => {
+        // Stagger multiple toasts
+        setTimeout(() => showToast(ms), i * 300);
+      });
+    }
+
+    // Check on load
+    checkAndShow();
+
+    // Listen for storage changes (other tabs completing units, etc.)
+    window.addEventListener('storage', (e) => {
+      if ([STORAGE_KEY, PROGRESS_KEY, STREAK_KEY, WEAK_KEY].includes(e.key)) {
+        setTimeout(checkAndShow, 100);
+      }
+    });
+
+    // Also check periodically in case of same-tab updates
+    let lastCheck = Date.now();
+    setInterval(() => {
+      if (Date.now() - lastCheck > 5000) {
+        checkAndShow();
+        lastCheck = Date.now();
+      }
+    }, 2000);
+  })();
+</script>

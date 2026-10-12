@@ -1,0 +1,42 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import SeoCards from '../../../components/SeoCards.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { phraseSets, phrasesFor } from '../../../lib/learn';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+---
+
+<Learn
+	title="Marathi Phrases for Real Life"
+	description="Greetings, daily conversation and travel phrases in Marathi — each with Hindi and English meanings, from the Bol Marathi curriculum."
+	kicker="Marathi Phrases"
+	crumbs={[{ label: 'Phrases', href: siteUrl('/phrases/') }]}
+	canonicalPath="/phrases/"
+	about="marathi phrases with hindi and english"
+>
+	<p>Phrases you can actually use — every one comes with its Hindi meaning, so Hindi speakers feel the pattern, not just the translation.</p>
+
+	<ul class="card-grid">
+		{phraseSets.map((p) => (
+			<li>
+				<a class="card" href={siteUrl(`/phrases/${p.slug}/`)}>
+					<img src={pageArt(`phrases/${p.slug}`)} alt="" loading="lazy" width="1200" height="630" />
+					<h3>{p.title}</h3>
+					<p>{phrasesFor(p).length} phrases · {p.description}</p>
+				</a>
+			</li>
+		))}
+		<li>
+			<a class="card" href={siteUrl('/how-to-say-good-morning-in-marathi/')}>
+				<img src={pageArt('how-to-say-good-morning-in-marathi')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>How to say good morning</h3>
+				<p>शुभ सकाळ and शुभ रात्री with usage.</p>
+			</a>
+		</li>
+	</ul>
+
+	<SeoCards family="phrases" heading="Phrases by situation" />
+
+	<AppCTA variant="general" context="phrases-index" />
+</Learn>

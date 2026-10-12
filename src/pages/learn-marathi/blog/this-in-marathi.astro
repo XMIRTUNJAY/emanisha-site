@@ -1,0 +1,74 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const thisWords = wordsByMarathi([
+	'हा', 'ही', 'हे', 'इथे', 'तिथे', 'असा', 'तसा',
+]);
+---
+
+<Learn
+	title="हा, ही, हे — Saying “This” in Marathi Correctly"
+	description="Marathi has three words for this: हा (masculine), ही (feminine), हे (neuter). The simple gender rule, plus इथे/तिथे and असा/तसा."
+	kicker="Word meaning"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'हा ही हे — this in Marathi', href: siteUrl('/blog/this-in-marathi/') },
+	]}
+	canonicalPath="/blog/this-in-marathi/"
+	about="ha hi he in marathi; this in marathi"
+	meta={['3 genders', '7 pointer words']}
+	faq={[
+		{
+			question: 'How do you know which of हा, ही, हे to use?',
+			answer: 'Match the noun, not the speaker: हा with masculine nouns, ही with feminine, हे with neuter. Every word table on this site carries the noun with its correct form, so checking a word once teaches you both at once.',
+		},
+		{
+			question: 'What is the difference between इथे and तिथे?',
+			answer: 'इथे = here (near the speaker), तिथे = there (away from the speaker). The same near/far split gives असा (like this) and तसा (like that).',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		Marathi splits "this" by gender:
+		<span class="mr" lang="mr">हा</span> for masculine nouns,
+		<span class="mr" lang="mr">ही</span> for feminine,
+		<span class="mr" lang="mr">हे</span> for neuter. Same word, three
+		uniforms — the noun decides which one it wears.
+	</p>
+
+	<h2>The pointer words</h2>
+	<p>
+		These seven are the navigation system of Marathi sentences: the three
+		"this" forms, the here/there pair (<span class="mr" lang="mr">इथे</span>
+		/ <span class="mr" lang="mr">तिथे</span>) and the like-this/like-that
+		pair (<span class="mr" lang="mr">असा</span> /
+		<span class="mr" lang="mr">तसा</span>).
+	</p>
+	<VocabTable words={thisWords} caption="This, here and like-this" />
+
+	<h2>The pattern that repeats everywhere</h2>
+	<p>
+		Once the हा/ही/हे habit clicks, relatives fall in line for free:
+		<span class="mr" lang="mr">माझा</span>/<span class="mr" lang="mr">माझी</span>
+		(my, masculine/feminine) follow the same agreement, and so do almost
+		all adjectives. If you are coming from Hindi, this feels familiar —
+		the feminine differs from Hindi in places, though, so trust the
+		gendered tables over guesswork.
+	</p>
+
+	<AppCTA variant="grammar" context="blog-this-in-marathi" />
+
+	<RelatedContent
+		links={[
+			{ label: 'My/your: माझा vs माझी', href: siteUrl('/grammar/possessives/') },
+			{ label: 'Grammar notes, all topics', href: siteUrl('/grammar/') },
+			{ label: 'Beginner words', href: siteUrl('/vocabulary/beginners/') },
+		]}
+	/>
+</Learn>

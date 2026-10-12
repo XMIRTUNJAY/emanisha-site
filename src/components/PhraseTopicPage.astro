@@ -1,0 +1,86 @@
+---
+// PhraseTopicPage — data-driven situational phrase pages
+// (src/data/seo/phrase-pages.json). Phrases resolve from unit speaking rows.
+import Learn from '../layouts/Learn.astro';
+import PhraseTable from './PhraseTable.astro';
+import QuickPractice from './QuickPractice.astro';
+import MistakeTable from './MistakeTable.astro';
+import AppCTA from './AppCTA.astro';
+import RelatedContent from './RelatedContent.astro';
+import { speakingFor, relatedFor, type SeoPage, FAMILY_BASE, FAMILY_LABEL } from '../lib/seo';
+import { siteUrl } from '../lib/site';
+
+type Props = { page: SeoPage };
+const { page } = Astro.props;
+
+const phrases = speakingFor(page);
+const related = relatedFor(page);
+const metaBits = [
+	`${phrases.length} phrases`,
+	...(page.units?.length ? [page.units.length > 1 ? `Units ${page.units.join(', ')}` : `Unit ${page.units[0]}`] : []),
+];
+---
+
+<Learn
+	title={page.title}
+	h1={page.h1 ?? page.title}
+	description={page.description}
+	kicker={FAMILY_LABEL[page.family]}
+	crumbs={[
+		{ label: FAMILY_LABEL[page.family], href: siteUrl(FAMILY_BASE[page.family]) },
+		{ label: page.title, href: siteUrl(`${FAMILY_BASE[page.family]}${page.slug}/`) },
+	]}
+	canonicalPath={`${FAMILY_BASE[page.family]}${page.slug}/`}
+	about={[page.primaryKeyword, ...page.secondaryKeywords].join('; ')}
+	meta={metaBits}
+	faq={page.faq ?? []}
+>
+	<h2>What you will learn</h2>
+	{page.intro.map((para) => <p>{para}</p>)}
+	{page.tip && <p class="tip"><strong>Tip:</strong> {page.tip}</p>}
+
+	<h2>The phrases</h2>
+	<PhraseTable phrases={phrases} caption={page.title} />
+
+	{(page.sections ?? []).map((s) => (
+		<section>
+			<h2>{s.heading}</h2>
+			{s.paragraphs.map((para) => <p>{para}</p>)}
+		</section>
+	))}
+
+	<MistakeTable mistakes={page.mistakes ?? []} />
+
+	{page.practice && <QuickPractice practice={page.practice} />}
+
+	<AppCTA variant={page.appCtaVariant ?? 'phrase'} context={`phrases-${page.slug}`} />
+
+	<RelatedContent links={related} />
+
+	{(page.faq ?? []).length > 0 && (
+		<>
+			<h2>Common questions</h2>
+			{page.faq!.map((f) => (
+				<details>
+					<summary>{f.question}</summary>
+					<p>{f.answer}</p>
+				</details>
+			))}
+		</>
+	)}
+</Learn>
+
+<style>
+	details {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 0.9em 1.1em;
+		margin-bottom: 0.6em;
+	}
+	details summary {
+		font-weight: 600;
+		cursor: pointer;
+	}
+	details p { margin: 0.6em 0 0.2em 0; }
+</style>

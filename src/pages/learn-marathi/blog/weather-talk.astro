@@ -1,0 +1,42 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByCategory } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const weather = wordsByCategory(['Weather']);
+---
+
+<Learn
+	title="Talking About Weather in Marathi"
+	description="Talk weather in Marathi: rain, seasons and sky words with Hindi meanings, pronunciation and examples."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Weather talk', href: siteUrl('/blog/weather-talk/') },
+	]}
+	canonicalPath="/blog/weather-talk/"
+	about="marathi weather words"
+	meta={['16 weather words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Monsoon small talk is a Maharashtrian ritual. Sixteen weather words —
+		rain, sky, seasons and everything the sky does — each with Hindi
+		meaning, pronunciation and an example sentence.
+	</p>
+
+	<VocabTable words={weather} caption="Marathi weather words" />
+
+	<AppCTA variant="vocabulary" context="blog-weather" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Numbers & time', href: siteUrl('/vocabulary/numbers-time/') },
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'Unit 16 — Time & Seasons', href: siteUrl('/lessons/16/') },
+		]}
+	/>
+</Learn>

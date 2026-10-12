@@ -1,0 +1,68 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const keys = wordsByMarathi(['थाळी', 'बिल', 'पाणी', 'चहा']);
+const u01 = getUnit('01').speaking[4];
+const u02 = getUnit('02').speaking[5];
+const u09 = getUnit('09').speaking[5];
+---
+
+<Learn
+	title="Ordering Food in Marathi at Restaurants"
+	description="Order food in Marathi: thali, bill, water and tea words plus the exact sentences to use them."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Ordering food', href: siteUrl('/blog/ordering-food/') },
+	]}
+	canonicalPath="/blog/ordering-food/"
+	about="ordering food marathi restaurant"
+	meta={['4 key words + 3 sentences', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Restaurant Marathi is four words plus three sentences. The words name
+		what you want; the sentences do the ordering — verified lines from
+		Units 01, 02 and 09.
+	</p>
+
+	<h2>Key words</h2>
+	<VocabTable words={keys} caption="Restaurant key words" />
+
+	<h2>Sentences that order for you</h2>
+	<div class="table-scroll" role="region" aria-label="Ordering sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{[u01, u02, u09].map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+	<p>
+		Notice the pattern: मला … पाहिजे (I need …) from Unit 01 builds any
+		request — swap in the food words above.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-food-order" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Food words', href: siteUrl('/vocabulary/food/') },
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+</Learn>

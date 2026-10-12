@@ -1,0 +1,111 @@
+---
+// QuickPractice — zero-JS practice block for SEO content pages.
+// Turns "SEO page" into "SEO page + learning interaction" using
+// <details>/<summary> reveals only (progressive enhancement, no islands).
+import type { Practice } from '../lib/seo';
+
+type Props = { practice: Practice; title?: string };
+const { practice, title = 'Quick practice' } = Astro.props;
+const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+const mcq = practice.mcq ?? [];
+const fill = practice.fill ?? [];
+const translate = practice.translate ?? [];
+const total = mcq.length + fill.length + translate.length;
+---
+
+{total > 0 && (
+	<section class="quick-practice" aria-label={title} data-practice-count={total}>
+		<h2>{title}</h2>
+		<p class="qp-note">Answer first, then open the reveal to check yourself.</p>
+
+		{mcq.map((q, i) => (
+			<details class="qp qp-mcq">
+				<summary>
+					<span class="qp-q">{i + 1}. {q.question}</span>
+					<ol class="qp-options" type="A">
+						{q.options.map((opt) => <li lang={/[\u0900-\u097F]/.test(opt) ? 'mr' : undefined}>{opt}</li>)}
+					</ol>
+				</summary>
+				<p class="qp-answer">
+					<strong>Answer: {letters[q.answer]}. <span lang={/[\u0900-\u097F]/.test(q.options[q.answer]) ? 'mr' : undefined}>{q.options[q.answer]}</span></strong>
+					{q.explanation && <> — {q.explanation}</>}
+				</p>
+			</details>
+		))}
+
+		{fill.map((f, i) => (
+			<details class="qp qp-fill">
+				<summary>
+					<span class="qp-q">{mcq.length + i + 1}. Fill in the blank: <span lang="mr">{f.sentence}</span></span>
+				</summary>
+				<p class="qp-answer">
+					<strong lang="mr">{f.answer}</strong>
+					{f.hint && <> — {f.hint}</>}
+				</p>
+			</details>
+		))}
+
+		{translate.map((t, i) => (
+			<details class="qp qp-translate">
+				<summary>
+					<span class="qp-q">{mcq.length + fill.length + i + 1}. Translate to Marathi: <span lang={t.sourceLang === 'hi' ? 'hi' : undefined}>“{t.source}”</span></span>
+				</summary>
+				<p class="qp-answer">
+					<strong lang="mr">{t.answer}</strong>
+					{t.note && <> — {t.note}</>}
+				</p>
+			</details>
+		))}
+	</section>
+)}
+
+<style>
+	.quick-practice {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 1.2em 1.4em;
+		margin: var(--space-5) 0;
+	}
+	.quick-practice h2 { margin-top: 0; }
+	.qp-note {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		margin-top: -0.4em;
+	}
+	.qp {
+		border-top: var(--border);
+		padding: 0.7em 0;
+	}
+	.qp summary {
+		cursor: pointer;
+		font-weight: 600;
+		list-style: none;
+		position: relative;
+		padding-right: 5.5em;
+	}
+	.qp summary::-webkit-details-marker { display: none; }
+	.qp summary::after {
+		content: 'Show answer';
+		position: absolute;
+		right: 0;
+		top: 0.1em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--accent);
+	}
+	.qp[open] summary::after { content: 'Hide answer'; }
+	.qp-options {
+		font-weight: 400;
+		margin: 0.5em 0 0 0;
+	}
+	.qp-answer {
+		margin: 0.6em 0 0.2em 0;
+		background: var(--accent-fixed);
+		border-radius: 8px;
+		padding: 0.55em 0.8em;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.qp summary { transition: none; }
+	}
+</style>

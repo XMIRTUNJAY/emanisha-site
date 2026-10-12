@@ -1,0 +1,64 @@
+---
+// IndieLayout — shared frame for the main emanisha.in site (the "indie /
+// builds" pages). The learn-marathi section has its own layouts (Base/Learn)
+// and never loads this, so the two design systems stay isolated.
+export interface Props {
+	title: string;
+	description: string;
+	/** Unique page path with leading slash, e.g. '/projects/marathi-learning/'. */
+	canonicalPath?: string;
+	/** Extra <head> JSON-LD blobs. */
+	jsonLd?: Record<string, unknown>;
+}
+const { title, description, canonicalPath = '/', jsonLd } = Astro.props;
+const site = 'https://emanisha.in';
+const canonical = new URL(canonicalPath, site).toString();
+import '../styles/main-site.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;650;700;750;800&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap"
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Indie Builds" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta
+			property="og:image"
+			content="https://images.hostinger.com/9783d01a-a4ce-45e2-8b04-7f5682ad2251.png"
+		/>
+		{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+		<link rel="sitemap" href="/sitemap-index.xml" />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<script>
+	// mobile nav toggle
+	function bindNav() {
+		const btn = document.querySelector<HTMLElement>('.mobile-menu');
+		const nav = document.querySelector<HTMLElement>('.nav');
+		if (!btn || !nav || btn.dataset.bound) return;
+		btn.dataset.bound = '1';
+		btn.addEventListener('click', () => {
+			const open = nav.classList.toggle('open');
+			btn.setAttribute('aria-expanded', String(open));
+		});
+	}
+	bindNav();
+</script>

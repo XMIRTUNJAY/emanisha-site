@@ -1,0 +1,114 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Mascot from '../../components/Mascot.astro';
+import { pageArt } from '../../lib/art';
+import { siteUrl } from '../../lib/site';
+
+const title = 'New to Marathi? Start Here — 6 Steps';
+const description = 'A beginner path into Marathi: essential words, greetings, first sentences, Hindi bridges, your first lesson, then practice in the app.';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+
+const steps = [
+	{ n: 'Step 1', title: 'Essential Marathi words', body: 'Meet your first 100+ words — greetings, yes/no, numbers — with Hindi meanings and pronunciation.', href: siteUrl('/vocabulary/beginners/'), art: pageArt('vocabulary/beginners') },
+	{ n: 'Step 2', title: 'Marathi greetings', body: 'Hello, thank you, sorry: the phrases that open every conversation.', href: siteUrl('/phrases/greetings/'), art: pageArt('phrases/greetings') },
+	{ n: 'Step 3', title: 'Basic sentences', body: 'Short everyday sentences with Hindi and English meanings. Say each aloud.', href: siteUrl('/phrases/daily/'), art: pageArt('phrases/daily') },
+	{ n: 'Step 4', title: 'Hindi → Marathi bridges', body: 'See how Hindi patterns map onto Marathi, word by word.', href: siteUrl('/hindi-to-marathi/'), art: pageArt('hindi-to-marathi') },
+	{ n: 'Step 5', title: 'Beginner Lesson 01', body: 'Unit 01 of the curriculum: alphabet, greetings, first words, first sentences.', href: siteUrl('/lessons/01/'), art: pageArt('lessons/01') },
+	{ n: 'Step 6', title: 'Practice in Bol Marathi', body: 'Turn reading into remembering: listening, speaking, sentence building, review.', href: siteUrl('/app/'), art: pageArt('app') },
+];
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Start here', href: siteUrl('/start/') }]}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={url}
+		type="LearningResource"
+		about="marathi beginner path"
+		breadcrumbs={[{ name: 'Learn Marathi', url: homeUrl }, { name: 'Start here', url }]}
+	/>
+	<div class="prose">
+		<p class="kicker">Beginner path</p>
+		<div class="start-hero">
+			<div class="start-hero-text">
+				<h1>New to Marathi? Start here.</h1>
+				<p class="lede">Six steps, each linking to a real lesson. No signup, everything below is free.</p>
+			</div>
+			<div class="start-hero-mascot">
+				<Mascot pose="read" size="lg" ariaLabel="Mascot reading a Marathi book" />
+			</div>
+		</div>
+		<ol class="steps">
+			{steps.map((s) => (
+				<li>
+					<a class="card" href={s.href} data-funnel="path_step_click">
+						<img src={s.art} alt="" loading="lazy" width="1200" height="630" />
+						<p class="kicker">{s.n}</p>
+						<h2>{s.title}</h2>
+						<p>{s.body}</p>
+					</a>
+				</li>
+			))}
+		</ol>
+		<AppCTA variant="general" context="start" />
+	</div>
+</Base>
+
+<style>
+	.start-hero {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 2rem;
+		flex-wrap: wrap;
+		margin: 1.5rem 0 1rem 0;
+	}
+	.start-hero-text { flex: 1; min-width: 280px; }
+	.start-hero-mascot { flex-shrink: 0; }
+	@media (max-width: 760px) {
+		.start-hero { flex-direction: column; align-items: center; text-align: center; }
+		.start-hero-mascot { order: -1; margin-bottom: 1rem; }
+	}
+
+	.steps {
+		list-style: none;
+		margin: 2em 0;
+		padding: 0;
+		display: grid;
+		gap: 1em;
+		grid-template-columns: repeat(2, 1fr);
+		counter-reset: step;
+	}
+	@media (max-width: 640px) {
+		.steps { grid-template-columns: 1fr; }
+	}
+	.steps li {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 1.25em 1.25em 1em 1.25em;
+	}
+	.steps .card {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+	.steps .card:hover { border-color: var(--accent); }
+	.steps .card img {
+		display: block;
+		width: calc(100% + 2.5em);
+		max-width: none;
+		height: auto;
+		aspect-ratio: 1200 / 630;
+		object-fit: cover;
+		margin: -1.25em -1.25em 0.8em -1.25em;
+		border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+		border-bottom: var(--border);
+		background: var(--container-low);
+	}
+	.steps .card h2 { font-size: 1.2rem; margin: 0 0 0.3em 0; }
+	.steps .card p { margin: 0 0 0.5em 0; }
+</style>

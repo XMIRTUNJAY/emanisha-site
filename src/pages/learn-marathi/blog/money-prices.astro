@@ -1,0 +1,42 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const money = wordsByMarathi(['एक', 'दोन', 'तीन', 'चार', 'पाच', 'सहा', 'सात', 'आठ', 'नऊ', 'दहा', 'किंमत', 'स्वस्त', 'महाग', 'दुकान']);
+---
+
+<Learn
+	title="Money & Prices in Marathi: Numbers That Pay"
+	description="Handle money in Marathi: numbers 1–10 plus price, cheap, expensive and shop — with Hindi meanings."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Money & prices', href: siteUrl('/blog/money-prices/') },
+	]}
+	canonicalPath="/blog/money-prices/"
+	about="marathi money prices numbers"
+	meta={['14 money words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Every price is a number plus a noun. Ten Marathi numbers and four
+		market words — price, cheap, expensive, shop — handle most money
+		moments, each with Hindi meaning and pronunciation.
+	</p>
+
+	<VocabTable words={money} caption="Marathi money words" />
+
+	<AppCTA variant="vocabulary" context="blog-money" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi numbers 1–20', href: siteUrl('/marathi-numbers/') },
+			{ label: 'Shopping phrases', href: siteUrl('/phrases/shopping/') },
+			{ label: 'Unit 09 — Shopping & Market', href: siteUrl('/lessons/09/') },
+		]}
+	/>
+</Learn>

@@ -1,0 +1,95 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const timeWords = wordsByMarathi([
+	'वेळ', 'मिनिट', 'तास', 'आता', 'घड्याळ', 'आज',
+	'उद्या', 'काल', 'सकाळ', 'दुपार', 'संध्याकाळ', 'रात्र',
+]);
+const timeTalk = getUnit('16').speaking;
+---
+
+<Learn
+	title="How to Tell Time in Marathi: वाजले Explained"
+	description="Tell time in Marathi: आता साडे पाच वाजले decoded, all day-part words from सकाळ to रात्र, plus the six Unit 16 time sentences."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Tell time in Marathi', href: siteUrl('/blog/how-to-tell-time-in-marathi/') },
+	]}
+	canonicalPath="/blog/how-to-tell-time-in-marathi/"
+	about="tell time in marathi; vajle meaning"
+	meta={['12 time words', '6 sentences', 'Unit 16']}
+	faq={[
+		{
+			question: 'How do you say "it is half past five" in Marathi?',
+			answer: 'साडे पाच वाजले — साडे marks the half hour, and वाजले is the verb completed: the clock "has struck". Add आता (now) up front for "it is now half past five".',
+		},
+		{
+			question: 'How do you say "it is getting late" in Marathi?',
+			answer: 'उशिरा होत आहे — literally "late is happening". The full everyday line is लवकर या, उशिरा होत आहे: come soon, it is getting late.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		Time in Marathi ends in <span class="mr" lang="mr">वाजले</span> — the
+		clock "striking". <span class="mr" lang="mr">आता साडे पाच वाजले</span>
+		= it's now half past five. Learn the half-hour marker
+		<span class="mr" lang="mr">साडे</span> plus the day-part words below
+		and you can handle any schedule talk.
+	</p>
+
+	<h2>The clock and the day</h2>
+	<p>
+		Note the honest trap for Hindi speakers:
+		<span class="mr" lang="mr">काल</span> means <em>yesterday</em> in
+		Marathi — never tomorrow (<span class="mr" lang="mr">उद्या</span>).
+		It is the single most useful word on this page to get right.
+	</p>
+	<VocabTable words={timeWords} caption="Time and day words" />
+
+	<h2>Saying the time (Unit 16)</h2>
+	<div class="table-scroll" role="region" aria-label="Time sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{timeTalk.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<h2>Beyond the clock</h2>
+	<p>
+		Unit 16 runs time into calendars:
+		<span class="mr" lang="mr">आठवडा</span> →
+		<span class="mr" lang="mr">महिना</span> →
+		<span class="mr" lang="mr">वर्ष</span> (week → month → year) plus the
+		useful frame <span class="mr" lang="mr">मी आठवड्यातून परत येईन</span>
+		— "I'll return in a week." Season talk continues in Unit 16 as well:
+		<span class="mr" lang="mr">वर्षात पावस खूप पडतो</span> — it rains a
+		lot in the monsoon.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-tell-time" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Weather words & seasons', href: siteUrl('/vocabulary/weather/') },
+			{ label: 'Daily conversation phrases', href: siteUrl('/phrases/daily/') },
+			{ label: 'Unit 16 — Time & Seasons', href: siteUrl('/lessons/16/') },
+		]}
+	/>
+</Learn>

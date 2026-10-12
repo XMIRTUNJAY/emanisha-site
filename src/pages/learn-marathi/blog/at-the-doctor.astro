@@ -1,0 +1,62 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const keys = wordsByMarathi(['पोट', 'ताप', 'डॉक्टर']);
+const visit = getUnit('10').speaking;
+---
+
+<Learn
+	title="At the Doctor in Marathi: Symptoms & Sentences"
+	description="Describe symptoms in Marathi: body words plus the exact Unit 10 sentences for fever, pain and medicine."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'At the doctor', href: siteUrl('/blog/at-the-doctor/') },
+	]}
+	canonicalPath="/blog/at-the-doctor/"
+	about="doctor visit marathi symptoms"
+	meta={['3 key words + 6 sentences', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Being sick is stressful enough without a language barrier. Three key
+		words plus the six Unit 10 doctor-visit sentences below cover pain,
+		fever, medicine and emergencies.
+	</p>
+
+	<h2>Key words</h2>
+	<VocabTable words={keys} caption="Doctor visit key words" />
+
+	<h2>What to say (Unit 10)</h2>
+	<div class="table-scroll" role="region" aria-label="Doctor sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{visit.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<AppCTA variant="phrase" context="blog-doctor" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Daily-use words (body)', href: siteUrl('/vocabulary/daily-life/') },
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'Unit 10 — Health & Body', href: siteUrl('/lessons/10/') },
+		]}
+	/>
+</Learn>

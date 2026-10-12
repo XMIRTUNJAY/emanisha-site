@@ -1,0 +1,88 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const likeVerbs = wordsByMarathi(['वाचणे', 'गाणे', 'खेळणे', 'ऐकणे']);
+const likes = getUnit('18').speaking;
+---
+
+<Learn
+	title="How to Say “I Like…” in Marathi: मला आवडतं"
+	description="The आवडतं pattern for likes in Marathi — मला वाचन आवडतं and friends — with Hindi meanings and the six Unit 18 sentences."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'I like in Marathi', href: siteUrl('/blog/i-like-in-marathi/') },
+	]}
+	canonicalPath="/blog/i-like-in-marathi/"
+	about="i like in marathi; avadta meaning"
+	meta={['मला + आवडतं', '6 sentences', 'Unit 18']}
+	faq={[
+		{
+			question: 'Why does "I like reading" start with मला and not मी?',
+			answer: 'आवडणे follows the Hindi "मुझे … पसंद है" pattern: the liking happens TO you. So मला (to me) + the thing + आवडतं. मला वाचन आवडतं = to-me reading is-pleasing.',
+		},
+		{
+			question: 'How do you say "I like music" in Marathi?',
+			answer: 'मला संगीत आवडतं — same frame as the curriculum line मला वाचन आवडतं; swap the noun for whatever you like.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		Likes in Marathi run on one frame:
+		<span class="mr" lang="mr">मला [thing] आवडतं</span>.
+		<span class="mr" lang="mr">मला वाचन आवडतं</span> = I like reading.
+		If you speak Hindi it will feel instantly familiar — it is the
+		<span lang="hi">मुझे … पसंद है</span> shape, one for one.
+	</p>
+
+	<h2>Verbs for the things you like</h2>
+	<p>
+		Four activity verbs straight from the word bank — read, sing, play,
+		listen. Any of them drops into the frame.
+	</p>
+	<VocabTable words={likeVerbs} caption="Activity verbs" />
+
+	<h2>The pattern in the wild (Unit 18)</h2>
+	<div class="table-scroll" role="region" aria-label="Likes and hobbies" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{likes.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<h2>Level it up with "how often"</h2>
+	<p>
+		Unit 18 pairs likes with frequency:
+		<span class="mr" lang="mr">मी रोज क्रिकेट खेळतो</span> (I play cricket
+		daily) and <span class="mr" lang="mr">मी कधीकधी चित्रकला करतो</span>
+		(I paint sometimes). Adverbs like <span class="mr" lang="mr">रोज</span>
+		and <span class="mr" lang="mr">कधीकधी</span> sit right before the verb —
+		spot them in the sentences above and they are yours.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-i-like" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Essential verbs', href: siteUrl('/vocabulary/verbs/') },
+			{ label: 'Emotion words', href: siteUrl('/vocabulary/emotions/') },
+			{ label: 'Unit 18 — Hobbies & Leisure', href: siteUrl('/lessons/18/') },
+		]}
+	/>
+</Learn>

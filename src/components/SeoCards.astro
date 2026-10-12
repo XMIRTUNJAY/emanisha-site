@@ -1,0 +1,33 @@
+---
+// SeoCards — hub listing of published content-engine pages for a family.
+import { seoPagesByFamily, wordsFor, speakingFor, bridgesForPage, grammarNotesFor, FAMILY_BASE, type Family } from '../lib/seo';
+import { pageArt } from '../lib/art';
+import { siteUrl } from '../lib/site';
+
+type Props = { family: Family; heading: string };
+const { family, heading } = Astro.props;
+const pages = seoPagesByFamily(family);
+
+const countLine = (p: (typeof pages)[number]): string => {
+	if (p.categories?.length || p.wordIds?.length) return `${wordsFor(p).length} words`;
+	if (p.speakingUnits?.length || p.speakingPicks?.length) return `${speakingFor(p).length} sentences`;
+	if (p.bridgeUnits?.length) return `${bridgesForPage(p).length} bridges`;
+	if (p.grammarPicks?.length) return `${grammarNotesFor(p).length} lesson notes`;
+	return '';
+};
+---
+
+{pages.length > 0 && (
+	<h2>{heading}</h2>
+	<ul class="card-grid">
+		{pages.map((p) => (
+			<li>
+				<a class="card" href={siteUrl(`${FAMILY_BASE[family]}${p.slug}/`)}>
+					<img src={pageArt(`${FAMILY_BASE[family].replace(/^\/+|\/+$/g, '')}/${p.slug}`)} alt="" loading="lazy" width="1200" height="630" />
+					<h3>{p.title}</h3>
+					<p>{countLine(p) ? `${countLine(p)} · ` : ''}{p.description}</p>
+				</a>
+			</li>
+		))}
+	</ul>
+)}

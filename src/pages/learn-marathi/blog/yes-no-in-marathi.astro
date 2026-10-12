@@ -1,0 +1,74 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const yesNo = wordsByMarathi([
+	'नाही', 'ठीक आहे', 'हो, झालं', 'हो, कृपया',
+	'नको, धन्यवाद', 'बरोबर', 'चूक',
+]);
+---
+
+<Learn
+	title="Yes and No in Marathi: हो, नको, बरोबर, चूक"
+	description="Saying yes and no in Marathi — हो कृपया vs नको धन्यवाद, correct (बरोबर) vs wrong (चूक), and refusing politely without being rude."
+	kicker="Marathi Q&amp;A"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Yes and no in Marathi', href: siteUrl('/blog/yes-no-in-marathi/') },
+	]}
+	canonicalPath="/blog/yes-no-in-marathi/"
+	about="yes no in marathi; nako meaning"
+	meta={['7 answers', 'Polite refusals']}
+	faq={[
+		{
+			question: 'How do you refuse something politely in Marathi?',
+			answer: 'नको, धन्यवाद — literally "no, thank you". Pushing harder with plain नाही sounds blunt; the धन्यवाद softener is the standard polite refusal.',
+		},
+		{
+			question: 'What is the difference between बरोबर and ठीक आहे?',
+			answer: 'बरोबर confirms a fact is correct; ठीक आहे says something is okay/fine. "That\'s right" = बरोबर; "it\'s fine" = ठीक आहे.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		Yes is <span class="mr" lang="mr">हो</span>, no is
+		<span class="mr" lang="mr">नाही</span> — but real Marathi answers come
+		as pairs: <span class="mr" lang="mr">हो, कृपया</span> (yes please),
+		<span class="mr" lang="mr">नको, धन्यवाद</span> (no thank you),
+		<span class="mr" lang="mr">बरोबर</span> (correct) and
+		<span class="mr" lang="mr">चूक</span> (wrong).
+	</p>
+
+	<h2>Seven ways to answer</h2>
+	<p>
+		From a formal yes-please to the everyday
+		<span class="mr" lang="mr">ठीक आहे</span> (that's fine), each row is
+		a complete spoken answer — nothing to assemble.
+	</p>
+	<VocabTable words={yesNo} caption="Yes, no and everything between" />
+
+	<h2>The soft refusal everyone uses</h2>
+	<p>
+		Refusing food, a ride, a second helping:
+		<span class="mr" lang="mr">नको, धन्यवाद</span> does it without
+		offence. Its mirror <span class="mr" lang="mr">हो, कृपया</span>
+		accepts just as gracefully. And when someone checks whether you have
+		eaten (<span class="mr" lang="mr">जेवण झालं का</span>), the cheerful
+		answer is <span class="mr" lang="mr">हो, झालं</span> — yes, done.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-yes-no" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Polite Marathi guide', href: siteUrl('/blog/polite-marathi/') },
+			{ label: 'Negation: how to say "not"', href: siteUrl('/grammar/negation/') },
+			{ label: 'Marathi greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+		]}
+	/>
+</Learn>

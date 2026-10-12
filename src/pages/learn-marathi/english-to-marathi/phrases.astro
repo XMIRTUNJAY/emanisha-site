@@ -1,0 +1,64 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { bridgesFor } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const bridges = bridgesFor(['01', '02', '03', '04']);
+---
+
+<Learn
+	title="English to Marathi Phrases & Sentences"
+	description="Everyday English sentences translated into Marathi — with word-by-word mapping and grammar notes, from the Bol Marathi bridge lessons."
+	kicker="English → Marathi"
+	crumbs={[
+		{ label: 'English → Marathi', href: siteUrl('/english-to-marathi/') },
+		{ label: 'Phrases', href: siteUrl('/english-to-marathi/phrases/') },
+	]}
+	canonicalPath="/english-to-marathi/phrases/"
+	about="english to marathi phrases and sentences"
+	meta={[`${bridges.length} sentence bridges`]}
+>
+	<h2>What you will learn</h2>
+	<p>
+		{bridges.length} English → Marathi sentence pairs with word-by-word maps.
+		Watch how English subject–verb–object becomes Marathi
+		subject–object–verb — the single most useful pattern.
+	</p>
+	<div class="table-scroll" role="region" aria-label="English to Marathi sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr>
+					<th scope="col">English</th>
+					<th scope="col">Marathi</th>
+					<th scope="col">Word map</th>
+					<th scope="col">Grammar note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{bridges.map((b) => (
+					<tr>
+						<td>{b.english}</td>
+						<td class="mr" lang="mr">{b.marathi}</td>
+						<td><small>{Object.entries(b.mapEn).map(([k, v]) => `${k} → ${v}`).join('; ')}</small></td>
+						<td>{b.grammarEn}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<AppCTA variant="phrase" context="english-phrases" />
+
+	<RelatedContent
+		links={[
+			{ label: 'English to Marathi words', href: siteUrl('/english-to-marathi/words/') },
+			{ label: 'Hindi to Marathi phrases', href: siteUrl('/hindi-to-marathi/phrases/') },
+			{ label: 'Daily conversation phrases', href: siteUrl('/phrases/daily/') },
+			{ label: 'Sentence structure', href: siteUrl('/grammar/sentence-structure/') },
+		]}
+	/>
+
+</Learn>
+

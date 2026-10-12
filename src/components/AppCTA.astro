@@ -1,0 +1,113 @@
+---
+import { BOL_MARATHI_APP } from '../data/app';
+import WaitlistForm from './WaitlistForm.astro';
+
+const deepLinkBase = BOL_MARATHI_APP.deepLinkBase || 'bolmarathi://practice';
+
+// Contextual CTA engine — ONE panel per content page. States:
+// beta (betaOptInUrl set) → "Join the beta" button;
+// live (playStoreUrl set) → variant-specific store button;
+// otherwise → shared WaitlistForm (no mailto anywhere).
+type Props = {
+	variant?: 'vocabulary' | 'phrase' | 'grammar' | 'lesson' | 'general' | 'unit-practice';
+	context?: string;
+	locale?: 'en' | 'hi';
+};
+
+const { variant = 'general', context = '', locale = 'en' } = Astro.props;
+
+const beta = BOL_MARATHI_APP.betaOptInUrl;
+const live = !BOL_MARATHI_APP.comingSoon && !!BOL_MARATHI_APP.playStoreUrl;
+
+type Copy = { heading: string; body: string; cta: string };
+const enCopy: Record<Exclude<Props['variant'], undefined>, Copy> = {
+	vocabulary: {
+		heading: 'Know the words. Now remember them.',
+		body: `Learn these words here. Practise listening and speaking in the app, and review them before you forget.`,
+		cta: 'Practice These Words',
+	},
+	phrase: {
+		heading: 'Reading the phrase is easy. Using it takes practice.',
+		body: `Say these phrases aloud, get feedback, and review them before you forget — in ${BOL_MARATHI_APP.name}.`,
+		cta: 'Practice These Phrases',
+	},
+	grammar: {
+		heading: 'Understand the pattern. Then build sentences.',
+		body: `This page teaches the rule. ${BOL_MARATHI_APP.name} turns it into sentence-building practice with instant feedback.`,
+		cta: 'Practice Sentence Building',
+	},
+	lesson: {
+		heading: 'Finished reading? Now practice it.',
+		body: `Continue this lesson with listening, speaking and interactive practice in ${BOL_MARATHI_APP.name}.`,
+		cta: 'Continue in Bol Marathi',
+	},
+	'unit-practice': {
+		heading: 'Ready to practice this unit?',
+		body: `Open the unit in the app for listening, speaking, sentence building and spaced repetition.`,
+		cta: 'Practice This Unit',
+	},
+	general: {
+		heading: 'Want to go beyond reading?',
+		body: `Learn the words here. Practise listening and speaking in the app — listen, speak, build, review, remember.`,
+		cta: 'Explore the Bol Marathi App',
+	},
+};
+
+const hiCopy: Record<Exclude<Props['variant'], undefined>, Copy> = {
+	vocabulary: {
+		heading: 'शब्द याद रखें, सिर्फ़ पढ़ें नहीं।',
+		body: `ये शब्द यहाँ सीखें। ऐप में सुनकर, बोलकर अभ्यास करें और भूलने से पहले दोहराएँ।`,
+		cta: 'इन शब्दों का अभ्यास करें',
+	},
+	phrase: {
+		heading: 'वाक्य पढ़ना आसान है, बोलना अभ्यास से आता है।',
+		body: `इन वाक्यों को बोलें, फीडबैक पाएँ और भूलने से पहले दोहराएँ — ${BOL_MARATHI_APP.name} में।`,
+		cta: 'इन वाक्यों का अभ्यास करें',
+	},
+	grammar: {
+		heading: 'नियम समझें, फिर वाक्य बनाएँ।',
+		body: `यह पन्ना नियम सिखाता है। ${BOL_MARATHI_APP.name} में तुरंत फीड백 के साथ वाक्य बनाने का अभ्यास करें।`,
+		cta: 'वाक्य बनाना सीखें',
+	},
+	lesson: {
+		heading: 'पढ़ लिया? अब अभ्यास करें।',
+		body: `इस पाठ को ${BOL_MARATHI_APP.name} में सुनने, बोलने और इंटरैक्टिव अभ्यास के साथ आगे बढ़ाएँ।`,
+		cta: 'बोल मराठी में जारी रखें',
+	},
+	'unit-practice': {
+		heading: 'इस यूनिट का अभ्यास करने के लिए तैयार?',
+		body: `ऐप में यूनिट खोलें — सुनना, बोलना, वाक्य बनाना और दोहराव।`,
+		cta: 'यह यूनिट अभ्यास करें',
+	},
+	general: {
+		heading: 'सिर्फ़ पढ़ने से आगे बढ़ें?',
+		body: `शब्द यहाँ सीखें। ऐप में सुनना-बोलना अभ्यास करें — सुनें, बोलें, बनाएँ, दोहराएँ, याद रखें।`,
+		cta: 'बोल मराठी ऐप देखें',
+	},
+};
+
+const copy = (locale === 'hi' ? hiCopy : enCopy)[variant];
+const betaLabel = locale === 'hi' ? 'बीटा से जुड़ें' : 'Join the beta';
+---
+
+<aside class="cta" data-cta={variant} data-cta-context={context} aria-label="Bol Marathi app">
+	<h2>{copy.heading}</h2>
+	<p>{copy.body}</p>
+	{beta ? (
+		<a class="btn" href={beta} data-funnel="beta_click" data-app-cta data-cta-variant={variant}>{betaLabel}</a>
+	) : live ? (
+		<a class="btn" href={BOL_MARATHI_APP.playStoreUrl as string} data-funnel="download_click" data-app-cta data-cta-variant={variant}>{copy.cta}</a>
+	) : variant === 'unit-practice' && (live || beta) ? (
+		<a class="btn" href={`${deepLinkBase}/unit/${context.replace('unit-', '')}`} data-funnel="deeplink_click" data-app-cta data-cta-variant={variant}>{copy.cta}</a>
+	) : (
+		<WaitlistForm context={context} locale={locale} />
+	)}
+	{BOL_MARATHI_APP.comingSoon && !beta && (
+		<p class="note">
+			{BOL_MARATHI_APP.comingSoonNote}{' '}
+			{locale === 'hi'
+				? 'मुफ़्त पाठ मुफ़्त रहेंगे — ऐप अभ्यास जोड़ता है।'
+				: 'Free lessons stay free — the app adds the practice loop.'}
+		</p>
+	)}
+</aside>

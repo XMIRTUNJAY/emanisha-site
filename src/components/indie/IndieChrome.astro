@@ -1,0 +1,59 @@
+---
+// IndieChrome — header + footer around main-site pages. Icons are inline
+// lucide paths; no icon library needed.
+export interface Props {
+	active?: 'work' | 'notebook' | 'book';
+}
+const { active } = Astro.props;
+---
+
+<header class="site-header rail">
+	<a class="brand" href="/" aria-label="Indie builds home"
+		><svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="30"
+			height="30"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			><path d="M12 6v12"></path><path d="M17.196 9 6.804 15"></path><path d="m6.804 9 10.392 6"></path></svg
+		><span>indie<span class="brand-light"> / builds</span><i>.</i></span></a
+	>
+	<nav class="nav" aria-label="Main navigation">
+		<a href="/#work">Work</a>
+		<a href="/#about">About</a>
+		<a href="/updates/" aria-current={active === 'notebook' ? 'page' : undefined}>Notebook</a>
+		<a href="/#contact">Say hello
+			<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+		</a>
+	</nav>
+	<div class="header-actions">
+		<a class="book-link" href="/book/">Book a chat
+			<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+		</a>
+		<button class="mobile-menu" aria-label="Open navigation" aria-expanded="false"
+			><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"></path><path d="M4 6h16"></path><path d="M4 18h16"></path></svg
+		></button>
+	</div>
+</header>
+
+<footer class="site-footer rail">
+	<a class="brand" href="/"
+		><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"></path><path d="M17.196 9 6.804 15"></path><path d="m6.804 9 10.392 6"></path></svg
+		><span>indie / builds.</span></a
+	>
+	<p>Made with care. And a little curiosity.</p>
+	<div>
+		<a href="/#contact">Get in touch
+			<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+		</a>
+		<span>© 2026 Indie Builds</span>
+	</div>
+</footer>
+
+<style>
+	/* header/footer styles come from main-site.css (global, scoped to this layout's pages) */
+</style>

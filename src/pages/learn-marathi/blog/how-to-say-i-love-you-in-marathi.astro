@@ -1,0 +1,121 @@
+---
+import Learn from '../../../layouts/Learn.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const word = wordsByMarathi(['प्रेम']);
+
+export const title = 'How to Say "I Love You" in Marathi: प्रेम vs आवडते';
+export const description = 'Learn "I love you" in Marathi — the difference between प्रेम (deep love) and आवडते (like/fancy), plus cultural etiquette and the phrases you hear.';
+export const pubDate = '2026-09-26';
+export const updatedDate = '2026-09-26';
+export const category = 'word-guide';
+export const tags = ['love', 'emotions', 'relationships', 'unit-18', 'cultural'];
+---
+
+<Learn
+	title={title}
+	description={description}
+	kicker="Word Guide"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'I Love You in Marathi', href: siteUrl('/blog/how-to-say-i-love-you-in-marathi/') },
+	]}
+	canonicalPath="/blog/how-to-say-i-love-you-in-marathi/"
+	about="how to say i love you in marathi; प्रेम meaning; आवडते meaning; marathi love phrases"
+	meta={['Deep vs casual love', 'Cultural etiquette', 'Unit 18']}
+	faq={[
+		{
+			question: 'How do you say "I love you" in Marathi?',
+			answer: 'The deep/romantic form is मी तुझ्यावर प्रेम करतो (masc) / मी तुझ्यावर प्रेम करते (fem) — literally "I do love on you." The lighter/casual form is मला तुझी आवडते — "I like you / you please me."'
+		},
+		{
+			question: 'What is the difference between प्रेम and आवडते?',
+			answer: 'प्रेम = deep, committed love (romantic, familial, spiritual). आवडते = like, fancy, attraction — the experiencer construction (मला ... आवडते). Use प्रेम for lifelong partners, parents, God. Use आवडते for dating, crushes, things you enjoy.'
+		},
+		{
+			question: 'Can I say "I love you" to friends in Marathi?',
+			answer: 'Not with प्रेम — that would be intense/romantic. For friends, use मला तुझी आवडते (I like you) or तू माझा छान मित्र आहेस (you are my good friend). Marathi reserves प्रेम for deep bonds.'
+		}
+	]}
+	hideHeading
+>
+
+<h1>{title}</h1>
+
+<p class="lead">Marathi has two distinct registers for "love" — <strong>प्रेम</strong> (prem, deep/committed love) and <strong>आवडते</strong> (āvaḍte, like/fancy/attraction). Using the wrong one is the #1 cultural mistake. This guide covers both, the grammar, and the phrases you will actually hear.</p>
+
+<h2>Quick Answer</h2>
+<table class="vocab-table">
+  <thead><tr><th>Context</th><th>Marathi</th><th>Literal</th><th>Register</th></tr></thead>
+  <tbody>
+    <tr><td>Romantic / lifelong partner</td><td>मी तुझ्यावर प्रेम करतो / करते</td><td>I do love on you</td><td>Deep, committed</td></tr>
+    <tr><td>Parents / elders / God</td><td>मी तुझ्यावर प्रेम करतो</td><td>I do love on you</td><td>Reverent</td></tr>
+    <tr><td>Dating / crush / "I like you"</td><td>मला तुझी आवडते</td><td>You please me</td><td>Casual / dating</td></tr>
+    <tr><td>Friend appreciation</td><td>तू माझा छान मित्र आहेस</td><td>You are my good friend</td><td>Platonic</td></tr>
+  </tbody>
+</table>
+
+<h2>Grammar: Two Constructions</h2>
+<h3>1. प्रेम करतो/करते — Transitive "do love"</h3>
+<ul>
+  <li><strong>मी तुझ्यावर प्रेम करतो</strong> (masculine speaker)</li>
+  <li><strong>मी तुझ्यावर प्रेम करते</strong> (feminine speaker)</li>
+  <li>तुझ्यावर = on you (locative of तुझा)</li>
+  <li>प्रेम = love (neuter noun)</li>
+  <li>करतो/करते = do (agrees with speaker: masculine → करतो, feminine → करते)</li>
+</ul>
+<div class="tip-box"><strong>Tip:</strong> The verb agrees with <em>you the speaker</em>, not the object. A woman says <em>प्रेम करते</em>, a man says <em>प्रेम करतो</em>. The object (तुझ्यावर) stays the same.</div>
+
+<h3>2. आवडते — Experiencer "pleases me"</h3>
+<ul>
+  <li><strong>मला तुझी आवडते</strong> — I like you / you please me</li>
+  <li>मला = to me (dative)</li>
+  <li>तुझी = your (feminine, agreeing with आवडते which treats the object as feminine)</li>
+  <li>आवडते = pleases (3rd person singular, neuter/feminine agreement)</li>
+</ul>
+<div class="tip-box"><strong>Tip:</strong> आवडते always takes dative subject (मला, तुला, त्याला). The thing liked is the grammatical subject: <em>मला चहा आवडते</em> (tea pleases me → I like tea), <em>मला तुझी आवडते</em> (you-fem please me → I like you).</div>
+
+<h2>Real-Life Patterns</h2>
+<table class="vocab-table">
+  <thead><tr><th>Situation</th><th>Marathi</th><th>Context</th></tr></thead>
+  <tbody>
+    <tr><td>Proposing / serious</td><td>मी तुझ्यावर प्रेम करतो. तू माझी बायको/नवरा होशील का?</td><td>Marriage intent</td></tr>
+    <tr><td>Dating / "I really like you"</td><td>मला तुझी खूप आवडते</td><td>खूप = very</td></tr>
+    <tr><td>To parents</td><td>मी आई-वडिलांवर प्रेम करतो</td><td>Reverent</td></tr>
+    <tr><td>Breakup / "I don't love you"</td><td>मला तुझी आवडत नाही / मी तुझ्यावर प्रेम करत नाही</td><td>Negation</td></tr>
+  </tbody>
+</table>
+
+<h2>Cultural Etiquette</h2>
+<ul>
+  <li><strong>प्रेम is heavy.</strong> Saying मी तुझ्यावर प्रेम करतो to someone you've dated twice is like saying "I want to marry you" on date 2. Use मला तुझी आवडते for dating.</li>
+  <li><strong>Public affection is verbal, not physical.</strong> Marathi couples say प्रेम करतो in private; PDA is rare.</li>
+  <li><strong>Family first.</strong> The first "I love you" a Marathi person hears is usually from parents (आई-वडिलांवर प्रेम करतो), not a partner.</li>
+  <li><strong>No "love you" shortcut.</strong> English "love you" / "luv u" doesn't translate — always use the full construction.</li>
+</ul>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li><strong>❌ मी तुझा प्रेम करतो</strong> → <strong>✅ मी तुझ्यावर प्रेम करतो</strong> (locative तुझ्यावर, not तुझा)</li>
+  <li><strong>❌ मला तुझा आवडते</strong> → <strong>✅ मला तुझी आवडते</strong> (feminine agreement on possessive)</li>
+  <li><strong>❌ मी तुझी प्रेम करतो</strong> → <strong>✅ मी तुझ्यावर प्रेम करतो</strong> (प्रेम takes locative, not dative)</li>
+  <li><strong>❌ Using "लव यू" / "लव्ह यू"</strong> → Don't — use the Marathi forms above</li>
+</ul>
+
+<h2>Mini Practice</h2>
+<ol>
+  <li>"I love you (to wife/husband)" → <em>मी तुझ्यावर प्रेम करतो/करते</em></li>
+  <li>"I like you (dating)" → <em>मला तुझी आवडते</em></li>
+  <li>"I love my parents" → <em>मी आई-वडिलांवर प्रेम करतो</em></li>
+</ol>
+
+<h2>Related</h2>
+<ul>
+  <li><a href={siteUrl('/vocabulary/emotions/')}>Emotions Vocabulary</a></li>
+  <li><a href={siteUrl('/hindi-to-marathi/emotions/')}>Hindi→Marathi Emotions</a></li>
+  <li><a href={siteUrl('/blog/i-like-in-marathi/')}>How to Say "I Like" in Marathi (आवडते frame)</a></li>
+  <li><a href={siteUrl('/lessons/18/')}>Unit 18: Hobbies & Likes</a></li>
+</ul>
+
+</Learn>

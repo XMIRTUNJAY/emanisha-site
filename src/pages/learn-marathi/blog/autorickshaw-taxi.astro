@@ -1,0 +1,55 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByCategory, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const dirs = wordsByCategory(['Directions']);
+const keys = wordsByMarathi(['कृपया', 'हळू बोला', 'थांबा']);
+---
+
+<Learn
+	title="Marathi for Autorickshaw & Taxi Rides"
+	description="Tell auto drivers where to go in Marathi: directions, stop/go, please-slowly phrases with Hindi meanings."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Autorickshaw Marathi', href: siteUrl('/blog/autorickshaw-taxi/') },
+	]}
+	canonicalPath="/blog/autorickshaw-taxi/"
+	about="marathi for autorickshaw taxi"
+	meta={['16 direction words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Every ride needs the same five moves: where to go, straight or turn,
+		stop here, how much, please. The direction words below plus two
+		politeness phrases cover all five — with Hindi meanings and
+		pronunciation.
+	</p>
+
+	<h2>Direction words</h2>
+	<VocabTable words={dirs} caption="Marathi direction words" />
+
+	<h2>The two phrases that save every ride</h2>
+	<VocabTable words={keys} caption="Key auto phrases" />
+
+	<h2>How to use them</h2>
+	<ul>
+		<li>Name the place, then position it: समोर (in front), मागे (behind), बाजूला (beside), पलीकडे (across) — all in the table.</li>
+		<li>थांबा stops the vehicle; कृपया keeps it polite; हळू बोला asks for slower speech.</li>
+		<li>Agree the fare with numbers before you sit — see the numbers page.</li>
+	</ul>
+
+	<AppCTA variant="phrase" context="blog-auto" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Travel words', href: siteUrl('/vocabulary/travel/') },
+			{ label: 'Marathi numbers 1–20', href: siteUrl('/marathi-numbers/') },
+			{ label: 'Travel phrases', href: siteUrl('/phrases/travel/') },
+		]}
+	/>
+</Learn>

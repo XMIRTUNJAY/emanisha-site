@@ -1,0 +1,123 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Base from '../../../layouts/Base.astro';
+import { guidesByCategory, allGuides } from '../../../lib/guides';
+import { pageArt, pageArtSocial } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'Real-Life Marathi: Situational Guides';
+const description =
+	'Real-life Marathi guides: autos, markets, doctors, offices, festivals plus common phrases and conversations — every word verified from the curriculum.';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+const ogImage = pageArtSocial('blog');
+
+const posts = [
+	['/blog/autorickshaw-taxi/', 'Marathi for Autorickshaw & Taxi Rides', 'Directions, stop/go, fares.'],
+	['/blog/grocery-shopping/', 'Grocery Shopping in Marathi', 'Staples plus bargaining sentences.'],
+	['/blog/ordering-food/', 'Ordering Food in Marathi', 'Thali, bill and the sentences that order.'],
+	['/blog/at-the-doctor/', 'At the Doctor in Marathi', 'Symptoms and the Unit 10 sentences.'],
+	['/blog/first-day-work/', 'Marathi for Work: First Day', 'Twelve office words.'],
+	['/blog/small-talk-intro/', 'Marathi Small Talk', 'Name, city and two rescue lines.'],
+	['/blog/festival-greetings/', 'Festival Greetings', 'Six festivals plus शुभेच्छा.'],
+	['/blog/weather-talk/', 'Talking About Weather', 'Rain, seasons and sky words.'],
+	['/blog/emotions-feelings/', 'Say How You Feel', 'Twenty emotion words.'],
+	['/blog/school-talk/', 'Marathi for School', 'Class, exam, homework talk.'],
+	['/blog/pune-newcomer-words/', 'New in Pune? 12 Words', 'The survival starter pack.'],
+	['/blog/hindi-speaker-traps/', '5 Traps for Hindi Speakers', 'काल, genders and friends.'],
+	['/blog/money-prices/', 'Money & Prices', 'Numbers 1–10 plus market words.'],
+	['/blog/polite-marathi/', 'Polite Marathi', 'Please, thanks, sorry — used right.'],
+];
+
+const answers = [
+	['/blog/how-to-shop-in-marathi/', 'How to Shop in Marathi', '12 market words + the 6-line bargaining script.'],
+	['/blog/train-station-marathi/', 'At the Train Station', 'Which train, booking, platform, hotel.'],
+	['/blog/how-to-tell-time-in-marathi/', 'How to Tell Time', 'वाजले, day parts, Unit 16 sentences.'],
+	['/blog/how-are-you-in-marathi/', '“How Are You?” in Marathi', 'कसा आहेस? vs the formal कसे आहात?'],
+	['/blog/bhet-meaning-in-marathi/', 'भेट (Bhet) Meaning', 'To meet — plus every goodbye form.'],
+	['/blog/thamba-meaning-in-marathi/', 'थांबा (Thamba) Meaning', 'Stop / wait, in autos and shops.'],
+	['/blog/yes-no-in-marathi/', 'Yes & No in Marathi', 'हो, नको, बरोबर, चूक — answers and refusals.'],
+	['/blog/this-in-marathi/', 'हा, ही, हे — “This”', 'Three genders, one habit.'],
+	['/blog/i-like-in-marathi/', 'Saying “I Like…”', 'The मला आवडतं frame, Unit 18.'],
+	['/blog/i-dont-understand-in-marathi/', '“I Don’t Understand”', '5 rescue lines for lost moments.'],
+];
+---
+
+<Base
+	title={title}
+	description={description}
+	ogImage={ogImage}
+	alternates={[{ lang: 'en', href: siteUrl('/blog/') }]}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Blog', href: siteUrl('/blog/') },
+	]}
+>
+	<div class="prose">
+		<p class="kicker">Real-life Marathi</p>
+		<h1>Situations, not chapters</h1>
+		<p class="lede">
+			Situation guides for real moments — autos, markets, doctors, offices,
+			festivals — plus a growing library of {allGuides.length} common
+			phrases and conversations. Every word and sentence verified from the
+			Bol Marathi curriculum; nothing invented.
+		</p>
+		<ul class="card-grid">
+			{posts.map(([href, label, sub]) => (
+				<li>
+					<a class="card" href={siteUrl(href)} data-funnel="path_click">
+						<img src={pageArt(href.replace(/^\//, '').replace(/\/$/, ''))} alt="" loading="lazy" width="1200" height="630" />
+						<h3>{label}</h3>
+						<p>{sub}</p>
+					</a>
+				</li>
+			))}
+		</ul>
+		<h2>You asked — quick answers</h2>
+		<p>
+			Question-first pages: what a word means, how a phrase works, how to
+			handle one exact moment. Same rule — every Marathi string traced to
+			the curriculum.
+		</p>
+		<ul class="card-grid">
+			{answers.map(([href, label, sub]) => (
+				<li>
+					<a class="card" href={siteUrl(href)} data-funnel="path_click">
+						<img src={pageArt(href.replace(/^\//, '').replace(/\/$/, ''))} alt="" loading="lazy" width="1200" height="630" />
+						<h3>{label}</h3>
+						<p>{sub}</p>
+					</a>
+				</li>
+			))}
+		</ul>
+		<h2>Common phrases & conversations</h2>
+		<p>
+			The phrases everyone searches and the conversations everyone has —
+			teach-yourself guides with audio: tap ▶ and the page reads itself
+			aloud. Grown from the Bol Marathi curriculum; more added weekly.
+		</p>
+		{[...guidesByCategory().entries()].map(([category, guides]) => (
+			<>
+				<h3 class="guide-group-title">{category}</h3>
+				<ul class="card-grid">
+					{guides.map((g) => (
+						<li>
+							<a class="card" href={siteUrl(`/blog/${g.slug}/`)} data-funnel="path_click">
+								<img src={pageArt(`blog/${g.slug}`)} alt="" loading="lazy" width="1200" height="630" />
+								<h3>{g.title.split('—')[0]?.trim() ?? g.title}</h3>
+								<p>{g.description.split('. ').slice(1).join('. ').slice(0, 90) || g.keyword}</p>
+							</a>
+						</li>
+					))}
+				</ul>
+			</>
+		))}
+		<AppCTA variant="general" context="blog-index" />
+	</div>
+</Base>
+
+<style>
+	.guide-group-title {
+		margin-top: 1.25em;
+	}
+</style>

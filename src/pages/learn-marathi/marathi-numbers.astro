@@ -1,0 +1,68 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Learn from '../../layouts/Learn.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import VocabTable from '../../components/VocabTable.astro';
+import { wordsByCategory } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+// Honest scope: the curriculum teaches 1–20, tens to 90, 100 and
+// ordinals — NOT every number 1–100. The H1 says exactly that.
+// Groups are matched by English meaning so page order never depends
+// on source-file order.
+const all = wordsByCategory(['Numbers']);
+const oneToTwenty = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+const tensEn = ['thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred'];
+const byEn = (list: string[]) => list.flatMap((e) => all.filter((w) => w.english === e));
+const ones = byEn(oneToTwenty);
+const tens = byEn(tensEn);
+const ordinals = all.filter((w) => !oneToTwenty.includes(w.english) && !tensEn.includes(w.english));
+---
+
+<Learn
+	title="Marathi Numbers 1–20, Tens & Ordinals"
+	description="Marathi numbers 1 to 20, tens to 90, 100 and ordinals — with pronunciation, Hindi meanings and examples. From the Bol Marathi curriculum."
+	kicker="Marathi Vocabulary"
+	crumbs={[
+		{ label: 'Vocabulary', href: siteUrl('/vocabulary/') },
+		{ label: 'Numbers', href: siteUrl('/marathi-numbers/') },
+	]}
+	canonicalPath="/marathi-numbers/"
+	about="marathi numbers 1 to 20 tens ordinals"
+	meta={['33 number words', 'Beginner']}
+>
+	<h2>What you will learn</h2>
+	<p>
+		Marathi numbers 1–20, the tens (30–90), 100, and everyday ordinals
+		(first, second, last…) — each with pronunciation, Hindi meaning and
+		an example. That covers prices, time, dates and counting in daily life.
+	</p>
+
+	<h2>1–20</h2>
+	<VocabTable words={ones} caption="Marathi numbers 1 to 20" />
+
+	<h2>Tens and 100</h2>
+	<VocabTable words={tens} caption="Marathi tens and hundred" />
+
+	<AppCTA variant="vocabulary" context="marathi-numbers" />
+
+	<h2>Ordinals</h2>
+	<VocabTable words={ordinals} caption="Marathi ordinal numbers" />
+
+	<h2>How to use them</h2>
+	<p>
+		Use these for shopping prices, the time, and dates — then meet the
+		rest of the number system inside the lessons, where numbers appear
+		with time, shopping and travel.
+	</p>
+
+	<RelatedContent
+		links={[
+			{ label: 'Numbers & time', href: siteUrl('/vocabulary/numbers-time/') },
+			{ label: 'Shopping & market words', href: siteUrl('/vocabulary/shopping/') },
+			{ label: 'Days of the week & months', href: siteUrl('/marathi-days-months/') },
+			{ label: 'Unit 16 — Time & Seasons', href: siteUrl('/lessons/16/') },
+		]}
+	/>
+
+</Learn>

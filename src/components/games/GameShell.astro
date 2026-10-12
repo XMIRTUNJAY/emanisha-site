@@ -1,0 +1,247 @@
+---
+// GameShell — shared frame for every game page: sibling-game nav + SFX
+// toggle, then the page content. Rendered inside the existing Base layout.
+import { siteUrl } from '../../lib/site';
+import '../SayScript.astro';
+import '../../styles/games.css';
+
+interface Props {
+	active: string;
+}
+
+const { active } = Astro.props;
+
+const games = [
+	{ slug: 'marathi-wordle', label: 'Wordle' },
+	{ slug: 'picture-guess', label: 'Picture Guess' },
+	{ slug: 'marathi-crossword', label: 'Crossword' },
+	{ slug: 'word-chain', label: 'Word Chain' },
+	{ slug: 'sentence-scramble', label: 'Sentence Scramble' },
+];
+---
+
+<div class="game-shell">
+	<div class="game-topbar">
+		<nav class="game-nav" aria-label="All games">
+			<a href={siteUrl('/games/')} aria-current={active === 'hub' ? 'page' : undefined}>All games</a>
+			{games.map((g) => (
+				<a href={siteUrl(`/games/${g.slug}/`)} aria-current={active === g.slug ? 'page' : undefined}>{g.label}</a>
+			))}
+		</nav>
+		<button type="button" class="sfx-toggle" id="sfx-toggle" aria-pressed="false" title="Sound effects on/off">🔊 SFX</button>
+	</div>
+	<slot />
+</div>
+
+<script>
+	import { buzz } from '../../lib/games/sfx';
+
+	function initSfxToggle() {
+		const btn = document.getElementById('sfx-toggle');
+		if (!btn || (btn as HTMLElement).dataset.bound) return;
+		(btn as HTMLElement).dataset.bound = '1';
+		const get = () => {
+			try { return localStorage.getItem('bol-game-muted') === 'on'; } catch { return false; }
+		};
+		const render = () => {
+			const m = get();
+			btn!.setAttribute('aria-pressed', String(m));
+			btn!.textContent = m ? '🔇 Muted' : '🔊 SFX';
+		};
+		btn!.addEventListener('click', () => {
+			try { localStorage.setItem('bol-game-muted', get() ? 'off' : 'on'); } catch { /* ignore */ }
+			render();
+		});
+		render();
+	}
+
+	// ---- Play mode (shared across games) ----
+
+	function clearStageControls() {
+		document.querySelectorAll('.game-exit, .game-backdrop').forEach((el) => el.remove());
+	}
+
+	// where to put things back after play mode
+	type HoistRestore = { el: HTMLElement; parent: Node; next: Node | null };
+	type StageRestore = { ac: AbortController; hoisted: HoistRestore[] };
+	const stageRestore = new WeakMap<HTMLElement, StageRestore>();
+
+	function hoistToBody(el: HTMLElement, hoisted: HoistRestore[]) {
+		if (!el.parentElement) return;
+		hoisted.push({ el, parent: el.parentElement, next: el.nextSibling });
+		document.body.appendChild(el);
+	}
+
+	function restoreHoisted(hoisted: HoistRestore[]) {
+		for (const h of hoisted) {
+			h.el.classList.remove('game-topbar--play');
+			h.parent.insertBefore(h.el, h.next);
+		}
+	}
+
+	// Fit the game to the play area like a canvas game: measure the content and
+	// scale it down proportionally (CSS zoom, which is layout-aware) so the
+	// whole game — board, keyboard, controls — is visible with no scrolling.
+	function setZoom(el: HTMLElement, value: string) {
+		(el.style as CSSStyleDeclaration & { zoom?: string }).zoom = value;
+	}
+
+	function fitStage(stage: HTMLElement) {
+		if (!stage.classList.contains('playing-immersive')) return;
+		const kids = Array.from(stage.children) as HTMLElement[];
+		if (!kids.length || !('zoom' in stage.style)) return;
+		for (const k of kids) setZoom(k, '');
+		const cs = getComputedStyle(stage);
+		const availH = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+		const availW = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+		const gap = parseFloat(cs.rowGap) || 0;
+		let totalH = 0;
+		let maxW = 0;
+		let first = true;
+		for (const k of kids) {
+			if (!k.offsetHeight) continue; // hidden (e.g. result panel)
+			totalH += k.offsetHeight + (first ? 0 : gap);
+			maxW = Math.max(maxW, k.offsetWidth);
+			first = false;
+		}
+		if (!totalH) return;
+		let s = Math.min(1, availH / totalH, availW / maxW);
+		// apply, re-measure, correct — converges even when margins/zoom rounding
+		// leave a few pixels of scrollable overflow behind
+		for (let i = 0; i < 4 && s < 0.999; i++) {
+			for (const k of kids) if (k.offsetHeight) setZoom(k, String(s));
+			const over = stage.scrollHeight - stage.clientHeight;
+			if (over <= 1) break;
+			s = Math.max(0.4, s * ((stage.clientHeight - 2) / stage.scrollHeight));
+		}
+	}
+
+	function exitStage(stage: HTMLElement) {
+		stage.classList.remove('playing-immersive');
+		if (document.fullscreenElement) {
+			try {
+				const fsExit = document.exitFullscreen?.();
+				if (fsExit && typeof fsExit.catch === 'function') fsExit.catch(() => {});
+			} catch {
+				/* ignore */
+			}
+		}
+		for (const k of Array.from(stage.children) as HTMLElement[]) setZoom(k, '');
+		const r = stageRestore.get(stage);
+		if (r) {
+			r.ac.abort();
+			restoreHoisted(r.hoisted);
+			stageRestore.delete(stage);
+		}
+		clearStageControls();
+		document.body.style.overflow = '';
+	}
+
+	function enterStage(stage: HTMLElement) {
+		if (stage.classList.contains('playing-immersive')) return;
+		buzz(8);
+		// instructions step aside
+		document.querySelectorAll('.game-intro[open]').forEach((d) => d.removeAttribute('open'));
+		const ac = new AbortController();
+		const hoisted: HoistRestore[] = [];
+		// the game's own topbar (game nav + SFX toggle) rides on top of the
+		// play layer — the whole-app site header stays hidden beneath it
+		const topbar = stage.closest('.game-shell')?.querySelector('.game-topbar') as HTMLElement | null;
+		if (topbar) {
+			topbar.classList.add('game-topbar--play');
+			hoistToBody(topbar, hoisted);
+			document.documentElement.style.setProperty('--game-top', `${Math.round(topbar.offsetHeight)}px`);
+		} else {
+			document.documentElement.style.setProperty('--game-top', '0px');
+		}
+		// hoist the stage to <body> so its z-index can't be trapped by an
+		// ancestor stacking context — the backdrop must sit behind it
+		hoistToBody(stage, hoisted);
+		stageRestore.set(stage, { ac, hoisted });
+		// refit whenever content or viewport changes (result panels, resizes…)
+		const refit = () => fitStage(stage);
+		const { signal } = ac;
+		stage.addEventListener('click', refit, { signal });
+		stage.addEventListener('keydown', refit, { signal });
+		window.addEventListener('resize', refit, { signal });
+		requestAnimationFrame(refit);
+		setTimeout(refit, 120);
+		// webfonts swap in late and change text metrics — refit once they land
+		document.fonts?.ready.then(() => { if (!signal.aborted) refit(); });
+		setTimeout(refit, 600);
+		const backdrop = document.createElement('div');
+		backdrop.className = 'game-backdrop';
+		backdrop.addEventListener('click', () => exitStage(stage));
+		document.body.appendChild(backdrop);
+		const exit = document.createElement('button');
+		exit.type = 'button';
+		exit.className = 'btn ghost game-exit';
+		exit.setAttribute('aria-label', 'Exit play mode');
+		exit.textContent = '✕ Exit';
+		exit.addEventListener('click', () => exitStage(stage));
+		document.body.appendChild(exit);
+		stage.classList.add('playing-immersive');
+		document.body.style.overflow = 'hidden';
+		// go TRUE fullscreen where the platform allows (desktop/Android) —
+		// the full-window play layer below stays as the fallback (iOS Safari)
+		try {
+			const fsReq = document.documentElement.requestFullscreen?.();
+			if (fsReq && typeof fsReq.catch === 'function') fsReq.catch(() => {});
+		} catch {
+			/* windowed play layer continues */
+		}
+		const first = stage.querySelector('button:not(.game-exit), input') as HTMLElement | null;
+		first?.focus();
+	}
+
+	function stageFor(btn: HTMLElement): HTMLElement | null {
+		return (
+			(btn.closest('.game-stage') as HTMLElement | null) ??
+			(btn.closest('.prose')?.querySelector('.game-stage') as HTMLElement | null)
+		);
+	}
+
+	function initPlayMode() {
+		document.querySelectorAll('[data-play]').forEach((b) => {
+			const btn = b as HTMLButtonElement;
+			if (btn.dataset.bound) return;
+			btn.dataset.bound = '1';
+			btn.addEventListener('click', () => {
+				const stage = stageFor(btn);
+				if (stage) enterStage(stage);
+			});
+		});
+		document.querySelectorAll('[data-howto]').forEach((b) => {
+			const btn = b as HTMLButtonElement;
+			if (btn.dataset.bound) return;
+			btn.dataset.bound = '1';
+			btn.addEventListener('click', () => {
+				const intro = btn.closest('.prose')?.querySelector('.game-intro') as HTMLElement | null;
+				if (!intro) return;
+				intro.setAttribute('open', '');
+				intro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				const summary = intro.querySelector('summary') as HTMLElement | null;
+				summary?.focus();
+			});
+		});
+	}
+
+	function initStageCleanup() {
+		if ((window as unknown as { __stageCleanupInit?: boolean }).__stageCleanupInit) return;
+		(window as unknown as { __stageCleanupInit?: boolean }).__stageCleanupInit = true;
+		// Esc leaves play mode
+		document.addEventListener('keydown', (e) => {
+			if (e.key !== 'Escape') return;
+			const stage = document.querySelector('.game-stage.playing-immersive') as HTMLElement | null;
+			if (stage) exitStage(stage);
+		});
+	}
+
+	initSfxToggle();
+	initPlayMode();
+	initStageCleanup();
+	document.addEventListener('astro:page-load', () => {
+		initSfxToggle();
+		initPlayMode();
+	});
+</script>

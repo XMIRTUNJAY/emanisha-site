@@ -1,0 +1,51 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByCategory } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const polite = wordsByCategory(['Greetings']);
+---
+
+<Learn
+	title="Polite Marathi: Please, Thanks & Sorry in Use"
+	description="Be polite in Marathi: please, thanks, sorry and greetings with usage notes — when to use each."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Polite Marathi', href: siteUrl('/blog/polite-marathi/') },
+	]}
+	canonicalPath="/blog/polite-marathi/"
+	about="polite marathi please thanks sorry"
+	meta={['15 polite words', 'Usage notes']}
+>
+	<h2>The situation</h2>
+	<p>
+		Politeness is three words used right: कृपया (when requesting),
+		धन्यवाद (same word as Hindi), माफ करा (apologies and attention) —
+		plus the greetings around them. The usage notes below come straight
+		from the curriculum.
+	</p>
+
+	<VocabTable words={polite} caption="Polite Marathi words" />
+
+	<h2>When to use each</h2>
+	<ul>
+		<li><strong>कृपया</strong> — used when making a request.</li>
+		<li><strong>धन्यवाद</strong> — same word in both languages.</li>
+		<li><strong>माफ करा</strong> — for apologies or getting attention.</li>
+		<li><strong>नमस्कार</strong> — greeting for elders and strangers.</li>
+	</ul>
+
+	<AppCTA variant="phrase" context="blog-polite" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+			{ label: 'How to say sorry', href: siteUrl('/how-to-say-sorry-in-marathi/') },
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+		]}
+	/>
+</Learn>

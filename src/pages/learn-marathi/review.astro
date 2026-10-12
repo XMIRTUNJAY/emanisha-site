@@ -1,0 +1,243 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Base from '../../layouts/Base.astro';
+import Mascot from '../../components/Mascot.astro';
+import ProgressCard from '../../components/ProgressCard.astro';
+import { siteUrl } from '../../lib/site';
+---
+
+<Base title="Review Before You Forget | Bol Marathi" description="Spaced repetition review: weakest-word practice scheduled before you forget." crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Review', href: siteUrl('/review/') }]}>
+	<div class="prose">
+		<p class="kicker">Spaced Repetition</p>
+		<div class="review-hero">
+			<div class="review-hero-text">
+				<h1>Review before you forget</h1>
+				<p class="lede">Your weakest words, scheduled for review. Grade each one — the app adjusts the schedule automatically.</p>
+			</div>
+			<div class="review-hero-mascot">
+				<Mascot pose="think" size="md" ariaLabel="Mascot thinking about what to review" />
+			</div>
+		</div>
+
+		<div class="review-header">
+			<p><strong id="due-count">…</strong> words due for review</p>
+		</div>
+
+		<div id="review-cards-container" class="review-cards"></div>
+
+		<div class="review-empty" id="review-empty" hidden>
+			<div class="empty-mascot">
+				<Mascot pose="celebrate" size="lg" ariaLabel="Mascot celebrating all caught up" />
+			</div>
+			<p>All caught up! No words due for review right now.</p>
+			<p>Wrong quiz answers land here automatically — take a quiz to build your review queue.</p>
+			<p><a href={siteUrl('/quiz/beginners/')} class="btn">Take a Beginner Quiz</a></p>
+		</div>
+
+		<ProgressCard variant="review" />
+
+		<AppCTA variant="general" context="review" />
+	</div>
+</Base>
+
+<script>
+	import { getDueWords, recordReview } from '../../lib/srs';
+	import { AnalyticsEvents } from '../../lib/analytics';
+
+	const SEARCH_INDEX_URL = '/learn-marathi/search-index.json';
+
+	function escapeHtml(s: string): string {
+		return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+	}
+
+	interface IndexEntry { id?: string; title?: string; description?: string; }
+	let wordLookup: Map<string, IndexEntry> | null = null;
+
+	async function getWordLookup(): Promise<Map<string, IndexEntry>> {
+		if (wordLookup) return wordLookup;
+		wordLookup = new Map();
+		try {
+			const res = await fetch(SEARCH_INDEX_URL, { headers: { Accept: 'application/json' } });
+			if (!res.ok) return wordLookup;
+			const data = (await res.json()) as IndexEntry[];
+			for (const e of data) {
+				if (e?.id?.startsWith('word-')) wordLookup.set(e.id.slice(5), e);
+			}
+		} catch { /* offline or unavailable — fall back to IDs */ }
+		return wordLookup;
+	}
+
+	async function renderReview() {
+		const container = document.getElementById('review-cards-container');
+		const emptyEl = document.getElementById('review-empty');
+		const countEl = document.getElementById('due-count');
+		if (!container || !emptyEl || !countEl) return;
+
+		let due;
+		try {
+			due = await getDueWords();
+		} catch {
+			due = [];
+		}
+		const lookup = await getWordLookup();
+
+		try { AnalyticsEvents.reviewOpen(due.length); } catch { /* ignore */ }
+
+		countEl.textContent = String(due.length);
+		if (due.length === 0) {
+			container.innerHTML = '';
+			emptyEl.hidden = false;
+			return;
+		}
+		emptyEl.hidden = true;
+
+		container.innerHTML = due.map((w) => {
+			const info = lookup.get(w.id);
+			const marathi = info?.title || w.id;
+			const desc = info?.description || '';
+			const dueStr = new Date(w.dueDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+			return `<div class="review-card" data-word-id="${escapeHtml(w.id)}">
+				<div class="review-word" lang="mr">${escapeHtml(marathi)}</div>
+				${desc ? `<div class="review-desc">${escapeHtml(desc)}</div>` : ''}
+				<div class="review-meta">
+					<p>Due: <span>${escapeHtml(dueStr)}</span> · Reps: ${w.repetitions} · Ease: ${w.easeFactor.toFixed(2)}</p>
+				</div>
+				<div class="review-buttons" role="group" aria-label="Grade ${escapeHtml(marathi)}">
+					<button type="button" class="btn" data-grade="again">Again</button>
+					<button type="button" class="btn ghost" data-grade="hard">Hard</button>
+					<button type="button" class="btn ghost" data-grade="good">Good</button>
+					<button type="button" class="btn ghost" data-grade="easy">Easy</button>
+				</div>
+			</div>`;
+		}).join('');
+
+		container.querySelectorAll('.review-card').forEach((card) => {
+			const wordId = (card as HTMLElement).dataset.wordId;
+			if (!wordId) return;
+			card.querySelectorAll('[data-grade]').forEach((btn) => {
+				(btn as HTMLButtonElement).addEventListener('click', async () => {
+					const grade = (btn as HTMLElement).dataset.grade as 'again' | 'hard' | 'good' | 'easy';
+					try {
+						await recordReview(wordId, grade);
+						AnalyticsEvents.reviewGrade(wordId, grade);
+					} catch { /* ignore */ }
+					card.querySelectorAll('button').forEach((b) => { (b as HTMLButtonElement).disabled = true; });
+					(card as HTMLElement).style.transition = 'opacity 0.3s ease';
+					(card as HTMLElement).style.opacity = '0.2';
+					window.setTimeout(() => {
+						card.remove();
+						const remaining = container.querySelectorAll('.review-card').length;
+						countEl.textContent = String(remaining);
+						if (remaining === 0) emptyEl.hidden = false;
+					}, 300);
+				});
+			});
+		});
+	}
+
+	function initReview() {
+		if ((window as unknown as { __reviewInit?: boolean }).__reviewInit) {
+			void renderReview();
+			return;
+		}
+		(window as unknown as { __reviewInit?: boolean }).__reviewInit = true;
+		void renderReview();
+	}
+
+	initReview();
+	document.addEventListener('astro:page-load', () => { void renderReview(); });
+</script>
+
+<style>
+	.review-hero {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		flex-wrap: wrap;
+		margin: 1rem 0 1.5rem 0;
+		padding: 1.5rem;
+		background: var(--accent-fixed);
+		border: var(--border);
+		border-radius: var(--radius);
+	}
+	.review-hero-text { flex: 1; min-width: 260px; }
+	.review-hero-text h1 { margin: 0 0 0.5rem 0; }
+	.review-hero-mascot { flex-shrink: 0; }
+	@media (max-width: 640px) {
+		.review-hero { flex-direction: column; text-align: center; }
+		.review-hero-mascot { order: -1; margin-bottom: 1rem; }
+	}
+
+	.review-header {
+		border-bottom: var(--border);
+		padding-bottom: 1em;
+		margin-bottom: 1.5em;
+	}
+	.review-header p {
+		margin: 0;
+		font-size: 1.05rem;
+		color: rgb(var(--gray-dark));
+	}
+	.review-empty {
+		background: var(--container-low);
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 2.5em 1.5em;
+		text-align: center;
+		margin: 2em 0;
+	}
+	.empty-mascot {
+		margin-bottom: 1.5rem;
+	}
+	.review-empty p:first-of-type {
+		font-weight: 600;
+		margin-bottom: 0.5em;
+	}
+	.review-empty p { color: rgb(var(--gray)); }
+	.review-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1em;
+		margin-bottom: 2em;
+	}
+	.review-card {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 1.25em 1.25em 1em 1.25em;
+		transition: opacity 0.3s ease;
+	}
+	.review-word {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: rgb(var(--black));
+		margin-bottom: 0.25em;
+	}
+	.review-desc {
+		font-size: 0.9rem;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 0.5em;
+	}
+	.review-meta {
+		font-size: 0.82rem;
+		color: rgb(var(--gray));
+		margin-bottom: 0.75em;
+	}
+	.review-meta p { margin: 0.2em 0; }
+	.review-buttons {
+		display: flex;
+		gap: 0.5em;
+		flex-wrap: wrap;
+	}
+	.review-buttons .btn {
+		min-height: 40px;
+		line-height: 40px;
+		padding: 0 0.75em;
+		font-size: 0.85rem;
+		margin-top: 0;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.review-card { transition: none; }
+	}
+</style>

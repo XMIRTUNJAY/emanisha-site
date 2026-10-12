@@ -1,0 +1,49 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const traps = wordsByMarathi(['काल', 'उद्या', 'हा', 'ही', 'हे']);
+---
+
+<Learn
+	title="5 Marathi Traps for Hindi Speakers"
+	description="Hindi speakers beware: काल isn't 'tomorrow', and हा/ही/हे hide a third gender — traps with examples."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Hindi speaker traps', href: siteUrl('/blog/hindi-speaker-traps/') },
+	]}
+	canonicalPath="/blog/hindi-speaker-traps/"
+	about="marathi traps hindi speakers"
+	meta={['5 tricky words', 'With examples']}
+>
+	<h2>The situation</h2>
+	<p>
+		Hindi helps with Marathi — until it doesn't. These five words look
+		familiar and bite: Hindi कल splits into two Marathi words, and the
+		three little pointers हा/ही/हे hide a gender Hindi doesn't have.
+		Each with Hindi meaning and an example proving the difference.
+	</p>
+
+	<VocabTable words={traps} caption="Tricky words for Hindi speakers" />
+
+	<h2>The traps, spelled out</h2>
+	<ul>
+		<li><strong>काल means only yesterday.</strong> Tomorrow is उद्या — both map to Hindi कल, which is exactly the trap.</li>
+		<li><strong>हे is neuter.</strong> Hindi has masculine and feminine; Marathi adds a third gender starting here.</li>
+	</ul>
+
+	<AppCTA variant="vocabulary" context="blog-traps" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi vs Hindi (draft)', href: siteUrl('/marathi-vs-hindi/') },
+			{ label: 'Hindi to Marathi words', href: siteUrl('/hindi-to-marathi/words/') },
+			{ label: 'Marathi pronouns', href: siteUrl('/grammar/pronouns/') },
+		]}
+	/>
+</Learn>

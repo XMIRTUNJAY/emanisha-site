@@ -1,0 +1,60 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Learn from '../../layouts/Learn.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import VocabTable from '../../components/VocabTable.astro';
+import { vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const morning = vocab.find((w) => w.id === 'v-greet-08');
+const night = vocab.find((w) => w.id === 'v-greet-09');
+if (!morning || !night) throw new Error('greeting data missing');
+---
+
+<Learn
+	title="How to Say Good Morning in Marathi: शुभ सकाळ"
+	description="Good morning in Marathi is शुभ सकाळ (śubh sakāḷ) — plus good night शुभ रात्री. Pronunciation, examples and usage."
+	kicker="Marathi Phrases"
+	crumbs={[
+		{ label: 'Phrases', href: siteUrl('/phrases/') },
+		{ label: 'How to say good morning', href: siteUrl('/how-to-say-good-morning-in-marathi/') },
+	]}
+	canonicalPath="/how-to-say-good-morning-in-marathi/"
+	about="how to say good morning in marathi"
+	meta={['Quick answer', 'Beginner']}
+>
+	<h2>The short answer</h2>
+	<p class="answer" lang="mr">शुभ सकाळ <span class="tr">(śubh sakāḷ)</span></p>
+	<p>Say शुभ सकाळ in the morning; at night, switch to शुभ रात्री (good night) — said while parting, per its usage note.</p>
+
+	<VocabTable words={[morning, night]} caption="Good morning and good night" />
+
+	<h2>How to use them</h2>
+	<ul>
+		<li>Add a name, like the examples: शुभ सकाळ, आई.</li>
+		<li>At other times of day, plain नमस्कार covers everything.</li>
+	</ul>
+
+	<AppCTA variant="phrase" context="say-good-morning" />
+
+	<RelatedContent
+		links={[
+			{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+			{ label: 'Greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+			{ label: 'Days of the week & months', href: siteUrl('/marathi-days-months/') },
+		]}
+	/>
+</Learn>
+
+<style>
+	.answer {
+		font-size: 1.6rem;
+		font-weight: 700;
+		color: rgb(var(--black));
+	}
+	.answer .tr {
+		font-size: 1rem;
+		font-weight: 400;
+		color: rgb(var(--gray));
+	}
+</style>

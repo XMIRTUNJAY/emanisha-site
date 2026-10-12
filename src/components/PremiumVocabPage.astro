@@ -1,0 +1,258 @@
+---
+// PremiumVocabPage — Premium vocabulary page template using new design system
+// Replaces VocabTopicPage with enhanced UX, learning components, and visual hierarchy
+
+import Learn from '../layouts/Learn.astro';
+import MarathiWordCard from '../components/learning/MarathiWordCard.astro';
+import MarathiWordTable from '../components/learning/MarathiWordTable.astro';
+import QuickPractice from '../components/QuickPractice.astro';
+import MistakeTable from '../components/MistakeTable.astro';
+import AppCTA from '../components/AppCTA.astro';
+import RelatedContent from '../components/RelatedContent.astro';
+import SentenceBuilder from '../components/SentenceBuilder.astro';
+import PracticeCTA from '../components/learning/PracticeCTA.astro';
+import RelatedLessons from '../components/layout/RelatedLessons.astro';
+import SectionNav from '../components/layout/SectionNav.astro';
+import { getUnit } from '../lib/learn';
+import { wordsFor, relatedFor, type SeoPage, FAMILY_BASE, FAMILY_LABEL } from '../lib/seo';
+import { siteUrl } from '../lib/site';
+
+type Props = { page: SeoPage };
+const { page } = Astro.props;
+
+const words = wordsFor(page);
+const related = relatedFor(page);
+const builders = (page.units ?? [])
+  .flatMap((no) =>
+    getUnit(no).sentenceBuilder.map((b) => ({
+      tokens: b.tokens,
+      answer: b.answer,
+      prompt: b.promptEn || b.prompt,
+      hindi: b.hindi,
+    }))
+  )
+  .slice(0, 5);
+const metaBits = [
+  `${words.length} words`,
+  ...(page.units?.length ? [page.units.length > 1 ? `Units ${page.units.join(', ')}` : `Unit ${page.units[0]}`] : []),
+];
+
+// Jump-to-section nav (progressive disclosure for long pages)
+const navSections = [
+  { id: 'objective-title', label: 'What you will learn' },
+  { id: 'words-title', label: 'The words' },
+  ...((page.mistakes ?? []).length ? [{ id: 'mistakes-title', label: 'Common mistakes' }] : []),
+  ...(builders.length ? [{ id: 'builder-title', label: 'Sentence builder' }] : []),
+  ...(page.practice ? [{ id: 'practice-title', label: 'Practice' }] : []),
+  ...((page.faq ?? []).length ? [{ id: 'faq-title', label: 'FAQ' }] : []),
+];
+---
+
+<Learn
+  title={page.title}
+  h1={page.h1 ?? page.title}
+  description={page.description}
+  kicker={FAMILY_LABEL[page.family]}
+  crumbs={[
+    { label: FAMILY_LABEL[page.family], href: siteUrl(FAMILY_BASE[page.family]) },
+    { label: page.title, href: siteUrl(`${FAMILY_BASE[page.family]}${page.slug}/`) },
+  ]}
+  canonicalPath={`${FAMILY_BASE[page.family]}${page.slug}/`}
+  about={[page.primaryKeyword, ...page.secondaryKeywords].join('; ')}
+  meta={metaBits}
+  faq={page.faq ?? []}
+>
+  <!-- SECTION NAV — jump to section (sticky) -->
+  <SectionNav sections={navSections} label="On this page" />
+
+  <!-- LEARNING OBJECTIVE -->
+  <section class="lesson-objective" aria-labelledby="objective-title">
+    <h2 id="objective-title" class="kicker">What you will learn</h2>
+    <div class="prose">
+      {page.intro.map((para) => <p>{para}</p>)}
+      {page.tip && <p class="tip"><strong>Tip:</strong> {page.tip}</p>}
+    </div>
+  </section>
+
+  <!-- CORE LESSON: Marathi Words -->
+  <section class="core-lesson" aria-labelledby="words-title">
+    <header class="lesson-header">
+      <h2 id="words-title">The Words</h2>
+      <div class="view-toggle" role="tablist" aria-label="View mode">
+        <button type="button" class="view-btn active" role="tab" aria-selected="true" data-view="cards">Flip Cards</button>
+        <button type="button" class="view-btn" role="tab" aria-selected="false" data-view="table">Table</button>
+      </div>
+    </header>
+
+    <div id="vocab-cards" role="tabpanel" aria-labelledby="words-title">
+      <div class="marathi-word-card-grid">
+        {words.map((word) => <MarathiWordCard word={word} />)}
+      </div>
+    </div>
+
+    <div id="vocab-table" role="tabpanel" aria-labelledby="words-title" hidden>
+      <MarathiWordTable words={words} caption={page.title} />
+    </div>
+  </section>
+
+  <!-- ADDITIONAL SECTIONS -->
+  {(page.sections ?? []).map((s) => (
+    <section>
+      <h2>{s.heading}</h2>
+      {s.paragraphs.map((para) => <p>{para}</p>)}
+    </section>
+  ))}
+
+  <!-- COMMON MISTAKES -->
+  <div id="mistakes-title">
+    <MistakeTable mistakes={page.mistakes ?? []} />
+  </div>
+
+  <!-- SENTENCE BUILDER -->
+  {builders.length > 0 && (
+    <div id="builder-title">
+      <SentenceBuilder builders={builders} />
+    </div>
+  )}
+
+  <!-- QUICK PRACTICE -->
+  {page.practice && (
+    <div id="practice-title">
+      <QuickPractice practice={page.practice} />
+    </div>
+  )}
+
+  <!-- PRACTICE CTA - Contextual app bridge -->
+  <PracticeCTA variant="vocabulary" context={`vocabulary-${page.slug}`} />
+
+  <!-- RELATED LESSONS -->
+  <RelatedLessons links={related} max={4} title="Continue learning" />
+
+  <!-- FAQ -->
+  {(page.faq ?? []).length > 0 && (
+    <>
+      <h2 id="faq-title">Common questions</h2>
+      {page.faq!.map((f) => (
+        <details>
+          <summary>{f.question}</summary>
+          <p>{f.answer}</p>
+        </details>
+      ))}
+    </>
+  )}
+</Learn>
+
+<script>
+  // Table / flip-card toggle, mobile defaults to cards
+  function initVocabView() {
+    const tableBtn = document.querySelector('[data-view="table"]');
+    const cardsBtn = document.querySelector('[data-view="cards"]');
+    const tablePanel = document.getElementById('vocab-table');
+    const cardsPanel = document.getElementById('vocab-cards');
+    if (!tableBtn || !cardsBtn || !tablePanel || !cardsPanel) return;
+    if (tableBtn.hasAttribute('data-view-init')) return;
+    tableBtn.setAttribute('data-view-init', 'true');
+    const show = (view: 'table' | 'cards') => {
+      const isCards = view === 'cards';
+      tableBtn.classList.toggle('active', !isCards);
+      cardsBtn.classList.toggle('active', isCards);
+      (tablePanel as HTMLElement).hidden = isCards;
+      (cardsPanel as HTMLElement).hidden = !isCards;
+    };
+    tableBtn.addEventListener('click', () => show('table'));
+    cardsBtn.addEventListener('click', () => show('cards'));
+    show(window.matchMedia('(max-width: 760px)').matches ? 'cards' : 'table');
+  }
+  initVocabView();
+  document.addEventListener('astro:page-load', initVocabView);
+</script>
+
+<style>
+  /* Anchor clearance for the sticky section nav */
+  #objective-title,
+  #words-title,
+  #mistakes-title,
+  #builder-title,
+  #practice-title,
+  #faq-title { scroll-margin-top: 5.5rem; }
+
+  .lesson-objective {
+    margin: var(--space-6) 0;
+    padding: var(--space-5);
+    background: var(--color-container-low);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .lesson-objective .kicker { margin-bottom: var(--space-2); }
+
+  .core-lesson { margin: var(--space-6) 0; }
+
+  .lesson-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .lesson-header h2 { margin: 0; font-size: var(--text-h2); }
+
+  .view-toggle {
+    display: flex;
+    gap: var(--space-2);
+    background: var(--color-container);
+    border-radius: var(--radius-full);
+    padding: var(--space-1);
+  }
+
+  .view-btn {
+    font: inherit;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .view-btn.active {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }
+
+  .view-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .view-btn { transition: none; }
+  }
+
+  .marathi-word-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-5) 0;
+  }
+
+  details {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  details summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  details p { margin: var(--space-2) 0 0 0; }
+</style>

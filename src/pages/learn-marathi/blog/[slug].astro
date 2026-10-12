@@ -1,0 +1,189 @@
+---
+// Blog guide engine — renders every data-driven guide from
+// src/data/blog/guides.json as /blog/<slug>/. Static .astro posts in this
+// directory always win over this route; a slug colliding with one fails the
+// build below so duplication can never ship.
+import Learn from '../../../layouts/Learn.astro';
+import SayScript from '../../../components/SayScript.astro';
+import GuideAudio from '../../../components/GuideAudio.astro';
+import GuideWordCard from '../../../components/GuideWordCard.astro';
+import AppCTA from '../../../components/AppCTA.astro';
+import { allGuides, guideBySlug, vocabRows, vocabExample, type Guide, type GuideRow } from '../../../lib/guides';
+import { siteUrl } from '../../../lib/site';
+
+// Static posts take precedence — refuse to generate a colliding slug.
+const staticPosts = Object.keys(import.meta.glob('./*.astro'))
+	.map((p) => p.replace('./', '').replace('.astro', ''))
+	.filter((s) => s !== 'index');
+for (const g of allGuides) {
+	if (staticPosts.includes(g.slug)) {
+		throw new Error(`blog guide "${g.slug}" collides with a static post — remove the duplicate`);
+	}
+}
+
+export function getStaticPaths() {
+	return allGuides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+}
+
+interface Props {
+	guide: Guide;
+}
+const { guide } = Astro.props;
+
+const kicker = guide.kind === 'phrase' ? 'Common Phrase' : guide.kind === 'conversation' ? 'Conversation Guide' : 'Word Guide';
+const canonicalPath = `/blog/${guide.slug}/`;
+
+const sayBtn = (mr: string, tr: string) =>
+	` <button type="button" class="say" data-say="${mr}" aria-label="Listen: ${tr}">🔊</button>`;
+
+const rowHtml = (r: GuideRow, withNote = true) =>
+	`<tr><td lang="mr">${r.mr}${r.tr ? sayBtn(r.mr, r.tr) : ''}</td><td>${r.tr}</td><td>${r.en}</td>${
+		withNote ? `<td>${r.note ?? ''}</td>` : ''
+	}</tr>`;
+
+// ---- TTS playlist: the guide reads itself aloud ----
+const segments: { lang: 'en' | 'mr'; text: string }[] = [];
+segments.push({ lang: 'en', text: guide.title.replace(/—.*$/, '') + '. ' + guide.lead });
+for (const r of guide.answer) {
+	segments.push({ lang: 'en', text: r.en });
+	segments.push({ lang: 'mr', text: r.mr.replace(/[।?!.]+$/, '') });
+}
+for (const r of guide.phrases ?? []) {
+	segments.push({ lang: 'en', text: r.en });
+	segments.push({ lang: 'mr', text: r.mr.replace(/[।?!.]+$/, '') });
+}
+for (const d of guide.dialogue ?? []) {
+	segments.push({ lang: 'en', text: d.en });
+	segments.push({ lang: 'mr', text: d.mr.replace(/[।?!.]+$/, '') });
+}
+
+const spotlight = guide.words?.length ? vocabRows(guide.words) : [];
+const example = guide.words?.length ? vocabExample(guide.words[0]!) : undefined;
+
+const relatedHtml = [
+	...(guide.related ?? []).map((r) => `<li><a href="${siteUrl(`/blog/${r.slug}/`)}">${r.label}</a></li>`),
+	...(guide.links ?? []).map((l) => `<li><a href="${siteUrl(l.href)}">${l.label}</a></li>`),
+].join('\n');
+---
+
+<Learn
+	title={guide.title}
+	description={guide.description}
+	kicker={kicker}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: guide.title.split('—')[0]?.trim() ?? guide.title, href: siteUrl(canonicalPath) },
+	]}
+	canonicalPath={canonicalPath}
+	about={guide.keyword}
+	meta={[kicker, guide.category, guide.pubDate]}
+	faq={guide.faqs}
+	hideHeading
+>
+	<h1>{guide.title}</h1>
+	<p class="lead">{guide.lead}</p>
+
+	<GuideWordCard mr={guide.answer[0]!.mr} tr={guide.answer[0]!.tr} en={guide.answer[0]!.en} kind={guide.kind} />
+
+	<GuideAudio segments={segments} />
+
+	<h2>Quick Answer</h2>
+	<table class="vocab-table">
+		<thead><tr><th>Marathi</th><th>Transliteration</th><th>Meaning</th></tr></thead>
+		<tbody>
+			{guide.answer.map((r) => <Fragment set:html={rowHtml(r, false)} />)}
+		</tbody>
+	</table>
+
+	{guide.dialogue && (
+		<>
+			<h2>The Conversation</h2>
+			<table class="vocab-table dialogue-table">
+				<thead><tr><th></th><th>Marathi</th><th>Transliteration</th><th>English</th></tr></thead>
+				<tbody>
+					{guide.dialogue.map((d) => (
+						<Fragment set:html={`<tr><td class="who">${d.who}</td><td lang="mr">${d.mr}${sayBtn(d.mr, d.tr)}</td><td>${d.tr}</td><td>${d.en}</td></tr>`} />
+					))}
+				</tbody>
+			</table>
+		</>
+	)}
+
+	{guide.phrases && (
+		<>
+			<h2>{guide.kind === 'conversation' ? 'Key Phrases' : 'Say It Like a Local'}</h2>
+			<table class="vocab-table">
+				<thead><tr><th>Marathi</th><th>Transliteration</th><th>English</th></tr></thead>
+				<tbody>
+					{guide.phrases.map((r) => <Fragment set:html={rowHtml(r, false)} />)}
+				</tbody>
+			</table>
+		</>
+	)}
+
+	{spotlight.length > 0 && (
+		<>
+			<h2>From the Curriculum</h2>
+			<table class="vocab-table">
+				<thead><tr><th>Marathi</th><th>Transliteration</th><th>Meaning</th><th>Hindi</th></tr></thead>
+				<tbody>
+					{spotlight.map((r) => <Fragment set:html={rowHtml(r)} />)}
+				</tbody>
+			</table>
+			{example && (
+				<p class="example-line"><span lang="mr">{example.mr}</span>{sayBtn(example.mr, example.mr)}<br /><em>{example.en}</em></p>
+			)}
+		</>
+	)}
+
+	{guide.mistakes && (
+		<>
+			<h2>Common Mistakes</h2>
+			<ul>
+				{guide.mistakes.map((m) => <Fragment set:html={`<li>${m}</li>`} />)}
+			</ul>
+		</>
+	)}
+
+	{guide.tip && <div class="tip-box"><strong>Tip:</strong> {guide.tip}</div>}
+
+	<h2>FAQs</h2>
+	{guide.faqs.map((f) => (
+		<details class="guide-faq">
+			<summary>{f.question}</summary>
+			<p>{f.answer}</p>
+		</details>
+	))}
+
+	<h2>Related</h2>
+	<ul set:html={relatedHtml} />
+
+	<p class="guide-cta">
+		<AppCTA variant="general" context={`blog-${guide.slug}`} />
+	</p>
+</Learn>
+
+<SayScript />
+
+<style>
+	.dialogue-table .who {
+		font-weight: 700;
+		color: rgb(var(--gray));
+		white-space: nowrap;
+	}
+	.example-line {
+		margin: 0.75em 0;
+		line-height: 1.9;
+	}
+	.guide-faq {
+		margin: 0.5em 0;
+	}
+	.guide-faq summary {
+		cursor: pointer;
+		font-weight: 600;
+	}
+	.guide-faq p {
+		margin: 0.5em 0;
+	}
+</style>

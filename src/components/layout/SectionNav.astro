@@ -1,0 +1,179 @@
+---
+// SectionNav — Sticky "jump to section" mini-navigation for long pages.
+// Spec: content density (§17) — progressive disclosure, sticky mini-nav.
+// Uses IntersectionObserver scroll-spy + smooth scroll. Accessible (nav + list,
+// aria-current). Degrades gracefully with no JS (plain anchor links).
+
+interface Section {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  sections: Section[];
+  label?: string;
+  class?: string;
+}
+
+const { sections, label = 'On this page', class: className = '' } = Astro.props;
+---
+
+{sections.length > 1 && (
+  <nav class={`section-nav ${className}`} aria-label={label} data-section-nav>
+    <p class="section-nav__label kicker">{label}</p>
+    <ul class="section-nav__list" role="list">
+      {sections.map((s, i) => (
+        <li class="section-nav__item">
+          <a
+            class={`section-nav__link ${i === 0 ? 'is-active' : ''}`}
+            href={`#${s.id}`}
+            data-section-link={s.id}
+            aria-current={i === 0 ? 'true' : undefined}
+          >
+            <span class="section-nav__dot" aria-hidden="true"></span>
+            <span class="section-nav__text">{s.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .section-nav {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: color-mix(in srgb, var(--color-cream) 92%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-2) 0;
+    margin: 0 0 var(--space-5) 0;
+  }
+
+  .section-nav__label {
+    margin: 0 0 var(--space-2) 0;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    opacity: 0.75;
+  }
+
+  .section-nav__list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0 0 2px 0;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .section-nav__list::-webkit-scrollbar { display: none; }
+
+  .section-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    white-space: nowrap;
+    padding: 0.35em 0.75em;
+    border-radius: var(--radius-full);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    border: 1px solid transparent;
+    transition: color var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .section-nav__link:hover {
+    color: var(--color-primary);
+    background: var(--color-primary-fixed);
+  }
+
+  .section-nav__link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .section-nav__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-border);
+    transition: background var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+  }
+
+  .section-nav__link.is-active {
+    color: var(--color-primary);
+    background: var(--color-primary-fixed);
+    border-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+
+  .section-nav__link.is-active .section-nav__dot {
+    background: var(--color-primary);
+    transform: scale(1.4);
+  }
+
+  /* Scroll margin so anchored headings clear the sticky bar */
+  :global([id][data-section-anchor]) { scroll-margin-top: 5rem; }
+
+  @media (max-width: 640px) {
+    .section-nav { padding: var(--space-1) 0; }
+    .section-nav__label { display: none; }
+    .section-nav__link { font-size: var(--text-caption); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-nav__link,
+    .section-nav__dot { transition: none; }
+  }
+</style>
+
+<script>
+  function initSectionNav() {
+    document.querySelectorAll<HTMLElement>('[data-section-nav]').forEach((nav) => {
+      if (nav.dataset.navInit === 'true') return;
+      nav.dataset.navInit = 'true';
+
+      const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-section-link]'));
+      const targets = links
+        .map((l) => document.getElementById(l.dataset.sectionLink || ''))
+        .filter((el): el is HTMLElement => Boolean(el));
+      if (targets.length < 2) return;
+
+      const setActive = (id: string) => {
+        links.forEach((l) => {
+          const on = l.dataset.sectionLink === id;
+          l.classList.toggle('is-active', on);
+          if (on) l.setAttribute('aria-current', 'true');
+          else l.removeAttribute('aria-current');
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible[0]) setActive(visible[0].target.id);
+        },
+        { rootMargin: '-72px 0px -65% 0px', threshold: 0 }
+      );
+      targets.forEach((t) => observer.observe(t));
+
+      links.forEach((l) => {
+        l.addEventListener('click', () => {
+          setActive(l.dataset.sectionLink || '');
+        });
+      });
+    });
+  }
+  initSectionNav();
+  document.addEventListener('astro:page-load', initSectionNav);
+</script>

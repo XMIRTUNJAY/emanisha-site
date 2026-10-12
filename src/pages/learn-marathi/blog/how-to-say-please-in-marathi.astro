@@ -1,0 +1,103 @@
+---
+import Learn from '../../../layouts/Learn.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const word = wordsByMarathi(['कृपया', 'मदत']);
+
+export const title = 'How to Say "Please" in Marathi: कृपया + Polite Patterns';
+export const description = 'Learn "please" in Marathi -- कृपया, कृपया करा, and polite request patterns with audio, examples, and common mistakes. From Unit 02.';
+export const pubDate = '2026-09-26';
+export const updatedDate = '2026-09-26';
+export const category = 'word-guide';
+export const tags = ['polite', 'requests', 'unit-02', 'daily-essentials'];
+---
+
+<Learn
+	title={title}
+	description={description}
+	kicker="Word Guide"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Please in Marathi', href: siteUrl('/blog/how-to-say-please-in-marathi/') },
+	]}
+	canonicalPath="/blog/how-to-say-please-in-marathi/"
+	about="how to say please in marathi; कृपया meaning; polite requests marathi"
+	meta={['Formal + casual', 'Polite -करा ending', 'Unit 02']}
+	faq={[
+		{
+			question: 'What is the Marathi word for please?',
+			answer: 'The formal word is कृपया (kṛpayā), but in daily speech the polite imperative ending -करा does the work: बस करा (please sit), द्या करा (please give), या करा (please come).'
+		},
+		{
+			question: 'Is "please" always कृपया in Marathi?',
+			answer: 'No. कृपया is formal (signs, letters). In conversation, use the verb + करा pattern: पाणी द्या करा (water give-please), माफ करा (excuse me/forgive-please).'
+		},
+		{
+			question: 'How do you say "yes, please" in Marathi?',
+			answer: 'हो, कृपया (ho, kṛpayā) — literally "yes, please."'
+		}
+	]}
+	hideHeading
+>
+
+<h1>{title}</h1>
+
+<p class="lead">The go-to word for <strong>please</strong> in Marathi is <strong>कृपया</strong> (kṛpayā) — but real politeness lives in the verb ending <strong>-करा</strong> (imperative polite) and the softener <strong>-न</strong> particles. This guide covers the word, the grammar, and the phrases you'll actually hear.</p>
+
+<h2>Quick Answer</h2>
+<table class="vocab-table">
+  <thead><tr><th>Marathi</th><th>Transliteration</th><th>Context</th></tr></thead>
+  <tbody>
+    <tr><td>कृपया</td><td>kṛpayā</td><td>Formal please (signs, writing)</td></tr>
+    <tr><td>कृपया करा</td><td>kṛpayā karā</td><td>Please do (polite request)</td></tr>
+    <tr><td>कृपया बस/ठेवा</td><td>kṛpayā bas/ṭhevā</td><td>Please sit / please keep</td></tr>
+    <tr><td>हो, कृपया</td><td>ho, kṛpayā</td><td>Yes, please</td></tr>
+  </tbody>
+</table>
+
+<h2>Grammar: The Polite Imperative -करा</h2>
+<p>Marathi makes requests polite by adding <strong>-करा</strong> to the verb stem (not कृपया alone):</p>
+<ul>
+  <li><strong>बस</strong> (sit) → <strong>बस करा</strong> (please sit)</li>
+  <li><strong>आ</strong> (come) → <strong>या करा</strong> (please come — irregular stem)</li>
+  <li><strong>दे</strong> (give) → <strong>द्या करा</strong> (please give)</li>
+  <li><strong>सांग</strong> (tell) → <strong>सांगा करा</strong> (please tell)</li>
+</ul>
+<div class="tip-box"><strong>Tip:</strong> कृपया is formal (signs, letters). In speech, the <strong>-करा</strong> ending does the heavy lifting. Say <em>पाणी द्या करा</em> (water give-please) more often than <em>कृपया पाणी द्या</em>.</div>
+
+<h2>Real-Life Patterns</h2>
+<table class="vocab-table">
+  <thead><tr><th>Situation</th><th>Marathi</th><th>Literal</th></tr></thead>
+  <tbody>
+    <tr><td>Ordering chai</td><td>एक चहा द्या करा</td><td>One tea give-please</td></tr>
+    <tr><td>Asking for water</td><td>पाणी द्या करा</td><td>Water give-please</td></tr>
+    <tr><td>Requesting directions</td><td>मला रस्ता सांगा करा</td><td>To-me route tell-please</td></tr>
+    <tr><td>Excuse me / pardon</td><td>माफ करा</td><td>Forgive-please</td></tr>
+    <tr><td>Yes, please</td><td>हो, कृपया</td><td>Yes, please</td></tr>
+  </tbody>
+</table>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li><strong>❌ कृपया बस</strong> → <strong>✅ बस करा</strong> (कृपया alone sounds like a sign)</li>
+  <li><strong>❌ कृपया आ</strong> → <strong>✅ या करा</strong> (come has irregular stem या)</li>
+  <li><strong>❌ प्लिज़</strong> → Don't use English "please" — use कृपया or -करा</li>
+</ul>
+
+<h2>Mini Practice</h2>
+<ol>
+  <li>How do you say "Please give water"? → <em>पाणी द्या करा</em></li>
+  <li>How do you say "Please sit"? → <em>बस करा</em></li>
+  <li>How do you say "Excuse me"? → <em>माफ करा</em></li>
+</ol>
+
+<h2>Related</h2>
+<ul>
+  <li><a href={siteUrl('/blog/how-to-say-water-in-marathi/')}>How to Say "Water" in Marathi</a></li>
+  <li><a href={siteUrl('/blog/how-to-say-help-in-marathi/')}>How to Say "Help" in Marathi</a></li>
+  <li><a href={siteUrl('/hindi-to-marathi/daily-conversation/')}>Hindi→Marathi Daily Conversation</a></li>
+  <li><a href={siteUrl('/lessons/02/')}>Unit 02: Polite Essentials</a></li>
+</ul>
+
+</Learn>

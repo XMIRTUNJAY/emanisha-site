@@ -1,0 +1,30 @@
+---
+type Props = { links: { label: string; href: string }[]; title?: string };
+const { links, title = 'Keep learning' } = Astro.props;
+---
+
+{links.length > 0 && (
+	<nav class="related" aria-label="Related content">
+		<h2>{title}</h2>
+		<ul>
+			{links.map((l) => (
+				<li><a href={l.href} data-funnel="related_click">{l.label}</a></li>
+			))}
+		</ul>
+	</nav>
+)}
+
+<style>
+	.related {
+		border-top: var(--border);
+		margin-top: var(--space-5);
+		padding-top: var(--space-3);
+	}
+	.related ul {
+		list-style: none;
+		margin: 0.5em 0 0 0;
+		padding: 0;
+		display: grid;
+		gap: 0.4em;
+	}
+</style>

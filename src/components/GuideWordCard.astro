@@ -1,0 +1,101 @@
+---
+// GuideWordCard — interactive SVG card showing the guide's main word big in
+// Devanagari with transliteration and meaning. The whole card is a tap-to-
+// hear button (device TTS via the shared SayScript [data-say] handler), and
+// each kind gets its own motif: chat bubbles (phrase), two speakers
+// (conversation), a letter tile (word guide).
+export interface Props {
+	mr: string;
+	tr: string;
+	en: string;
+	kind: string;
+}
+const { mr, tr, en, kind } = Astro.props;
+---
+
+<button type="button" class="guide-wordcard" data-say={mr} aria-label={`Listen: ${tr}`}>
+	<svg viewBox="0 0 1200 300" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+		<defs>
+			<linearGradient id="gwc-bg" x1="0" y1="0" x2="1" y2="1">
+				<stop offset="0%" stop-color="#8E2D12" />
+				<stop offset="100%" stop-color="#6E210C" />
+			</linearGradient>
+		</defs>
+		<rect width="1200" height="300" rx="28" fill="url(#gwc-bg)" />
+		<!-- kind motif -->
+		{kind === 'conversation' ? (
+			<g opacity="0.22" stroke="#FDFBF7" stroke-width="10" fill="none" stroke-linecap="round">
+				<circle cx="150" cy="150" r="52" />
+				<path d="M 120 196 L 104 232 L 150 210" />
+				<circle cx="1050" cy="150" r="52" />
+				<path d="M 1080 196 L 1096 232 L 1050 210" />
+			</g>
+		) : kind === 'phrase' ? (
+			<g opacity="0.22" fill="none" stroke="#FDFBF7" stroke-width="10" stroke-linecap="round">
+				<path d="M 110 96 h 200 a 28 28 0 0 1 28 28 v 44 a 28 28 0 0 1 -28 28 h -110 l -44 40 v -40 h -46 a 28 28 0 0 1 -28 -28 v -44 a 28 28 0 0 1 28 -28 z" />
+				<path d="M 980 120 h 160 a 24 24 0 0 1 24 24 v 36 a 24 24 0 0 1 -24 24 h -40 l -34 32 v -32 h -86 a 24 24 0 0 1 -24 -24 v -36 a 24 24 0 0 1 24 -24 z" />
+			</g>
+		) : (
+			<g opacity="0.22">
+				<rect x="96" y="84" width="132" height="132" rx="26" fill="none" stroke="#FDFBF7" stroke-width="10" />
+				<text x="162" y="178" text-anchor="middle" font-size="76" font-weight="700" fill="#FDFBF7">अ</text>
+			</g>
+		)}
+		<text class="gwc-mr" x="600" y="140" text-anchor="middle" lang="mr">{mr}</text>
+		<text class="gwc-tr" x="600" y="210" text-anchor="middle">{tr}</text>
+		<text class="gwc-en" x="600" y="254" text-anchor="middle">{en}</text>
+		<g class="gwc-chip">
+			<rect x="980" y="34" width="176" height="44" rx="22" fill="#FDFBF7" opacity="0.9" />
+			<text class="gwc-chip-text" x="1068" y="63" text-anchor="middle">🔊 tap to hear</text>
+		</g>
+	</svg>
+</button>
+
+<style>
+	.guide-wordcard {
+		display: block;
+		width: 100%;
+		max-width: 46rem;
+		margin: 0.75em auto 1em auto;
+		padding: 0;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		border-radius: 28px;
+		transition: transform 0.15s var(--ease-out, ease), box-shadow 0.15s var(--ease-out, ease);
+	}
+	.guide-wordcard:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 30px rgb(142 45 18 / 0.25);
+	}
+	.guide-wordcard:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+	.guide-wordcard svg {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+	.gwc-mr {
+		font-family: var(--font-display, inherit);
+		font-size: 92px;
+		font-weight: 700;
+		fill: #fdfbf7;
+	}
+	.gwc-tr {
+		font-size: 34px;
+		fill: #ffdbd1;
+		font-style: italic;
+	}
+	.gwc-en {
+		font-size: 26px;
+		fill: #fdfbf7;
+		opacity: 0.85;
+	}
+	.gwc-chip-text {
+		font-size: 22px;
+		font-weight: 600;
+		fill: #8e2d12;
+	}
+</style>

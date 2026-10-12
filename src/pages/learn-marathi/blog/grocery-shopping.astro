@@ -1,0 +1,62 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { getUnit, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const veg = wordsByMarathi(['बटाटा', 'कांदा', 'टोमॅटो', 'दूध', 'भात', 'साखर', 'मीठ']);
+const bargaining = getUnit('09').speaking;
+---
+
+<Learn
+	title="Grocery Shopping in Marathi: Words & Bargaining"
+	description="Buy vegetables in Marathi: grocery words, quantities and bargaining sentences with Hindi meanings."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Grocery shopping', href: siteUrl('/blog/grocery-shopping/') },
+	]}
+	canonicalPath="/blog/grocery-shopping/"
+	about="grocery shopping marathi"
+	meta={['7 staples + 6 sentences', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		A vegetable vendor needs three things from you: what, how much, and
+		what price. The staples below plus six bargaining sentences from
+		Unit 09 cover the whole exchange.
+	</p>
+
+	<h2>Staples to recognize</h2>
+	<VocabTable words={veg} caption="Marathi grocery staples" />
+
+	<h2>The bargaining exchange (Unit 09)</h2>
+	<div class="table-scroll" role="region" aria-label="Bargaining sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr><th scope="col">Marathi</th><th scope="col">Hindi</th><th scope="col">English</th></tr>
+			</thead>
+			<tbody>
+				{bargaining.map((s) => (
+					<tr>
+						<td class="mr" lang="mr">{s.sentence}</td>
+						<td lang="hi">{s.hindi}</td>
+						<td>{s.english}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<AppCTA variant="phrase" context="blog-grocery" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Food words', href: siteUrl('/vocabulary/food/') },
+			{ label: 'Shopping phrases', href: siteUrl('/phrases/shopping/') },
+			{ label: 'Unit 09 — Shopping & Market', href: siteUrl('/lessons/09/') },
+		]}
+	/>
+</Learn>

@@ -1,0 +1,42 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByCategory } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const school = wordsByCategory(['Education']).slice(0, 10);
+---
+
+<Learn
+	title="Marathi for School: Talk to Teachers"
+	description="Talk to teachers in Marathi: class, exam, homework and question words with Hindi meanings."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'School talk', href: siteUrl('/blog/school-talk/') },
+	]}
+	canonicalPath="/blog/school-talk/"
+	about="marathi school words parents"
+	meta={['10 school words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		Parent-teacher meetings run on ten words: class, exam, homework,
+		marks, question, answer and friends. All with Hindi meanings,
+		pronunciation and examples — enough to follow any school conversation.
+	</p>
+
+	<VocabTable words={school} caption="Marathi school words" />
+
+	<AppCTA variant="vocabulary" context="blog-school" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Marathi numbers', href: siteUrl('/marathi-numbers/') },
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'Unit 11 — Education & Work', href: siteUrl('/lessons/11/') },
+		]}
+	/>
+</Learn>

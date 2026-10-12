@@ -1,0 +1,55 @@
+---
+// PhraseTable — speaking rows (real curriculum sentences) as a table.
+// englishFirst flips column order for the English → Marathi learner path.
+import type { SpeakingRow } from '../lib/learn';
+
+type Props = {
+	phrases: (SpeakingRow & { unit: string })[];
+	caption?: string;
+	englishFirst?: boolean;
+};
+const { phrases, caption = 'Marathi phrases', englishFirst = false } = Astro.props;
+---
+
+<div class="table-scroll" role="region" aria-label={caption} tabindex="0">
+	<table class="vocab">
+		<thead>
+			<tr>
+				{englishFirst ? (
+					<>
+						<th scope="col">English</th>
+						<th scope="col">Marathi</th>
+						<th scope="col">Tip</th>
+					</>
+				) : (
+					<>
+						<th scope="col">Marathi</th>
+						<th scope="col">Hindi</th>
+						<th scope="col">English</th>
+						<th scope="col">Tip</th>
+					</>
+				)}
+			</tr>
+		</thead>
+		<tbody>
+			{phrases.map((p) => (
+				<tr>
+					{englishFirst ? (
+						<>
+							<td>{p.english}</td>
+							<td class="mr" lang="mr">{p.sentence}</td>
+							<td>{p.tip}</td>
+						</>
+					) : (
+						<>
+							<td class="mr" lang="mr">{p.sentence}</td>
+							<td lang="hi">{p.hindi}</td>
+							<td>{p.english}</td>
+							<td>{p.tip}</td>
+						</>
+					)}
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>

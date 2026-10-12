@@ -1,0 +1,28 @@
+---
+type Props = { items?: string[] };
+const { items = [] } = Astro.props;
+---
+
+<aside class="review-note" role="note" aria-label="Native review pending">
+	<p><strong>Native review pending.</strong> This page is a draft: the structure below is correct, but the Marathi details listed need a native speaker's confirmation before you rely on them.</p>
+	{items.length > 0 && (
+		<ul>
+			{items.map((i) => (
+				<li>{i}</li>
+			))}
+		</ul>
+	)}
+</aside>
+
+<style>
+	.review-note {
+		border: 1px solid #d9a441;
+		border-left: 4px solid #d9a441;
+		border-radius: var(--radius);
+		background: #fdf6e7;
+		padding: 1em 1.2em;
+		margin: 1.5em 0;
+	}
+	.review-note p { margin: 0 0 0.5em 0; }
+	.review-note ul { margin: 0; padding-left: 1.2em; }
+</style>

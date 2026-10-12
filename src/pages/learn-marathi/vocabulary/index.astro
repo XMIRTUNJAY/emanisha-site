@@ -1,0 +1,36 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import SeoCards from '../../../components/SeoCards.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { clusters, wordsByCategory } from '../../../lib/learn';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+---
+
+<Learn
+	title="Marathi Vocabulary by Topic"
+	description="Learn Marathi words by topic — beginners, food, family, travel, verbs and daily life — each with Hindi and English meanings, pronunciation and examples."
+	kicker="Marathi Vocabulary"
+	crumbs={[{ label: 'Vocabulary', href: siteUrl('/vocabulary/') }]}
+	canonicalPath="/vocabulary/"
+	about="marathi vocabulary by topic"
+	items={clusters.map((c) => ({ name: c.title, url: new URL(siteUrl(`/vocabulary/${c.slug}/`), Astro.site).toString() }))}
+>
+	<p>Pick a topic. Every list comes from the real Bol Marathi curriculum — no filler, no invented words. Prefer a test? <a href={siteUrl('/quiz/')}>Try a 10-question quiz</a>.</p>
+
+	<ul class="card-grid">
+		{clusters.map((c) => (
+			<li>
+				<a class="card" href={siteUrl(`/vocabulary/${c.slug}/`)}>
+					<img src={pageArt(`vocabulary/${c.slug}`)} alt="" loading="lazy" width="1200" height="630" />
+					<h3>{c.title}</h3>
+					<p>{wordsByCategory(c.categories).length} words · {c.description}</p>
+				</a>
+			</li>
+		))}
+	</ul>
+
+	<SeoCards family="vocabulary" heading="More vocabulary topics" />
+
+	<AppCTA variant="general" context="vocabulary-index" />
+</Learn>

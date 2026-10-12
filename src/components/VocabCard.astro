@@ -1,0 +1,219 @@
+---
+import { Word } from '../lib/learn';
+import { simpleRespelling } from '../lib/simple';
+import audioManifest from '../data/audio-manifest.json';
+import SayScript from './SayScript.astro';
+import { siteUrl } from '../lib/site';
+
+interface Props {
+	word: Word;
+	roman?: 'diacritic' | 'simple' | 'none';
+}
+const { word, roman = 'diacritic' } = Astro.props;
+const files = (audioManifest as { files?: Record<string, { word?: string }> }).files ?? {};
+const audioSrc = files[word.id]?.word ? siteUrl(`/audio/${files[word.id].word}`) : null;
+const showSimpleFirst = roman === 'simple';
+---
+<article class="vocab-card" tabindex="0" role="button" aria-label={`Flip to see meaning of ${word.marathi}`}>
+	<div class="vocab-card-inner">
+		<div class="vocab-card-front">
+			<span class="vocab-mr" lang="mr">{word.marathi}</span>
+			<span class="vocab-hint">Tap to reveal</span>
+			{audioSrc && (
+				<button class="say" data-audio={audioSrc} aria-label={`Listen: ${word.marathi}`}>🔊</button>
+			)}
+		</div>
+		<div class="vocab-card-back">
+			<span class="vocab-mr" lang="mr">{word.marathi}</span>
+			{roman !== 'none' && (
+				<span class="vocab-tr">
+					<span class="r-a">{showSimpleFirst ? simpleRespelling(word.transliteration) : word.transliteration}</span>
+					<span class="r-b" hidden>{showSimpleFirst ? word.transliteration : simpleRespelling(word.transliteration)}</span>
+				</span>
+			)}
+			<span class="vocab-hi" lang="hi">{word.hindi}</span>
+			<span class="vocab-en">{word.english}</span>
+			<div class="vocab-ex">
+				<span lang="mr">{word.exampleMarathi}</span>
+				<small>{word.exampleEnglish}</small>
+			</div>
+			{audioSrc && (
+				<button class="say" data-audio={audioSrc} aria-label={`Listen: ${word.marathi}`}>🔊</button>
+			)}
+			<div class="vocab-srs" data-srs-actions={word.id}>
+				<button type="button" class="srs-btn" data-srs-grade="again" aria-label={`Review ${word.marathi} later`}>↻ Review</button>
+				<button type="button" class="srs-btn" data-srs-grade="easy" aria-label={`I know ${word.marathi}`}>✓ Know it</button>
+				<span class="srs-fb" aria-live="polite" hidden>Saved!</span>
+			</div>
+		</div>
+	</div>
+</article>
+<SayScript />
+
+<style>
+	.vocab-card {
+		perspective: 1000px;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		min-height: 140px;
+		cursor: pointer;
+	}
+	.vocab-card-inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+		transform-style: preserve-3d;
+	}
+	.vocab-card.flipped .vocab-card-inner {
+		transform: rotateY(180deg);
+	}
+	.vocab-card-front,
+	.vocab-card-back {
+		position: absolute;
+		inset: 0;
+		backface-visibility: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 0.4em;
+		padding: 1em;
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		text-align: center;
+	}
+	.vocab-card-back {
+		transform: rotateY(180deg);
+		flex-direction: column;
+		align-items: center;
+		gap: 0.35em;
+	}
+	.vocab-mr {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: rgb(var(--black));
+		line-height: 1.3;
+	}
+	.vocab-hint {
+		font-size: 0.75rem;
+		color: var(--accent);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+	.vocab-tr {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		color: rgb(var(--gray));
+	}
+	.vocab-hi {
+		font-size: 1rem;
+		color: rgb(var(--gray-dark));
+		font-weight: 500;
+	}
+	.vocab-en {
+		font-size: 1rem;
+		color: rgb(var(--gray-dark));
+		font-weight: 700;
+	}
+	.vocab-ex {
+		font-size: 0.8rem;
+		color: rgb(var(--gray));
+		line-height: 1.5;
+		display: flex;
+		flex-direction: column;
+		gap: 0.15em;
+		margin-top: 0.25em;
+	}
+	.vocab-ex small { font-size: 0.7rem; color: rgb(var(--gray)); }
+	.vocab-card .say {
+		background: var(--accent-fixed);
+		border: none;
+		border-radius: var(--radius);
+		padding: 0.35em 0.6em;
+		cursor: pointer;
+		font-size: 1rem;
+		color: var(--accent-on-fixed);
+		transition: all 0.15s ease;
+	}
+	.vocab-card .say:hover {
+		background: var(--accent);
+		color: #fff;
+	}
+	.vocab-card:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.vocab-srs {
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+		margin-top: 0.3em;
+	}
+	.srs-btn {
+		font: inherit;
+		font-size: 0.72rem;
+		font-weight: 600;
+		padding: 0.35em 0.7em;
+		border-radius: var(--radius-full);
+		border: var(--border);
+		background: var(--container-low);
+		color: rgb(var(--gray-dark));
+		cursor: pointer;
+	}
+	.srs-btn:hover { border-color: var(--accent); color: var(--accent); }
+	.srs-fb { font-size: 0.72rem; color: var(--success); font-weight: 600; }
+	@media (prefers-reduced-motion: reduce) {
+		.vocab-card-inner { transition: none; }
+	}
+</style>
+
+<script>
+	import { addWord } from '../lib/srs';
+	import { AnalyticsEvents } from '../lib/analytics';
+
+	// Flip on click/Enter/Space
+	function initVocabCards() {
+		document.querySelectorAll('.vocab-card:not([data-flip-init])').forEach(card => {
+			card.setAttribute('data-flip-init', 'true');
+			function flip() {
+				const nowFlipped = card.classList.toggle('flipped');
+				if (nowFlipped) {
+					try {
+						const label = card.getAttribute('aria-label') || 'word';
+						AnalyticsEvents.vocabFlipCard(label.replace('Flip to see meaning of ', '').slice(0, 50));
+					} catch { /* ignore */ }
+				}
+			}
+			card.addEventListener('click', flip);
+			card.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					flip();
+				}
+			});
+		});
+		// SRS grading buttons (don't flip the card when pressed)
+		document.querySelectorAll('[data-srs-actions]:not([data-srs-init])').forEach(zone => {
+			zone.setAttribute('data-srs-init', 'true');
+			const wordId = zone.getAttribute('data-srs-actions');
+			if (!wordId) return;
+			zone.querySelectorAll('[data-srs-grade]').forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					e.stopPropagation();
+					const grade = btn.getAttribute('data-srs-grade') as 'again' | 'easy';
+					addWord(wordId, grade === 'easy' ? 'easy' : 'again').catch(() => {});
+					const fb = zone.querySelector('.srs-fb');
+					if (fb) {
+						fb.removeAttribute('hidden');
+						window.setTimeout(() => fb.setAttribute('hidden', ''), 2000);
+					}
+				});
+			});
+		});
+	}
+	initVocabCards();
+	document.addEventListener('astro:page-load', initVocabCards);
+</script>

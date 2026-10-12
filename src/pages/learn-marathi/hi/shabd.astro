@@ -1,0 +1,95 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import JsonLd from '../../../components/JsonLd.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import { vocab } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'हिंदी से मराठी शब्द — उच्चारण और उदाहरण के साथ';
+const description = 'रोज़ बोले जाने वाले हिंदी शब्दों के मराठी अर्थ — उच्चारण, हिंदी मतलब और उदाहरण वाक्यों के साथ। बोल मराठी पाठ्यक्रम से।';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+
+const differing = vocab.filter((w) => w.hindi.trim() !== w.marathi.trim());
+const sample = differing.slice(0, 60);
+---
+
+<Base title={title} description={description} lang="hi" alternates={[{ lang: 'x-default', href: siteUrl('/hindi-to-marathi/words/') }, { lang: 'en', href: siteUrl('/hindi-to-marathi/words/') }, { lang: 'hi', href: siteUrl('/hi/shabd/') }]}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={url}
+		type="LearningResource"
+		about="hindi se marathi shabd"
+		breadcrumbs={[
+			{ name: 'मराठी सीखें', url: homeUrl },
+			{ name: 'हिंदी → मराठी', url: new URL(siteUrl('/hi/'), Astro.site).toString() },
+			{ name: 'शब्द', url },
+		]}
+	/>
+	<Breadcrumbs
+		items={[
+			{ label: 'हिंदी → मराठी', href: siteUrl('/hi/') },
+			{ label: 'शब्द', href: siteUrl('/hi/shabd/') },
+		]}
+	/>
+	<div class="prose">
+		<p class="kicker">हिंदी → मराठी</p>
+		<h1>हिंदी से मराठी शब्द</h1>
+		<p class="lede">{description}</p>
+		<p class="learn-meta">{sample.length} शब्द · पूरे पाठ्यक्रम में {differing.length} जोड़े</p>
+		<h2>आप क्या सीखेंगे</h2>
+		<p>
+			मराठी और हिंदी में बहुत कुछ एक जैसा है — लेकिन रोज़मर्रा के शब्द अक्सर
+			अलग होते हैं। नीचे बोल मराठी के {sample.length} सबसे काम के जोड़े हैं,
+			हर एक के साथ उच्चारण और उदाहरण वाक्य।
+		</p>
+	</div>
+	<div class="table-scroll" role="region" aria-label="हिंदी से मराठी शब्द" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr>
+					<th scope="col">मराठी</th>
+					<th scope="col">हिंदी</th>
+					<th scope="col">English</th>
+					<th scope="col">उदाहरण</th>
+				</tr>
+			</thead>
+			<tbody>
+				{sample.map((w) => (
+					<tr>
+						<td class="mr" lang="mr">{w.marathi}</td>
+						<td lang="hi">{w.hindi}</td>
+						<td>{w.english}</td>
+						<td>
+							<span lang="mr">{w.exampleMarathi}</span>
+							<br />
+							<small lang="hi">{w.exampleHindi}</small>
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+	<div class="prose">
+		<RelatedContent
+			links={[
+				{ label: 'हिंदी से मराठी वाक्य', href: siteUrl('/hi/vakya/') },
+				{ label: 'Hindi to Marathi words (English)', href: siteUrl('/hindi-to-marathi/words/') },
+				{ label: 'पाठ 01 — मराठी मूलभूत', href: siteUrl('/lessons/01/') },
+			]}
+		/>
+		<AppCTA variant="vocabulary" locale="hi" context="hi-shabd-end" />
+	</div>
+</Base>
+
+<style>
+	.learn-meta {
+		font-size: 0.8rem;
+		color: rgb(var(--gray));
+	}
+</style>
+
+

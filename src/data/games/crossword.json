@@ -1,0 +1,153 @@
+{
+	"_provenance": "Hand-curated puzzles; answers resolve to vocab.json entries (validated at build + tests). One akshara per cell.",
+	"puzzles": [
+		{
+			"id": "cw-01",
+			"title": "Word Garden",
+			"titleHi": "शब्दबाग",
+			"rows": 4,
+			"cols": 4,
+			"words": [
+				{
+					"id": "cw-01-1",
+					"row": 0,
+					"col": 1,
+					"dir": "across",
+					"answer": "भात",
+					"clue": "Cooked rice — a daily staple",
+					"clueHi": "भात",
+					"vocabId": "v-food-04"
+				},
+				{
+					"id": "cw-01-2",
+					"row": 0,
+					"col": 2,
+					"dir": "down",
+					"answer": "तलाव",
+					"clue": "Lake or pond",
+					"clueHi": "सरोवर",
+					"vocabId": "v-nat-09"
+				},
+				{
+					"id": "cw-01-3",
+					"row": 0,
+					"col": 1,
+					"dir": "down",
+					"answer": "भाकरी",
+					"clue": "Millet flatbread",
+					"clueHi": "भाकरी",
+					"vocabId": "v-food-08"
+				},
+				{
+					"id": "cw-01-4",
+					"row": 1,
+					"col": 2,
+					"dir": "across",
+					"answer": "लाल",
+					"clue": "The color of a rose",
+					"clueHi": "लाल रंग",
+					"vocabId": "v-col-01"
+				},
+				{
+					"id": "cw-01-5",
+					"row": 2,
+					"col": 2,
+					"dir": "across",
+					"answer": "वही",
+					"clue": "Notebook for keeping accounts",
+					"clueHi": "वही",
+					"vocabId": "v-edu-13"
+				},
+				{
+					"id": "cw-01-6",
+					"row": 1,
+					"col": 0,
+					"dir": "across",
+					"answer": "नाक",
+					"clue": "You smell with it",
+					"clueHi": "नाक",
+					"vocabId": "v-body-03"
+				},
+				{
+					"id": "cw-01-7",
+					"row": 1,
+					"col": 0,
+					"dir": "down",
+					"answer": "नाताळ",
+					"clue": "Christmas, in Marathi",
+					"clueHi": "नाताळ",
+					"vocabId": "v-fes-09"
+				}
+			]
+		},
+		{
+			"id": "cw-02",
+			"title": "Winter Words",
+			"titleHi": "हिवाळी शब्द",
+			"rows": 6,
+			"cols": 3,
+			"words": [
+				{
+					"id": "cw-02-1",
+					"row": 0,
+					"col": 1,
+					"dir": "down",
+					"answer": "हिवाळा",
+					"clue": "Winter",
+					"clueHi": "हिवाळा",
+					"vocabId": "v-sea-03"
+				},
+				{
+					"id": "cw-02-2",
+					"row": 1,
+					"col": 0,
+					"dir": "across",
+					"answer": "दिवा",
+					"clue": "Lamp",
+					"clueHi": "दिवा",
+					"vocabId": "v-home-08"
+				},
+				{
+					"id": "cw-02-3",
+					"row": 2,
+					"col": 0,
+					"dir": "across",
+					"answer": "निळा",
+					"clue": "The color of the sky",
+					"clueHi": "निळा",
+					"vocabId": "v-col-02"
+				},
+				{
+					"id": "cw-02-4",
+					"row": 2,
+					"col": 0,
+					"dir": "down",
+					"answer": "नियम",
+					"clue": "Rule",
+					"clueHi": "नियम",
+					"vocabId": "v-key-11"
+				},
+				{
+					"id": "cw-02-5",
+					"row": 3,
+					"col": 1,
+					"dir": "across",
+					"answer": "घर",
+					"clue": "House / home",
+					"clueHi": "घर",
+					"vocabId": "v-home-01"
+				},
+				{
+					"id": "cw-02-6",
+					"row": 3,
+					"col": 1,
+					"dir": "down",
+					"answer": "घड्याळ",
+					"clue": "Clock or watch",
+					"clueHi": "घड्याळ",
+					"vocabId": "v-home-15"
+				}
+			]
+		}
+	]
+}

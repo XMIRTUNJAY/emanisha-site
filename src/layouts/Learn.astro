@@ -1,0 +1,94 @@
+---
+import Base from './Base.astro';
+import Breadcrumbs, { type Crumb } from '../components/Breadcrumbs.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { BRAND, REVIEWER } from '../data/brand';
+import { pageArt, pageArtSocial, pageLQIP } from '../lib/art';
+import { siteUrl } from '../lib/site';
+
+type Props = {
+	title: string;
+	description: string;
+	kicker: string;
+	crumbs: Crumb[];
+	canonicalPath: string;
+	about?: string;
+	meta?: string[];
+	alternates?: { lang: string; href: string }[];
+	h1?: string;
+	/** When the page renders its own <h1> (e.g. a rich header), suppress the layout's. */
+	hideHeading?: boolean;
+	items?: { name: string; url: string }[];
+	faq?: { question: string; answer: string }[];
+};
+
+const { title, description, kicker, crumbs, canonicalPath, about, meta = [], alternates, h1, hideHeading = false, items, faq = [] } = Astro.props;
+// Absolute URLs must include the base (e.g. /learn-marathi) — Astro.url.pathname has it, Astro.site does not.
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const abs = (href: string) => new URL(href, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+---
+
+<Base title={title} description={description} alternates={alternates}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={pageUrl}
+		type="LearningResource"
+		about={about}
+		items={items}
+		breadcrumbs={[{ name: 'Learn Marathi', url: homeUrl }, ...crumbs.map((c) => ({ name: c.label, url: abs(c.href) }))]}
+	/>
+	{faq.length > 0 && (
+		<JsonLd
+			headline={title}
+			description={description}
+			url={pageUrl}
+			type="FAQPage"
+			faq={faq}
+			breadcrumbs={[]}
+		/>
+	)}
+	<Breadcrumbs items={crumbs} />
+	<figure class="hero-figure" transition:name="hero-image" transition:persist>
+		<picture>
+			<source type="image/webp" srcSet={pageArt(canonicalPath.replace(/^\//, '').replace(/\/$/, ''))} />
+			<img
+				src={pageArtSocial(canonicalPath.replace(/^\//, '').replace(/\/$/, ''))}
+				alt=""
+				loading="lazy"
+				width="1200"
+				height="630"
+				style={`background-image: url('${pageLQIP(canonicalPath.replace(/^\//, '').replace(/\/$/, ''))}'); background-size: cover;`}
+				onload="this.style.backgroundImage=''"
+			/>
+		</picture>
+	</figure>
+	<div class="prose">
+		<p class="kicker">{kicker}</p>
+		{!hideHeading && <h1>{h1 ?? title}</h1>}
+		<p class="lede">{description}</p>
+		{meta.length > 0 && (
+			<p class="learn-meta">{meta.join(' · ')}</p>
+		)}
+		<p class="byline">
+			Curated by <a href={BRAND.github} target="_blank" rel="noopener">xmirtunjay</a> for {BRAND.brandName} ·
+			{REVIEWER.name ? `Reviewed by ${REVIEWER.name}${REVIEWER.role ? ` (${REVIEWER.role})` : ''}` : 'Reviewer: pending native-speaker review'} ·
+			<a href={siteUrl('/how-it-works/')}>how the curriculum works</a>
+		</p>
+	</div>
+	<div class="prose">
+		<slot />
+	</div>
+</Base>
+
+<style>
+	.learn-meta {
+		font-size: 0.8rem;
+		color: rgb(var(--gray));
+	}
+	.byline {
+		font-size: 0.82rem;
+		color: rgb(var(--gray));
+	}
+</style>

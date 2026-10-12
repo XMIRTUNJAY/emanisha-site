@@ -1,0 +1,73 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const thambaWords = wordsByMarathi([
+	'थांबणे', 'थांबवणे', 'थांबा', 'थांबा एक मिनिट',
+]);
+---
+
+<Learn
+	title="थांबा (Thamba) Meaning in Marathi &amp; When to Say It"
+	description="थांबा means stop or wait — from halting an auto to asking थांबा एक मिनिट. The थांबणे verb family explained with Hindi meanings."
+	kicker="Word meaning"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'थांबा meaning', href: siteUrl('/blog/thamba-meaning-in-marathi/') },
+	]}
+	canonicalPath="/blog/thamba-meaning-in-marathi/"
+	about="thamba meaning in marathi; stop in marathi"
+	meta={['4 forms', 'Auto, shops, chats']}
+	faq={[
+		{
+			question: 'What does thamba mean in Marathi?',
+			answer: 'थांबा is the command "stop / wait" — from the verb थांबणे (to stop, to wait). Say it to an autorickshaw driver to get dropped right where you want.',
+		},
+		{
+			question: 'How do you say "wait a minute" in Marathi?',
+			answer: 'थांबा एक मिनिट — literally "wait, one minute". It works on the phone, at a counter, anywhere.',
+		},
+	]}
+>
+	<h2>The short answer</h2>
+	<p class="lede">
+		<span class="mr" lang="mr">थांबा</span> = stop / wait — the single
+		word you call out to halt an autorickshaw at your exact gate. It comes
+		from the verb <span class="mr" lang="mr">थांबणे</span> (to stop, to
+		wait).
+	</p>
+
+	<h2>The थांबणे family</h2>
+	<p>
+		<span class="mr" lang="mr">थांबणे</span> is what <em>you</em> do
+		(stop on your own); <span class="mr" lang="mr">थांबवणे</span> is what
+		you do <em>to something else</em> (stop the vehicle, halt the line).
+		The bare <span class="mr" lang="mr">थांबा</span> is the everyday
+		command; add <span class="mr" lang="mr">एक मिनिट</span> and it
+		becomes a polite request.
+	</p>
+	<VocabTable words={thambaWords} caption="Stop and wait forms" />
+
+	<h2>Where you will use it first</h2>
+	<p>
+		In an autorickshaw, this is your landing word — call
+		<span class="mr" lang="mr">थांबा</span> as you reach your corner.
+		Inside a shop or on a call, soften it to
+		<span class="mr" lang="mr">थांबा एक मिनिट</span>. The autorickshaw
+		guide linked below shows the full drop-off sequence around it.
+	</p>
+
+	<AppCTA variant="phrase" context="blog-thamba-meaning" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Autorickshaw & taxi guide', href: siteUrl('/blog/autorickshaw-taxi/') },
+			{ label: 'भेट meaning', href: siteUrl('/blog/bhet-meaning-in-marathi/') },
+			{ label: 'Commands & requests politely', href: siteUrl('/grammar/commands-polite/') },
+		]}
+	/>
+</Learn>

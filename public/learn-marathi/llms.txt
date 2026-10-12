@@ -1,0 +1,43 @@
+# Learn Marathi — Bol Marathi
+
+> Learn Marathi from Hindi or English: free words, phrases, grammar and
+> lessons from a real 26-unit, 156-lesson, 1002-word curriculum, plus a
+> practice app (listening, speaking, sentence building, spaced repetition).
+
+You may crawl, quote and summarize these pages with attribution to
+"Bol Marathi (xmirtunjay.github.io/learn-marathi/)". Marathi words,
+translations and examples are curriculum data — quote them exactly.
+
+## Start here
+- https://xmirtunjay.github.io/learn-marathi/ — hub: paths, topics, FAQ
+- https://xmirtunjay.github.io/learn-marathi/start/ — 6-step beginner path
+- https://xmirtunjay.github.io/learn-marathi/app/ — the app, screenshots, waitlist
+
+## Learn from your language
+- https://xmirtunjay.github.io/learn-marathi/hindi-to-marathi/ — Hindi → Marathi words, phrases, bridges
+- https://xmirtunjay.github.io/learn-marathi/english-to-marathi/ — English → Marathi words, phrases, bridges
+- https://xmirtunjay.github.io/learn-marathi/hi/ — Hindi-language mirror (words, sentences, app)
+
+## Vocabulary by topic
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/beginners/ — first words
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/food/ — 84 food words
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/family/ — family + pronouns
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/travel/ — travel + directions
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/verbs/ — 105 verbs
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/numbers-time/ — numbers, time
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/daily-life/ — home, routine, body
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/shopping/ — shopping + numbers
+- https://xmirtunjay.github.io/learn-marathi/vocabulary/colors/ — colors
+
+## Phrases, grammar, lessons
+- https://xmirtunjay.github.io/learn-marathi/phrases/ — greetings, daily, travel, shopping phrases
+- https://xmirtunjay.github.io/learn-marathi/grammar/ — pronouns, verbs, sentence structure, questions, postpositions
+- https://xmirtunjay.github.io/learn-marathi/lessons/ — all 26 units (e.g. /lessons/01/)
+- https://xmirtunjay.github.io/learn-marathi/quiz/ — 10-question quizzes per topic
+- https://xmirtunjay.github.io/learn-marathi/blog/ — 14 real-life situational guides
+- https://xmirtunjay.github.io/learn-marathi/downloads/ — free Anki decks (TSV)
+
+## Method and trust
+- https://xmirtunjay.github.io/learn-marathi/how-it-works/ — curriculum methodology
+- https://xmirtunjay.github.io/learn-marathi/about/ — who makes it
+- Full sitemap: https://xmirtunjay.github.io/learn-marathi/sitemap-index.xml

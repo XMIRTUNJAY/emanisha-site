@@ -1,0 +1,103 @@
+#separator:tab
+#html:false
+#columns: Marathi	Pronunciation	Hindi	English	ExampleMarathi	ExampleEnglish
+नमस्कार	namaskār	नमस्कार	hello (respectful greeting)	नमस्कार, तुम्ही कसे आहात?	Hello, how are you?
+धन्यवाद	dhanyavād	धन्यवाद	thank you	मदतीबद्दल धन्यवाद.	Thank you for the help.
+कृपया	kṛpayā	कृपया	please	कृपया पाणी द्या.	Please give water.
+माफ करा	māph karā	माफ कीजिए	sorry / excuse me	उशीर झाला, माफ करा.	I am late, sorry.
+हो	ho	हाँ	yes	हो, मी येतो.	Yes, I am coming.
+नाही	nāhī	नहीं	no / not	नाही, मला नको.	No, I do not want it.
+छान	chān	अच्छा	nice / good	छान काम केलंस.	You did good work.
+शुभ सकाळ	śubh sakāḷ	शुभ प्रभात	good morning	शुभ सकाळ, आई.	Good morning, mother.
+शुभ रात्री	śubh rātrī	शुभ रात्रि	good night	शुभ रात्री, उद्या भेटू.	Good night, see you tomorrow.
+स्वागत आहे	svāgat āhe	स्वागत है	welcome	आमच्या घरी स्वागत आहे.	Welcome to our home.
+अभिनंदन	abhinandan	बधाई	congratulations	परीक्षेत यशाबद्दल अभिनंदन.	Congratulations on passing the exam.
+भेटूया	bheṭūyā	मिलेंगे	see you (let us meet)	उद्या भेटूया.	See you tomorrow.
+ठीक आहे	ṭhīk āhe	ठीक है	okay / it is fine	ठीक आहे, आपण जाऊया.	Okay, let us go.
+हरकत नाही	harkat nāhī	कोई बात नहीं	no problem	हरकत नाही, मी थांबतो.	No problem, I will wait.
+शुभेच्छा	śubhecchā	शुभकामनाएँ	best wishes	वाढदिवसाच्या शुभेच्छा.	Best wishes for your birthday.
+एक	ek	एक	one	मला एक सफरचंद हवं.	I want one apple.
+दोन	don	दो	two	माझ्याकडे दोन पुस्तकं आहेत.	I have two books.
+तीन	tīn	तीन	three	तीन वाजले.	It is three o’clock.
+चार	chār	चार	four	टेबलाला चार पाय आहेत.	The table has four legs.
+पाच	pāch	पाँच	five	पाच मिनिटं थांब.	Wait five minutes.
+सहा	sahā	छह	six	सहा वाजता उठ.	Wake up at six.
+सात	sāt	सात	seven	आठवड्यात सात दिवस.	Seven days in a week.
+आठ	āṭh	आठ	eight	मला आठ आंबे हवेत.	I want eight mangoes.
+नऊ	naū	नौ	nine	नऊ वाजले का?	Is it nine o’clock?
+दहा	dahā	दस	ten	दहा रुपये द्या.	Give ten rupees.
+अकरा	akarā	ग्यारह	eleven	अकरा मुलं आहेत.	There are eleven children.
+बारा	bārā	बारह	twelve	बारा महिने असतात.	There are twelve months.
+तेरा	terā	तेरह	thirteen	तेरा तारखेला ये.	Come on the thirteenth.
+चौदा	chaudā	चौदह	fourteen	चौदा पुस्तकं आण.	Bring fourteen books.
+पंधरा	pandharā	पंद्रह	fifteen	पंधरा ऑगस्ट स्वातंत्र्यदिन.	Fifteenth August is Independence Day.
+सोळा	soḷā	सोलह	sixteen	सोळा वर्षं पूर्ण.	Sixteen years complete.
+सतरा	satarā	सत्रह	seventeen	सतराशे रुपये.	Seventeen hundred rupees.
+अठरा	aṭharā	अठारह	eighteen	अठरा वर्षांनंतर मतदान.	Voting after eighteen years.
+एकोणीस	ekoṇīs	उन्नीस	nineteen	एकोणीस रुपये उरले.	Nineteen rupees remain.
+वीस	vīs	बीस	twenty	वीस रुपये द्या.	Give twenty rupees.
+तीस	tīs	तीस	thirty	तीस रुपये द्या.	Give thirty rupees.
+चाळीस	chāḷīs	चालीस	forty	चाळीस मुलं आली.	Forty children came.
+पन्नास	pannās	पचास	fifty	पन्नास टक्के सूट.	Fifty percent discount.
+साठ	sāṭh	साठ	sixty	साठ वर्षं पूर्ण.	Sixty years complete.
+सत्तर	sattar	सत्तर	seventy	सत्तर रुपये उरले.	Seventy rupees remain.
+ऐंशी	ainśī	अस्सी	eighty	ऐंशी गुण मिळाले.	Got eighty marks.
+नव्वद	navvad	नब्बे	ninety	नव्वद दिवसांची सुट्टी.	Ninety days of leave.
+शंभर	śambhar	सौ	hundred	शंभर रुपये द्या.	Give a hundred rupees.
+पहिला	pahilā	पहला	first	पहिला धडा सोपा आहे.	The first lesson is easy.
+दुसरा	dusrā	दूसरा	second	दुसरा पर्याय निवड.	Choose the second option.
+तिसरा	tisrā	तीसरा	third	तिसऱ्या मजल्यावर जा.	Go to the third floor.
+शेवटचा	śevaṭchā	आखिरी	last	शेवटचा प्रश्न सोडव.	Solve the last question.
+पुढचा	puḍhchā	अगला	next	पुढचा धडा उघड.	Open the next lesson.
+मदत	madat	मदद	help	मदत करा.	Please help.
+पोलीस	polīs	पुलिस	police	पोलिसांना बोलवा.	Call the police.
+आग	āg	आग	fire	इथे आग लागली आहे.	There is a fire here.
+सावधान	sāvdhān	सावधान	careful / caution	सावधान राहा.	Stay careful.
+घाई	ghāī	जल्दी	hurry	घाई करू नकोस.	Do not hurry.
+परवानगी	parvāngī	इजाजत	permission	आत येण्याची परवानगी आहे का?	May I come in?
+आभार	ābhār	आभार	gratitude	तुमचे आभार मानतो.	I am grateful to you.
+क्षमा	kṣamā	क्षमा	forgiveness	मला क्षमा करा.	Forgive me.
+नशीब	naśīb	किस्मत	luck	तुला शुभेच्छा, नशीब बलवान होवो.	Good luck to you.
+संधी	sandhī	मौका	opportunity	संधीचं सोनं कर.	Make the most of the opportunity.
+नियम	niyam	नियम	rule	नियम पाळा.	Follow the rules.
+आराम	ārām	आराम	rest	थोडा आराम कर.	Rest a little.
+महत्त्व	mahattv	महत्व	importance	वेळेला महत्त्व द्या.	Give importance to time.
+कसे आहात	kase āhāt	कैसे हैं	how are you (formal)	नमस्कार, कसे आहात?	Hello, how are you?
+मी ठीक आहे	mī ṭhīk āhe	मैं ठीक हूँ	I am fine	मी ठीक आहे, धन्यवाद.	I am fine, thank you.
+तुमचं नाव काय	tumcha nāv kāy	आपका नाम क्या है	what is your name	तुमचं नाव काय आहे?	What is your name?
+माझं नाव	mājha nāv	मेरा नाम	my name is	माझं नाव राहुल आहे.	My name is Rahul.
+तुम्ही कुठे राहता	tumhī kuṭhe rāhatā	आप कहाँ रहते हैं	where do you live	तुम्ही कुठे राहता?	Where do you live?
+मी पुण्यात राहतो	mī puṇyāt rāhato	मैं पुणे में रहता हूँ	I live in Pune	मी पुण्यात राहतो.	I live in Pune.
+तुम्हाला मराठी येतं का	tumhālā marāṭhī yeta kā	क्या आपको मराठी आती है	do you know Marathi	तुम्हाला मराठी येतं का?	Do you know Marathi?
+मला थोडं मराठी येतं	malā thoḍa marāṭhī yeta	मुझे थोड़ी मराठी आती है	I know a little Marathi	मला थोडं मराठी येतं.	I know a little Marathi.
+पुन्हा सांगा	punhā sāṅgā	फिर से कहिए	please say again	कृपया पुन्हा सांगा.	Please say it again.
+हळू बोला	haḷū bolā	धीरे बोलिए	please speak slowly	कृपया हळू बोला.	Please speak slowly.
+मला समजलं नाही	malā samajala nāhī	मुझे समझ नहीं आया	I did not understand	माफ करा, मला समजलं नाही.	Sorry, I did not understand.
+याचा अर्थ काय	yāchā arth kāy	इसका मतलब क्या है	what does this mean	या शब्दाचा अर्थ काय?	What does this word mean?
+मराठीत कसं म्हणतात	marāṭhīt kasa mhaṇtāt	मराठी में कैसे कहते हैं	how do you say in Marathi	धन्यवाद मराठीत कसं म्हणतात?	How do you say thank you in Marathi?
+खूप छान	khūp chān	बहुत अच्छा	very nice	खूप छान काम केलंस.	You did very nice work.
+शाबास	śābās	शाबाश	well done / bravo	शाबास, छान काम केलंस.	Bravo, you did good work.
+काळजी घे	kāḷjī ghe	अपना ख्याल रखो	take care	स्वतःची काळजी घे.	Take care of yourself.
+लवकर भेटू	lavkar bheṭū	जल्द मिलेंगे	see you soon	चल, लवकर भेटू.	Bye, see you soon.
+शुभ प्रवास	śubh pravās	शुभ यात्रा	have a good trip	शुभ प्रवास.	Have a good trip.
+जेवण झालं का	jevaṇ jhāla kā	खाना खाया क्या	did you eat	जेवण झालं का?	Have you eaten?
+हो, झालं	ho, jhāla	हाँ, खा लिया	yes, I ate	हो, जेवण झालं.	Yes, I have eaten.
+चला जाऊया	chalā jāūyā	चलो चलें	let us go	उशीर होतोय, चला जाऊया.	It is getting late, let us go.
+थांबा एक मिनिट	thāmbā ek miniṭ	एक मिनट रुको	wait a minute	थांबा एक मिनिट, येतोच.	Wait a minute, I am coming.
+काही हरकत नाही	kāhī harkat nāhī	कोई बात नहीं	it is alright	काही हरकत नाही, पुढच्या वेळी.	It is alright, next time.
+देवाची कृपा	devāchī kṛpā	भगवान की कृपा	by God’s grace	देवाच्या कृपेने सर्व ठीक आहे.	All is well by God’s grace.
+राम राम	rām rām	राम राम	hello (traditional)	राम राम, कसे आहात?	Hello, how are you?
+ओळख करून देणे	oḷakh karūn deṇe	परिचय कराना	introducing someone	माझ्या मित्राची ओळख करून देतो.	Let me introduce my friend.
+कृपया मदत करा	kṛpayā madat karā	कृपया मदद कीजिए	please help me	कृपया मला मदत करा.	Please help me.
+तुमचं स्वागत आहे	tumcha svāgat āhe	आपका स्वागत है	you are welcome	धन्यवाद. तुमचं स्वागत आहे.	Thank you. You are welcome.
+काही मदत हवी का	kāhī madat havī kā	कोई मदद चाहिए क्या	do you need help	तुला काही मदत हवी का?	Do you need any help?
+हो, कृपया	ho, kṛpayā	हाँ, कृपया	yes, please	हो, कृपया मदत करा.	Yes, please help.
+नको, धन्यवाद	nako, dhanyavād	नहीं, धन्यवाद	no, thank you	नको, धन्यवाद.	No, thank you.
+बरोबर	barobar	सही	correct	तुझं उत्तर बरोबर आहे.	Your answer is correct.
+चूक	chūk	गलत	wrong	हे उत्तर चूक आहे.	This answer is wrong.
+आई	āī	माँ	mother	आई स्वयंपाक करते.	Mother cooks food.
+वडील	vaḍīl	पिता	father	वडील कार्यालयात जातात.	Father goes to the office.
+भाऊ	bhāū	भाई	brother	माझा भाऊ शाळेत जातो.	My brother goes to school.
+बहीण	bahīṇ	बहन	sister	माझी बहीण गाते.	My sister sings.
+मुलगा	mulgā	बेटा	son	त्यांचा मुलगा डॉक्टर आहे.	Their son is a doctor.
+मुलगी	mulgī	बेटी	daughter	माझी मुलगी खेळते.	My daughter plays.

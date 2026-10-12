@@ -1,0 +1,64 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { bridgesFor } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const bridges = bridgesFor(['01', '02', '03', '04']);
+---
+
+<Learn
+	title="Hindi to Marathi Phrases & Sentences"
+	description="Everyday Hindi sentences translated into Marathi — with word-by-word mapping and grammar notes, from the Bol Marathi bridge lessons."
+	kicker="Hindi → Marathi"
+	crumbs={[
+		{ label: 'Hindi → Marathi', href: siteUrl('/hindi-to-marathi/') },
+		{ label: 'Phrases', href: siteUrl('/hindi-to-marathi/phrases/') },
+	]}
+	canonicalPath="/hindi-to-marathi/phrases/"
+	about="hindi to marathi phrases and sentences"
+	meta={[`${bridges.length} sentence bridges`]}
+	alternates={[{ lang: 'x-default', href: siteUrl('/hindi-to-marathi/phrases/') }, { lang: 'en', href: siteUrl('/hindi-to-marathi/phrases/') }, { lang: 'hi', href: siteUrl('/hi/vakya/') }]}
+>
+	<h2>What you will learn</h2>
+	<p>
+		{bridges.length} Hindi → Marathi sentence pairs with word-by-word maps.
+		This is the fastest way for Hindi speakers to start thinking in Marathi:
+		same idea, Marathi shape.
+	</p>
+
+	<div class="table-scroll" role="region" aria-label="Hindi to Marathi sentences" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr>
+					<th scope="col">Hindi</th>
+					<th scope="col">Marathi</th>
+					<th scope="col">Word map</th>
+					<th scope="col">Grammar note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{bridges.map((b) => (
+					<tr>
+						<td lang="hi">{b.hindi} <br /><small>{b.english}</small></td>
+						<td class="mr" lang="mr">{b.marathi}</td>
+						<td><small>{Object.entries(b.mapEn).map(([k, v]) => `${k} → ${v}`).join('; ')}</small></td>
+						<td>{b.grammarEn}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<AppCTA variant="phrase" context="hindi-phrases" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Hindi to Marathi words', href: siteUrl('/hindi-to-marathi/words/') },
+			{ label: 'Daily conversation phrases', href: siteUrl('/phrases/daily/') },
+			{ label: 'Sentence structure', href: siteUrl('/grammar/sentence-structure/') },
+		]}
+	/>
+
+</Learn>

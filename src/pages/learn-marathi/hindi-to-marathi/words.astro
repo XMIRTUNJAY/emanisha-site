@@ -1,0 +1,59 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { bridgesFor, vocab } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+// Hindi → Marathi words: vocab entries where Hindi and Marathi differ
+// (the interesting learning content), plus bridge highlights.
+const differing = vocab.filter((w) => w.hindi.trim() !== w.marathi.trim());
+const sample = differing.slice(0, 60);
+const bridgeHighlights = bridgesFor(['01', '02']);
+---
+
+<Learn
+	title="Hindi to Marathi Words"
+	description="Common Hindi words and their Marathi equivalents — with pronunciation and examples. Built for Hindi speakers learning Marathi."
+	kicker="Hindi → Marathi"
+	crumbs={[
+		{ label: 'Hindi → Marathi', href: siteUrl('/hindi-to-marathi/') },
+		{ label: 'Words', href: siteUrl('/hindi-to-marathi/words/') },
+	]}
+	canonicalPath="/hindi-to-marathi/words/"
+	about="hindi to marathi words"
+	meta={[`${differing.length} word pairs in curriculum`]}
+	alternates={[{ lang: 'x-default', href: siteUrl('/hindi-to-marathi/words/') }, { lang: 'en', href: siteUrl('/hindi-to-marathi/words/') }, { lang: 'hi', href: siteUrl('/hi/shabd/') }]}
+>
+	<h2>What you will learn</h2>
+	<p>
+		Marathi and Hindi share a lot — but the everyday words often differ.
+		Below are {sample.length} high-frequency pairs from the Bol Marathi
+		vocabulary ({differing.length} such pairs in the full curriculum),
+		each with pronunciation and an example sentence.
+	</p>
+
+	<VocabTable words={sample} caption="Hindi to Marathi words" roman="none" />
+
+	<h2>Patterns to notice</h2>
+	<ul>
+		{bridgeHighlights.map((b) => (
+			<li>
+				<span lang="hi">{b.hindi}</span> → <strong lang="mr">{b.marathi}</strong>
+				{' '}— {b.grammarEn}
+			</li>
+		))}
+	</ul>
+
+	<AppCTA variant="vocabulary" context="hindi-words" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Hindi to Marathi phrases', href: siteUrl('/hindi-to-marathi/phrases/') },
+			{ label: 'Marathi words for beginners', href: siteUrl('/vocabulary/beginners/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+
+</Learn>

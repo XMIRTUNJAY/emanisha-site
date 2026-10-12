@@ -1,0 +1,91 @@
+---
+// Shared device-TTS script (VocabTable + unit lesson tables). No props.
+// Self-guarding: window.__sayInit binds the delegated click handler once
+// per page, so multiple components including this script stay safe.
+---
+<script is:inline>
+	(function () {
+		// Device text-to-speech for Marathi headwords. No network, no keys —
+		// uses the visitor's own voices. Prefers a Marathi voice, falls back
+		// to Hindi (same script, closest phonetics), then system default.
+		// Buttons remove themselves if speech synthesis is unavailable.
+		if (window.__sayInit) return;
+		window.__sayInit = true;
+		if (!('speechSynthesis' in window)) {
+			document.querySelectorAll('.say').forEach((b) => b.remove());
+			return;
+		}
+		var voice = null;
+		var saySpeed = parseFloat(localStorage.getItem('bol-say-speed') || '1');
+		function pickVoice() {
+			try {
+				var voices = window.speechSynthesis.getVoices() || [];
+				voice =
+					voices.find(function (v) { return (v.lang || '').toLowerCase().indexOf('mr') === 0; }) ||
+					voices.find(function (v) { return (v.lang || '').toLowerCase().indexOf('hi') === 0; }) ||
+					null;
+			} catch (err) { voice = null; }
+		}
+		pickVoice();
+		if ('onvoiceschanged' in window.speechSynthesis) {
+			window.speechSynthesis.onvoiceschanged = pickVoice;
+		}
+
+		// Speed selector UI (injected once near first .say button)
+		function injectSpeedControl() {
+			if (document.getElementById('say-speed-control')) return;
+			var firstSay = document.querySelector('.say');
+			if (!firstSay) return;
+			var wrapper = document.createElement('div');
+			wrapper.id = 'say-speed-control';
+			wrapper.style.cssText = 'display:inline-flex;align-items:center;gap:0.5em;margin-left:0.5em;font-size:0.75rem;color:rgb(var(--gray));';
+			wrapper.innerHTML = '<label>Speed: <select id="say-speed-select" style="font:inherit;padding:0.2em 0.5em;border:var(--border);border-radius:4px;background:var(--card);"><option value="0.75">0.75×</option><option value="1">1×</option><option value="1.25">1.25×</option></select></label>';
+			wrapper.querySelector('select').value = String(saySpeed);
+			wrapper.querySelector('select').addEventListener('change', function (e) {
+				saySpeed = parseFloat(e.target.value);
+				localStorage.setItem('bol-say-speed', String(saySpeed));
+			});
+			firstSay.parentNode.insertBefore(wrapper, firstSay.nextSibling);
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', injectSpeedControl);
+		} else {
+			injectSpeedControl();
+		}
+
+		document.addEventListener('click', (e) => {
+			var btn = e.target.closest ? e.target.closest('[data-say],[data-audio]') : null;
+			if (!btn) return;
+			// Pre-generated clip (lazy: created on first tap, then cached).
+			var src = btn.getAttribute('data-audio');
+			if (src) {
+				try {
+					if (!btn._player) {
+						btn._player = new Audio(src);
+						btn._player.preload = 'none';
+					}
+					btn._player.currentTime = 0;
+					btn._player.playbackRate = saySpeed;
+					btn._player.play().catch(() => {});
+				} catch (err) {}
+				return;
+			}
+			try {
+				window.speechSynthesis.cancel();
+				var u = new SpeechSynthesisUtterance(btn.getAttribute('data-say') || '');
+				u.lang = 'mr-IN';
+				u.rate = 0.85 * saySpeed;
+				if (voice) u.voice = voice;
+				window.speechSynthesis.speak(u);
+			} catch (err) {
+				/* voice missing — table content still fully usable */
+			}
+		});
+		if (document.hidden !== undefined) {
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden) { try { window.speechSynthesis.cancel(); } catch (err) {} }
+			});
+		}
+	})();
+</script>

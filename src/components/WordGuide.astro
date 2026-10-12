@@ -1,0 +1,99 @@
+---
+import AppCTA from './AppCTA.astro';
+import RelatedContent from './RelatedContent.astro';
+import type { Word } from '../lib/learn';
+
+type Props = {
+	word: Word;
+	answer: string;
+	usage: string[];
+	faq: { q: string; a: string }[];
+	related: { label: string; href: string }[];
+	context: string;
+};
+
+const { word: w, answer, usage, faq, related, context } = Astro.props;
+---
+
+<h2>The short answer</h2>
+<p class="answer" lang="mr">{w.marathi} <span class="tr">({w.transliteration})</span></p>
+<p>{answer}</p>
+
+<h2>What you'll learn</h2>
+<ul>
+	<li>Say it: <span lang="mr">{w.marathi}</span> ({w.transliteration})</li>
+	<li>Hindi: <span lang="hi">{w.hindi}</span> · English: {w.english}</li>
+	<li>When to use it and an example sentence below</li>
+</ul>
+
+<div class="table-scroll" role="region" aria-label={w.english} tabindex="0">
+	<table class="vocab">
+		<thead>
+			<tr>
+				<th scope="col">Marathi</th>
+				<th scope="col">Pronunciation</th>
+				<th scope="col">Hindi</th>
+				<th scope="col">English</th>
+				<th scope="col">Example</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="mr" lang="mr">{w.marathi}</td>
+				<td class="tr">{w.transliteration}</td>
+				<td lang="hi">{w.hindi}</td>
+				<td>{w.english}</td>
+				<td>
+					<span lang="mr">{w.exampleMarathi}</span>
+					<br />
+					<small>{w.exampleEnglish} · <span lang="hi">{w.exampleHindi}</span></small>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<h2>How to use it</h2>
+<ul>
+	{usage.map((u) => (
+		<li>{u}</li>
+	))}
+	{w.noteEn && <li>Usage note: {w.noteEn}</li>}
+</ul>
+
+<AppCTA variant="phrase" context={context} />
+
+<h2>Common questions</h2>
+{faq.map((f) => (
+	<details>
+		<summary>{f.q}</summary>
+		<p>{f.a}</p>
+	</details>
+))}
+
+<RelatedContent links={related} />
+
+<style>
+	.answer {
+		font-size: 1.6rem;
+		font-weight: 700;
+		color: rgb(var(--black));
+	}
+	.answer .tr {
+		font-size: 1rem;
+		font-weight: 400;
+		color: rgb(var(--gray));
+	}
+	details {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 0.9em 1.1em;
+		margin-bottom: 0.6em;
+	}
+	details summary {
+		font-weight: 600;
+		cursor: pointer;
+	}
+	details p { margin: 0.6em 0 0.2em 0; }
+</style>

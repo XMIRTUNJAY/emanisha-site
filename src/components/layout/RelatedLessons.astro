@@ -1,0 +1,145 @@
+---
+// RelatedLessons — Curated related lessons at bottom of pages
+
+interface Props {
+  links: Array<{
+    slug: string;
+    title: string;
+    family: string;
+    description?: string;
+    art?: string;
+    lqip?: string;
+  }>;
+  max?: number;
+  title?: string;
+  /** Set false when the surrounding section already renders its own heading. */
+  showTitle?: boolean;
+}
+
+const { links, max = 4, title = 'Continue learning', showTitle = true } = Astro.props;
+const displayLinks = links.slice(0, max);
+---
+
+{displayLinks.length > 0 && (
+  <section class="related-lessons" aria-labelledby={showTitle ? 'related-lessons-title' : undefined}>
+    {showTitle && (
+      <header class="related-lessons__header">
+        <h2 id="related-lessons-title" class="related-lessons__title">{title}</h2>
+      </header>
+    )}
+    <ul class="related-lessons__grid">
+      {displayLinks.map((link, i) => (
+        <li class={`related-lessons__card reveal reveal-delay-${i + 1}`}>
+          <a class="related-lessons__link" href={link.slug} data-funnel="related_lesson_click" data-slug={link.slug}>
+            {link.art && (
+              <div class="related-lessons__image" style={`background-image: url('${link.lqip || link.art}'); background-size: cover;`}>
+                <img src={link.art} alt="" loading="lazy" width="400" height="225" style="opacity: 0;" onload="this.style.opacity=1; this.previousElementSibling.style.opacity=0" />
+              </div>
+            )}
+            <div class="related-lessons__content">
+              <span class="related-lessons__kicker kicker">{link.family}</span>
+              <h3 class="related-lessons__label">{link.title}</h3>
+              {link.description && <p class="related-lessons__desc">{link.description}</p>}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .related-lessons {
+    margin: var(--space-8) 0 0 0;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .related-lessons__header { margin-bottom: var(--space-4); }
+
+  .related-lessons__title {
+    margin: 0;
+    font-size: var(--text-h3);
+    color: var(--color-text);
+  }
+
+  .related-lessons__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .related-lessons__card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    overflow: hidden;
+    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .related-lessons__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+  }
+
+  .related-lessons__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .related-lessons__image {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-container-low);
+    overflow: hidden;
+  }
+
+  .related-lessons__image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  .related-lessons__content {
+    padding: var(--space-4);
+  }
+
+  .related-lessons__kicker { margin-bottom: var(--space-1); }
+
+  .related-lessons__label {
+    margin: 0 0 var(--space-1) 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+
+  .related-lessons__desc {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  .related-lessons__grid {
+    grid-template-columns: 1fr;
+  }
+  .related-lessons__content { padding: var(--space-3); }
+  .related-lessons__label { font-size: var(--text-body); }
+  .related-lessons__desc { font-size: var(--text-body-sm); }
+}
+</style>

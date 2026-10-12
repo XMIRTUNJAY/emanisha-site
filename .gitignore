@@ -1,0 +1,37 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# generated content snapshots are committed intentionally (see tools/),
+# so they are NOT ignored: src/data/learn/*.json
+
+# local scratch / audit artifacts
+livecheck/
+frames/
+tools/ocr-out/
+tessenv/
+tools/redesign-shots/
+og-validation/
+playwright-screenshots/
+test-results/
+temp_new_images/
+design-audit/

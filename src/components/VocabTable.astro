@@ -1,0 +1,95 @@
+---
+import type { Word } from '../lib/learn';
+import { simpleRespelling } from '../lib/simple';
+import audioManifest from '../data/audio-manifest.json';
+import SayScript from './SayScript.astro';
+import { siteUrl } from '../lib/site';
+
+type Props = {
+	words: Word[];
+	caption?: string;
+	// Pronunciation column: 'diacritic' (precise, default) | 'simple'
+	// (plain respelling) | 'none' (hidden — Hindi path reads Devanagari).
+	// toggle=true adds a CSS-only checkbox switching simple ↔ precise.
+	roman?: 'diacritic' | 'simple' | 'none';
+	toggle?: boolean;
+	context?: string;
+};
+const { words, caption, roman = 'diacritic', toggle = roman !== 'none', context = 'vocab' } = Astro.props;
+const showSimpleFirst = roman === 'simple';
+// Pre-generated TTS clips (tools/gen-audio) win; otherwise device TTS.
+// Manifest: { files: { <vocabId>: { word, example? } } }.
+const files = (audioManifest as { files?: Record<string, { word?: string }> }).files ?? {};
+const audioFor = (id: string): string | null => (files[id]?.word ? siteUrl(`/audio/${files[id].word}`) : null);
+---
+
+<div class="table-scroll" role="region" aria-label={caption ?? 'Vocabulary'} tabindex="0">
+	{toggle && (
+		<label class="roman-toggle">
+			<input type="checkbox" class={`roman-check-${context}`} />
+			Show precise pronunciation
+		</label>
+	)}
+	<table class="vocab">
+		<thead>
+			<tr>
+				<th scope="col">Marathi</th>
+				{roman !== 'none' && <th scope="col">Pronunciation</th>}
+				<th scope="col">Hindi</th>
+				<th scope="col">English</th>
+				<th scope="col">Example</th>
+			</tr>
+		</thead>
+		<tbody>
+			{words.map((w) => (
+				<tr>
+					<td class="mr" lang="mr">
+						{w.marathi}
+						{audioFor(w.id) ? (
+							<button type="button" class="say" data-audio={audioFor(w.id)} aria-label={`Listen: ${w.marathi}`}>🔊</button>
+						) : (
+							<button type="button" class="say" data-say={w.marathi} aria-label={`Listen: ${w.marathi}`}>🔊</button>
+						)}
+					</td>
+					{roman !== 'none' && (
+						<td class="tr">
+							<span class="r-a">{showSimpleFirst ? simpleRespelling(w.transliteration) : w.transliteration}</span>
+							{toggle && (
+								<span class="r-b">{showSimpleFirst ? w.transliteration : simpleRespelling(w.transliteration)}</span>
+							)}
+						</td>
+					)}
+					<td lang="hi">{w.hindi}</td>
+					<td>{w.english}</td>
+					<td>
+						<span lang="mr">{w.exampleMarathi}</span>
+						<br />
+						<small>{w.exampleEnglish}</small>
+					</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>
+
+<SayScript />
+
+<style>
+	.roman-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4em;
+		font-size: 0.82rem;
+		color: rgb(var(--gray));
+		margin-bottom: 0.6em;
+		cursor: pointer;
+	}
+	.roman-toggle input {
+		width: 1em;
+		height: 1em;
+		accent-color: var(--accent);
+	}
+	.r-b { display: none; }
+	.roman-toggle:has(input:checked) ~ table .r-a { display: none; }
+	.roman-toggle:has(input:checked) ~ table .r-b { display: inline; }
+</style>

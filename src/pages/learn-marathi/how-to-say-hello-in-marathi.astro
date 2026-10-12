@@ -1,0 +1,43 @@
+---
+import Learn from '../../layouts/Learn.astro';
+import WordGuide from '../../components/WordGuide.astro';
+import { vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const w = vocab.find((x) => x.id === 'v-greet-01');
+if (!w) throw new Error('missing v-greet-01');
+---
+
+<Learn
+	title="How to Say Hello in Marathi: नमस्कार (With Pronunciation)"
+	description="Hello in Marathi is नमस्कार (namaskār) — the respectful greeting for any time of day. Pronunciation, Hindi meaning, example and usage."
+	kicker="Marathi Phrases"
+	crumbs={[
+		{ label: 'Phrases', href: siteUrl('/phrases/') },
+		{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+	]}
+	canonicalPath="/how-to-say-hello-in-marathi/"
+	about="how to say hello in marathi"
+	meta={['Quick answer', 'Beginner']}
+>
+	<WordGuide
+		word={w}
+		context="say-hello"
+		answer="Say नमस्कार (namaskār) — it works any time of day, for anyone, formal or friendly."
+		usage={[
+			'Use it any time of day. For mornings and nights specifically, Marathi also has शुभ सकाळ (good morning) and शुभ रात्री (good night).',
+			'Pair it like the example: नमस्कार, तुम्ही कसे आहात? (Hello, how are you?).',
+		]}
+		faq={[
+			{ q: 'Is नमस्कार formal or casual?', a: 'Both. It is respectful enough for elders and strangers, natural enough for friends — that is why it is the first word to learn.' },
+			{ q: 'Do Marathi speakers also say हॅलो?', a: 'In cities you will hear हॅलो too, but नमस्कार is always correct and always appreciated.' },
+		]}
+		related={[
+			{ label: 'Marathi greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+			{ label: 'Beginner words', href: siteUrl('/vocabulary/beginners/') },
+			{ label: 'How to say thank you', href: siteUrl('/how-to-say-thank-you-in-marathi/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+</Learn>
+

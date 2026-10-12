@@ -1,0 +1,50 @@
+---
+// MistakeTable — "Common mistakes" block for generated pages.
+import type { Mistake } from '../lib/seo';
+
+type Props = { mistakes: Mistake[]; title?: string };
+const { mistakes, title = 'Common mistakes' } = Astro.props;
+---
+
+{mistakes.length > 0 && (
+	<section class="mistakes" aria-label={title}>
+		<h2>{title}</h2>
+		{mistakes.map((m) => (
+			<div class="mistake">
+				<p class="mistake-row">
+					<span class="wrong" lang={/[\u0900-\u097F]/.test(m.wrong) ? 'mr' : undefined}>✗ {m.wrong}</span>
+					<span class="arrow" aria-hidden="true">→</span>
+					<span class="right" lang={/[\u0900-\u097F]/.test(m.right) ? 'mr' : undefined}>✓ {m.right}</span>
+				</p>
+				<p class="why">{m.why}</p>
+			</div>
+		))}
+	</section>
+)}
+
+<style>
+	.mistakes { margin: var(--space-5) 0; }
+	.mistake {
+		border: var(--border);
+		border-left: 3px solid var(--accent);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 0.7em 1em;
+		margin-bottom: 0.7em;
+	}
+	.mistake-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4em 0.7em;
+		align-items: baseline;
+		margin: 0;
+	}
+	.mistake-row .wrong { color: #b3261e; }
+	.mistake-row .right { color: #146c2e; font-weight: 600; }
+	.mistake-row .arrow { color: rgb(var(--gray)); }
+	.why {
+		margin: 0.35em 0 0 0;
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
+	}
+</style>

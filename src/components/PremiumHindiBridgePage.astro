@@ -1,0 +1,237 @@
+---
+// PremiumHindiBridgePage — Premium Hindi→Marathi bridge page template
+// Uses TranslationCard for visual mapping + practice CTA
+
+import Learn from '../layouts/Learn.astro';
+import TranslationCard from '../components/learning/TranslationCard.astro';
+import QuickPractice from '../components/QuickPractice.astro';
+import MistakeTable from '../components/MistakeTable.astro';
+import AppCTA from '../components/AppCTA.astro';
+import RelatedContent from '../components/RelatedContent.astro'
+import PracticeCTA from '../components/learning/PracticeCTA.astro'
+import RelatedLessons from '../components/layout/RelatedLessons.astro'
+import SectionNav from '../components/layout/SectionNav.astro'
+import { seoPagesByFamily, bridgesForPage, relatedFor, FAMILY_BASE, FAMILY_LABEL } from '../lib/seo';
+import { siteUrl } from '../lib/site';
+
+type Props = { page: import('../../lib/seo').SeoPage };
+const { page } = Astro.props;
+
+const bridges = bridgesForPage(page);
+const related = relatedFor(page);
+const metaBits = [
+  `${bridges.length} Hindi → Marathi bridges`,
+  ...(page.units?.length ? [page.units.length > 1 ? `Units ${page.units.join(', ')}` : `Unit ${page.units[0]}`] : []),
+];
+
+const navSections = [
+  { id: 'objective-title', label: 'What you will learn' },
+  { id: 'bridges-title', label: 'Hindi → Marathi' },
+  ...((page.mistakes ?? []).length ? [{ id: 'mistakes-title', label: 'Common mistakes' }] : []),
+  ...(page.practice ? [{ id: 'practice-title', label: 'Practice' }] : []),
+  ...((page.faq ?? []).length ? [{ id: 'faq-title', label: 'FAQ' }] : []),
+];
+---
+
+<Learn
+  title={page.title}
+  h1={page.h1 ?? page.title}
+  description={page.description}
+  kicker={FAMILY_LABEL[page.family]}
+  crumbs={[
+    { label: FAMILY_LABEL[page.family], href: siteUrl(FAMILY_BASE[page.family]) },
+    { label: page.title, href: siteUrl(`${FAMILY_BASE[page.family]}${page.slug}/`) },
+  ]}
+  canonicalPath={`${FAMILY_BASE[page.family]}${page.slug}/`}
+  about={[page.primaryKeyword, ...page.secondaryKeywords].join('; ')}
+  meta={metaBits}
+  faq={page.faq ?? []}
+>
+  <!-- SECTION NAV — jump to section (sticky) -->
+  <SectionNav sections={navSections} label="On this page" />
+
+  <!-- LEARNING OBJECTIVE -->
+  <section class="lesson-objective" aria-labelledby="objective-title">
+    <h2 id="objective-title" class="kicker">What you will learn</h2>
+    <div class="prose">
+      {page.intro.map((para) => <p>{para}</p>)}
+      {page.tip && <p class="tip"><strong>Tip:</strong> {page.tip}</p>}
+    </div>
+  </section>
+
+  <!-- HINDI → MARATHI BRIDGES -->
+  <section class="core-lesson" aria-labelledby="bridges-title">
+    <header class="lesson-header">
+      <h2 id="bridges-title">Hindi → Marathi, line by line</h2>
+    </header>
+
+    <div class="translation-card-grid">
+      {bridges.map((b) => (
+        <TranslationCard
+          hindi={b.hindi}
+          marathi={b.marathi}
+          transliteration={b.transliteration ?? ''}
+          english={b.english}
+          hindiAudio={b.hindiAudio}
+          marathiAudio={b.marathiAudio}
+          showArrows={true}
+        />
+      ))}
+    </div>
+
+    <div class="word-map-section">
+      <h3>Word map</h3>
+      <div class="table-scroll" role="region" aria-label="Word map" tabindex="0">
+        <table class="vocab">
+          <thead>
+            <tr>
+              <th scope="col">Hindi</th>
+              <th scope="col">Marathi</th>
+              <th scope="col">English</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bridges.flatMap((b) => Object.entries(b.mapEn).map(([k, v]) => (
+              <tr>
+                <td lang="hi">{k}</td>
+                <td class="mr" lang="mr">{v}</td>
+                <td>{b.mapEn[k] === v ? '' : 'mapped'}</td>
+              </tr>
+            )))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAMMAR NOTES -->
+  {(page.sections ?? []).map((s) => (
+    <section>
+      <h2>{s.heading}</h2>
+      {s.paragraphs.map((para) => <p>{para}</p>)}
+    </section>
+  ))}
+
+  <!-- COMMON MISTAKES -->
+  <div id="mistakes-title">
+    <MistakeTable mistakes={page.mistakes ?? []} />
+  </div>
+
+  <!-- QUICK PRACTICE -->
+  {page.practice && (
+    <div id="practice-title">
+      <QuickPractice practice={page.practice} />
+    </div>
+  )}
+
+  <!-- PRACTICE CTA - Contextual app bridge -->
+  <PracticeCTA variant="hindi-bridge" context={`hindi-bridge-${page.slug}`} />
+
+  <!-- RELATED LESSONS -->
+  <RelatedLessons links={related} max={4} title="Continue learning" />
+
+  <!-- FAQ -->
+  {(page.faq ?? []).length > 0 && (
+    <>
+      <h2 id="faq-title">Common questions</h2>
+      {page.faq!.map((f) => (
+        <details>
+          <summary>{f.question}</summary>
+          <p>{f.answer}</p>
+        </details>
+      ))}
+    </>
+  )}
+</Learn>
+
+<style>
+  /* Anchor clearance for the sticky section nav */
+  #objective-title,
+  #bridges-title,
+  #mistakes-title,
+  #practice-title,
+  #faq-title { scroll-margin-top: 5.5rem; }
+
+  .lesson-objective {
+    margin: var(--space-6) 0;
+    padding: var(--space-5);
+    background: var(--color-container-low);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .lesson-objective .kicker { margin-bottom: var(--space-2); }
+
+  .core-lesson { margin: var(--space-6) 0; }
+
+  .lesson-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .lesson-header h2 { margin: 0; font-size: var(--text-h2); }
+
+  .translation-card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .word-map-section {
+    margin-top: var(--space-6);
+  }
+
+  .word-map-section h3 {
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  table.vocab {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 560px;
+  }
+
+  table.vocab th,
+  table.vocab td {
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  table.vocab th {
+    font-size: var(--text-caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    background: var(--color-container);
+  }
+
+  table.vocab tr:last-child td { border-bottom: none; }
+
+  details {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  details summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  details p { margin: var(--space-2) 0 0 0; }
+</style>

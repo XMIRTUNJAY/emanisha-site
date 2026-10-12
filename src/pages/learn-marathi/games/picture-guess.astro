@@ -1,0 +1,345 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GameShell from '../../../components/games/GameShell.astro';
+import GameIntro from '../../../components/games/GameIntro.astro';
+import GameResult from '../../../components/games/GameResult.astro';
+import AppCTA from '../../../components/AppCTA.astro';
+import { vocab as words } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+import { splitGraphemes } from '../../../lib/games/graphemes';
+import pictureData from '../../../data/games/picture-guess.json';
+
+const byId = new Map(words.map((w) => [w.id, w]));
+const items = pictureData.items.map((it) => {
+	const w = byId.get(it.id);
+	if (!w) throw new Error(`picture: unknown vocab id "${it.id}"`);
+	return {
+		id: w.id,
+		mr: w.marathi,
+		en: w.english,
+		hi: w.hindi,
+		tr: w.transliteration,
+		exMr: w.exampleMarathi,
+		exEn: w.exampleEnglish,
+		cat: w.category,
+		level: it.level,
+		svg: it.svg,
+		first: (splitGraphemes(w.marathi)[0] ?? ''),
+	};
+});
+
+const audio = (f: string) => siteUrl(`/games/audio/${f}`);
+const dataJson = JSON.stringify({
+	items,
+	artBase: siteUrl('/games/picture-guess/'),
+	sfx: {
+		key: audio('ui/click_soft.mp3'),
+		correct: audio('feedback/correct_soft.mp3'),
+		wrong: audio('feedback/incorrect.mp3'),
+		hint: audio('feedback/hint.mp3'),
+		round: audio('fanfare/round_complete.mp3'),
+	},
+});
+
+const title = 'Marathi Picture Guess Game — Vocabulary From Pictures | Bol Marathi';
+const description =
+	'Free Marathi vocabulary game: guess the word behind the picture with progressive hints, three difficulty levels, Hindi and English meanings and audio. 40 original illustrations.';
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Games', href: siteUrl('/games/') },
+		{ label: 'Picture Guess', href: siteUrl('/games/picture-guess/') },
+	]}
+>
+	<GameShell active="picture-guess">
+		<div class="prose">
+			<p class="kicker">Marathi Picture Guess</p>
+			<h1>Picture Guess</h1>
+			<p class="lede">
+				A picture, four words — which one is it? Words come from the curriculum and every picture is an
+				original illustration made for this site.
+			</p>
+			<div class="game-startbar">
+				<button type="button" class="btn btn-play" data-play>▶ Play</button>
+				<button type="button" class="btn ghost game-howto" data-howto>How to play</button>
+			</div>
+			<GameIntro
+				steps={[
+					'Pick a level: easy words are everyday objects, challenge words are longer or rarer.',
+					'Not sure? Open a hint: the meaning first, then the pronunciation, then the first letter.',
+					'After answering you get the Hindi meaning, an example sentence and audio.',
+				]}
+			/>
+			<div class="game-stage">
+				<div id="pg-root" data-game>
+				<div class="modes" role="tablist" aria-label="Difficulty">
+					<button type="button" class="mode on" data-level="easy" role="tab" aria-selected="true">Easy</button>
+					<button type="button" class="mode" data-level="medium" role="tab" aria-selected="false">Medium</button>
+					<button type="button" class="mode" data-level="challenge" role="tab" aria-selected="false">Challenge</button>
+				</div>
+				<p class="wl-meta" id="pg-meta"></p>
+				<div class="pg-card" id="pg-card">
+					<div class="pg-art">
+						<img id="pg-img" src="" alt="" width="200" height="200" />
+						<span class="pg-fallback" id="pg-fallback" hidden></span>
+					</div>
+					<p class="pg-word" id="pg-answer" lang="mr" hidden></p>
+				</div>
+				<p class="hint-box" id="pg-hint" aria-live="polite"></p>
+				<div class="wc-cands" id="pg-cands" role="group" aria-label="Answer options"></div>
+				<p class="wl-msg" id="pg-msg" aria-live="polite"></p>
+				<p class="qtr" id="pg-extra" hidden></p>
+				<div class="game-actions">
+					<button type="button" class="btn ghost" id="pg-hintbtn">Hint</button>
+					<button type="button" class="btn" id="pg-next" hidden>Next →</button>
+				</div>
+			</div>
+			<GameResult id="pg-done" heading="Round complete">
+				<p class="game-actions" style="justify-content:center">
+					<a class="btn" href={siteUrl('/vocabulary/daily-life/')} data-funnel="game_review">More daily words</a>
+					<AppCTA variant="vocabulary" context="game-picture" />
+				</p>
+			</GameResult>
+			</div>
+		</div>
+	</GameShell>
+</Base>
+
+<script type="application/json" id="pg-data" set:html={dataJson} />
+
+<script>
+	import { makeStorage } from '../../../lib/games/storage';
+	import { makeSfx, sfxMuted, buzz } from '../../../lib/games/sfx';
+
+	type PItem = {
+		id: string;
+		mr: string;
+		en: string;
+		hi: string;
+		tr: string;
+		exMr: string;
+		exEn: string;
+		cat: string;
+		level: string;
+		svg: string;
+		first: string;
+	};
+
+	const ROUND = 8;
+
+	function init() {
+		const root = document.getElementById('pg-root');
+		if (!root || (root as HTMLElement).dataset.bound) return;
+		(root as HTMLElement).dataset.bound = '1';
+		const dataEl = document.getElementById('pg-data');
+		if (!dataEl) return;
+		let data: { items: PItem[]; artBase: string; sfx: Record<string, string> };
+		try {
+			data = JSON.parse(dataEl.textContent || '{}');
+		} catch {
+			return;
+		}
+		const all: PItem[] = data.items ?? [];
+		if (!all.length) return;
+
+		const store = makeStorage('bol-game-picture-');
+		const sfx = makeSfx(data.sfx ?? {}, { storage: store });
+
+		const meta = document.getElementById('pg-meta') as HTMLElement;
+		const card = document.getElementById('pg-card') as HTMLElement;
+		const img = document.getElementById('pg-img') as HTMLImageElement;
+		const fallback = document.getElementById('pg-fallback') as HTMLElement;
+		const answerEl = document.getElementById('pg-answer') as HTMLElement;
+		const candsEl = document.getElementById('pg-cands') as HTMLElement;
+		const msg = document.getElementById('pg-msg') as HTMLElement;
+		const extra = document.getElementById('pg-extra') as HTMLElement;
+		const hintEl = document.getElementById('pg-hint') as HTMLElement;
+		const hintBtn = document.getElementById('pg-hintbtn') as HTMLButtonElement;
+		const nextBtn = document.getElementById('pg-next') as HTMLButtonElement;
+		const done = document.getElementById('pg-done') as HTMLElement;
+
+		let level = 'easy';
+		let round: PItem[] = [];
+		let idx = 0;
+		let score = 0;
+		let streak = 0;
+		let best = 0;
+		let locked = false;
+		let hintStage = 0;
+		let current: PItem | null = null;
+
+		function renderMeta() {
+			meta.textContent = round.length
+				? `Picture ${Math.min(idx + 1, round.length)}/${round.length} · Score ${score} · Streak ${streak}`
+				: 'Select a level';
+		}
+
+		function showArt(it: PItem) {
+			card.classList.remove('no-art');
+			img.hidden = false;
+			fallback.hidden = true;
+			img.src = data.artBase + it.svg;
+			img.alt = `Picture puzzle ${idx + 1}`;
+		}
+
+		img.addEventListener('error', () => {
+			// graceful fallback when an SVG hasn't been added yet
+			card.classList.add('no-art');
+			img.hidden = true;
+			fallback.hidden = false;
+			fallback.textContent = current ? `${current.tr} — picture coming soon` : 'Picture coming soon';
+		});
+
+		function load() {
+			const it = round[idx];
+			if (!it) {
+				finish();
+				return;
+			}
+			current = it;
+			locked = false;
+			hintStage = 0;
+			hintEl.textContent = '';
+			msg.textContent = '';
+			msg.className = 'wl-msg';
+			extra.hidden = true;
+			answerEl.hidden = true;
+			hintBtn.disabled = false;
+			nextBtn.hidden = true;
+			showArt(it);
+			renderMeta();
+			dealOptions(it);
+		}
+
+		function dealOptions(it: PItem) {
+			const pool = all.filter((x) => x.id !== it.id && x.en !== it.en);
+			const decoys: PItem[] = [];
+			const sameLevel = pool.filter((x) => x.level === it.level);
+			while (decoys.length < 3 && sameLevel.length) {
+				const pick = sameLevel.splice(Math.floor(Math.random() * sameLevel.length), 1)[0];
+				if (pick) decoys.push(pick);
+			}
+			const others = pool.sort(() => Math.random() - 0.5);
+			while (decoys.length < 3 && others.length) {
+				const pick = others.shift() as PItem;
+				if (!decoys.some((d) => d.en === pick.en)) decoys.push(pick);
+			}
+			const options = [it, ...decoys].sort(() => Math.random() - 0.5);
+			candsEl.innerHTML = '';
+			for (const o of options) {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = 'qopt';
+				b.innerHTML = '<span class="qopt-text"></span>';
+				const text = b.querySelector('.qopt-text') as HTMLElement;
+				text.lang = 'mr';
+				text.textContent = o.mr;
+				b.addEventListener('click', () => answer(o, b));
+				candsEl.appendChild(b);
+			}
+		}
+
+		function answer(o: PItem, btn: HTMLButtonElement) {
+			if (locked || !current) return;
+			locked = true;
+			const ok = o.id === current.id;
+			sfx.play(ok ? 'correct' : 'wrong');
+			buzz(ok ? [20, 30, 40] : 60);
+			for (const b of candsEl.querySelectorAll('button')) (b as HTMLButtonElement).disabled = true;
+			btn.classList.add(ok ? 'ok' : 'bad');
+			if (ok) {
+				score += 1;
+				streak += 1;
+				best = Math.max(best, streak);
+				store.set('best-streak', String(best));
+			} else {
+				streak = 0;
+				// highlight the right one
+				for (const b of candsEl.querySelectorAll('button')) {
+					if ((b.querySelector('.qopt-text') as HTMLElement)?.textContent === current.mr) {
+						b.classList.add('ok');
+					}
+				}
+			}
+			answerEl.hidden = false;
+			answerEl.textContent = current.mr;
+			extra.hidden = false;
+			const say = ` <button type="button" class="say" data-say="${current.mr}" aria-label="Listen: ${current.tr}">🔊</button>`;
+			extra.innerHTML =
+				`<strong>EN:</strong> ${current.en} · <strong lang="hi">HI:</strong> <span lang="hi">${current.hi}</span>${say}<br>` +
+				`<span lang="mr">${current.exMr}</span><br><span class="gr-ex">${current.exEn}</span>`;
+			msg.textContent = ok ? 'Correct!' : `It was ${current.mr} (${current.tr})`;
+			msg.className = 'wl-msg ' + (ok ? 'ok' : 'bad');
+			hintBtn.disabled = true;
+			nextBtn.hidden = false;
+			nextBtn.textContent = idx === round.length - 1 ? 'See results →' : 'Next →';
+			renderMeta();
+		}
+
+		hintBtn.addEventListener('click', () => {
+			if (locked || !current) return;
+			sfx.play('hint');
+			hintStage += 1;
+			if (hintStage === 1) {
+				hintEl.textContent = `Meaning: ${current.en}`;
+			} else if (hintStage === 2) {
+				hintEl.textContent = `Pronunciation: ${current.tr}`;
+			} else {
+				hintStage = 3;
+				hintEl.textContent = `First letter: “${current.first}”`;
+				hintBtn.disabled = true;
+			}
+		});
+
+		nextBtn.addEventListener('click', () => {
+			idx += 1;
+			if (idx >= round.length) finish();
+			else load();
+		});
+
+		function finish() {
+			sfx.play('round');
+			done.hidden = false;
+			const scoreEl = done.querySelector('.gr-score') as HTMLElement;
+			const body = done.querySelector('.gr-body') as HTMLElement;
+			scoreEl.textContent = `${score}/${round.length} at ${level} level · Best streak ${best}`;
+			body.innerHTML = `<p>Every picture points at one curriculum word — miss one? The meanings above are the lesson.</p>`;
+			done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		}
+
+		function startRound() {
+			round = all
+				.filter((it) => it.level === level)
+				.sort(() => Math.random() - 0.5)
+				.slice(0, Math.min(ROUND, 8));
+			idx = 0;
+			score = 0;
+			streak = 0;
+			done.hidden = true;
+			nextBtn.hidden = true;
+			renderMeta();
+			load();
+		}
+
+		for (const btn of document.querySelectorAll('#pg-root .mode')) {
+			btn.addEventListener('click', () => {
+				level = (btn as HTMLElement).dataset.level ?? 'easy';
+				for (const b of document.querySelectorAll('#pg-root .mode')) {
+					b.classList.toggle('on', b === btn);
+					b.setAttribute('aria-selected', String(b === btn));
+				}
+				startRound();
+			});
+		}
+
+		if (sfxMuted()) sfx.setMuted(true);
+		startRound();
+	}
+
+	init();
+	document.addEventListener('astro:page-load', init);
+</script>

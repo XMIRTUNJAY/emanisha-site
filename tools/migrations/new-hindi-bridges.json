@@ -1,0 +1,139 @@
+[
+  {
+    "slug": "postpositions",
+    "title": "Hindi to Marathi Postpositions: Cases, Meanings & Usage",
+    "description": "Postpositions mapped Hindi to Marathi — cases, meanings, and usage from Unit 08. Covers में→मध्ये, पर→वर, नीचे→खाली, पास→जवळ, पीछे→मागे, से→कडून.",
+    "h1": "Hindi to Marathi: Postpositions & Cases",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": ["hindi"],
+    "topics": ["grammar", "postpositions", "cases", "comparison"],
+    "primaryKeyword": "hindi to marathi postpositions",
+    "secondaryKeywords": ["marathi cases", "hindi to marathi grammar", "marathi postpositions list"],
+    "intro": [
+      "Postpositions (case markers) from Unit 08 mapped Hindi to Marathi — the relational words that sit after nouns. Hindi में/पर/नीचे/पास/पीछे/से map to Marathi मध्ये/वर/खाली/जवळ/मागे/कडून with distinct case forms. Each row maps the Hindi postposition to the Marathi equivalent with the grammar note.",
+      "Unlike Hindi where postpositions are relatively fixed, Marathi postpositions combine with noun case endings (प्रथमा, द्वितीया, तृतीया, चतुर्थी, पंचमी, षष्ठी, सप्तमी). The base postpositions are the same, but the noun form changes: घर + मध्ये → घरात, मेज + वर → मेजवर, टेबल + खाली → टेबलाखाली."
+    ],
+    "tip": "Memorize the 6 core postpositions: मध्ये (in), वर (on), खाली (under), जवळ (near), मागे (behind), कडून (from). Then learn the noun case forms — the postposition stays, the noun ending shifts.",
+    "bridgeUnits": ["08"],
+    "units": ["08"],
+    "sections": [
+      { "heading": "The 6 core postpositions — Hindi → Marathi", "paragraphs": ["Hindi में → Marathi मध्ये (in/inside). Hindi पर → Marathi वर (on). Hindi नीचे → Marathi खाली (under/below). Hindi पास/बगल में → Marathi जवळ/शेजारी (near/beside). Hindi पीछे → Marathi मागे (behind). Hindi से → Marathi कडून (from). These are direct mappings — the noun case is the variable."] },
+      { "heading": "Noun case forms — the Marathi twist", "paragraphs": ["Marathi nouns change form before postpositions (सामान्य रूप → संबंधी रूप). घर (house) → घरात (in the house), मेज (table) → मेजवर (on the table), टेबल (table) → टेबलाखाली (under the table), मित्र (friend) → मित्राजवळ (near the friend), बस (bus) → बसाकडून (from the bus). The pattern: masculine nouns ending in अ add त/वर/खाली/जवळ/कडून; other endings follow their declension."] }
+    ],
+    "mistakes": [
+      { "wrong": "Using Hindi postpositions directly: घर में", "right": "घरात — Marathi uses noun case + postposition fused", "why": "Marathi fuses the postposition into the noun ending. घर + मध्ये = घरात, not घर मध्ये." },
+      { "wrong": "Saying मेज पर for 'on the table'", "right": "मेजवर — फ्यूज्ड फॉर्म", "why": "मेज + वर = मेजवर. The noun ending absorbs the postposition." },
+      { "wrong": "Using से for all 'from' meanings", "right": "कडून for physical source, हून for agent/instrument", "why": "कडून = from a place (बसाकडून). हून = by/through agent (त्याहून = by him). Hindi से covers both; Marathi distinguishes." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "'In the house' in Marathi?", "options": ["घर में", "घरात", "घर मध्ये", "घरमध्ये"], "answer": 1, "explanation": "घरात — घर + मध्ये fused. The standard locative form." },
+        { "question": "'On the table' in Marathi?", "options": ["मेज पर", "मेजवर", "मेज वर", "मेजचे वर"], "answer": 1, "explanation": "मेजवर — मेज + वर fused." },
+        { "question": "'From the bus' in Marathi?", "options": ["बस से", "बसाकडून", "बस कडून", "बसहून"], "answer": 1, "explanation": "बसाकडून — बस + कडून (physical source)." }
+      ],
+      "translate": [
+        { "source": "The book is on the table.", "sourceLang": "hi", "answer": "पुस्तक मेजवर आहे.", "note": "मेजवर = fused locative. आहे = is." }
+      ]
+    },
+    "relatedPages": ["/hindi-to-marathi/sentence-patterns/", "/hindi-to-marathi/pronouns-people/", "/grammar/postpositions/", "/lessons/08/"],
+    "faq": [
+      { "question": "How many cases does Marathi have?", "answer": "8 cases (प्रथमा to सप्तमी) + संबोधन. Postpositions primarily use द्वितीया (accusative), तृतीया (instrumental), चतुर्थी (dative), पंचमी (ablative), षष्ठी (genitive), सप्तमी (locative)." },
+      { "question": "Is 'से' always 'कडून'?", "answer": "No. से as physical source = कडून (बसाकडून). से as agent/instrument = हून (त्याहून = by him). से in comparatives = पेक्षा (तो माझ्यापेक्षा मोठा = he is bigger than me)." }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "hobbies",
+    "title": "Hindi to Marathi Hobbies & Leisure: Sports, Arts, Frequency",
+    "description": "Hobbies vocabulary mapped Hindi to Marathi — sports, arts, frequency, leisure time from Unit 18.",
+    "h1": "Hindi to Marathi: Hobbies & Leisure",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": ["hindi"],
+    "topics": ["hobbies", "sports", "arts", "daily-life", "comparison"],
+    "primaryKeyword": "hindi to marathi hobbies",
+    "secondaryKeywords": ["marathi hobbies vocabulary", "marathi sports words", "marathi frequency adverbs"],
+    "intro": [
+      "Hobbies and leisure vocabulary from Unit 18 mapped Hindi to Marathi — sports (क्रिकेट→क्रिकेट, फुटबॉल→फुटबॉल, कबड्डी→कबड्डी), arts (नृत्य→नृत्य, नाट्य→नाट्य, फोटोग्राफी→फोटोग्राफी), frequency (रोज→रोज, कभी-कभी→कधीकधी, कभी नहीं→कधीही नाही), leisure time (छुट्टी→सुट्टी, सुबह→सकाळी, शाम→सायंकाळी, दोस्त→मित्र, परिवार→कुटुंब). Each row maps the Hindi term to the Marathi equivalent with grammar notes.",
+      "Most sports and arts terms are shared Sanskrit/English loans — the new vocabulary is in the frequency adverbs and leisure-time nouns. The grammar pattern मी … आवडते (I like…) from Unit 18 is the key to talking about hobbies."
+    ],
+    "tip": "Sports names are free vocabulary — क्रिकेट, फुटबॉल, कबड्डी, हॉकी, टेनिस identical. Arts terms नृत्य, नाट्य, फोटोग्राफी, चित्रकला, संगीत also shared. Learn the frequency words (रोज, कधीकधी, कधीही नाही) and the frame मी [activity] आवडते to talk about hobbies.",
+    "bridgeUnits": ["18"],
+    "units": ["18"],
+    "sections": [
+      { "heading": "Sports — shared vocabulary", "paragraphs": ["क्रिकेट, फुटबॉल, कबड्डी, हॉकी, टेनिस, बैडमिंटन, तैराकी, दौड़ — identical in both languages. Marathi uses the same Devanagari spellings. The verb is खेळणे (to play): मी क्रिकेट खेळतो, तो फुटबॉल खेळतो."] },
+      { "heading": "Arts & creative hobbies", "paragraphs": ["नृत्य (dance), नाट्य (drama), फोटोग्राफी (photography), चित्रकला (painting), संगीत (music), गाणी (singing folk), लावणी (lavani) — shared terms. The verb frame: मी नृत्य करतो (I dance), मी फोटोग्राफी करतो (I do photography)."] },
+      { "heading": "Frequency & leisure time — the new words", "paragraphs": ["रोज (daily) → रोज (same), कभी-कभी (sometimes) → कधीकधी, कभी नहीं (never) → कधीही नाही, छुट्टी (holiday) → सुट्टी, सुबह (morning) → सकाळी, शाम (evening) → सायंकाळी, दोस्त (friend) → मित्र, परिवार (family) → कुटुंब. These are the words that differ from Hindi."] }
+    ],
+    "mistakes": [
+      { "wrong": "Saying कभी-कभी for sometimes", "right": "कधीकधी — the Marathi frequency adverb", "why": "कभी-कभी is Hindi; कधीकधी is the standard Marathi equivalent." },
+      { "wrong": "Using छुट्टी for holiday", "right": "सुट्टी — with ट", "why": "Hindi छुट्टी → Marathi सुट्टी. The ट vs ट्ट shift is systematic." },
+      { "wrong": "Saying दोस्त for friend", "right": "मित्र — Sanskrit term used in both but standard in Marathi", "why": "दोस्त is Urdu/Hindi; मित्र is the standard Marathi word for friend." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "'Sometimes' in Marathi?", "options": ["कभी-कभी", "कधीकधी", "कधी", "कधीच"], "answer": 1, "explanation": "कधीकधी — the Marathi frequency adverb for sometimes." },
+        { "question": "'Never' in Marathi?", "options": ["कभी नहीं", "कधीही नाही", "कधी नाही", "कधीही"], "answer": 1, "explanation": "कधीही नाही — literally 'at no time not'." },
+        { "question": "'Holiday' in Marathi?", "options": ["छुट्टी", "सुट्टी", "सुटी", "छुटी"], "answer": 1, "explanation": "सुट्टी — with retroflex ट." }
+      ],
+      "translate": [
+        { "source": "I play cricket daily.", "sourceLang": "hi", "answer": "मी रोज क्रिकेट खेळतो.", "note": "रोज = daily, खेळतो = play (habitual)." }
+      ]
+    },
+    "relatedPages": ["/hobbies-freetime/", "/english-to-marathi/hobbies-freetime/", "/grammar/frequency-adverbs/", "/lessons/18/"],
+    "faq": [
+      { "question": "How do you say 'I like cricket' in Marathi?", "answer": "मला क्रिकेट आवडते — literal 'to me cricket pleases'. The experiencer subject construction (डेटिव + आवडते)." },
+      { "question": "What is 'photography' in Marathi?", "answer": "फोटोग्राफी — identical to Hindi/English. The verb frame: मी फोटोग्राफी करतो." }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "literature-words",
+    "title": "Hindi to Marathi Literature Terms: Poetry, Drama, Fiction",
+    "description": "Literature vocabulary mapped Hindi to Marathi — poetry, drama, fiction, awards, digital terms from Unit 22.",
+    "h1": "Hindi to Marathi: Literature & Literary Terms",
+    "searchIntent": "comparison",
+    "level": "advanced",
+    "languagePaths": ["hindi"],
+    "topics": ["literature", "culture", "advanced", "comparison"],
+    "primaryKeyword": "hindi to marathi literature words",
+    "secondaryKeywords": ["marathi literary terms", "marathi poetry words", "marathi awards"],
+    "intro": [
+      "Literature and literary terms from Unit 22 mapped Hindi to Marathi — poetry (कविता→कविता, कवि→कवी, आधुनिक→आधुनिक), drama (नाटक→नाट्य, नाट्यकार→नाट्यकार, रंगमंच→रंगमंच), fiction (उपन्यास→कादंबरी, कथाकार→कथाकार, कथा→कथा), awards (ज्ञानपीठ→ज्ञानपीठ, साहित्य अकादमी→साहित्य अकादमी, पद्म→पद्म), digital (ईबुक→ई-पुस्तक, ऑडियोबुक→ऑडिओबुक, ब्लॉग→ब्लॉग). Each row maps the Hindi term to the Marathi equivalent with cultural notes.",
+      "Most terms are shared Sanskrit loans — the shifts are in a few key words: कवि→कवी (poet), उपन्यास→कादंबरी (novel), नाटक→नाट्य (drama). The award names and digital terms are identical."
+    ],
+    "tip": "कादंबरी = novel (not उपन्यास), कवी = poet (not कवि), नाट्य = drama (not नाटक). These three shifts cover the core literary vocabulary differences.",
+    "bridgeUnits": ["22"],
+    "units": ["22"],
+    "sections": [
+      { "heading": "The 3 key shifts", "paragraphs": ["1) कवि → कवी (poet): Hindi कवि → Marathi कवी. 2) उपन्यास → कादंबरी (novel): Hindi उपन्यास → Marathi कादंबरी (classical term). 3) नाटक → नाट्य (drama): Hindi नाटक → Marathi नाट्य (also नाट्यशैली for dramaturgy)."] },
+      { "heading": "Poetry, drama, fiction — shared terms", "paragraphs": ["कविता (poetry), कविता संग्रह (poetry collection), छंद (meter), रस (aesthetic sentiment), अलंकार (figure of speech) — identical. नाट्यकार (playwright), रंगमंच (theatre), मंचन (staging), संवाद (dialogue) — identical. कथाकार (storyteller), कथा (story), कथासंग्रह (short story collection) — identical."] },
+      { "heading": "Awards & digital — identical", "paragraphs": ["ज्ञानपीठ पुरस्कार, साहित्य अकादमी पुरस्कार, पद्म पुरस्कार — identical. ई-पुस्तक (e-book), ऑडिओबुक (audiobook), ब्लॉग (blog), पॉडकास्ट (podcast) — identical loans in Devanagari."] }
+    ],
+    "mistakes": [
+      { "wrong": "Using कवि for poet", "right": "कवी — with ई ending", "why": "Hindi कवि → Marathi कवी. The ई ending is the standard Marathi form for agent nouns." },
+      { "wrong": "Using उपन्यास for novel", "right": "कादंबरी — the classical Marathi term", "why": "उपन्यास is understood but कादंबरी is the traditional Marathi word for novel (from कादंबरी, Bana's classic)." },
+      { "wrong": "Using नाटक for drama", "right": "नाट्य — the formal term", "why": "नाटक is used colloquially, but नाट्य is the standard literary term (नाट्यशैली = dramaturgy, नाट्यसंस्थान = theatre institution)." }
+    ],
+    "practice": {
+      "mcq": [
+        { "question": "'Poet' in Marathi?", "options": ["कवि", "कवी", "कविता", "कविराज"], "answer": 1, "explanation": "कवी — agent noun with ई ending." },
+        { "question": "'Novel' in Marathi?", "options": ["उपन्यास", "कादंबरी", "कथा", "ग्रंथ"], "answer": 1, "explanation": "कादंबरी — the classical Marathi term for novel." },
+        { "question": "'Drama' (formal) in Marathi?", "options": ["नाटक", "नाट्य", "नृत्य", "नाट्यशैली"], "answer": 1, "explanation": "नाट्य — the formal literary term." }
+      ],
+      "translate": [
+        { "source": "He is a famous poet.", "sourceLang": "hi", "answer": "तो प्रसिद्ध कवी आहे.", "note": "कवी = poet. प्रसिद्ध = famous." }
+      ]
+    ],
+    "relatedPages": ["/hindi-to-marathi/media-news/", "/hindi-to-marathi/advanced-conversation/", "/vocabulary/abstract-concepts/", "/lessons/22/"],
+    "faq": [
+      { "question": "What is the Marathi word for novel?", "answer": "कादंबरी (kādambarī) — from Bāṇa's classical work. उपन्यास is understood but कादंबरी is the native term." },
+      { "question": "How do you say 'poetry' in Marathi?", "answer": "कविता (kavitā) — identical to Hindi. Poetry collection = कविता संग्रह." }
+    ],
+    "appCtaVariant": "vocabulary",
+    "status": "published"
+  }
+]

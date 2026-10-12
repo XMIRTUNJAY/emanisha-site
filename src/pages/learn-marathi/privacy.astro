@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { siteUrl } from '../../lib/site';
+
+const title = 'Privacy — Bol Marathi Website';
+const description = 'Privacy notes for the Bol Marathi learning website: no accounts, no tracking of your learning.';
+---
+
+<Base title={title} description={description} crumbs={[{ label: 'Learn Marathi', href: siteUrl('/') }, { label: 'Privacy', href: siteUrl('/privacy/') }]}>
+	<div class="prose">
+		<p class="kicker">Privacy</p>
+		<h1>Privacy</h1>
+		<p>This website has no accounts, no comments and no analytics tracker of its own.</p>
+		<ul>
+			<li><strong>Reading is anonymous by default.</strong> Nothing you study here is recorded by us unless we enable a privacy-friendly analytics tool (Plausible or Umami, no cookies, no cross-site tracking) — this page will say so if that changes.</li>
+			<li><strong>Waitlist:</strong> join from the footer form (your address goes through our form provider to our inbox only) or by email — either way, one launch notification, no newsletters, no sharing.</li>
+			<li><strong>Google Translate widget:</strong> the optional footer translator loads code from Google, which may set its own cookies per Google's policies. Using it is optional — every page works without it.</li>
+			<li><strong>App (separate product):</strong> stores your progress on your device to schedule reviews. Its store listing will carry its own policy at launch.</li>
+		</ul>
+	</div>
+</Base>

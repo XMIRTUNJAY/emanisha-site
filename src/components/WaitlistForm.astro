@@ -1,0 +1,147 @@
+---
+import { BOL_MARATHI_APP } from '../data/app';
+
+// ONE shared waitlist form. Every email capture on the site uses this.
+// Posts to Formspree (waitlistFormAction). No mailto anywhere: if the
+// endpoint is empty the build prints a warning (below) and the form
+// renders disabled with a contact link instead of a dead post.
+type Props = {
+	context: string;
+	locale?: 'en' | 'hi';
+	layout?: 'inline' | 'stacked';
+	showMessage?: boolean;
+	buttonLabel?: string;
+};
+
+const { context, locale = 'en', layout = 'inline', showMessage = false, buttonLabel } = Astro.props;
+const action = BOL_MARATHI_APP.waitlistFormAction;
+if (!action) {
+	console.warn(`[waitlist] empty waitlistFormAction — form "${context}" renders disabled. Set it in src/data/app.ts.`);
+}
+
+const t =
+	locale === 'hi'
+		? {
+				email: 'ईमेल पता',
+				placeholder: 'aap@example.com',
+				button: 'सूचित करें',
+				message: 'संदेश (वैकल्पिक)',
+				disabled: 'वेटलिस्ट जल्द आ रही है — संपर्क पेज देखें।',
+			}
+		: {
+				email: 'Email address',
+				placeholder: 'you@example.com',
+				button: 'Notify me',
+				message: 'Message (optional)',
+				disabled: 'Waitlist opening soon — see the contact page.',
+			};
+
+const page = Astro.url.pathname;
+const nextUrl = new URL('/app/#joined', Astro.site).toString();
+---
+
+<form
+	class:list={['waitlist-form', layout]}
+	action={action || undefined}
+	method="POST"
+	data-funnel="waitlist_signup"
+	data-cta-context={context}
+>
+	<label class="vh" for={`wl-${context}`}>{t.email}</label>
+	<input
+		id={`wl-${context}`}
+		type="email"
+		name="email"
+		placeholder={t.placeholder}
+		required
+		autocomplete="email"
+		disabled={!action}
+		data-funnel="waitlist_click"
+	/>
+	{showMessage && <textarea name="message" placeholder={t.message} rows="3" disabled={!action}></textarea>}
+	<input type="hidden" name="_subject" value={BOL_MARATHI_APP.waitlistSubject} />
+	<input type="hidden" name="_next" value={nextUrl} />
+	<input type="hidden" name="page" value={page} />
+	<input type="hidden" name="language" value={locale} />
+	<input type="hidden" name="referrer" value="" data-referrer />
+	<input type="text" name="_gotcha" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true" />
+	<button type="submit" disabled={!action}>{buttonLabel ?? t.button}</button>
+	{!action && <p class="note">{t.disabled}</p>}
+</form>
+
+<script is:inline>
+	(function () {
+		// Fills the referrer field; form works without it.
+		try {
+			document.querySelectorAll('[data-referrer]').forEach((el) => {
+				el.value = document.referrer || '';
+			});
+		} catch (e) {}
+	})();
+</script>
+
+<style>
+	.waitlist-form {
+		display: flex;
+		gap: 0.5em;
+		margin-top: 0.75em;
+	}
+	.waitlist-form.inline {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	.waitlist-form.stacked {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.waitlist-form input[type='email'],
+	.waitlist-form textarea {
+		font: inherit;
+		font-size: 1rem;
+		color: rgb(var(--gray-dark));
+		background: var(--card);
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.7em 1em;
+		min-height: 52px;
+	}
+	.waitlist-form.inline input[type='email'] {
+		flex: 1;
+		min-width: 0;
+	}
+	.waitlist-form textarea {
+		resize: vertical;
+	}
+	.waitlist-form button {
+		font: inherit;
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: #fff;
+		background: var(--accent);
+		border: none;
+		border-radius: var(--radius);
+		padding: 0 1.5em;
+		min-height: 52px;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+	.waitlist-form button:hover:not(:disabled) {
+		filter: brightness(0.92);
+	}
+	.waitlist-form button:disabled {
+		opacity: 0.55;
+		cursor: default;
+	}
+	.waitlist-form .note {
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
+		margin: 0.5em 0 0 0;
+	}
+	.vh {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+	}
+</style>

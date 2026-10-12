@@ -1,0 +1,81 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import JsonLd from '../../../components/JsonLd.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import { bridgesFor } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'हिंदी से मराठी वाक्य — शब्द-दर-शब्द अनुवाद';
+const description = 'रोज़मर्रा के हिंदी वाक्यों का मराठी अनुवाद — शब्द-दर-शब्द नक्शे और व्याकरण टिप्पणियों के साथ। बोल मराठी ब्रिज पाठों से।';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+
+const bridges = bridgesFor(['01', '02', '03', '04']);
+---
+
+<Base title={title} description={description} lang="hi" alternates={[{ lang: 'x-default', href: siteUrl('/hindi-to-marathi/phrases/') }, { lang: 'en', href: siteUrl('/hindi-to-marathi/phrases/') }, { lang: 'hi', href: siteUrl('/hi/vakya/') }]}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={url}
+		type="LearningResource"
+		about="hindi se marathi vakya"
+		breadcrumbs={[
+			{ name: 'मराठी सीखें', url: homeUrl },
+			{ name: 'हिंदी → मराठी', url: new URL(siteUrl('/hi/'), Astro.site).toString() },
+			{ name: 'वाक्य', url },
+		]}
+	/>
+	<Breadcrumbs
+		items={[
+			{ label: 'हिंदी → मराठी', href: siteUrl('/hi/') },
+			{ label: 'वाक्य', href: siteUrl('/hi/vakya/') },
+		]}
+	/>
+	<div class="prose">
+		<p class="kicker">हिंदी → मराठी</p>
+		<h1>हिंदी से मराठी वाक्य</h1>
+		<p class="lede">{description}</p>
+		<h2>आप क्या सीखेंगे</h2>
+		<p>
+			{bridges.length} हिंदी → मराठी वाक्य-जोड़े — एक ही बात, मराठी अंदाज़ में।
+			हिंदी बोलने वालों के लिए मराठी सोचने का सबसे तेज़ तरीका।
+		</p>
+	</div>
+	<div class="table-scroll" role="region" aria-label="हिंदी से मराठी वाक्य" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr>
+					<th scope="col">हिंदी</th>
+					<th scope="col">मराठी</th>
+					<th scope="col">शब्द नक्शा</th>
+					<th scope="col">व्याकरण टिप</th>
+				</tr>
+			</thead>
+			<tbody>
+				{bridges.map((b) => (
+					<tr>
+						<td lang="hi">{b.hindi}</td>
+						<td class="mr" lang="mr">{b.marathi}</td>
+						<td><small>{Object.entries(b.map).map(([k, v]) => `${k} → ${v}`).join('; ')}</small></td>
+						<td lang="hi">{b.grammar}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+	<div class="prose">
+		<RelatedContent
+			links={[
+				{ label: 'हिंदी से मराठी शब्द', href: siteUrl('/hi/shabd/') },
+				{ label: 'Hindi to Marathi phrases (English)', href: siteUrl('/hindi-to-marathi/phrases/') },
+				{ label: 'वाक्य रचना (व्याकरण)', href: siteUrl('/grammar/sentence-structure/') },
+			]}
+		/>
+		<AppCTA variant="phrase" locale="hi" context="hi-vakya-end" />
+	</div>
+</Base>
+
+

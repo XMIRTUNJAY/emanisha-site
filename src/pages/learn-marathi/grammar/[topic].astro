@@ -1,0 +1,71 @@
+---
+// Grammar topic page - Premium version
+// Uses PremiumGrammarPage for data-driven SEO pages, Learn for curated topics
+
+import AppCTA from '../../../components/AppCTA.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import Learn from '../../../layouts/Learn.astro';
+import PremiumGrammarPage from '../../../components/PremiumGrammarPage.astro';
+import GameLinks from '../../../components/games/GameLinks.astro';
+import { getUnit, grammarTopics } from '../../../lib/learn';
+import { seoPagesByFamily } from '../../../lib/seo';
+import { siteUrl } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  return [
+    ...grammarTopics.map((g) => ({ params: { topic: g.slug } })),
+    // Data-driven grammar pages (src/data/seo/grammar-pages.json)
+    ...seoPagesByFamily('grammar').map((p) => ({ params: { topic: p.slug }, props: { seoPage: p } })),
+  ];
+}
+
+const { topic: slug } = Astro.params;
+const seoPage = Astro.props.seoPage as import('../../../lib/seo').SeoPage | undefined;
+const topic = grammarTopics.find((g) => g.slug === slug);
+if (!topic && !seoPage) throw new Error(`Unknown grammar topic: ${slug}`);
+
+// Grammar notes for this topic: explicit verified picks (see learn.ts).
+const notes = topic ? topic.picks.flatMap(({ unit: no, lessons }) => {
+  const u = getUnit(no);
+  return u.grammar.filter((g) => lessons.includes(g.lesson)).map((g) => ({ ...g, unit: no }))
+}) : [];
+---
+
+{seoPage ? (
+  <PremiumGrammarPage page={seoPage} />
+) : topic && (
+<Learn
+  title={topic.title}
+  h1={`${topic.title} (with Examples)`}
+  description={topic.description}
+  kicker="Marathi Grammar"
+  crumbs={[
+    { label: 'Grammar', href: siteUrl('/grammar/') },
+    { label: topic.title, href: siteUrl(`/grammar/${topic.slug}/`) },
+  ]}
+  canonicalPath={`/grammar/${topic.slug}/`}
+  about={topic.intent}
+  meta={[topic.unitRefs.length > 1 ? `Units ${topic.unitRefs.join(', ')}` : `Unit ${topic.unitRefs[0]}`]}
+>
+  <h2>What you will learn</h2>
+  <p>{topic.description} Notes below come straight from the Bol Marathi lessons.</p>
+  <p>{topic.intro}</p>
+  {topic.tip && <p class="tip"><strong>Tip:</strong> {topic.tip}</p>}
+
+  {notes.map((g) => (
+    <section>
+      <h3>{g.titleEn} · <span lang="mr">{g.title}</span></h3>
+      <p lang="mr">{g.text}</p>
+      <p>{g.textEn}</p>
+      {g.note && <p><em>Note:</em> {g.note}</p>}
+      <p><small>From <a href={siteUrl(`/lessons/${g.unit}/`)}>Unit {g.unit}</a></small></p>
+    </section>
+  ))}
+
+  <AppCTA variant="grammar" context={`grammar-${topic.slug}`} />
+
+  <GameLinks variant="grammar" />
+
+  <RelatedContent links={topic.related} />
+</Learn>
+)}

@@ -1,0 +1,96 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Learn from '../../layouts/Learn.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import PronunciationViz from '../../components/PronunciationViz.astro';
+import { getUnit } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+// Pronunciation guide repackaged from Unit 06 grammar notes
+// (retroflex, nasals, visarga, anusvara, vowel length, conjuncts).
+const unit = getUnit('06');
+
+// Deterministic pseudo-waveform per section so each sound group gets its
+// own visualization (placeholder until measured TTS clips land).
+function demoWave(seed: number, n = 48): number[] {
+	return Array.from({ length: n }, (_, i) => {
+		const v = Math.abs(Math.sin(i * 0.7 + seed) * 0.6 + Math.sin(i * 0.23 + seed * 2) * 0.4);
+		return Math.round(v * 100) / 100;
+	});
+}
+function demoPitch(seed: number, n = 48): number[] {
+	return Array.from({ length: n }, (_, i) => Math.round(110 + 60 * Math.abs(Math.sin(i * 0.3 + seed))));
+}
+const sections = unit.grammar.map((g, i) => ({ ...g, wave: demoWave(i + 1), pitch: demoPitch(i + 1) }));
+---
+
+<Learn
+	title="Marathi Pronunciation: Key Sounds Guide"
+	description="Retroflex consonants, nasals, visarga, anusvara, vowel length and conjuncts — Marathi pronunciation explained with examples from Unit 06."
+	kicker="Marathi Guide"
+	crumbs={[
+		{ label: 'Grammar', href: siteUrl('/grammar/') },
+		{ label: 'Pronunciation', href: siteUrl('/marathi-pronunciation/') },
+	]}
+	canonicalPath="/marathi-pronunciation/"
+	about="marathi pronunciation guide"
+	meta={['Unit 06', 'Beginner to intermediate']}
+>
+	<h2>What you will learn</h2>
+	<p>
+		The six sound patterns that make or break Marathi pronunciation —
+		straight from Unit 06 of the Bol Marathi curriculum, each with
+		Marathi explanation and English meaning.
+	</p>
+
+	{sections.map((g) => (
+		<section>
+			<h2>{g.titleEn} · <span lang="mr">{g.title}</span></h2>
+			<p lang="mr">{g.text}</p>
+			<p>{g.textEn}</p>
+			{g.note && <p><em>Note:</em> {g.note}</p>}
+			<PronunciationViz
+				label={`Hear it: ${g.titleEn}`}
+				sayText={g.text}
+				waveform={g.wave}
+				pitch={g.pitch}
+			/>
+		</section>
+	))}
+
+	<AppCTA variant="grammar" context="marathi-pronunciation" />
+
+	<h2>Common questions</h2>
+	<details>
+		<summary>Which Marathi sound trips Hindi speakers most?</summary>
+		<p>Start with vowel length: मला (to me) vs माला (garland) differ only in length — the Unit 06 notes above drill exactly this. Then retroflex ट ठ ड ढ ण, where tongue placement matters.</p>
+	</details>
+	<details>
+		<summary>How should I practice these sounds?</summary>
+		<p>Say the Unit 06 examples aloud, starting with the मला (to me) vs माला (garland) pair above. In the app, listening quizzes and speaking checks drill the same sounds with instant feedback.</p>
+	</details>
+
+	<RelatedContent
+		links={[
+			{ label: 'Unit 06 — Marathi Pronunciation', href: siteUrl('/lessons/06/') },
+			{ label: 'Marathi verbs', href: siteUrl('/grammar/verbs/') },
+			{ label: 'Beginner words', href: siteUrl('/vocabulary/beginners/') },
+		]}
+	/>
+
+</Learn>
+
+<style>
+	details {
+		border: var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		padding: 0.9em 1.1em;
+		margin-bottom: 0.6em;
+	}
+	details summary {
+		font-weight: 600;
+		cursor: pointer;
+	}
+	details p { margin: 0.6em 0 0.2em 0; }
+</style>

@@ -1,0 +1,42 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByCategory } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const emo = wordsByCategory(['Emotions']);
+---
+
+<Learn
+	title="Say How You Feel in Marathi: Emotion Words"
+	description="Say how you feel in Marathi: happiness, sorrow, anger, love and more — with Hindi meanings and examples."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Emotions', href: siteUrl('/blog/emotions-feelings/') },
+	]}
+	canonicalPath="/blog/emotions-feelings/"
+	about="marathi emotion words"
+	meta={['20 emotion words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		"How are you?" deserves a better answer than ठीक आहे. Twenty emotion
+		words — happiness, sorrow, anger, love, fear and the rest — each with
+		Hindi meaning, pronunciation and an example sentence.
+	</p>
+
+	<VocabTable words={emo} caption="Marathi emotion words" />
+
+	<AppCTA variant="vocabulary" context="blog-emotions" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'Family words', href: siteUrl('/vocabulary/family/') },
+			{ label: 'Unit 17 — Emotions & Feelings', href: siteUrl('/lessons/17/') },
+		]}
+	/>
+</Learn>

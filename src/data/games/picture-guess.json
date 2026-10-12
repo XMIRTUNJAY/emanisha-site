@@ -1,0 +1,205 @@
+{
+	"_provenance": "Original SVG illustrations created for this repository (public/games/picture-guess/). Prompt table: docs/GAMES_SVG_PROMPTS.md. Word ids reference src/data/learn/vocab.json.",
+	"items": [
+		{
+			"id": "v-food-16",
+			"level": "easy",
+			"svg": "safarchand.svg"
+		},
+		{
+			"id": "v-food-01",
+			"level": "easy",
+			"svg": "pani.svg"
+		},
+		{
+			"id": "v-food-03",
+			"level": "easy",
+			"svg": "doodh.svg"
+		},
+		{
+			"id": "v-food-04",
+			"level": "easy",
+			"svg": "bhaat.svg"
+		},
+		{
+			"id": "v-ani-01",
+			"level": "easy",
+			"svg": "kutra.svg"
+		},
+		{
+			"id": "v-ani-02",
+			"level": "easy",
+			"svg": "manjar.svg"
+		},
+		{
+			"id": "v-ani-03",
+			"level": "easy",
+			"svg": "gaay.svg"
+		},
+		{
+			"id": "v-home-01",
+			"level": "easy",
+			"svg": "ghar.svg"
+		},
+		{
+			"id": "v-nat-15",
+			"level": "easy",
+			"svg": "soorya.svg"
+		},
+		{
+			"id": "v-nat-02",
+			"level": "easy",
+			"svg": "phool.svg"
+		},
+		{
+			"id": "v-clo-01",
+			"level": "easy",
+			"svg": "shirt.svg"
+		},
+		{
+			"id": "v-food-15",
+			"level": "easy",
+			"svg": "aamba.svg"
+		},
+		{
+			"id": "v-food-02",
+			"level": "medium",
+			"svg": "chaha.svg"
+		},
+		{
+			"id": "v-home-03",
+			"level": "medium",
+			"svg": "daar.svg"
+		},
+		{
+			"id": "v-home-04",
+			"level": "medium",
+			"svg": "khidki.svg"
+		},
+		{
+			"id": "v-home-06",
+			"level": "medium",
+			"svg": "khurchi.svg"
+		},
+		{
+			"id": "v-home-08",
+			"level": "medium",
+			"svg": "diva.svg"
+		},
+		{
+			"id": "v-body-02",
+			"level": "medium",
+			"svg": "dola.svg"
+		},
+		{
+			"id": "v-body-05",
+			"level": "medium",
+			"svg": "haat.svg"
+		},
+		{
+			"id": "v-body-06",
+			"level": "medium",
+			"svg": "paay.svg"
+		},
+		{
+			"id": "v-nat-01",
+			"level": "medium",
+			"svg": "jhaad.svg"
+		},
+		{
+			"id": "v-nat-16",
+			"level": "medium",
+			"svg": "chandra.svg"
+		},
+		{
+			"id": "v-wea-10",
+			"level": "medium",
+			"svg": "chhatri.svg"
+		},
+		{
+			"id": "v-clo-05",
+			"level": "medium",
+			"svg": "topi.svg"
+		},
+		{
+			"id": "v-clo-03",
+			"level": "medium",
+			"svg": "saadi.svg"
+		},
+		{
+			"id": "v-food-19",
+			"level": "medium",
+			"svg": "batata.svg"
+		},
+		{
+			"id": "v-ani-06",
+			"level": "challenge",
+			"svg": "hatti.svg"
+		},
+		{
+			"id": "v-ani-07",
+			"level": "challenge",
+			"svg": "vaagh.svg"
+		},
+		{
+			"id": "v-ani-17",
+			"level": "challenge",
+			"svg": "mor.svg"
+		},
+		{
+			"id": "v-ani-10",
+			"level": "challenge",
+			"svg": "sasa.svg"
+		},
+		{
+			"id": "v-ani-15",
+			"level": "challenge",
+			"svg": "bakri.svg"
+		},
+		{
+			"id": "v-ani-13",
+			"level": "challenge",
+			"svg": "maasa.svg"
+		},
+		{
+			"id": "v-ani-12",
+			"level": "challenge",
+			"svg": "pakshi.svg"
+		},
+		{
+			"id": "v-home-15",
+			"level": "challenge",
+			"svg": "ghadyaal.svg"
+		},
+		{
+			"id": "v-nat-10",
+			"level": "challenge",
+			"svg": "dhabdhaba.svg"
+		},
+		{
+			"id": "v-nat-09",
+			"level": "challenge",
+			"svg": "talaav.svg"
+		},
+		{
+			"id": "v-wea-01",
+			"level": "challenge",
+			"svg": "paus.svg"
+		},
+		{
+			"id": "v-wea-04",
+			"level": "challenge",
+			"svg": "dhag.svg"
+		},
+		{
+			"id": "v-wea-05",
+			"level": "challenge",
+			"svg": "vij.svg"
+		},
+		{
+			"id": "v-clo-14",
+			"level": "challenge",
+			"svg": "pagdi.svg"
+		}
+	]
+}

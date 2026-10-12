@@ -1,0 +1,15 @@
+---
+// Hindi → Marathi bridge pages (src/data/seo/hindi-bridges.json).
+// Renders unit bridge rows: Hindi | Marathi | word map | grammar note.
+import Learn from '../../../layouts/Learn.astro';
+import PremiumHindiBridgePage from '../../../components/PremiumHindiBridgePage.astro';
+import { seoPagesByFamily } from '../../../lib/seo';
+
+export async function getStaticPaths() {
+  return seoPagesByFamily('hindi-bridge').map((p) => ({ params: { slug: p.slug }, props: { page: p } }));
+}
+
+const page = Astro.props.page as import('../../../lib/seo').SeoPage;
+---
+
+<PremiumHindiBridgePage page={page} />

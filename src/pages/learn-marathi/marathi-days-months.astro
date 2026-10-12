@@ -1,0 +1,56 @@
+---
+import AppCTA from '../../components/AppCTA.astro';
+import Learn from '../../layouts/Learn.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import VocabTable from '../../components/VocabTable.astro';
+import { wordsByCategory } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const time = wordsByCategory(['Time']);
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const dayWords = time.filter((w) => days.includes(w.english));
+const monthWords = time.filter((w) => months.includes(w.english));
+const parts = ['morning', 'afternoon', 'evening', 'night'];
+const partWords = time.filter((w) => parts.includes(w.english));
+---
+
+<Learn
+	title="Marathi Days of the Week & Months (With Pronunciation)"
+	description="All 7 Marathi days, all 12 Marathi months, and parts of the day — with pronunciation, Hindi meanings and example sentences."
+	kicker="Marathi Vocabulary"
+	crumbs={[
+		{ label: 'Vocabulary', href: siteUrl('/vocabulary/') },
+		{ label: 'Days & months', href: siteUrl('/marathi-days-months/') },
+	]}
+	canonicalPath="/marathi-days-months/"
+	about="marathi days of week months"
+	meta={['7 days · 12 months', 'Beginner']}
+>
+	<h2>What you will learn</h2>
+	<p>
+		Every day of the week, every month, and the parts of the day in
+		Marathi — pronunciation, Hindi meanings and a real example sentence
+		each, from the Bol Marathi curriculum.
+	</p>
+
+	<h2>Days of the week</h2>
+	<VocabTable words={dayWords} caption="Marathi days of the week" />
+
+	<h2>Months</h2>
+	<VocabTable words={monthWords} caption="Marathi months" />
+
+	<AppCTA variant="vocabulary" context="marathi-days-months" />
+
+	<h2>Parts of the day</h2>
+	<VocabTable words={partWords} caption="Marathi parts of the day" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Numbers & time', href: siteUrl('/vocabulary/numbers-time/') },
+			{ label: 'Marathi numbers', href: siteUrl('/marathi-numbers/') },
+			{ label: 'Unit 16 — Time & Seasons', href: siteUrl('/lessons/16/') },
+		]}
+	/>
+
+</Learn>

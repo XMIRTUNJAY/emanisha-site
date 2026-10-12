@@ -1,0 +1,113 @@
+{
+	"_provenance": "References sentenceBuilder rows of the Bol Marathi curriculum (src/data/learn/units.json) by unit + lesson + promptEn. Resolved at build; alternates are curated additional accepted orders (empty = canonical only).",
+	"items": [
+		{
+			"unit": "01",
+			"lesson": 1,
+			"promptEn": "Pattern: मी ___ आहे (I am ___) → Build: I am Rahul",
+			"alternates": []
+		},
+		{
+			"unit": "02",
+			"lesson": 2,
+			"promptEn": "Pattern: मला ___ पाहिजे (I want ___) → Build: I need help",
+			"alternates": []
+		},
+		{
+			"unit": "02",
+			"lesson": 5,
+			"promptEn": "Pattern: कृपया ___ या (Please come ___) → Build: Please come here",
+			"alternates": []
+		},
+		{
+			"unit": "04",
+			"lesson": 3,
+			"promptEn": "Pattern: तो ___ येतो (He comes ___) → Build: He is coming here",
+			"alternates": []
+		},
+		{
+			"unit": "05",
+			"lesson": 1,
+			"promptEn": "Pattern: आम्ही ___ आहोत (We are ___) → Build: We are friends",
+			"alternates": []
+		},
+		{
+			"unit": "03",
+			"lesson": 5,
+			"promptEn": "Pattern: आज ___ खाल्लं (Ate ___ today) → Build: Ate a little today",
+			"alternates": []
+		},
+		{
+			"unit": "01",
+			"lesson": 2,
+			"promptEn": "Pattern: माझं नाव ___ आहे (My name is ___) → Build: My name is Rahul",
+			"alternates": []
+		},
+		{
+			"unit": "02",
+			"lesson": 3,
+			"promptEn": "Pattern: हे माझं ___ आहे (This is my ___) → Build: This is my book",
+			"alternates": []
+		},
+		{
+			"unit": "02",
+			"lesson": 6,
+			"promptEn": "Pattern: ___ नको, पाणी द्या (No ___, give water) → Build: No tea, give water",
+			"alternates": []
+		},
+		{
+			"unit": "03",
+			"lesson": 1,
+			"promptEn": "Pattern: माझं ___ मोठं आहे (My ___ is big) → Build: My family is big",
+			"alternates": []
+		},
+		{
+			"unit": "04",
+			"lesson": 1,
+			"promptEn": "Pattern: मी ___ जात आहे (I am going to ___) → Build: I am going to Pune",
+			"alternates": []
+		},
+		{
+			"unit": "03",
+			"lesson": 4,
+			"promptEn": "Pattern: माझ्याकडे ___ भाऊ आहेत (I have ___ brothers) → Build: I have five brothers",
+			"alternates": []
+		},
+		{
+			"unit": "03",
+			"lesson": 2,
+			"promptEn": "Pattern: आई रसोईत ___ करत आहे (Mom is cooking ___ in the kitchen) → Build: Mom is cooking in the kitchen",
+			"alternates": []
+		},
+		{
+			"unit": "03",
+			"lesson": 3,
+			"promptEn": "Pattern: मला ___ पाहिजे (I want ___) → Build: I need rice and dal",
+			"alternates": []
+		},
+		{
+			"unit": "03",
+			"lesson": 6,
+			"promptEn": "Pattern: ___ चांगली आहे, मोठीही आहे (The ___ is good, and big too) → Build: The bhakri is good, and big too",
+			"alternates": []
+		},
+		{
+			"unit": "07",
+			"lesson": 5,
+			"promptEn": "Pattern: तो कोण आहे? माझा ___ (Who is he? My ___) → Build: Who is he? My friend.",
+			"alternates": []
+		},
+		{
+			"unit": "09",
+			"lesson": 1,
+			"promptEn": "Pattern: हे किती आहे? ___ रुपये (How much is it? ___ rupees) → Build: How much? Fifty rupees",
+			"alternates": []
+		},
+		{
+			"unit": "10",
+			"lesson": 6,
+			"promptEn": "Pattern: रोज ___ करा, निरोग राहा (Do ___ daily, stay healthy) → Build: Exercise daily stay healthy",
+			"alternates": []
+		}
+	]
+}

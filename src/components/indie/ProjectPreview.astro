@@ -1,0 +1,98 @@
+---
+// ProjectPreview — the illustrative concept cards for each project kind.
+// Ported from the eManisha app with inline SVG icons (no icon library).
+export interface Props {
+	project: {
+		kind: string;
+		color: string;
+		name: string;
+	};
+	detail?: boolean;
+}
+const { project, detail = false } = Astro.props;
+---
+
+<div class:list={['project-preview', project.color]} aria-label={`${project.name}: illustrative concept preview`}>
+	<span class="preview-label">CONCEPT PREVIEW</span>
+	{project.kind === 'marathi' && (
+		<>
+			<div class="marathi-word" lang="mr">नमस्कार<span>Hello, new beginnings.</span></div>
+			<div class="phone marathi-phone">
+				<div class="phone-top">मराठी
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"></path><path d="M6 6v11"></path><path d="M10 3v18"></path><path d="M14 8v7"></path><path d="M18 5v13"></path><path d="M22 10v3"></path></svg>
+				</div>
+				<span class="tiny">A LITTLE EVERY DAY</span>
+				<h3>Say hello<br />to Marathi.</h3>
+				<div class="lesson"><span lang="mr">नमस्कार</span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"></path><path d="M6 6v11"></path><path d="M10 3v18"></path><path d="M14 8v7"></path><path d="M18 5v13"></path><path d="M22 10v3"></path></svg>
+				</div>
+				<p>Namaskār · Hello</p>
+				<div class="mock-button">Let&rsquo;s learn
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+				</div>
+			</div>
+			<span class="preview-doodle">अ आ इ</span>
+		</>
+	)}
+	{project.kind === 'news' && (
+		<div class="news-window">
+			<div class="mock-nav"><b>the daily scroll<span> / for curious minds</span></b><span>Explore ↗</span></div>
+			<div class="news-layout">
+				<div class="news-main">
+					<span class="tiny">A WINDOW TO THE WORLD</span>
+					<h3>Big ideas.<br />Small scrolls.</h3>
+					<div class="news-art"><div class="sun-disc"></div><div class="hill"></div></div>
+				</div>
+				<div class="news-side">
+					<span>01 / DISCOVER</span>
+					<h4>There&rsquo;s always<br />more to the story.</h4>
+					<p>A fresh perspective,<br />one story at a time.</p>
+					<div class="fake-lines"></div>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+				</div>
+			</div>
+		</div>
+	)}
+	{project.kind === 'wellness' && (
+		<>
+			<div class="calm-orbit"></div>
+			<div class="calm-disc"></div>
+			<div class="wellness-copy">
+				<span class="tiny">A MOMENT, JUST FOR YOU</span>
+				<h3>Pause.<br />Breathe.<br />Begin again.</h3>
+				<span class="calm-play">
+					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+					Find a little calm</span
+				>
+			</div>
+			<div class="wellness-mini">
+				<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"></path><path d="M6 6v11"></path><path d="M10 3v18"></path><path d="M14 8v7"></path><path d="M18 5v13"></path><path d="M22 10v3"></path></svg>
+				<span>A quieter mind.<br />A kinder day.</span>
+			</div>
+		</>
+	)}
+	{project.kind === 'data' && (
+		<div class="data-window">
+			<div class="mock-nav"><b><span class="code-mark">{'{'}</span> data / engineer</b><span>Work &nbsp; About &nbsp; Contact</span></div>
+			<div class="data-inner">
+				<span class="tiny">FROM DATA TO DIRECTION</span>
+				<h3>Good data.<br />Better possibilities<span>.</span></h3>
+				<p>Clear systems. Thoughtful engineering.</p>
+				<div class="data-flow">
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+						Source</span
+					><i>→</i
+					><span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg>
+						Transform</span
+					><i>→</i
+					><span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+						Deliver</span
+					>
+				</div>
+			</div>
+		</div>
+	)}
+</div>

@@ -1,0 +1,111 @@
+---
+import Learn from '../../../layouts/Learn.astro';
+import { wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const word = wordsByMarathi(['मदत', 'कृपया']);
+
+export const title = 'How to Say "Help" in Marathi: मदत + Emergency Phrases';
+export const description = 'Learn "help" in Marathi — मदत (madat) — with emergency phrases, polite requests, and the critical distinction between मदत and सहाय्य. From Unit 08 & 13.';
+export const pubDate = '2026-09-26';
+export const updatedDate = '2026-09-26';
+export const category = 'word-guide';
+export const tags = ['emergency', 'daily-essentials', 'unit-08', 'unit-13'];
+---
+
+<Learn
+	title={title}
+	description={description}
+	kicker="Word Guide"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'Help in Marathi', href: siteUrl('/blog/how-to-say-help-in-marathi/') },
+	]}
+	canonicalPath="/blog/how-to-say-help-in-marathi/"
+	about="how to say help in marathi; मदत meaning; emergency phrases marathi"
+	meta={['Feminine noun', 'मदत vs सहाय्य', 'Unit 08 & 13']}
+	faq={[
+		{
+			question: 'What is the Marathi word for help?',
+			answer: 'मदत (madat) — feminine, everyday word. The formal equivalent is सहाय्य (sahāyy) used in official contexts.'
+		},
+		{
+			question: 'How do you say "help me" in Marathi?',
+			answer: 'मला मदत करा (malā madat karā) — "to me help do" = please help me. For emergencies: मदत! (Help!) or बचवा! (Save me!).'
+		},
+		{
+			question: 'What is the difference between मदत and सहाय्य?',
+			answer: 'मदत = everyday help (मदत करा, मदत पाहिजे, मदत नंबर). सहाय्य = formal/official assistance (सरकारी सहाय्य, आर्थिक सहाय्य, सहाय्य केंद्र).'
+		}
+	]}
+	hideHeading
+>
+
+<h1>{title}</h1>
+
+<p class="lead">The everyday word for <strong>help</strong> in Marathi is <strong>मदत</strong> (madat) — feminine, from Hindi/Urdu. The formal Sanskrit equivalent is <strong>सहाय्य</strong> (sahāyy). This guide covers both, plus emergency phrases you need to recognize.</p>
+
+<h2>Quick Answer</h2>
+<table class="vocab-table">
+  <thead><tr><th>Marathi</th><th>Transliteration</th><th>Context</th></tr></thead>
+  <tbody>
+    <tr><td>मदत</td><td>madat</td><td>Help (everyday, feminine)</td></tr>
+    <tr><td>सहाय्य</td><td>sahāyy</td><td>Assistance (formal, official)</td></tr>
+    <tr><td>मदत करा</td><td>madat karā</td><td>Help me / Please help (imperative)</td></tr>
+    <tr><td>मला मदत पाहिजे</td><td>malā madat pāhije</td><td>I need help</td></tr>
+    <tr><td>मदत हवा?</td><td>madat havā?</td><td>Do you need help?</td></tr>
+  </tbody>
+</table>
+
+<h2>Grammar: मदत is Feminine</h2>
+<p>मदत ends in त but is feminine (like चहा, भाषा). Possessives and adjectives agree:</p>
+<ul>
+  <li><strong>माझी मदत</strong> — My help</li>
+  <li><strong>तिची मदत</strong> — Her help</li>
+  <li><strong>मदत करणे</strong> — To help (verb phrase, neuter infinitive)</li>
+</ul>
+<div class="tip-box"><strong>Tip:</strong> मदत is a noun. The verb is <strong>मदत करणे</strong> (to help). <em>तो मला मदत करतो</em> = He helps me. <em>मी तो मदत करतो</em> = I help him.</div>
+
+<h2>Everyday vs Emergency</h2>
+<table class="vocab-table">
+  <thead><tr><th>Situation</th><th>Marathi</th><th>Tone</th></tr></thead>
+  <tbody>
+    <tr><td>Can you help me?</td><td>तु मला मदत करशील का?</td><td>Polite request</td></tr>
+    <tr><td>I need help</td><td>मला मदत पाहिजे</td><td>Direct need</td></tr>
+    <tr><td>Help! (emergency)</td><td>मदत! / बचवा!</td><td>Urgent — बचवा = save me</td></tr>
+    <tr><td>Call for help</td><td>मदत सांगा / पोलिसांना फोन करा</td><td>Emergency action</td></tr>
+    <tr><td>First aid</td><td>प्राथमिक उपचार</td><td>Medical term</td></tr>
+    <tr><td>Helpline</td><td>मदत नंबर / हेल्पलाइन</td><td>Phone number</td></tr>
+  </tbody>
+</table>
+
+<h2>सहाय्य vs मदत</h2>
+<ul>
+  <li><strong>मदत</strong> — Daily life: <em>मदत करा</em>, <em>मदत पाहिजे</em>, <em>मदत नंबर</em></li>
+  <li><strong>सहाय्य</strong> — Official/formal: <em>सरकारी सहाय्य</em> (govt assistance), <em>आर्थिक सहाय्य</em> (financial aid), <em>सहाय्य केंद्र</em> (help center)</li>
+</ul>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li><strong>❌ माझा मदत</strong> → <strong>✅ माझी मदत</strong> (feminine)</li>
+  <li><strong>❌ मदत करो</strong> → <strong>✅ मदत करा</strong> (Marathi imperative ends in -आ, not -ओ)</li>
+  <li><strong>❌ हेल्प</strong> → Use <strong>मदत</strong> or <strong>सहाय्य</strong></li>
+</ul>
+
+<h2>Mini Practice</h2>
+<ol>
+  <li>"I need help" → <em>मला मदत पाहिजे</em></li>
+  <li>"Please help me" → <em>मला मदत करा</em></li>
+  <li>"Help! (emergency)" → <em>मदत! / बचवा!</em></li>
+</ol>
+
+<h2>Related</h2>
+<ul>
+  <li><a href={siteUrl('/blog/how-to-say-please-in-marathi/')}>How to Say "Please" in Marathi</a></li>
+  <li><a href={siteUrl('/blog/how-to-say-water-in-marathi/')}>How to Say "Water" in Marathi</a></li>
+  <li><a href={siteUrl('/phrases/emergency-phrases/')}>Emergency Phrases</a></li>
+  <li><a href={siteUrl('/hindi-to-marathi/health-body/')}>Hindi→Marathi Health & Body</a></li>
+  <li><a href={siteUrl('/lessons/08/')}>Unit 08: Health & Help</a></li>
+</ul>
+
+</Learn>

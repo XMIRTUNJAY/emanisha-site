@@ -1,0 +1,241 @@
+---
+// WordShowcase — the hero's product demo. Instead of describing what Bol Marathi
+// teaches, it *shows* a real word card from the live curriculum: Devanagari headword,
+// transliteration, Hindi + English, a real example sentence, and working audio.
+//
+// Data comes from the single curriculum source (lib/learn), so it can never drift
+// from what the site actually teaches. Words are chosen by id with a safe fallback.
+
+import { vocab, type Word } from '../../lib/learn';
+import Icon from '../design-system/Icon.astro';
+
+interface Props {
+  ids?: string[];
+  class?: string;
+}
+
+const { ids = ['v-greet-01', 'v-greet-02', 'v-greet-03'], class: className = '' } = Astro.props;
+
+const pick = (id: string): Word | undefined => vocab.find((w) => w.id === id);
+const chosen = ids.map(pick).filter((w): w is Word => Boolean(w));
+// Guarantee at least one card even if ids ever change.
+const cards = chosen.length ? chosen : vocab.slice(0, 2);
+
+const [front, ...rest] = cards;
+const backdrop = rest.slice(0, 2);
+---
+
+<div class={`showcase ${className}`} aria-label="Example word from the curriculum">
+  <div class="showcase__stack">
+    {backdrop.map((w, i) => (
+      <div class={`showcase__card showcase__card--ghost showcase__card--ghost-${i + 1}`} aria-hidden="true">
+        <span class="showcase__word showcase__word--ghost" lang="mr">{w.marathi}</span>
+      </div>
+    ))}
+
+    <article class="showcase__card showcase__card--front">
+      <header class="showcase__meta">
+        <span class="showcase__badge">{front.category}</span>
+        <button
+          type="button"
+          class="say showcase__audio"
+          data-say={front.marathi}
+          aria-label={`Listen: ${front.marathi}`}
+        >
+          <Icon name="headphones" size={16} />
+          <span>Listen</span>
+        </button>
+      </header>
+
+      <p class="showcase__word" lang="mr">{front.marathi}</p>
+      <p class="showcase__translit">{front.transliteration}</p>
+
+      <dl class="showcase__meanings">
+        <div class="showcase__meaning">
+          <dt>English</dt>
+          <dd>{front.english}</dd>
+        </div>
+        <div class="showcase__meaning">
+          <dt>हिंदी</dt>
+          <dd lang="hi">{front.hindi}</dd>
+        </div>
+      </dl>
+
+      <figure class="showcase__example">
+        <blockquote lang="mr">{front.exampleMarathi}</blockquote>
+        <figcaption>{front.exampleEnglish}</figcaption>
+      </figure>
+    </article>
+  </div>
+
+  <p class="showcase__hint">
+    <Icon name="spark" size={15} />
+    Every word ships with audio, Hindi and English — and an example sentence.
+  </p>
+</div>
+
+<style>
+  .showcase {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .showcase__stack {
+    position: relative;
+    padding: var(--space-4) var(--space-4) 0;
+  }
+
+  .showcase__card {
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  /* Ghost cards give the stack depth without adding noise */
+  .showcase__card--ghost {
+    position: absolute;
+    inset: var(--space-4) var(--space-4) auto var(--space-4);
+    padding: var(--space-6) var(--space-5);
+    min-height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-container-low);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .showcase__card--ghost-1 { transform: rotate(-2.5deg) translateY(-14px) scale(0.97); opacity: 0.9; }
+  .showcase__card--ghost-2 { transform: rotate(2deg) translateY(-26px) scale(0.94); opacity: 0.55; }
+
+  .showcase__word--ghost {
+    font-size: 1.6rem;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  .showcase__card--front {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-5);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .showcase__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .showcase__badge {
+    font-size: var(--text-caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--color-primary);
+    background: var(--color-primary-fixed);
+    padding: 0.3em 0.7em;
+    border-radius: var(--radius-full);
+  }
+
+  .showcase__audio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font: inherit;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--color-primary);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    min-height: 40px;
+    padding: 0 0.9em;
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .showcase__audio:hover { background: var(--color-primary-fixed); border-color: var(--color-primary); }
+
+  .showcase__word {
+    margin: 0;
+    font-size: clamp(2.75rem, 6vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+
+  .showcase__translit {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .showcase__meanings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin: 0;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .showcase__meaning { margin: 0; }
+
+  .showcase__meaning dt {
+    font-size: var(--text-caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.15em;
+  }
+
+  .showcase__meaning dd {
+    margin: 0;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .showcase__example {
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-container-low);
+    border-radius: var(--radius);
+  }
+
+  .showcase__example blockquote {
+    margin: 0;
+    font-size: var(--text-marathi-body);
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .showcase__example figcaption {
+    margin-top: 0.25em;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+  }
+
+  .showcase__hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .showcase__hint :global(.icon) { color: var(--color-primary); }
+</style>

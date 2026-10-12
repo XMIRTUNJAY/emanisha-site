@@ -1,0 +1,87 @@
+// Content for the main emanisha.in site (ported from the eManisha app).
+export const projects = [
+	{
+		slug: 'marathi-learning',
+		title: 'Marathi, one word at a time.',
+		name: 'Marathi language-learning app',
+		category: 'Education',
+		kind: 'marathi',
+		description: 'An approachable space for learning Marathi and connecting with the language.',
+		detail:
+			'A language-learning build centered on Marathi. The idea is simple: make getting started feel less intimidating and give the language a welcoming digital home.',
+		color: 'peach',
+	},
+	{
+		slug: 'student-news',
+		title: 'A little scroll. A wider world.',
+		name: 'News scroll for students',
+		category: 'Education',
+		kind: 'news',
+		description: 'A news scroll that helps students explore what\u2019s happening around them.',
+		detail:
+			'A news-focused build for students, bringing updates into an easy-to-browse scroll. It explores how a familiar reading format can make discovering the world more approachable.',
+		color: 'yellow',
+	},
+	{
+		slug: 'headspace-india',
+		title: 'A little more room to breathe.',
+		name: 'Headspace for India',
+		category: 'Wellness',
+		kind: 'wellness',
+		description: 'Exploring a calmer digital space for wellness in an Indian context.',
+		detail:
+			'A wellness concept exploring what a Headspace-like experience could look like for India. This is an independent portfolio concept, not an official Headspace product or an affiliated service.',
+		color: 'rose',
+	},
+	{
+		slug: 'data-engineer',
+		title: 'Making complex things clear.',
+		name: 'Data engineer site',
+		category: 'Web & data',
+		kind: 'data',
+		description: 'A focused web presence for the world of data engineering.',
+		detail:
+			'A website build centered on data engineering. It explores how to communicate technical work through a clear structure and a focused, readable digital experience.',
+		color: 'sand',
+	},
+] as const;
+
+export type IndieProject = (typeof projects)[number];
+
+export const posts = [
+	{
+		slug: 'small-builds-useful-questions',
+		category: 'Building',
+		title: 'Small builds start with useful questions',
+		excerpt: 'A simple way to give an idea a little more direction.',
+		body: [
+			'Before choosing a framework, ask who the build is for and what it should help them do. A clear answer is more useful than a long feature list.',
+			'Write down one action a visitor should be able to complete. Sketch the shortest path to it, then build that path before the extras.',
+			'A small scope is not a small ambition. It gives you something concrete to test, discuss, and improve.',
+		],
+	},
+	{
+		slug: 'designing-for-language',
+		category: 'Notes',
+		title: 'Making room for language in an interface',
+		excerpt: 'Why language deserves more than a last-minute translation.',
+		body: [
+			'Language shapes an interface from the beginning. Letterforms, line lengths, and familiar words all affect whether a screen feels welcoming.',
+			'Give text room to grow. Test the actual script, not just an English placeholder, and check how it behaves on a small screen.',
+			'A thoughtful language experience starts with listening to the people who use it. An interface should support their words, not force those words into an inflexible layout.',
+		],
+	},
+	{
+		slug: 'clear-technical-websites',
+		category: 'Web & data',
+		title: 'A technical website can still feel human',
+		excerpt: 'Clarity is a useful starting point for complex work.',
+		body: [
+			'Technical work does not have to be introduced with technical language. Start with the problem, explain the purpose, and let the detail follow.',
+			'Use a clear hierarchy so readers can choose their depth. A short summary and a more detailed explanation can live together without competing.',
+			'The goal is not to remove complexity. It is to give people a helpful way into it.',
+		],
+	},
+] as const;
+
+export type IndiePost = (typeof posts)[number];

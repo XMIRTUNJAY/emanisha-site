@@ -1,0 +1,43 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import Learn from '../../../layouts/Learn.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import VocabTable from '../../../components/VocabTable.astro';
+import { wordsByCategory, wordsByMarathi } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const work = [...wordsByCategory(['Work']).slice(0, 10), ...wordsByMarathi(['काम', 'शाळा'])];
+---
+
+<Learn
+	title="Marathi for Work: First-Day Office Words"
+	description="First day at a Maharashtra office: 12 work words with Hindi meanings, pronunciation and examples."
+	kicker="Real-life Marathi"
+	crumbs={[
+		{ label: 'Blog', href: siteUrl('/blog/') },
+		{ label: 'First day at work', href: siteUrl('/blog/first-day-work/') },
+	]}
+	canonicalPath="/blog/first-day-work/"
+	about="marathi office work words"
+	meta={['12 work words', 'Real situations']}
+>
+	<h2>The situation</h2>
+	<p>
+		First day in a Maharashtra office: greet colleagues (नमस्कार covers
+		it), learn the words for work, school-talk if there are kids around,
+		and follow conversations. Twelve work words below, all with Hindi
+		meanings and examples.
+	</p>
+
+	<VocabTable words={work} caption="Marathi work words" />
+
+	<AppCTA variant="vocabulary" context="blog-work" />
+
+	<RelatedContent
+		links={[
+			{ label: 'Daily conversation', href: siteUrl('/phrases/daily/') },
+			{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+			{ label: 'Unit 11 — Education & Work', href: siteUrl('/lessons/11/') },
+		]}
+	/>
+</Learn>

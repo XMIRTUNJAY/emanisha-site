@@ -1,0 +1,103 @@
+---
+import Base from '../../../layouts/Base.astro';
+import JsonLd from '../../../components/JsonLd.astro';
+import WaitlistForm from '../../../components/WaitlistForm.astro';
+import { BOL_MARATHI_APP } from '../../../data/app';
+import { units, vocab } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+
+const title = 'बोल मराठी ऐप — हिंदी से मराठी सीखें';
+const description = 'शब्दावली, सुनना, बोलना, वाक्य बनाना और दोहराव — बोल मराठी ऐप मुफ़्त पाठों को काम की मराठी में बदलता है।';
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
+
+const storeHref = !BOL_MARATHI_APP.comingSoon && BOL_MARATHI_APP.playStoreUrl ? BOL_MARATHI_APP.playStoreUrl : null;
+const betaHref = BOL_MARATHI_APP.betaOptInUrl;
+
+const faqs = [
+	{ question: 'क्या बोल मराठी मुफ़्त है?', answer: 'इस साइट की सारी सामग्री मुफ़्त है। ऐप की कीमत लॉन्च पर बताई जाएगी।' },
+	{ question: 'मैं हिंदी बोलता हूँ — क्या मराठी कठिन होगी?', answer: 'हिंदी बोलने वालों को बढ़त है: मराठी में भी कर्ता–कर्म–क्रिया क्रम है और कई शब्द एक जैसे हैं।' },
+	{ question: 'ऐप कैसे मिलेगा?', answer: `${BOL_MARATHI_APP.comingSoonNote} नीचे वेटलिस्ट से जुड़ें — सबसे पहले आपको ख़बर मिलेगी।` },
+];
+
+---
+
+<Base title={title} description={description} lang="hi" alternates={[{ lang: 'x-default', href: siteUrl('/app/') }, { lang: 'en', href: siteUrl('/app/') }, { lang: 'hi', href: siteUrl('/hi/app/') }]}>
+	<JsonLd
+		headline={title}
+		description={description}
+		url={url}
+		type="FAQPage"
+		faq={faqs}
+		breadcrumbs={[{ name: 'मराठी सीखें', url: homeUrl }, { name: 'ऐप', url }]}
+	/>
+	<div class="prose">
+		<p class="kicker">बोल मराठी · ऐप</p>
+		<h1>पढ़ने से आगे — मराठी बोलना सीखें।</h1>
+		<p class="lede">
+			इस साइट पर {vocab.length} शब्द और {units.length * 6} पाठ का असली पाठ्यक्रम
+			मुफ़्त है। {BOL_MARATHI_APP.name} उसे काम की मराठी में बदलता है —
+			सुनना, बोलना, वाक्य बनाना और दोहराव।
+		</p>
+		{storeHref ? (
+			<p><a class="btn" href={storeHref} data-funnel="download_click" data-app-cta data-cta-variant="hi-app-hero">बोल मराठी डाउनलोड करें</a></p>
+		) : betaHref ? (
+			<p><a class="btn" href={betaHref} data-funnel="beta_click" data-app-cta data-cta-variant="hi-app-hero">बीटा से जुड़ें</a></p>
+		) : (
+			<div class="cta">
+				<h2>बोल मराठी पाएँ</h2>
+				<p>{BOL_MARATHI_APP.comingSoonNote}</p>
+				<WaitlistForm context="hi-app-hero" locale="hi" />
+				<p class="note">सिर्फ़ एक ईमेल — Play Store पर आते ही सबसे पहले आपको ख़बर।</p>
+			</div>
+		)}
+	</div>
+
+	<div class="prose">
+		<h2>ऐप के अंदर</h2>
+		<p>असली स्क्रीन — सुनकर चुनना, तुरंत सही/ग़लत, वाक्य बनाना और अभ्यास संग्रह।</p>
+	</div>
+	<div class="flow" role="region" aria-label="बोल मराठी ऐप की झलक" tabindex="0">
+		{BOL_MARATHI_APP.screenshots.map((s) => (
+			<figure>
+				<img src={siteUrl(s.src)} alt={s.alt} loading="lazy" width="720" height="1568" />
+				<figcaption><strong>{s.step}</strong><span>{s.alt}</span></figcaption>
+			</figure>
+		))}
+	</div>
+
+	<div class="prose">
+		<h2>अक्सर पूछे जाने वाले सवाल</h2>
+		{faqs.map((f) => (
+			<section>
+				<h3>{f.question}</h3>
+				<p>{f.answer}</p>
+			</section>
+		))}
+
+		<div class="cta">
+			<h2>सबसे पहले जानें</h2>
+			<p>{BOL_MARATHI_APP.comingSoonNote}</p>
+			{!storeHref && !betaHref && <WaitlistForm context="hi-app-end" locale="hi" />}
+			{betaHref && !storeHref && <p><a class="btn" href={betaHref} data-funnel="beta_click" data-app-cta data-cta-variant="hi-app-end">बीटा से जुड़ें</a></p>}
+		</div>
+	</div>
+</Base>
+
+<style>
+	.btn {
+		display: inline-block;
+		min-height: 52px;
+		line-height: 52px;
+		padding: 0 1.5em;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.95rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: var(--radius);
+		margin-top: 0.5em;
+	}
+	.btn:hover { background: var(--accent); filter: brightness(0.92); color: #fff; }
+</style>
+

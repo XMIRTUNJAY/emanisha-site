@@ -1,0 +1,19 @@
+---
+// GameIntro — accessible how-to-play instructions (collapsible details;
+// closed by default — the page's "How to play" button opens it, keeping the
+// landing view clean like a HTML5 game).
+interface Props {
+	title?: string;
+	steps: string[];
+	open?: boolean;
+}
+
+const { title = 'How to play', steps, open = false } = Astro.props;
+---
+
+<details class="game-intro" open={open ? '' : undefined}>
+	<summary>{title}</summary>
+	<ol>
+		{steps.map((s) => <li set:html={s} />)}
+	</ol>
+</details>

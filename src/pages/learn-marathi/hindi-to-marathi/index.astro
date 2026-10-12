@@ -1,0 +1,71 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import SeoCards from '../../../components/SeoCards.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { pageArt } from '../../../lib/art';
+import { siteUrl } from '../../../lib/site';
+---
+
+<Learn
+	title="Hindi to Marathi"
+	description="Learn Marathi through Hindi: word pairs, sentence bridges and daily conversation — mapped word-by-word so Hindi speakers get Marathi faster."
+	kicker="Hindi → Marathi"
+	crumbs={[{ label: 'Hindi → Marathi', href: siteUrl('/hindi-to-marathi/') }]}
+	canonicalPath="/hindi-to-marathi/"
+	about="hindi to marathi"
+>
+	<p>
+		If you speak Hindi, you are closer to Marathi than you think. Same
+		sentence shape (subject–object–verb), many shared words — and
+		systematic differences you can learn one pattern at a time.
+	</p>
+
+	<ul class="card-grid">
+			<li>
+				<a class="card" href={siteUrl('/hindi-to-marathi/words/')}>
+					<img src={pageArt('hindi-to-marathi/words')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>Hindi to Marathi words</h3>
+					<p>High-frequency word pairs with pronunciation and examples.</p>
+				</a>
+			</li>
+			<li>
+				<a class="card" href={siteUrl('/hindi-to-marathi/phrases/')}>
+					<img src={pageArt('hindi-to-marathi/phrases')} alt="" loading="lazy" width="1200" height="630" />
+					<h3>Hindi to Marathi phrases</h3>
+					<p>Sentence bridges with word-by-word maps and grammar notes.</p>
+				</a>
+			</li>
+		<li>
+			<a class="card" href={siteUrl('/phrases/daily/')}>
+				<img src={pageArt('phrases/daily')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Daily conversation</h3>
+				<p>Everyday Marathi sentences with Hindi meanings.</p>
+			</a>
+		</li>
+		<li>
+			<a class="card" href={siteUrl('/lessons/01/')}>
+				<img src={pageArt('lessons/01')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Start at Unit 01</h3>
+				<p>Marathi Fundamentals — greetings, alphabet, first words.</p>
+			</a>
+		</li>
+		<li>
+			<a class="card" href={siteUrl('/english-to-marathi/')}>
+				<img src={pageArt('english-to-marathi')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>Learning from English instead?</h3>
+				<p>English → Marathi words and sentences.</p>
+			</a>
+		</li>
+		<li>
+			<a class="card" href={siteUrl('/hi/')} lang="hi">
+				<img src={pageArt('hi')} alt="" loading="lazy" width="1200" height="630" />
+				<h3>हिंदी में पढ़ें</h3>
+				<p>पूरा खंड हिंदी में — शब्द, वाक्य और ऐप।</p>
+			</a>
+		</li>
+	</ul>
+
+	<SeoCards family="hindi-bridge" heading="Hindi → Marathi by topic" />
+
+	<AppCTA variant="general" context="hindi-index" />
+</Learn>

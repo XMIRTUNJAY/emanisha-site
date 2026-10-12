@@ -1,0 +1,280 @@
+---
+// Vocabulary cluster/topic page — Premium version
+// Curated clusters and data-driven SEO pages both render the premium learning experience.
+
+import RelatedLessons from '../../../components/layout/RelatedLessons.astro';
+import SectionNav from '../../../components/layout/SectionNav.astro';
+import MarathiWordCard from '../../../components/learning/MarathiWordCard.astro';
+import MarathiWordTable from '../../../components/learning/MarathiWordTable.astro';
+import PracticeCTA from '../../../components/learning/PracticeCTA.astro';
+import SentenceBuilder from '../../../components/SentenceBuilder.astro';
+import Mascot from '../../../components/Mascot.astro';
+import Learn from '../../../layouts/Learn.astro';
+import PremiumVocabPage from '../../../components/PremiumVocabPage.astro';
+import GameLinks from '../../../components/games/GameLinks.astro';
+import { clusters, wordsByCategory, getUnit } from '../../../lib/learn';
+import { seoPagesByFamily } from '../../../lib/seo';
+import { siteUrl } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  return [
+    ...clusters.map((c) => ({ params: { cluster: c.slug } })),
+    // Data-driven topic pages (src/data/seo/vocab-topics.json, published only)
+    ...seoPagesByFamily('vocabulary').map((p) => ({ params: { cluster: p.slug }, props: { seoPage: p } })),
+  ];
+}
+
+const { cluster: slug } = Astro.params;
+const seoPage = Astro.props.seoPage as import('../../../lib/seo').SeoPage | undefined;
+const cluster = clusters.find((c) => c.slug === slug);
+if (!cluster && !seoPage) throw new Error(`Unknown cluster: ${slug}`);
+const words = cluster ? wordsByCategory(cluster.categories) : [];
+const builders = cluster ? cluster.unitRefs.flatMap((no) =>
+  getUnit(no).sentenceBuilder.map((b) => ({
+    tokens: b.tokens,
+    answer: b.answer,
+    prompt: b.promptEn || b.prompt,
+    hindi: b.hindi,
+  }))
+).slice(0, 5) : [];
+
+const navSections = cluster ? [
+  { id: 'objective-title', label: 'What you will learn' },
+  { id: 'words-title', label: 'The words' },
+  ...(builders.length ? [{ id: 'builder-title', label: 'Sentence builder' }] : []),
+  { id: 'practice-title', label: 'Practice' },
+  { id: 'faq-title', label: 'FAQ' },
+] : [];
+---
+
+{seoPage ? (
+  <PremiumVocabPage page={seoPage} />
+) : cluster && (
+<Learn
+  title={`${cluster.title} | Free Lesson`}
+  h1={`${cluster.title} (with Hindi & English)`}
+  description={cluster.description}
+  kicker="Marathi Vocabulary"
+  crumbs={[
+    { label: 'Vocabulary', href: siteUrl('/vocabulary/') },
+    { label: cluster.title, href: siteUrl(`/vocabulary/${cluster.slug}/`) },
+  ]}
+  canonicalPath={`/vocabulary/${cluster.slug}/`}
+  about={cluster.intent}
+  meta={[`${words.length} words`, cluster.unitRefs.length > 1 ? `Units ${cluster.unitRefs.join(', ')}` : `Unit ${cluster.unitRefs[0]}`]}
+  faq={[
+    { question: `How many words are on this page?`, answer: `${words.length} ${cluster.categories.join(', ').toLowerCase()} words, each with Hindi and English meanings, pronunciation and an example sentence.` },
+    { question: 'How do I remember these words?', answer: 'Read them here, then practise listening, speaking and spaced repetition in the Bol Marathi app — it schedules reviews before you forget.' },
+  ]}
+>
+  <!-- SECTION NAV — jump to section (sticky) -->
+  <SectionNav sections={navSections} label="On this page" />
+
+  <!-- LEARNING OBJECTIVE -->
+  <section class="lesson-objective" aria-labelledby="objective-title">
+    <h2 id="objective-title" class="kicker">What you will learn</h2>
+    <div class="vocab-intro">
+      <div class="vocab-intro-text">
+        <p>
+          {words.length} everyday Marathi words
+          ({cluster.categories.join(', ').toLowerCase()}) — each with Hindi meaning,
+          English meaning, pronunciation and a real example sentence from the
+          Bol Marathi curriculum.
+        </p>
+        <p>{cluster.intro}</p>
+        {cluster.tip && <p class="tip"><strong>Tip:</strong> {cluster.tip}</p>}
+      </div>
+      <div class="vocab-intro-mascot">
+        <Mascot pose="read" size="md" ariaLabel="Mascot reading Marathi vocabulary" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE LESSON: The Words -->
+  <section class="core-lesson" aria-labelledby="words-title">
+    <header class="lesson-header">
+      <h2 id="words-title">The Words</h2>
+      <div class="view-toggle" role="tablist" aria-label="View mode">
+        <button type="button" class="view-btn active" role="tab" aria-selected="true" data-view="cards">Flip Cards</button>
+        <button type="button" class="view-btn" role="tab" aria-selected="false" data-view="table">Table</button>
+      </div>
+    </header>
+
+    <div id="vocab-cards" role="tabpanel" aria-label="Flip cards view">
+      <div class="vocab-cards-grid">
+        {words.map((word) => <MarathiWordCard word={word} />)}
+      </div>
+    </div>
+
+    <div id="vocab-table" role="tabpanel" aria-label="Table view" hidden>
+      <MarathiWordTable words={words} caption={cluster.title} />
+    </div>
+  </section>
+
+  <!-- SENTENCE BUILDER -->
+  {builders.length > 0 && (
+    <div id="builder-title">
+      <SentenceBuilder builders={builders} />
+    </div>
+  )}
+
+  <!-- PRACTICE -->
+  <div id="practice-title">
+    <h2 class="kicker">Practice</h2>
+    <p>
+      Read the Marathi word aloud, check the Hindi meaning, then say the
+      example sentence. Words stick when you hear and speak them — that is
+      what the listening and speaking practice in Bol Marathi is for.
+    </p>
+    <p><a class="btn" href={siteUrl(`/quiz/${cluster.slug}/`)}>Quiz yourself on {cluster.title} →</a></p>
+    <GameLinks variant="vocab" />
+  </div>
+
+  <!-- PRACTICE CTA — contextual app bridge -->
+  <PracticeCTA variant="vocabulary" context={`vocabulary-${cluster.slug}`} />
+
+  <!-- FAQ (h2 anchor; content rendered by Learn layout) -->
+  <h2 id="faq-title">Common questions</h2>
+
+  <!-- RELATED LESSONS -->
+  <RelatedLessons
+    links={cluster.related.map((r) => ({ slug: r.href, title: r.label, family: 'Continue' }))}
+    max={4}
+    title="Continue learning"
+  />
+</Learn>
+)}
+
+<script>
+  import { AnalyticsEvents } from '../../../lib/analytics';
+
+  // View toggle: Table / Flip Cards (preference persisted; mobile defaults to cards)
+  const VOCAB_VIEW_KEY = 'bol-vocab-view';
+  function initVocabView() {
+    const tableBtn = document.querySelector('[data-view="table"]');
+    const cardsBtn = document.querySelector('[data-view="cards"]');
+    const tablePanel = document.getElementById('vocab-table');
+    const cardsPanel = document.getElementById('vocab-cards');
+    if (!tableBtn || !cardsBtn || !tablePanel || !cardsPanel) return;
+    if (tableBtn.hasAttribute('data-view-init')) return;
+    tableBtn.setAttribute('data-view-init', 'true');
+    function getPreferred(): 'table' | 'cards' {
+      try {
+        const saved = localStorage.getItem(VOCAB_VIEW_KEY);
+        if (saved === 'table' || saved === 'cards') return saved;
+      } catch { /* ignore */ }
+      return window.matchMedia('(max-width: 760px)').matches ? 'cards' : 'table';
+    }
+    function show(view: 'table' | 'cards') {
+      const isCards = view === 'cards';
+      tableBtn!.classList.toggle('active', !isCards);
+      cardsBtn!.classList.toggle('active', isCards);
+      tableBtn!.setAttribute('aria-selected', String(!isCards));
+      cardsBtn!.setAttribute('aria-selected', String(isCards));
+      (tablePanel as HTMLElement).hidden = isCards;
+      (cardsPanel as HTMLElement).hidden = !isCards;
+      try { localStorage.setItem(VOCAB_VIEW_KEY, view); } catch { /* ignore */ }
+    }
+    tableBtn.addEventListener('click', () => show('table'));
+    cardsBtn.addEventListener('click', () => {
+      show('cards');
+      try {
+        const slug = window.location.pathname.split('/').filter(Boolean).pop() || 'unknown';
+        const count = document.querySelectorAll('.marathi-word-card').length;
+        AnalyticsEvents.vocabView(slug, count);
+      } catch { /* ignore */ }
+    });
+    show(getPreferred());
+  }
+  initVocabView();
+  document.addEventListener('astro:page-load', initVocabView);
+</script>
+
+<style>
+  /* Anchor clearance for the sticky section nav */
+  #objective-title,
+  #words-title,
+  #builder-title,
+  #practice-title,
+  #faq-title { scroll-margin-top: 5.5rem; }
+
+  .lesson-objective {
+    margin: var(--space-6) 0;
+    padding: var(--space-5);
+    background: var(--color-container-low);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .lesson-objective .kicker { margin-bottom: var(--space-2); }
+
+  .core-lesson { margin: var(--space-6) 0; }
+
+  .lesson-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .lesson-header h2 { margin: 0; font-size: var(--text-h2); }
+
+  .view-toggle {
+    display: flex;
+    gap: var(--space-2);
+    background: var(--color-container);
+    border-radius: var(--radius-full);
+    padding: var(--space-1);
+  }
+
+  .view-btn {
+    font: inherit;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .view-btn.active {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }
+
+  .view-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .view-btn { transition: none; }
+  }
+
+  .vocab-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-5) 0;
+  }
+
+  .vocab-intro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 0.5rem 0;
+  }
+  .vocab-intro-text { flex: 1; min-width: 260px; }
+  .vocab-intro-mascot { flex-shrink: 0; }
+  @media (max-width: 760px) {
+    .vocab-intro { flex-direction: column; align-items: center; text-align: center; }
+    .vocab-intro-mascot { order: -1; margin-bottom: 1rem; }
+  }
+</style>

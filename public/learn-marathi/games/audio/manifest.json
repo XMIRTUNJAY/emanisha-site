@@ -1,0 +1,520 @@
+[
+  {
+    "id": "click",
+    "category": "ui",
+    "file": "ui/click.mp3",
+    "duration_s": 0.05,
+    "description": "Generic button tap"
+  },
+  {
+    "id": "click_soft",
+    "category": "ui",
+    "file": "ui/click_soft.mp3",
+    "duration_s": 0.07,
+    "description": "Gentle tap for menu items"
+  },
+  {
+    "id": "back",
+    "category": "ui",
+    "file": "ui/back.mp3",
+    "duration_s": 0.17,
+    "description": "Back / cancel navigation"
+  },
+  {
+    "id": "toggle_on",
+    "category": "ui",
+    "file": "ui/toggle_on.mp3",
+    "duration_s": 0.15,
+    "description": "Setting switched on"
+  },
+  {
+    "id": "toggle_off",
+    "category": "ui",
+    "file": "ui/toggle_off.mp3",
+    "duration_s": 0.15,
+    "description": "Setting switched off"
+  },
+  {
+    "id": "whoosh",
+    "category": "ui",
+    "file": "ui/whoosh.mp3",
+    "duration_s": 0.35,
+    "description": "Screen / card transition"
+  },
+  {
+    "id": "pop",
+    "category": "ui",
+    "file": "ui/pop.mp3",
+    "duration_s": 0.09,
+    "description": "Small element appearing"
+  },
+  {
+    "id": "game_start",
+    "category": "ui",
+    "file": "ui/game_start.mp3",
+    "duration_s": 0.67,
+    "description": "Round begins"
+  },
+  {
+    "id": "countdown_beep",
+    "category": "ui",
+    "file": "ui/countdown_beep.mp3",
+    "duration_s": 0.15,
+    "description": "3-2-1 countdown beep"
+  },
+  {
+    "id": "countdown_go",
+    "category": "ui",
+    "file": "ui/countdown_go.mp3",
+    "duration_s": 0.4,
+    "description": "Countdown GO beep"
+  },
+  {
+    "id": "notification",
+    "category": "ui",
+    "file": "ui/notification.mp3",
+    "duration_s": 0.6,
+    "description": "Reminder / daily practice nudge"
+  },
+  {
+    "id": "correct",
+    "category": "feedback",
+    "file": "feedback/correct.mp3",
+    "duration_s": 0.77,
+    "description": "Correct answer"
+  },
+  {
+    "id": "correct_soft",
+    "category": "feedback",
+    "file": "feedback/correct_soft.mp3",
+    "duration_s": 0.3,
+    "description": "Quiet correct answer (low-stimulus mode)"
+  },
+  {
+    "id": "incorrect",
+    "category": "feedback",
+    "file": "feedback/incorrect.mp3",
+    "duration_s": 0.42,
+    "description": "Wrong answer (gentle, not harsh)"
+  },
+  {
+    "id": "incorrect_buzz",
+    "category": "feedback",
+    "file": "feedback/incorrect_buzz.mp3",
+    "duration_s": 0.3,
+    "description": "Wrong answer (buzzer variant)"
+  },
+  {
+    "id": "try_again",
+    "category": "feedback",
+    "file": "feedback/try_again.mp3",
+    "duration_s": 0.42,
+    "description": "Encouraging nudge after a miss"
+  },
+  {
+    "id": "almost",
+    "category": "feedback",
+    "file": "feedback/almost.mp3",
+    "duration_s": 0.37,
+    "description": "Close but not quite"
+  },
+  {
+    "id": "hint",
+    "category": "feedback",
+    "file": "feedback/hint.mp3",
+    "duration_s": 0.53,
+    "description": "Hint revealed"
+  },
+  {
+    "id": "skip",
+    "category": "feedback",
+    "file": "feedback/skip.mp3",
+    "duration_s": 0.18,
+    "description": "Question skipped"
+  },
+  {
+    "id": "streak_1",
+    "category": "streak",
+    "file": "streak/streak_1.mp3",
+    "duration_s": 0.64,
+    "description": "Correct-answer streak level 1"
+  },
+  {
+    "id": "streak_2",
+    "category": "streak",
+    "file": "streak/streak_2.mp3",
+    "duration_s": 0.7,
+    "description": "Correct-answer streak level 2"
+  },
+  {
+    "id": "streak_3",
+    "category": "streak",
+    "file": "streak/streak_3.mp3",
+    "duration_s": 0.7,
+    "description": "Correct-answer streak level 3"
+  },
+  {
+    "id": "streak_4",
+    "category": "streak",
+    "file": "streak/streak_4.mp3",
+    "duration_s": 0.7,
+    "description": "Correct-answer streak level 4"
+  },
+  {
+    "id": "streak_5",
+    "category": "streak",
+    "file": "streak/streak_5.mp3",
+    "duration_s": 0.7,
+    "description": "Correct-answer streak level 5"
+  },
+  {
+    "id": "streak_6",
+    "category": "streak",
+    "file": "streak/streak_6.mp3",
+    "duration_s": 0.7,
+    "description": "Correct-answer streak level 6"
+  },
+  {
+    "id": "streak_lost",
+    "category": "streak",
+    "file": "streak/streak_lost.mp3",
+    "duration_s": 0.45,
+    "description": "Streak broken"
+  },
+  {
+    "id": "combo_x2",
+    "category": "streak",
+    "file": "streak/combo_x2.mp3",
+    "duration_s": 0.31,
+    "description": "Combo multiplier x2"
+  },
+  {
+    "id": "combo_x3",
+    "category": "streak",
+    "file": "streak/combo_x3.mp3",
+    "duration_s": 0.4,
+    "description": "Combo multiplier x3"
+  },
+  {
+    "id": "combo_x5",
+    "category": "streak",
+    "file": "streak/combo_x5.mp3",
+    "duration_s": 0.71,
+    "description": "Combo multiplier x5"
+  },
+  {
+    "id": "coin",
+    "category": "reward",
+    "file": "reward/coin.mp3",
+    "duration_s": 0.32,
+    "description": "Coin / point earned"
+  },
+  {
+    "id": "star_1",
+    "category": "reward",
+    "file": "reward/star_1.mp3",
+    "duration_s": 0.68,
+    "description": "One star earned"
+  },
+  {
+    "id": "star_2",
+    "category": "reward",
+    "file": "reward/star_2.mp3",
+    "duration_s": 0.86,
+    "description": "Second star earned"
+  },
+  {
+    "id": "star_3",
+    "category": "reward",
+    "file": "reward/star_3.mp3",
+    "duration_s": 1.14,
+    "description": "Third star earned"
+  },
+  {
+    "id": "badge_unlock",
+    "category": "reward",
+    "file": "reward/badge_unlock.mp3",
+    "duration_s": 1.58,
+    "description": "Badge / achievement unlocked"
+  },
+  {
+    "id": "level_up",
+    "category": "reward",
+    "file": "reward/level_up.mp3",
+    "duration_s": 1.48,
+    "description": "Level up"
+  },
+  {
+    "id": "new_high_score",
+    "category": "reward",
+    "file": "reward/new_high_score.mp3",
+    "duration_s": 1.96,
+    "description": "New high score"
+  },
+  {
+    "id": "daily_goal",
+    "category": "reward",
+    "file": "reward/daily_goal.mp3",
+    "duration_s": 1.18,
+    "description": "Daily goal reached"
+  },
+  {
+    "id": "round_complete",
+    "category": "fanfare",
+    "file": "fanfare/round_complete.mp3",
+    "duration_s": 1.56,
+    "description": "Round / level finished"
+  },
+  {
+    "id": "perfect_score",
+    "category": "fanfare",
+    "file": "fanfare/perfect_score.mp3",
+    "duration_s": 2.08,
+    "description": "100% / flawless round"
+  },
+  {
+    "id": "game_complete",
+    "category": "fanfare",
+    "file": "fanfare/game_complete.mp3",
+    "duration_s": 2.48,
+    "description": "Whole game / unit finished"
+  },
+  {
+    "id": "game_over",
+    "category": "fanfare",
+    "file": "fanfare/game_over.mp3",
+    "duration_s": 1.04,
+    "description": "Out of lives / time (soft, not punishing)"
+  },
+  {
+    "id": "tick",
+    "category": "timer",
+    "file": "timer/tick.mp3",
+    "duration_s": 0.03,
+    "description": "Timer tick"
+  },
+  {
+    "id": "tick_fast",
+    "category": "timer",
+    "file": "timer/tick_fast.mp3",
+    "duration_s": 0.04,
+    "description": "Last-seconds tick"
+  },
+  {
+    "id": "time_warning",
+    "category": "timer",
+    "file": "timer/time_warning.mp3",
+    "duration_s": 0.32,
+    "description": "10 seconds left"
+  },
+  {
+    "id": "time_up",
+    "category": "timer",
+    "file": "timer/time_up.mp3",
+    "duration_s": 0.58,
+    "description": "Timer expired"
+  },
+  {
+    "id": "life_lost",
+    "category": "timer",
+    "file": "timer/life_lost.mp3",
+    "duration_s": 0.3,
+    "description": "Heart lost"
+  },
+  {
+    "id": "life_gained",
+    "category": "timer",
+    "file": "timer/life_gained.mp3",
+    "duration_s": 0.44,
+    "description": "Heart gained"
+  },
+  {
+    "id": "word_pick",
+    "category": "sentence_builder",
+    "file": "sentence_builder/word_pick.mp3",
+    "duration_s": 0.07,
+    "description": "Word tile picked up"
+  },
+  {
+    "id": "word_place",
+    "category": "sentence_builder",
+    "file": "sentence_builder/word_place.mp3",
+    "duration_s": 0.1,
+    "description": "Word tile dropped into the sentence"
+  },
+  {
+    "id": "word_remove",
+    "category": "sentence_builder",
+    "file": "sentence_builder/word_remove.mp3",
+    "duration_s": 0.08,
+    "description": "Word tile returned to the bank"
+  },
+  {
+    "id": "word_snap",
+    "category": "sentence_builder",
+    "file": "sentence_builder/word_snap.mp3",
+    "duration_s": 0.17,
+    "description": "Tile snaps into the correct slot"
+  },
+  {
+    "id": "word_wrong_slot",
+    "category": "sentence_builder",
+    "file": "sentence_builder/word_wrong_slot.mp3",
+    "duration_s": 0.2,
+    "description": "Tile rejected from a slot"
+  },
+  {
+    "id": "sentence_correct",
+    "category": "sentence_builder",
+    "file": "sentence_builder/sentence_correct.mp3",
+    "duration_s": 1.34,
+    "description": "Complete sentence is correct"
+  },
+  {
+    "id": "sentence_wrong",
+    "category": "sentence_builder",
+    "file": "sentence_builder/sentence_wrong.mp3",
+    "duration_s": 0.5,
+    "description": "Complete sentence is incorrect"
+  },
+  {
+    "id": "sentence_check",
+    "category": "sentence_builder",
+    "file": "sentence_builder/sentence_check.mp3",
+    "duration_s": 0.12,
+    "description": "Check button pressed"
+  },
+  {
+    "id": "word_order_swap",
+    "category": "sentence_builder",
+    "file": "sentence_builder/word_order_swap.mp3",
+    "duration_s": 0.1,
+    "description": "Two words swap places"
+  },
+  {
+    "id": "node_select",
+    "category": "word_map",
+    "file": "word_map/node_select.mp3",
+    "duration_s": 0.12,
+    "description": "Map node selected"
+  },
+  {
+    "id": "node_connect",
+    "category": "word_map",
+    "file": "word_map/node_connect.mp3",
+    "duration_s": 0.25,
+    "description": "Two nodes linked by a line"
+  },
+  {
+    "id": "node_disconnect",
+    "category": "word_map",
+    "file": "word_map/node_disconnect.mp3",
+    "duration_s": 0.12,
+    "description": "Link removed"
+  },
+  {
+    "id": "pair_correct",
+    "category": "word_map",
+    "file": "word_map/pair_correct.mp3",
+    "duration_s": 0.7,
+    "description": "Word-meaning pair is correct"
+  },
+  {
+    "id": "pair_wrong",
+    "category": "word_map",
+    "file": "word_map/pair_wrong.mp3",
+    "duration_s": 0.37,
+    "description": "Word-meaning pair is wrong"
+  },
+  {
+    "id": "region_unlock",
+    "category": "word_map",
+    "file": "word_map/region_unlock.mp3",
+    "duration_s": 1.12,
+    "description": "New map region unlocked"
+  },
+  {
+    "id": "region_complete",
+    "category": "word_map",
+    "file": "word_map/region_complete.mp3",
+    "duration_s": 1.42,
+    "description": "Map region fully learned"
+  },
+  {
+    "id": "path_step",
+    "category": "word_map",
+    "file": "word_map/path_step.mp3",
+    "duration_s": 0.06,
+    "description": "Marker moves one step along the map"
+  },
+  {
+    "id": "map_reveal",
+    "category": "word_map",
+    "file": "word_map/map_reveal.mp3",
+    "duration_s": 0.68,
+    "description": "Map piece revealed"
+  },
+  {
+    "id": "card_flip",
+    "category": "memory_match",
+    "file": "memory_match/card_flip.mp3",
+    "duration_s": 0.06,
+    "description": "Card flipped face-up"
+  },
+  {
+    "id": "card_flip_back",
+    "category": "memory_match",
+    "file": "memory_match/card_flip_back.mp3",
+    "duration_s": 0.06,
+    "description": "Card flipped face-down"
+  },
+  {
+    "id": "card_match",
+    "category": "memory_match",
+    "file": "memory_match/card_match.mp3",
+    "duration_s": 0.77,
+    "description": "Matching pair found"
+  },
+  {
+    "id": "card_mismatch",
+    "category": "memory_match",
+    "file": "memory_match/card_mismatch.mp3",
+    "duration_s": 0.28,
+    "description": "Cards do not match"
+  },
+  {
+    "id": "card_shuffle",
+    "category": "memory_match",
+    "file": "memory_match/card_shuffle.mp3",
+    "duration_s": 0.67,
+    "description": "Deck shuffled at start"
+  },
+  {
+    "id": "card_deal",
+    "category": "memory_match",
+    "file": "memory_match/card_deal.mp3",
+    "duration_s": 0.05,
+    "description": "Card dealt onto the board"
+  },
+  {
+    "id": "pair_vanish",
+    "category": "memory_match",
+    "file": "memory_match/pair_vanish.mp3",
+    "duration_s": 0.53,
+    "description": "Matched pair clears from the board"
+  },
+  {
+    "id": "board_clear",
+    "category": "memory_match",
+    "file": "memory_match/board_clear.mp3",
+    "duration_s": 1.63,
+    "description": "Every pair matched"
+  },
+  {
+    "id": "last_pair",
+    "category": "memory_match",
+    "file": "memory_match/last_pair.mp3",
+    "duration_s": 0.48,
+    "description": "One pair remaining"
+  }
+]

@@ -1,0 +1,30 @@
+---
+// GameLinks — contextual "practice it as a game" strip for content pages.
+// Non-intrusive: two relevant links, styled like the site's related blocks.
+import { siteUrl } from '../../lib/site';
+
+interface Props {
+	variant: 'vocab' | 'grammar';
+}
+
+const { variant } = Astro.props;
+const links =
+	variant === 'vocab'
+		? [
+				{ href: siteUrl('/games/marathi-wordle/'), label: 'Play Wordle with words like these' },
+				{ href: siteUrl('/games/picture-guess/'), label: 'Guess words from pictures' },
+			]
+		: [
+				{ href: siteUrl('/games/sentence-scramble/'), label: 'Build Marathi sentences in the Scramble game' },
+				{ href: siteUrl('/games/word-chain/'), label: 'Try the Marathi Word Chain' },
+			];
+---
+
+<aside class="game-links">
+	<p class="game-links-title">Practice it as a game</p>
+	<ul>
+		{links.map((l) => (
+			<li><a href={l.href}>{l.label}</a></li>
+		))}
+	</ul>
+</aside>

@@ -1,0 +1,72 @@
+---
+import AppCTA from '../../../components/AppCTA.astro';
+import RelatedContent from '../../../components/RelatedContent.astro';
+import Learn from '../../../layouts/Learn.astro';
+import { vocab } from '../../../lib/learn';
+import { simpleRespelling } from '../../../lib/simple';
+import { siteUrl } from '../../../lib/site';
+
+// Even spread across all vocab words so every category is represented.
+const sample = vocab.filter((_, i) => i % 17 === 0);
+---
+
+<Learn
+	title="English to Marathi Words"
+	description="Common English words and their Marathi equivalents — with pronunciation, Hindi meanings and examples. From the Bol Marathi curriculum."
+	kicker="English → Marathi"
+	crumbs={[
+		{ label: 'English → Marathi', href: siteUrl('/english-to-marathi/') },
+		{ label: 'Words', href: siteUrl('/english-to-marathi/words/') },
+	]}
+	canonicalPath="/english-to-marathi/words/"
+	about="english to marathi words"
+	meta={[`${vocab.length} word pairs in curriculum`]}
+>
+	<h2>What you will learn</h2>
+	<p>
+		High-frequency English → Marathi word pairs from across the whole
+		Bol Marathi vocabulary ({vocab.length} words) — Marathi script,
+		pronunciation, Hindi meaning and a real example sentence each.
+	</p>
+	<div class="table-scroll" role="region" aria-label="English to Marathi words" tabindex="0">
+		<table class="vocab">
+			<thead>
+				<tr>
+					<th scope="col">English</th>
+					<th scope="col">Marathi</th>
+					<th scope="col">Pronunciation</th>
+					<th scope="col">Hindi</th>
+					<th scope="col">Example</th>
+				</tr>
+			</thead>
+			<tbody>
+				{sample.map((w) => (
+					<tr>
+						<td>{w.english}</td>
+						<td class="mr" lang="mr">{w.marathi}</td>
+						<td class="tr">{simpleRespelling(w.transliteration)}</td>
+						<td lang="hi">{w.hindi}</td>
+						<td>
+							<span lang="mr">{w.exampleMarathi}</span>
+							<br />
+							<small>{w.exampleEnglish}</small>
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<AppCTA variant="vocabulary" context="english-words" />
+
+	<RelatedContent
+		links={[
+			{ label: 'English to Marathi phrases', href: siteUrl('/english-to-marathi/phrases/') },
+			{ label: 'Hindi to Marathi words', href: siteUrl('/hindi-to-marathi/words/') },
+			{ label: 'Marathi words for beginners', href: siteUrl('/vocabulary/beginners/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+
+</Learn>
+

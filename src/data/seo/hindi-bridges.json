@@ -1,0 +1,3049 @@
+[
+  {
+    "slug": "greetings",
+    "title": "Hindi to Marathi Greetings & First Sentences",
+    "description": "Bridge your Hindi into Marathi greetings and first sentences: नमस्ते→नमस्कार, मेरा नाम→माझं नाव, मुझे चाहिए→मला पाहिजे — mapping by mapping.",
+    "h1": "Hindi → Marathi: Greetings & Your First Sentences",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "greetings",
+      "conversation",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi greetings",
+    "secondaryKeywords": [
+      "namaste in marathi",
+      "hindi to marathi translation sentences",
+      "learn marathi from hindi"
+    ],
+    "intro": [
+      "If you know Hindi, your first Marathi sentences are closer than you think — but not identical. This page maps the greeting-and-introduction bridge row by row: what carries over, what shifts sound, and what changes shape entirely.",
+      "Each row shows the Hindi you know, the Marathi that matches, the English meaning, and the one grammar note that matters for that pair. These are Unit 01 bridge lessons from the Bol Marathi course."
+    ],
+    "tip": "Read each pair aloud, Hindi then Marathi — your ear already knows how close they are.",
+    "bridgeUnits": [
+      "01"
+    ],
+    "units": [
+      "01"
+    ],
+    "sections": [
+      {
+        "heading": "What carries over directly",
+        "paragraphs": [
+          "नमस्ते → नमस्कार, and it works any time of day. Sentence skeletons carry over too: both languages put the verb last, so the shape of आप कैसे हैं? and तू कसा आहेस? is the same shape."
+        ]
+      },
+      {
+        "heading": "Where Hindi and Marathi part ways",
+        "paragraphs": [
+          "Three splits to know on day one: possession (मेरा नाम → माझं नाव — Marathi नाव is neuter), need (मुझे चाहिए → मला पाहिजे — one fused expression), and the continuous tense (खा रहा हूँ → खातो आहे — verb + तो + आहे instead of रहा/रही).",
+          "None of these require new grammar concepts; they are Hindi logic wearing Marathi endings — which is exactly what the bridge rows below drill."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "मेरा नाम राहुल है",
+        "right": "माझं नाव राहुल आहे",
+        "why": "नाव is neuter in Marathi, so the possessive is माझं, not माझा (and not Hindi मेरा)."
+      },
+      {
+        "wrong": "मी खा रहा आहे",
+        "right": "मी खातो आहे",
+        "why": "Marathi continuous = verb + तो + आहे. रहा never appears."
+      },
+      {
+        "wrong": "मुझे पानी चाहिए",
+        "right": "मला पाणी पाहिजे",
+        "why": "चाहिए has no Marathi life; the fused form is मला … पाहिजे."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“मुझे चाहिए” in Marathi is…",
+          "options": [
+            "मला हवे",
+            "मला पाहिजे",
+            "मी घेतो",
+            "माझं आहे"
+          ],
+          "answer": 1,
+          "explanation": "मला पाहिजे — the fused need-expression from Unit 01."
+        },
+        {
+          "question": "“How are you?” (to a male friend) in Marathi?",
+          "options": [
+            "तू कशी आहेस?",
+            "तुम्ही कसे आहात?",
+            "तू कसा आहेस?",
+            "तो कसा आहे?"
+          ],
+          "answer": 2,
+          "explanation": "कसा agrees with the person addressed: masculine कसा, feminine कशी."
+        }
+      ],
+      "translate": [
+        {
+          "source": "मेरा नाम राहुल है।",
+          "sourceLang": "hi",
+          "answer": "माझं नाव राहुल आहे.",
+          "note": "Possessive flip: मेरा → माझं (neuter)."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/words/",
+      "/phrases/greetings/",
+      "/lessons/01/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say hello in Marathi if you know Hindi?",
+        "answer": "नमस्ते becomes नमस्कार — and it works at any hour. Add शुभ सकाळ (good morning) and शुभ रात्री (good night) for time-specific greetings."
+      },
+      {
+        "question": "Is Marathi grammar the same as Hindi?",
+        "answer": "The frame is the same (subject–object–verb, postpositions, gender agreement), but Marathi adds a neuter gender, fuses expressions like मला पाहिजे, and forms the continuous tense with verb + तो + आहे."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "daily-conversation",
+    "title": "Hindi to Marathi Daily Conversation: Survival Sentences",
+    "description": "Everyday survival sentences mapped Hindi to Marathi — तैयार→तयार, मदद→मदत, चाहिए→पाहिजे, नहीं चाहिए→नको — with the grammar behind each pair.",
+    "h1": "Hindi → Marathi: Daily Conversation Essentials",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "daily-life",
+      "conversation"
+    ],
+    "primaryKeyword": "hindi to marathi daily conversation",
+    "secondaryKeywords": [
+      "hindi to marathi common sentences",
+      "hindi to marathi sentence translation",
+      "marathi for hindi speakers"
+    ],
+    "intro": [
+      "Six survival-sentence mappings from Unit 02 of the Bol Marathi course: being ready, asking for help, saying what is yours, question words, polite imperatives, and the need/don't-want pair. Each row shows the Hindi, the Marathi, the English, and one grammar note.",
+      "The theme of this page is sound shift plus fusion: मदद → मदत and तैयार → तयार are the same words wearing Marathi endings, while नहीं चाहिए fuses into the single word नको."
+    ],
+    "tip": "मदत before मदद: help is the one word you never want to mispronounce.",
+    "bridgeUnits": [
+      "02"
+    ],
+    "units": [
+      "02"
+    ],
+    "sections": [
+      {
+        "heading": "Sound shifts you can bank on",
+        "paragraphs": [
+          "A reliable early pattern: several Hindi words ending in a consonant + अ pick up a त in Marathi — मदद → मदत. Others drop the tail vowel: तैयार stays तैयार. When in doubt, check the table; the shifts are regular enough to become instinct within a week."
+        ]
+      },
+      {
+        "heading": "The fused forms",
+        "paragraphs": [
+          "Marathi likes single words where Hindi uses phrases: चाहिए → पाहिजे, नहीं चाहिए → नको. Learn the pair पाहिजे/नको as one unit; Unit 02's sentence मला चहा नको, पाणी द्या shows both halves of the conversation."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Saying मदद in Marathi",
+        "right": "मदत",
+        "why": "Same word, Marathi ending: the final द becomes त."
+      },
+      {
+        "wrong": "नाही चाहिए for “don't want”",
+        "right": "नको",
+        "why": "Marathi fuses the whole idea into one word — the highest-utility negation you will learn."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“Help” in Marathi?",
+          "options": [
+            "मदद",
+            "मदत",
+            "मदती",
+            "मदता"
+          ],
+          "answer": 1,
+          "explanation": "मदत (madat) — Hindi मदद with the Marathi त ending."
+        },
+        {
+          "question": "“Ready” in Marathi?",
+          "options": [
+            "तयार",
+            "तय्यार",
+            "तेयार",
+            "तयारी"
+          ],
+          "answer": 0,
+          "explanation": "तयार — same spelling, no tail vowel change here."
+        }
+      ],
+      "translate": [
+        {
+          "source": "मुझे मदद चाहिए।",
+          "sourceLang": "hi",
+          "answer": "मला मदत पाहिजे.",
+          "note": "From Unit 02 — both halves shift: मदद→मदत and चाहिए→पाहिजे."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/greetings/",
+      "/phrases/daily/",
+      "/lessons/02/"
+    ],
+    "faq": [
+      {
+        "question": "What are the first differences a Hindi speaker hits in Marathi?",
+        "answer": "Fused expressions (पाहिजे, नको), sound shifts (मदद→मदत), the neuter gender, and the continuous tense built with तो + आहे instead of रहा."
+      },
+      {
+        "question": "How do you ask for help in Marathi?",
+        "answer": "मला मदत पाहिजे (I need help). In an emergency the single word मदत! works."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "questions",
+    "title": "Hindi to Marathi Question Words: क्या → काय",
+    "description": "All six question words mapped Hindi to Marathi — क्या→काय, कहाँ→कुठे, कब→कधी, कैसे→कसे, कौन→कोण, क्यों→का — with example questions.",
+    "h1": "Hindi → Marathi: Question Words (काय, कुठे, कधी)",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "questions",
+      "grammar",
+      "conversation"
+    ],
+    "primaryKeyword": "hindi to marathi question words",
+    "secondaryKeywords": [
+      "marathi question words",
+      "what where when in marathi",
+      "hindi to marathi kay kuthe"
+    ],
+    "intro": [
+      "Six pairs, one pattern: Hindi question words starting with क map to Marathi question words starting with क. क्या→काय, कहाँ→कुठे, कब→कधी, कैसे→कसे, कौन→कोण, क्यों→का. Unit 07 of the course is built entirely on these six.",
+      "The best news on this page: question words stay in place. कुठे जात आहेस? puts कुठे exactly where कहाँ sits in कहाँ जा रहे हो? There is no word-order tax on questions."
+    ],
+    "tip": "Learn the six as a क-family: काय कुठे कधी कसे कोण का — one breath, all six.",
+    "bridgeUnits": [
+      "07"
+    ],
+    "units": [
+      "07"
+    ],
+    "sections": [
+      {
+        "heading": "The क-family",
+        "paragraphs": [
+          "Both languages front-load interrogatives with क, which makes the mapping feel designed. The two that need attention: क्यों becomes single-syllable का, and कौन becomes कोण — the vowel changes, the role doesn't."
+        ]
+      },
+      {
+        "heading": "Question words in action",
+        "paragraphs": [
+          "Unit 07's lesson sentences show the full swap: कुठे जात आहेस? पुणे. (Where are you going? Pune.) and कधी येत आहेस? उद्या. (When are you coming? Tomorrow.) Notice आहेस tagging along at the end — the verb stays last, as always."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Translating क्यों as a long word",
+        "right": "का — one syllable",
+        "why": "उदाहरण: का आलात? (Why did you come?) — short and final-position-friendly."
+      },
+      {
+        "wrong": "कुन for “who”",
+        "right": "कोण (koṇ)",
+        "why": "The vowel is ओ, and the final ण is retroflex — कोण, not कुन or कौन."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“Where” in Marathi?",
+          "options": [
+            "कधी",
+            "कुठे",
+            "काय",
+            "कसे"
+          ],
+          "answer": 1,
+          "explanation": "कुठे (kuṭhe) = where; कधी is when."
+        },
+        {
+          "question": "काय आहे? means…",
+          "options": [
+            "Who is it?",
+            "How is it?",
+            "What is it?",
+            "When is it?"
+          ],
+          "answer": 2,
+          "explanation": "काय = what — the opener of Unit 07."
+        },
+        {
+          "question": "“Why” in Marathi?",
+          "options": [
+            "का",
+            "कोण",
+            "कधी",
+            "कसे"
+          ],
+          "answer": 0,
+          "explanation": "का (kā) = why — a single syllable."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "तू ___ जात आहेस? — पुणे.",
+          "answer": "कुठे",
+          "hint": "Answer is a place, so the question word is…"
+        }
+      ]
+    },
+    "relatedPages": [
+      "/grammar/questions/",
+      "/hindi-to-marathi/phrases/",
+      "/lessons/07/"
+    ],
+    "faq": [
+      {
+        "question": "What are the six Marathi question words?",
+        "answer": "काय (what), कुठे (where), कधी (when), कसे (how), कोण (who), का (why) — each mapping to its Hindi क-counterpart."
+      },
+      {
+        "question": "Do Marathi questions change word order?",
+        "answer": "No — the question word stays where the answer would go, and the verb stays last: तू कुठे जात आहेस?"
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "travel",
+    "title": "Hindi to Marathi Travel Words: Trains, Tickets & Stays",
+    "description": "12 Hindi-to-Marathi travel mappings — transport, booking, stations, hotels and directions — with the vocabulary travellers actually need in Maharashtra.",
+    "h1": "Hindi → Marathi: Travel Words & Transport",
+    "searchIntent": "comparison",
+    "level": "intermediate",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "travel",
+      "transport",
+      "directions"
+    ],
+    "primaryKeyword": "hindi to marathi travel words",
+    "secondaryKeywords": [
+      "marathi travel vocabulary",
+      "train ticket marathi",
+      "directions in marathi"
+    ],
+    "intro": [
+      "Twelve bridge rows from Units 14–15 covering a full journey: landscapes and directions, transport modes, booking and platforms, hotels and local transport. Each maps the Hindi phrase you know to the Marathi you will hear at a Maharashtra station or ticket counter.",
+      "Much travel vocabulary is shared — बस, टिकीट, हॉटेल — and the cardinal directions are identical: उत्तर, दक्षिण, पूर्व, पश्चिम. What changes are the transport words themselves and the spelling conventions around loanwords."
+    ],
+    "tip": "Before a trip, memorize the booking row (बुक करा, कन्फर्म, वेटिंग) and platform sentence first — timetables forgive, queues don't.",
+    "bridgeUnits": [
+      "14",
+      "15"
+    ],
+    "units": [
+      "14",
+      "15"
+    ],
+    "sections": [
+      {
+        "heading": "The good news: directions and half the nouns",
+        "paragraphs": [
+          "उत्तर दक्षिण पूर्व पश्चिम are letter-for-letter Hindi. नदी, पठार, वेटिंग, टर्मिनल, गेट, लॉज cross over untouched. You already own half the travel page."
+        ]
+      },
+      {
+        "heading": "What actually changes",
+        "paragraphs": [
+          "Train is रेल्वे in Marathi (though ट्रेन is universally understood, and course sentences use both). झील becomes सरोवर, पेड़ becomes झाड, जानवर becomes प्राणी. And watch the loanword spellings: Marathi writes प्लॅटफॉर्म, हॉटेल and शेअरिंग with its own conventions (ॅ and ऑ)."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Writing प्लेटफॉर्म in Marathi context",
+        "right": "प्लॅटफॉर्म with ॅ",
+        "why": "Marathi and Hindi spell English loanwords differently — signs in Maharashtra use the ॅ convention."
+      },
+      {
+        "wrong": "Asking for the झील",
+        "right": "सरोवर",
+        "why": "झील is understood by bilinguals but सरोवर is the Marathi word on maps and in speech."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“Train” in formal Marathi?",
+          "options": [
+            "ट्रेन",
+            "रेल्वे",
+            "गाडी",
+            "विमान"
+          ],
+          "answer": 1,
+          "explanation": "रेल्वे is the Marathi word; ट्रेन is understood everywhere, and विमान is a flight."
+        },
+        {
+          "question": "Which set is identical in Hindi and Marathi?",
+          "options": [
+            "North–South–East–West",
+            "River–Lake–Sea",
+            "Tree–Flower–Animal",
+            "Train–Bus–Flight"
+          ],
+          "answer": 0,
+          "explanation": "उत्तर दक्षिण पूर्व पश्चिम — the directions never change."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "प्लॅटफॉर्म नंबर ___ आहे. (Platform number five.)",
+          "answer": "पाच",
+          "hint": "From Unit 15's station sentence."
+        }
+      ],
+      "translate": [
+        {
+          "source": "Which train goes to Mumbai?",
+          "answer": "मुंबईला जाणारा ट्रेन कोणता?",
+          "note": "From Unit 15 — note मुंबईला (to Mumbai) and the relative clause जाणारा."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/travel/",
+      "/phrases/travel/",
+      "/lessons/15/"
+    ],
+    "faq": [
+      {
+        "question": "How different is travel Marathi from Hindi?",
+        "answer": "Directions, bookings and stays are mostly shared; transport names and nature words shift (ट्रेन→रेल्वे, झील→सरोवर, जानवर→प्राणी), and loanwords take Marathi spellings with ॅ and ऑ."
+      },
+      {
+        "question": "How do you ask “which platform” in Marathi?",
+        "answer": "प्लॅटफॉर्म नंबर कोणता? — or state it: प्लॅटफॉर्म नंबर पाच आहे. The word order matches the Hindi you already know."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "family-home",
+    "title": "Hindi to Marathi Family & Home: Relations, Rooms, Daily Life",
+    "description": "Hindi to Marathi family words — relations, rooms and everyday household vocabulary — from Units 03, 05, 20.",
+    "h1": "Hindi → Marathi: Family & Home",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "family",
+      "home",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi family words",
+    "secondaryKeywords": [
+      "marathi family relations",
+      "home vocabulary marathi",
+      "hindi to marathi household"
+    ],
+    "intro": [
+      "Family and home vocabulary from Units 03, 05, 20 mapped Hindi to Marathi — relations (चाचा→काका, चाची→काकी), rooms (कमरा→खोली), everyday objects. Each row shows the Hindi you know, the Marathi that matches, and the one grammar note that matters.",
+      "Marathi keeps gender in relations explicitly: काका/काकी (uncle/aunt), मामा/मामी, दादा/दादी, मामू/मामी — the feminine form is always there. Hindi merges some; Marathi separates."
+    ],
+    "tip": "Learn relations in pairs: काका/काकी, मामा/मामी, दादा/दादी — the feminine form is the same root + ई.",
+    "bridgeUnits": [
+      "03",
+      "05",
+      "20"
+    ],
+    "units": [
+      "03",
+      "05",
+      "20"
+    ],
+    "sections": [
+      {
+        "heading": "Relations — gender is explicit",
+        "paragraphs": [
+          "Hindi चाचा/चाची maps cleanly to काका/काकी. But दादा is both grandfather and elder brother — context tells you. भाऊ/बहिण are the sibling words; कोई/कोणी for someone/anyone."
+        ]
+      },
+      {
+        "heading": "Rooms and fixtures",
+        "paragraphs": [
+          "कमरा → खोली, दरवाजा → दार, खिड़की → खिडकी, आईना → आरसा, चाबी → चावी. The Hindi speaker's आरसा moment: mirror is not आईना in Marathi."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using आईना for mirror",
+        "right": "आरसा = mirror",
+        "why": "आईना is Hindi; आरसा is the Marathi word — no sound overlap, must learn fresh."
+      },
+      {
+        "wrong": "Calling elder brother दादा only",
+        "right": "भाऊ = elder brother; दादा = grandfather or elder brother (context)",
+        "why": "Marathi distinguishes: भाऊ is the sibling word, दादा is grandfather (and respectfully, elder brother)."
+      },
+      {
+        "wrong": "Writing चाबी for key",
+        "right": "चावी = key (Marathi spelling)",
+        "why": "Systematic Hindi ब → Marathi व shift in loans: चाबी→चावी, सब्जी→भाजी spirit."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Elder brother in Marathi?",
+          "options": [
+            "दादा",
+            "भाऊ",
+            "काका",
+            "मामा"
+          ],
+          "answer": 1,
+          "explanation": "भाऊ = elder brother; दादा = grandfather."
+        },
+        {
+          "question": "Mirror in Marathi?",
+          "options": [
+            "आईना",
+            "आरसा",
+            "खिडकी",
+            "दार"
+          ],
+          "answer": 1,
+          "explanation": "आरसा (ārsā) — the clearest Hindi→Marathi swap on this page."
+        },
+        {
+          "question": "Room in Marathi?",
+          "options": [
+            "कमरा",
+            "खोली",
+            "घर",
+            "दार"
+          ],
+          "answer": 1,
+          "explanation": "खोली (khoḷī) = room; घर = house."
+        }
+      ],
+      "translate": [
+        {
+          "source": "मेरा कमरा साफ है।",
+          "sourceLang": "hi",
+          "answer": "माझी खोली स्वच्छ आहे.",
+          "note": "खोली is feminine → माझी, स्वच्छ."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/family/",
+      "/vocabulary/daily-life/",
+      "/vocabulary/household-items/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say “uncle/aunt” in Marathi?",
+        "answer": "काका/काकी (father's brother/wife), मामा/मामी (mother's brother/wife) — gender is explicit in every pair."
+      },
+      {
+        "question": "What is the Marathi word for “mirror”?",
+        "answer": "आरसा — not आईना. This is one of the few household words with zero sound overlap."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "sentence-patterns",
+    "title": "Hindi to Marathi Sentence Patterns: SOV, Particles, Tense",
+    "description": "Core sentence patterns mapped Hindi to Marathi — SOV order, particles (ने, को, से), continuous tense (रहा→तो+आहे), possession — from Units 04, 05.",
+    "h1": "Hindi → Marathi: Sentence Patterns",
+    "searchIntent": "comparison",
+    "level": "intermediate",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "grammar",
+      "sentence-structure",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi sentence patterns",
+    "secondaryKeywords": [
+      "marathi sentence structure",
+      "hindi marathi grammar comparison",
+      "marathi word order"
+    ],
+    "intro": [
+      "Sentence-level mappings from Units 04–05: both languages are SOV, but Marathi adds a neuter gender, fuses postpositions (मुझे→मला, को→कडून), and builds continuous tense with verb+तो+आहे instead of रहा/रही. Each row maps the Hindi pattern to the Marathi pattern with the grammar note.",
+      "The good news: word order is the same. The work is in the particles and the fused forms."
+    ],
+    "tip": "Continuous tense = verb root + तो + आहे (खातो आहे, जात आहे, बोलतो आहे). Drop रहा/रही entirely.",
+    "bridgeUnits": [
+      "04",
+      "05"
+    ],
+    "units": [
+      "04",
+      "05"
+    ],
+    "sections": [
+      {
+        "heading": "Postposition fusion",
+        "paragraphs": [
+          "Hindi मुझे → Marathi मला, को → कडून, से → कडून, के लिए → साठी. These are single fused forms where Hindi uses a separate postposition. Memorize the fused pairs; they appear in every sentence."
+        ]
+      },
+      {
+        "heading": "The continuous tense rewrite",
+        "paragraphs": [
+          "Hindi खा रहा हूँ → Marathi मी खातो आहे. The pattern: verb root + तो + आहे (masculine), ती + आहे (feminine), ते + आहे (neuter). No रहा/रही anywhere."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "मी खा रहा आहे",
+        "right": "मी खातो आहे",
+        "why": "Marathi continuous = verb root + तो + आहे. रहा never appears."
+      },
+      {
+        "wrong": "मुझे पसंद है for “I like”",
+        "right": "मला आवडते",
+        "why": "पसंद है has no Marathi life; the fused form is मला … आवडते."
+      },
+      {
+        "wrong": "मेरा for all possessives",
+        "right": "माझा (masc), माझी (fem), माझे (neut)",
+        "why": "Three genders, three forms — the noun decides."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“I am eating” in Marathi?",
+          "options": [
+            "मी खा रहा आहे",
+            "मी खातो आहे",
+            "मी खावेन आहे",
+            "मी खाल्लो आहे"
+          ],
+          "answer": 1,
+          "explanation": "Verb root खा + तो + आहे = खातो आहे."
+        },
+        {
+          "question": "“To me” (dative) in Marathi?",
+          "options": [
+            "मुझको",
+            "मला",
+            "माझ्याकडे",
+            "माझ्यासाठी"
+          ],
+          "answer": 1,
+          "explanation": "मला — the fused dative form, replaces Hindi मुझे."
+        },
+        {
+          "question": "Continuous tense marker in Marathi?",
+          "options": [
+            "रहा",
+            "तो + आहे",
+            "ते + आहे",
+            "त + आहे"
+          ],
+          "answer": 1,
+          "explanation": "तो + आहे (masc), ती + आहे (fem), ते + आहे (neut)."
+        }
+      ],
+      "translate": [
+        {
+          "source": "वह जा रहा है।",
+          "sourceLang": "hi",
+          "answer": "तो जात आहे.",
+          "note": "Verb root जा + तो + आहे = जात आहे."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/grammar/sentence-structure/",
+      "/grammar/possessives/",
+      "/hindi-to-marathi/questions/"
+    ],
+    "faq": [
+      {
+        "question": "Is Marathi word order the same as Hindi?",
+        "answer": "Yes — both are SOV. The differences are in particles (fused forms), gender (neuter added), and continuous tense (तो+आहे)."
+      },
+      {
+        "question": "How do you form the continuous tense in Marathi?",
+        "answer": "Verb root + तो + आहे (masc), ती + आहे (fem), ते + आहे (neut). Example: खातो आहे, पडते आहे, बोलतो आहे."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "pronouns-people",
+    "title": "Hindi to Marathi Pronouns & People Words: I, You, We, They",
+    "description": "Pronouns and people words mapped Hindi to Marathi — मैं→मी, तू→तू, आप→तुम्ही/आप, वह→तो/ती/ते — with gender, honorifics and case forms from Unit 05.",
+    "h1": "Hindi → Marathi: Pronouns & People",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "pronouns",
+      "grammar",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi pronouns",
+    "secondaryKeywords": [
+      "marathi pronouns",
+      "i you we in marathi",
+      "marathi personal pronouns"
+    ],
+    "intro": [
+      "Pronouns and people words from Unit 05 mapped Hindi to Marathi: personal pronouns (मैं→मी, तू→तू, आप→तुम्ही/आप, वह→तो/ती/ते), demonstratives (यह→हा/ही/हे, वह→तो/ती/ते), question pronouns (कौन→कोण, क्या→काय). Each row shows the Hindi, the Marathi, and the gender/case note.",
+      "Marathi adds a neuter gender (ते/हे) and splits the honorific आप into तुम्ही (plural respectful) and आप (formal singular). The demonstratives mirror the pronoun genders exactly."
+    ],
+    "tip": "Demonstratives = pronoun genders made visible: हा/ही/हे = तो/ती/ते near the speaker. Learn one set, you know both.",
+    "bridgeUnits": [
+      "05"
+    ],
+    "units": [
+      "05"
+    ],
+    "sections": [
+      {
+        "heading": "Personal pronouns — three genders, two honorifics",
+        "paragraphs": [
+          "मी (I), तू (you informal), तुम्ही (you respectful plural/older), आप (formal singular — rare in speech). Third person: तो (he), ती (she), ते (it/they neuter). The neuter ते is the new piece for Hindi speakers."
+        ]
+      },
+      {
+        "heading": "Demonstratives mirror pronouns",
+        "paragraphs": [
+          "हा/ही/हे (this) matches तो/ती/ते (that) in gender exactly. इथे/तिथे (here/there) and असा/तसा (like this/like that) follow the same near/far split."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using तू for elders",
+        "right": "तुम्ही for elders, strangers, formal",
+        "why": "तू is intimate/informal only. Hindi speakers often overuse तू because आप covers both in Hindi."
+      },
+      {
+        "wrong": "Assuming वह maps to one word",
+        "right": "वह → तो (he) / ती (she) / ते (it) — gender is mandatory",
+        "why": "Marathi has no gender-neutral third-person singular."
+      },
+      {
+        "wrong": "Writing येथे for इथे",
+        "right": "इथे = here; येथे is a variant, standard is इथे",
+        "why": "Course standard is इथे/तिथे."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“He” in Marathi?",
+          "options": [
+            "ती",
+            "ते",
+            "तो",
+            "तुम्ही"
+          ],
+          "answer": 2,
+          "explanation": "तो = he (masculine)."
+        },
+        {
+          "question": "Formal “you” in Marathi?",
+          "options": [
+            "तू",
+            "तुम्ही",
+            "मी",
+            "तो"
+          ],
+          "answer": 1,
+          "explanation": "तुम्ही = respectful you. आप exists but is rare in speech."
+        },
+        {
+          "question": "Neuter “it/this”?",
+          "options": [
+            "हा",
+            "ही",
+            "हे",
+            "हो"
+          ],
+          "answer": 2,
+          "explanation": "हे (he) = neuter this/it."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "___ काय आहे? — हे पुस्तक आहे.",
+          "answer": "हे",
+          "hint": "पुस्तक is neuter → हे."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/grammar/pronouns/",
+      "/grammar/possessives/",
+      "/hindi-to-marathi/sentence-patterns/"
+    ],
+    "faq": [
+      {
+        "question": "How many genders does Marathi have?",
+        "answer": "Three — masculine, feminine, neuter. Hindi has two; the neuter (ते/हे/माझे) is the new one to learn."
+      },
+      {
+        "question": "What is the formal “you” in Marathi?",
+        "answer": "तुम्ही (respectful plural/older). The Hindi आप splits into तुम्ही (common) and आप (very formal, rare)."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "shopping",
+    "title": "Hindi to Marathi Shopping: Market, Prices, Bargaining",
+    "description": "Shopping vocabulary mapped Hindi to Marathi — prices, quantities, bargaining, payment — from Unit 09.",
+    "h1": "Hindi → Marathi: Shopping & Market",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "shopping",
+      "market",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi shopping",
+    "secondaryKeywords": [
+      "bargaining in marathi",
+      "marathi market words",
+      "marathi price words"
+    ],
+    "intro": [
+      "Shopping and market vocabulary from Unit 09 mapped Hindi to Marathi — quantities (किलो, पाव, आधा), prices (कितना→किती, महँगा→महाग), bargaining (कम करो→कमी करा), payment (नकद→रोख, ऑनलाइन→ऑनलाइन). Each row maps the Hindi phrase to the Marathi sentence with the grammar note.",
+      "The quantities and bargaining lines are identical in structure — एक किलो, आधा किलो, थोडं कमी करा — making this one of the fastest pages for Hindi speakers to internalize."
+    ],
+    "tip": "थोडं कमी करा, कृपया — the single most useful bargaining line. Say it with a smile; vendors expect it.",
+    "bridgeUnits": [
+      "09"
+    ],
+    "units": [
+      "09"
+    ],
+    "sections": [
+      {
+        "heading": "Quantities — identical structure",
+        "paragraphs": [
+          "एक किलो, आधा किलो, पाव किलो, दोन किलो — the Hindi speaker already knows these. The Marathi noun follows exactly as in Hindi: एक किलो भाजी, आधा किलो टोमॅटो."
+        ]
+      },
+      {
+        "heading": "Bargaining lines",
+        "paragraphs": [
+          "किती आहे? (How much?), थोडं कमी करा (reduce a little), हे छान आहे (this is good), मी घेईन (I'll take it), बिल द्या (give the bill). The grammar is the same; only the vocabulary shifts."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Saying कितना in Marathi",
+        "right": "किती = how much/many",
+        "why": "Hindi कितना/कितनी/कितने; Marathi collapses to किती for all."
+      },
+      {
+        "wrong": "Using महँगा",
+        "right": "महाग = expensive (Marathi spelling)",
+        "why": "Same root, Marathi drops the nasal: महँगा → महाग."
+      },
+      {
+        "wrong": "नकद for cash",
+        "right": "रोख = cash",
+        "why": "नकद is understood but रोख is the everyday Marathi word."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "How much? in Marathi",
+          "options": [
+            "कितना",
+            "किती",
+            "कितनी",
+            "कितने"
+          ],
+          "answer": 1,
+          "explanation": "किती — single form for all genders/numbers."
+        },
+        {
+          "question": "“Reduce a little” in Marathi?",
+          "options": [
+            "थोडा कम करो",
+            "थोडं कमी करा",
+            "कमी करा",
+            "थोडं करा"
+          ],
+          "answer": 1,
+          "explanation": "थोडं कमी करा — exact Unit 09 line."
+        },
+        {
+          "question": "Cash in Marathi?",
+          "options": [
+            "नकद",
+            "रोख",
+            "पैसा",
+            "पावती"
+          ],
+          "answer": 1,
+          "explanation": "रोख (rokh) — everyday word; नकद is formal."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "एक किलो ___ द्या.",
+          "answer": "भाजी",
+          "hint": "Generic vegetable ask — Unit 09."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/shopping/",
+      "/phrases/shopping/",
+      "/blog/how-to-shop-in-marathi/"
+    ],
+    "faq": [
+      {
+        "question": "How do you bargain in Marathi?",
+        "answer": "थोडं कमी करा, कृपया — reduce a little, please. The polite कृपया makes it standard etiquette."
+      },
+      {
+        "question": "What is the Marathi word for “expensive”?",
+        "answer": "महाग (mahāg) — same root as महँगा, nasal dropped."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "health-body",
+    "title": "Hindi to Marathi Health & Body: Symptoms, Doctor Visit",
+    "description": "Hindi to Marathi health words — body parts, symptoms and doctor sentences — from Units 10, 17.",
+    "h1": "Hindi → Marathi: Health & Body",
+    "searchIntent": "comparison",
+    "level": "intermediate",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "health",
+      "body",
+      "doctor"
+    ],
+    "primaryKeyword": "hindi to marathi health words",
+    "secondaryKeywords": [
+      "marathi medical words",
+      "body parts in marathi",
+      "doctor visit marathi"
+    ],
+    "intro": [
+      "Health and body vocabulary from Units 10 and 17 mapped Hindi to Marathi — body parts (सिर→डोकं, पेट→पोट, हाथ→हात), symptoms (दर्द→दुखते, बुखार→ताप, खाँसी→खोकला), doctor sentences (डॉक्टर, मुझे चाहिए→मला पाहिजे). Each row shows the Hindi, the Marathi, and the grammar note.",
+      "The pattern माझे … दुखते (my … hurts) with body part as subject mirrors Hindi मेरा … दुख रहा है — the subject-verb agreement carries over. The shift is in the body part words themselves."
+    ],
+    "tip": "Body part as subject: माझं डोके दुखते (my head hurts). The body part is the grammatical subject — same logic as Hindi.",
+    "bridgeUnits": [
+      "10",
+      "17"
+    ],
+    "units": [
+      "10",
+      "17"
+    ],
+    "sections": [
+      {
+        "heading": "Body parts — the shifts",
+        "paragraphs": [
+          "सिर → डोकं, पेट → पोट, हाथ → हात, पैर → पाय, आँख → डोळा, कान → कान (same), नाक → नाक (same), दाँत → दात. The unchanged ones (कान, नाक) are free; the shifted ones (डोकं, पोट, डोळा, दात) are the ones to drill."
+        ]
+      },
+      {
+        "heading": "Symptoms — the pattern carries",
+        "paragraphs": [
+          "दुखते (hurts) with body part subject: माझं डोके दुखते, माझे पोट दुखते. ताप (fever), खोकला (cough), उलटी (vomiting), दस्त (diarrhea) — all take मला pattern: मला ताप आहे, मला खोकला आहे."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "मुझे ताप है for fever",
+        "right": "मला ताप आहे",
+        "why": "Symptoms take the dative मला pattern: मला ताप आहे, मला खोकला आहे."
+      },
+      {
+        "wrong": "Using आँख for eye",
+        "right": "डोळा = eye",
+        "why": "आँख is Hindi; डोळा is the Marathi word — no sound overlap."
+      },
+      {
+        "wrong": "मेरा पेट दुख रहा है word-for-word",
+        "right": "माझे पोट दुखते",
+        "why": "Body part as subject works, but the possessive and body word shift: मेरा→माझे, पेट→पोट, दुख रहा है→दुखते."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Headache in Marathi?",
+          "options": [
+            "माझं डोके दुखते",
+            "मला डोके दुखते",
+            "माझे सिर दुखते",
+            "मी डोके दुखतो"
+          ],
+          "answer": 0,
+          "explanation": "माझं डोके दुखते — body part as subject, neuter agreement."
+        },
+        {
+          "question": "Fever in Marathi?",
+          "options": [
+            "बुखार",
+            "ताप",
+            "तापमान",
+            "ज्वर"
+          ],
+          "answer": 1,
+          "explanation": "ताप (tāp) — everyday word; बुखार is understood but ताप is standard."
+        },
+        {
+          "question": "Stomach in Marathi?",
+          "options": [
+            "पेट",
+            "पोट",
+            "पाठ",
+            "कमर"
+          ],
+          "answer": 1,
+          "explanation": "पोट (poṭ) — stomach."
+        }
+      ],
+      "translate": [
+        {
+          "source": "Doctor, I have a fever.",
+          "sourceLang": "hi",
+          "answer": "डॉक्टर, मला ताप आहे.",
+          "note": "Unit 10 — dative मला for symptoms."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/body-parts/",
+      "/blog/at-the-doctor/",
+      "/lessons/10/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say “my stomach hurts” in Marathi?",
+        "answer": "माझे पोट दुखते — body part as subject, neuter possessive माझे, verb दुखते."
+      },
+      {
+        "question": "What is the Marathi word for “cough”?",
+        "answer": "खोकला (khoklā) — मला खोकला आहे (I have a cough)."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "time-seasons",
+    "title": "Hindi to Marathi Time & Seasons: Clock, Calendar, Weather",
+    "description": "Hindi to Marathi time words — clock, day parts, seasons, calendar and dates — from Units 16, 14.",
+    "h1": "Hindi → Marathi: Time & Seasons",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "time",
+      "seasons",
+      "calendar"
+    ],
+    "primaryKeyword": "hindi to marathi time words",
+    "secondaryKeywords": [
+      "marathi time vocabulary",
+      "seasons in marathi",
+      "clock in marathi"
+    ],
+    "intro": [
+      "Time, seasons and calendar words from Units 14 and 16 mapped Hindi to Marathi — clock (घंटा→तास, मिनट→मिनिट, बजे→वाजले), day parts (सुबह→सकाळ, दोपहर→दुपार, शाम→संध्याकाळ, रात→रात्र), seasons (गर्मी→उन्हाळा, बरसात→पावसाळा, सर्दी→हिवाळा, बसंत→वसंत). Each row shows the Hindi, the Marathi, and the one trap to avoid.",
+      "The big trap for Hindi speakers: काल means YESTERDAY in Marathi (tomorrow is उद्या). This is the single most dangerous false friend on the calendar."
+    ],
+    "tip": "काल = yesterday (not tomorrow). उद्या = tomorrow. Write it on a sticky note until it sticks.",
+    "bridgeUnits": [
+      "14",
+      "16"
+    ],
+    "units": [
+      "14",
+      "16"
+    ],
+    "sections": [
+      {
+        "heading": "The काल trap",
+        "paragraphs": [
+          "Hindi कल = tomorrow OR yesterday (context). Marathi splits it: उद्या = tomorrow, काल = yesterday. This is the #1 calendar mistake for Hindi speakers — drill it until automatic."
+        ]
+      },
+      {
+        "heading": "Clock words",
+        "paragraphs": [
+          "घंटा → तास, मिनट → मिनिट, बजे → वाजले (the verb, not a noun). साडे पाच वाजले = half past five. The half-hour marker साडे is the only new grammar piece; the numbers are shared."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using काल for tomorrow",
+        "right": "उद्या = tomorrow; काल = yesterday",
+        "why": "The most dangerous false friend in the time system. Hindi कल does both; Marathi separates them."
+      },
+      {
+        "wrong": "Saying पाँच बजे for 5 o'clock",
+        "right": "पाच वाजले",
+        "why": "Marathi uses वाजले (struck) as the verb: पाच वाजले = 5 o'clock struck."
+      },
+      {
+        "wrong": "Writing गर्मी for summer",
+        "right": "उन्हाळा = summer",
+        "why": "गर्मी = heat (noun); उन्हाळा = the summer season. Same split as Hindi but the word is different."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Tomorrow in Marathi?",
+          "options": [
+            "काल",
+            "उद्या",
+            "आज",
+            "परसों"
+          ],
+          "answer": 1,
+          "explanation": "उद्या = tomorrow. काल = yesterday."
+        },
+        {
+          "question": "Half past five in Marathi?",
+          "options": [
+            "साडे पाच बजे",
+            "साडे पाच वाजले",
+            "पाच तीस",
+            "ढाई पाच"
+          ],
+          "answer": 1,
+          "explanation": "साडे पाच वाजले — साडे = half, वाजले = struck."
+        },
+        {
+          "question": "Monsoon in Marathi?",
+          "options": [
+            "उन्हाळा",
+            "पावसाळा",
+            "हिवाळा",
+            "वसंत"
+          ],
+          "answer": 1,
+          "explanation": "पावसाळा (pāvasāḷā) — the monsoon season."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "आता ___ वाजले. (It is now half past five.)",
+          "answer": "साडे पाच",
+          "hint": "Unit 16 clock sentence."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/weather/",
+      "/blog/how-to-tell-time-in-marathi/",
+      "/lessons/16/"
+    ],
+    "faq": [
+      {
+        "question": "What is the biggest time trap for Hindi speakers?",
+        "answer": "काल means yesterday in Marathi, not tomorrow. Tomorrow is उद्या. This is the #1 mistake."
+      },
+      {
+        "question": "How do you say “5 o'clock” in Marathi?",
+        "answer": "पाच वाजले — the verb वाजले (struck) replaces Hindi बजे."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "emotions",
+    "title": "Hindi to Marathi Emotions: Feelings, Moods, Inner States",
+    "description": "Emotions and inner states mapped Hindi to Marathi — आनंद, राग, भीती, काळजी, भूक, तहान — with the मला…आहे pattern from Unit 17.",
+    "h1": "Hindi → Marathi: Emotions & Feelings",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "emotions",
+      "conversation",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi emotions",
+    "secondaryKeywords": [
+      "marathi feelings words",
+      "emotions in marathi",
+      "happy sad angry marathi"
+    ],
+    "intro": [
+      "Emotions and inner states from Unit 17 mapped Hindi to Marathi — आनंद (happiness), राग (anger), भीती (fear), काळजी (worry), लाज (shame), गौरव (pride), and the body-states भूक (hunger), तहान (thirst), झोप (sleepiness). Each row shows the Hindi, the Marathi, and the मला…आहे pattern note.",
+      "The grammar key: feelings and body-states arrive TO you in Marathi — मला आनंद आहे (I have happiness → I am happy), मला भूक लागली आहे (hunger has hit me). Hindi मुझे … है works the same way; the words shift."
+    ],
+    "tip": "Learn in opposite pairs: आनंद/दुःख, भीती/धैर्य, काळजी/निश्चिंती, भूक/तृप्ती — pairs stick better than lists.",
+    "bridgeUnits": [
+      "17"
+    ],
+    "units": [
+      "17"
+    ],
+    "sections": [
+      {
+        "heading": "The मला…आहे pattern",
+        "paragraphs": [
+          "Feelings are things that happen TO you: मला राग आला (anger came to me), मला भीती वाटते (fear feels to me), मला भूक लागली आहे (hunger has struck me). The Hindi मुझे … है maps directly — just swap the vocabulary."
+        ]
+      },
+      {
+        "heading": "The राग trap",
+        "paragraphs": [
+          "Hindi राग = musical mode. Marathi राग = anger. Same spelling, opposite vibe. This is the highest-frequency false friend on this page — flag it mentally."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using राग for music",
+        "right": "राग = anger in Marathi",
+        "why": "Hindi राग (melody) ≠ Marathi राग (anger). The word is identical; the meaning is not."
+      },
+      {
+        "wrong": "मी आनंद आहे for “I am happy”",
+        "right": "मला आनंद आहे",
+        "why": "Happiness arrives TO you: मला (to me) + आनंद (happiness) + आहे (is)."
+      },
+      {
+        "wrong": "दुख for दुःख",
+        "right": "दुःख with visarga",
+        "why": "Standard Marathi keeps the ः; writing दुख is the Hindi spelling habit."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Anger in Marathi?",
+          "options": [
+            "भीती",
+            "राग",
+            "आनंद",
+            "काळजी"
+          ],
+          "answer": 1,
+          "explanation": "राग (rāg) = anger — not music, as in Hindi."
+        },
+        {
+          "question": "“I am afraid” in Marathi?",
+          "options": [
+            "मी भीती आहे",
+            "मला भीती वाटते",
+            "माझी भीती आहे",
+            "भीती मी आहे"
+          ],
+          "answer": 1,
+          "explanation": "मला भीती वाटते — fear feels to me (dative + verb वाटणे)."
+        },
+        {
+          "question": "Hunger in Marathi?",
+          "options": [
+            "भूक",
+            "भूख",
+            "भोग",
+            "भजन"
+          ],
+          "answer": 0,
+          "explanation": "भूक (bhūk) — the dative pattern: मला भूक लागली आहे."
+        }
+      ],
+      "translate": [
+        {
+          "source": "I am very happy today.",
+          "sourceLang": "hi",
+          "answer": "मी आज खूप आनंदी आहे.",
+          "note": "Unit 17 — आनंदी (happy) is the adjective form of आनंद."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/emotions/",
+      "/blog/emotions-feelings/",
+      "/lessons/17/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say “I am sad” in Marathi?",
+        "answer": "मला दुःख आहे or मी दुःखी आहे — the curriculum sentence is मला थोडं दुःख आहे (I feel a little sad)."
+      },
+      {
+        "question": "Is राग the same in Hindi and Marathi?",
+        "answer": "No — Hindi राग = musical mode; Marathi राग = anger. This is the top false friend on this page."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "work-career",
+    "title": "Hindi to Marathi Work & Career: Jobs, Office, Professions",
+    "description": "Hindi to Marathi work words — jobs, office, traditional professions and modern roles — from Units 11, 19, 23.",
+    "h1": "Hindi → Marathi: Work & Career",
+    "searchIntent": "comparison",
+    "level": "intermediate",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "work",
+      "office",
+      "career"
+    ],
+    "primaryKeyword": "hindi to marathi work words",
+    "secondaryKeywords": [
+      "marathi office vocabulary",
+      "jobs in marathi",
+      "marathi profession words"
+    ],
+    "intro": [
+      "Work and career vocabulary from Units 11, 19, 23 mapped Hindi to Marathi — modern roles (इंजीनियर→अभियंता, वकील→वकील, डॉक्टर→डॉक्टर), traditional professions (बढ़ई→सुतार, लोहार→लोहार, सुनार→सोनार, दर्जी→शिंपी), office words (नौकरी→नोकरी, वेतन→पगार, मीटिंग→बैठक, छुट्टी→सुट्टी). Each row maps the Hindi to the Marathi with the grammar note.",
+      "Many traditional professions are also surnames in Maharashtra — सुतार, लोहार, सोनार, शिंपी, न्हावी, धोबी, माळी, गवळी. Knowing the word means you recognize the surname too."
+    ],
+    "tip": "Traditional professions = surnames: सुतार, लोहार, सोनार, शिंपी, न्हावी, धोबी, माळी, गवळी. The vocabulary and the family name are identical.",
+    "bridgeUnits": [
+      "11",
+      "19",
+      "23"
+    ],
+    "units": [
+      "11",
+      "19",
+      "23"
+    ],
+    "sections": [
+      {
+        "heading": "Traditional professions — surnames you will meet",
+        "paragraphs": [
+          "सुतार (carpenter), लोहार (blacksmith), सोनार (goldsmith), शिंपी (tailor), न्हावी (barber), धोबी (washerman), माळी (gardener), गवळी (milkman) — identical words serve as job titles and family names across Maharashtra."
+        ]
+      },
+      {
+        "heading": "Modern office",
+        "paragraphs": [
+          "नोकरी (job), पगार (salary), बैठक (meeting), सुट्टी (leave), संगणक (computer), बिल (bill), प्रमोशन (promotion), प्रोजेक्ट (project) — the words for your first day, your payslip, your career growth."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using शिपाई for soldier",
+        "right": "शिपाई = peon/attendant; सैनिक = soldier",
+        "why": "Hindi सिपाही = soldier; Marathi शिपाई is the office attendant. The soldier is सैनिक — direct false friend."
+      },
+      {
+        "wrong": "Confusing काम (work) and नोकरी (job)",
+        "right": "काम = work (activity); नोकरी = job (position)",
+        "why": "मला काम आहे (I have work to do) vs माझी नोकरी आहे (I have a job). Hindi काम/नौकरी follows the same split."
+      },
+      {
+        "wrong": "Writing बॉस for boss",
+        "right": "मालक/अधिकारी — बॉस is understood but मालक is the Marathi word",
+        "why": "Loanwords work but the native terms carry more respect in formal contexts."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Salary in Marathi?",
+          "options": [
+            "वेतन",
+            "पगार",
+            "तनख्वाह",
+            "आय"
+          ],
+          "answer": 1,
+          "explanation": "पगार (pagār) — everyday word; वेतन is formal."
+        },
+        {
+          "question": "A tailor in Marathi?",
+          "options": [
+            "सुतार",
+            "लोहार",
+            "शिंपी",
+            "धोबी"
+          ],
+          "answer": 2,
+          "explanation": "शिंपी (śimpī) = tailor; the surname Shimpī comes from this."
+        },
+        {
+          "question": "Leave/holiday in Marathi?",
+          "options": [
+            "छुट्टी",
+            "सुट्टी",
+            "अवकाश",
+            "सुटी"
+          ],
+          "answer": 1,
+          "explanation": "सुट्टी (suṭṭī) — the everyday word."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "मला ___ मिळालं. (I got a promotion.)",
+          "answer": "प्रमोशन",
+          "hint": "Unit 19 office sentence — loanword used as-is."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/work-office/",
+      "/phrases/office-work/",
+      "/blog/first-day-work/"
+    ],
+    "faq": [
+      {
+        "question": "What is the Marathi word for “salary”?",
+        "answer": "पगार (pagār) — everyday; वेतन is formal/official."
+      },
+      {
+        "question": "Are traditional professions also surnames?",
+        "answer": "Yes — सुतार, लोहार, सोनार, शिंपी, न्हावी, धोबी, माळी, गवळी are both job titles and common surnames in Maharashtra."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "review-essentials",
+    "title": "Hindi to Marathi Review: Grammar & Vocab Recap",
+    "description": "Review of essential Hindi-to-Marathi bridges — fused forms, sound shifts, gender, continuous tense, question words — from Units 01–20.",
+    "h1": "Hindi → Marathi: Review Essentials",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "review",
+      "grammar",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi review",
+    "secondaryKeywords": [
+      "marathi grammar review",
+      "hindi marathi comparison",
+      "learn marathi from hindi basics"
+    ],
+    "intro": [
+      "A review bridge pulling the highest-leverage patterns from Units 01–20: fused forms (पाहिजे, नको, मला), sound shifts (मदद→मदत, तयार, चावी), three genders (माझा/माझी/माझे), continuous tense (तो+आहे), question words (काय, कुठे, कधी, कसे, कोण, का), and the dative pattern for feelings/symptoms (मला…आहे). Each row is a Hindi→Marathi mapping with the one note that makes it stick.",
+      "This page is the pre-trip or pre-exam checklist — if these 20 rows are automatic, the rest of the course builds on solid ground."
+    ],
+    "tip": "If you know these 20 rows cold, you have the skeleton of Marathi. Everything else is vocabulary hanging on this frame.",
+    "bridgeUnits": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "07",
+      "09",
+      "10",
+      "11",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "units": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "07",
+      "09",
+      "10",
+      "11",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "sections": [
+      {
+        "heading": "The 5 fused forms to never forget",
+        "paragraphs": [
+          "1) चाहिए → पाहिजे  2) नहीं चाहिए → नको  3) मुझे → मला  4) को/से/के लिए → कडून/साठी  5) यह/वह → हा/ही/हे, तो/ती/ते. These appear in every conversation."
+        ]
+      },
+      {
+        "heading": "The 3 sound shifts that cover 80%",
+        "paragraphs": [
+          "1) Hindi द/द → Marathi त/त (मदद→मदत, चाबी→चावी, सब्जी→भाजी spirit). 2) Hindi nasal drop (महँगा→महाग, गंगा→गंगा same). 3) Hindi आ → Marathi अ/अ (तयार, आरसा)."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using all Hindi postpositions separately",
+        "right": "Marathi fuses them: मुझे→मला, को→कडून",
+        "why": "Fused forms are mandatory, not optional — they are the grammar."
+      },
+      {
+        "wrong": "Dropping the neuter gender",
+        "right": "Neuter is real: ते, हे, माझे, सोपे, खाते आहे",
+        "why": "Hindi has two genders; Marathi has three. Ignoring neuter breaks agreement everywhere."
+      },
+      {
+        "wrong": "Keeping रहा/रही in continuous",
+        "right": "तो+आहे, ती+आहे, ते+आहे — never रहा",
+        "why": "The marker is the verb root + तो/ती/ते + आहे. रहा has no place in Marathi."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "“I need” in Marathi?",
+          "options": [
+            "मी हवा",
+            "मला पाहिजे",
+            "मी मागतो",
+            "माझं आहे"
+          ],
+          "answer": 1,
+          "explanation": "मला पाहिजे — the fused need form."
+        },
+        {
+          "question": "Continuous “he is going”?",
+          "options": [
+            "तो जा रहा आहे",
+            "तो जात आहे",
+            "तो गेला आहे",
+            "तो जाईल आहे"
+          ],
+          "answer": 1,
+          "explanation": "तो जात आहे — root जा + तो + आहे."
+        },
+        {
+          "question": "Neuter “this book”?",
+          "options": [
+            "हा पुस्तक",
+            "ही पुस्तक",
+            "हे पुस्तक",
+            "हो पुस्तक"
+          ],
+          "answer": 2,
+          "explanation": "पुस्तक is neuter → हे पुस्तक."
+        }
+      ],
+      "translate": [
+        {
+          "source": "मुझे पानी चाहिए।",
+          "sourceLang": "hi",
+          "answer": "मला पाणी पाहिजे.",
+          "note": "Fused need + dative — the pattern from Unit 01."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/greetings/",
+      "/hindi-to-marathi/questions/",
+      "/hindi-to-marathi/sentence-patterns/"
+    ],
+    "faq": [
+      {
+        "question": "What are the top 5 Hindi→Marathi patterns to master first?",
+        "answer": "1) पाहिजे/नको (need/don't want)  2) मला (to me)  3) कडून/साठी (from/for)  4) तो+आहे (continuous)  5) हा/ही/हे (gendered this)."
+      },
+      {
+        "question": "Do I need to learn all three genders?",
+        "answer": "Yes — neuter is not optional. Words like पाणी (water), पुस्तक (book), घर (house), खाते (eating) are neuter and appear constantly."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "advanced-structures",
+    "title": "Hindi to Marathi Advanced: Passive, Causative",
+    "description": "Hindi to Marathi advanced grammar — passive, causative, relative-correlative and conditionals — from Unit 21.",
+    "h1": "Hindi → Marathi: Advanced Structures",
+    "searchIntent": "comparison",
+    "level": "advanced",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "grammar",
+      "advanced",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi advanced grammar",
+    "secondaryKeywords": [
+      "marathi passive causative",
+      "marathi relative clauses",
+      "hindi marathi advanced"
+    ],
+    "intro": [
+      "Advanced structures from Unit 21 mapped Hindi to Marathi — passive voice (किया जाता है → केला जाते), causative (करवाता है → करवते), relative-correlative pairs (जो…वह → जो…तो), complex conditionals (अगर…तो → जर…तर). Each row shows the Hindi structure, the Marathi equivalent, and the grammar shift.",
+      "Marathi passive uses the verb root + याचे/याचे + जाते (केला जाते, खाल्ले जाते). Causative adds व/वव (खववते = makes eat, बोलवते = makes speak). The relative-correlative pair is जो…तो (not जो…वह)."
+    ],
+    "tip": "Passive = root + याचे + जाते. Causative = root + व/वव. Relative = जो…तो. Three patterns, infinite sentences.",
+    "bridgeUnits": [
+      "21"
+    ],
+    "units": [
+      "21"
+    ],
+    "sections": [
+      {
+        "heading": "Passive — the याचे+जाते frame",
+        "paragraphs": [
+          "Hindi किया जाता है → Marathi केला जाते. The pattern: past participle (केला, खाल्ले, केले) + याचे + जाते. The agent (by whom) uses कडून: मी कडून केला जाते (done by me)."
+        ]
+      },
+      {
+        "heading": "Causative — the व/वव marker",
+        "paragraphs": [
+          "Hindi करवाता है → Marathi करवते. खववते (makes eat), बोलवते (makes speak), लिहवते (makes write). The causative marker व/वव attaches to the verb root before the tense ending."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using किया जाता है structure directly",
+        "right": "केला जाते — past participle + याचे + जाते",
+        "why": "Marathi passive is not a word-for-word translation of Hindi passive; the morphology is different."
+      },
+      {
+        "wrong": "जो…वह for relative clauses",
+        "right": "जो…तो — the correlative is तो, not वह",
+        "why": "Marathi's relative-correlative pair is जो…तो. वह never appears as the correlate."
+      },
+      {
+        "wrong": "Adding causative to already-causative verbs",
+        "right": "Check if the verb is already causative (बोलवणे = to make speak); double causative is ungrammatical",
+        "why": "Some verbs are inherently causative; adding another व creates nonsense."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Passive of “to do” in Marathi?",
+          "options": [
+            "करा जाते",
+            "केला जाते",
+            "करणे जाते",
+            "करते जाते"
+          ],
+          "answer": 1,
+          "explanation": "केला जाते — past participle केला + याचे + जाते."
+        },
+        {
+          "question": "Causative of “to eat” (खाणे)?",
+          "options": [
+            "खववते",
+            "खावते",
+            "खवते",
+            "खवावते"
+          ],
+          "answer": 0,
+          "explanation": "खववते — root खा + वव + ते = makes eat."
+        },
+        {
+          "question": "Relative-correlative pair in Marathi?",
+          "options": [
+            "जो…वह",
+            "जो…तो",
+            "जे…ते",
+            "जे…वह"
+          ],
+          "answer": 1,
+          "explanation": "जो…तो — जो introduces, तो correlates."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "काम ___ गेला. (The work got done.)",
+          "answer": "केला जाते",
+          "hint": "Passive frame from Unit 21."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/sentence-patterns/",
+      "/lessons/21/"
+    ],
+    "faq": [
+      {
+        "question": "How do you form the passive in Marathi?",
+        "answer": "Past participle + याचे + जाते — e.g., केला जाते (is done), खाल्ले जाते (is eaten), लिखले जाते (is written)."
+      },
+      {
+        "question": "What is the relative-correlative pair in Marathi?",
+        "answer": "जो…तो — जो introduces the relative clause, तो is the correlate in the main clause. Hindi जो…वह becomes जो…तो."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "media-news",
+    "title": "Hindi to Marathi Media & News: Politics, Formal Register",
+    "description": "Hindi to Marathi news words — political terms, report language and formal register — from Units 23, 24.",
+    "h1": "Hindi → Marathi: Media & News",
+    "searchIntent": "comparison",
+    "level": "advanced",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "media",
+      "news",
+      "formal"
+    ],
+    "primaryKeyword": "hindi to marathi news words",
+    "secondaryKeywords": [
+      "marathi political vocabulary",
+      "formal marathi words",
+      "marathi news language"
+    ],
+    "intro": [
+      "Media and news vocabulary from Units 23–24 mapped Hindi to Marathi — political terms (सरकार→सरकार, मंत्री→मंत्री, चुनाव→निवडणूक), report language (रिपोर्ट→अहवाल, जांच→तपास, घोषणा→घोषणा), formal register (इस प्रकार→या प्रकारे, इसलिए→म्हणून). Each row maps the Hindi formal word to the Marathi equivalent with the register note.",
+      "Much political vocabulary is shared Sanskrit loans (सरकार, मंत्री, संसद, विधानसभा) — the shifts are in the functional words and the register conventions (Marathi prefers या प्रकारे over इस प्रकार)."
+    ],
+    "tip": "Formal Marathi prefers या प्रकारे (in this manner) over इस प्रकार, म्हणून (therefore) over इसलिए — the logic is the same, the vocabulary is Marathi.",
+    "bridgeUnits": [
+      "23",
+      "24"
+    ],
+    "units": [
+      "23",
+      "24"
+    ],
+    "sections": [
+      {
+        "heading": "Shared Sanskrit loans — free vocabulary",
+        "paragraphs": [
+          "सरकार, मंत्री, मुख्यमंत्री, प्रधानमंत्री, संसद, विधानसभा, चुनाव→निवडणूक, मतदार, मतदान — the political core is shared. Learn the few that shift: चुनाव→निवडणूक, मत→मत (same), पार्टी→पक्ष."
+        ]
+      },
+      {
+        "heading": "Register shifts — the functional words",
+        "paragraphs": [
+          "इस प्रकार → या प्रकारे, इसलिए → म्हणून, अतः → त्यामुळे, किन्तु → पण/परंतु, यदि → जर. The logic is identical; the vocabulary is Marathi."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using चुनाव for election",
+        "right": "निवडणूक = election (Marathi)",
+        "why": "चुनाव is understood but निवडणूक is the standard Marathi word in news and official use."
+      },
+      {
+        "wrong": "Writing इस प्रकार in formal Marathi",
+        "right": "या प्रकारे",
+        "why": "Marathi formal register prefers या प्रकारे; इस प्रकार marks the text as Hindi-influenced."
+      },
+      {
+        "wrong": "Using इसलिए in writing",
+        "right": "म्हणून (therefore)",
+        "why": "म्हणून is the standard formal connector; इसलिए is Hindi."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Election in formal Marathi?",
+          "options": [
+            "चुनाव",
+            "निवडणूक",
+            "मतदान",
+            "पक्ष"
+          ],
+          "answer": 1,
+          "explanation": "निवडणूक — the standard Marathi word for election."
+        },
+        {
+          "question": "“Therefore” in formal Marathi?",
+          "options": [
+            "इसलिए",
+            "म्हणून",
+            "अतः",
+            "त्यामुळे"
+          ],
+          "answer": 1,
+          "explanation": "म्हणून — the standard formal connector."
+        },
+        {
+          "question": "Party (political) in Marathi?",
+          "options": [
+            "पार्टी",
+            "पक्ष",
+            "दल",
+            "समूह"
+          ],
+          "answer": 1,
+          "explanation": "पक्ष (pakṣa) — the standard term; पार्टी is understood."
+        }
+      ],
+      "translate": [
+        {
+          "source": "सरकार ने घोषणा की।",
+          "sourceLang": "hi",
+          "answer": "सरकाराने घोषणा केली.",
+          "note": "Ergative government + घोषणा केली (feminine agreement with घोषणा)."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/business/",
+      "/hindi-to-marathi/advanced-conversation/",
+      "/lessons/24/"
+    ],
+    "faq": [
+      {
+        "question": "How different is news Marathi from Hindi?",
+        "answer": "Core political vocabulary is shared Sanskrit loans; functional words shift (इस प्रकार→या प्रकारे, इसलिए→म्हणून, यदि→जर). The grammar (ergative in past, gender agreement) is the same logic."
+      },
+      {
+        "question": "What is “election” in Marathi?",
+        "answer": "निवडणूक — the standard word in news, official documents and conversation."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "business",
+    "title": "Hindi to Marathi Business: Trade, Finance",
+    "description": "Hindi to Marathi business words — trade, finance, banking, contracts and formal letters — from Units 19, 23.",
+    "h1": "Hindi → Marathi: Business & Finance",
+    "searchIntent": "comparison",
+    "level": "advanced",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "business",
+      "finance",
+      "formal"
+    ],
+    "primaryKeyword": "hindi to marathi business words",
+    "secondaryKeywords": [
+      "marathi finance vocabulary",
+      "trade words marathi",
+      "formal marathi business"
+    ],
+    "intro": [
+      "Business and finance vocabulary from Units 19, 23 mapped Hindi to Marathi — trade (व्यापार→व्यापार, सौदा→सौदा, ऑर्डर→ऑर्डर), banking (बैंक→बँक, खाता→खाते, ब्याज→व्याज, कर्ज→कर्ज), contracts (अनुबंध→करार, शर्त→शर्त, हस्ताक्षर→स्वाक्षरी). Each row maps the Hindi term to the Marathi equivalent with the register note.",
+      "Most finance vocabulary is shared Sanskrit/English loans — the shifts are in the functional words (बैंक→बँक with ँ, चेक→चेक same, रसीद→पावती). Formal letters use the ergative (सरकाराने, कंपनीने) and standard closings (आपला, शुभेच्छा)."
+    ],
+    "tip": "पावती = receipt (Marathi); रसीद is Hindi. बँक with ँ (candrabindu) is the Marathi spelling convention for bank.",
+    "bridgeUnits": [
+      "19",
+      "23"
+    ],
+    "units": [
+      "19",
+      "23"
+    ],
+    "sections": [
+      {
+        "heading": "Banking — mostly shared, spelling shifts",
+        "paragraphs": [
+          "बँक (bank), खाते (account), व्याज (interest), कर्ज (loan), किश्त (installment), चेक (cheque), डिमॅन्ड ड्राफ्ट (demand draft). The candrabindu in बँक is the only spelling flag; the words are shared."
+        ]
+      },
+      {
+        "heading": "Contracts — native terms where it matters",
+        "paragraphs": [
+          "करार (agreement), शर्त (condition), स्वाक्षरी (signature), गवाह (witness), नोंदणी (registration). These are the words on stamp paper and in legal Marathi — learn them if you sign contracts in Maharashtra."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Writing बैंक for bank",
+        "right": "बँक (with candrabindu)",
+        "why": "Marathi spelling convention for English loans: candrabindu marks the nasal."
+      },
+      {
+        "wrong": "Using रसीद for receipt",
+        "right": "पावती = receipt",
+        "why": "रसीद is Hindi; पावती is the Marathi word on every bill and invoice."
+      },
+      {
+        "wrong": "हस्ताक्षर for signature",
+        "right": "स्वाक्षरी = signature",
+        "why": "हस्ताक्षर is Sanskrit/Hindi formal; स्वाक्षरी is the Marathi legal word."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Receipt in Marathi?",
+          "options": [
+            "रसीद",
+            "पावती",
+            "बिल",
+            "खाते"
+          ],
+          "answer": 1,
+          "explanation": "पावती (pāvatī) — the word on every Marathi receipt."
+        },
+        {
+          "question": "Signature in legal Marathi?",
+          "options": [
+            "हस्ताक्षर",
+            "स्वाक्षरी",
+            "साइन",
+            "निशानी"
+          ],
+          "answer": 1,
+          "explanation": "स्वाक्षरी (svākṣarī) — the legal term; हस्ताक्षर is Sanskrit/Hindi."
+        },
+        {
+          "question": "Interest in Marathi?",
+          "options": [
+            "ब्याज",
+            "व्याज",
+            "बाजार",
+            "व्यापार"
+          ],
+          "answer": 1,
+          "explanation": "व्याज (vyāj) — nasalized from ब्याज."
+        }
+      ],
+      "fill": [
+        {
+          "sentence": "कंपनीने करार ___ केला. (The company signed the agreement.)",
+          "answer": "स्वाक्षरी",
+          "hint": "Ergative company + signature — formal business sentence."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/work-career/",
+      "/vocabulary/work-office/",
+      "/lessons/19/"
+    ],
+    "faq": [
+      {
+        "question": "What is the Marathi word for “receipt”?",
+        "answer": "पावती — not रसीद. Every Marathi bill says पावती."
+      },
+      {
+        "question": "How do you write “bank” in Marathi?",
+        "answer": "बँक — with candrabindu (ँ) over the ब. This is the standard Marathi spelling for the English loan."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "advanced-conversation",
+    "title": "Hindi to Marathi Advanced Conversation: Idioms, Politeness",
+    "description": "Advanced conversation patterns mapped Hindi to Marathi — idioms, politeness levels, social nuance, cultural phrases — from Units 25, 26.",
+    "h1": "Hindi → Marathi: Advanced Conversation",
+    "searchIntent": "comparison",
+    "level": "advanced",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "conversation",
+      "idioms",
+      "culture"
+    ],
+    "primaryKeyword": "hindi to marathi advanced conversation",
+    "secondaryKeywords": [
+      "marathi idioms",
+      "polite marathi phrases",
+      "cultural marathi expressions"
+    ],
+    "intro": [
+      "Advanced conversation from Units 25–26 mapped Hindi to Marathi — idioms (आमची भेट झाली→आमचं भेट झालं, कृपया→कृपया/हो कृपया), politeness layers (तू/तुम्ही/आप), cultural phrases (राम राम, देवाची कृपा, शुभ प्रवास, काळजी घे), social nuance (काही हरकत नाही, बरोबर, चूक). Each row shows the Hindi social phrase, the Marathi equivalent, and the nuance note.",
+      "Marathi politeness is more granular: तू (intimate), तुम्ही (respectful plural/older), आप (formal rare). The rescue lines (मला समजलं नाही, पुन्हा सांगा, हळू बोला) are social lubricant — use them liberally."
+    ],
+    "tip": "When in doubt, use तुम्ही — it is never wrong for elders, strangers, or groups. तू is intimate only.",
+    "bridgeUnits": [
+      "25",
+      "26"
+    ],
+    "units": [
+      "25",
+      "26"
+    ],
+    "sections": [
+      {
+        "heading": "Politeness ladder",
+        "paragraphs": [
+          "तू (intimate/children) → तुम्ही (respectful plural/older) → आप (formal/official, rare in speech). Hindi आप covers both तुम्ही and आप; Marathi splits them. Default to तुम्ही for anyone older or unfamiliar."
+        ]
+      },
+      {
+        "heading": "Cultural phrases that carry weight",
+        "paragraphs": [
+          "राम राम (traditional greeting, rural/older), देवाची कृपा (by God's grace — common response to कैसे आहात), शुभ प्रवास (safe journey), काळजी घे (take care), शाबास (well done). These are not decorative — they are social currency."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using तू with a shopkeeper",
+        "right": "तुम्ही — always respectful with service people",
+        "why": "तू with a stranger is rude in Marathi culture. Hindi speakers often default to तू because Hindi आप covers both."
+      },
+      {
+        "wrong": "Skipping कृपया in requests",
+        "right": "कृपया or हो कृपया — expected in every request",
+        "why": "Marathi requests without कृपया sound like commands. हो कृपया (yes please) and नको कृपया (no please) are the polite pair."
+      },
+      {
+        "wrong": "Assuming राम राम is religious only",
+        "right": "राम राम = traditional greeting (secular, cultural)",
+        "why": "Used by all communities in rural Maharashtra as a neutral hello. Not a religious statement."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Respectful “you” in Marathi?",
+          "options": [
+            "तू",
+            "तुम्ही",
+            "मी",
+            "तो"
+          ],
+          "answer": 1,
+          "explanation": "तुम्ही — respectful you for elders, strangers, groups."
+        },
+        {
+          "question": "“Take care” in Marathi?",
+          "options": [
+            "ध्यान रखो",
+            "काळजी घे",
+            "सावधान",
+            "रक्षक"
+          ],
+          "answer": 1,
+          "explanation": "काळजी घे — literal: care take. The standard caring farewell."
+        },
+        {
+          "question": "Traditional rural greeting?",
+          "options": [
+            "नमस्कार",
+            "राम राम",
+            "जय महाराष्ट्र",
+            "हरी ॐ"
+          ],
+          "answer": 1,
+          "explanation": "राम राम — secular cultural greeting across Maharashtra."
+        }
+      ],
+      "translate": [
+        {
+          "source": "कैसे हैं आप? — देवाची कृपा।",
+          "sourceLang": "hi",
+          "answer": "कसे आहात? — देवाची कृपा।",
+          "note": "Standard polite exchange — Unit 26 routine."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/pronouns-people/",
+      "/blog/polite-marathi/",
+      "/lessons/26/"
+    ],
+    "faq": [
+      {
+        "question": "How many politeness levels does Marathi have for “you”?",
+        "answer": "Three — तू (intimate), तुम्ही (respectful/standard), आप (formal/rare). Hindi आप covers तुम्ही and आप both."
+      },
+      {
+        "question": "What does काळजी घे mean?",
+        "answer": "Take care — literal: care take. The standard caring farewell in Marathi, used like ख्याल रखना."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "pronunciation-sounds",
+    "title": "Hindi to Marathi Pronunciation: Sounds, Shifts & Alphabet",
+    "description": "Sound shifts and pronunciation mapped Hindi to Marathi -- vowel/consonant changes, transliteration rules, the Devanagari alphabet -- from Unit 06.",
+    "h1": "Hindi to Marathi: Pronunciation & Sounds",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "pronunciation",
+      "alphabet",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi pronunciation",
+    "secondaryKeywords": [
+      "marathi alphabet",
+      "hindi to marathi sound shifts",
+      "marathi phonetics"
+    ],
+    "intro": [
+      "Pronunciation and sound shifts from Unit 06 mapped Hindi to Marathi -- the Devanagari alphabet, vowel signs, consonant shifts, and the systematic sound changes that turn Hindi into Marathi. Each row maps the Hindi sound to the Marathi equivalent with a clear example.",
+      "The shifts are regular and learnable: Hindi ड/ड → Marathi त/ट, Hindi nasal ँ → Marathi ँ, Hindi आ → Marathi अ. Once you internalize these 3-4 patterns, you can predict the Marathi form of most Sanskrit-derived words."
+    ],
+    "tip": "Focus on the 3 big shifts: 1) द/ड → त/ट (मदद→मदत, चाबी→चावी), 2) nasal drop (महँगा→महाग), 3) आ → अ (तयार, आरसा). These cover 80% of vocabulary shifts.",
+    "bridgeUnits": [
+      "06"
+    ],
+    "units": [
+      "06"
+    ],
+    "sections": [
+      {
+        "heading": "The Devanagari alphabet -- shared with twists",
+        "paragraphs": [
+          "Marathi uses the same Devanagari script as Hindi, but with a few extra signs: the eyelash ँ (candrabindu) for nasalization, the eyelash ़ (nukta) for loanword sounds (क़, ख़, ग़, ज़, फ़), and the vowel sign ॅ (short e) for English loans (प्लॅटफॉर्म). The core consonants and vowels are identical."
+        ]
+      },
+      {
+        "heading": "The 3 systematic sound shifts",
+        "paragraphs": [
+          "1) Hindi द/ड → Marathi त/ट: मदद→मदत, चाबी→चावी, बड़ी→बडी, कड़वा→कटवा. 2) Hindi nasal ँ drop: महँगा→महाग, गंगा→गंगा (same), झाँसी→झांसी. 3) Hindi आ → Marathi अ: तयार, आरसा, बाजार→बाजार (same), नमस्ते→नमस्कार. These are not exceptions -- they are rules."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Pronouncing ड as ड in Marathi",
+        "right": "Say ट: बड़ी→बडी, कड़वा→कटवा",
+        "why": "The retroflex ड shifts to ट systematically. This is the single most consistent shift."
+      },
+      {
+        "wrong": "Keeping nasal ँ in all words",
+        "right": "Drop it: महँगा→महाग, गंगा→गंगा (same), झाँसी→झांसी",
+        "why": "Marathi often drops the nasal ँ where Hindi keeps it. Not random -- follows phonological rules."
+      },
+      {
+        "wrong": "Writing तयार as तयार",
+        "right": "तयार -- with अ, not आ",
+        "why": "Hindi तैयार → Marathi तयार. The final आ shortens to अ in many loans."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Marathi for चाबी?",
+          "options": [
+            "चाबी",
+            "चावी",
+            "चाबि",
+            "चाबे"
+          ],
+          "answer": 1,
+          "explanation": "चावी -- Hindi चाबी shifts द→व, आ→अ."
+        },
+        {
+          "question": "Marathi for बड़ी?",
+          "options": [
+            "बड़ी",
+            "बडी",
+            "बदी",
+            "बडे"
+          ],
+          "answer": 1,
+          "explanation": "बडी -- ड shifts to ट."
+        },
+        {
+          "question": "Marathi for महँगा?",
+          "options": [
+            "महँगा",
+            "महाग",
+            "महग",
+            "महँग"
+          ],
+          "answer": 1,
+          "explanation": "महाग -- nasal ँ drops."
+        }
+      ],
+      "translate": [
+        {
+          "source": "बड़ी खुशी की बात है।",
+          "sourceLang": "hi",
+          "answer": "बडी खुशी बात आहे.",
+          "note": "बड़ी→बडी, है→आहे -- standard shifts."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/questions/",
+      "/hindi-to-marathi/daily-conversation/",
+      "/lessons/06/"
+    ],
+    "faq": [
+      {
+        "question": "How many sound shifts are there between Hindi and Marathi?",
+        "answer": "Three major systematic shifts cover 80% of vocabulary: 1) द/ड→त/ट, 2) nasal drop, 3) आ→अ. The rest are word-specific."
+      },
+      {
+        "question": "Is the Devanagari alphabet the same?",
+        "answer": "Yes, the core alphabet is identical. Marathi adds candrabindu (ँ), nukta (़), and ॅ for English loans."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "school-and-study",
+    "title": "Hindi to Marathi School & Study: Classroom, Subjects, Exams",
+    "description": "Hindi to Marathi school words — classroom, subjects, exams and grades — from Unit 11 (education half).",
+    "h1": "Hindi to Marathi: School & Study",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "education",
+      "school",
+      "conversation"
+    ],
+    "primaryKeyword": "hindi to marathi school words",
+    "secondaryKeywords": [
+      "marathi classroom vocabulary",
+      "hindi to marathi education",
+      "study words marathi"
+    ],
+    "intro": [
+      "School and study vocabulary from Unit 11 (education half) mapped Hindi to Marathi -- classroom (कक्षा→वर्ग), exams (परीक्षा→परीक्षा), subjects (गणित→गणित, विज्ञान→विज्ञान), grades (अंक→गुण). Each row maps the Hindi word to the Marathi equivalent with the grammar note.",
+      "Much of the vocabulary is shared Sanskrit loans (गणित, विज्ञान, इतिहास, भूगोल, परीक्षा, अध्यापक) -- the shifts are in the functional words and the classroom-specific terms (कॉपी→वही, रबड़→खोडरबर, पैमाना→पट्टी)."
+    ],
+    "tip": "Subject names are your free vocabulary -- गणित, विज्ञान, इतिहास, भूगोल, परीक्षा, अध्यापक are identical. The new words are the classroom objects: वही, खोडरबर, पट्टी, टिफिन.",
+    "bridgeUnits": [
+      "11"
+    ],
+    "units": [
+      "11"
+    ],
+    "sections": [
+      {
+        "heading": "Classroom objects -- the shifts",
+        "paragraphs": [
+          "कॉपी → वही (notebook), रबड़ → खोडरबर (eraser), पैमाना → पट्टी (ruler), टिफिन → टिफिन (same), बस्ता → दप्तर (schoolbag), स्याही → शाई (ink), पेंसिल → पेन्सिल (same), पाठ → धडा (lesson). The shifts are systematic: Hindi ब→व (कॉपी→वही), ड→ड (खोडरबर), म→ट (पैमाना→पट्टी)."
+        ]
+      },
+      {
+        "heading": "Subjects -- mostly free vocabulary",
+        "paragraphs": [
+          "गणित, विज्ञान, इतिहास, भूगोल, नागरिकशास्त्र, शारीरिक शिक्षण -- these are identical in both languages. The course sentences like मी गणित शिकत आहे use the same words. Learn the functional words around them: धडा (lesson), परीक्षा (exam), गुण (marks), गुणपत्रक (report card)."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using कॉपी for notebook",
+        "right": "वही = notebook",
+        "why": "कॉपी is the Hindi/English loan; वही is the standard Marathi word used in schools."
+      },
+      {
+        "wrong": "Saying रबड़ for eraser",
+        "right": "खोडरबर = eraser",
+        "why": "रबड़ is the Hindi/English loan; खोडरबर is the standard Marathi word."
+      },
+      {
+        "wrong": "Saying पैमाना for ruler",
+        "right": "पट्टी = ruler",
+        "why": "पैमाना is Hindi/Urdu; पट्टी is the Marathi word used in schools."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Notebook in Marathi?",
+          "options": [
+            "कॉपी",
+            "वही",
+            "पुस्तक",
+            "पत्र"
+          ],
+          "answer": 1,
+          "explanation": "वही (vahī) -- the standard Marathi word for notebook/copy."
+        },
+        {
+          "question": "Eraser in Marathi?",
+          "options": [
+            "रबड़",
+            "खोडरबर",
+            "मिटाने वाला",
+            "मिट्टी"
+          ],
+          "answer": 1,
+          "explanation": "खोडरबर (khoḍarbar) = eraser."
+        },
+        {
+          "question": "Ruler in Marathi?",
+          "options": [
+            "पैमाना",
+            "पट्टी",
+            "स्केल",
+            "रूलर"
+          ],
+          "answer": 1,
+          "explanation": "पट्टी (paṭṭī) = ruler/scale."
+        }
+      ],
+      "translate": [
+        {
+          "source": "मेरा इंटरव्यू कल है।",
+          "sourceLang": "hi",
+          "answer": "माझं इंटरव्यू उद्या आहे.",
+          "note": "Unit 11 sentence -- इंटरव्यू (loan) + उद्या (tomorrow) + आहे."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/education/",
+      "/hindi-to-marathi/sentence-patterns/",
+      "/lessons/11/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say exam in Marathi?",
+        "answer": "परीक्षा (parīkṣā) -- identical to Hindi परीक्षा."
+      },
+      {
+        "question": "What is the Marathi word for classroom?",
+        "answer": "वर्ग (varg) -- not कक्षा (that's Hindi). वर्ग also means class/grade."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "technology",
+    "title": "Hindi to Marathi Technology: Phone, Internet, Apps",
+    "description": "Hindi to Marathi technology words — phone, internet, apps, social media and devices — from Unit 12.",
+    "h1": "Hindi to Marathi: Technology & Internet",
+    "searchIntent": "comparison",
+    "level": "intermediate",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "technology",
+      "internet",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi technology words",
+    "secondaryKeywords": [
+      "marathi tech vocabulary",
+      "phone internet marathi",
+      "digital marathi vocabulary"
+    ],
+    "intro": [
+      "Technology vocabulary from Unit 12 mapped Hindi to Marathi -- phone (फोन→फोन, मोबाइल→मोबाईल), internet (इंटरनेट→इंटरनेट, वाईफाई→व्हायफाय), apps (ऐप→ऐप, व्हाट्सएप→व्हाट्सअॅप), actions (कॉल करना→फोन करा, मेसेज भेजना→मेसेज पाठवा). Each row maps the Hindi term to the Marathi equivalent with the grammar note.",
+      "Most tech vocabulary is English loans written in Devanagari -- the shifts are in the verb frames and spelling conventions (मोबाइल→मोबाईल, व्हाट्सएप→व्हाट्सअॅप, चार्ज→चार्ज). The grammar is the same; only the spelling conventions differ."
+    ],
+    "tip": "मोबाईल, इंटरनेट, चार्ज, ऐप, बैटरी -- these are the same words, just Devanagari. Learn the verbs (फोन करा, मेसेज पाठवा, चार्ज करा) and you have the full tech kit.",
+    "bridgeUnits": [
+      "12"
+    ],
+    "units": [
+      "12"
+    ],
+    "sections": [
+      {
+        "heading": "Loanwords you already know",
+        "paragraphs": [
+          "फोन, मोबाईल, इंटरनेट, व्हाट्सअॅप, चार्ज, ऐप, बैटरी, व्हायफाय, ब्लूटूथ, सिम, मेमोरी, स्टोरेज -- the nouns are English loans in Devanagari. The Marathi part is the verb: फोन करा, मेसेज पाठवा, चार्ज करा, डाउनलोड करा, इंस्टॉल करा, डिलीट करा."
+        ]
+      },
+      {
+        "heading": "Spelling conventions -- the only traps",
+        "paragraphs": [
+          "मोबाइल → मोबाईल (Marathi writes ि and ल), व्हाट्सएप → व्हाट्सअॅप (अॅ for the a-sound), इंटरनेट → इंटरनेट (same), व्हाट्सएप → व्हाट्सअॅप. The candrabindu in मोबाईल and the ॅ in व्हाट्सअॅप are the only spelling flags."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Writing मोबाइल for mobile",
+        "right": "मोबाईल -- with ि and ल",
+        "why": "Marathi writes the English loan as मोबाईल; the Hindi spelling मोबाइल uses the wrong vowel sign."
+      },
+      {
+        "wrong": "Saying इंटरनेट काम करत आहे for \"internet is working\"",
+        "right": "इंटरनेट चालू आहे",
+        "why": "चालू = on/working; बंद = off. चालू/बंद is the standard on/off pair."
+      },
+      {
+        "wrong": "Writing व्हाट्सएप for WhatsApp",
+        "right": "व्हाट्सअॅप -- with ॅ",
+        "why": "Marathi uses ॅ (short e) for the English 'a' in WhatsApp; व्हाट्सएप uses Hindi vowel."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Call me in Marathi?",
+          "options": [
+            "मला फोन करा",
+            "मी फोन करतो",
+            "फोन करा मी",
+            "माझा फोन करा"
+          ],
+          "answer": 0,
+          "explanation": "मला फोन करा -- to me, call (dative + verb)."
+        },
+        {
+          "question": "My battery is low in Marathi?",
+          "options": [
+            "माझी बैटरी कमी आहे",
+            "बैटरी लो आहे",
+            "माझी बैटरी डाउन आहे",
+            "बैटरी लो"
+          ],
+          "answer": 0,
+          "explanation": "माझी बैटरी कमी आहे -- battery is feminine, so माझी/कमी."
+        },
+        {
+          "question": "Download the app in Marathi?",
+          "options": [
+            "ऐप डाउनलोड करा",
+            "ऐप लोड करा",
+            "ऐप घेऊन या",
+            "ऐप मिळवा"
+          ],
+          "answer": 0,
+          "explanation": "ऐप डाउनलोड करा -- loanword + करा."
+        }
+      ],
+      "translate": [
+        {
+          "source": "Charge your phone.",
+          "answer": "तुमचा फोन चार्ज करा.",
+          "note": "Imperative with loanword + करा."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/english-to-marathi/technology-phone/",
+      "/lessons/12/",
+      "/blog/how-to-shop-in-marathi/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say mobile in Marathi?",
+        "answer": "मोबाईल -- with ि and ल, not मोबाइल. The candrabindu is not used here; just the spelling convention."
+      },
+      {
+        "question": "What is WhatsApp in Marathi?",
+        "answer": "व्हाट्सअॅप -- with ॅ (short e) for the English 'a' sound."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "festivals",
+    "title": "Hindi to Marathi Festivals: Diwali, Ganpati & More",
+    "description": "Hindi to Marathi festival words — Diwali, Ganpati, Gudi Padwa, Holi and Makar Sankranti — from Unit 13.",
+    "h1": "Hindi to Marathi: Festivals & Celebrations",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "festivals",
+      "culture",
+      "daily-life"
+    ],
+    "primaryKeyword": "hindi to marathi festival words",
+    "secondaryKeywords": [
+      "marathi festival names",
+      "diwali in marathi",
+      "ganpati marathi",
+      "gudi padwa marathi"
+    ],
+    "intro": [
+      "Festival vocabulary from Unit 13 mapped Hindi to Marathi -- Diwali (दिवाली→दिवाळी), Ganpati (गणपति→गणपती), Gudi Padwa (गुड़ी पड़वा→गुढीपाडवा), Holi (होली→होळी), Makar Sankranti (मकर संक्रांति→मकरसंक्रांत), Raksha Bandhan (रक्षाबंधन→रक्षाबंधन), Eid (ईद→ईद), Christmas (क्रिसमस→नाताळ). Each row maps the Hindi festival name to the Marathi equivalent with cultural notes.",
+      "The shifts are in the spelling conventions: दिवाली→दिवाळी (ळ), होली→होळी (ळ), गुड़ी पड़वा→गुढीपाडवा (ढ़, ण). The names like गणपति, रक्षाबंधन, मकर संक्रांति are identical. Cultural phrases like शुभ दिवाळी, गणपती बप्पा मोरया are distinctly Marathi."
+    ],
+    "tip": "गुढीपाडवा is the Marathi New Year (not Diwali) -- learn it first; it unlocks the calendar. गणपती उत्सव is 10 days of public celebration -- uniquely Maharashtrian.",
+    "bridgeUnits": [
+      "13"
+    ],
+    "units": [
+      "13"
+    ],
+    "sections": [
+      {
+        "heading": "The big five festivals",
+        "paragraphs": [
+          "दिवाळी (Diwali), गणपती (Ganpati), गुढीपाडवा (Gudi Padwa), होळी (Holi), मकरसंक्रांत (Makar Sankranti) -- these five dominate the Marathi festival calendar. Each has specific vocabulary: दिवाळी → फराळ, लाडू, चकली, दिवाळीची शुभेच्छा; गणपती → मोदक, विसर्जन, बप्पा; गुढीपाडवा → गुढी, नीम-शेंगदाणा, नवीन वर्ष."
+        ]
+      },
+      {
+        "heading": "Festival greetings -- the Marathi way",
+        "paragraphs": [
+          "शुभ दिवाळी, गणपती बप्पा मोरया, गुढीपाडवाच्या शुभेच्छा, होळीची शुभेच्छा, शुभ मकरसंक्रांत. The pattern: शुभ + festival name + शुभेच्छा/मोरया. These are not translations -- they are cultural formulas you use as-is."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Writing दिवाली instead of दिवाळी",
+        "right": "दिवाळी (with ळ)",
+        "why": "The ळ sound is Marathi's signature; writing दिवाली marks the word as Hindi, not Marathi."
+      },
+      {
+        "wrong": "Using होली for Holi",
+        "right": "होळी (with ळ)",
+        "why": "Same ळ shift -- होली is Hindi, होळी is Marathi. The ळ is non-negotiable."
+      },
+      {
+        "wrong": "Writing गुड़ी पड़वा for Gudi Padwa",
+        "right": "गुढीपाडवा (ढ़, ण)",
+        "why": "Hindi गुड़ी पड़वा → Marathi गुढीपाडवा. The ढ़→ढ़ and ण are systematic."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "Marathi New Year?",
+          "options": [
+            "दिवाळी",
+            "गुढीपाडवा",
+            "गणपती",
+            "होळी"
+          ],
+          "answer": 1,
+          "explanation": "गुढीपाडवा (Guḍhī Pāḍavā) -- late March/early April, the Marathi New Year."
+        },
+        {
+          "question": "Lord Ganpati's visarjan in Marathi?",
+          "options": [
+            "विसर्जन",
+            "प्रविसर्जन",
+            "विसर्जन करा",
+            "प्रवेश"
+          ],
+          "answer": 0,
+          "explanation": "विसर्जन (visarjan) -- identical in both languages, the immersion ritual."
+        },
+        {
+          "question": "Diwali sweets in Marathi?",
+          "options": [
+            "मिठाई",
+            "फराळ",
+            "प्रसाद",
+            "लाडू"
+          ],
+          "answer": 1,
+          "explanation": "फराळ (pharāḷ) -- the special Diwali snacks (चकली, लाडू, शंकरपाले, अनारसे)."
+        }
+      ],
+      "translate": [
+        {
+          "source": "Happy Diwali!",
+          "sourceLang": "hi",
+          "answer": "शुभ दिवाळी!",
+          "note": "Standard Diwali greeting -- शुभ + festival name."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/vocabulary/culture-festivals/",
+      "/blog/festival-greetings/",
+      "/hindi-to-marathi/travel/",
+      "/lessons/13/"
+    ],
+    "faq": [
+      {
+        "question": "What is the Marathi New Year?",
+        "answer": "गुढीपाडवा (Guḍhī Pāḍavā) -- usually late March/early April, marked by raising a गुढी (flag) and eating नीम-शेंगदाणा मिश्रण."
+      },
+      {
+        "question": "How do you say Happy Ganpati in Marathi?",
+        "answer": "गणपती बप्पा मोरया -- the iconic chant. For wishes: गणपतीची शुभेच्छा."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "postpositions",
+    "title": "Hindi to Marathi Postpositions: Cases, Meanings & Usage",
+    "description": "Postpositions mapped Hindi to Marathi -- cases, meanings, and usage from Unit 08. Covers में→मध्ये, पर→वर, नीचे→खाली, पास→जवळ, पीछे→मागे, से→कडून.",
+    "h1": "Hindi to Marathi: Postpositions & Cases",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "grammar",
+      "postpositions",
+      "cases",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi postpositions",
+    "secondaryKeywords": [
+      "marathi cases",
+      "hindi to marathi grammar",
+      "marathi postpositions list"
+    ],
+    "intro": [
+      "Postpositions (case markers) from Unit 08 mapped Hindi to Marathi -- the relational words that sit after nouns. Hindi में/पर/नीचे/पास/पीछे/से map to Marathi मध्ये/वर/खाली/जवळ/मागे/कडून with distinct case forms. Each row maps the Hindi postposition to the Marathi equivalent with the grammar note.",
+      "Unlike Hindi where postpositions are relatively fixed, Marathi postpositions combine with noun case endings (प्रथमा, द्वितीया, तृतीया, चतुर्थी, पंचमी, षष्ठी, सप्तमी). The base postpositions are the same, but the noun form changes: घर + मध्ये → घरात, मेज + वर → मेजवर, टेबल + खाली → टेबलाखाली."
+    ],
+    "tip": "Memorize the 6 core postpositions: मध्ये (in), वर (on), खाली (under), जवळ (near), मागे (behind), कडून (from). Then learn the noun case forms -- the postposition stays, the noun ending shifts.",
+    "bridgeUnits": [
+      "08"
+    ],
+    "units": [
+      "08"
+    ],
+    "sections": [
+      {
+        "heading": "The 6 core postpositions -- Hindi to Marathi",
+        "paragraphs": [
+          "Hindi में → Marathi मध्ये (in/inside). Hindi पर → Marathi वर (on). Hindi नीचे → Marathi खाली (under/below). Hindi पास/बगल में → Marathi जवळ/शेजारी (near/beside). Hindi पीछे → Marathi मागे (behind). Hindi से → Marathi कडून (from). These are direct mappings -- the noun case is the variable."
+        ]
+      },
+      {
+        "heading": "Noun case forms -- the Marathi twist",
+        "paragraphs": [
+          "Marathi nouns change form before postpositions (सामान्य रूप → संबंधी रूप). घर (house) → घरात (in the house), मेज (table) → मेजवर (on the table), टेबल (table) → टेबलाखाली (under the table), मित्र (friend) → मित्राजवळ (near the friend), बस (bus) → बसाकडून (from the bus). The pattern: masculine nouns ending in अ add त/वर/खाली/जवळ/कडून; other endings follow their declension."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using Hindi postpositions directly: घर में",
+        "right": "घरात -- Marathi uses noun case + postposition fused",
+        "why": "Marathi fuses the postposition into the noun ending. घर + मध्ये = घरात, not घर मध्ये."
+      },
+      {
+        "wrong": "Saying मेज पर for 'on the table'",
+        "right": "मेजवर -- fused form",
+        "why": "मेज + वर = मेजवर. The noun ending absorbs the postposition."
+      },
+      {
+        "wrong": "Using से for all 'from' meanings",
+        "right": "कडून for physical source, हून for agent/instrument",
+        "why": "कडून = from a place (बसाकडून). हून = by/through agent (त्याहून = by him). Hindi से covers both; Marathi distinguishes."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "'In the house' in Marathi?",
+          "options": [
+            "घर में",
+            "घरात",
+            "घर मध्ये",
+            "घरमध्ये"
+          ],
+          "answer": 1,
+          "explanation": "घरात -- घर + मध्ये fused. The standard locative form."
+        },
+        {
+          "question": "'On the table' in Marathi?",
+          "options": [
+            "मेज पर",
+            "मेजवर",
+            "मेज वर",
+            "मेजचे वर"
+          ],
+          "answer": 1,
+          "explanation": "मेजवर -- मेज + वर fused."
+        },
+        {
+          "question": "'From the bus' in Marathi?",
+          "options": [
+            "बस से",
+            "बसाकडून",
+            "बस कडून",
+            "बसहून"
+          ],
+          "answer": 1,
+          "explanation": "बसाकडून -- बस + कडून (physical source)."
+        }
+      ],
+      "translate": [
+        {
+          "source": "The book is on the table.",
+          "sourceLang": "hi",
+          "answer": "पुस्तक मेजवर आहे.",
+          "note": "मेजवर = fused locative. आहे = is."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/sentence-patterns/",
+      "/hindi-to-marathi/pronouns-people/",
+      "/grammar/postpositions/",
+      "/lessons/08/"
+    ],
+    "faq": [
+      {
+        "question": "How many cases does Marathi have?",
+        "answer": "8 cases (प्रथमा to सप्तमी) + संबोधन. Postpositions primarily use द्वितीया (accusative), तृतीया (instrumental), चतुर्थी (dative), पंचमी (ablative), षष्ठी (genitive), सप्तमी (locative)."
+      },
+      {
+        "question": "Is 'से' always 'कडून'?",
+        "answer": "No. से as physical source = कडून (बसाकडून). से as agent/instrument = हून (त्याहून = by him). से in comparatives = पेक्षा (तो माझ्यापेक्षा मोठा = he is bigger than me)."
+      }
+    ],
+    "appCtaVariant": "grammar",
+    "status": "published"
+  },
+  {
+    "slug": "hobbies",
+    "title": "Hindi to Marathi Hobbies & Leisure: Sports, Arts, Frequency",
+    "description": "Hobbies vocabulary mapped Hindi to Marathi -- sports, arts, frequency, leisure time from Unit 18.",
+    "h1": "Hindi to Marathi: Hobbies & Leisure",
+    "searchIntent": "comparison",
+    "level": "beginner",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "hobbies",
+      "sports",
+      "arts",
+      "daily-life",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi hobbies",
+    "secondaryKeywords": [
+      "marathi hobbies vocabulary",
+      "marathi sports words",
+      "marathi frequency adverbs"
+    ],
+    "intro": [
+      "Hobbies and leisure vocabulary from Unit 18 mapped Hindi to Marathi -- sports (क्रिकेट→क्रिकेट, फुटबॉल→फुटबॉल, कबड्डी→कबड्डी), arts (नृत्य→नृत्य, नाट्य→नाट्य, फोटोग्राफी→फोटोग्राफी), frequency (रोज→रोज, कभी-कभी→कधीकधी, कभी नहीं→कधीही नाही), leisure time (छुट्टी→सुट्टी, सुबह→सकाळी, शाम→सायंकाळी, दोस्त→मित्र, परिवार→कुटुंब). Each row maps the Hindi term to the Marathi equivalent with grammar notes.",
+      "Most sports and arts terms are shared Sanskrit/English loans -- the new vocabulary is in the frequency adverbs and leisure-time nouns. The grammar pattern मी ... आवडते (I like...) from Unit 18 is the key to talking about hobbies."
+    ],
+    "tip": "Sports names are free vocabulary -- क्रिकेट, फुटबॉल, कबड्डी, हॉकी, टेनिस identical. Arts terms नृत्य, नाट्य, फोटोग्राफी, चित्रकला, संगीत also shared. Learn the frequency words (रोज, कधीकधी, कधीही नाही) and the frame मी [activity] आवडते to talk about hobbies.",
+    "bridgeUnits": [
+      "18"
+    ],
+    "units": [
+      "18"
+    ],
+    "sections": [
+      {
+        "heading": "Sports -- shared vocabulary",
+        "paragraphs": [
+          "क्रिकेट, फुटबॉल, कबड्डी, हॉकी, टेनिस, बैडमिंटन, तैराकी, दौड़ -- identical in both languages. Marathi uses the same Devanagari spellings. The verb is खेळणे (to play): मी क्रिकेट खेळतो, तो फुटबॉल खेळतो."
+        ]
+      },
+      {
+        "heading": "Arts & creative hobbies",
+        "paragraphs": [
+          "नृत्य (dance), नाट्य (drama), फोटोग्राफी (photography), चित्रकला (painting), संगीत (music), गाणी (singing folk), लावणी (lavani) -- shared terms. The verb frame: मी नृत्य करतो (I dance), मी फोटोग्राफी करतो (I do photography)."
+        ]
+      },
+      {
+        "heading": "Frequency & leisure time -- the new words",
+        "paragraphs": [
+          "रोज (daily) → रोज (same), कभी-कभी (sometimes) → कधीकधी, कभी नहीं (never) → कधीही नाही, छुट्टी (holiday) → सुट्टी, सुबह (morning) → सकाळी, शाम (evening) → सायंकाळी, दोस्त (friend) → मित्र, परिवार (family) → कुटुंब. These are the words that differ from Hindi."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Saying कभी-कभी for sometimes",
+        "right": "कधीकधी -- the Marathi frequency adverb",
+        "why": "कभी-कभी is Hindi; कधीकधी is the standard Marathi equivalent."
+      },
+      {
+        "wrong": "Using छुट्टी for holiday",
+        "right": "सुट्टी -- with ट",
+        "why": "Hindi छुट्टी → Marathi सुट्टी. The ट vs ट्ट shift is systematic."
+      },
+      {
+        "wrong": "Saying दोस्त for friend",
+        "right": "मित्र -- Sanskrit term used in both but standard in Marathi",
+        "why": "दोस्त is Urdu/Hindi; मित्र is the standard Marathi word for friend."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "'Sometimes' in Marathi?",
+          "options": [
+            "कभी-कभी",
+            "कधीकधी",
+            "कधी",
+            "कधीच"
+          ],
+          "answer": 1,
+          "explanation": "कधीकधी -- the Marathi frequency adverb for sometimes."
+        },
+        {
+          "question": "'Never' in Marathi?",
+          "options": [
+            "कभी नहीं",
+            "कधीही नाही",
+            "कधी नाही",
+            "कधीही"
+          ],
+          "answer": 1,
+          "explanation": "कधीही नाही -- literally 'at no time not'."
+        },
+        {
+          "question": "'Holiday' in Marathi?",
+          "options": [
+            "छुट्टी",
+            "सुट्टी",
+            "सुटी",
+            "छुटी"
+          ],
+          "answer": 1,
+          "explanation": "सुट्टी -- with retroflex ट."
+        }
+      ],
+      "translate": [
+        {
+          "source": "I play cricket daily.",
+          "sourceLang": "hi",
+          "answer": "मी रोज क्रिकेट खेळतो.",
+          "note": "रोज = daily, खेळतो = play (habitual)."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/english-to-marathi/hobbies-freetime/",
+      "/grammar/frequency-adverbs/",
+      "/lessons/18/"
+    ],
+    "faq": [
+      {
+        "question": "How do you say 'I like cricket' in Marathi?",
+        "answer": "मला क्रिकेट आवडते -- literal 'to me cricket pleases'. The experiencer subject construction (डेटिव + आवडते)."
+      },
+      {
+        "question": "What is 'photography' in Marathi?",
+        "answer": "फोटोग्राफी -- identical to Hindi/English. The verb frame: मी फोटोग्राफी करतो."
+      }
+    ],
+    "appCtaVariant": "phrase",
+    "status": "published"
+  },
+  {
+    "slug": "literature-words",
+    "title": "Hindi to Marathi Literature Terms: Poetry, Drama, Fiction",
+    "description": "Hindi to Marathi literature words — poetry, drama, fiction, awards and digital terms — from Unit 22.",
+    "h1": "Hindi to Marathi: Literature & Literary Terms",
+    "searchIntent": "comparison",
+    "level": "advanced",
+    "languagePaths": [
+      "hindi"
+    ],
+    "topics": [
+      "literature",
+      "culture",
+      "advanced",
+      "comparison"
+    ],
+    "primaryKeyword": "hindi to marathi literature words",
+    "secondaryKeywords": [
+      "marathi literary terms",
+      "marathi poetry words",
+      "marathi awards"
+    ],
+    "intro": [
+      "Literature and literary terms from Unit 22 mapped Hindi to Marathi -- poetry (कविता→कविता, कवि→कवी, आधुनिक→आधुनिक), drama (नाटक→नाट्य, नाट्यकार→नाट्यकार, रंगमंच→रंगमंच), fiction (उपन्यास→कादंबरी, कथाकार→कथाकार, कथा→कथा), awards (ज्ञानपीठ→ज्ञानपीठ, साहित्य अकादमी→साहित्य अकादमी, पद्म→पद्म), digital (ईबुक→ई-पुस्तक, ऑडियोबुक→ऑडिओबुक, ब्लॉग→ब्लॉग). Each row maps the Hindi term to the Marathi equivalent with cultural notes.",
+      "Most terms are shared Sanskrit loans -- the shifts are in a few key words: कवि→कवी (poet), उपन्यास→कादंबरी (novel), नाटक→नाट्य (drama). The award names and digital terms are identical."
+    ],
+    "tip": "कादंबरी = novel (not उपन्यास), कवी = poet (not कवि), नाट्य = drama (not नाटक). These three shifts cover the core literary vocabulary differences.",
+    "bridgeUnits": [
+      "22"
+    ],
+    "units": [
+      "22"
+    ],
+    "sections": [
+      {
+        "heading": "The 3 key shifts",
+        "paragraphs": [
+          "1) कवि → कवी (poet): Hindi कवि → Marathi कवी. 2) उपन्यास → कादंबरी (novel): Hindi उपन्यास → Marathi कादंबरी (classical term). 3) नाटक → नाट्य (drama): Hindi नाटक → Marathi नाट्य (also नाट्यशैली for dramaturgy)."
+        ]
+      },
+      {
+        "heading": "Poetry, drama, fiction -- shared terms",
+        "paragraphs": [
+          "कविता (poetry), कविता संग्रह (poetry collection), छंद (meter), रस (aesthetic sentiment), अलंकार (figure of speech) -- identical. नाट्यकार (playwright), रंगमंच (theatre), मंचन (staging), संवाद (dialogue) -- identical. कथाकार (storyteller), कथा (story), कथासंग्रह (short story collection) -- identical."
+        ]
+      },
+      {
+        "heading": "Awards & digital -- identical",
+        "paragraphs": [
+          "ज्ञानपीठ पुरस्कार, साहित्य अकादमी पुरस्कार, पद्म पुरस्कार -- identical. ई-पुस्तक (e-book), ऑडिओबुक (audiobook), ब्लॉग (blog), पॉडकास्ट (podcast) -- identical loans in Devanagari."
+        ]
+      }
+    ],
+    "mistakes": [
+      {
+        "wrong": "Using कवि for poet",
+        "right": "कवी -- with ई ending",
+        "why": "Hindi कवि → Marathi कवी. The ई ending is the standard Marathi form for agent nouns."
+      },
+      {
+        "wrong": "Using उपन्यास for novel",
+        "right": "कादंबरी -- the classical Marathi term",
+        "why": "उपन्यास is understood but कादंबरी is the traditional Marathi word for novel (from कादंबरी, Bana's classic)."
+      },
+      {
+        "wrong": "Using नाटक for drama",
+        "right": "नाट्य -- the formal term",
+        "why": "नाटक is used colloquially, but नाट्य is the standard literary term (नाट्यशैली = dramaturgy, नाट्यसंस्थान = theatre institution)."
+      }
+    ],
+    "practice": {
+      "mcq": [
+        {
+          "question": "'Poet' in Marathi?",
+          "options": [
+            "कवि",
+            "कवी",
+            "कविता",
+            "कविराज"
+          ],
+          "answer": 1,
+          "explanation": "कवी -- agent noun with ई ending."
+        },
+        {
+          "question": "'Novel' in Marathi?",
+          "options": [
+            "उपन्यास",
+            "कादंबरी",
+            "कथा",
+            "ग्रंथ"
+          ],
+          "answer": 1,
+          "explanation": "कादंबरी -- the classical Marathi term for novel."
+        },
+        {
+          "question": "'Drama' (formal) in Marathi?",
+          "options": [
+            "नाटक",
+            "नाट्य",
+            "नृत्य",
+            "नाट्यशैली"
+          ],
+          "answer": 1,
+          "explanation": "नाट्य -- the formal literary term."
+        }
+      ],
+      "translate": [
+        {
+          "source": "He is a famous poet.",
+          "sourceLang": "hi",
+          "answer": "तो प्रसिद्ध कवी आहे.",
+          "note": "कवी = poet. प्रसिद्ध = famous."
+        }
+      ]
+    },
+    "relatedPages": [
+      "/hindi-to-marathi/media-news/",
+      "/hindi-to-marathi/advanced-conversation/",
+      "/vocabulary/abstract-concepts/",
+      "/lessons/22/"
+    ],
+    "faq": [
+      {
+        "question": "What is the Marathi word for novel?",
+        "answer": "कादंबरी (kadambari) -- from Bana's classical work. उपन्यास is understood but कादंबरी is the native term."
+      },
+      {
+        "question": "How do you say 'poetry' in Marathi?",
+        "answer": "कविता (kavita) -- identical to Hindi. Poetry collection = कविता संग्रह."
+      }
+    ],
+    "appCtaVariant": "vocabulary",
+    "status": "published"
+  }
+]

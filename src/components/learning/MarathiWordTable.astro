@@ -1,0 +1,190 @@
+---
+// MarathiWordTable — Enhanced vocabulary table with better UX
+// Replaces VocabTable with improved interactions and accessibility
+import type { Word } from '../../lib/learn';
+import { simpleRespelling } from '../../lib/simple';
+import audioManifest from '../../data/audio-manifest.json';
+import { siteUrl } from '../../lib/site';
+import AudioPlayer from '../learning/AudioPlayer.astro';
+
+type Props = {
+  words: Word[];
+  caption?: string;
+  roman?: 'diacritic' | 'simple' | 'none';
+  toggle?: boolean;
+  context?: string;
+};
+
+const {
+  words,
+  caption,
+  roman = 'diacritic',
+  toggle = roman !== 'none',
+  context = 'vocab'
+} = Astro.props;
+
+const showSimpleFirst = roman === 'simple';
+const files = (audioManifest as { files?: Record<string, { word?: string }> }).files ?? {};
+const audioFor = (id: string): string | null => (files[id]?.word ? siteUrl(`/audio/${files[id].word}`) : null);
+---
+
+<div class="marathi-word-table__wrapper" role="region" aria-label={caption ?? 'Vocabulary'} tabindex="0">
+  {toggle && (
+    <label class="marathi-word-table__toggle roman-toggle">
+      <input type="checkbox" class={`roman-check-${context}`} />
+      Show precise pronunciation
+    </label>
+  )}
+
+  <div class="marathi-word-table__scroll table-scroll" tabindex="0">
+    <table class="marathi-word-table vocab">
+      <thead>
+        <tr>
+          <th scope="col">Marathi</th>
+          {roman !== 'none' && <th scope="col">Pronunciation</th>}
+          <th scope="col">Hindi</th>
+          <th scope="col">English</th>
+          <th scope="col">Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        {words.map((w) => (
+          <tr>
+            <td class="mr" lang="mr">
+              <span class="marathi-word-table__marathi">{w.marathi}</span>
+              {audioFor(w.id) ? (
+                <AudioPlayer
+                  src={audioFor(w.id)}
+                  text={w.marathi}
+                  transliteration={showSimpleFirst ? simpleRespelling(w.transliteration) : w.transliteration}
+                  translation={w.english}
+                  size="sm"
+                  showText={false}
+                  class="marathi-word-table__audio"
+                />
+              ) : (
+                <AudioPlayer
+                  src={`data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAA`}
+                  text={w.marathi}
+                  transliteration={showSimpleFirst ? simpleRespelling(w.transliteration) : w.transliteration}
+                  translation={w.english}
+                  size="sm"
+                  showText={false}
+                  class="marathi-word-table__audio marathi-word-table__audio--tts"
+                  data-tts={w.marathi}
+                />
+              )}
+            </td>
+            {roman !== 'none' && (
+              <td class="tr">
+                <span class="r-a">{showSimpleFirst ? simpleRespelling(w.transliteration) : w.transliteration}</span>
+                {toggle && <span class="r-b">{showSimpleFirst ? w.transliteration : simpleRespelling(w.transliteration)}</span>}
+              </td>
+            )}
+            <td lang="hi">{w.hindi}</td>
+            <td>{w.english}</td>
+            <td>
+              <span lang="mr" class="marathi-word-table__example-mr">{w.exampleMarathi}</span>
+              <br />
+              <small class="marathi-word-table__example-en">{w.exampleEnglish}</small>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .marathi-word-table__wrapper {
+    margin: var(--space-4) 0;
+  }
+
+  .marathi-word-table__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-body-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+    cursor: pointer;
+  }
+
+  .marathi-word-table__toggle input {
+    width: 1em;
+    height: 1em;
+    accent-color: var(--color-primary);
+  }
+
+  .marathi-word-table__scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .marathi-word-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 560px;
+  }
+
+  .marathi-word-table th,
+  .marathi-word-table td {
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+
+  .marathi-word-table th {
+    font-size: var(--text-caption);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    background: var(--color-container);
+  }
+
+  .marathi-word-table tr:last-child td { border-bottom: none; }
+
+  .marathi-word-table__marathi {
+    font-family: var(--font-display);
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .marathi-word-table__audio {
+    margin-left: var(--space-2);
+    vertical-align: middle;
+  }
+
+  .marathi-word-table__audio--tts {
+    opacity: 0.7;
+  }
+
+  .marathi-word-table__example-mr {
+    font-family: var(--font-display);
+    font-size: 0.95em;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .marathi-word-table__example-en {
+    font-size: 0.85em;
+    color: var(--color-text-muted);
+  }
+
+  .r-b { display: none; }
+  .roman-toggle:has(input:checked) ~ .marathi-word-table__scroll .r-a { display: none; }
+  .roman-toggle:has(input:checked) ~ .marathi-word-table__scroll .r-b { display: inline; }
+
+  /* Focus styles for keyboard navigation */
+  .marathi-word-table__scroll:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+</style>

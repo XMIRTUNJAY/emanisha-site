@@ -1,0 +1,469 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GameShell from '../../../components/games/GameShell.astro';
+import GameIntro from '../../../components/games/GameIntro.astro';
+import GameResult from '../../../components/games/GameResult.astro';
+import AppCTA from '../../../components/AppCTA.astro';
+import { vocab as words } from '../../../lib/learn';
+import { siteUrl } from '../../../lib/site';
+import { countGraphemes } from '../../../lib/games/graphemes';
+import wordleData from '../../../data/games/wordle.json';
+
+const byId = new Map(words.map((w) => [w.id, w]));
+const resolve = (id: string) => {
+	const w = byId.get(id);
+	if (!w) throw new Error(`wordle: unknown vocab id "${id}"`);
+	return {
+		id: w.id,
+		mr: w.marathi,
+		en: w.english,
+		hi: w.hindi,
+		tr: w.transliteration,
+		exMr: w.exampleMarathi,
+		exEn: w.exampleEnglish,
+		len: countGraphemes(w.marathi),
+	};
+};
+const answers = wordleData.answers.map(resolve);
+const practice = wordleData.practicePool.map(resolve);
+
+const audio = (f: string) => siteUrl(`/games/audio/${f}`);
+const dataJson = JSON.stringify({
+	version: wordleData.version,
+	answers,
+	practice,
+	shareUrl: siteUrl('/games/marathi-wordle/'),
+	sfx: {
+		key: audio('ui/click_soft.mp3'),
+		submit: audio('ui/whoosh.mp3'),
+		hint: audio('feedback/hint.mp3'),
+		win: audio('fanfare/round_complete.mp3'),
+		lose: audio('fanfare/game_over.mp3'),
+	},
+});
+
+const title = 'Marathi Wordle — Guess a Marathi Word Daily | Bol Marathi';
+const description =
+	'Free daily Marathi word game: guess the Marathi word in six tries, one akshara per tile, with Hindi and English meanings, examples and audio. Unlimited practice mode.';
+---
+
+<Base
+	title={title}
+	description={description}
+	crumbs={[
+		{ label: 'Learn Marathi', href: siteUrl('/') },
+		{ label: 'Games', href: siteUrl('/games/') },
+		{ label: 'Wordle', href: siteUrl('/games/marathi-wordle/') },
+	]}
+>
+	<GameShell active="marathi-wordle">
+		<div class="prose">
+			<p class="kicker">Daily Marathi Wordle</p>
+			<h1>Marathi Wordle</h1>
+			<p class="lede">
+				Guess the Marathi word in six tries. Every tile is one <strong>akshara</strong> — a full syllable, never a
+				broken letter.
+			</p>
+			<div class="game-startbar">
+				<button type="button" class="btn btn-play" data-play>▶ Play</button>
+				<button type="button" class="btn ghost game-howto" data-howto>How to play</button>
+			</div>
+			<GameIntro
+				steps={[
+					'Each guess must be the right length — build it by tapping the Marathi keyboard.',
+					'After you submit, tiles change color: <strong class="wl-legend-ok">green</strong> = right akshara, right spot; <strong class="wl-legend-mid">amber</strong> = right akshara, wrong spot; grey = not in the word.',
+					'Tap <kbd>⏎</kbd> (or press Enter) to submit and <kbd>⌫</kbd> (Backspace) to delete.',
+					'A new word arrives every day (UTC). Practice mode gives unlimited words from the same pool.',
+					'Wordle is tough — tap <strong>💡 Hint</strong> for the meaning, then the first akshara.',
+				]}
+			/>
+			<div class="game-stage">
+				<div id="wordle-root" data-game>
+				<div class="modes" role="tablist" aria-label="Wordle modes">
+					<button type="button" class="mode on" id="tab-daily" role="tab" aria-selected="true">Daily</button>
+					<button type="button" class="mode" id="tab-practice" role="tab" aria-selected="false">Practice</button>
+				</div>
+				<p class="wl-meta" id="wl-meta"></p>
+				<p class="hint-box" id="wl-hintbox" aria-live="polite"></p>
+				<div id="wl-board" role="grid" aria-label="Guess grid"></div>
+				<p class="wl-msg" id="wl-msg" aria-live="polite"></p>
+				<div id="wl-keys" role="group" aria-label="Marathi keyboard"></div>
+				<div class="game-actions">
+					<button type="button" class="btn ghost" id="wl-hint">💡 Hint</button>
+					<button type="button" class="btn" id="wl-share" hidden>Share result</button>
+					<button type="button" class="btn ghost" id="wl-new" hidden>New practice word</button>
+				</div>
+			</div>
+			<GameResult id="wl-done" heading="Wordle complete">
+				<p class="game-actions" style="justify-content:center">
+					<a class="btn" href={siteUrl('/vocabulary/beginners/')} data-funnel="game_review">Learn these words</a>
+					<AppCTA variant="general" context="game-wordle" />
+				</p>
+			</GameResult>
+			</div>
+		</div>
+	</GameShell>
+</Base>
+
+<script type="application/json" id="wordle-data" set:html={dataJson} />
+
+<script>
+	import { splitGraphemes, normalizeMr } from '../../../lib/games/graphemes';
+	import { dailyIndex, todayISO } from '../../../lib/games/daily';
+	import { evaluateGuess, isWin, shareGrid, type TileState } from '../../../lib/games/wordle';
+	import { makeStorage } from '../../../lib/games/storage';
+	import { makeSfx, sfxMuted, buzz } from '../../../lib/games/sfx';
+	import { romanize, aksharaSortKey } from '../../../lib/games/mrKeys';
+
+	type GWord = {
+		id: string;
+		mr: string;
+		en: string;
+		hi: string;
+		tr: string;
+		exMr: string;
+		exEn: string;
+		len: number;
+	};
+
+	function init() {
+		const root = document.getElementById('wordle-root');
+		if (!root || (root as HTMLElement).dataset.bound) return;
+		(root as HTMLElement).dataset.bound = '1';
+
+		const dataEl = document.getElementById('wordle-data');
+		if (!dataEl) return;
+		let data: {
+			version: number;
+			answers: GWord[];
+			practice: GWord[];
+			shareUrl: string;
+			sfx: Record<string, string>;
+		};
+		try {
+			data = JSON.parse(dataEl.textContent || '{}');
+		} catch {
+			return;
+		}
+		const answers = data.answers ?? [];
+		const practice = data.practice ?? [];
+		if (!answers.length || !practice.length) return;
+
+		const store = makeStorage('bol-game-wordle-');
+		const sfx = makeSfx(data.sfx ?? {}, { storage: store });
+
+		const board = document.getElementById('wl-board') as HTMLElement;
+		const keysEl = document.getElementById('wl-keys') as HTMLElement;
+		const msg = document.getElementById('wl-msg') as HTMLElement;
+		const meta = document.getElementById('wl-meta') as HTMLElement;
+		const done = document.getElementById('wl-done') as HTMLElement;
+		const shareBtn = document.getElementById('wl-share') as HTMLButtonElement;
+		const newBtn = document.getElementById('wl-new') as HTMLButtonElement;
+		const hintBtn = document.getElementById('wl-hint') as HTMLButtonElement;
+		const hintBox = document.getElementById('wl-hintbox') as HTMLElement;
+		const tabDaily = document.getElementById('tab-daily') as HTMLButtonElement;
+		const tabPractice = document.getElementById('tab-practice') as HTMLButtonElement;
+
+		// Keyboard inventory: every akshara in the curated pools — valid letters only.
+		const keySet = new Set<string>();
+		for (const w of [...answers, ...practice]) {
+			for (const a of splitGraphemes(normalizeMr(w.mr))) keySet.add(a);
+		}
+		const keys = [...keySet].sort((a, b) => aksharaSortKey(a) - aksharaSortKey(b));
+		const keyState = new Map<string, TileState>();
+		const RANK: Record<TileState, number> = { absent: 0, present: 1, correct: 2 };
+
+		const today = todayISO();
+		let mode: 'daily' | 'practice' = 'daily';
+		let word: GWord = answers[dailyIndex(today, data.version, answers.length)] as GWord;
+		let guess: string[] = [];
+		let history: { letters: string[]; states: TileState[] }[] = [];
+		let finished = false;
+		let lastWon = false;
+		let hintStage = 0;
+
+		function setMode(m: 'daily' | 'practice') {
+			mode = m;
+			tabDaily.classList.toggle('on', m === 'daily');
+			tabPractice.classList.toggle('on', m === 'practice');
+			tabDaily.setAttribute('aria-selected', String(m === 'daily'));
+			tabPractice.setAttribute('aria-selected', String(m !== 'daily'));
+			if (m === 'daily') {
+				word = answers[dailyIndex(today, data.version, answers.length)] as GWord;
+			} else {
+				word = practice[Math.floor(Math.random() * practice.length)] as GWord;
+			}
+			guess = [];
+			history = [];
+			finished = false;
+			keyState.clear();
+			done.hidden = true;
+			shareBtn.hidden = true;
+			newBtn.hidden = true;
+			msg.textContent = '';
+			msg.className = 'wl-msg';
+			hintStage = 0;
+			hintBox.textContent = '';
+			hintBtn.disabled = false;
+			// restore today's daily progress
+			if (m === 'daily') {
+				const saved = store.get('daily-' + today);
+				if (saved) {
+					try {
+						const s = JSON.parse(saved) as { word: string; history: typeof history; done: boolean };
+						if (s.word === word.mr && Array.isArray(s.history)) {
+							history = s.history;
+							for (const h of history) {
+								h.states.forEach((st, i) => {
+									const k = h.letters[i] ?? '';
+									const cur = keyState.get(k);
+									if (!cur || RANK[st] > RANK[cur]) keyState.set(k, st);
+								});
+							}
+							if (s.done) {
+								finished = true;
+								lastWon = history.length > 0 && isWin(history[history.length - 1]!.states);
+								showResult(false);
+							}
+						}
+					} catch {
+						/* corrupt state — start fresh */
+					}
+				}
+			}
+			renderMeta();
+			renderBoard();
+			renderKeys();
+		}
+
+		function renderMeta() {
+			meta.textContent =
+				mode === 'daily'
+					? `Daily word — ${today} · ${history.length}/6 tries`
+					: 'Practice — unlimited rounds, same word pool';
+		}
+
+		function renderBoard() {
+			board.innerHTML = '';
+			for (let r = 0; r < 6; r++) {
+				const row = document.createElement('div');
+				row.className = 'wl-row';
+				row.setAttribute('role', 'row');
+				for (let c = 0; c < word.len; c++) {
+					const tile = document.createElement('span');
+					tile.className = 'wl-tile';
+					tile.setAttribute('role', 'gridcell');
+					tile.lang = 'mr';
+					const h = history[r];
+					if (h) {
+						tile.textContent = h.letters[c] ?? '';
+						tile.classList.add(h.states[c] ?? 'absent');
+						if (r === history.length - 1) {
+							tile.classList.add('reveal');
+							(tile as HTMLElement).style.animationDelay = (c * 60).toString() + 'ms';
+						}
+					} else if (r === history.length && !finished && guess[c]) {
+						tile.textContent = guess[c] as string;
+						tile.classList.add('filled');
+					}
+					row.appendChild(tile);
+				}
+				board.appendChild(row);
+			}
+		}
+
+		function renderKeys() {
+			keysEl.innerHTML = '';
+			const mk = (label: string, cls: string, title: string, onClick: () => void) => {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = 'wl-key' + (cls ? ' ' + cls : '');
+				b.textContent = label;
+				if (title) b.title = title;
+				b.addEventListener('click', onClick);
+				return b;
+			};
+			for (const k of keys) {
+				const st = keyState.get(k) ?? '';
+				keysEl.appendChild(mk(k, st, romanize(k), () => type(k)));
+			}
+			keysEl.appendChild(mk('⌫', 'wide', 'Backspace', () => {
+				if (finished) return;
+				guess.pop();
+				renderBoard();
+			}));
+			keysEl.appendChild(mk('⏎', 'wide', 'Enter', submit));
+		}
+
+		function type(ak: string) {
+			if (finished || guess.length >= word.len) return;
+			sfx.play('key');
+			buzz(8);
+			guess.push(ak);
+			renderBoard();
+			// pop the tile that was just filled
+			const row = board.children[history.length] as HTMLElement | undefined;
+			const tile = row?.children[guess.length - 1] as HTMLElement | undefined;
+			if (tile) {
+				tile.classList.remove('pop');
+				void tile.offsetWidth; // restart animation
+				tile.classList.add('pop');
+			}
+		}
+
+		function submit() {
+			if (finished) return;
+			if (guess.length !== word.len) {
+				msg.textContent = `Need ${word.len} aksharas — ${guess.length} so far.`;
+				msg.className = 'wl-msg bad';
+				sfx.play('wrong');
+				// shake the active row
+				const row = board.children[history.length] as HTMLElement | undefined;
+				if (row) {
+					row.classList.remove('shake');
+					void row.offsetWidth;
+					row.classList.add('shake');
+				}
+				return;
+			}
+			sfx.play('submit');
+			const states = evaluateGuess(word.mr, guess.join(''));
+			history.push({ letters: [...guess], states });
+			states.forEach((st, i) => {
+				const k = guess[i] ?? '';
+				const cur = keyState.get(k);
+				if (!cur || RANK[st] > RANK[cur]) keyState.set(k, st);
+			});
+			guess = [];
+			lastWon = isWin(states);
+			if (lastWon || history.length >= 6) {
+				finished = true;
+				sfx.play(lastWon ? 'win' : 'lose');
+				buzz(lastWon ? [30, 40, 60] : 80);
+				if (lastWon) {
+					// victory cascade on the winning row
+					const row = board.children[history.length - 1] as HTMLElement | undefined;
+					if (row) {
+						[...row.children].forEach((tile, i) => {
+							const el = tile as HTMLElement;
+							el.style.animationDelay = (i * 90).toString() + 'ms';
+							el.classList.add('dance');
+						});
+					}
+				}
+				if (mode === 'daily') {
+					store.set('daily-' + today, JSON.stringify({ word: word.mr, history, done: true }));
+				}
+				showResult(true);
+			} else {
+				msg.textContent = '';
+				msg.className = 'wl-msg';
+				if (mode === 'daily') {
+					store.set('daily-' + today, JSON.stringify({ word: word.mr, history, done: false }));
+				}
+			}
+			renderMeta();
+			renderBoard();
+			renderKeys();
+		}
+
+		function showResult(justFinished: boolean) {
+			done.hidden = false;
+			hintBtn.disabled = true;
+			done.classList.toggle('confetti', finished && lastWon);
+			done.classList.add('bounce-in');
+			const score = done.querySelector('.gr-score') as HTMLElement;
+			const body = done.querySelector('.gr-body') as HTMLElement;
+			const tries = history.length;
+			score.textContent = finished && lastWon ? `Solved in ${tries}/6` : finished ? 'Out of tries' : 'Today\'s word';
+			const say = ` <button type="button" class="say" data-say="${word.mr}" aria-label="Listen: ${word.tr}">🔊</button>`;
+			body.innerHTML =
+				`<p class="gr-word" lang="mr">${word.mr}</p>` +
+				`<p class="gr-tr">${word.tr}${say}</p>` +
+				`<p><strong>EN:</strong> ${word.en} · <strong lang="hi">HI:</strong> <span lang="hi">${word.hi}</span></p>` +
+				`<p lang="mr">${word.exMr}</p><p class="gr-ex">${word.exEn}</p>`;
+			if (justFinished) done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+			shareBtn.hidden = !justFinished || mode !== 'daily';
+			newBtn.hidden = mode !== 'practice';
+			newBtn.textContent = 'New practice word';
+		}
+
+		shareBtn.addEventListener('click', () => {
+			const n = Math.floor(Date.parse(today + 'T00:00:00Z') / 86400000);
+			const text =
+				`Bol Marathi Wordle #${n} — ${lastWon ? history.length : 'X'}/6\n\n` +
+				shareGrid(history.map((h) => h.states)) +
+				`\n${data.shareUrl}`;
+			const ok = () => {
+				sfx.play('key');
+				msg.textContent = 'Copied to clipboard!';
+				msg.className = 'wl-msg ok';
+			};
+			if (navigator.clipboard?.writeText) {
+				navigator.clipboard.writeText(text).then(ok, () => fallbackCopy(text, ok));
+			} else {
+				fallbackCopy(text, ok);
+			}
+		});
+		function fallbackCopy(text: string, ok: () => void) {
+			const ta = document.createElement('textarea');
+			ta.value = text;
+			ta.style.position = 'fixed';
+			ta.style.opacity = '0';
+			document.body.appendChild(ta);
+			ta.select();
+			try {
+				document.execCommand('copy');
+				ok();
+			} catch {
+				/* ignore */
+			}
+			ta.remove();
+		}
+
+		newBtn.addEventListener('click', () => setMode('practice'));
+		tabDaily.addEventListener('click', () => setMode('daily'));
+		tabPractice.addEventListener('click', () => setMode('practice'));
+
+		hintBtn.addEventListener('click', () => {
+			if (finished) return;
+			sfx.play('hint');
+			buzz(10);
+			hintStage += 1;
+			if (hintStage === 1) {
+				hintBox.textContent = `Meaning: ${word.en} — ${word.hi} (${word.tr})`;
+			} else if (hintStage === 2) {
+				const first = splitGraphemes(normalizeMr(word.mr))[0] ?? '';
+				hintBox.textContent = `Starts with “${first}” — it's on the keyboard.`;
+				hintBtn.disabled = true;
+			}
+		});
+
+		document.addEventListener(
+			'keydown',
+			(e) => {
+				if (finished) return;
+				const t = e.target as HTMLElement | null;
+				if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+				if (e.key === 'Enter') {
+					e.preventDefault();
+					e.stopPropagation();
+					submit();
+				} else if (e.key === 'Backspace') {
+					e.preventDefault();
+					e.stopPropagation();
+					guess.pop();
+					renderBoard();
+				}
+			},
+			true
+		);
+
+		// init: restore daily or start fresh (sfxMuted read happens lazily in makeSfx)
+		if (sfxMuted()) sfx.setMuted(true);
+		setMode('daily');
+	}
+
+	init();
+	document.addEventListener('astro:page-load', init);
+</script>

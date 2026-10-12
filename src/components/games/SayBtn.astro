@@ -1,0 +1,14 @@
+---
+// SayBtn — device-TTS listen button. Markup contract matches the site-wide
+// SayScript.astro delegated handler (`[data-say]`); SayScript itself is
+// included once per page by GameShell. Removes nothing by itself — SayScript
+// hides .say buttons when speech synthesis is unavailable.
+interface Props {
+	text: string;
+	label?: string;
+}
+
+const { text, label } = Astro.props;
+---
+
+<button type="button" class="say" data-say={text} aria-label={label ?? `Listen: ${text}`}>🔊</button>

@@ -1,0 +1,43 @@
+---
+import Learn from '../../layouts/Learn.astro';
+import WordGuide from '../../components/WordGuide.astro';
+import { vocab } from '../../lib/learn';
+import { siteUrl } from '../../lib/site';
+
+const w = vocab.find((x) => x.id === 'v-greet-04');
+if (!w) throw new Error('missing v-greet-04');
+---
+
+<Learn
+	title="How to Say Sorry in Marathi: माफ करा (With Pronunciation)"
+	description="Sorry in Marathi is माफ करा (māph karā) — for apologies and getting attention. Pronunciation, Hindi counterpart, example and usage."
+	kicker="Marathi Phrases"
+	crumbs={[
+		{ label: 'Phrases', href: siteUrl('/phrases/') },
+		{ label: 'How to say sorry', href: siteUrl('/how-to-say-sorry-in-marathi/') },
+	]}
+	canonicalPath="/how-to-say-sorry-in-marathi/"
+	about="how to say sorry in marathi"
+	meta={['Quick answer', 'Beginner']}
+>
+	<WordGuide
+		word={w}
+		context="say-sorry"
+		answer="Say माफ करा (māph karā) — it covers both sorry-for-a-mistake and excuse-me-to-get-attention, like Hindi माफ कीजिए."
+		usage={[
+			'Late? उशीर झाला, माफ करा — exactly like the example.',
+			'Need attention in a crowd? A short माफ करा works like "excuse me".',
+		]}
+		faq={[
+			{ q: 'When in doubt, what should I say?', a: 'माफ करा — it is correct everywhere, including with elders, for both apologies and getting attention.' },
+			{ q: 'How does it differ from Hindi माफ कीजिए?', a: 'Same job, Marathi shape: करा instead of कीजिए. One pattern, many verbs.' },
+		]}
+		related={[
+			{ label: 'Marathi greetings & polite phrases', href: siteUrl('/phrases/greetings/') },
+			{ label: 'How to say hello', href: siteUrl('/how-to-say-hello-in-marathi/') },
+			{ label: 'Daily conversation phrases', href: siteUrl('/phrases/daily/') },
+			{ label: 'Unit 01 — Marathi Fundamentals', href: siteUrl('/lessons/01/') },
+		]}
+	/>
+</Learn>
+
