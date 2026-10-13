@@ -36,6 +36,7 @@ const description =
 	<main>
 		<section class="hero-slider rail" aria-roledescription="carousel" aria-label="Featured builds">
 			<div class="hero-slides" id="hero-slides">
+				<div class="hero-count" aria-hidden="true"><span id="hero-cur">01</span><i>/</i><span>04</span></div>
 				<article class="hero-slide theme-bol active" data-slide="0" aria-label="1 of 4: Bol Marathi">
 					<div class="hero-copy">
 						<span class="hero-eyebrow">LIVE NOW · BOL MARATHI</span>
@@ -512,6 +513,8 @@ const description =
 		for (const s of heroSlides) {
 			const on = Number(s.dataset.slide) === heroIdx;
 			s.classList.toggle('active', on);
+			const cur = document.getElementById('hero-cur');
+			if (cur) cur.textContent = String(heroIdx + 1).padStart(2, '0');
 			if (on) s.removeAttribute('inert');
 			else s.setAttribute('inert', '');
 		}

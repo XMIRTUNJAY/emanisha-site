@@ -427,8 +427,8 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 /* ===== hero slideshow: one band per app, Pixel of attention each ===== */
 .hero-slider { padding-top: 26px; }
 .hero-slides { position: relative; border-radius: 28px; overflow: hidden; min-height: 540px; }
-.hero-slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: center; padding: clamp(30px, 5vw, 72px) clamp(24px, 5vw, 72px); opacity: 0; transform: translateX(36px); transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1); pointer-events: none; overflow: hidden; }
-.hero-slide.active { opacity: 1; transform: none; pointer-events: auto; z-index: 2; }
+.hero-slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: center; padding: clamp(30px, 5vw, 72px) clamp(24px, 5vw, 72px); opacity: 0; transform: scale(1.035); transition: opacity 0.9s ease, transform 1.3s cubic-bezier(0.22, 0.61, 0.36, 1); pointer-events: none; overflow: hidden; }
+.hero-slide.active { opacity: 1; transform: scale(1); pointer-events: auto; z-index: 2; }
 .theme-bol { background: #0a2540; color: #fff; }
 .theme-bol::before { content: ''; position: absolute; width: 520px; height: 520px; right: -170px; top: -170px; background: radial-gradient(circle, rgba(0,100,224,0.45), transparent 65%); }
 .theme-dhy { background: linear-gradient(120deg, #7c3f22, #a95832); color: #fff8ef; }
@@ -476,3 +476,7 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 	.hero-slide { transition: none; }
 	.hero-breath { animation: none; }
 }
+
+/* hero slide counter */
+.hero-count { position: absolute; left: max(24px, calc((100vw - 1280px) / 2 + 24px)); bottom: 26px; z-index: 5; display: flex; gap: 8px; align-items: baseline; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px; opacity: 0.85; font-variant-numeric: tabular-nums; }
+.hero-count i { font-style: normal; opacity: 0.5; }
