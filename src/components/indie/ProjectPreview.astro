@@ -77,6 +77,16 @@ const { project, detail = false, live = false } = Astro.props;
 			</div>
 		</>
 	)}
+	{project.kind === 'notes' && (
+		<div class="notes-window">
+			<div class="mock-nav"><b>engineering / notebook</b><span>cases · guides · essays</span></div>
+			<div class="notes-list">
+				<div class="notes-row"><span>01</span><div><b>When the pipeline said done</b><p>reconciliation · evidence inside</p></div></div>
+				<div class="notes-row"><span>02</span><div><b>Agents with approval gates</b><p>automation · decisions logged</p></div></div>
+				<div class="notes-row"><span>03</span><div><b>Postgres for everything?</b><p>data · measured tradeoffs</p></div></div>
+			</div>
+		</div>
+	)}
 	{project.kind === 'data' && (
 		<div class="data-window">
 			<div class="mock-nav"><b><span class="code-mark">{'{'}</span> data / engineer</b><span>Work &nbsp; About &nbsp; Contact</span></div>

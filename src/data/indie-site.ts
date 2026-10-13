@@ -44,6 +44,17 @@ export const projects = [
 			'A website build centered on data engineering. It explores how to communicate technical work through a clear structure and a focused, readable digital experience.',
 		color: 'sand',
 	},
+	{
+		slug: 'engineering-notebook',
+		title: 'Notes with receipts.',
+		name: 'Engineering Notebook',
+		category: 'Web & data',
+		kind: 'notes',
+		description: 'Real systems, documented with architecture, evidence, and decisions.',
+		detail:
+			'A personal engineering publication: data-engineering case studies, multi-part tutorials, essays and hypothesis-first experiments — every claim backed by evidence, every decision recorded.',
+		color: 'sand',
+	},
 ] as const;
 
 export type IndieProject = (typeof projects)[number];

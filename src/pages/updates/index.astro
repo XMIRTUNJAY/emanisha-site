@@ -62,11 +62,3 @@ const description =
 	</footer>
 </IndieLayout>
 
-<script>
-	const menuBtn = document.querySelector<HTMLButtonElement>('.mobile-menu');
-	const nav = document.querySelector<HTMLElement>('.nav');
-	menuBtn?.addEventListener('click', () => {
-		const open = nav?.classList.toggle('open');
-		menuBtn?.setAttribute('aria-expanded', String(!!open));
-	});
-</script>
