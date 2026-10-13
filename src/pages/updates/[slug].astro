@@ -3,9 +3,16 @@ import IndieLayout from '../../layouts/IndieLayout.astro';
 import { posts } from '../../data/indie-site';
 
 export function getStaticPaths() {
-	return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+	return posts.map((post, i) => ({
+		params: { slug: post.slug },
+		props: { post, prev: posts[i - 1] ?? null, next: posts[i + 1] ?? null },
+	}));
 }
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props as {
+	post: (typeof posts)[number];
+	prev: (typeof posts)[number] | null;
+	next: (typeof posts)[number] | null;
+};
 ---
 
 <IndieLayout
@@ -50,6 +57,22 @@ const { post } = Astro.props;
 		<a class="text-link" href="/#contact">Continue the conversation
 			<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
 		</a>
+		{(prev || next) && (
+			<nav class="note-pager" aria-label="More notes">
+				{prev ? (
+					<a href={`/updates/${prev.slug}/`}>
+						<span>← Previous note</span>
+						<strong>{prev.title}</strong>
+					</a>
+				) : <span />}
+				{next ? (
+					<a href={`/updates/${next.slug}/`} style="text-align:right">
+						<span>Next note →</span>
+						<strong>{next.title}</strong>
+					</a>
+				) : <span />}
+			</nav>
+		)}
 	</main>
 
 	<footer class="site-footer rail">

@@ -388,3 +388,11 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .about { gap: 20px; }
 .about-roles { margin-top: 0; }
 .role-card.selected { border-color: #0064e0; box-shadow: 0 0 0 2px #0064e0, 0 24px 55px rgba(0, 100, 224, 0.3); transform: translateY(-4px); }
+
+/* notebook: blue arrow hover (matches project-card pattern) + article pager */
+.update-list > a > svg { transition: color 0.2s ease, transform 0.2s ease; }
+.update-list > a:hover > svg { color: #0064e0; transform: translate(2px, -2px); }
+.note-pager { display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; padding-top: 28px; border-top: 1px solid #e6e6e6; }
+.note-pager a span { display: block; font-size: 10px; font-weight: 800; letter-spacing: 1.4px; color: #5f6368; margin-bottom: 6px; }
+.note-pager a strong { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #0f0f0f; }
+.note-pager a:hover strong { color: #0064e0; }
