@@ -423,6 +423,32 @@ const description =
 	}
 	if (routeItems.length) setRoute('bol');
 
+	// role cards: single-select with blue outline (Muse model-card pattern)
+	const roleCards = Array.from(document.querySelectorAll<HTMLElement>('.role-card'));
+	for (const card of roleCards) {
+		card.setAttribute('tabindex', '0');
+		card.setAttribute('role', 'button');
+		card.setAttribute('aria-pressed', 'false');
+		const select = () => {
+			const was = card.classList.contains('selected');
+			for (const c of roleCards) {
+				c.classList.remove('selected');
+				c.setAttribute('aria-pressed', 'false');
+			}
+			if (!was) {
+				card.classList.add('selected');
+				card.setAttribute('aria-pressed', 'true');
+			}
+		};
+		card.addEventListener('click', select);
+		card.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				select();
+			}
+		});
+	}
+
 	// mobile nav
 	const menuBtn = document.querySelector<HTMLButtonElement>('.mobile-menu');
 	const nav = document.querySelector<HTMLElement>('.nav');

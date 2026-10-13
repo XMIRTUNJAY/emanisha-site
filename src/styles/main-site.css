@@ -377,3 +377,14 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 @media (prefers-reduced-motion: reduce) {
 	.cloud-row { animation: none; }
 }
+
+/* selectable role cards: blue outline + blue shadow when active */
+.role-card { cursor: pointer; }
+.role-card:hover { border-color: #9cc2f5; }
+.role-card.selected { border-color: #0064e0; box-shadow: 0 0 0 1.5px #0064e0, 0 20px 44px rgba(0, 100, 224, 0.2); transform: translateY(-4px); }
+.role-card:focus-visible { outline: 2px solid #0064e0; outline-offset: 3px; }
+
+/* compact about: banner + role cards belong to one section */
+.about { gap: 20px; }
+.about-roles { margin-top: 0; }
+.role-card.selected { border-color: #0064e0; box-shadow: 0 0 0 2px #0064e0, 0 24px 55px rgba(0, 100, 224, 0.3); transform: translateY(-4px); }
