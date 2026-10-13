@@ -480,3 +480,47 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 /* hero slide counter */
 .hero-count { position: absolute; left: max(24px, calc((100vw - 1280px) / 2 + 24px)); bottom: 26px; z-index: 5; display: flex; gap: 8px; align-items: baseline; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px; opacity: 0.85; font-variant-numeric: tabular-nums; }
 .hero-count i { font-style: normal; opacity: 0.5; }
+
+/* ===== full-bleed hero + overlay pill navbar + AI builder theme ===== */
+.hero-slider { width: 100%; max-width: none; padding: 0; margin: 0; }
+.hero-slides { border-radius: 0; min-height: 100svh; }
+.hero-slide { padding: calc(clamp(30px, 5vw, 72px) + 104px) max(24px, calc((100vw - 1280px) / 2 + 24px)) clamp(30px, 5vw, 72px); }
+.site-header.over-hero { position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 100; background: transparent; border-bottom: 1px solid transparent; transition: background 0.3s ease, border-color 0.3s ease; }
+.site-header.over-hero .brand, .site-header.over-hero .nav a { color: #fff; transition: color 0.3s ease; }
+.site-header.over-hero .brand svg { color: #fff; }
+.site-header.over-hero .nav { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; padding: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.site-header.over-hero .nav a { border-radius: 999px; padding: 7px 15px; }
+.site-header.over-hero .nav a:hover { background: rgba(255, 255, 255, 0.24); color: #fff; }
+.site-header.over-hero .book-link { border-color: rgba(255, 255, 255, 0.45); color: #fff; }
+.site-header.over-hero .book-link:hover { background: rgba(255, 255, 255, 0.16); }
+.site-header.over-hero .mobile-menu { color: #fff; }
+.site-header.over-hero.is-scrolled { background: rgba(255, 255, 255, 0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid #e6e6e6; }
+.site-header.over-hero.is-scrolled .brand, .site-header.over-hero.is-scrolled .nav a { color: #0f0f0f; }
+.site-header.over-hero.is-scrolled .brand svg { color: #0064e0; }
+.site-header.over-hero.is-scrolled .nav { background: #f2f4f6; border-color: #e6e6e6; }
+.site-header.over-hero.is-scrolled .nav a:hover { background: #fff; color: #0064e0; }
+.site-header.over-hero.is-scrolled .book-link { border-color: #e0e0e0; color: #0f0f0f; }
+.site-header.over-hero.is-scrolled .book-link:hover { background: #eaf1fd; }
+.site-header.over-hero.is-scrolled .mobile-menu { color: #0f0f0f; }
+.theme-ai { background: #0b1220; color: #e8eef5; }
+.theme-ai::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0, 100, 224, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 100, 224, 0.08) 1px, transparent 1px); background-size: 36px 36px; }
+.theme-ai h1, .theme-ai .hero-copy p { color: #e8eef5; }
+.hero-chart { width: min(360px, 100%); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 22px 18px 16px; }
+.hero-chart svg { width: 100%; height: auto; display: block; }
+.chart-grid { stroke: rgba(255, 255, 255, 0.1); stroke-width: 1; fill: none; }
+.chart-area { fill: rgba(0, 100, 224, 0.22); }
+.chart-line { stroke: #4a90e2; stroke-width: 3; fill: none; stroke-linecap: round; }
+.chart-feed { margin-top: 12px; display: grid; gap: 5px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #8fb8f5; }
+.chart-feed .caret::after { content: '\258A'; animation: caret-blink 1s steps(1) infinite; }
+@keyframes caret-blink { 50% { opacity: 0; } }
+@media (max-width: 900px) {
+	.hero-slide { padding-top: calc(clamp(30px, 5vw, 72px) + 84px); }
+	.site-header.over-hero .nav.open { background: rgba(255, 255, 255, 0.97); }
+	.site-header.over-hero .nav.open a { color: #0f0f0f; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.chart-feed .caret::after { animation: none; }
+}
+
+/* scrolled navbar: stronger glass so it never looks invisible on white */
+.site-header.over-hero.is-scrolled { background: rgba(255, 255, 255, 0.94); border-bottom: 1px solid #dfe3e8; box-shadow: 0 8px 28px rgba(15, 15, 15, 0.08); }

@@ -10,7 +10,7 @@ const description =
 ---
 
 <IndieLayout title={title} description={description} canonicalPath="/">
-	<header class="site-header rail">
+	<header class="site-header rail over-hero">
 		<a class="brand" href="/" aria-label="Indie builds home"
 			><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"></path><path d="M17.196 9 6.804 15"></path><path d="m6.804 9 10.392 6"></path></svg
 			><span>indie<span class="brand-light"> / builds</span><i>.</i></span></a
@@ -34,10 +34,36 @@ const description =
 	</header>
 
 	<main>
-		<section class="hero-slider rail" aria-roledescription="carousel" aria-label="Featured builds">
+		<section class="hero-slider" aria-roledescription="carousel" aria-label="Featured builds">
 			<div class="hero-slides" id="hero-slides">
-				<div class="hero-count" aria-hidden="true"><span id="hero-cur">01</span><i>/</i><span>04</span></div>
-				<article class="hero-slide theme-bol active" data-slide="0" aria-label="1 of 4: Bol Marathi">
+				<div class="hero-count" aria-hidden="true"><span id="hero-cur">01</span><i>/</i><span>05</span></div>
+				<article class="hero-slide theme-ai active" data-slide="0" aria-label="1 of 5: AI builder">
+				<div class="hero-copy">
+				<span class="hero-eyebrow">AI BUILDER / DATA ENGINEER</span>
+				<h1>Pipelines with a pulse.</h1>
+				<p>Post-trade finance systems, ML-driven data quality, and agents that do the boring work - built to settle millions without drama.</p>
+				<div class="hero-cta-row">
+				<a class="button" href="/#work">See the work</a>
+				<a class="ghost-link-light" href="/projects/data-engineer/">How I build</a>
+				</div>
+				</div>
+				<div class="hero-visual" aria-hidden="true">
+				<div class="hero-chart">
+				<svg viewBox="0 0 320 170" preserveAspectRatio="none">
+				<path class="chart-grid" d="M0 34H320M0 68H320M0 102H320M0 136H320" />
+				<path class="chart-area" d="M0 140 L40 128 L80 132 L120 104 L160 110 L200 76 L240 84 L280 46 L320 52 L320 170 L0 170 Z" />
+				<path class="chart-line" d="M0 140 L40 128 L80 132 L120 104 L160 110 L200 76 L240 84 L280 46 L320 52" />
+				<circle r="5" fill="#4ade80"><animateMotion dur="7s" repeatCount="indefinite" path="M0 140 L40 128 L80 132 L120 104 L160 110 L200 76 L240 84 L280 46 L320 52" /></circle>
+				</svg>
+				<div class="chart-feed">
+				<span>&gt; ingest ... 2.1M rows</span>
+				<span>&gt; validate ... schema ok</span>
+				<span>&gt; agent: forecast ready<span class="caret"></span></span>
+				</div>
+				</div>
+				</div>
+				</article>
+				<article class="hero-slide theme-bol" data-slide="1" aria-label="2 of 5: Bol Marathi">
 					<div class="hero-copy">
 						<span class="hero-eyebrow">LIVE NOW · BOL MARATHI</span>
 						<h1>Play Marathi in your browser.</h1>
@@ -53,7 +79,7 @@ const description =
 						<div class="hero-stats"><div><b>5</b><span>GAMES</span></div><div><b>215</b><span>GUIDES</span></div><div><b>1167</b><span>WORDS</span></div></div>
 					</div>
 				</article>
-				<article class="hero-slide theme-dhy" data-slide="1" aria-label="2 of 4: Dhyaana" inert>
+				<article class="hero-slide theme-dhy" data-slide="2" aria-label="3 of 5: Dhyaana" inert>
 					<div class="hero-copy">
 						<span class="hero-eyebrow">IN DEVELOPMENT · DHYAANA</span>
 						<h1>A calmer digital space.</h1>
@@ -69,7 +95,7 @@ const description =
 						<span class="hero-sub">BREATHE IN · BREATHE OUT</span>
 					</div>
 				</article>
-				<article class="hero-slide theme-cla" data-slide="2" aria-label="3 of 4: Clarity" inert>
+				<article class="hero-slide theme-cla" data-slide="3" aria-label="4 of 5: Clarity" inert>
 					<div class="hero-copy">
 						<span class="hero-eyebrow">CONCEPT · CLARITY</span>
 						<h1>Big ideas. Small scrolls.</h1>
@@ -87,7 +113,7 @@ const description =
 						</div>
 					</div>
 				</article>
-				<article class="hero-slide theme-dea" data-slide="3" aria-label="4 of 4: DE/AGENT" inert>
+				<article class="hero-slide theme-dea" data-slide="4" aria-label="5 of 5: DE/AGENT" inert>
 					<div class="hero-copy">
 						<span class="hero-eyebrow">ON THE ROADMAP · DE/AGENT</span>
 						<h1>Pipelines that run themselves.</h1>
@@ -105,16 +131,7 @@ const description =
 					</div>
 				</article>
 			</div>
-			<div class="hero-controls">
-				<button type="button" class="hero-arrow" data-dir="-1" aria-label="Previous slide">←</button>
-				<div class="hero-dots" role="tablist" aria-label="Choose slide">
-					<button type="button" role="tab" aria-selected="true" aria-label="Bol Marathi" data-go="0"></button>
-					<button type="button" role="tab" aria-selected="false" aria-label="Dhyaana" data-go="1"></button>
-					<button type="button" role="tab" aria-selected="false" aria-label="Clarity" data-go="2"></button>
-					<button type="button" role="tab" aria-selected="false" aria-label="DE/AGENT" data-go="3"></button>
-				</div>
-				<button type="button" class="hero-arrow" data-dir="1" aria-label="Next slide">→</button>
-			</div>
+			
 		</section>
 
 		<section class="work rail reveal" id="work">
@@ -501,7 +518,7 @@ const description =
 
 	// hero slideshow: auto-rotating app bands, pause on hover/focus
 	const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
-	const heroDots = Array.from(document.querySelectorAll<HTMLButtonElement>('.hero-dots button'));
+	
 	const heroBox = document.getElementById('hero-slides');
 	let heroIdx = 0;
 	let heroTimer: number | undefined;
@@ -518,19 +535,11 @@ const description =
 			if (on) s.removeAttribute('inert');
 			else s.setAttribute('inert', '');
 		}
-		for (const d of heroDots) {
-			const on = Number(d.dataset.go) === heroIdx;
-			d.setAttribute('aria-selected', String(on));
-		}
 	}
 	function heroAuto() {
 		if (reduceMotion) return;
 		window.clearInterval(heroTimer);
 		heroTimer = window.setInterval(() => showSlide(heroIdx + 1), 6000);
-	}
-	for (const d of heroDots) d.addEventListener('click', () => { showSlide(Number(d.dataset.go)); heroAuto(); });
-	for (const a of document.querySelectorAll<HTMLButtonElement>('.hero-arrow')) {
-		a.addEventListener('click', () => { showSlide(heroIdx + Number(a.dataset.dir)); heroAuto(); });
 	}
 	document.querySelector('.hero-slider')?.addEventListener('keydown', (e) => {
 		if ((e as KeyboardEvent).key !== 'ArrowRight' && (e as KeyboardEvent).key !== 'ArrowLeft') return;
@@ -544,6 +553,21 @@ const description =
 	showSlide(0);
 	heroAuto();
 
+	// overlay header: stay transparent-white for the whole dark hero,
+	// switch to white glass only once page content scrolls underneath
+	var overHeader = document.querySelector('.site-header.over-hero');
+	var onScrollHeader = function () {
+		if (!overHeader || !heroBox) return;
+		var past = window.scrollY > heroBox.offsetHeight - 120;
+		overHeader.classList.toggle('is-scrolled', past);
+	};
+	window.addEventListener('scroll', onScrollHeader, { passive: true });
+	onScrollHeader();
+	if (reduceMotion) {
+		document.querySelectorAll('.hero-chart svg').forEach(function (sv) {
+			try { sv.pauseAnimations(); } catch (e) { /* ignore */ }
+		});
+	}
 	// mobile nav
 	const menuBtn = document.querySelector<HTMLButtonElement>('.mobile-menu');
 	const nav = document.querySelector<HTMLElement>('.nav');
