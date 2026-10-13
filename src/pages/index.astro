@@ -310,6 +310,10 @@ const description =
 					<a class="text-link" href="/book/">Prefer a conversation? Book a time
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
 					</a>
+					<div class="contact-cards">
+						<a href="mailto:hello@emanisha.in"><b>Email me</b><span>hello@emanisha.in</span></a>
+						<a href="/book/"><b>Book a chat</b><span>Find a time that suits you</span></a>
+					</div>
 				</div>
 				<form id="contact-form">
 					<div class="form-pair">
@@ -329,22 +333,22 @@ const description =
 		</section>
 
 		<section class="newsletter rail reveal">
-			<div>
+			<div class="news-card">
 				<span class="eyebrow">LET&rsquo;S STAY IN THE LOOP</span>
 				<h2>A little update, now and then.</h2>
-				<p>New builds, fresh notes, and things worth sharing.</p>
+				<p>New builds, fresh notes, and things worth sharing. One email a month, never noise.</p>
+				<form id="newsletter-form">
+					<label class="sr-only" for="newsletter-email">Email address</label>
+					<div class="newsletter-input">
+						<input id="newsletter-email" name="email" type="email" required placeholder="Your email address" autocomplete="email" />
+						<button aria-label="Sign up for updates" type="submit"
+							><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+						></button>
+					</div>
+					<label class="consent"><input type="checkbox" required /> I agree to receive email updates. I can unsubscribe anytime.</label>
+					<p role="status"></p>
+				</form>
 			</div>
-			<form id="newsletter-form">
-				<label class="sr-only" for="newsletter-email">Email address</label>
-				<div class="newsletter-input">
-					<input id="newsletter-email" name="email" type="email" required placeholder="Your email address" autocomplete="email" />
-					<button aria-label="Sign up for updates" type="submit"
-						><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
-					></button>
-				</div>
-				<label class="consent"><input type="checkbox" required /> I agree to receive email updates. I can unsubscribe anytime.</label>
-				<p role="status"></p>
-			</form>
 		</section>
 	</main>
 
