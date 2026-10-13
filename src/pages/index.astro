@@ -34,20 +34,86 @@ const description =
 	</header>
 
 	<main>
-		<section class="hero" aria-labelledby="intro">
-			<div class="intro-label"><span class="status-dot"></span> INDEPENDENT DEVELOPER. CURIOUS HUMAN.</div>
-			<h1 id="intro">Small ideas.<br />Thoughtful <span>builds.<svg viewBox="0 0 380 20" aria-hidden="true"><path d="M4 14 Q 180 -3 372 10 M24 19 Q195 4 345 15"></path></svg></span></h1>
-			<svg class="hero-spark" xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path></svg>
-			<p>I turn curiosity into things you can use.<br />A collection of apps, websites, and experiments — built with care.</p>
-			<div class="hero-actions">
-				<a class="button" href="#work">Explore my work
-					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
-				</a>
-				<a class="text-link" href="/book/">Let&rsquo;s build something
-					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-				</a>
+		<section class="hero-slider rail" aria-roledescription="carousel" aria-label="Featured builds">
+			<div class="hero-slides" id="hero-slides">
+				<article class="hero-slide theme-bol active" data-slide="0" aria-label="1 of 4: Bol Marathi">
+					<div class="hero-copy">
+						<span class="hero-eyebrow">LIVE NOW · BOL MARATHI</span>
+						<h1>Play Marathi in your browser.</h1>
+						<p>Five games, 215 guides and a full dictionary — free, no sign-up, running right here.</p>
+						<div class="hero-cta-row">
+							<a class="button" href="/learn-marathi/games/marathi-wordle/">Play now</a>
+							<a class="ghost-link-light" href="/learn-marathi/">Explore the build</a>
+						</div>
+					</div>
+					<div class="hero-visual" aria-hidden="true">
+						<span class="hero-big" lang="mr">नमस्कार</span>
+						<span class="hero-watermark" lang="mr">मराठी</span>
+						<div class="hero-stats"><div><b>5</b><span>GAMES</span></div><div><b>215</b><span>GUIDES</span></div><div><b>1167</b><span>WORDS</span></div></div>
+					</div>
+				</article>
+				<article class="hero-slide theme-dhy" data-slide="1" aria-label="2 of 4: Dhyaana" inert>
+					<div class="hero-copy">
+						<span class="hero-eyebrow">IN DEVELOPMENT · DHYAANA</span>
+						<h1>A calmer digital space.</h1>
+						<p>Breathing-led sessions for Indian mornings — short, quiet, and respectful of your attention.</p>
+						<div class="hero-cta-row">
+							<a class="button" href="/projects/headspace-india/">See the concept</a>
+							<a class="ghost-link-light" href="/#contact">Get notified</a>
+						</div>
+					</div>
+					<div class="hero-visual" aria-hidden="true">
+						<div class="hero-breath"></div>
+						<span class="hero-big" lang="mr">श्वास</span>
+						<span class="hero-sub">BREATHE IN · BREATHE OUT</span>
+					</div>
+				</article>
+				<article class="hero-slide theme-cla" data-slide="2" aria-label="3 of 4: Clarity" inert>
+					<div class="hero-copy">
+						<span class="hero-eyebrow">CONCEPT · CLARITY</span>
+						<h1>Big ideas. Small scrolls.</h1>
+						<p>A 3-minute morning insight for curious minds and students. Jargon-free, ad-light.</p>
+						<div class="hero-cta-row">
+							<a class="button" href="/projects/student-news/">See the concept</a>
+							<a class="ghost-link-light" href="/#contact">Get notified</a>
+						</div>
+					</div>
+					<div class="hero-visual" aria-hidden="true">
+						<div class="hero-article">
+							<span>DAILY INSIGHT</span>
+							<b>Students decode the budget in 5 minutes</b>
+							<i></i>
+						</div>
+					</div>
+				</article>
+				<article class="hero-slide theme-dea" data-slide="3" aria-label="4 of 4: DE/AGENT" inert>
+					<div class="hero-copy">
+						<span class="hero-eyebrow">ON THE ROADMAP · DE/AGENT</span>
+						<h1>Pipelines that run themselves.</h1>
+						<p>Reliable data workflows and autonomous execution — with a human approving every step.</p>
+						<div class="hero-cta-row">
+							<a class="button" href="/projects/data-engineer/">See the concept</a>
+							<a class="ghost-link-light" href="/#contact">Get notified</a>
+						</div>
+					</div>
+					<div class="hero-visual" aria-hidden="true">
+						<div class="hero-term">
+							<span>$ agent run --task ship</span>
+							<span class="ok">✓ done in 2.4s</span>
+						</div>
+					</div>
+				</article>
 			</div>
-			<div class="hero-note">A little code. A lot of curiosity.</div>
+			<div class="hero-controls">
+				<button type="button" class="hero-arrow" data-dir="-1" aria-label="Previous slide">←</button>
+				<div class="hero-dots" role="tablist" aria-label="Choose slide">
+					<button type="button" role="tab" aria-selected="true" aria-label="Bol Marathi" data-go="0"></button>
+					<button type="button" role="tab" aria-selected="false" aria-label="Dhyaana" data-go="1"></button>
+					<button type="button" role="tab" aria-selected="false" aria-label="Clarity" data-go="2"></button>
+					<button type="button" role="tab" aria-selected="false" aria-label="DE/AGENT" data-go="3"></button>
+				</div>
+				<button type="button" class="hero-arrow" data-dir="1" aria-label="Next slide">→</button>
+			</div>
 		</section>
 
 		<section class="work rail reveal" id="work">
@@ -84,27 +150,6 @@ const description =
 					))
 				}
 			</div>
-		</section>
-
-		<section class="live-band reveal" aria-label="Live now: the Marathi build">
-			<span class="live-watermark" aria-hidden="true">मराठी</span>
-			<div>
-				<span class="eyebrow">LIVE NOW</span>
-				<h2>Play Marathi in your browser.</h2>
-				<p>The concept became real: five games, 215 guides and a full dictionary — free, no sign-up, running right here on this site.</p>
-				<div class="live-stats">
-					<div><b>5</b><span>GAMES</span></div>
-					<div><b>215</b><span>GUIDES</span></div>
-					<div><b>1167</b><span>WORDS</span></div>
-				</div>
-				<div class="live-cta-row">
-					<a class="button" href="/learn-marathi/games/marathi-wordle/">Play now
-						<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-					</a>
-					<a class="ghost-link" href="/learn-marathi/">Explore the build</a>
-				</div>
-			</div>
-			<div class="live-word" lang="mr">नमस्कार<small>NAMASKĀR · HELLO</small></div>
 		</section>
 
 		<section class="route-band reveal" aria-label="The mobile route">
@@ -452,6 +497,49 @@ const description =
 			}
 		});
 	}
+
+	// hero slideshow: auto-rotating app bands, pause on hover/focus
+	const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
+	const heroDots = Array.from(document.querySelectorAll<HTMLButtonElement>('.hero-dots button'));
+	const heroBox = document.getElementById('hero-slides');
+	let heroIdx = 0;
+	let heroTimer: number | undefined;
+	const reduceMotion =
+		typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	function showSlide(i: number) {
+		if (!heroSlides.length) return;
+		heroIdx = (i + heroSlides.length) % heroSlides.length;
+		for (const s of heroSlides) {
+			const on = Number(s.dataset.slide) === heroIdx;
+			s.classList.toggle('active', on);
+			if (on) s.removeAttribute('inert');
+			else s.setAttribute('inert', '');
+		}
+		for (const d of heroDots) {
+			const on = Number(d.dataset.go) === heroIdx;
+			d.setAttribute('aria-selected', String(on));
+		}
+	}
+	function heroAuto() {
+		if (reduceMotion) return;
+		window.clearInterval(heroTimer);
+		heroTimer = window.setInterval(() => showSlide(heroIdx + 1), 6000);
+	}
+	for (const d of heroDots) d.addEventListener('click', () => { showSlide(Number(d.dataset.go)); heroAuto(); });
+	for (const a of document.querySelectorAll<HTMLButtonElement>('.hero-arrow')) {
+		a.addEventListener('click', () => { showSlide(heroIdx + Number(a.dataset.dir)); heroAuto(); });
+	}
+	document.querySelector('.hero-slider')?.addEventListener('keydown', (e) => {
+		if ((e as KeyboardEvent).key !== 'ArrowRight' && (e as KeyboardEvent).key !== 'ArrowLeft') return;
+		showSlide(heroIdx + ((e as KeyboardEvent).key === 'ArrowRight' ? 1 : -1));
+		heroAuto();
+	});
+	heroBox?.addEventListener('mouseenter', () => window.clearInterval(heroTimer));
+	heroBox?.addEventListener('mouseleave', heroAuto);
+	heroBox?.addEventListener('focusin', () => window.clearInterval(heroTimer));
+	heroBox?.addEventListener('focusout', heroAuto);
+	showSlide(0);
+	heroAuto();
 
 	// mobile nav
 	const menuBtn = document.querySelector<HTMLButtonElement>('.mobile-menu');
