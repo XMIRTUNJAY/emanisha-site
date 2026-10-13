@@ -524,3 +524,10 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 
 /* scrolled navbar: stronger glass so it never looks invisible on white */
 .site-header.over-hero.is-scrolled { background: rgba(255, 255, 255, 0.94); border-bottom: 1px solid #dfe3e8; box-shadow: 0 8px 28px rgba(15, 15, 15, 0.08); }
+
+/* morphing wordmark: emanisha -> eManisha -> e-Manisha -> e/Manisha */
+.brand-word { display: inline-block; transition: opacity 0.28s ease, transform 0.28s ease; }
+.brand-word.swap { opacity: 0; transform: translateY(5px); }
+@media (prefers-reduced-motion: reduce) {
+	.brand-word { transition: none; }
+}
