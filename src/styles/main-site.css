@@ -427,8 +427,8 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 /* ===== hero slideshow: one band per app, Pixel of attention each ===== */
 .hero-slider { padding-top: 26px; }
 .hero-slides { position: relative; border-radius: 28px; overflow: hidden; min-height: 540px; }
-.hero-slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: center; padding: clamp(30px, 5vw, 72px) clamp(24px, 5vw, 72px); opacity: 0; transform: scale(1.035); transition: opacity 0.9s ease, transform 1.3s cubic-bezier(0.22, 0.61, 0.36, 1); pointer-events: none; overflow: hidden; }
-.hero-slide.active { opacity: 1; transform: scale(1); pointer-events: auto; z-index: 2; }
+.hero-slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: center; padding: clamp(30px, 5vw, 72px) clamp(24px, 5vw, 72px); opacity: 0; transform: translateX(36px); transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1); pointer-events: none; overflow: hidden; }
+.hero-slide.active { opacity: 1; transform: none; pointer-events: auto; z-index: 2; }
 .theme-bol { background: #0a2540; color: #fff; }
 .theme-bol::before { content: ''; position: absolute; width: 520px; height: 520px; right: -170px; top: -170px; background: radial-gradient(circle, rgba(0,100,224,0.45), transparent 65%); }
 .theme-dhy { background: linear-gradient(120deg, #7c3f22, #a95832); color: #fff8ef; }
@@ -476,31 +476,3 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 	.hero-slide { transition: none; }
 	.hero-breath { animation: none; }
 }
-
-/* ===== hero: full-bleed cover, auto-only rotation ===== */
-.hero-slider { width: 100%; max-width: none; padding: 0; margin: 0; }
-.hero-slides { border-radius: 0; min-height: calc(100svh - 101px); }
-.hero-slide { padding-left: max(24px, calc((100vw - 1280px) / 2 + 24px)); padding-right: max(24px, calc((100vw - 1280px) / 2 + 24px)); }
-/* AI builder theme: deep space navy + live chart */
-.theme-ai { background: #0b1220; color: #e8eef5; }
-.theme-ai::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,100,224,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,100,224,0.08) 1px, transparent 1px); background-size: 36px 36px; }
-.theme-ai h1, .theme-ai .hero-copy p { color: #e8eef5; }
-.hero-chart { width: min(360px, 100%); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 22px 18px 16px; backdrop-filter: blur(2px); }
-.hero-chart svg { width: 100%; height: auto; display: block; }
-.chart-grid { stroke: rgba(255, 255, 255, 0.1); stroke-width: 1; fill: none; }
-.chart-area { fill: rgba(0, 100, 224, 0.22); }
-.chart-line { stroke: #4a90e2; stroke-width: 3; fill: none; stroke-linecap: round; }
-.chart-feed { margin-top: 12px; display: grid; gap: 5px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #8fb8f5; }
-.chart-feed .caret::after { content: '\258A'; animation: blink 1s steps(1) infinite; }
-@media (max-width: 900px) {
-	.hero-slides { min-height: calc(100svh - 77px); }
-}
-@media (prefers-reduced-motion: reduce) {
-	.chart-line { animation: none; stroke-dashoffset: 0; }
-	.chart-dot { visibility: hidden; }
-	.chart-feed .caret::after { animation: none; }
-}
-
-/* hero slide counter */
-.hero-count { position: absolute; left: max(24px, calc((100vw - 1280px) / 2 + 24px)); bottom: 26px; z-index: 5; display: flex; gap: 8px; align-items: baseline; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px; opacity: 0.85; font-variant-numeric: tabular-nums; }
-.hero-count i { font-style: normal; opacity: 0.5; }
