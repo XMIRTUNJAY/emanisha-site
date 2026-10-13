@@ -234,3 +234,28 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 	.route-item .pm::before, .route-item .pm::after { transition: none; }
 	.route-detail { transition: none; }
 }
+
+/* ===== real phone frames for the route stage ===== */
+.stage-card { background: transparent; border: 0; box-shadow: none; padding: 0; align-items: center; }
+.phone-frame { position: relative; width: 100%; background: #101014; border-radius: 54px; padding: 11px; box-shadow: 0 30px 70px rgba(15, 15, 15, 0.28), inset 0 0 0 2px rgba(255, 255, 255, 0.08); }
+.phone-frame::before, .phone-frame::after { content: ''; position: absolute; background: #2a2a30; border-radius: 3px; }
+.phone-frame::before { left: -2.5px; top: 120px; width: 3px; height: 64px; }
+.phone-frame::after { right: -2.5px; top: 150px; width: 3px; height: 88px; }
+.phone-notch { position: absolute; top: 23px; left: 50%; transform: translateX(-50%); width: 104px; height: 29px; background: #000; border-radius: 20px; z-index: 6; }
+.phone-screen { background: #f4f6f8; border-radius: 43px; overflow: hidden; display: flex; flex-direction: column; min-height: 400px; }
+.phone-screen.dark { background: #0a2540; }
+.phone-status { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px 6px; font-size: 13px; font-weight: 800; color: #0f0f0f; }
+.phone-status.on-dark { color: #fff; }
+.phone-icons { display: inline-flex; align-items: center; gap: 6px; }
+.phone-icons svg { width: 17px; height: 12px; fill: currentColor; stroke: currentColor; }
+.screen-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 10px 14px; }
+.screen-body .term { min-height: 0; }
+.phone-home { width: 118px; height: 5px; border-radius: 3px; background: #0f0f0f; opacity: 0.85; margin: 12px auto 10px; }
+.phone-home.on-dark { background: #fff; }
+.phone-caption { text-align: center; margin-top: 16px; }
+.phone-caption .mini-name { font-size: 17px; }
+.phone-caption .mini-sub { margin-top: 2px; }
+.stage-card .mini-status { margin-top: 10px; }
+.route-stage { min-height: 620px; }
+@media (max-width: 900px) { .route-stage { min-height: 600px; } }
+.stage-card .phone-caption, .stage-card .mini-status { transition: opacity 0.35s ease; }
