@@ -545,30 +545,8 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .route-stage { border-radius: 0; }
 .newsletter { width: 100%; max-width: none; padding-inline: 0; }
 .news-card { border-radius: 0; border-left: 0; border-right: 0; max-width: none; padding-inline: max(24px, calc((100vw - 680px) / 2 + 24px)); }
-/* blue-bordered inputs with shadow */
-.contact form input, .contact form textarea { border: 2px solid #9cc2f5; box-shadow: 0 6px 18px rgba(0, 100, 224, 0.1); }
-.contact form input:focus, .contact form textarea:focus { border-color: #0064e0; box-shadow: 0 0 0 3px rgba(0, 100, 224, 0.15), 0 8px 22px rgba(0, 100, 224, 0.12); }
-.news-card .newsletter-input { border: 2px solid #9cc2f5; box-shadow: 0 10px 26px rgba(0, 100, 224, 0.12); }
-/* warm hello band */
-.contact-wrap { background: linear-gradient(180deg, #fdf3e7, #fbeedf); }
 .about-banner { padding-inline: max(24px, calc((100vw - 1280px) / 2 + 24px)); }
 .about-banner-copy { max-width: none; }
-
-/* live alt screens: second animated page inside each app */
-.app-screen { position: relative; }
-.app-alt { position: absolute; inset: 0; padding: 64px 18px 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; background: inherit; border-radius: inherit; text-align: center; }
-.app-alt.on { opacity: 1; }
-.as-alt-note { font-size: 11px; color: #5f6368; }
-.dea-screen .as-alt-note { color: #7e9cbd; }
-.as-big { font-size: 52px; font-weight: 800; letter-spacing: -0.03em; color: #6b4a2a; }
-.as-big span { font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #9a8a76; margin-left: 4px; }
-.as-dots { display: flex; gap: 7px; }
-.as-dots i { width: 11px; height: 11px; border-radius: 50%; background: #e7d9c2; font-style: normal; }
-.as-dots i.on { background: #b25a36; }
-.as-saved { width: 100%; background: #fff; border: 1px solid #e6e6e6; border-radius: 12px; padding: 11px 13px; text-align: left; }
-.as-saved b { display: block; font-size: 12.5px; color: #0f0f0f; }
-.as-saved span { font-size: 10px; color: #5f6368; }
-.as-log.big { font-size: 10.5px; gap: 7px; }
 
 /* notes-window preview (engineering notebook project card) */
 .notes-window { position: absolute; top: 48px; left: 35px; width: calc(100% - 70px); background: #fbf9f3; border: 6px solid #f5f2e8; border-radius: 8px; transform: rotate(-2deg); box-shadow: 0 15px 35px rgba(53, 48, 37, 0.13); padding-bottom: 14px; }
@@ -578,38 +556,6 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .notes-row > span:first-child { font-family: 'Lora', serif; font-size: 13px; color: #797067; }
 .notes-row b { display: block; font-size: 12px; font-weight: 700; color: #302b27; }
 .notes-row p { font-size: 9px; color: #797067; margin-top: 2px; }
-
-/* floating pill navbar: always visible, dark glass over hero, white glass after */
-.site-header.over-hero { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); width: min(1200px, calc(100% - 24px)); z-index: 100; background: rgba(10, 17, 32, 0.55); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; padding: 10px 12px 10px 22px; height: auto; gap: 12px; }
-.site-header.over-hero .brand, .site-header.over-hero .nav a { color: #fff; }
-.site-header.over-hero .brand svg { color: #fff; }
-.site-header.over-hero .nav { background: transparent; border: 0; padding: 0; backdrop-filter: none; -webkit-backdrop-filter: none; gap: 2px; }
-.site-header.over-hero .nav a { border-radius: 999px; padding: 8px 16px; }
-.site-header.over-hero .nav a:hover { background: rgba(255, 255, 255, 0.18); color: #fff; }
-.site-header.over-hero .book-link { border-color: rgba(255, 255, 255, 0.45); color: #fff; }
-.site-header.over-hero .book-link:hover { background: rgba(255, 255, 255, 0.16); }
-.site-header.over-hero .mobile-menu { color: #fff; }
-.site-header.over-hero.is-scrolled { background: rgba(255, 255, 255, 0.92); border: 1px solid #e2e6eb; box-shadow: 0 12px 32px rgba(15, 15, 15, 0.1); }
-.site-header.over-hero.is-scrolled .brand, .site-header.over-hero.is-scrolled .nav a { color: #0f0f0f; }
-.site-header.over-hero.is-scrolled .brand svg { color: #0064e0; }
-.site-header.over-hero.is-scrolled .nav a:hover { background: #eaf1fd; color: #0064e0; }
-.site-header.over-hero.is-scrolled .book-link { border-color: #e0e0e0; color: #0f0f0f; }
-.site-header.over-hero.is-scrolled .book-link:hover { background: #eaf1fd; }
-.site-header.over-hero.is-scrolled .mobile-menu { color: #0f0f0f; }
-@media (max-width: 740px) {
-	.site-header.over-hero { border-radius: 22px; }
-	.site-header.over-hero .nav.open { background: rgba(255, 255, 255, 0.98); border-radius: 18px; top: calc(100% + 8px); }
-	.site-header.over-hero .nav.open a { color: #0f0f0f; }
-}
-.site-header.over-hero { height: auto; align-items: center; }
-
-/* hello section: meta-blue band, white type, floating white form */
-.contact-wrap { background: linear-gradient(160deg, #0064e0, #004fb8); }
-.contact .eyebrow { color: #bcd6fb; }
-.contact h2, .contact > div > p { color: #fff; }
-.contact .text-link { color: #fff; }
-.contact .text-link:hover { color: #d6e6fd; }
-.contact-cards a { border-color: transparent; }
 
 /* project shelf: horizontal slider, first card featured large */
 .project-grid { display: flex; gap: 26px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 18px; scrollbar-width: thin; }
@@ -622,18 +568,9 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 	.project-card, .project-card.featured { min-width: 84vw; }
 }
 
-/* navbar: back to the rail bar, but never transparent (dark glass over hero, white glass after) */
-.site-header.over-hero { left: 50%; top: 0; width: min(1120px, calc(100% - 96px)); max-width: 100%; padding: 0; border-radius: 0; background: rgba(10, 17, 32, 0.62); border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
-.site-header.over-hero.is-scrolled { border-radius: 0; }
 /* mobile: compact phone, closer to a real handset size */
 @media (max-width: 600px) {
 	.device-frame { width: min(242px, 64vw); border-radius: 44px; padding: 9px; }
 	.device-screen { border-radius: 35px; min-height: 430px; }
 	.phone-notch { width: 86px; height: 24px; top: 19px; }
-}
-@media (max-width: 1000px) {
-	.site-header.over-hero { width: calc(100% - 56px); }
-}
-@media (max-width: 740px) {
-	.site-header.over-hero { width: calc(100% - 36px); }
 }

@@ -261,13 +261,7 @@ const description =
 								<span class="as-listen">🔊 Listen</span>
 								<div class="as-progress" aria-hidden="true"><i style="width:68%"></i></div>
 								<div class="as-card"><span lang="mr">पाणी</span><span>pāṇī · water — tap the tile in the game</span></div>
-								<div class="app-alt">
-									<span class="as-kicker">PRACTICE · WORDLE</span>
-									<div class="tiles" aria-hidden="true"><span class="tile">पा</span><span class="tile">णी</span></div>
-									<div class="as-progress" aria-hidden="true"><i style="width:82%"></i></div>
-									<span class="as-alt-note">820 XP · 6-day streak</span>
-								</div>
-							</div>
+															</div>
 							<div class="app-screen dhy-screen" data-app="dhy">
 								<div class="as-greet"><span>शुभ सकाळ</span><span>Tue · 24°</span></div>
 								<div class="as-feat">
@@ -276,26 +270,14 @@ const description =
 									<span class="as-play">▶ Begin</span>
 								</div>
 								<div class="as-cats"><span>Breath</span><span>Sleep</span><span>Focus</span></div>
-								<div class="app-alt">
-									<span class="as-kicker">THIS WEEK</span>
-									<div class="as-big">128<span>min</span></div>
-									<div class="as-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
-									<span class="as-alt-note">5 mornings in a row</span>
-								</div>
-							</div>
+															</div>
 							<div class="app-screen cla-screen" data-app="cla">
 								<span class="as-kicker">DAILY INSIGHT · 3 MIN READ</span>
 								<b class="as-head">Students decode the budget in 5 minutes</b>
 								<p class="as-ex">Three numbers explain where the money goes — and what changes for hostels, books and bus passes.</p>
 								<div class="as-progress" aria-hidden="true"><i style="width:34%"></i></div>
 								<div class="as-row"><span class="as-save">♡ Save</span><span class="as-next">Continue →</span></div>
-								<div class="app-alt">
-									<span class="as-kicker">SAVED FOR LATER</span>
-									<div class="as-saved"><b>Monsoon arrives over Konkan</b><span>2 min · Geography</span></div>
-									<div class="as-saved"><b>ISRO's next launch</b><span>4 min · Science</span></div>
-									<div class="as-cats"><span>Top stories</span><span>Science</span><span>Money</span></div>
-								</div>
-							</div>
+															</div>
 							<div class="app-screen dea-screen" data-app="dea">
 								<span class="as-kicker light">PIPELINE · ILLUSTRATIVE PREVIEW</span>
 								<div class="as-pipe">
@@ -310,11 +292,7 @@ const description =
 								<div class="as-meta">run #4821 · 2.4s · eu-west</div>
 								<div class="as-approve"><span>Deploy to production?</span><b>Approve</b></div>
 								<div class="as-log"><span>✓ tests passed 148/148</span><span>✓ bundle 212kb</span></div>
-								<div class="app-alt">
-									<span class="as-kicker light">ACTIVITY</span>
-									<div class="as-log big"><span>✓ ingest finished · 2.1M rows</span><span>✓ validate passed · schema v14</span><span>✓ transform done · 2.4s</span><span>● publish waiting approval</span></div>
-								</div>
-							</div>
+															</div>
 						</div>
 						<div class="phone-home"></div>
 					</div>
@@ -511,7 +489,6 @@ const description =
 			item.classList.toggle('open', on);
 			item.querySelector('button')?.setAttribute('aria-expanded', String(on));
 		}
-		resetAltCycle();
 		if (key === null) return; // closing all: leave the stage on the last screen
 		for (const s of appScreens) s.classList.toggle('active', s.dataset.app === key);
 		routeStage?.setAttribute('data-active', key);
@@ -534,22 +511,6 @@ const description =
 		});
 	}
 	if (routeItems.length) setRoute('bol');
-
-	// live alt screens: cycle a second animated page inside the active app
-	let altTimer: number | undefined;
-	function resetAltCycle() {
-		document.querySelectorAll('.app-alt.on').forEach((el) => el.classList.remove('on'));
-		window.clearInterval(altTimer);
-		if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-			return;
-		altTimer = window.setInterval(() => {
-			if (document.hidden) return;
-			const active = document.querySelector('.app-screen.active');
-			const alt = active?.querySelector('.app-alt');
-			if (alt) alt.classList.toggle('on');
-		}, 4500);
-	}
-	resetAltCycle();
 
 	// forms — static build: store to a configurable PocketBase when present,
 	// otherwise show a graceful offline message
