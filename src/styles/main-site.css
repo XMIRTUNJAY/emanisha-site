@@ -205,3 +205,32 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 	.term .type-line { width: 100%; }
 	.term .ok { opacity: 1; }
 }
+
+/* ===== route showcase: accordion details + fanned phone stage (Muse pattern) ===== */
+.route-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; text-align: left; align-items: start; }
+.route-item { border-top: 1px solid #e0e0e0; }
+.route-item:last-child { border-bottom: 1px solid #e0e0e0; }
+.route-item > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: none; border: 0; padding: 20px 4px; cursor: pointer; text-align: left; }
+.route-item > button b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; color: #0f0f0f; }
+.route-item > button i { display: block; font-style: normal; font-size: 12px; color: #5f6368; margin-top: 3px; }
+.route-item .pm { position: relative; flex-shrink: 0; width: 20px; height: 20px; }
+.route-item .pm::before, .route-item .pm::after { content: ''; position: absolute; background: #0f0f0f; border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+.route-item .pm::before { left: 2px; right: 2px; top: 9px; height: 2px; }
+.route-item .pm::after { top: 2px; bottom: 2px; left: 9px; width: 2px; }
+.route-item.open .pm::after { transform: rotate(90deg); opacity: 0; }
+.route-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.route-item.open .route-detail { max-height: 300px; }
+.route-detail p { font-size: 13px; color: #5f6368; line-height: 1.75; padding: 0 4px; max-width: 420px; }
+.route-cta { display: flex; align-items: center; gap: 20px; margin: 16px 4px 22px; flex-wrap: wrap; }
+.route-cta .button { padding: 12px 24px; min-height: 44px; }
+.route-stage { position: relative; min-height: 480px; }
+.stage-card { position: absolute; top: 0; left: 50%; width: min(300px, 72%); margin-left: calc(min(300px, 72%) / -2); transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1), opacity 0.45s ease; will-change: transform; }
+@media (max-width: 900px) {
+	.route-showcase { grid-template-columns: 1fr; gap: 28px; }
+	.route-stage { min-height: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.stage-card { transition: none; }
+	.route-item .pm::before, .route-item .pm::after { transition: none; }
+	.route-detail { transition: none; }
+}

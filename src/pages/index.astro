@@ -111,57 +111,113 @@ const description =
 			<span class="eyebrow">THE MOBILE ROUTE</span>
 			<h2>Four apps. One pocket-sized future.</h2>
 			<p>An homage to where this is all going — from the build that is already live to concepts on the drawing board. Each screen is animated; tap any phone to open its story.</p>
-			<div class="route-grid">
-				<a class="mini-phone" href="/learn-marathi/">
-					<div class="mini-bar"><span>09:41</span><span class="mini-dot"></span></div>
-					<div class="mini-screen">
-						<span class="mini-tag">NOW PLAYING</span>
-						<div class="tiles" aria-hidden="true"><span class="tile">न</span><span class="tile">म</span><span class="tile">स्का</span></div>
-						<div class="mini-name" lang="mr">बोल मराठी</div>
-						<div class="mini-sub">Bol Marathi · games, guides & dictionary</div>
-					</div>
-					<span class="mini-status is-live">● LIVE</span>
-				</a>
-				<a class="mini-phone" href="/projects/headspace-india/">
-					<div class="mini-bar"><span>09:41</span><span class="mini-dot amber"></span></div>
-					<div class="mini-screen">
-						<span class="mini-tag">WELLNESS</span>
-						<div class="breath" aria-hidden="true"></div>
-						<div class="breath-words" aria-hidden="true"><span>BREATHE IN</span><span>BREATHE OUT</span></div>
-						<div class="mini-name">Dhyaana</div>
-						<div class="mini-sub">A calmer digital space, in the works</div>
-					</div>
-					<span class="mini-status is-soon">IN THE WORKS</span>
-				</a>
-				<a class="mini-phone" href="/projects/student-news/">
-					<div class="mini-bar"><span>09:41</span><span class="mini-dot amber"></span></div>
-					<div class="mini-screen">
-						<span class="mini-tag">NEWS</span>
-						<div class="ticker" aria-hidden="true">
-							<div class="ticker-track">
-								<div class="tick">Students decode the budget in 5 minutes</div>
-								<div class="tick">Monsoon arrives early over Konkan</div>
-								<div class="tick">ISRO's next launch: what to watch</div>
+			<div class="route-showcase">
+				<div class="route-list">
+					<div class="route-item open" data-app="bol">
+						<button type="button" aria-expanded="true">
+							<span><b>Bol Marathi — live now</b><i>Games, guides & dictionary, in your browser</i></span>
+							<span class="pm" aria-hidden="true"></span>
+						</button>
+						<div class="route-detail">
+							<p>The concept became real: five games, 215 guides and a full dictionary — free, no sign-up, running right here on this site.</p>
+							<div class="route-cta">
+								<a class="button try-btn" href="/learn-marathi/">Try Bol Marathi</a>
+								<a class="text-link" href="/projects/marathi-learning/">Open its story</a>
 							</div>
 						</div>
-						<div class="mini-name">Clarity</div>
-						<div class="mini-sub">The daily scroll for curious minds</div>
 					</div>
-					<span class="mini-status is-concept">CONCEPT</span>
-				</a>
-				<a class="mini-phone" href="/projects/data-engineer/">
-					<div class="mini-bar"><span>09:41</span><span class="mini-dot grey"></span></div>
-					<div class="mini-screen">
-						<span class="mini-tag">AGENTS</span>
-						<div class="term" aria-hidden="true">
-							<span class="type-line">$ agent run --task ship<span class="caret"></span></span><br />
-							<span class="ok">✓ done in 2.4s</span>
+					<div class="route-item" data-app="dhy">
+						<button type="button" aria-expanded="false">
+							<span><b>Dhyaana — in the works</b><i>A calmer digital space</i></span>
+							<span class="pm" aria-hidden="true"></span>
+						</button>
+						<div class="route-detail">
+							<p>Breathing-led sessions designed for Indian mornings — short, quiet, and respectful of your attention.</p>
+							<div class="route-cta">
+								<a class="button try-btn" href="/projects/headspace-india/">Try Dhyaana</a>
+								<a class="text-link" href="/#contact">Get notified</a>
+							</div>
 						</div>
-						<div class="mini-name">DE/AGENT</div>
-						<div class="mini-sub">Autonomous builds, on the roadmap</div>
 					</div>
-					<span class="mini-status is-concept">FUTURE</span>
-				</a>
+					<div class="route-item" data-app="cla">
+						<button type="button" aria-expanded="false">
+							<span><b>Clarity — concept</b><i>The daily scroll for curious minds</i></span>
+							<span class="pm" aria-hidden="true"></span>
+						</button>
+						<div class="route-detail">
+							<p>Student-first news in a familiar scroll: big stories decoded in five minutes, every morning.</p>
+							<div class="route-cta">
+								<a class="button try-btn" href="/projects/student-news/">Try Clarity</a>
+								<a class="text-link" href="/#contact">Get notified</a>
+							</div>
+						</div>
+					</div>
+					<div class="route-item" data-app="dea">
+						<button type="button" aria-expanded="false">
+							<span><b>DE/AGENT — future</b><i>Autonomous builds, on the roadmap</i></span>
+							<span class="pm" aria-hidden="true"></span>
+						</button>
+						<div class="route-detail">
+							<p>Data engineering that runs itself: goals in, pipelines out — with a human approving every step.</p>
+							<div class="route-cta">
+								<a class="button try-btn" href="/projects/data-engineer/">Try DE/AGENT</a>
+								<a class="text-link" href="/#contact">Get notified</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="route-stage" aria-hidden="true">
+					<div class="mini-phone stage-card" data-app="bol">
+						<div class="mini-bar"><span>09:41</span><span class="mini-dot"></span></div>
+						<div class="mini-screen">
+							<span class="mini-tag">NOW PLAYING</span>
+							<div class="tiles"><span class="tile">न</span><span class="tile">म</span><span class="tile">स्का</span></div>
+							<div class="mini-name" lang="mr">बोल मराठी</div>
+							<div class="mini-sub">Bol Marathi · games, guides & dictionary</div>
+						</div>
+						<span class="mini-status is-live">● LIVE</span>
+					</div>
+					<div class="mini-phone stage-card" data-app="dhy">
+						<div class="mini-bar"><span>09:41</span><span class="mini-dot amber"></span></div>
+						<div class="mini-screen">
+							<span class="mini-tag">WELLNESS</span>
+							<div class="breath"></div>
+							<div class="breath-words"><span>BREATHE IN</span><span>BREATHE OUT</span></div>
+							<div class="mini-name">Dhyaana</div>
+							<div class="mini-sub">A calmer digital space, in the works</div>
+						</div>
+						<span class="mini-status is-soon">IN THE WORKS</span>
+					</div>
+					<div class="mini-phone stage-card" data-app="cla">
+						<div class="mini-bar"><span>09:41</span><span class="mini-dot amber"></span></div>
+						<div class="mini-screen">
+							<span class="mini-tag">NEWS</span>
+							<div class="ticker">
+								<div class="ticker-track">
+									<div class="tick">Students decode the budget in 5 minutes</div>
+									<div class="tick">Monsoon arrives early over Konkan</div>
+									<div class="tick">ISRO's next launch: what to watch</div>
+								</div>
+							</div>
+							<div class="mini-name">Clarity</div>
+							<div class="mini-sub">The daily scroll for curious minds</div>
+						</div>
+						<span class="mini-status is-concept">CONCEPT</span>
+					</div>
+					<div class="mini-phone stage-card" data-app="dea">
+						<div class="mini-bar"><span>09:41</span><span class="mini-dot grey"></span></div>
+						<div class="mini-screen">
+							<span class="mini-tag">AGENTS</span>
+							<div class="term">
+								<span class="type-line">$ agent run --task ship<span class="caret"></span></span><br />
+								<span class="ok">✓ done in 2.4s</span>
+							</div>
+							<div class="mini-name">DE/AGENT</div>
+							<div class="mini-sub">Autonomous builds, on the roadmap</div>
+						</div>
+						<span class="mini-status is-concept">FUTURE</span>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -285,6 +341,44 @@ const description =
 			for (const card of cards) {
 				card.style.display = f === 'All builds' || card.dataset.category === f ? '' : 'none';
 			}
+		});
+	}
+
+	// route showcase: accordion rows drive the fanned phone stage
+	const routeItems = Array.from(document.querySelectorAll<HTMLElement>('.route-item'));
+	const stageCards = Array.from(document.querySelectorAll<HTMLElement>('.stage-card'));
+	function layoutStage(activeKey: string) {
+		const order = ['bol', 'dhy', 'cla', 'dea'];
+		const ai = order.indexOf(activeKey);
+		for (const card of stageCards) {
+			const d = (order.indexOf(card.dataset.app ?? '') - ai + order.length) % order.length;
+			const conf = [
+				{ t: 'translate(0, 0) rotate(0deg) scale(1)', o: '1', z: '40' },
+				{ t: 'translate(30%, 4%) rotate(7deg) scale(0.9)', o: '0.75', z: '30' },
+				{ t: 'translate(0, 2%) rotate(0deg) scale(0.82)', o: '0.45', z: '20' },
+				{ t: 'translate(-30%, 4%) rotate(-7deg) scale(0.9)', o: '0.75', z: '30' },
+			][d]!;
+			card.style.transform = conf.t;
+			card.style.opacity = conf.o;
+			card.style.zIndex = conf.z;
+		}
+	}
+	function setRoute(key: string) {
+		for (const item of routeItems) {
+			const on = item.dataset.app === key;
+			item.classList.toggle('open', on);
+			item.querySelector('button')?.setAttribute('aria-expanded', String(on));
+		}
+		layoutStage(key);
+	}
+	for (const item of routeItems) {
+		item.querySelector('button')?.addEventListener('click', () => setRoute(item.dataset.app ?? 'bol'));
+	}
+	if (routeItems.length) {
+		layoutStage('bol');
+		window.addEventListener('resize', () => {
+			const open = routeItems.find((i) => i.classList.contains('open'));
+			layoutStage(open?.dataset.app ?? 'bol');
 		});
 	}
 
