@@ -464,7 +464,61 @@ const description =
 		shelf?.scrollBy({ left: 440, behavior: 'smooth' });
 	});
 
-	// route showcase: accordion rows drive a single device stage.
+// hero slideshow: auto-rotating app bands, pause on hover/focus
+	const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
+	
+	const heroBox = document.getElementById('hero-slides');
+	let heroIdx = 0;
+	let heroTimer: number | undefined;
+	const reduceMotion =
+		typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	function showSlide(i: number) {
+		if (!heroSlides.length) return;
+		heroIdx = (i + heroSlides.length) % heroSlides.length;
+		for (const s of heroSlides) {
+			const on = Number(s.dataset.slide) === heroIdx;
+			s.classList.toggle('active', on);
+			const cur = document.getElementById('hero-cur');
+			if (cur) cur.textContent = String(heroIdx + 1).padStart(2, '0');
+			if (on) s.removeAttribute('inert');
+			else s.setAttribute('inert', '');
+		}
+	}
+	function heroAuto() {
+		if (reduceMotion) return;
+		window.clearInterval(heroTimer);
+		heroTimer = window.setInterval(() => showSlide(heroIdx + 1), 6000);
+	}
+	document.querySelector('.hero-slider')?.addEventListener('keydown', (e) => {
+		if ((e as KeyboardEvent).key !== 'ArrowRight' && (e as KeyboardEvent).key !== 'ArrowLeft') return;
+		showSlide(heroIdx + ((e as KeyboardEvent).key === 'ArrowRight' ? 1 : -1));
+		heroAuto();
+	});
+	heroBox?.addEventListener('mouseenter', () => window.clearInterval(heroTimer));
+	heroBox?.addEventListener('mouseleave', heroAuto);
+	heroBox?.addEventListener('focusin', () => window.clearInterval(heroTimer));
+	heroBox?.addEventListener('focusout', heroAuto);
+	showSlide(0);
+	heroAuto();
+
+	// overlay header: stay transparent-white for the whole dark hero,
+	// switch to white glass only once page content scrolls underneath
+	var overHeader = document.querySelector('.site-header.over-hero');
+	var onScrollHeader = function () {
+		if (!overHeader || !heroBox) return;
+		var past = window.scrollY > heroBox.offsetHeight - 120;
+		overHeader.classList.toggle('is-scrolled', past);
+	};
+	window.addEventListener('scroll', onScrollHeader, { passive: true });
+	onScrollHeader();
+	if (reduceMotion) {
+		document.querySelectorAll('.hero-chart svg').forEach(function (sv) {
+			try { sv.pauseAnimations(); } catch (e) { /* ignore */ }
+		});
+	}
+	// mobile nav is owned by IndieLayout.bindNav (single handler)
+
+		// route showcase: accordion rows drive a single device stage.
 	// Play Store URLs go here the day the apps publish — swap the hrefs only.
 	const STORE_URLS: Record<string, string> = {
 		bol: '/learn-marathi/',

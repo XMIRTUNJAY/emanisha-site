@@ -574,3 +574,23 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 	.device-screen { border-radius: 35px; min-height: 430px; }
 	.phone-notch { width: 86px; height: 24px; top: 19px; }
 }
+
+/* navbar as 3 separate pills: brand, links, CTA � each with own backdrop */
+.site-header.over-hero .brand { background: rgba(10, 17, 32, 0.55); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; padding: 10px 20px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: background 0.3s ease, border-color 0.3s ease; }
+.site-header.over-hero .header-actions .book-link { background: rgba(10, 17, 32, 0.55); border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.site-header.over-hero .header-actions .book-link:hover { background: rgba(0, 100, 224, 0.75); border-color: transparent; }
+.site-header.over-hero .mobile-menu { background: rgba(10, 17, 32, 0.55); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 50%; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.site-header.over-hero.is-scrolled .brand { background: rgba(255, 255, 255, 0.9); border-color: #e2e6eb; box-shadow: 0 8px 24px rgba(15, 15, 15, 0.08); }
+.site-header.over-hero.is-scrolled .header-actions .book-link { background: rgba(255, 255, 255, 0.9); border-color: #e0e0e0; box-shadow: 0 8px 24px rgba(15, 15, 15, 0.08); }
+.site-header.over-hero.is-scrolled .header-actions .book-link:hover { background: #eaf1fd; }
+.site-header.over-hero.is-scrolled .mobile-menu { background: rgba(255, 255, 255, 0.9); border-color: #e2e6eb; }
+
+/* navbar final: free-flow brand, glass pill nav, square book button */
+.site-header.over-hero .brand { background: transparent; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; box-shadow: none; }
+.site-header.over-hero .header-actions .book-link { background: transparent; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 6px; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.site-header.over-hero .header-actions .book-link:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.45); }
+.site-header.over-hero .mobile-menu { background: transparent; border: 0; }
+.site-header.over-hero.is-scrolled .brand { background: transparent; border: 0; box-shadow: none; }
+.site-header.over-hero.is-scrolled .header-actions .book-link { background: transparent; border: 1px solid #e0e0e0; box-shadow: none; }
+.site-header.over-hero.is-scrolled .header-actions .book-link:hover { background: #eaf1fd; }
+.site-header.over-hero.is-scrolled .mobile-menu { background: transparent; border: 0; }
