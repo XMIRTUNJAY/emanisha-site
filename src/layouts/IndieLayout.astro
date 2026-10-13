@@ -61,4 +61,28 @@ import '../styles/main-site.css';
 		});
 	}
 	bindNav();
+
+	// scroll-reveal: sections fade/slide in once, then unobserve.
+	// Skipped entirely under prefers-reduced-motion (CSS keeps them visible).
+	(function initReveal() {
+		var els = document.querySelectorAll('.reveal');
+		if (!els.length) return;
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		if (!('IntersectionObserver' in window)) {
+			els.forEach(function (el) { el.classList.add('in'); });
+			return;
+		}
+		var io = new IntersectionObserver(
+			function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('in');
+						io.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+		);
+		els.forEach(function (el) { io.observe(el); });
+	})();
 </script>

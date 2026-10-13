@@ -64,3 +64,81 @@
 @media (prefers-reduced-motion: reduce) {
 	.live-dot { animation: none; }
 }
+
+/* ===== Meta-inspired theme overhaul (emanisha.in main site) =====
+   White canvas, ink text, Meta-blue accents, pill CTAs, rounded cards.
+   Unlayered on purpose: wins over the @layer base tokens above. */
+:root {
+	--background: 0 0% 100%;
+	--foreground: 0 0% 6%;
+	--primary: 214 100% 44%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 220 14% 96%;
+	--secondary-foreground: 0 0% 6%;
+	--muted: 220 14% 96%;
+	--muted-foreground: 0 0% 42%;
+	--accent: 214 100% 94%;
+	--accent-foreground: 0 0% 6%;
+	--card: 0 0% 100%;
+	--card-foreground: 0 0% 6%;
+	--popover: 0 0% 100%;
+	--popover-foreground: 0 0% 6%;
+	--border: 0 0% 90%;
+	--input: 0 0% 90%;
+	--ring: 214 100% 44%;
+	--peach: #eaf1fd;
+	--yellow: #f2f5f9;
+	--rose: #eaf1fd;
+	--sand: #f2f5f9;
+	--ink: #0f0f0f;
+	--cream: #ffffff;
+	--rust: #0064e0;
+	--line: #e6e6e6;
+	--quiet: #5f6368;
+}
+body { background: #fff; }
+h1, h2 { font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: -0.032em; }
+::selection { background: #cfe2fc; }
+/* pill CTAs */
+.button { background: #0064e0; color: #fff; border-radius: 999px; padding: 15px 30px; gap: 14px; font-weight: 700; }
+.button:hover { background: #004fb8; }
+.text-link { color: #0064e0; font-weight: 700; }
+.text-link:hover { color: #004fb8; }
+.book-link:hover { background: #eaf1fd; border-color: #cfe2fc; }
+.brand svg, .brand i { color: #0064e0; }
+/* cards: rounder, bordered, premium lift */
+.project-preview { border-radius: 24px; border: 1px solid #e6e6e6; }
+.filter-row button.selected { border-color: #cfe2fc; background: #eaf1fd; color: #0f0f0f; }
+.project-card:hover .arrow-box { background: #0064e0; border-color: #0064e0; color: #fff; }
+.update-category { color: #0064e0; }
+/* form accents */
+button:focus-visible, a:focus-visible { outline-color: #0064e0; }
+input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color: #0064e0; }
+.consent input { accent-color: #0064e0; }
+/* dark live-build band */
+.live-band { background: #0a2540; color: #fff; border-radius: 28px; padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 72px); margin: 70px auto 0; max-width: 1120px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; overflow: hidden; position: relative; }
+.live-band::before { content: ''; position: absolute; width: 480px; height: 480px; right: -160px; top: -160px; background: radial-gradient(circle, rgba(0,100,224,0.45), transparent 65%); pointer-events: none; }
+.live-band .eyebrow { color: #8fb8f5; }
+.live-band h2 { color: #fff; font-size: clamp(30px, 4vw, 46px); margin: 14px 0 18px; }
+.live-band p { color: #c3d4ea; font-size: 14px; max-width: 420px; }
+.live-stats { display: flex; gap: 28px; margin: 26px 0 30px; }
+.live-stats div b { display: block; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.live-stats div span { font-size: 10px; letter-spacing: 1.4px; color: #8fb8f5; }
+.live-cta-row { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+.live-cta-row .ghost-link { color: #fff; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 14px 24px; }
+.live-cta-row .ghost-link:hover { border-color: #fff; }
+.live-word { font-family: 'Noto Sans Devanagari', sans-serif; font-size: clamp(72px, 10vw, 150px); font-weight: 600; color: #fff; line-height: 1.1; text-align: center; }
+.live-word small { display: block; font-family: 'Manrope', sans-serif; font-size: 13px; letter-spacing: 2px; color: #8fb8f5; margin-top: 14px; font-weight: 700; }
+@media (max-width: 900px) { .live-band { grid-template-columns: 1fr; gap: 30px; } .live-word { font-size: 84px; } }
+/* scroll reveal (transform/opacity only, interruptible, reduced-motion safe) */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); }
+.reveal.in { opacity: 1; transform: none; }
+.project-grid .project-card:nth-child(2) .reveal, .project-grid .project-card:nth-child(2).reveal { transition-delay: 0.08s; }
+.project-grid .project-card:nth-child(3).reveal { transition-delay: 0.16s; }
+.project-grid .project-card:nth-child(4).reveal { transition-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) {
+	.reveal { opacity: 1; transform: none; transition: none; }
+	.live-dot { animation: none; }
+}
+.contact-wrap { background: #f2f7fe; }
+.newsletter-input { border-color: #0f0f0f; }
