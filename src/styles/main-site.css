@@ -594,3 +594,9 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .site-header.over-hero.is-scrolled .header-actions .book-link { background: transparent; border: 1px solid #e0e0e0; box-shadow: none; }
 .site-header.over-hero.is-scrolled .header-actions .book-link:hover { background: #eaf1fd; }
 .site-header.over-hero.is-scrolled .mobile-menu { background: transparent; border: 0; }
+
+/* form fields: theme-filled white, blue outline + shadow on focus/select */
+.contact form input, .contact form textarea { background: #fff; border: 2px solid #c9d8ec; box-shadow: 0 6px 18px rgba(0, 100, 224, 0.08); transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.contact form input:focus, .contact form textarea:focus { border-color: #0064e0; box-shadow: 0 0 0 3px rgba(0, 100, 224, 0.16), 0 10px 26px rgba(0, 100, 224, 0.14); }
+.news-card .newsletter-input { border: 2px solid #c9d8ec; background: #fff; box-shadow: 0 10px 26px rgba(0, 100, 224, 0.1); transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.news-card .newsletter-input:focus-within { border-color: #0064e0; box-shadow: 0 0 0 3px rgba(0, 100, 224, 0.16), 0 12px 30px rgba(0, 100, 224, 0.14); }
