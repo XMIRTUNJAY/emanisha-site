@@ -147,3 +147,61 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 /* giant watermark in the live band */
 .live-band .live-watermark { position: absolute; right: -10px; bottom: -46px; font-family: 'Noto Sans Devanagari', sans-serif; font-size: clamp(140px, 22vw, 300px); font-weight: 700; line-height: 1; color: rgba(255, 255, 255, 0.07); pointer-events: none; user-select: none; white-space: nowrap; }
+
+/* ===== mobile-route homage strip: four animated phone screens ===== */
+.route-band { max-width: 1120px; margin: 84px auto 0; padding: 0 24px; text-align: center; }
+.route-band > p { color: #5f6368; font-size: 13px; max-width: 560px; margin: 14px auto 0; }
+.route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 38px; text-align: left; }
+.mini-phone { display: flex; flex-direction: column; background: #fff; border: 1px solid #e6e6e6; border-radius: 30px; padding: 14px 14px 18px; box-shadow: 0 18px 44px rgba(15, 15, 15, 0.1); min-height: 400px; color: inherit; transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.3s ease; }
+.mini-phone:hover { transform: translateY(-7px); box-shadow: 0 28px 60px rgba(15, 15, 15, 0.15); }
+.mini-bar { display: flex; align-items: center; justify-content: space-between; font-size: 9px; font-weight: 800; letter-spacing: 1.2px; color: #5f6368; padding: 2px 4px 12px; }
+.mini-dot { width: 7px; height: 7px; border-radius: 50%; background: #1a7f37; }
+.mini-dot.amber { background: #d9930d; }
+.mini-dot.grey { background: #9aa0a6; }
+.mini-screen { background: #f4f6f8; border-radius: 18px; padding: 16px 12px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; overflow: hidden; }
+.mini-tag { font-size: 8px; letter-spacing: 1.4px; color: #0064e0; font-weight: 800; }
+.mini-name { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; color: #0f0f0f; }
+.mini-sub { font-size: 10px; color: #5f6368; text-align: center; line-height: 1.6; }
+.mini-status { font-size: 9px; font-weight: 800; letter-spacing: 1px; padding: 6px 12px; border-radius: 999px; margin-top: 12px; align-self: center; }
+.mini-status.is-live { color: #1a7f37; background: #eaf6ee; border: 1px solid #bfe3c8; }
+.mini-status.is-concept { color: #5f6368; background: #f2f4f6; border: 1px solid #e0e0e0; }
+.mini-status.is-soon { color: #8a5a00; background: #fdf3e3; border: 1px solid #f0dcae; }
+/* bol marathi tiles */
+.tiles { display: flex; gap: 7px; }
+.tile { width: 36px; height: 46px; border-radius: 9px; background: #fff; border: 1px solid #dfe3e8; display: grid; place-items: center; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 20px; font-weight: 700; color: #0f0f0f; animation: tile-pop 2.6s ease-in-out infinite; }
+.tile:nth-child(2) { animation-delay: 0.25s; }
+.tile:nth-child(3) { animation-delay: 0.5s; }
+@keyframes tile-pop { 0%, 100% { transform: scale(1); background: #fff; } 12% { transform: scale(1.14); background: #cfe2fc; border-color: #0064e0; } 26% { transform: scale(1); background: #fff; } }
+/* dhyaana breathing */
+.breath { width: 86px; height: 86px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #2f7fe0, #0a2540 75%); animation: breathe 4.6s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { transform: scale(0.9); opacity: 0.82; } 50% { transform: scale(1.12); opacity: 1; } }
+.breath-words { position: relative; height: 16px; width: 100%; font-size: 10px; letter-spacing: 1.6px; font-weight: 700; color: #0a2540; text-align: center; }
+.breath-words span { position: absolute; inset: 0; animation: word-swap 4.6s ease-in-out infinite; }
+.breath-words span:last-child { animation-delay: 2.3s; opacity: 0; }
+@keyframes word-swap { 0%, 42% { opacity: 1; } 58%, 100% { opacity: 0; } }
+.breath-words span:last-child { animation-name: word-swap-b; }
+@keyframes word-swap-b { 0%, 42% { opacity: 0; } 58%, 100% { opacity: 1; } }
+/* clarity ticker */
+.ticker { height: 150px; width: 100%; overflow: hidden; }
+.ticker-track { display: flex; flex-direction: column; gap: 8px; animation: tick 7s ease-in-out infinite; }
+.tick { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 9px 11px; font-size: 10px; font-weight: 700; line-height: 1.5; min-height: 44px; display: flex; align-items: center; }
+@keyframes tick { 0%, 26% { transform: translateY(0); } 36%, 62% { transform: translateY(-52px); } 72%, 96% { transform: translateY(-104px); } 100% { transform: translateY(0); } }
+/* de/agent terminal */
+.term { background: #0a2540; color: #c3d4ea; border-radius: 12px; padding: 13px 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9.5px; line-height: 2; width: 100%; text-align: left; min-height: 118px; }
+.term .type-line { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; animation: type 5s steps(26) infinite; }
+.term .ok { color: #4ade80; font-weight: 700; animation: term-fade 5s ease-in-out infinite; }
+@keyframes type { 0% { width: 0; } 45%, 88% { width: 100%; } 100% { width: 0; } }
+@keyframes term-fade { 0%, 44% { opacity: 0; } 56%, 88% { opacity: 1; } 100% { opacity: 0; } }
+.term .caret::after { content: '?'; animation: blink 1s steps(1) infinite; color: #8fb8f5; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (max-width: 1000px) { .route-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+	.route-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
+	.mini-phone { min-width: 250px; scroll-snap-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.tile, .breath, .breath-words span, .ticker-track, .term .type-line, .term .ok, .term .caret::after { animation: none; }
+	.breath-words span:last-child { opacity: 1; }
+	.term .type-line { width: 100%; }
+	.term .ok { opacity: 1; }
+}
