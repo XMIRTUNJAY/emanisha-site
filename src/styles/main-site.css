@@ -621,3 +621,19 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 @media (max-width: 740px) {
 	.project-card, .project-card.featured { min-width: 84vw; }
 }
+
+/* navbar: back to the rail bar, but never transparent (dark glass over hero, white glass after) */
+.site-header.over-hero { left: 50%; top: 0; width: min(1120px, calc(100% - 96px)); max-width: 100%; padding: 0; border-radius: 0; background: rgba(10, 17, 32, 0.62); border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.site-header.over-hero.is-scrolled { border-radius: 0; }
+/* mobile: compact phone, closer to a real handset size */
+@media (max-width: 600px) {
+	.device-frame { width: min(242px, 64vw); border-radius: 44px; padding: 9px; }
+	.device-screen { border-radius: 35px; min-height: 430px; }
+	.phone-notch { width: 86px; height: 24px; top: 19px; }
+}
+@media (max-width: 1000px) {
+	.site-header.over-hero { width: calc(100% - 56px); }
+}
+@media (max-width: 740px) {
+	.site-header.over-hero { width: calc(100% - 36px); }
+}
