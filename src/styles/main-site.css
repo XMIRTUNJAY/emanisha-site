@@ -268,7 +268,7 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .route-stage[data-active="dhy"] { background: #f6ecdc; }
 .route-stage[data-active="cla"] { background: #edf1f6; }
 .route-stage[data-active="dea"] { background: #e4ebf3; }
-/* Pixel 8 logical viewport is 412x915 - the frame keeps that ratio */
+/* Pixel 8 logical viewport is 412x915 � the frame keeps that ratio */
 .device-frame { position: relative; width: min(296px, 74vw); background: #101014; border-radius: 52px; padding: 11px; box-shadow: 0 30px 70px rgba(15, 15, 15, 0.28), inset 0 0 0 2px rgba(255, 255, 255, 0.08); }
 .device-frame::before, .device-frame::after { content: ''; position: absolute; background: #2a2a30; border-radius: 3px; }
 .device-frame::before { left: -2.5px; top: 120px; width: 3px; height: 64px; }
