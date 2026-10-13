@@ -142,3 +142,8 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 }
 .contact-wrap { background: #f2f7fe; }
 .newsletter-input { border-color: #0f0f0f; }
+
+/* glass sticky header (from the Stitch showcase edition) */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+/* giant watermark in the live band */
+.live-band .live-watermark { position: absolute; right: -10px; bottom: -46px; font-family: 'Noto Sans Devanagari', sans-serif; font-size: clamp(140px, 22vw, 300px); font-weight: 700; line-height: 1; color: rgba(255, 255, 255, 0.07); pointer-events: none; user-select: none; white-space: nowrap; }
