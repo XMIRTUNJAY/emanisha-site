@@ -1,0 +1,14 @@
+{
+ "generated_at": "2026-10-14T06:33:37.490Z",
+ "groups": [
+  {
+   "key": "fork:mcp",
+   "reason": "possible-fork",
+   "ids": [
+    "mcp-aws",
+    "mcp-snowflake"
+   ]
+  }
+ ],
+ "checked": 156
+}

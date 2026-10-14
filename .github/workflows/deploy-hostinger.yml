@@ -35,6 +35,31 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Checkout de-agent-platform
+        uses: actions/checkout@v4
+        with:
+          repository: XMIRTUNJAY/de-agent-platform
+          ref: main
+          path: de-agent-platform
+
+      - name: Build /de-agent/ section
+        working-directory: de-agent-platform
+        env:
+          DEAGENT_BASE: /de-agent
+          DEAGENT_SITE: https://emanisha.in
+        run: |
+          rm -rf src/pages/api
+          npm ci
+          npx astro build
+
+      - name: Embed platform into public/de-agent
+        run: |
+          node tools/de-agent-rewrite.mjs de-agent-platform/dist
+          mkdir -p public/de-agent
+          cp -r de-agent-platform/dist/. public/de-agent/
+          rm -f public/de-agent/robots.txt public/de-agent/sitemap-index.xml public/de-agent/sitemap-0.xml
+          cp de-agent-platform/dist/sitemap-0.xml public/de-agent-sitemap.xml
+
       - name: Build site
         run: npm run build
 

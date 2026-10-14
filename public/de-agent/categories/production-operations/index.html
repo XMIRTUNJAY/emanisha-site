@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><script>
+      (function () {
+        try {
+          var t = localStorage.getItem('de-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* keep default */ }
+      })();
+    </script><title>Production Operations · DE//AGENT</title><meta name="description" content="An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status."><link rel="canonical" href="https://emanisha.in/de-agent/categories/production-operations/"><script>
+        (function () {
+          window.__DE_ANALYTICS_CONFIG__ = {
+            endpoint: '/de-agent/api/analytics/collect',
+            batchSize: 10,
+            flushInterval: 5000,
+            debug: import.meta.env.DEV,
+          };
+        })();
+      </script><meta property="og:type" content="website"><meta property="og:site_name" content="DE//AGENT"><meta property="og:title" content="Production Operations · DE//AGENT"><meta property="og:description" content="An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status."><meta property="og:url" content="https://emanisha.in/de-agent/categories/production-operations/"><meta property="og:image" content="https://emanisha.in/de-agent/og.svg"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Production Operations · DE//AGENT"><meta name="twitter:description" content="An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status."><meta name="twitter:image" content="https://emanisha.in/de-agent/og.svg"><link rel="alternate" type="application/rss+xml" title="DE//AGENT — newest resources" href="https://emanisha.in/rss.xml"><link rel="icon" href="/de-agent/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0b0d0b" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)"><link rel="stylesheet" href="/de-agent/_astro/_slug_.DZj7LUyg.css"><script type="module" src="/de-agent/_astro/page.sJrt8mpm.js"></script></head> <body> <a href="#main" class="skip-link">Skip to content</a> <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true"> <svg class="h-full w-full opacity-50"> <defs> <pattern id="rails" width="96" height="26" patternUnits="userSpaceOnUse"> <line x1="0.5" y1="0" x2="0.5" y2="26" stroke="var(--rail)" stroke-width="0.75" stroke-dasharray="1 7" stroke-linecap="round"></line> </pattern> </defs> <rect width="100%" height="100%" fill="url(#rails)"></rect> </svg> <div class="grid-lines-bg absolute inset-0 opacity-60"></div> <div class="absolute inset-x-0 top-0 h-[420px]" style="background: radial-gradient(120% 100% at 50% -20%, var(--accent-soft) 0%, transparent 62%);"></div> <div class="absolute inset-x-0 bottom-0 h-64" style="background: linear-gradient(to top, var(--shell) 10%, transparent);"></div> </div> <header class="sticky top-0 z-40 border-b border-line backdrop-blur-sm" style="background: color-mix(in oklab, var(--shell) 88%, transparent);"> <div class="mx-auto flex h-14 max-w-[1600px] items-center gap-3 px-4 sm:px-6"> <!-- mobile sidebar trigger --> <button type="button" data-sidebar-toggle class="btn-ghost -ml-1 grid h-9 w-9 place-items-center rounded-md lg:hidden" aria-label="Open navigation" aria-expanded="false"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"></path></svg> </button> <a href="/de-agent/" class="flex items-center gap-2 rounded-md pr-2" aria-label="DE//AGENT home"> <span class="inline-flex items-center gap-2 select-none"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0"> <rect x="1.25" y="1.25" width="21.5" height="21.5" rx="4" stroke="var(--accent)" stroke-width="1.5"></rect> <path d="M6 12h4.2l2-4.4 2 8.8 1.6-4.4H18" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <span class="font-mono text-[0.9rem] font-semibold tracking-tight text-fg">
+DE<span class="text-accent">//</span>AGENT
+</span> </span> </a> <nav class="hidden items-center gap-0.5 md:flex" aria-label="Main navigation"> <a href="/de-agent/roadmap" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Roadmap</a><a href="/de-agent/marketplace" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Marketplace</a><a href="/de-agent/projects" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Projects</a><a href="/de-agent/runbooks" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Runbooks</a> </nav> <div class="ml-auto flex items-center gap-2"> <button type="button" data-cmd-palette-open class="btn btn-sm gap-2 pr-2 text-muted" aria-label="Open command palette" title="Open command palette (⌘K)"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5" stroke-linecap="round"></path></svg> <span class="hidden sm:inline">Search</span> <span class="hidden items-center gap-0.5 sm:inline-flex"> <kbd class="kbd">⌘K</kbd> </span> </button> <button type="button" data-theme-toggle class="btn-ghost grid h-9 w-9 place-items-center rounded-md" aria-label="Toggle color theme" title="Toggle theme"> <svg data-theme-icon="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round"></path></svg> <svg data-theme-icon="light" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" stroke-linecap="round"></path></svg> </button> <a href="https://github.com/XMIRTUNJAY/de-agent-platform" target="_blank" rel="noopener" class="btn-ghost hidden h-9 w-9 place-items-center rounded-md sm:grid" aria-label="Source repository"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"></path></svg> </a> <a href="/de-agent/marketplace" class="btn btn-sm btn-accent">Explore</a> </div> </div> </header> <!-- Command Palette --> <div class="cmd-palette" id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette"> <div class="p-4 border-b border-line"> <input type="search" class="cmd-input" placeholder="Type a command or search..." aria-label="Command palette search" autocomplete="off" spellcheck="false"> </div> <div class="cmd-results" id="cmd-results" role="listbox"></div> <div class="px-4 py-2 border-t border-line text-xs text-dim font-mono"> <kbd class="kbd">⌘K</kbd> to open · <kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> to navigate · <kbd class="kbd">Enter</kbd> to select · <kbd class="kbd">Esc</kbd> to close
+</div> </div> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <div class="mx-auto flex max-w-[1600px]"> <nav id="sidebar" class="sidebar" aria-label="Documentation"> <div class="px-3"> <div class="mb-5"> <p class="mono-label px-2 pb-1.5">Get Started</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Introduction</span>  </a> </li><li> <a href="/de-agent/docs/how-it-works" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">How the platform works</span>  </a> </li><li> <a href="/de-agent/roadmap" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">The Learning Roadmap</span>  </a> </li><li> <a href="/de-agent/docs/verification" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Verification Levels</span>  </a> </li><li> <a href="/de-agent/docs/security" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Security &amp; Trust</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Learn</p> <ul class="space-y-px"> <li> <a href="/de-agent/taxonomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Taxonomy</span>  </a> </li><li> <a href="/de-agent/categories" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">All categories</span>  </a> </li><li> <a href="/de-agent/tutorials" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Tutorials</span>  </a> </li><li> <a href="/de-agent/guides" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Guides</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Marketplace</p> <ul class="space-y-px"> <li> <a href="/de-agent/marketplace" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Browse all</span>  </a> </li><li> <a href="/de-agent/skills" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Skills</span>  </a> </li><li> <a href="/de-agent/mcp" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">MCP servers</span>  </a> </li><li> <a href="/de-agent/plugins" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Plugins</span>  </a> </li><li> <a href="/de-agent/agents" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Agents</span>  </a> </li><li> <a href="/de-agent/hooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Hooks</span>  </a> </li><li> <a href="/de-agent/templates" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Templates &amp; starters</span>  </a> </li><li> <a href="/de-agent/references" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">References</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Build</p> <ul class="space-y-px"> <li> <a href="/de-agent/projects" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Practical projects</span>  </a> </li><li> <a href="/de-agent/patterns" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Architecture patterns</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Operate</p> <ul class="space-y-px"> <li> <a href="/de-agent/runbooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Production playbooks</span>  </a> </li><li> <a href="/de-agent/agents/incident-assistant" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Incident assistant</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Agentic Data Engineering</p> <ul class="space-y-px"> <li> <a href="/de-agent/agentic" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Capabilities overview</span>  </a> </li><li> <a href="/de-agent/docs/skill-anatomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Skill anatomy</span>  </a> </li><li> <a href="/de-agent/docs/tooling" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Tool &amp; MCP contract</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Reference</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs/content-model" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Content object model</span>  </a> </li><li> <a href="/de-agent/docs/scoring" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Source quality score</span>  </a> </li><li> <a href="/de-agent/docs/ingestion" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Ingestion pipeline</span>  </a> </li><li> <a href="/de-agent/docs/relationships" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Relationships graph</span>  </a> </li><li> <a href="/de-agent/docs/monetization" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Monetization policy</span>  </a> </li><li> <a href="/de-agent/docs/measurement" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Measurement</span>  </a> </li><li> <a href="/de-agent/docs/maintenance" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Maintenance</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Curation</p> <ul class="space-y-px"> <li> <a href="/de-agent/admin" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Curation workflow</span>  </a> </li><li> <a href="/de-agent/admin/queue" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Review queue</span>  </a> </li><li> <a href="/de-agent/admin/health" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Registry health</span>  </a> </li> </ul> </div> </div> </nav> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <main id="main" class="min-w-0 flex-1">  <header class="col section-sm" style="padding-top: 4.5rem;"> <div class="mount"> <p class="kicker">Operations</p> <h1 class="display-hero" style="margin-top: 1rem; max-width: 18ch;">Production Operations</h1> <p class="lede" style="margin-top: 1.25rem;">Day-two work: monitoring, on-call, backfills, deployments and capacity.</p>  <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;"> <span class="chip">4 resources</span> <span class="chip">4 types</span> </div>  </div> </header> <hr class="hairline col"> <div class="col section-sm" style="padding-top: 2.5rem;"> <div class="grid gap-8 lg:grid-cols-[280px_1fr]"> <aside class="sticky top-16 space-y-6 self-start" style="max-height: calc(100vh - 5rem); overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; padding-bottom: 1rem;"> <details class="card card-pad-sm" open> <summary class="mono-label cursor-pointer">Type <span class="text-dim">(4)</span></summary> <ul class="mt-3 space-y-2"> <li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="type" value="hook" class="checkbox"> <span class="text-sm text-muted">Hook</span> <span class="ml-auto font-mono text-2xs text-dim">(1)</span> </label> </li><li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="type" value="plugin" class="checkbox"> <span class="text-sm text-muted">Plugin</span> <span class="ml-auto font-mono text-2xs text-dim">(1)</span> </label> </li><li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="type" value="reference" class="checkbox"> <span class="text-sm text-muted">Reference</span> <span class="ml-auto font-mono text-2xs text-dim">(1)</span> </label> </li><li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="type" value="runbook" class="checkbox"> <span class="text-sm text-muted">Runbook</span> <span class="ml-auto font-mono text-2xs text-dim">(1)</span> </label> </li> </ul> </details><details class="card card-pad-sm" open> <summary class="mono-label cursor-pointer">Difficulty <span class="text-dim">(1)</span></summary> <ul class="mt-3 space-y-2"> <li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="difficulty" value="beginner" class="checkbox"> <span class="text-sm text-muted">beginner</span> <span class="ml-auto font-mono text-2xs text-dim">(3)</span> </label> </li> </ul> </details><details class="card card-pad-sm" open> <summary class="mono-label cursor-pointer">Verification <span class="text-dim">(1)</span></summary> <ul class="mt-3 space-y-2"> <li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="verification" value="community" class="checkbox"> <span class="text-sm text-muted">Community</span> <span class="ml-auto font-mono text-2xs text-dim">(4)</span> </label> </li> </ul> </details><details class="card card-pad-sm" open> <summary class="mono-label cursor-pointer">Technology <span class="text-dim">(0)</span></summary> <ul class="mt-3 space-y-2">  </ul> </details><details class="card card-pad-sm" open> <summary class="mono-label cursor-pointer">Stage <span class="text-dim">(1)</span></summary> <ul class="mt-3 space-y-2"> <li> <label class="flex items-center gap-2 cursor-pointer"> <input type="checkbox" name="stage" value="reliability" class="checkbox"> <span class="text-sm text-muted">Reliability</span> <span class="ml-auto font-mono text-2xs text-dim">(4)</span> </label> </li> </ul> </details> </aside> <section> <div id="results" class="card-grid"> <div data-type="plugin" data-difficulty="beginner" data-verification="community" data-technology data-stage="reliability"> <a href="/de-agent/plugins/runbook-runner" class="card card-pad card-interactive" style="display: flex; flex-direction: column; height: 100%; content-visibility: auto; contain-intrinsic-size: auto 220px;" data-marketplace="{&#34;install_count&#34;:0,&#34;install_success_rate&#34;:0,&#34;last_installed_at&#34;:null,&#34;rating_average&#34;:0,&#34;rating_count&#34;:0,&#34;rating_distribution&#34;:{},&#34;quality_scores&#34;:{&#34;performance&#34;:null,&#34;completeness&#34;:84,&#34;test_coverage&#34;:5,&#34;security&#34;:90,&#34;documentation&#34;:15,&#34;maintainability&#34;:50,&#34;community&#34;:null},&#34;composite_score&#34;:48,&#34;composite_label&#34;:&#34;adequate&#34;,&#34;roadmap_stages&#34;:[&#34;reliability&#34;],&#34;roadmap_phase&#34;:&#34;trust-operations&#34;,&#34;is_featured&#34;:false,&#34;is_official&#34;:false,&#34;publisher_tier&#34;:&#34;community&#34;,&#34;install_manifest&#34;:null}"> <div class="card-header" style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;"> <span class="mono-label">Plugin / Production Operations</span> <span class="chip" style="color: var(--color-{scoreColor(compositeScore)})">adequate (48)</span> </div> <h3 style="font-size: var(--text-xl); font-weight: 500; line-height: 1.3; color: var(--fg);">Runbook Runner</h3>  <div class="card-meta" style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center;"> <span class="chip">beginner</span> <span class="chip">plugin</span><span class="chip">runbooks</span><span class="chip">incidents</span>    <span class="chip" style="margin-left: auto; font-size: var(--text-2xs);">community</span> </div> </a> </div><div data-type="hook" data-difficulty="beginner" data-verification="community" data-technology data-stage="reliability"> <a href="/de-agent/hooks/prod-write-confirm" class="card card-pad card-interactive" style="display: flex; flex-direction: column; height: 100%; content-visibility: auto; contain-intrinsic-size: auto 220px;" data-marketplace="{&#34;install_count&#34;:0,&#34;install_success_rate&#34;:0,&#34;last_installed_at&#34;:null,&#34;rating_average&#34;:0,&#34;rating_count&#34;:0,&#34;rating_distribution&#34;:{},&#34;quality_scores&#34;:{&#34;performance&#34;:null,&#34;completeness&#34;:74,&#34;test_coverage&#34;:5,&#34;security&#34;:100,&#34;documentation&#34;:10,&#34;maintainability&#34;:50,&#34;community&#34;:null},&#34;composite_score&#34;:47.29,&#34;composite_label&#34;:&#34;adequate&#34;,&#34;roadmap_stages&#34;:[&#34;reliability&#34;],&#34;roadmap_phase&#34;:&#34;trust-operations&#34;,&#34;is_featured&#34;:false,&#34;is_official&#34;:false,&#34;publisher_tier&#34;:&#34;community&#34;,&#34;install_manifest&#34;:null}"> <div class="card-header" style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;"> <span class="mono-label">Hook / Production Operations</span> <span class="chip" style="color: var(--color-{scoreColor(compositeScore)})">adequate (47.29)</span> </div> <h3 style="font-size: var(--text-xl); font-weight: 500; line-height: 1.3; color: var(--fg);">Production Write Confirmation</h3> <p class="card-desc" style="flex: 1;">Force human confirmation for any write against a production data target.</p> <div class="card-meta" style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center;"> <span class="chip">beginner</span> <span class="chip">hook</span><span class="chip">production</span><span class="chip">guardrail</span>    <span class="chip" style="margin-left: auto; font-size: var(--text-2xs);">community</span> </div> </a> </div><div data-type="runbook" data-difficulty="beginner" data-verification="community" data-technology data-stage="reliability"> <a href="/de-agent/runbooks/pipeline-failed" class="card card-pad card-interactive" style="display: flex; flex-direction: column; height: 100%; content-visibility: auto; contain-intrinsic-size: auto 220px;" data-marketplace="{&#34;install_count&#34;:0,&#34;install_success_rate&#34;:0,&#34;last_installed_at&#34;:null,&#34;rating_average&#34;:0,&#34;rating_count&#34;:0,&#34;rating_distribution&#34;:{},&#34;quality_scores&#34;:{&#34;performance&#34;:null,&#34;completeness&#34;:75,&#34;test_coverage&#34;:5,&#34;security&#34;:30,&#34;documentation&#34;:35,&#34;maintainability&#34;:50,&#34;community&#34;:null},&#34;composite_score&#34;:36.07,&#34;composite_label&#34;:&#34;weak&#34;,&#34;roadmap_stages&#34;:[&#34;reliability&#34;],&#34;roadmap_phase&#34;:&#34;trust-operations&#34;,&#34;is_featured&#34;:false,&#34;is_official&#34;:false,&#34;publisher_tier&#34;:&#34;community&#34;,&#34;install_manifest&#34;:null}"> <div class="card-header" style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;"> <span class="mono-label">Runbook / Production Operations</span> <span class="chip" style="color: var(--color-{scoreColor(compositeScore)})">weak (36.07)</span> </div> <h3 style="font-size: var(--text-xl); font-weight: 500; line-height: 1.3; color: var(--fg);">Pipeline failed</h3>  <div class="card-meta" style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center;"> <span class="chip">beginner</span> <span class="chip">incident</span><span class="chip">orchestration</span><span class="chip">failure</span>    <span class="chip" style="margin-left: auto; font-size: var(--text-2xs);">community</span> </div> </a> </div><div data-type="reference" data-difficulty data-verification="community" data-technology data-stage="reliability"> <a href="/de-agent/references/reading-ci-failures-across-pipelines-not-one-build-at-a-time" class="card card-pad card-interactive" style="display: flex; flex-direction: column; height: 100%; content-visibility: auto; contain-intrinsic-size: auto 220px;" data-marketplace="{&#34;install_count&#34;:0,&#34;install_success_rate&#34;:0,&#34;last_installed_at&#34;:null,&#34;rating_average&#34;:0,&#34;rating_count&#34;:0,&#34;rating_distribution&#34;:{},&#34;quality_scores&#34;:{&#34;performance&#34;:null,&#34;completeness&#34;:47,&#34;test_coverage&#34;:5,&#34;security&#34;:70,&#34;documentation&#34;:20,&#34;maintainability&#34;:0,&#34;community&#34;:null},&#34;composite_score&#34;:29.36,&#34;composite_label&#34;:&#34;weak&#34;,&#34;roadmap_stages&#34;:[&#34;reliability&#34;],&#34;roadmap_phase&#34;:&#34;trust-operations&#34;,&#34;is_featured&#34;:false,&#34;is_official&#34;:false,&#34;publisher_tier&#34;:&#34;community&#34;,&#34;install_manifest&#34;:null}"> <div class="card-header" style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;"> <span class="mono-label">Reference / Production Operations</span> <span class="chip" style="color: var(--color-{scoreColor(compositeScore)})">weak (29.36)</span> </div> <h3 style="font-size: var(--text-xl); font-weight: 500; line-height: 1.3; color: var(--fg);">Reading CI Failures Across Pipelines, Not One Build at a Time</h3>  <div class="card-meta" style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center;">      <span class="chip" style="margin-left: auto; font-size: var(--text-2xs);">community</span> </div> </a> </div> </div> </section> </div> </div> <script type="module">(function(){const o=document.getElementById("results");if(!o)return;const r=Array.from(o.children),c=document.querySelectorAll('aside input[type="checkbox"]'),s=new Map;c.forEach(e=>{s.set(e.name,new Set)});function f(){for(const e of r){let t=!0;for(const[l,a]of s){if(a.size===0)continue;const n=e.dataset[l];if(!n){t=!1;break}if(l==="technology"){if(!n.split(",").some(i=>a.has(i))){t=!1;break}}else if(!a.has(n)){t=!1;break}}e.hidden=!t}}c.forEach(e=>{e.addEventListener("change",()=>{const t=s.get(e.name);e.checked?t.add(e.value):t.delete(e.value),f()})})})();</script>  </main> </div>  <script>
+      (function () {
+        // theme toggle
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-theme-toggle]');
+          if (!t) return;
+          var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+          var next = cur === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('de-theme', next); } catch (err) {}
+          document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+            ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== next);
+          });
+        });
+        // sync icons on load
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+          ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== cur);
+        });
+
+        // mobile sidebar
+        var sb = document.getElementById('sidebar');
+        var scrim = document.getElementById('sidebar-scrim');
+        var toggle = document.querySelector('[data-sidebar-toggle]');
+        function setSidebar(open) {
+          if (!sb) return;
+          sb.classList.toggle('open', open);
+          if (scrim) scrim.classList.toggle('visible', open);
+          if (toggle) toggle.setAttribute('aria-expanded', String(open));
+        }
+        if (toggle) toggle.addEventListener('click', function () {
+          setSidebar(!sb.classList.contains('open'));
+        });
+        if (scrim) scrim.addEventListener('click', function () { setSidebar(false); });
+
+        // Command Palette
+        var palette = document.getElementById('cmd-palette');
+        var paletteInput = palette?.querySelector('.cmd-input');
+        var paletteResults = document.getElementById('cmd-results');
+        var paletteOpen = false;
+
+        function openPalette() {
+          if (!palette || paletteOpen) return;
+          paletteOpen = true;
+          palette.classList.add('open');
+          paletteInput?.focus();
+          document.body.style.overflow = 'hidden';
+          renderResults('');
+        }
+        function closePalette() {
+          if (!palette || !paletteOpen) return;
+          paletteOpen = false;
+          palette.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-cmd-palette-open]');
+          if (t) { openPalette(); return; }
+          if (paletteOpen && !palette.contains(e.target)) closePalette();
+        });
+        document.addEventListener('keydown', function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (paletteOpen) closePalette(); else openPalette();
+          }
+          if (e.key === 'Escape') {
+            if (paletteOpen) closePalette();
+            setSidebar(false);
+          }
+          if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+            e.preventDefault();
+            openPalette();
+          }
+        });
+
+        function renderResults(query) {
+          if (!paletteResults) return;
+          var q = (query || '').trim().toLowerCase();
+          var registry = window.__DE_REGISTRY__ || [];
+          var results = registry
+            .map(function(r) {
+              var hay = (r.title + ' ' + (r.tagline || '') + ' ' + (r.description || '') + ' ' + (r.tags || []).join(' ') + ' ' + (r.categoryTitle || '')).toLowerCase();
+              var terms = q.split(/\s+/).filter(Boolean);
+              var score = 0;
+              for (var i = 0; i < terms.length; i++) {
+                if (r.title.toLowerCase().includes(terms[i])) score += 10;
+                if (r.tags?.some(function(tag) { return tag.toLowerCase().includes(terms[i]); })) score += 5;
+                if (hay.includes(terms[i])) score += 1;
+              }
+              return { r: r, score: score };
+            })
+            .filter(function(x) { return x.score > 0; })
+            .sort(function(a,b) { return b.score - a.score; })
+            .slice(0, 10);
+
+          if (!results.length) {
+            paletteResults.innerHTML = '<div class="px-4 py-8 text-center text-dim">No matches for "' + q + '"</div>';
+            return;
+          }
+          paletteResults.innerHTML = results.map(function(x) {
+            var r = x.r;
+            var verificationLabel = r.verification === 'verified' ? '✓ Verified' : r.verification === 'tested' ? '✓ Tested' : r.verification === 'reviewed' ? '✓ Reviewed' : 'Community';
+            var verificationColor = r.verification === 'verified' ? 'accent' : r.verification === 'tested' ? 'info' : r.verification === 'reviewed' ? 'warn' : 'dim';
+            return '<div class="cmd-item" data-url="' + r.url + '" role="option" tabindex="0">' +
+              '<span class="chip">' + r.typeLabel + '</span>' +
+              '<span class="flex-1 min-w-0 truncate">' + r.title + '</span>' +
+              '<span class="chip" style="color: var(--color-' + verificationColor + ')">' + verificationLabel + '</span>' +
+              '<kbd class="kbd ml-auto">Enter</kbd>' +
+            '</div>';
+          }).join('');
+
+          // keyboard navigation
+          var items = paletteResults.querySelectorAll('.cmd-item');
+          var selected = 0;
+          items.forEach(function(item, i) {
+            item.addEventListener('click', function() {
+              window.location.href = item.dataset.url;
+              closePalette();
+            });
+            item.addEventListener('keydown', function(ev) {
+              if (ev.key === 'Enter') {
+                window.location.href = item.dataset.url;
+                closePalette();
+              } else if (ev.key === 'ArrowDown') {
+                ev.preventDefault();
+                items[(i + 1) % items.length]?.focus();
+              } else if (ev.key === 'ArrowUp') {
+                ev.preventDefault();
+                items[(i - 1 + items.length) % items.length]?.focus();
+              }
+            });
+          });
+          if (items.length) items[0].focus();
+        }
+
+        if (paletteInput) {
+          paletteInput.addEventListener('input', function() { renderResults(this.value); });
+        }
+
+        // registry data for command palette
+        fetch('/de-agent/data/generated/search-index.json')
+          .then(function(r) { return r.json(); })
+          .then(function(d) { window.__DE_REGISTRY__ = d.entries || []; })
+          .catch(function() {});
+
+        // outbound-click hook: bounded in-memory log, no network, no cookies.
+        window.__DE_OUTBOUND__ = [];
+        document.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="http"]') : null;
+          if (!a) return;
+          window.__DE_OUTBOUND__.push({ href: a.href, at: new Date().toISOString() });
+          if (window.__DE_OUTBOUND__.length > 100) window.__DE_OUTBOUND__.shift();
+        });
+
+        // Scroll-triggered reveal animations
+        if ('IntersectionObserver' in window) {
+          var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+          document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+            revealObserver.observe(el);
+          });
+        }
+
+        // Analytics initialization
+        if (window.__DE_ANALYTICS_CONFIG__) {
+          var config = window.__DE_ANALYTICS_CONFIG__;
+          var queue = [];
+          var sessionId = sessionStorage.getItem('de_agent_session_id') || crypto.randomUUID();
+          sessionStorage.setItem('de_agent_session_id', sessionId);
+          var anonymousId = localStorage.getItem('de_agent_anonymous_id') || crypto.randomUUID();
+          localStorage.setItem('de_agent_anonymous_id', anonymousId);
+
+          function flush() {
+            if (!queue.length) return;
+            var events = queue.splice(0, config.batchSize);
+            fetch(config.endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ events, version: '1.0.0' }),
+              keepalive: true,
+            }).catch(function() { queue.unshift.apply(queue, events); });
+          }
+
+          window.trackEvent = function(event, properties) {
+            var base = {
+              session_id: sessionId,
+              anonymous_id: anonymousId,
+              context: {
+                user_agent: navigator.userAgent,
+                locale: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                screen_width: screen.width,
+                screen_height: screen.height,
+              },
+              page: {
+                path: window.location.pathname,
+                referrer: document.referrer || undefined,
+                title: document.title,
+              },
+            };
+            var fullEvent = Object.assign({}, base, { event, timestamp: new Date().toISOString(), properties });
+            queue.push(fullEvent);
+            if (queue.length >= config.batchSize) flush();
+          };
+
+          setInterval(flush, config.flushInterval);
+          window.addEventListener('beforeunload', flush);
+        }
+      })();
+    </script> </body> </html>

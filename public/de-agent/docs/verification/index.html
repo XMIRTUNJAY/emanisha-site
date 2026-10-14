@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><script>
+      (function () {
+        try {
+          var t = localStorage.getItem('de-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* keep default */ }
+      })();
+    </script><title>Verification · DE//AGENT</title><meta name="description" content="Four verification levels earned through recorded checks — what each one guarantees, and what evidence sits behind it."><link rel="canonical" href="https://emanisha.in/de-agent/docs/verification/"><script>
+        (function () {
+          window.__DE_ANALYTICS_CONFIG__ = {
+            endpoint: '/de-agent/api/analytics/collect',
+            batchSize: 10,
+            flushInterval: 5000,
+            debug: import.meta.env.DEV,
+          };
+        })();
+      </script><meta property="og:type" content="website"><meta property="og:site_name" content="DE//AGENT"><meta property="og:title" content="Verification · DE//AGENT"><meta property="og:description" content="Four verification levels earned through recorded checks — what each one guarantees, and what evidence sits behind it."><meta property="og:url" content="https://emanisha.in/de-agent/docs/verification/"><meta property="og:image" content="https://emanisha.in/de-agent/og.svg"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Verification · DE//AGENT"><meta name="twitter:description" content="Four verification levels earned through recorded checks — what each one guarantees, and what evidence sits behind it."><meta name="twitter:image" content="https://emanisha.in/de-agent/og.svg"><link rel="alternate" type="application/rss+xml" title="DE//AGENT — newest resources" href="https://emanisha.in/rss.xml"><link rel="icon" href="/de-agent/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0b0d0b" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)"><link rel="stylesheet" href="/de-agent/_astro/_slug_.DZj7LUyg.css"><script type="module" src="/de-agent/_astro/page.sJrt8mpm.js"></script></head> <body> <a href="#main" class="skip-link">Skip to content</a> <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true"> <svg class="h-full w-full opacity-50"> <defs> <pattern id="rails" width="96" height="26" patternUnits="userSpaceOnUse"> <line x1="0.5" y1="0" x2="0.5" y2="26" stroke="var(--rail)" stroke-width="0.75" stroke-dasharray="1 7" stroke-linecap="round"></line> </pattern> </defs> <rect width="100%" height="100%" fill="url(#rails)"></rect> </svg> <div class="grid-lines-bg absolute inset-0 opacity-60"></div> <div class="absolute inset-x-0 top-0 h-[420px]" style="background: radial-gradient(120% 100% at 50% -20%, var(--accent-soft) 0%, transparent 62%);"></div> <div class="absolute inset-x-0 bottom-0 h-64" style="background: linear-gradient(to top, var(--shell) 10%, transparent);"></div> </div> <header class="sticky top-0 z-40 border-b border-line backdrop-blur-sm" style="background: color-mix(in oklab, var(--shell) 88%, transparent);"> <div class="mx-auto flex h-14 max-w-[1600px] items-center gap-3 px-4 sm:px-6"> <!-- mobile sidebar trigger --> <button type="button" data-sidebar-toggle class="btn-ghost -ml-1 grid h-9 w-9 place-items-center rounded-md lg:hidden" aria-label="Open navigation" aria-expanded="false"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"></path></svg> </button> <a href="/de-agent/" class="flex items-center gap-2 rounded-md pr-2" aria-label="DE//AGENT home"> <span class="inline-flex items-center gap-2 select-none"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0"> <rect x="1.25" y="1.25" width="21.5" height="21.5" rx="4" stroke="var(--accent)" stroke-width="1.5"></rect> <path d="M6 12h4.2l2-4.4 2 8.8 1.6-4.4H18" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <span class="font-mono text-[0.9rem] font-semibold tracking-tight text-fg">
+DE<span class="text-accent">//</span>AGENT
+</span> </span> </a> <nav class="hidden items-center gap-0.5 md:flex" aria-label="Main navigation"> <a href="/de-agent/roadmap" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Roadmap</a><a href="/de-agent/marketplace" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Marketplace</a><a href="/de-agent/projects" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Projects</a><a href="/de-agent/runbooks" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Runbooks</a> </nav> <div class="ml-auto flex items-center gap-2"> <button type="button" data-cmd-palette-open class="btn btn-sm gap-2 pr-2 text-muted" aria-label="Open command palette" title="Open command palette (⌘K)"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5" stroke-linecap="round"></path></svg> <span class="hidden sm:inline">Search</span> <span class="hidden items-center gap-0.5 sm:inline-flex"> <kbd class="kbd">⌘K</kbd> </span> </button> <button type="button" data-theme-toggle class="btn-ghost grid h-9 w-9 place-items-center rounded-md" aria-label="Toggle color theme" title="Toggle theme"> <svg data-theme-icon="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round"></path></svg> <svg data-theme-icon="light" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" stroke-linecap="round"></path></svg> </button> <a href="https://github.com/XMIRTUNJAY/de-agent-platform" target="_blank" rel="noopener" class="btn-ghost hidden h-9 w-9 place-items-center rounded-md sm:grid" aria-label="Source repository"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"></path></svg> </a> <a href="/de-agent/marketplace" class="btn btn-sm btn-accent">Explore</a> </div> </div> </header> <!-- Command Palette --> <div class="cmd-palette" id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette"> <div class="p-4 border-b border-line"> <input type="search" class="cmd-input" placeholder="Type a command or search..." aria-label="Command palette search" autocomplete="off" spellcheck="false"> </div> <div class="cmd-results" id="cmd-results" role="listbox"></div> <div class="px-4 py-2 border-t border-line text-xs text-dim font-mono"> <kbd class="kbd">⌘K</kbd> to open · <kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> to navigate · <kbd class="kbd">Enter</kbd> to select · <kbd class="kbd">Esc</kbd> to close
+</div> </div> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <div class="mx-auto flex max-w-[1600px]"> <nav id="sidebar" class="sidebar" aria-label="Documentation"> <div class="px-3"> <div class="mb-5"> <p class="mono-label px-2 pb-1.5">Get Started</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Introduction</span>  </a> </li><li> <a href="/de-agent/docs/how-it-works" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">How the platform works</span>  </a> </li><li> <a href="/de-agent/roadmap" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">The Learning Roadmap</span>  </a> </li><li> <a href="/de-agent/docs/verification" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Verification Levels</span>  </a> </li><li> <a href="/de-agent/docs/security" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Security &amp; Trust</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Learn</p> <ul class="space-y-px"> <li> <a href="/de-agent/taxonomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Taxonomy</span>  </a> </li><li> <a href="/de-agent/categories" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">All categories</span>  </a> </li><li> <a href="/de-agent/tutorials" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Tutorials</span>  </a> </li><li> <a href="/de-agent/guides" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Guides</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Marketplace</p> <ul class="space-y-px"> <li> <a href="/de-agent/marketplace" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Browse all</span>  </a> </li><li> <a href="/de-agent/skills" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Skills</span>  </a> </li><li> <a href="/de-agent/mcp" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">MCP servers</span>  </a> </li><li> <a href="/de-agent/plugins" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Plugins</span>  </a> </li><li> <a href="/de-agent/agents" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Agents</span>  </a> </li><li> <a href="/de-agent/hooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Hooks</span>  </a> </li><li> <a href="/de-agent/templates" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Templates &amp; starters</span>  </a> </li><li> <a href="/de-agent/references" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">References</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Build</p> <ul class="space-y-px"> <li> <a href="/de-agent/projects" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Practical projects</span>  </a> </li><li> <a href="/de-agent/patterns" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Architecture patterns</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Operate</p> <ul class="space-y-px"> <li> <a href="/de-agent/runbooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Production playbooks</span>  </a> </li><li> <a href="/de-agent/agents/incident-assistant" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Incident assistant</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Agentic Data Engineering</p> <ul class="space-y-px"> <li> <a href="/de-agent/agentic" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Capabilities overview</span>  </a> </li><li> <a href="/de-agent/docs/skill-anatomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Skill anatomy</span>  </a> </li><li> <a href="/de-agent/docs/tooling" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Tool &amp; MCP contract</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Reference</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs/content-model" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Content object model</span>  </a> </li><li> <a href="/de-agent/docs/scoring" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Source quality score</span>  </a> </li><li> <a href="/de-agent/docs/ingestion" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Ingestion pipeline</span>  </a> </li><li> <a href="/de-agent/docs/relationships" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Relationships graph</span>  </a> </li><li> <a href="/de-agent/docs/monetization" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Monetization policy</span>  </a> </li><li> <a href="/de-agent/docs/measurement" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Measurement</span>  </a> </li><li> <a href="/de-agent/docs/maintenance" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Maintenance</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Curation</p> <ul class="space-y-px"> <li> <a href="/de-agent/admin" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Curation workflow</span>  </a> </li><li> <a href="/de-agent/admin/queue" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Review queue</span>  </a> </li><li> <a href="/de-agent/admin/health" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Registry health</span>  </a> </li> </ul> </div> </div> </nav> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <main id="main" class="min-w-0 flex-1">  <header class="col section-sm" style="padding-top: 4.5rem;"> <div class="mount"> <p class="kicker">Docs · Trust</p> <h1 class="display-hero" style="margin-top: 1rem; max-width: 18ch;">Verification</h1> <p class="lede" style="margin-top: 1.25rem;">Four verification levels earned through recorded checks — what each one guarantees, and what evidence sits behind it.</p>  </div> </header> <hr class="hairline col"> <article class="col prose-de section" style="padding-bottom: 6rem;"> <p>Not all registry entries carry the same confidence. Every resource has a <strong>claimed</strong> level set by a curator and an <strong>earned</strong> level computed from recorded checks. When they differ, both are shown — the entry stays listed, labeled honestly, until evidence closes the gap.</p>
+<h2 id="the-four-levels">The four levels</h2>
+<p><strong>Verified</strong> — the strongest signal. The artifact was executed, its behavior matched the documented expectation, and build plus tests passed with evidence on file.</p>
+<p><strong>Tested</strong> — installation and the provided example ran successfully, with the commands and outputs recorded as evidence.</p>
+<p><strong>Reviewed</strong> — a maintainer checked the source (it exists and matches the description), the license (declared and compatible), and the metadata (type, category, stage and difficulty reflect what the resource does). Reviewed does not mean line-by-line audited.</p>
+<p><strong>Community</strong> — found in an external source with metadata captured and nothing checked yet. Usable, but check the linked source and treat configuration snippets as starting points.</p>
+<h2 id="the-ten-checks">The ten checks</h2>
+<p>Each check is a separate claim with its own timestamp, tool, and author. Levels are earned by passing groups of them:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Check</th><th>What it means</th><th>Gates a level</th></tr></thead><tbody><tr><td><code>source_reachable</code></td><td>The upstream URL was fetched successfully</td><td>Yes</td></tr><tr><td><code>metadata_validated</code></td><td>Schema and referential integrity passed</td><td>Yes</td></tr><tr><td><code>license_reviewed</code></td><td>A human confirmed the declared license</td><td>Yes</td></tr><tr><td><code>build_passed</code></td><td>The documented build ran clean</td><td>Yes</td></tr><tr><td><code>tests_passed</code></td><td>The test suite ran with results recorded</td><td>Yes</td></tr><tr><td><code>smoke_passed</code></td><td>A runtime smoke test passed</td><td>Yes</td></tr><tr><td><code>output_validated</code></td><td>Observed output matched the documented expectation</td><td>Yes</td></tr><tr><td><code>tutorial_generated</code></td><td>A tutorial was generated from source evidence</td><td>No — shown</td></tr><tr><td><code>static_checks_passed</code></td><td>Lint or type checks ran</td><td>No — shown</td></tr><tr><td><code>security_reviewed</code></td><td>A human reviewed the security posture</td><td>No — shown separately</td></tr></tbody></table>
+<p>Reviewed needs the first three. Tested adds build and tests. Verified adds smoke and output validation. The three supplemental checks are recorded and displayed but never gate a level: a skill without a tutorial is not unreviewed, and security posture always stands apart from verification.</p>
+<h2 id="recording-evidence">Recording evidence</h2>
+<p>Evidence lives on the curated record as an <code>evidence</code> list. Each entry names its check, result, date, and author:</p>
+<pre class="astro-code astro-code-themes github-light github-dark-default" style="--shiki-light:#24292e;--shiki-dark:#e6edf3;--shiki-light-bg:#fff;--shiki-dark-bg:#0d1117; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">evidence</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">  - </span><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">check</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">source_reachable</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    status</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">passed</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    at</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'2026-10-10'</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    by</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">human</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    tool</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">curl</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    version</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'8.x'</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    ref</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'https://github.com/example/repo'</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    summary</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'Repo and docs respond; README matches registry description.'</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">  - </span><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">check</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">license_reviewed</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    status</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">passed</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    at</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'2026-10-10'</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    by</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">human</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    tool</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">hands</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    version</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'1'</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#7EE787">    summary</span><span style="--shiki-light:#24292E;--shiki-dark:#E6EDF3">: </span><span style="--shiki-light:#032F62;--shiki-dark:#A5D6FF">'Apache-2.0 LICENSE file at repo root.'</span></span></code></pre>
+<p><code>status</code> is <code>passed</code> or <code>failed</code> — a failed check blocks its level but stays on record. <code>by</code> is <code>human</code> or <code>pipeline</code>: only those two count. A model saying code looks correct is not evidence.</p>
+<p>The pipeline attests <code>metadata_validated</code> itself on every build (tool <code>de-agent-pipeline</code>, current version, schema plus referential integrity) because it actually ran those validations. Everything else needs a human entry or a runner that records its tool and version.</p>
+<h2 id="over-claims-and-backfill">Over-claims and backfill</h2>
+<p>If a record claims more than its evidence supports, the pipeline reports it and the site shows both values — for example, <code>evidence: community · claimed reviewed</code>. Nothing is hidden and nothing is auto-downgraded: the claim says what a curator believes, the earned level says what the file supports.</p>
+<p>Most older records predate this system and show a gap. To clear one, work through the level’s checks top-down, add an evidence entry per check, and rebuild. Start with <code>source_reachable</code> and <code>license_reviewed</code> — those two plus the automatic <code>metadata_validated</code> earn <code>reviewed</code>.</p>
+<h2 id="freshness">Freshness</h2>
+<p>Every resource records <code>last_verified</code> — the date of its most recent check at its current level. Entries older than a reviewer-defined freshness window are re-queued for re-check. If you find a stale or broken entry, see the report path in <a href="/de-agent/docs/security">Security</a>.</p>
+<h2 id="running-checks-with-the-execution-engine">Running checks with the execution engine</h2>
+<p>Evidence for build, test, and smoke checks comes from the execution engine (<code>pipelines/execute.mjs</code>), not from claims. The rules:</p>
+<ul>
+<li><strong>Manifests are curator-authored.</strong> Nothing runs because a model suggested it. A manifest lists exact commands, pins versions in its arguments, and is reviewed like any other change.</li>
+<li><strong>Dry is the default.</strong> The engine prints its plan and runs nothing. Local execution needs two explicit keys: <code>--backend local</code> and <code>--local-i-understand</code>.</li>
+<li><strong>The policy gate runs first.</strong> Unapproved trust, network access, paths outside the repo, and malformed commands block the run before anything spawns. A blocked run executes zero commands.</li>
+<li><strong>Runs are recorded.</strong> Every execution writes a checksummed transcript and a machine-readable summary with tool, version, timestamps, and exit codes. Secrets are scrubbed from the environment and redacted from logs.</li>
+<li><strong>Evidence is assigned by a human.</strong> The engine prints suggested entries; the curator uncomments the checks the run actually proves and pastes them into the record. A passing build earns <code>build_passed</code> — it never implies production readiness.</li>
+<li><strong>Guarded is not isolated.</strong> Timeouts and output caps are enforced on every backend; CPU, memory, and PID caps plus network isolation and disposable environments are enforced by the Docker backend (<code>--backend docker</code>: pinned image already present locally, <code>--network none</code>, read-only filesystem, nobody user, no pulls, no privileged flags). Run only manifests for projects you have already reviewed.</li>
+</ul> </article>  </main> </div>  <script>
+      (function () {
+        // theme toggle
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-theme-toggle]');
+          if (!t) return;
+          var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+          var next = cur === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('de-theme', next); } catch (err) {}
+          document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+            ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== next);
+          });
+        });
+        // sync icons on load
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+          ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== cur);
+        });
+
+        // mobile sidebar
+        var sb = document.getElementById('sidebar');
+        var scrim = document.getElementById('sidebar-scrim');
+        var toggle = document.querySelector('[data-sidebar-toggle]');
+        function setSidebar(open) {
+          if (!sb) return;
+          sb.classList.toggle('open', open);
+          if (scrim) scrim.classList.toggle('visible', open);
+          if (toggle) toggle.setAttribute('aria-expanded', String(open));
+        }
+        if (toggle) toggle.addEventListener('click', function () {
+          setSidebar(!sb.classList.contains('open'));
+        });
+        if (scrim) scrim.addEventListener('click', function () { setSidebar(false); });
+
+        // Command Palette
+        var palette = document.getElementById('cmd-palette');
+        var paletteInput = palette?.querySelector('.cmd-input');
+        var paletteResults = document.getElementById('cmd-results');
+        var paletteOpen = false;
+
+        function openPalette() {
+          if (!palette || paletteOpen) return;
+          paletteOpen = true;
+          palette.classList.add('open');
+          paletteInput?.focus();
+          document.body.style.overflow = 'hidden';
+          renderResults('');
+        }
+        function closePalette() {
+          if (!palette || !paletteOpen) return;
+          paletteOpen = false;
+          palette.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-cmd-palette-open]');
+          if (t) { openPalette(); return; }
+          if (paletteOpen && !palette.contains(e.target)) closePalette();
+        });
+        document.addEventListener('keydown', function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (paletteOpen) closePalette(); else openPalette();
+          }
+          if (e.key === 'Escape') {
+            if (paletteOpen) closePalette();
+            setSidebar(false);
+          }
+          if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+            e.preventDefault();
+            openPalette();
+          }
+        });
+
+        function renderResults(query) {
+          if (!paletteResults) return;
+          var q = (query || '').trim().toLowerCase();
+          var registry = window.__DE_REGISTRY__ || [];
+          var results = registry
+            .map(function(r) {
+              var hay = (r.title + ' ' + (r.tagline || '') + ' ' + (r.description || '') + ' ' + (r.tags || []).join(' ') + ' ' + (r.categoryTitle || '')).toLowerCase();
+              var terms = q.split(/\s+/).filter(Boolean);
+              var score = 0;
+              for (var i = 0; i < terms.length; i++) {
+                if (r.title.toLowerCase().includes(terms[i])) score += 10;
+                if (r.tags?.some(function(tag) { return tag.toLowerCase().includes(terms[i]); })) score += 5;
+                if (hay.includes(terms[i])) score += 1;
+              }
+              return { r: r, score: score };
+            })
+            .filter(function(x) { return x.score > 0; })
+            .sort(function(a,b) { return b.score - a.score; })
+            .slice(0, 10);
+
+          if (!results.length) {
+            paletteResults.innerHTML = '<div class="px-4 py-8 text-center text-dim">No matches for "' + q + '"</div>';
+            return;
+          }
+          paletteResults.innerHTML = results.map(function(x) {
+            var r = x.r;
+            var verificationLabel = r.verification === 'verified' ? '✓ Verified' : r.verification === 'tested' ? '✓ Tested' : r.verification === 'reviewed' ? '✓ Reviewed' : 'Community';
+            var verificationColor = r.verification === 'verified' ? 'accent' : r.verification === 'tested' ? 'info' : r.verification === 'reviewed' ? 'warn' : 'dim';
+            return '<div class="cmd-item" data-url="' + r.url + '" role="option" tabindex="0">' +
+              '<span class="chip">' + r.typeLabel + '</span>' +
+              '<span class="flex-1 min-w-0 truncate">' + r.title + '</span>' +
+              '<span class="chip" style="color: var(--color-' + verificationColor + ')">' + verificationLabel + '</span>' +
+              '<kbd class="kbd ml-auto">Enter</kbd>' +
+            '</div>';
+          }).join('');
+
+          // keyboard navigation
+          var items = paletteResults.querySelectorAll('.cmd-item');
+          var selected = 0;
+          items.forEach(function(item, i) {
+            item.addEventListener('click', function() {
+              window.location.href = item.dataset.url;
+              closePalette();
+            });
+            item.addEventListener('keydown', function(ev) {
+              if (ev.key === 'Enter') {
+                window.location.href = item.dataset.url;
+                closePalette();
+              } else if (ev.key === 'ArrowDown') {
+                ev.preventDefault();
+                items[(i + 1) % items.length]?.focus();
+              } else if (ev.key === 'ArrowUp') {
+                ev.preventDefault();
+                items[(i - 1 + items.length) % items.length]?.focus();
+              }
+            });
+          });
+          if (items.length) items[0].focus();
+        }
+
+        if (paletteInput) {
+          paletteInput.addEventListener('input', function() { renderResults(this.value); });
+        }
+
+        // registry data for command palette
+        fetch('/de-agent/data/generated/search-index.json')
+          .then(function(r) { return r.json(); })
+          .then(function(d) { window.__DE_REGISTRY__ = d.entries || []; })
+          .catch(function() {});
+
+        // outbound-click hook: bounded in-memory log, no network, no cookies.
+        window.__DE_OUTBOUND__ = [];
+        document.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="http"]') : null;
+          if (!a) return;
+          window.__DE_OUTBOUND__.push({ href: a.href, at: new Date().toISOString() });
+          if (window.__DE_OUTBOUND__.length > 100) window.__DE_OUTBOUND__.shift();
+        });
+
+        // Scroll-triggered reveal animations
+        if ('IntersectionObserver' in window) {
+          var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+          document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+            revealObserver.observe(el);
+          });
+        }
+
+        // Analytics initialization
+        if (window.__DE_ANALYTICS_CONFIG__) {
+          var config = window.__DE_ANALYTICS_CONFIG__;
+          var queue = [];
+          var sessionId = sessionStorage.getItem('de_agent_session_id') || crypto.randomUUID();
+          sessionStorage.setItem('de_agent_session_id', sessionId);
+          var anonymousId = localStorage.getItem('de_agent_anonymous_id') || crypto.randomUUID();
+          localStorage.setItem('de_agent_anonymous_id', anonymousId);
+
+          function flush() {
+            if (!queue.length) return;
+            var events = queue.splice(0, config.batchSize);
+            fetch(config.endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ events, version: '1.0.0' }),
+              keepalive: true,
+            }).catch(function() { queue.unshift.apply(queue, events); });
+          }
+
+          window.trackEvent = function(event, properties) {
+            var base = {
+              session_id: sessionId,
+              anonymous_id: anonymousId,
+              context: {
+                user_agent: navigator.userAgent,
+                locale: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                screen_width: screen.width,
+                screen_height: screen.height,
+              },
+              page: {
+                path: window.location.pathname,
+                referrer: document.referrer || undefined,
+                title: document.title,
+              },
+            };
+            var fullEvent = Object.assign({}, base, { event, timestamp: new Date().toISOString(), properties });
+            queue.push(fullEvent);
+            if (queue.length >= config.batchSize) flush();
+          };
+
+          setInterval(flush, config.flushInterval);
+          window.addEventListener('beforeunload', flush);
+        }
+      })();
+    </script> </body> </html>

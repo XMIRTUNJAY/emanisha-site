@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><script>
+      (function () {
+        try {
+          var t = localStorage.getItem('de-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* keep default */ }
+      })();
+    </script><title>Agent Skills (open format) · DE//AGENT</title><meta name="description" content="An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status."><link rel="canonical" href="https://emanisha.in/de-agent/references/agent-skills/"><script>
+        (function () {
+          window.__DE_ANALYTICS_CONFIG__ = {
+            endpoint: '/de-agent/api/analytics/collect',
+            batchSize: 10,
+            flushInterval: 5000,
+            debug: import.meta.env.DEV,
+          };
+        })();
+      </script><meta property="og:type" content="website"><meta property="og:site_name" content="DE//AGENT"><meta property="og:title" content="Agent Skills (open format) · DE//AGENT"><meta property="og:description" content="An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status."><meta property="og:url" content="https://emanisha.in/de-agent/references/agent-skills/"><meta property="og:image" content="https://emanisha.in/de-agent/og.svg"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Agent Skills (open format) · DE//AGENT"><meta name="twitter:description" content="An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status."><meta name="twitter:image" content="https://emanisha.in/de-agent/og.svg"><link rel="alternate" type="application/rss+xml" title="DE//AGENT — newest resources" href="https://emanisha.in/rss.xml"><link rel="icon" href="/de-agent/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0b0d0b" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)"><style>.feedback-btn[data-astro-cid-ukalbhrz]{transition:all .15s ease}.feedback-btn[data-astro-cid-ukalbhrz][data-feedback=yes].btn-accent{background-color:var(--color-accent)}.feedback-btn[data-astro-cid-ukalbhrz][data-feedback=partial].btn-accent{background-color:var(--color-info)}.feedback-btn[data-astro-cid-ukalbhrz][data-feedback=no].btn-accent{background-color:var(--color-danger)}.feedback-comment[data-astro-cid-ukalbhrz] textarea[data-astro-cid-ukalbhrz]:focus{outline:none;border-color:var(--color-accent)}.feedback-thanks[data-astro-cid-ukalbhrz] svg[data-astro-cid-ukalbhrz]{animation:pop-in .3s ease-out}@keyframes pop-in{0%{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+<link rel="stylesheet" href="/de-agent/_astro/_slug_.DZj7LUyg.css"><script type="module" src="/de-agent/_astro/page.sJrt8mpm.js"></script></head> <body> <a href="#main" class="skip-link">Skip to content</a> <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true"> <svg class="h-full w-full opacity-50"> <defs> <pattern id="rails" width="96" height="26" patternUnits="userSpaceOnUse"> <line x1="0.5" y1="0" x2="0.5" y2="26" stroke="var(--rail)" stroke-width="0.75" stroke-dasharray="1 7" stroke-linecap="round"></line> </pattern> </defs> <rect width="100%" height="100%" fill="url(#rails)"></rect> </svg> <div class="grid-lines-bg absolute inset-0 opacity-60"></div> <div class="absolute inset-x-0 top-0 h-[420px]" style="background: radial-gradient(120% 100% at 50% -20%, var(--accent-soft) 0%, transparent 62%);"></div> <div class="absolute inset-x-0 bottom-0 h-64" style="background: linear-gradient(to top, var(--shell) 10%, transparent);"></div> </div> <header class="sticky top-0 z-40 border-b border-line backdrop-blur-sm" style="background: color-mix(in oklab, var(--shell) 88%, transparent);"> <div class="mx-auto flex h-14 max-w-[1600px] items-center gap-3 px-4 sm:px-6"> <!-- mobile sidebar trigger --> <button type="button" data-sidebar-toggle class="btn-ghost -ml-1 grid h-9 w-9 place-items-center rounded-md lg:hidden" aria-label="Open navigation" aria-expanded="false"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"></path></svg> </button> <a href="/de-agent/" class="flex items-center gap-2 rounded-md pr-2" aria-label="DE//AGENT home"> <span class="inline-flex items-center gap-2 select-none"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0"> <rect x="1.25" y="1.25" width="21.5" height="21.5" rx="4" stroke="var(--accent)" stroke-width="1.5"></rect> <path d="M6 12h4.2l2-4.4 2 8.8 1.6-4.4H18" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <span class="font-mono text-[0.9rem] font-semibold tracking-tight text-fg">
+DE<span class="text-accent">//</span>AGENT
+</span> </span> </a> <nav class="hidden items-center gap-0.5 md:flex" aria-label="Main navigation"> <a href="/de-agent/roadmap" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Roadmap</a><a href="/de-agent/marketplace" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Marketplace</a><a href="/de-agent/projects" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Projects</a><a href="/de-agent/runbooks" class="rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2">Runbooks</a> </nav> <div class="ml-auto flex items-center gap-2"> <button type="button" data-cmd-palette-open class="btn btn-sm gap-2 pr-2 text-muted" aria-label="Open command palette" title="Open command palette (⌘K)"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5" stroke-linecap="round"></path></svg> <span class="hidden sm:inline">Search</span> <span class="hidden items-center gap-0.5 sm:inline-flex"> <kbd class="kbd">⌘K</kbd> </span> </button> <button type="button" data-theme-toggle class="btn-ghost grid h-9 w-9 place-items-center rounded-md" aria-label="Toggle color theme" title="Toggle theme"> <svg data-theme-icon="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round"></path></svg> <svg data-theme-icon="light" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" stroke-linecap="round"></path></svg> </button> <a href="https://github.com/XMIRTUNJAY/de-agent-platform" target="_blank" rel="noopener" class="btn-ghost hidden h-9 w-9 place-items-center rounded-md sm:grid" aria-label="Source repository"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"></path></svg> </a> <a href="/de-agent/marketplace" class="btn btn-sm btn-accent">Explore</a> </div> </div> </header> <!-- Command Palette --> <div class="cmd-palette" id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette"> <div class="p-4 border-b border-line"> <input type="search" class="cmd-input" placeholder="Type a command or search..." aria-label="Command palette search" autocomplete="off" spellcheck="false"> </div> <div class="cmd-results" id="cmd-results" role="listbox"></div> <div class="px-4 py-2 border-t border-line text-xs text-dim font-mono"> <kbd class="kbd">⌘K</kbd> to open · <kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> to navigate · <kbd class="kbd">Enter</kbd> to select · <kbd class="kbd">Esc</kbd> to close
+</div> </div> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <div class="mx-auto flex max-w-[1600px]"> <nav id="sidebar" class="sidebar" aria-label="Documentation"> <div class="px-3"> <div class="mb-5"> <p class="mono-label px-2 pb-1.5">Get Started</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Introduction</span>  </a> </li><li> <a href="/de-agent/docs/how-it-works" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">How the platform works</span>  </a> </li><li> <a href="/de-agent/roadmap" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">The Learning Roadmap</span>  </a> </li><li> <a href="/de-agent/docs/verification" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Verification Levels</span>  </a> </li><li> <a href="/de-agent/docs/security" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Security &amp; Trust</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Learn</p> <ul class="space-y-px"> <li> <a href="/de-agent/taxonomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Taxonomy</span>  </a> </li><li> <a href="/de-agent/categories" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">All categories</span>  </a> </li><li> <a href="/de-agent/tutorials" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Tutorials</span>  </a> </li><li> <a href="/de-agent/guides" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Guides</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Marketplace</p> <ul class="space-y-px"> <li> <a href="/de-agent/marketplace" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Browse all</span>  </a> </li><li> <a href="/de-agent/skills" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Skills</span>  </a> </li><li> <a href="/de-agent/mcp" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">MCP servers</span>  </a> </li><li> <a href="/de-agent/plugins" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Plugins</span>  </a> </li><li> <a href="/de-agent/agents" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Agents</span>  </a> </li><li> <a href="/de-agent/hooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Hooks</span>  </a> </li><li> <a href="/de-agent/templates" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Templates &amp; starters</span>  </a> </li><li> <a href="/de-agent/references" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">References</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Build</p> <ul class="space-y-px"> <li> <a href="/de-agent/projects" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Practical projects</span>  </a> </li><li> <a href="/de-agent/patterns" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Architecture patterns</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Operate</p> <ul class="space-y-px"> <li> <a href="/de-agent/runbooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Production playbooks</span>  </a> </li><li> <a href="/de-agent/agents/incident-assistant" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Incident assistant</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Agentic Data Engineering</p> <ul class="space-y-px"> <li> <a href="/de-agent/agentic" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Capabilities overview</span>  </a> </li><li> <a href="/de-agent/docs/skill-anatomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Skill anatomy</span>  </a> </li><li> <a href="/de-agent/docs/tooling" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Tool &amp; MCP contract</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Reference</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs/content-model" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Content object model</span>  </a> </li><li> <a href="/de-agent/docs/scoring" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Source quality score</span>  </a> </li><li> <a href="/de-agent/docs/ingestion" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Ingestion pipeline</span>  </a> </li><li> <a href="/de-agent/docs/relationships" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Relationships graph</span>  </a> </li><li> <a href="/de-agent/docs/monetization" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Monetization policy</span>  </a> </li><li> <a href="/de-agent/docs/measurement" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Measurement</span>  </a> </li><li> <a href="/de-agent/docs/maintenance" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Maintenance</span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Curation</p> <ul class="space-y-px"> <li> <a href="/de-agent/admin" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Curation workflow</span>  </a> </li><li> <a href="/de-agent/admin/queue" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Review queue</span>  </a> </li><li> <a href="/de-agent/admin/health" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="truncate">Registry health</span>  </a> </li> </ul> </div> </div> </nav> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <main id="main" class="min-w-0 flex-1">  <main class="mx-auto max-w-[1600px] px-4 py-8 sm:px-6"> <nav class="mb-6 text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex items-center gap-1.5"> <li><a href="/de-agent/" class="link">Home</a></li> <li class="text-dim">/</li> <li><a href="/de-agent/references" class="link">References</a></li> <li class="text-dim">/</li> <li aria-current="page">Agent Skills (open format)</li> </ol> </nav> <header class="mb-8 mount"> <div class="flex flex-wrap items-center gap-2 mb-3"> <span class="chip">Reference</span> <span class="chip" style="color: var(--color-{res.verification === 'verified' ? 'accent' : res.verification === 'tested' ? 'info' : res.verification === 'reviewed' ? 'warn' : 'dim'})">community</span>  </div> <h1 class="display text-3xl sm:text-4xl">Agent Skills (open format)</h1>  <p class="mt-3 max-w-3xl">The Agent Skills format specification — a SKILL.md file with front-matter (name, description, version), plus references/, scripts/, and examples/ directories that an agent loads on demand. The format this platform&#39;s Skill object is modelled on — portable across compatible agents. Covers the SKILL.md schema, the directory layout convention, and the agent loading protocol.</p>  </header> <div class="grid gap-8 lg:grid-cols-[1fr_320px]"> <section class="prose-de space-y-8">                                  </section> <aside class="sticky top-16 space-y-6"> <!-- Metadata card --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Metadata</h3> <dl class="space-y-3 text-sm"> <div><dt class="text-muted">Category</dt><dd><a href="/de-agent/categories/agentic-data-engineering" class="link">Agentic Data Engineering</a></dd></div> <div><dt class="text-muted">Stage</dt><dd>Agentic Data Engineering</dd></div>  <div><dt class="text-muted">License</dt><dd class="font-mono">Proprietary (docs)</dd></div>  <div><dt class="text-muted">Publisher</dt><dd>Anthropic</dd></div> <div><dt class="text-muted">Last Verified</dt><dd class="font-mono">2026-09-28</dd></div> <div><dt class="text-muted">Source</dt><dd><a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener" class="link">https://code.claude.com/docs/en/skills</a></dd></div>   </dl> </section> <!-- Security card --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Security Posture</h3> <p class="text-sm text-muted mb-3">A listing is not an endorsement. Review the flags before connecting.</p> <dl class="space-y-2 text-sm"> <div class="flex items-center justify-between"> <dt class="text-muted capitalize">runs code</dt> <dd class="font-mono">—</dd> </div><div class="flex items-center justify-between"> <dt class="text-muted capitalize">network access</dt> <dd class="font-mono">—</dd> </div><div class="flex items-center justify-between"> <dt class="text-muted capitalize">credentials</dt> <dd class="font-mono">—</dd> </div><div class="flex items-center justify-between"> <dt class="text-muted capitalize">filesystem access</dt> <dd class="font-mono">—</dd> </div><div class="flex items-center justify-between"> <dt class="text-muted capitalize">external apis</dt> <dd class="font-mono">—</dd> </div> </dl> </section> <!-- Provenance card --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Provenance</h3> <dl class="space-y-2 text-sm"> <div><dt class="text-muted">Verification</dt><dd class="font-mono capitalize">community</dd></div> <div><dt class="text-muted">Evidence</dt><dd class="font-mono text-xs">1/10 checks · earned community</dd></div>  <div><dt class="text-muted">Source File</dt><dd class="font-mono text-xs">data\curated\references\02-cloud-books-agentic.yaml</dd></div>  </dl> </section> <!-- Before you trust this --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Before you trust this</h3> <dl class="space-y-2 text-sm"> <div> <dt class="text-muted">Limitations</dt> <dd class="text-sm"> <span class="text-muted">No documented limitations — treat the unknown as unknown, not as safe.</span> </dd> </div> <div> <dt class="text-muted">Prerequisites</dt> <dd class="text-sm">None declared</dd> </div> <div> <dt class="text-muted">Evidence checklist</dt> <dd class="flex flex-wrap gap-1.5 mt-1"> <span class="chip text-xs" title="no evidence on file">source reachable: unclaimed</span><span class="chip text-xs" title="passed · pipeline · 2026-10-14T06:33:37.660Z">metadata validated: passed</span><span class="chip text-xs" title="no evidence on file">license reviewed: unclaimed</span><span class="chip text-xs" title="no evidence on file">tutorial generated: unclaimed</span><span class="chip text-xs" title="no evidence on file">static checks passed: unclaimed</span><span class="chip text-xs" title="no evidence on file">build passed: unclaimed</span><span class="chip text-xs" title="no evidence on file">tests passed: unclaimed</span><span class="chip text-xs" title="no evidence on file">smoke passed: unclaimed</span><span class="chip text-xs" title="no evidence on file">output validated: unclaimed</span><span class="chip text-xs" title="no evidence on file">security reviewed: unclaimed</span> </dd> </div> </dl> </section> <!-- Prerequisites --> 0 <!-- Related -->  <!-- Related in the graph (computed, not curated) --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Related in the graph</h3> <ul class="space-y-1"> <li><a href="/de-agent/references/daily-life-as-a-jenkins-administrator-2" class="link text-sm">Daily Life as a Jenkins Administrator</a> <span class="text-dim">(Reference)</span></li><li><a href="/de-agent/references/gsoc-2026-final-blog-how-it-was-to-be-a-contributor-at-jenkins" class="link text-sm">GSoC 2026 Final Blog: How It Was to Be a Contributor at Jenkins</a> <span class="text-dim">(Reference)</span></li><li><a href="/de-agent/references/jenkins-and-ai-agents-the-trusted-engine-for-faster-software-del" class="link text-sm">Jenkins and AI Agents: The Trusted Engine for Faster Software Delivery</a> <span class="text-dim">(Reference)</span></li><li><a href="/de-agent/references/kitfunso-hippo-memory" class="link text-sm">kitfunso/hippo-memory</a> <span class="text-dim">(Reference)</span></li><li><a href="/de-agent/references/mcp-registry" class="link text-sm">MCP Registry (official)</a> <span class="text-dim">(Reference)</span></li> </ul> <p class="card-desc" style="margin-top: 0.75rem;">Computed from shared taxonomy — not curator endorsements.</p> </section> <!-- Technologies --> 0 <!-- Marketplace Quality Scores --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Marketplace Quality Score</h3> <div class="mb-4"> <div class="flex items-center gap-3 mb-2"> <span class="chip" style="color: var(--color-{scoreColor(compositeScore)})">weak (35.29/100)</span>   </div> <p class="text-sm text-muted">
+Rule-based scoring across 7 dimensions. Higher is better. <a href="/de-agent/docs/scoring" class="link">How it works</a> </p> </div> <div class="space-y-3"> <div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">performance</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div><div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">completeness</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">58/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div><div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">test coverage</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">5/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div><div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">security</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">70/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div><div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">documentation</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">20/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div><div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">maintainability</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">25/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div><div> <div class="flex justify-between text-sm mb-1"> <span class="capitalize">community</span> <span class="font-mono" style="color: var(--color-{scoreColor(score)})">/100</span> </div> <div class="h-2 bg-muted rounded-full overflow-hidden"> <div class="h-full rounded-full" style="width: {score}%; background-color: var(--color-{scoreColor(score)})"></div> </div> </div> </div> </section> <!-- Roadmap Alignment --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Roadmap Alignment</h3> <div class="flex flex-wrap gap-2"> <span class="chip">Agentic Data Engineering (advanced-agentic)</span> </div> <p class="text-sm text-muted mt-2">This artifact teaches skills for the stages above in the 13-stage Data Engineering roadmap.</p> </section>  <!-- Install & Rate Actions --> <section class="card card-pad mount"> <h3 class="mono-label mb-3">Install & Review</h3> <div class="space-y-4">  <div> <p class="text-sm text-muted mb-2">Rate and review this artifact (requires verified install):</p> <div class="flex gap-2 flex-wrap" id="rating-stars"> <button type="button" class="rating-star text-2xl" data-rating="1" onclick="setRating({i + 1})">☆</button><button type="button" class="rating-star text-2xl" data-rating="2" onclick="setRating({i + 1})">☆</button><button type="button" class="rating-star text-2xl" data-rating="3" onclick="setRating({i + 1})">☆</button><button type="button" class="rating-star text-2xl" data-rating="4" onclick="setRating({i + 1})">☆</button><button type="button" class="rating-star text-2xl" data-rating="5" onclick="setRating({i + 1})">☆</button> </div> <textarea id="review-text" class="mt-2 w-full p-2 border rounded" placeholder="Optional: Share your experience..." rows="3"></textarea> <button class="btn btn-sm mt-2" onclick="submitRating('{res.id}')">Submit Rating</button> <div id="rating-result" class="mt-2 hidden"></div> </div> </div> </section> </aside> </div> <div class="feedback-card card card-pad mt-8" id="feedback" data-astro-cid-ukalbhrz> <h3 class="text-lg font-medium mb-4" data-astro-cid-ukalbhrz>Did this solve your problem?</h3> <p class="text-sm text-dim mb-4" data-astro-cid-ukalbhrz>Agent Skills (open format)</p> <div class="feedback-buttons flex gap-3 mb-4" role="group" aria-label="Feedback options" data-astro-cid-ukalbhrz> <button type="button" class="feedback-btn btn btn-accent" data-feedback="yes" aria-label="Yes, this solved my problem" data-astro-cid-ukalbhrz> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-ukalbhrz> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" data-astro-cid-ukalbhrz></path> </svg> <span data-astro-cid-ukalbhrz>Yes</span> </button> <button type="button" class="feedback-btn btn btn-ghost" data-feedback="partial" aria-label="Partially helpful" data-astro-cid-ukalbhrz> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-ukalbhrz> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" data-astro-cid-ukalbhrz></path> </svg> <span data-astro-cid-ukalbhrz>Partially</span> </button> <button type="button" class="feedback-btn btn btn-ghost" data-feedback="no" aria-label="No, this didn't help" data-astro-cid-ukalbhrz> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-ukalbhrz> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-astro-cid-ukalbhrz></path> </svg> <span data-astro-cid-ukalbhrz>No</span> </button> </div> <div class="feedback-comment hidden" id="feedback-comment" data-astro-cid-ukalbhrz> <label for="feedback-text" class="block text-sm text-dim mb-2" data-astro-cid-ukalbhrz>What could be improved? (optional)</label> <textarea id="feedback-text" class="w-full px-3 py-2 border rounded bg-base-200 text-sm resize-none" rows="3" maxlength="2000" placeholder="Your feedback helps us improve..." data-astro-cid-ukalbhrz></textarea> <div class="flex justify-end gap-2 mt-3" data-astro-cid-ukalbhrz> <button type="button" class="btn btn-ghost feedback-cancel" data-astro-cid-ukalbhrz>Cancel</button> <button type="button" class="btn btn-accent feedback-submit" disabled data-astro-cid-ukalbhrz>Submit</button> </div> </div> <div class="feedback-thanks hidden text-center py-8" id="feedback-thanks" data-astro-cid-ukalbhrz> <svg class="w-12 h-12 mx-auto text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-ukalbhrz> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" data-astro-cid-ukalbhrz></path> </svg> <p class="mt-3 text-dim" data-astro-cid-ukalbhrz>Thanks! Your feedback helps us improve.</p> </div> </div> <script type="module">(function(){const c=document.getElementById("feedback");if(!c)return;const i="{resourceId}",r=c.querySelectorAll(".feedback-btn"),d=c.querySelector("#feedback-comment"),s=c.querySelector("#feedback-text"),n=c.querySelector(".feedback-submit"),l=c.querySelector(".feedback-cancel"),u=c.querySelector("#feedback-thanks");let a=null;r.forEach(e=>{e.addEventListener("click",()=>{a=e.dataset.feedback,r.forEach(t=>{t.classList.toggle("btn-accent",t.dataset.feedback===a),t.classList.toggle("btn-ghost",t.dataset.feedback!==a)}),d?.classList.remove("hidden"),s?.focus(),o()})}),s?.addEventListener("input",o);function o(){n&&(n.disabled=!a)}n?.addEventListener("click",async()=>{if(a){n.disabled=!0,n.textContent="Submitting...";try{if((await fetch("/de-agent/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({resource_id:i,helpful:a,comment:s?.value?.trim()||void 0})})).ok)f(),b(a,!!s?.value?.trim());else throw new Error("Failed")}catch(e){console.error("Feedback submit failed:",e),n.disabled=!1,n.textContent="Retry";let t=c.querySelector(".feedback-error");t||(t=document.createElement("p"),t.className="feedback-error text-sm text-danger mt-2",n.parentElement?.appendChild(t)),t.textContent="Could not send feedback (service unavailable). Your selection is kept — retry anytime."}}}),l?.addEventListener("click",()=>{a=null,r.forEach(e=>{e.classList.remove("btn-accent"),e.classList.add("btn-ghost")}),d?.classList.add("hidden"),s.value="",o()});function f(){r.forEach(e=>e.disabled=!0),d?.classList.add("hidden"),u?.classList.remove("hidden")}function b(e,t){window.trackEvent&&window.trackEvent("feedback_submit",{resource_id:i,helpful:e,has_comment:t})}})();</script>  </main>  </main> </div>  <script>
+      (function () {
+        // theme toggle
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-theme-toggle]');
+          if (!t) return;
+          var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+          var next = cur === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('de-theme', next); } catch (err) {}
+          document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+            ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== next);
+          });
+        });
+        // sync icons on load
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+          ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== cur);
+        });
+
+        // mobile sidebar
+        var sb = document.getElementById('sidebar');
+        var scrim = document.getElementById('sidebar-scrim');
+        var toggle = document.querySelector('[data-sidebar-toggle]');
+        function setSidebar(open) {
+          if (!sb) return;
+          sb.classList.toggle('open', open);
+          if (scrim) scrim.classList.toggle('visible', open);
+          if (toggle) toggle.setAttribute('aria-expanded', String(open));
+        }
+        if (toggle) toggle.addEventListener('click', function () {
+          setSidebar(!sb.classList.contains('open'));
+        });
+        if (scrim) scrim.addEventListener('click', function () { setSidebar(false); });
+
+        // Command Palette
+        var palette = document.getElementById('cmd-palette');
+        var paletteInput = palette?.querySelector('.cmd-input');
+        var paletteResults = document.getElementById('cmd-results');
+        var paletteOpen = false;
+
+        function openPalette() {
+          if (!palette || paletteOpen) return;
+          paletteOpen = true;
+          palette.classList.add('open');
+          paletteInput?.focus();
+          document.body.style.overflow = 'hidden';
+          renderResults('');
+        }
+        function closePalette() {
+          if (!palette || !paletteOpen) return;
+          paletteOpen = false;
+          palette.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-cmd-palette-open]');
+          if (t) { openPalette(); return; }
+          if (paletteOpen && !palette.contains(e.target)) closePalette();
+        });
+        document.addEventListener('keydown', function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (paletteOpen) closePalette(); else openPalette();
+          }
+          if (e.key === 'Escape') {
+            if (paletteOpen) closePalette();
+            setSidebar(false);
+          }
+          if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+            e.preventDefault();
+            openPalette();
+          }
+        });
+
+        function renderResults(query) {
+          if (!paletteResults) return;
+          var q = (query || '').trim().toLowerCase();
+          var registry = window.__DE_REGISTRY__ || [];
+          var results = registry
+            .map(function(r) {
+              var hay = (r.title + ' ' + (r.tagline || '') + ' ' + (r.description || '') + ' ' + (r.tags || []).join(' ') + ' ' + (r.categoryTitle || '')).toLowerCase();
+              var terms = q.split(/\s+/).filter(Boolean);
+              var score = 0;
+              for (var i = 0; i < terms.length; i++) {
+                if (r.title.toLowerCase().includes(terms[i])) score += 10;
+                if (r.tags?.some(function(tag) { return tag.toLowerCase().includes(terms[i]); })) score += 5;
+                if (hay.includes(terms[i])) score += 1;
+              }
+              return { r: r, score: score };
+            })
+            .filter(function(x) { return x.score > 0; })
+            .sort(function(a,b) { return b.score - a.score; })
+            .slice(0, 10);
+
+          if (!results.length) {
+            paletteResults.innerHTML = '<div class="px-4 py-8 text-center text-dim">No matches for "' + q + '"</div>';
+            return;
+          }
+          paletteResults.innerHTML = results.map(function(x) {
+            var r = x.r;
+            var verificationLabel = r.verification === 'verified' ? '✓ Verified' : r.verification === 'tested' ? '✓ Tested' : r.verification === 'reviewed' ? '✓ Reviewed' : 'Community';
+            var verificationColor = r.verification === 'verified' ? 'accent' : r.verification === 'tested' ? 'info' : r.verification === 'reviewed' ? 'warn' : 'dim';
+            return '<div class="cmd-item" data-url="' + r.url + '" role="option" tabindex="0">' +
+              '<span class="chip">' + r.typeLabel + '</span>' +
+              '<span class="flex-1 min-w-0 truncate">' + r.title + '</span>' +
+              '<span class="chip" style="color: var(--color-' + verificationColor + ')">' + verificationLabel + '</span>' +
+              '<kbd class="kbd ml-auto">Enter</kbd>' +
+            '</div>';
+          }).join('');
+
+          // keyboard navigation
+          var items = paletteResults.querySelectorAll('.cmd-item');
+          var selected = 0;
+          items.forEach(function(item, i) {
+            item.addEventListener('click', function() {
+              window.location.href = item.dataset.url;
+              closePalette();
+            });
+            item.addEventListener('keydown', function(ev) {
+              if (ev.key === 'Enter') {
+                window.location.href = item.dataset.url;
+                closePalette();
+              } else if (ev.key === 'ArrowDown') {
+                ev.preventDefault();
+                items[(i + 1) % items.length]?.focus();
+              } else if (ev.key === 'ArrowUp') {
+                ev.preventDefault();
+                items[(i - 1 + items.length) % items.length]?.focus();
+              }
+            });
+          });
+          if (items.length) items[0].focus();
+        }
+
+        if (paletteInput) {
+          paletteInput.addEventListener('input', function() { renderResults(this.value); });
+        }
+
+        // registry data for command palette
+        fetch('/de-agent/data/generated/search-index.json')
+          .then(function(r) { return r.json(); })
+          .then(function(d) { window.__DE_REGISTRY__ = d.entries || []; })
+          .catch(function() {});
+
+        // outbound-click hook: bounded in-memory log, no network, no cookies.
+        window.__DE_OUTBOUND__ = [];
+        document.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="http"]') : null;
+          if (!a) return;
+          window.__DE_OUTBOUND__.push({ href: a.href, at: new Date().toISOString() });
+          if (window.__DE_OUTBOUND__.length > 100) window.__DE_OUTBOUND__.shift();
+        });
+
+        // Scroll-triggered reveal animations
+        if ('IntersectionObserver' in window) {
+          var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+          document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+            revealObserver.observe(el);
+          });
+        }
+
+        // Analytics initialization
+        if (window.__DE_ANALYTICS_CONFIG__) {
+          var config = window.__DE_ANALYTICS_CONFIG__;
+          var queue = [];
+          var sessionId = sessionStorage.getItem('de_agent_session_id') || crypto.randomUUID();
+          sessionStorage.setItem('de_agent_session_id', sessionId);
+          var anonymousId = localStorage.getItem('de_agent_anonymous_id') || crypto.randomUUID();
+          localStorage.setItem('de_agent_anonymous_id', anonymousId);
+
+          function flush() {
+            if (!queue.length) return;
+            var events = queue.splice(0, config.batchSize);
+            fetch(config.endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ events, version: '1.0.0' }),
+              keepalive: true,
+            }).catch(function() { queue.unshift.apply(queue, events); });
+          }
+
+          window.trackEvent = function(event, properties) {
+            var base = {
+              session_id: sessionId,
+              anonymous_id: anonymousId,
+              context: {
+                user_agent: navigator.userAgent,
+                locale: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                screen_width: screen.width,
+                screen_height: screen.height,
+              },
+              page: {
+                path: window.location.pathname,
+                referrer: document.referrer || undefined,
+                title: document.title,
+              },
+            };
+            var fullEvent = Object.assign({}, base, { event, timestamp: new Date().toISOString(), properties });
+            queue.push(fullEvent);
+            if (queue.length >= config.batchSize) flush();
+          };
+
+          setInterval(flush, config.flushInterval);
+          window.addEventListener('beforeunload', flush);
+        }
+      })();
+    </script> </body> </html> <script>
+  let currentRating = 0;
+
+  function setRating(rating) {
+    currentRating = rating;
+    const stars = document.querySelectorAll('#rating-stars .rating-star');
+    stars.forEach((star, i) => {
+      star.textContent = i < rating ? '★' : '☆';
+      star.style.color = i < rating ? 'var(--color-accent)' : 'var(--color-dim)';
+    });
+  }
+
+  async function installResource(resourceId) {
+    const btn = document.getElementById('install-btn');
+    const resultDiv = document.getElementById('install-result');
+    if (!btn || !resultDiv) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Fetching manifest...';
+    resultDiv.hidden = true;
+
+    try {
+      const resp = await fetch('/de-agent/api/marketplace/install', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ resource_id: resourceId, backend: 'dry' }),
+      });
+      if (!resp.ok) {
+        throw new Error('Install service unavailable (static preview) — copy the manifest from the docs instead.');
+      }
+      const data = await resp.json();
+
+      if (!data.ok) {
+        throw new Error(data.error ?? 'Failed to fetch install manifest');
+      }
+
+      btn.textContent = 'Manifest ready — run locally';
+      resultDiv.hidden = false;
+      resultDiv.innerHTML = `
+        <div class="codeblock" style="max-height: 300px; overflow: auto;">
+          <pre><code>${JSON.stringify(data.manifest, null, 2)}</code></pre>
+        </div>
+        <p class="text-sm text-muted mt-2">
+          Save the manifest above as a YAML file and run:
+          <code>node pipelines/execute.mjs --manifest <file> --backend local --local-i-understand</code>
+        </p>
+      `;
+    } catch (err) {
+      resultDiv.hidden = false;
+      resultDiv.innerHTML = `<span class="text-danger">Error: ${err.message}</span>`;
+      btn.disabled = false;
+      btn.textContent = 'Retry';
+    }
+  }
+
+  async function submitRating(resourceId) {
+    const reviewText = document.getElementById('review-text')?.value ?? '';
+    const resultDiv = document.getElementById('rating-result');
+    const submitBtn = document.querySelector('button[onclick^="submitRating"]');
+
+    if (currentRating === 0) {
+      alert('Please select a rating (1-5 stars)');
+      return;
+    }
+
+    if (!submitBtn || !resultDiv) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    resultDiv.hidden = true;
+
+    try {
+      const resp = await fetch('/de-agent/api/marketplace/rate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          resource_id: resourceId,
+          rating: currentRating,
+          review_text: reviewText,
+          user_id: 'anonymous', // In production: get from auth context
+        }),
+      });
+      if (!resp.ok) {
+        throw new Error('Rating service unavailable (static preview).');
+      }
+      const data = await resp.json();
+
+      if (!data.ok) {
+        throw new Error(data.error ?? 'Failed to submit rating');
+      }
+
+      resultDiv.hidden = false;
+      resultDiv.innerHTML = '<span class="text-accent">✓ Rating submitted successfully!</span>';
+      submitBtn.textContent = 'Submitted';
+      document.querySelectorAll('.rating-star').forEach(s => s.disabled = true);
+      document.getElementById('review-text')!.disabled = true;
+    } catch (err) {
+      resultDiv.hidden = false;
+      resultDiv.innerHTML = `<span class="text-danger">Error: ${err.message}</span>`;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Retry';
+    }
+  }
+</script>
