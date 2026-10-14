@@ -608,8 +608,7 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .theme-cla .button:hover { background: #e8e8e8; }
 .theme-dea .button { background: #2f7fe0; }
 .theme-dea .button:hover { background: #1f6fd0; }
-/* in-device flow pages: 3 animated screens per app */
-.app-screen { position: relative; }
+/* in-device flow pages: 3 animated screens per app (flow pages anchor to .device-screen) */
 .as-alt-note { font-size: 11px; color: #5f6368; }
 .dea-screen .as-alt-note { color: #7e9cbd; }
 .as-big { font-size: 52px; font-weight: 800; letter-spacing: -0.03em; color: #6b4a2a; }
@@ -647,4 +646,13 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 @media (max-width: 600px) {
 	.app-screen { min-height: 380px; }
 	.flow-page { padding-top: 70px; }
+}
+
+
+/* showcase alignment: stage sticks with the options, height follows content.
+   Max honors the biggest Pixel phone viewport (915px CSS height). */
+.route-showcase { align-items: center; }
+.route-stage { min-height: 0; max-height: 900px; }
+@media (max-width: 900px) {
+	.route-stage { min-height: 0; }
 }
