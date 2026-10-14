@@ -656,3 +656,7 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 @media (max-width: 900px) {
 	.route-stage { min-height: 0; }
 }
+
+/* single focus ring on fields: kill the native outline, keep our ring */
+.contact form input:focus, .contact form textarea:focus { outline: none; }
+.news-card .newsletter-input input:focus { outline: none; }
