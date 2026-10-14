@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/NotebookBase.astro';
+---
+
+<Base title="About" description="Who builds this notebook, and why their engineering perspective is worth your time.">
+	<div class="prose">
+		<p class="kicker">About</p>
+		<h1>I'm Mirtunjay. I build data systems.</h1>
+		<p>
+			By day I'm an AVP–Data Engineer at an MNC — Spark, Databricks, pipelines,
+			migrations, and the 3 AM pages that teach you what "done" really means.
+			By night I build systems of my own: a study platform, a wealth tracker,
+			a mutual-fund intelligence system, and the tooling around them. This
+			notebook is where that work is recorded — not as a highlight reel, but
+			as evidence.
+		</p>
+		<p>
+			Every claim here traces back to something I can point at: code, tests,
+			logs, measurements. Where something isn't measured, the page says so.
+			Where something broke, the page keeps the failure on record next to the
+			fix. I hold outside work to the standard I'd defend in any review, and
+			this site is where I prove it — project by project, incident by incident.
+		</p>
+		<p>
+			Lately the work changed shape. AI writes most first drafts now, including
+			some of the code on this site. So the notebook changed with it: less
+			"here is code," more "here is the reasoning the code came from" —
+			constraints, rejected alternatives, verification, and the failures kept
+			on record. Implementation is cheap. Judgment is the scarce part, and
+			this is where I practice it in public.
+		</p>
+		<h2>What I work on</h2>
+		<ul>
+			<li>Data engineering — Spark, Databricks, pipelines, migrations</li>
+			<li>AI and agents — LLM systems, memory, evaluation, tooling</li>
+			<li>Systems and architecture — storage, sync, offline-first design</li>
+			<li>Developer tools — scanners, notebooks, automation that compounds</li>
+		</ul>
+		<h2>How I work, in one page</h2>
+		<p>
+			Reason first, then build, then measure. Decisions get written down with
+			their alternatives. Tests pin the math. Metrics come from runs, not
+			adjectives — and the gaps are labeled, not hidden. If you want the
+			method stated plainly, open any project page and read its struggle
+			section first: that's the notebook in miniature.
+		</p>
+		<h2>Elsewhere</h2>
+		<ul>
+			<li>
+				<a href="https://github.com/xmirtunjay" target="_blank" rel="noopener">GitHub</a>
+			</li>
+			<li>
+				<a href="/notebook/rss.xml">RSS</a>
+			</li>
+		</ul>
+	</div>
+</Base>
+
+<style>
+	.kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--accent);
+		font-weight: 700;
+		margin: 0 0 0.5em 0;
+	}
+</style>

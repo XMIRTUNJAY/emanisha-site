@@ -1,0 +1,150 @@
+﻿---
+import Base from '../../../layouts/NotebookBase.astro';
+import ProjectCardImage from '../../../components/notebook/ProjectCardImage.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('notebookProjects', ({ data }) => !data.draft)).sort(
+	(a, b) => (b.data.portfolioScore ?? 0) - (a.data.portfolioScore ?? 0),
+);
+const lessonCounts = new Map<string, number>();
+for (const lesson of await getCollection('notebookTutorials', ({ data }) => !data.draft)) {
+	lessonCounts.set(lesson.data.project, (lessonCounts.get(lesson.data.project) ?? 0) + 1);
+}
+
+const categories = ['All', ...new Set(projects.map((p) => p.data.category))];
+const slugOf = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+
+<Base title="Projects" description="Engineering case studies of systems I actually built.">
+	<div class="prose">
+		<p class="kicker">Projects</p>
+		<h1>Built systems, written up.</h1>
+		<p class="lede">
+			Each project is a working system with architecture, real code, measured results, and
+			documented decisions. Filter by category.
+		</p>
+		<div class="filters" role="group" aria-label="Filter by category">
+			{categories.map((category) => (
+				<button
+					type="button"
+					data-filter={category === 'All' ? '' : slugOf(category)}
+					aria-pressed={category === 'All' ? 'true' : 'false'}
+				>
+					{category}
+					{category !== 'All' && (
+						<span class="count">{projects.filter((p) => p.data.category === category).length}</span>
+					)}
+				</button>
+			))}
+		</div>
+		<p class="result-line" data-result-line aria-live="polite"></p>
+	</div>
+	<div class="listing">
+		<ul class="project-grid">
+			{projects.map((project) => (
+				<ProjectCardImage
+					project={project}
+					lessonCount={lessonCounts.get(project.id) ?? 0}
+					categorySlug={slugOf(project.data.category)}
+				/>
+			))}
+		</ul>
+	</div>
+</Base>
+
+<script>
+	(function () {
+		const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+		const cards = Array.from(document.querySelectorAll('[data-category]'));
+		const line = document.querySelector('[data-result-line]');
+		function apply(filter: string) {
+			let shown = 0;
+			cards.forEach((card) => {
+				const show =
+					filter === '' || (card as HTMLElement).dataset.category === filter;
+				(card as HTMLElement).style.display = show ? '' : 'none';
+				if (show) shown++;
+			});
+			buttons.forEach((b) =>
+				b.setAttribute('aria-pressed', String((b as HTMLElement).dataset.filter === filter))
+			);
+			if (line) line.textContent = `Showing ${shown} of ${cards.length} projects.`;
+		}
+		buttons.forEach((b) =>
+			b.addEventListener('click', () => apply((b as HTMLElement).dataset.filter || ''))
+		);
+		apply('');
+	})();
+</script>
+
+<style>
+	.kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--accent);
+		font-weight: 700;
+		margin: 0 0 0.5em 0;
+	}
+	.lede {
+		font-size: 1.15em;
+		color: rgb(var(--gray-dark));
+	}
+	.filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		margin: 1.5em 0 0 0;
+	}
+	.filters button {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		padding: 0.3em 0.9em;
+		border: var(--border);
+		border-radius: 999px;
+		background: transparent;
+		color: rgb(var(--gray-dark));
+		cursor: pointer;
+	}
+	.filters button:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+	.filters button[aria-pressed='true'] {
+		background: rgb(var(--black));
+		border-color: rgb(var(--black));
+		color: var(--paper);
+	}
+	.filters .count {
+		opacity: 0.65;
+		margin-left: 0.35em;
+	}
+	.result-line {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: rgb(var(--gray));
+		margin: 1em 0 0 0;
+	}
+	.listing {
+		margin-top: var(--space-4);
+	}
+	.project-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.25em;
+	}
+	@media (max-width: 1024px) {
+		.project-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (max-width: 640px) {
+		.project-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

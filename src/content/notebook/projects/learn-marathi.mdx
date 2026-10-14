@@ -1,0 +1,215 @@
+---
+title: "Learn Marathi"
+description: "A 200-page static Marathi learning site synced from a real Flutter curriculum — engineered so every page earns its place in search and funnels readers to the app."
+stack: ["Astro 7", "TypeScript", "MDX", "Playwright"]
+category: "Education / SEO"
+status: "Active"
+featured: true
+draft: false
+cover: "/case-studies/learn-marathi/hero.png"
+language: "TypeScript"
+focus: ["Curriculum-to-static sync pipeline", "Dataset-validated SEO engine", "Funnel engineering without fake links", "Bilingual scale without duplication"]
+---
+
+import ProjectHero from '../../../components/notebook/case-study/ProjectHero.astro';
+import TechStack from '../../../components/notebook/case-study/TechStack.astro';
+import ProjectMetadata from '../../../components/notebook/case-study/ProjectMetadata.astro';
+import ScreenshotGallery from '../../../components/notebook/case-study/ScreenshotGallery.astro';
+import DemoVideo from '../../../components/notebook/case-study/DemoVideo.astro';
+import ArchitectureDiagram from '../../../components/notebook/case-study/ArchitectureDiagram.astro';
+import Callout from '../../../components/notebook/case-study/Callout.astro';
+import Decision from '../../../components/notebook/case-study/Decision.astro';
+import MetricsTable from '../../../components/notebook/case-study/MetricsTable.astro';
+import Timeline from '../../../components/notebook/case-study/Timeline.astro';
+import { siteUrl } from '../../../lib/notebook-site';
+
+<ProjectHero
+  title="Learn Marathi"
+  subtitle="A static Marathi learning site that turns a real Flutter app's curriculum into indexable pages readers love and search engines trust — every word traced to source, every page above the thin-content bar, every download button honest about the app not being launched yet."
+  status="Active"
+  category="Education / SEO"
+  image={siteUrl('/case-studies/learn-marathi/hero.png')}
+  imageAlt="Learn Marathi homepage: searchable curriculum, cluster cards, and app call-to-action"
+  imageCaption="Homepage: searchable curriculum, cluster cards, and one honest app call-to-action. Click to enlarge."
+  meta={[
+    { label: 'Pages', value: '200 built' },
+    { label: 'Words', value: '1,041+ live' },
+    { label: 'Units', value: '26 → 26 pages' },
+    { label: 'QA gate', value: 'prebuild, blocking' },
+  ]}
+/>
+
+A language app with its curriculum locked inside the app is invisible to the people searching for exactly what it teaches. This project started from that gap: the **Bol Marathi** Flutter app holds 26 units, 156 lessons, and 1,002 trilingual words — and none of it could be found, linked, or previewed on the web. The website fixes that without becoming a content farm: a sync pipeline carries the curriculum into a static Astro site, a dataset engine turns it into pages that each serve one search intent, and a validation gate refuses to publish anything thin, duplicated, or unresolvable.
+
+## Two ways to read this page
+
+- **Understand the system:** The spark ? The struggle ? The decisions ? How it works ? Where it stands ? Reflection.
+- **Build your own:** Constraints ? Architecture ? The size-gate rule ? Try the pages ? The tutorial series ? Exercises at the end.
+
+## The spark
+
+The app teaches Marathi from Hindi — greetings, food, travel, verbs, grammar, culture — in structured units a learner could browse like a course. But app-store listings don't teach, and a marketing page with three screenshots doesn't answer "how do you say good morning in Marathi?" So the requirement became: publish the real curriculum as real web pages, one search intent per page, with a visible path from every page into the app. Not a blog about Marathi. The curriculum itself, addressable.
+
+## The struggle
+
+**A thousand words that must never become a thousand pages.** The vocabulary snapshot holds 1,002 entries. The naive move — one page per word — is exactly how sites earn thin-content penalties: hundreds of near-empty pages with one example each. The project refused. Per-word pages were rejected outright; words ship inside clusters and topic pages that clear a size gate (~15 entries) and a validator threshold (≥10 resolved words). One entry is data. Ten is a page.
+
+**Six scattered email links and a store button for an app that isn't launched.** The early site had mailto links in buttons, panels, footers, and a personal address in the source — plus store-badge instincts for an app with no listing. Every one of those is a small lie told to a future user. The fix consolidated contact into one shared waitlist form with a configured endpoint, and gated every app promise behind `src/data/app.ts`: `comingSoon: true` renders honest waitlist copy everywhere, and only setting a real store URL flips the labels. Trust is a build artifact here.
+
+**156 lessons that would drown any index.** Six lesson rows across six sections in each of 26 units is 156 addressable lessons — each too thin alone, overwhelming together. They ship as 26 unit pages instead, each bundling its grammar, culture, speaking, listening, bridge, and sentence-builder rows with related words. Fewer pages, denser pages, no orphans.
+
+## The decisions
+
+<Decision
+  title="A size gate for every page"
+  problem="Hundreds of curriculum entries could each become a page, and most of them would be thin."
+  options={["One page per word/lesson", "Curated clusters with a minimum-entry gate", "A handful of giant index pages"]}
+  chosen="Curated clusters plus dataset pages, each clearing a size gate (~15 entries to exist) and validator minimums (≥10 words / ≥8 phrases / ≥5 bridges per published page)."
+  why="Search engines and learners agree on this one: a page needs enough substance to answer its intent. Shopping (12) and Colors (13) merged instead of standing alone."
+  tradeoffs="Some genuinely useful micro-topics wait until the curriculum grows enough entries to carry them."
+  result="200 built pages (2026-10-07), zero title/description violations, no doorway pages."
+/>
+
+<Decision
+  title="Resolvers that throw, and a QA gate that blocks the build"
+  problem="A data-driven site can silently render wrong or empty content when a reference drifts."
+  options={["Trust the datasets", "Validate at QA time only", "Throw at build time AND gate the build"]}
+  chosen="Both: `src/lib/seo.ts` resolvers throw on any unresolvable word, phrase, or grammar reference, and `tools/validate-content.mjs` runs in `prebuild` so a failing dataset blocks the build."
+  why="Two layers because they catch different failures: resolvers catch drift between datasets and snapshots, the validator catches schema, duplicate, slug-collision, script-mixing, and below-threshold content before Astro ever renders."
+  tradeoffs="Authors must satisfy the validator to ship — drafts stay drafts until they clear the bar."
+  result="Bad references cannot ship silently; every rendered word traces to `vocab.json` or `units.json`."
+/>
+
+<Decision
+  title="Config-gated app promises"
+  problem="The app is not on any store yet, but the site's whole job is funneling readers toward it."
+  options={["Store badges linking nowhere real", "No app mentions until launch", "One config file gating every CTA state"]}
+  chosen="`src/data/app.ts` is the single funnel config: `comingSoon: true` renders waitlist copy, a beta URL flips primaries to “Join the beta”, and only a real store URL plus `comingSoon: false` shows download labels."
+  why="One place to update on launch day with zero template edits — and zero days of promising a download that doesn't exist."
+  tradeoffs="The config must be remembered on launch day; the site cannot detect the store listing by itself."
+  result="Every CTA on all 200 pages updates from one file; no dead store links anywhere."
+/>
+
+<Decision
+  title="A Hindi mirror without duplicating the curriculum"
+  problem="Half the audience thinks in Hindi first — but a second copy of the site doubles drift."
+  options={["No Hindi pages", "Full duplicate Hindi site", "Hindi chrome over the same data"]}
+  chosen="`/hi/` pages reuse the same snapshots with a Hindi UI dictionary (`src/i18n/hi.ts`), reciprocal `hreflang` both ways plus `x-default`, and the Hindi language tag on mirror pages."
+  why="Only the chrome is translated; the curriculum is never forked, so a sync updates both languages at once."
+  tradeoffs="Non-mirrored pages fall back to machine translation via an explicit widget rather than handcrafted Hindi."
+  result="4 mirrored pairs, hreflang-verified, one sync serving two languages."
+/>
+
+<Callout type="lesson" title="Habit worth copying">
+  Count before you create the page. Every URL on this site justifies itself with a number — entries in the cluster, resolved words on the dataset page, lessons in the unit. If the number is small, the content joins an existing page instead of getting its own.
+</Callout>
+
+Five constraints did the rest of the shaping, extracted from the implementation rather than aspired to: fully static output (no server, GitHub Pages project site under `/learn-marathi`); base-aware links with trailing slashes everywhere; curriculum never hand-copied (sync from the Flutter repo, website-only fixes in `overrides.json` and logged); no page below the thin-content bar; no app promise the config can't back. Deployment stays `npm run build` plus a Pages workflow.
+
+## How it works
+
+<TechStack items={['Astro 7 (static)', 'TypeScript (strict snapshots)', 'Zero-dep Node sync + QA scripts', 'MDX topic components', 'Playwright (screenshots, quizzes)']} />
+
+<ArchitectureDiagram
+  title="Curriculum in, pages out"
+  chart={`flowchart LR
+    subgraph APP["Flutter repo — canonical"]
+        U["26 unit JSON files"]
+        V["generated_vocab.dart — 1002 words"]
+    end
+    subgraph SYNC["npm run sync"]
+        S["sync-learn-marathi.mjs"]
+        O["overrides.json — logged"]
+    end
+    subgraph SITE["Astro site"]
+        SN["units + vocab + meta.json snapshots"]
+        DS["seo JSON datasets — 5 families"]
+        R["seo.ts resolvers — throw on drift"]
+        P["getStaticPaths → 200 pages"]
+    end
+    U --> S
+    V --> S
+    O --> S
+    S --> SN
+    SN --> R
+    DS --> R
+    R --> P`}
+  caption="One direction, no hand edits: app data flows through validation into snapshots, datasets reference snapshots, resolvers throw on drift, pages render."
+/>
+
+The file to understand first is `tools/sync-learn-marathi.mjs`: zero npm dependencies, plain Node. It reads the 26 unit files (requiring every top-level key and exactly 6 rows per section), parses the Dart vocabulary with a regex, applies the logged override layer, and writes three committed snapshots — `units.json`, `vocab.json`, `meta.json` — with counts in `meta.json` (26 units, 156 lessons, 1,002 words, synced 2026-09-20). The file to understand second is `src/lib/seo.ts`: typed dataset loading plus resolvers (`wordsFor`, `speakingFor`, `grammarNotesFor`, `bridgesForPage`) that throw at build time on bad references, and `relatedFor`, a deterministic capped internal-linking engine — declared links first, then cross-family topic matches, curriculum unit links, one same-family sibling. No random article lists anywhere.
+
+<ProjectMetadata rows={[
+  { label: 'Language', value: 'TypeScript (Astro + Node scripts)' },
+  { label: 'Source', value: 'Flutter units + vocab, synced' },
+  { label: 'Output', value: '200 static pages, sitemap + RSS' },
+  { label: 'QA', value: 'validate-content.mjs in prebuild (blocking)' },
+  { label: 'Deploy', value: 'GitHub Pages project site' },
+  { label: 'Funnel', value: 'WaitlistForm + app.ts config gate' },
+]} />
+
+## In action
+
+Screenshots and video captured from a live local run against the real synced curriculum (verified 2026-10-07). Every frame read before shipping; no skeletons, no placeholders.
+
+<ScreenshotGallery
+  title="In action"
+  shots={[
+    { src: siteUrl('/case-studies/learn-marathi/home.png'), alt: 'Learn Marathi homepage with searchable curriculum and cluster cards', caption: 'Homepage: the curriculum made browsable — clusters, phrases, grammar, lessons.' },
+    { src: siteUrl('/case-studies/learn-marathi/vocabulary.png'), alt: 'Food vocabulary cluster page with word tables and examples', caption: 'A cluster page: 84 food words with Marathi, Hindi, English, and examples.' },
+    { src: siteUrl('/case-studies/learn-marathi/lesson.png'), alt: 'Unit lesson page with grammar, speaking, and bridge rows', caption: 'A unit page: six lesson sections plus related links, one contextual app panel.' },
+  ]}
+/>
+
+<DemoVideo
+  title="Video walkthrough"
+  src={siteUrl('/demos/learn-marathi.mp4')}
+  note="Silent 29-second tour recorded 2026-10-07 from a live local run: homepage, food vocabulary cluster, Unit 01 lesson page, and the app landing page."
+/>
+
+## Where it stands
+
+| | |
+|---|---|
+| **Verified** | 200 pages build with 0 errors (2026-10-07); 60/60 dataset pages published per content-manifest.json; 0 title/description violations; 83 per-page OG cards; reciprocal hreflang on 4 mirrored pairs; 3 screenshots + 29s tour video from live runs |
+| **Observed** | `npm run sync` re-runs cleanly on curriculum updates with no page-code changes; new unit JSON appears as a new `/lessons/<unit>/` route automatically |
+| **Intended** | Native-speaker review of override glosses and respelling map; Azure TTS clips per category once reviewed |
+| **Unknown** | Search performance of dataset pages over time; whether the 15-entry gate holds as the curriculum doubles |
+
+<MetricsTable
+  title="Verification results"
+  headers={["Check", "Result", "Date"]}
+  rows={[
+    ["Static build", "200 pages, 0 errors", "2026-10-07"],
+    ["Dataset pages published", "60 / 60 in manifest", "content-manifest.json"],
+    ["Curriculum snapshot", "26 units · 156 lessons · 1,002 words", "meta.json 2026-09-20"],
+    ["Live word count", "1,041+ words on homepage", "screenshot 2026-10-07"],
+    ["Meta length audit", "0 violations of 60/155 limits", "2026-09"],
+    ["Per-page OG cards", "83 generated + fallback", "2026-09"],
+    ["Validator gate", "blocking in prebuild", "in repo"],
+  ]}
+  caption="Build and manifest figures are quoted from the project REPORT and committed snapshots as point-in-time; the validator gate is structural, in the repo."
+/>
+
+## Reflection
+
+**What worked.** The size gate survived contact with real content pressure — Shopping and Colors merged without drama because the number made the call, not taste. Resolvers-that-throw turned drift from a slow rot into a loud build failure, which is the only kind of content bug you actually fix.
+
+**What didn't.** The early funnel told small lies (scattered mailtos, store-badge instincts) until one config file made honesty the default. And per-word pages were tempting right up until the threshold math showed what 1,002 near-empty pages would cost.
+
+**What surprised me.** How little of a 200-page SEO project is SEO: most of the work is pipeline plumbing, threshold choices, and link hygiene. The rankings follow the structure; the structure is just counting.
+
+**What I'd change.** Nothing structural — the next work is evidence, not architecture: native review, measured search performance, then clips and word-pages only when their entry conditions are met.
+
+<Timeline
+  title="Project timeline"
+  items={[
+    { date: '2026-09', title: 'SEO content engine lands', detail: 'Five dataset families, typed resolvers, blocking validator, manifest + report tooling — the 200-page layer without thin pages.' },
+    { date: '2026-09', title: 'Funnel + technical SEO pass', detail: 'One shared waitlist form, config-gated CTAs, zero meta violations, 83 OG cards, reciprocal hreflang (per REPORT).' },
+    { date: '2026-09-20', title: 'Curriculum snapshot verified', detail: 'meta.json: 26 units, 156 lessons, 1,002 words across 29 categories.' },
+  ]}
+/>
+
+## Build your own
+
+Reproduce: clone, point `BOL_MARATHI_ROOT` at the app repo, run `npm run sync`, then `npm run content:qa` and `npm run build`. Modify: add one dataset page that clears the thresholds and watch the manifest, sitemap, and related links absorb it. Extend: mirror one more page pair into `/hi/` with `hreflang` both ways. Re-design: replace the size gate with per-word pages for one category and feel, concretely, what thin content costs. The six-part tutorial series reconstructs this project layer by layer — start with <a href={siteUrl('/tutorials/learn-marathi/01-problem-and-architecture/')}>Part 1: problem and architecture</a>.

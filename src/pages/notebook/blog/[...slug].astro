@@ -1,0 +1,35 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Article from '../../../layouts/NotebookArticle.astro';
+import { siteUrl } from '../../../lib/notebook-site';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('notebookBlog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Article
+	title={post.data.title}
+	description={post.data.description}
+	kicker="Writing"
+	meta={[
+		post.data.pubDate.toISOString().slice(0, 10),
+		...(post.data.updatedDate ? [`Updated ${post.data.updatedDate.toISOString().slice(0, 10)}`] : []),
+	]}
+	crumbs={[{ label: 'Writing', href: siteUrl('/blog/') }]}
+	heroSrc={siteUrl(`/blog/${post.id}.svg`)}
+	heroAlt={post.data.title}
+	datePublished={post.data.pubDate.toISOString()}
+	dateModified={post.data.updatedDate?.toISOString()}
+	canonicalPath={`/blog/${post.id}/`}
+>
+	<Content />
+</Article>

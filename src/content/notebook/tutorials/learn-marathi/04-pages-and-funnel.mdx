@@ -1,0 +1,70 @@
+---
+title: "Pages and funnel: a tour from hub to app without dark patterns"
+description: "Every route, the components that render it, and the honest CTA ladder that ends at the app."
+series: "learn-marathi"
+part: 4
+project: "learn-marathi"
+category: "Education / SEO"
+tags: ["astro", "funnel", "components", "beginners"]
+technologies: ["Astro 7", "MDX components", "Formspree"]
+difficulty: "beginner"
+status: "Active"
+featured: false
+draft: false
+pubDate: 2026-10-07
+---
+
+import Callout from '../../../../components/notebook/case-study/Callout.astro';
+
+## What is a funnel?
+
+A **funnel** is the path a reader walks from "just browsing" to "taking action" — here, from a vocabulary page to the app's waitlist. A **CTA** (call to action) is each signpost along that path: a button or panel inviting the next step. A funnel with integrity shows the same honesty at the bottom as at the top. This part tours every route, then walks the ladder.
+
+## The route tour
+
+Every page is static — props computed by `getStaticPaths` at build time, no client state except quizzes and the audio toggle:
+
+| Page | One-line purpose | State |
+| ---- | ---------------- | ----- |
+| `/` hub | Searchable entry: clusters, phrases, grammar, lessons | Static |
+| `/vocabulary/` + clusters | Word lists with examples per topic | Static |
+| `/phrases/` + sets | Everyday phrases from lesson scripts | Static |
+| `/hindi-to-marathi/` | Hindi-first bridge words + phrases | Static |
+| `/english-to-marathi/` | English-first bridge words + phrases | Static |
+| `/grammar/` + topics | Grammar notes with real unit rows | Static |
+| `/lessons/<unit>/` | 26 unit pages, all six sections each | Static |
+| `/quiz/<cluster>/` | Self-tests for the original clusters | Client-side |
+| `/app/` | Conversion page: screenshots + waitlist | Static + form |
+| `/hi/` mirror | Hindi-chrome hub pages over the same data | Static |
+| `/search`, `/start`, `/how-it-works` | Helpers: find content, onboarding, method | Static |
+
+## The components that render it
+
+Dataset pages assemble from a small shared kit — one page component per family plus table and practice primitives:
+
+- **VocabTopicPage / PhraseTopicPage / GrammarTopicPage** — the three page shells: intro, resolved content tables, practice, mistakes, related links, CTA panel.
+- **PhraseTable / MistakeTable** — phrase rows and wrong-vs-right tables with the *why*, not just the correction.
+- **QuickPractice** — self-test items (multiple-choice, fill-in, translate) rendered from the dataset's practice block.
+- **SeoCards** — index cards linking clusters, sets, and topics together.
+
+Every shell ends with the same related-links block from `relatedFor` (Part 5), so no page is a dead end.
+
+## The SEO head on every page
+
+**BaseHead** writes the canonical URL plus Open Graph and Twitter tags per page; **JsonLd** adds structured data — `LearningResource` and `BreadcrumbList` everywhere, `FAQPage` on `/app/`, `ItemList` on the vocabulary and lessons indexes. Answer engines and social previews read these instead of guessing. Titles stay under 60 characters and descriptions within 60–155 — enforced by the same validator from Part 3, which is why the audit found zero violations.
+
+## The CTA ladder
+
+The funnel rule is exact: **one contextual panel per content page** — soft in the middle, strong at the end, lesson-flavored on unit pages, and the `/app/` landing at the bottom of the ladder. Index and hub pages carry one panel too. Never two, never a popup, never a badge for a store listing that doesn't exist.
+
+The ladder works because every rung is backed by one config file, `src/data/app.ts`: with `comingSoon: true` every primary renders waitlist copy; setting a beta URL flips primaries to "Join the beta"; only a real store URL plus `comingSoon: false` shows download labels. Launch day is a one-file change with zero template edits — and until then, the site physically cannot promise a download.
+
+Contact follows the same consolidation: one shared `WaitlistForm` posting to a configured Formspree endpoint (with honeypot spam field and a disabled state when the endpoint is empty, so a missing config renders honesty instead of a dead form). Analytics is environment-only — unset variables mean nothing loads, and the privacy page says exactly that.
+
+<Callout type="lesson" title="Habit worth copying">
+  One CTA panel per page, and every promise behind a config flag. Count your panels the way you count your pages: if a second one crept in, one of them is lying about being necessary.
+</Callout>
+
+## The alternative it beat
+
+The alternative was the early site: mailto links scattered across buttons, panels, and footers, a personal address in the source, store-badge instincts for an unlisted app. Each one small, each one eroding the exact trust a waitlist runs on. Consolidation felt like janitorial work; it was actually the funnel — a reader who finds three different contact paths assumes none of them work.

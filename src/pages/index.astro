@@ -9,7 +9,7 @@ const description =
 	'Explore an independent developer\u2019s projects in Marathi learning, student news, wellness, and data. Read notes, book a conversation, or say hello.';
 ---
 
-<IndieLayout title={title} description={description} canonicalPath="/">
+<IndieLayout title={title} description={description} canonicalPath="/" image="/og/og-home.png">
 	<header class="site-header rail over-hero">
 		<a class="brand" href="/" aria-label="eManisha home"
 			><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"></path><path d="M17.196 9 6.804 15"></path><path d="m6.804 9 10.392 6"></path></svg
@@ -403,7 +403,7 @@ const description =
 					<a class="text-link" href="/updates/">All updates
 						<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
 					</a>
-					<a class="text-link" href="https://xmirtunjay.github.io/engineering-notebook/">Engineering notebook
+					<a class="text-link" href="/notebook/">Engineering notebook
 						<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
 					</a>
 				</div>
@@ -539,7 +539,7 @@ const description =
 	function heroAuto() {
 		if (reduceMotion) return;
 		window.clearInterval(heroTimer);
-		heroTimer = window.setInterval(() => showSlide(heroIdx + 1), 6000);
+		heroTimer = window.setInterval(() => showSlide(heroIdx + 1), 4000);
 	}
 	document.querySelector('.hero-slider')?.addEventListener('keydown', (e) => {
 		if ((e as KeyboardEvent).key !== 'ArrowRight' && (e as KeyboardEvent).key !== 'ArrowLeft') return;

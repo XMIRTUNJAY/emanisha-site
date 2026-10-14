@@ -1,0 +1,95 @@
+---
+title: "The dataset engine: validated content that cannot render lies"
+description: "How typed datasets, resolvers that throw, and a prebuild QA gate keep 200 pages honest."
+series: "learn-marathi"
+part: 3
+project: "learn-marathi"
+category: "Education / SEO"
+tags: ["typescript", "validation", "content-pipeline", "beginners"]
+technologies: ["TypeScript", "Node scripts", "Astro content"]
+difficulty: "beginner"
+status: "Active"
+featured: false
+draft: false
+pubDate: 2026-10-07
+---
+
+import CodeExample from '../../../../components/notebook/case-study/CodeExample.astro';
+import Callout from '../../../../components/notebook/case-study/Callout.astro';
+
+## What is a dataset page?
+
+A **dataset** here is a JSON file describing pages: each entry holds the slug, title, search intent, and *data hooks* — references like "words from these categories" or "speaking rows from unit 3, lessons 1–2". A **resolver** is the function that turns those hooks into real curriculum rows at build time. A **QA gate** is a script that fails the build when a dataset breaks the rules. Authors write data; the engine decides what ships.
+
+## The five families
+
+Page datasets live in `src/data/seo/*.json`, one file per family:
+
+| File | Family | Pages render under |
+| ---- | ------ | ------------------ |
+| `vocab-topics.json` | Vocabulary topics | `/vocabulary/<slug>/` |
+| `phrase-pages.json` | Phrase topics | `/phrases/<slug>/` |
+| `grammar-pages.json` | Grammar topics | `/grammar/<slug>/` |
+| `hindi-bridges.json` | Hindi bridge rows | `/hindi-to-marathi/<slug>/` |
+| `english-paths.json` | English-first rows | `/english-to-marathi/<slug>/` |
+
+Each entry carries a `status` of `draft` or `published` — only published pages render. Drafts are how half-finished ideas wait without leaking onto the site.
+
+## Resolvers that throw
+
+Real code from `src/lib/seo.ts` (verbatim, trimmed to the word resolver):
+
+<CodeExample
+  title="References that fail loudly"
+  file="learn-marathi/src/lib/seo.ts"
+  what="Resolves a page's word hooks against the synced vocabulary; unknown ids throw at build time."
+  why="A typo'd word-id would otherwise render an empty section nobody notices. Throwing turns drift into a build failure you fix the same day."
+  tradeoff="Authors can't preview a page with placeholder references — every hook must resolve before anything renders. The alternative (skipping bad refs silently) guarantees the one skipped section is the one users needed."
+>
+```typescript
+export function wordsFor(page: SeoPage): Word[] {
+  const words: Word[] = [];
+  if (page.categories) words.push(...vocab.filter((w) => page.categories!.includes(w.category)));
+  for (const id of page.wordIds ?? []) {
+    const w = vocab.find((x) => x.id === id);
+    if (!w) throw new Error(`seo/lib: unknown word id "${id}" on page "${page.slug}"`);
+    if (!words.includes(w)) words.push(w);
+  }
+  return words;
+}
+```
+</CodeExample>
+
+Three sibling resolvers work the same way: `speakingFor` pulls lesson-script rows by unit and lesson number, `grammarNotesFor` verifies every picked lesson resolved exactly one row (count mismatch throws), and `bridgesForPage` pulls Hindi-bridge rows by unit. The rule is absolute: **every word, phrase, or grammar row on a generated page traces to `vocab.json` or `units.json`, or it is page-level prose.** Nothing in between.
+
+## The QA gate
+
+Resolvers catch drift. The validator catches everything else. Real thresholds from `tools/validate-content.mjs` (verbatim):
+
+<CodeExample
+  title="The thin-content bar, as code"
+  file="learn-marathi/tools/validate-content.mjs"
+  what="Minimum resolved-content counts per family — below the bar, a page must not be published."
+  why="Numbers enforce what taste can't: extend an existing page instead of shipping a thin one. The gate runs in `prebuild`, so unvalidated pages can never ship."
+  tradeoff="Thresholds are blunt — a brilliant 9-word page still waits. The alternative (reviewer judgment per page) doesn't scale to 60 dataset pages and counting."
+>
+```javascript
+const MIN = {
+  vocabulary: { words: 10 },
+  phrases: { phrases: 8 },
+  'hindi-bridge': { bridges: 5 },
+  'english-path': { sentences: 5 },
+  grammar: { notes: 1 },
+};
+```
+</CodeExample>
+
+The same script also fails on schema violations, duplicate slugs/titles/descriptions, slug collisions with the curated taxonomy, broken internal links, Latin script in Marathi answer fields (and Devanagari in English fields), and published pages with no practice items. It warns — without failing — on near-duplicate intents and draft debt. And because `package.json` wires it into `prebuild` (`node ./tools/validate-content.mjs && node ./tools/build-search-index.mjs`), none of this is advisory: a red dataset stops the deploy.
+
+<Callout type="lesson" title="Habit worth copying">
+  Make bad content unrenderable, not just discouraged. A style guide says "don't ship thin pages" and gets skimmed; a validator says "this page has 7 words and the minimum is 10" and blocks the build. Put the rule where it cannot be skipped.
+</Callout>
+
+## The alternative it beat
+
+The alternative was trusting the datasets — write JSON carefully, review carefully, ship. Careful works until the 40th page, then a renamed category silently empties three pages and nobody notices for months because the pages still *render*. They render empty. The throw-at-build layer exists because the failure mode of data-driven sites isn't crashing — it's confidently displaying nothing.

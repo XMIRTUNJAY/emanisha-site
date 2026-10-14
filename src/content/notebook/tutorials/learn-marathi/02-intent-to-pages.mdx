@@ -1,0 +1,70 @@
+---
+title: "One intent per page: what became a page and what didn't"
+description: "How search intent and a 15-entry size gate decided every URL — and why 1002 words became zero word-pages."
+series: "learn-marathi"
+part: 2
+project: "learn-marathi"
+category: "Education / SEO"
+tags: ["seo", "information-architecture", "beginners"]
+technologies: ["Astro 7", "Markdown datasets"]
+difficulty: "beginner"
+status: "Active"
+featured: false
+draft: false
+pubDate: 2026-10-07
+---
+
+import Callout from '../../../../components/notebook/case-study/Callout.astro';
+
+## What is a page, really?
+
+A **search intent** is the job a searcher wants done: "marathi food words" wants a browsable list, "how to say sorry in Marathi" wants one phrase with pronunciation, "marathi verbs" wants a reference table. A **page** on this site is one intent, fully answered. That single rule — one intent, one page, fully answered — decided all 200 URLs. Everything in this part is that rule applied to real counts.
+
+## The inventory: what the curriculum holds
+
+The synced snapshot (`src/data/learn/meta.json`, stamped 2026-09-20) counts 26 units, 156 lessons, and 1,002 words across 29 categories. The big categories read like page titles waiting to happen:
+
+| Category | Entries | Became |
+| -------- | ------- | ------ |
+| Verbs | 105 | Vocabulary cluster |
+| Food | 84 | Vocabulary cluster |
+| Home | 65 | Part of daily-life cluster |
+| Travel | 50 | Travel cluster |
+| Directions | 16 | Merged into travel |
+| Family | 15 | Family cluster |
+| Shopping | 12 | Merged (with numbers/scripts) |
+| People | 10 | Merged into family |
+| Pronouns | 8 | Merged into family/grammar |
+| Routine | 7 | Merged |
+| Questions | 7 | Merged |
+
+The pattern: above roughly 15 entries, a category stands alone. Below it, the content joins a neighbor instead of getting its own page. That number is the **size gate**, and it is the cheapest important decision on the site.
+
+## The route table: one row per intent
+
+| Route family | What lives there | Example |
+| ------------ | ---------------- | ------- |
+| `/vocabulary/` + clusters | Word lists by topic | `/vocabulary/food/` — 84 food words |
+| `/phrases/` + sets | Everyday phrases from lesson scripts | Greetings, daily, travel |
+| `/hindi-to-marathi/` | Hindi-first bridge content | Words + phrases for Hindi speakers |
+| `/english-to-marathi/` | English-first bridge content | Words + phrases for English speakers |
+| `/grammar/` + topics | Grammar explanations with unit rows | Pronouns, verbs, sentence-structure |
+| `/lessons/<unit>/` | 26 unit pages bundling all six lesson sections | Grammar + culture + speaking + listening + bridge + builder |
+| `/app/` | The conversion page: screenshots + waitlist | One honest CTA, no store badges |
+| `/hi/` mirror | Hindi-chrome versions of hub pages | Same data, `hreflang` both ways |
+
+## What didn't become pages (and why)
+
+Three rejections did more for the site's quality than any page it shipped:
+
+- **Per-word pages (1,002 candidates → zero pages).** A single word with one example is the textbook definition of thin content. Words ship inside clusters and topic pages that clear the validator's minimums instead.
+- **Per-lesson pages (156 candidates → 26 unit pages).** One lesson row alone can't hold a page; six sections bundled per unit can. Fewer pages, denser pages.
+- **Micro-clusters (Shopping 12, Colors 13, People 10, Pronouns 8, Routine 7 → merged).** Each joined a sibling — shopping with numbers and market scripts, people and pronouns with family — instead of standing alone.
+
+<Callout type="lesson" title="Habit worth copying">
+  Count before you create the page. List the entries the page would contain; if the list is short, the content belongs on an existing page. The gate number (~15 here) matters less than having one and enforcing it.
+</Callout>
+
+## The alternative it beat
+
+The alternative was hand-written Markdown, one file per page, maintained by hand. At 200 pages that means 200 files drifting from the app's curriculum with every app update — new words never appearing, fixed translations never propagating. The dataset engine in Part 3 exists so the route table above is generated from data that itself is synced from data. The intent map decides *what* pages exist; the engine decides *how* they stay true.

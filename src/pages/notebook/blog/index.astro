@@ -1,0 +1,50 @@
+---
+import RowCard from '../../../components/notebook/RowCard.astro';
+import Base from '../../../layouts/NotebookBase.astro';
+import { getCollection } from 'astro:content';
+import { siteUrl } from '../../../lib/notebook-site';
+
+const posts = (await getCollection('notebookBlog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Base title="Writing" description="Essays and notes on building data systems, AI agents, and developer tools.">
+	<div class="prose">
+		<p class="kicker">Writing</p>
+		<h1>Notes worth keeping.</h1>
+		<p class="lede">Essays on systems I build and lessons I don't want to re-learn.</p>
+	</div>
+	<div class="listing">
+		<ul class="row-list">
+			{posts.map((post) => (
+				<RowCard
+					kicker="Essay"
+					title={post.data.title}
+					href={siteUrl(`/blog/${post.id}/`)}
+					description={post.data.description}
+					meta={post.data.pubDate.toISOString().slice(0, 10)}
+				/>
+			))}
+		</ul>
+	</div>
+</Base>
+
+<style>
+	.kicker {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--accent);
+		font-weight: 700;
+		margin: 0 0 0.5em 0;
+	}
+	.lede {
+		font-size: 1.15em;
+		color: rgb(var(--gray-dark));
+	}
+	.listing {
+		margin-top: var(--space-4);
+	}
+</style>

@@ -7,12 +7,15 @@ export interface Props {
 	description: string;
 	/** Unique page path with leading slash, e.g. '/projects/marathi-learning/'. */
 	canonicalPath?: string;
+	/** Page-specific share-card path (served from /og/), defaults to the generic card. */
+	image?: string;
 	/** Extra <head> JSON-LD blobs. */
 	jsonLd?: Record<string, unknown>;
 }
-const { title, description, canonicalPath = '/', jsonLd } = Astro.props;
+const { title, description, canonicalPath = '/', image = '/og/og-fallback.png', jsonLd } = Astro.props;
 const site = 'https://emanisha.in';
 const canonical = new URL(canonicalPath, site).toString();
+const ogImage = new URL(image, site).toString();
 import '../styles/main-site.css';
 ---
 
@@ -36,10 +39,14 @@ import '../styles/main-site.css';
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
-		<meta
-			property="og:image"
-			content="https://images.hostinger.com/9783d01a-a4ce-45e2-8b04-7f5682ad2251.png"
-		/>
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={title} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
 		{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 		<link rel="sitemap" href="/sitemap-index.xml" />
 	</head>

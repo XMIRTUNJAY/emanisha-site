@@ -1,0 +1,84 @@
+---
+title: "Capstone: rebuild one slice of the 200-page engine yourself"
+description: "Full-flow recap, glossary, testing layers, stealable principles, and a guided exercise."
+series: "learn-marathi"
+part: 6
+project: "learn-marathi"
+category: "Education / SEO"
+tags: ["capstone", "exercise", "beginners"]
+technologies: ["Astro 7", "TypeScript"]
+difficulty: "beginner"
+status: "Active"
+featured: false
+draft: false
+pubDate: 2026-10-07
+---
+
+## Full-flow recap
+
+One direction, no hand edits. The Flutter app's 26 unit files and 1,002-word vocabulary feed `npm run sync`, which validates every key and row, applies the logged override file, and writes three committed snapshots with counts stamped in `meta.json`. Page datasets in `src/data/seo/*.json` reference those snapshots through data hooks; `src/lib/seo.ts` resolvers turn hooks into rows and throw on anything unresolvable. `tools/validate-content.mjs` gates the build on schema, uniqueness, thresholds, links, and script hygiene. Astro renders 200 static pages with per-page SEO heads, related-links blocks, and exactly one contextual CTA panel each — all funneled through one config file toward a waitlist, because the app isn't launched yet. A Hindi mirror reuses the same data with translated chrome and reciprocal hreflang. That is the whole machine.
+
+## Glossary
+
+| Term | Plain meaning | Where it appeared |
+| ---- | ------------- | ----------------- |
+| Static site | Pre-built pages, no server programs at visit time | Part 1 |
+| Curriculum | The teaching material: units, lessons, word lists | Part 1 |
+| Search intent | The job a searcher wants done | Part 1 |
+| Snapshot | Committed JSON copy of app data (`units/vocab/meta.json`) | Part 1 |
+| Sync | The script carrying app data into snapshots | Part 1 |
+| Override | Logged website-only correction, fixed upstream too | Part 1 |
+| Cluster | A topic word-list big enough to stand alone | Part 2 |
+| Size gate | Minimum entries (~15) for a page to exist | Part 2 |
+| Thin content | A page too insubstantial to answer its intent | Part 2 |
+| Dataset | JSON file describing pages plus data hooks | Part 3 |
+| Data hook | A reference like "words from these categories" | Part 3 |
+| Resolver | The function turning hooks into real rows (throws on drift) | Part 3 |
+| QA gate | The validator script blocking bad builds | Part 3 |
+| Route | A URL pattern and the page it renders | Part 4 |
+| getStaticPaths | Astro's build-time list of pages to generate | Part 4 |
+| Page component | The shared shell rendering one page family | Part 4 |
+| BaseHead | The component writing canonical + social tags | Part 4 |
+| JSON-LD | Structured data describing the page to machines | Part 4 |
+| Funnel | The path from browsing to action | Part 4 |
+| CTA | A button or panel inviting the next step | Part 4 |
+| Orphan | A page nothing links to | Part 5 |
+| hreflang | The tag pairing translated pages across languages | Part 5 |
+| x-default | The fallback hreflang for unmatched languages | Part 5 |
+| Sitemap | The machine-readable list of pages to index | Part 5 |
+| OG card | The preview image for shared links | Part 5 |
+| Mirror | Same data, translated chrome (`/hi/` pages) | Part 5 |
+
+## Testing layers
+
+| Layer | Command | What it proves |
+| ----- | ------- | -------------- |
+| Sync validation | `npm run sync` (fails on bad keys/rows/refs) | Curriculum shape intact |
+| Dataset QA | `npm run content:qa` (also in `prebuild`) | Schema, uniqueness, thresholds, links, scripts |
+| Snapshot QA | `npm run qa` | Missing fields, duplicates, script mixing |
+| Static build | `npm run build` | 0 errors, 200 pages, sitemap emitted |
+| Content report | `npm run content:report` | Links, orphans, stats |
+| OG resolution | `npm run content:og` + `og:check` | Every page resolves its card |
+| Preview + console | `npm run preview`, devtools open | 0 errors on hub, lesson, index |
+| Responsive | 390px + 1440px review | Layout holds, mobile menu works |
+
+## Stealable principles
+
+1. **Count before you create the page.** Entries per cluster, resolved rows per dataset page, lessons per unit — numbers decide URLs.
+2. **Make bad content unrenderable.** Resolvers throw, validators block, drafts stay drafts until they clear the bar.
+3. **One direction, no hand edits.** Canonical data flows through scripts into snapshots; corrections land in a logged override layer, never in the output.
+4. **One CTA panel per page.** Count panels like pages; a second one is lying about being necessary.
+5. **Gate every promise in config.** If the thing doesn't exist yet, the site must be physically incapable of offering it.
+6. **Mirror chrome, never data.** A second language is a dictionary over the same snapshots, not a second copy.
+7. **Scale the checks with the pages.** Every growth mechanism ships with its audit: manifests, reports, checker scripts, counts.
+
+## Rebuild one slice yourself
+
+Pick a real topic with 15 or more words in the snapshot — Animals (40), Clothing (38), or Emotions (20). Then:
+
+1. Write one dataset entry (`vocabulary` family): slug, title under 60 characters, description 60–155 characters, one search intent, topics, and data hooks pointing at the real category.
+2. Add three practice items and two wrong-vs-right mistakes with the *why*.
+3. Run `npm run content:qa` — fix every failure it reports (thresholds, lengths, links).
+4. Run `npm run build` — confirm your page renders and appears in the manifest and sitemap.
+
+Done means: QA passes, the build passes, the page shows only resolved rows, its related block has no dead ends, and exactly one CTA panel points at the funnel. You just did, at small scale, everything Parts 1–5 describe. The only difference between your slice and the 200-page site is repetition — and repetition with gates is the entire game.

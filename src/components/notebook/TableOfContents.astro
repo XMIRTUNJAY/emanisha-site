@@ -1,0 +1,202 @@
+---
+---
+
+<aside class="toc" aria-label="Table of contents">
+	<details class="toc-mobile">
+		<summary>On this page</summary>
+		<nav class="toc-nav" data-toc></nav>
+	</details>
+	<p class="toc-label" aria-hidden="true">On this page</p>
+	<nav class="toc-desktop" data-toc></nav>
+</aside>
+
+<script>
+	(function () {
+		var article = document.querySelector('[data-article-body]');
+		if (!article) return;
+		var headings = Array.from(article.querySelectorAll('h2, h3')).filter(function (h) {
+			var el = h as HTMLElement;
+			if (el.hasAttribute('data-toc-skip')) return false;
+			if (el.closest('.series')) return false;
+			return true;
+		});
+		if (headings.length < 2) return;
+		document.querySelectorAll('[data-toc]').forEach(function (nav) {
+			var list = document.createElement('ol');
+			headings.forEach(function (h) {
+				var el = h as HTMLElement;
+				if (!el.id) {
+					el.id = el.textContent
+						.trim()
+						.toLowerCase()
+						.replace(/[^a-z0-9\s-]/g, '')
+						.replace(/\s+/g, '-');
+				}
+				var li = document.createElement('li');
+				if (el.tagName === 'H3') li.className = 'toc-h3';
+				var a = document.createElement('a');
+				a.href = '#' + el.id;
+				a.textContent = el.textContent;
+				a.dataset.target = el.id;
+				li.appendChild(a);
+				list.appendChild(li);
+			});
+			nav.appendChild(list);
+		});
+		// Scrollspy.
+		var links = Array.from(document.querySelectorAll('[data-toc] a')) as HTMLAnchorElement[];
+		var map = new Map<string, HTMLAnchorElement[]>();
+		links.forEach(function (a) {
+			var arr = map.get(a.dataset.target || '') || [];
+			arr.push(a);
+			map.set(a.dataset.target || '', arr);
+		});
+		var observer = new IntersectionObserver(
+			function (entries) {
+				entries.forEach(function (entry) {
+					if (!entry.isIntersecting) return;
+					links.forEach(function (a) {
+						var on = a.dataset.target === (entry.target as HTMLElement).id;
+						a.classList.toggle('active', on);
+						var li = a.closest('li');
+						if (li) li.classList.toggle('active', on);
+					});
+				});
+			},
+			{ rootMargin: '-20% 0px -70% 0px' }
+		);
+		headings.forEach(function (h) {
+			observer.observe(h);
+		});
+	})();
+</script>
+
+<style is:global>
+	.toc {
+		position: sticky;
+		top: 120px;
+	}
+	.toc-desktop {
+		font-size: 0.85rem;
+	}
+	.toc-desktop:empty {
+		display: none;
+	}
+	.toc-label {
+		display: none;
+	}
+	.toc-desktop ol {
+		counter-reset: toc;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.toc-desktop li {
+		counter-increment: toc;
+		display: flex;
+		gap: 0.6em;
+		align-items: baseline;
+		margin: 0;
+		padding: 0.65em 0;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.toc-desktop li:last-child {
+		border-bottom: none;
+	}
+	.toc-desktop li::before {
+		content: counter(toc) '.';
+		color: rgb(var(--gray));
+		font-variant-numeric: tabular-nums;
+		min-width: 2.2ch;
+		text-align: right;
+		font-size: 0.85em;
+		flex-shrink: 0;
+	}
+	.toc-desktop li.toc-h3 {
+		padding-left: 1.2em;
+		font-size: 0.9em;
+	}
+	.toc-desktop li.active::before {
+		color: rgb(var(--black));
+		font-weight: 600;
+	}
+	.toc-desktop a {
+		color: rgb(var(--gray));
+		text-decoration: none;
+		line-height: 1.4;
+		flex: 1;
+		min-width: 0;
+	}
+	.toc-desktop a:hover {
+		color: rgb(var(--black));
+		text-decoration: none;
+	}
+	.toc-desktop a.active {
+		color: rgb(var(--black));
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.toc-mobile {
+		display: none;
+		border: var(--border);
+		border-radius: var(--radius);
+		padding: 0.5em 1em;
+		margin-bottom: 1.5em;
+	}
+	.toc-mobile summary {
+		cursor: pointer;
+		font-weight: 700;
+	}
+	.toc-mobile .toc-nav ol {
+		counter-reset: toc;
+		list-style: none;
+		margin: 0.75em 0 0.25em 0;
+		padding: 0;
+	}
+	.toc-mobile .toc-nav li {
+		counter-increment: toc;
+		display: flex;
+		gap: 0.6em;
+		align-items: baseline;
+		margin: 0;
+		padding: 0.55em 0;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.toc-mobile .toc-nav li:last-child {
+		border-bottom: none;
+	}
+	.toc-mobile .toc-nav li::before {
+		content: counter(toc) '.';
+		color: rgb(var(--gray));
+		font-variant-numeric: tabular-nums;
+		min-width: 2.2ch;
+		text-align: right;
+		font-size: 0.85em;
+		flex-shrink: 0;
+	}
+	.toc-mobile .toc-nav a {
+		color: rgb(var(--gray-dark));
+		text-decoration: none;
+		line-height: 1.4;
+		flex: 1;
+		min-width: 0;
+	}
+	.toc:has(.toc-desktop:empty) .toc-label {
+		display: none;
+	}
+	.toc:has(.toc-desktop:empty) .toc-mobile {
+		display: none;
+	}
+	@media (max-width: 1024px) {
+		.toc {
+			margin-top: 0;
+		}
+		.toc-desktop,
+		.toc-label {
+			display: none;
+		}
+		.toc-mobile {
+			display: block;
+		}
+	}
+</style>

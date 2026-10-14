@@ -1,0 +1,95 @@
+---
+title: "The problem: 200 Marathi lessons that must each earn their place"
+description: "Why Learn Marathi exists, the constraints that shaped it, and the sync-to-static architecture they led to — explained for newcomers."
+series: "learn-marathi"
+part: 1
+project: "learn-marathi"
+category: "Education / SEO"
+tags: ["astro", "architecture", "seo", "beginners"]
+technologies: ["Astro 7", "TypeScript", "Node sync scripts"]
+difficulty: "beginner"
+status: "Active"
+featured: false
+draft: false
+pubDate: 2026-10-07
+---
+
+import ArchitectureDiagram from '../../../../components/notebook/case-study/ArchitectureDiagram.astro';
+import Callout from '../../../../components/notebook/case-study/Callout.astro';
+
+## What are we looking at?
+
+Learn Marathi is a website that teaches the Marathi language — words, phrases, grammar, and full lessons — to anyone with a browser. Its curriculum is real: 26 course units, 156 lessons, and 1,002 words in three languages (Marathi, Hindi, English), all written for the **Bol Marathi** phone app. This six-part series rebuilds the website layer by layer so you can see how a data-driven static site fits together. It is the build companion to the Learn Marathi story — the rejected thousand pages, the resolvers that throw, and the size-gate rule all get their full context here.
+
+If you are new to web development, here are the only three ideas you need for this part:
+
+- **A static site** is a website made of pre-built pages: no programs run on the server when someone visits, so hosting is cheap and pages load fast.
+- **A curriculum** is the teaching material itself: the units, lessons, and word lists the app's authors wrote.
+- **Search intent** is what a person actually wants when they type into Google — "food words in Marathi" wants a vocabulary list, not the app's download page.
+
+## The problem
+
+A language app keeps its lessons behind an install button. Nobody searching "how to say thank you in Marathi" will ever find them — app-store listings don't answer questions, and a marketing page with three screenshots doesn't teach. The problem Learn Marathi solves: publish the app's real curriculum as real web pages, one search intent per page, with a visible path from every page into the app — without turning into a content farm of a thousand near-empty pages.
+
+## Constraints: decisions before code
+
+Every important decision in this project traces back to five constraints. Read them first; everything below is just consequences:
+
+1. **Static only.** No server, no database, no login — the site must build to plain files served from GitHub Pages under the `/learn-marathi` path.
+2. **Never hand-copy the curriculum.** The Flutter app's files are the source of truth; the site syncs them with a script. Hand-editing synced files guarantees silent drift.
+3. **No thin pages.** Every page must carry enough substance to answer its intent — small topics join bigger pages instead of getting their own.
+4. **No fake app promises.** The app is not on any store yet, so no button may offer a download that doesn't exist.
+5. **Two languages, one dataset.** Hindi-first readers get Hindi pages, but the curriculum must never be forked into two copies.
+
+<Callout type="lesson" title="Habit worth copying">
+  Write constraints before code. When a decision is hard later ("should this cluster be its own page?"), you re-read the constraints and the answer is usually there. This project rejected a thousand word-pages for exactly this reason — keep reading.
+</Callout>
+
+## Why these tools
+
+| Tool | What it is | Why this project uses it |
+| ---- | ---------- | ------------------------ |
+| Astro 7 | A framework that builds multi-page sites to static files | 200 pages from one codebase; almost no JavaScript ships to readers |
+| TypeScript | JavaScript with types — the editor catches mistakes before you run | Dataset references are checked by type and by tests, not by hope |
+| Node sync script | A zero-dependency script (`tools/sync-learn-marathi.mjs`) | Carries units + vocabulary from the app repo into committed snapshots |
+| JSON datasets | Five page families in `src/data/seo/*.json` | Authors write pages as data; the validator and resolvers keep them honest |
+| Playwright | A browser-automation library | Screenshots, quizzes, and link checks run against the real built site |
+
+A traditional blog setup (hand-written Markdown per page) would violate constraint 2 at this scale — 200 pages of synced curriculum cannot be maintained by hand. A database-backed site would violate constraint 1. Hence datasets plus static generation: content as data, pages as build output.
+
+## The pivotal mechanism
+
+`src/lib/seo.ts` sits between the datasets and the pages: every word, phrase, and grammar row rendered on a generated page passes through its resolvers (`wordsFor`, `speakingFor`, `grammarNotesFor`, `bridgesForPage`), and any reference that doesn't trace back to the curriculum snapshots throws at build time. One bad word-id fails the build instead of shipping an empty section. Part 3 is entirely about this file.
+
+## Architecture
+
+<ArchitectureDiagram
+  title="Curriculum in, pages out"
+  chart={`flowchart LR
+    subgraph APP["Flutter repo — canonical"]
+        U["26 unit JSON files"]
+        V["generated_vocab.dart — 1002 words"]
+    end
+    subgraph SYNC["npm run sync"]
+        S["sync-learn-marathi.mjs"]
+        O["overrides.json — logged"]
+    end
+    subgraph SITE["Astro site"]
+        SN["units + vocab + meta.json snapshots"]
+        DS["seo JSON datasets — 5 families"]
+        R["seo.ts resolvers — throw on drift"]
+        P["getStaticPaths → 200 pages"]
+    end
+    U --> S
+    V --> S
+    O --> S
+    S --> SN
+    SN --> R
+    DS --> R
+    R --> P`}
+  caption="One direction, no hand edits: app data flows through validation into snapshots, datasets reference snapshots, resolvers throw on drift, pages render."
+/>
+
+The sync script is deliberately boring: plain Node, zero dependencies, loud failures. It requires every unit file to carry all sixteen top-level keys and exactly six rows per lesson section, parses the Dart vocabulary with a regular expression, applies the small logged override file for website-only corrections, and writes three snapshots with counts stamped in `meta.json`. Boring is the point — a sync you can read in ten minutes is a sync you will actually re-run.
+
+What the diagram hides, the rest of this series reveals: how 1,002 words become pages without becoming a thousand pages (Part 2), how datasets stay honest (Part 3), what the pages look like and how they funnel readers to the app (Part 4), and how the whole thing scales to two languages without duplicating (Part 5).
