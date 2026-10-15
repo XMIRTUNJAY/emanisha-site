@@ -97,6 +97,28 @@ export const projects: IndieProject[] = [
 			'Seven specialist agents (strategy, script, thumbnail, SEO, production, publishing, analytics) with gated publishing, SQLite evidence, and controlled growth experiments. Self-hosted, MIT licensed.',
 		color: 'yellow',
 	},
+	{
+		slug: 'mf360',
+		title: 'Mutual funds, decoded.',
+		name: 'MF360 — Mutual Fund Analytics',
+		category: 'Finance',
+		kind: 'data',
+		description: 'Trustworthy answers from messy Indian mutual-fund data — methodology first, corrections as rows.',
+		detail:
+			'A DIY investor platform for Indian mutual funds: portfolio tracking, cost and overlap engines, tax lots, and golden-portfolio testing. Method-first development with versioned formulas and a modular monolith.',
+		color: 'sand',
+	},
+	{
+		slug: 'mf360-academy',
+		title: 'Learn funds. Build wealth.',
+		name: 'MF360 Academy',
+		category: 'Education',
+		kind: 'notes',
+		description: 'Certification prep with zero runtime AI: offline pipeline generates, the website serves finished intelligence.',
+		detail:
+			'An AI-native certification preparation platform where models work the offline night shift and students meet only validated, versioned content through deterministic APIs. Concept stage: engine and pipeline built, store awaiting its first syllabus.',
+		color: 'yellow',
+	},
 ];
 
 export const posts = [

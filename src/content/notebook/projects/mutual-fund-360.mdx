@@ -208,4 +208,8 @@ This repo shows its agent workflow in the open: `docs/tasks/` holds generated ta
 
 Reproduce: Compose up, migrate, seed, run the goldens — green except the five known drift failures, which you should see fail exactly as described (a failing test you understand beats a passing suite you don't). Modify: add one validator to ingestion and watch a bad CAS row land in the dead letter queue. Extend: author golden portfolio GP-25 for a case you fear — merger during a SIP is taken; find your own intersection. Re-design: swap one engine's methodology version and feel what "pinned goldens" buys you. The five-part series follows Ravi from upload to reviewed portfolio — start with <a href={siteUrl('/tutorials/mutual-fund-360/01-method-and-monolith/')}>Part 1: method and monolith</a>.
 
+## Go deeper
+
+The closest sibling is the <a href={siteUrl('/notebook/projects/mf360-academy/')}>MF360 Academy</a> — the education layer on top of this methodology: versioned syllabi and deterministic study paths instead of versioned formulas. Read them as a pair: one versions money math, the other versions learning content. For the opposite philosophy — agents with gates instead of deterministic math — the <a href={siteUrl('/notebook/projects/autonomous-data-engineer/')}>Autonomous Data Engineer</a> shows what happens when the machine is allowed to act, and the <a href={siteUrl('/notebook/projects/data-eng-mastery/')}>Mastery platform</a> shows the no-agent extreme.
+
 

@@ -1,0 +1,254 @@
+---
+title: "MF360 Academy"
+description: "An AI-native certification prep platform with zero runtime LLM dependency: offline pipeline generates and validates, the website serves pre-built intelligence — architecture, decisions, and an honest early status."
+repo: ""
+stack: ["Python 3.11", "FastAPI", "Deterministic study engine", "Content store", "Offline AI pipeline"]
+category: "Education"
+status: "Concept"
+portfolioScore: 58
+featured: false
+draft: false
+language: "Python"
+focus: ["Zero runtime LLM", "Pre-generated intelligence", "Versioned learning content"]
+---
+
+import ProjectHero from '../../../components/notebook/case-study/ProjectHero.astro';
+import TechStack from '../../../components/notebook/case-study/TechStack.astro';
+import ProjectMetadata from '../../../components/notebook/case-study/ProjectMetadata.astro';
+import ArchitectureDiagram from '../../../components/notebook/case-study/ArchitectureDiagram.astro';
+import Callout from '../../../components/notebook/case-study/Callout.astro';
+import Decision from '../../../components/notebook/case-study/Decision.astro';
+import MetricsTable from '../../../components/notebook/case-study/MetricsTable.astro';
+import { siteUrl } from '../../../lib/notebook-site';
+
+<ProjectHero
+  title="MF360 Academy"
+  subtitle="Certification prep where the AI works offline and the website never calls a model: generate, validate, store, index — then serve intelligence that's already finished."
+  status="Concept"
+  category="Education"
+  meta={[
+    { label: 'Who it serves', value: 'Certification candidates first' },
+    { label: 'Runtime LLM calls', value: 'Zero, by design' },
+    { label: 'Engine', value: 'Deterministic study algorithms' },
+    { label: 'Content store', value: 'Built, awaiting first syllabus' },
+  ]}
+/>
+
+## Two ways to read this page
+
+- **Understand the system:** The spark → The struggle → The decisions → How it works → Where it stands → Reflection.
+- **Build your own:** Constraints → Architecture → The offline rule → The versioning pattern → Exercises at the end.
+
+> "If every LLM provider goes offline, the website keeps working — only the future content pipeline pauses."
+
+That sentence from the README is the whole project. Most "AI learning platforms" are thin wrappers around an API call that bills per student per click. This one inverts it: the AI works the night shift in an offline pipeline, and the website serves finished intelligence from a store. Students get instant answers with zero latency, zero per-request cost, and zero hallucination risk at serving time — because nothing is generated at serving time.
+
+## The spark
+
+Certification prep has two failure modes, and they look like opposites. Static question banks rot: syllabi change, questions leak, answers go stale, and nobody knows which items still hold. AI tutors, meanwhile, invent confidently: plausible explanations for wrong answers, outdated syllabus coverage, confident nonsense at $0.03 a question. One rots, the other hallucinates.
+
+So the academy splits the problem across time: an offline pipeline where AI is allowed to draft, argue, and be wrong — with validators, versioning, and publishing gates before anything reaches a student — and a runtime that serves only what survived. Generation is optimistic; serving is deterministic. The content store sits between them as the membrane.
+
+The first syllabus is Databricks Certified Data Engineer Professional — chosen because the sibling <a href={siteUrl('/notebook/projects/data-eng-mastery/')}>Mastery platform</a> already mapped that territory, and because data engineers pay for credentials that employers verify.
+
+## The struggle
+
+Two things went wrong enough to leave marks, and one honest empty room.
+
+**The engine came before the content.** The deterministic study brain exists — `exam.py`, `learning_path.py`, `mastery.py`, `prerequisite.py`, `progress.py`, `recommendation.py`, `retention.py`, `weakness.py` in the backend — mirroring the proven Mastery-platform math. But an engine without a syllabus is a library with no books: the content store has its four wings built (`concepts/`, `knowledge-graph/`, `questions/`, `versioning/`) and nothing shelved. Building the kitchen before the first recipe is either foresight or procrastination; the pipeline's first full syllabus run will decide which.
+
+**Versioning is designed, not yet exercised.** Content versions, knowledge-graph updates, gap-and-duplicate detection — all specified in `docs/`, none battle-tested, because there is no v1 to version yet. The design is sound on paper: every explanation carries its syllabus mapping and version, updates never overwrite. Paper is where all versioning schemes look easy.
+
+And the empty room, stated plainly: the store is built and empty. This page documents an architecture with a pilot light on, not a platform with students. Everything below describes what exists (engine, pipeline scaffolding, runtime skeleton, docs) versus what is next (first syllabus run, validation evidence, learners).
+
+## The decisions
+
+<Decision
+  title="Zero runtime LLM dependency"
+  problem="Per-request model calls make answers slow, expensive, non-reproducible — and aGo down with every provider outage."
+  options={["Live LLM tutoring", "Cached LLM responses", "Offline generation, deterministic serving"]}
+  chosen="AI works only in the offline pipeline (extract, generate, validate, version, publish); the website runtime serves the content store through deterministic APIs like GET /api/concepts/{id}."
+  why="Instant answers, zero per-student inference bill, identical answers for identical questions, and survival when providers go dark. Reproducibility is a feature students can feel."
+  tradeoffs="Content freshness lags the world by one pipeline run; interactive Socratic tutoring is impossible without runtime generation; the pipeline itself still needs model budget and supervision."
+  result="The runtime has no model key to leak, no per-click cost to meter, and nothing to hallucinate at serving time."
+/>
+
+<Decision
+  title="Versioned content with syllabus mappings"
+  problem="Syllabi change and questions rot; students need to know what each item covers and which version they studied."
+  options={["Unversioned question bank", "Versioned content + syllabus graph", "External CMS"]}
+  chosen="Content store with concepts, knowledge graph, questions, and versioning wings; every item maps to syllabus sections."
+  why="When Databricks reshuffles the exam, the mapping shows exactly which items die — updates become queries, not archaeology."
+  tradeoffs="Versioning machinery with no v1 yet is speculation with good posture. The knowledge-graph schema may not survive first contact with real syllabus sprawl."
+  result="Structure ready; awaiting the first syllabus run to prove or reshape it."
+/>
+
+<Decision
+  title="Deterministic study engine, not recommendations-as-a-service"
+  problem="Adaptive paths need scheduling math, prerequisites, retention, and weakness modeling — without per-student inference."
+  options={["LLM-driven tutoring", "Rules + scheduling arithmetic", "Buy a learning platform"]}
+  chosen="Eight algorithm modules (exam, learning path, mastery, prerequisite, progress, recommendation, retention, weakness) — the Mastery-platform lineage, adapted for certifications."
+  why="Same inputs, same path; every recommendation explainable; zero marginal cost per learner. Proven sibling math beats novel math."
+  tradeoffs="No conversational adaptation, no free-text understanding. The engine schedules brilliantly and converses not at all."
+  result="The brain is done; it is waiting for its first books."
+/>
+
+| Decision | Option A | Option B | Chosen | Why |
+| -------- | -------- | -------- | ------ | --- |
+| Generation | Runtime LLM | Offline pipeline | Offline pipeline | Zero serving cost/risk |
+| Content | Question bank | Versioned store | Versioned store | Syllabus changes are queries |
+| Engine | Tutoring model | Deterministic math | Deterministic math | Explainable + free |
+
+Neither table is universal advice. Each row holds only under this project's constraints: certification content goes stale on schedule, students deserve reproducible answers, and per-click inference would price out the audience. Change the constraints and the answers change.
+
+## How it works
+
+<TechStack items={['Python 3.11', 'FastAPI', 'Deterministic algorithms', 'Content store', 'Offline AI pipeline', 'Pytest', 'httpx']} />
+
+The whole system is two loops that meet at the store — drawn below. Six terms, explained once and never again:
+
+- **Offline pipeline.** Queue → processors (extract, generate) → validators → publishers → versioning → DB. LLMs work here, under supervision, where mistakes are cheap.
+- **Content store.** Concepts, explanations, examples, questions, knowledge graph, syllabus mappings, versions. The membrane between generation and serving.
+- **Deterministic APIs.** `GET /api/concepts/{id}`, syllabus sections, practice by section and difficulty. No model behind any of them.
+- **Study engine.** Eight modules scheduling what to learn next, tracking mastery and retention, modeling prerequisites and weakness.
+- **Validators.** Gap detection, duplicate detection, syllabus coverage — the pipeline's immune system, run before publish, never after.
+- **Versioning.** Every item carries its version and mappings; updates add, never overwrite.
+
+<ArchitectureDiagram
+  title="Night shift and day shift"
+  chart={`flowchart TB
+    subgraph Night["Offline pipeline"]
+        Q["Queue of gaps"]
+        G["LLM generates"]
+        V["Validators check"]
+        P["Publish versioned"]
+        Q --> G --> V --> P
+    end
+    subgraph Store["Content store"]
+        CS[("Concepts + questions + graph")]
+    end
+    subgraph Day["Website runtime"]
+        API["Deterministic APIs"]
+        ST["Study engine"]
+    end
+    P --> CS --> API --> ST`}
+  caption="AI works at night under supervision; students meet only finished, versioned intelligence by day. The store is the membrane that makes both halves honest."
+/>
+
+<ArchitectureDiagram
+  title="What a syllabus update touches"
+  chart={`flowchart LR
+    SY["Syllabus change"]
+    M["Mapping query: affected items"]
+    R["Regenerate affected only"]
+    VV["Re-validate"]
+    N["New version, old kept"]
+    SY --> M --> R --> VV --> N`}
+  caption="Updates are queries, not archaeology: the graph says what died, regeneration touches only that, and the old version stays for students mid-flight."
+/>
+
+Three chains connect requirements to what got built:
+
+**Answers must be instant and reproducible → no runtime generation.** The website's hottest path touches a store and arithmetic, never a model. Latency and cost are properties of the architecture, not optimizations applied later.
+
+**Content must survive syllabus churn → mappings plus versions.** The graph absorbs the change; regeneration is scoped; history is preserved. This is designed, awaiting its first real test.
+
+**Paths must adapt without inference → deterministic study math.** Mastery, retention, prerequisites, and weakness modules schedule from stored state. The lineage to the Mastery platform is deliberate — proven math, new domain.
+
+<Callout type="decision" title="Why the store stays empty for now">
+  An empty versioned store with a working pipeline beats a full unversioned bank. The first syllabus run will fill it or expose the schema — either outcome is progress, and both are recorded here when they happen.
+</Callout>
+
+## The contract, then the code
+
+The runtime promises are small and total — deterministic endpoints over finished content:
+
+```bash
+# A concept, finished and versioned (no model involved)
+curl http://localhost:8000/api/concepts/{id}
+
+# A syllabus, section by section
+curl http://localhost:8000/api/syllabus/{cert}/sections
+
+# Practice, filtered deterministically
+curl "http://localhost:8000/api/practice?section=X&difficulty=Y"
+```
+
+Broken promises get honest codes: `400` malformed, `404` unknown concept, `500` our bug. The shape never changes; only the content versions do.
+
+Who remembers what: the content store holds finished intelligence (back it up — it IS the product). The pipeline queue holds intentions. The runtime holds nothing — restart it freely, it re-reads the store.
+
+<ProjectMetadata rows={[
+  { label: 'Built with', value: 'Python + FastAPI backend, offline AI pipeline, pytest' },
+  { label: 'Remembers', value: 'Content store (concepts, graph, questions, versions)' },
+  { label: 'Refuses', value: 'Runtime LLM calls — by architecture, not policy' },
+  { label: 'Tests', value: 'Pytest suite present in backend' },
+  { label: 'State', value: 'Concept: engine + pipeline built, store awaiting first syllabus' },
+]} />
+
+## Where it stands
+
+| | |
+|---|---|
+| **Verified** (read from source) | 8 study-engine modules; pipeline dirs (processors, publishers, queue, validators); runtime skeleton (backend FastAPI + frontend + public); docs (architecture, content, pipeline, syllabi); empty content-store wings |
+| **Observed** (noticed, not benchmarked) | Backend requirements frozen (fastapi, sqlalchemy, pydantic, pytest, httpx); docs-first culture (architecture written before content exists) |
+| **Intended** (designed, not yet proven) | First syllabus run (Databricks DE Professional); validator effectiveness; versioning under real churn |
+| **Unknown** (not measured) | Learner outcomes; pipeline throughput and cost per syllabus; retention lift from deterministic paths |
+
+<MetricsTable
+  title="Verification results"
+  headers={["Check", "Result", "Date"]}
+  rows={[
+    ["Study engine modules (from source)", "8 files: exam, path, mastery, prereq, progress, recommendation, retention, weakness", "from source"],
+    ["Pipeline stages (from source)", "processors, publishers, queue, validators present", "from source"],
+    ["Content store (from source)", "4 wings built, 0 items shelved", "from source"],
+    ["Runtime (from source)", "FastAPI backend skeleton + frontend + public", "from source"],
+  ]}
+  caption="Structural facts read from source for this case study. No test suite was executed here; the store is empty by design at this stage, not by accident."
+/>
+
+Running it costs the machine plus the offline pipeline's model budget per syllabus run — students cost nothing extra, ever. That shape is the business model as much as the architecture: fixed creation cost, zero marginal serving cost, reproducible answers as the selling point.
+
+## How AI was actually used here
+
+Inverted from the usual: AI does the authoring, never the serving. What gets delegated: knowledge extraction from LLM interactions, explanations, examples, counterexamples, practice questions, gap and duplicate detection, learning paths. What doesn't: anything a student touches — every served byte passed validators, versioning, and publishing first.
+
+Verification is the pipeline itself: generate, validate, version, publish — in that order, always. A validator that never rejects is decoration; the first syllabus run will show whether these are guards or garnish.
+
+<ArchitectureDiagram
+  title="The loop content works inside"
+  chart={`flowchart TB
+    S["Syllabus + gaps"]
+    S --> G["Generate (LLM, supervised)"]
+    G --> V["Validate (rules, not vibes)"]
+    V -->|reject| G
+    V -->|pass| P["Version + publish"]
+    P --> S2["Students learn"]
+    S2 --> M["Measure outcomes"]
+    M --> S`}
+  caption="Generation proposes, validation disposes, students experience only survivors. Outcomes feed back into gaps — the store gets smarter without ever getting slower."
+/>
+
+One gap I'll name plainly: validator quality is asserted, not demonstrated — with no content run yet, "validated" means "designed to validate." The first syllabus is the exam the pipeline itself must pass.
+
+## Reflection
+
+**What worked.** The inversion (offline AI, deterministic serving) held through every design review — no quiet runtime calls crept in. Borrowing the Mastery study math instead of inventing new math. Docs before content.
+
+**What didn't.** Nothing has failed yet, which is itself the risk — an untested pipeline is a hypothesis with folders. The empty store is honest but also the whole bet, unresolved.
+
+**What surprised me.** How much of "AI platform" turned out to be versioning and mappings rather than models. The intelligence is easy to generate; knowing what it covers, which version a student saw, and what died in a syllabus change is the actual product.
+
+**What I'd change.** Run the first syllabus now, even thin — one section end to end would test the pipeline, the store, the versioning, and the engine together. Thin and real beats comprehensive and theoretical.
+
+**What remains unsolved.** Whether deterministic paths retain learners as well as adaptive tutors convert them — the core bet, measurable only with students. That experiment is scoped and waiting: first syllabus, then cohorts, then numbers.
+
+## Build your own
+
+Reproduce it exactly (requirements, backend skeleton, empty store — the store being empty IS the checkpoint), then: run the first syllabus section through processors → validators → versioning and shelve one real concept; query it back through the deterministic API and confirm zero model involvement; change one syllabus mapping and watch versioning contain the blast radius; add one validator (duplicate detection on explanations) and feel what "immune system" means in practice.
+
+Five things worth keeping: generate offline, serve deterministically. Version everything a syllabus can kill. Borrow proven math; invent only content. Validators must reject or they're decoration. An empty store with a working pipeline beats a full bank with no provenance.
+
+## Go deeper
+
+The closest sibling is the <a href={siteUrl('/notebook/projects/data-eng-mastery/')}>Data Engineering Mastery platform</a> — the study math this engine descends from, with students, tests, and scars. Read them as a pair: one proves the engine, the other scales it to certifications. For the finance-domain sibling built the same method-first way, the <a href={siteUrl('/notebook/projects/mutual-fund-360/')}>MF360 platform</a> shows versioned methodology applied to money instead of syllabi.
