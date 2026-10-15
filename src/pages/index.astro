@@ -149,16 +149,22 @@ const description =
 				))}
 			</div>
 			<div class="show-stage">
-				{
-					projects.map((project, index) => (
-						<article class:list={['show-panel', { active: index === 0 }, project.color]} data-panel={project.slug} aria-hidden={index !== 0}>
-							<a class="show-visual" href={`/projects/${project.slug}/`} tabindex="-1" aria-hidden="true">
+				<div class="show-visual-stack" aria-hidden="false">
+					{
+						projects.map((project, index) => (
+							<a class:list={['show-shot', { active: index === 0 }]} data-shot={project.slug} href={`/projects/${project.slug}/`} tabindex={index === 0 ? 0 : -1} aria-label={`${project.name} — open project`}>
 								<span class="browser">
 									<span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">emanisha.in/projects/{project.slug}/</span></span>
 									<img src={project.image ?? '/og/og-fallback.png'} alt="" loading="lazy" />
 									<span class="show-prompt"><span>{project.status ?? project.category}</span><span class="show-go">→</span></span>
 								</span>
 							</a>
+						))
+					}
+				</div>
+				{
+					projects.map((project, index) => (
+						<article class:list={['show-panel', { active: index === 0 }, project.color]} data-panel={project.slug} aria-hidden={index !== 0}>
 							<div class="show-copy">
 								<span class="shelf-icon" aria-hidden="true">
 									{project.kind === 'marathi' && (
@@ -508,22 +514,53 @@ const description =
 </IndieLayout>
 
 <script>
-	// project tabs + showcase stage
+	// project tabs + sliding visual stack (directional, neighbors peek)
 	const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.show-tabs [role="tab"]'));
 	const panels = Array.from(document.querySelectorAll<HTMLElement>('.show-panel'));
-	function showProject(slug: string | undefined) {
-		if (!slug) return;
+	const shots = Array.from(document.querySelectorAll<HTMLAnchorElement>('.show-shot'));
+	const reduceMotionShowcase =
+		typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	let currentShow = 0;
+	function paintShow(n: number, dir: number) {
 		for (const t of tabBtns) {
-			const on = t.dataset.tab === slug;
+			const on = tabBtns.indexOf(t) === n;
 			t.classList.toggle('selected', on);
 			t.setAttribute('aria-selected', String(on));
 		}
 		for (const p of panels) {
-			const on = p.dataset.panel === slug;
+			const on = panels.indexOf(p) === n;
 			p.classList.toggle('active', on);
 			p.setAttribute('aria-hidden', String(!on));
 		}
+		const total = shots.length;
+		const prev = (n - 1 + total) % total;
+		const next = (n + 1) % total;
+		shots.forEach((s, i) => {
+			s.classList.remove('active', 'peek-prev', 'peek-next', 'enter-left', 'enter-right');
+			s.setAttribute('tabindex', '-1');
+			s.setAttribute('aria-hidden', 'true');
+			if (i === n) {
+				if (dir !== 0 && !reduceMotionShowcase) s.classList.add(dir > 0 ? 'enter-right' : 'enter-left');
+				void s.offsetWidth;
+				s.classList.remove('enter-left', 'enter-right');
+				s.classList.add('active');
+				s.setAttribute('tabindex', '0');
+				s.setAttribute('aria-hidden', 'false');
+			} else if (i === prev) {
+				s.classList.add('peek-prev');
+			} else if (i === next) {
+				s.classList.add('peek-next');
+			}
+		});
 	}
+	function showProject(slug: string | undefined) {
+		const n = tabBtns.findIndex((t) => t.dataset.tab === slug);
+		if (n < 0 || n === currentShow) return;
+		const dir = n > currentShow ? 1 : -1;
+		currentShow = n;
+		paintShow(n, dir);
+	}
+	paintShow(0, 0);
 	for (const t of tabBtns) {
 		t.addEventListener('click', () => showProject(t.dataset.tab));
 		t.addEventListener('keydown', (e) => {
@@ -536,10 +573,9 @@ const description =
 		});
 	}
 	function stepProject(dir: 1 | -1) {
-		const i = tabBtns.findIndex((t) => t.classList.contains('selected'));
-		const n = ((i < 0 ? 0 : i) + dir + tabBtns.length) % tabBtns.length;
+		const n = (currentShow + dir + tabBtns.length) % tabBtns.length;
 		showProject(tabBtns[n].dataset.tab);
-		tabBtns[n].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+		tabBtns[n].scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduceMotionShowcase ? 'auto' : 'smooth' });
 	}
 	document.getElementById('shelf-prev')?.addEventListener('click', () => stepProject(-1));
 	document.getElementById('shelf-next')?.addEventListener('click', () => stepProject(1));
