@@ -565,7 +565,7 @@ const description =
 	}
 	paintShow(0, 0);
 	for (const t of tabBtns) {
-		t.addEventListener('click', () => showProject(t.dataset.tab));
+		t.addEventListener('click', () => { showProject(t.dataset.tab); showAuto(); });
 		t.addEventListener('keydown', (e) => {
 			if ((e as KeyboardEvent).key !== 'ArrowRight' && (e as KeyboardEvent).key !== 'ArrowLeft') return;
 			e.preventDefault();
@@ -573,6 +573,7 @@ const description =
 			const n = (i + ((e as KeyboardEvent).key === 'ArrowRight' ? 1 : -1) + tabBtns.length) % tabBtns.length;
 			tabBtns[n].focus();
 			showProject(tabBtns[n].dataset.tab);
+			showAuto();
 		});
 	}
 	function stepProject(dir: 1 | -1) {
@@ -580,8 +581,28 @@ const description =
 		showProject(tabBtns[n].dataset.tab);
 		tabBtns[n].scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduceMotionShowcase ? 'auto' : 'smooth' });
 	}
-	document.getElementById('shelf-prev')?.addEventListener('click', () => stepProject(-1));
-	document.getElementById('shelf-next')?.addEventListener('click', () => stepProject(1));
+	document.getElementById('shelf-prev')?.addEventListener('click', () => { stepProject(-1); showAuto(); });
+	document.getElementById('shelf-next')?.addEventListener('click', () => { stepProject(1); showAuto(); });
+	// autoscroll: advance while the shelf is visible and untouched
+	const showcaseSection = document.getElementById('work');
+	let showTimer: number | undefined;
+	function showAuto() {
+		if (reduceMotionShowcase) return;
+		window.clearInterval(showTimer);
+		showTimer = window.setInterval(() => stepProject(1), 4000);
+	}
+	showcaseSection?.addEventListener('mouseenter', () => window.clearInterval(showTimer));
+	showcaseSection?.addEventListener('mouseleave', showAuto);
+	showcaseSection?.addEventListener('focusin', () => window.clearInterval(showTimer));
+	showcaseSection?.addEventListener('focusout', showAuto);
+	if (showcaseSection && 'IntersectionObserver' in window) {
+		new IntersectionObserver((entries) => {
+			if (entries[0].isIntersecting) showAuto();
+			else window.clearInterval(showTimer);
+		}, { threshold: 0.2 }).observe(showcaseSection);
+	} else {
+		showAuto();
+	}
 
 // hero slideshow: auto-rotating app bands, pause on hover/focus
 	const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
