@@ -12,6 +12,8 @@ export interface IndieProject {
 	liveUrl?: string;
 	/** Label for the live button. Defaults to 'Open live site'. */
 	liveLabel?: string;
+	/** Share-card art shown in the shelf panel. Defaults to the generic card. */
+	image?: string;
 }
 export const projects: IndieProject[] = [
 	{
@@ -26,6 +28,7 @@ export const projects: IndieProject[] = [
 		color: 'peach',
 		liveUrl: '/learn-marathi/',
 		liveLabel: 'Explore the live Marathi build',
+		image: '/og/og-project-marathi-learning.png',
 	},
 	{
 		slug: 'student-news',
@@ -34,6 +37,7 @@ export const projects: IndieProject[] = [
 		category: 'Education',
 		kind: 'news',
 		description: 'A news scroll that helps students explore what\u2019s happening around them.',
+		image: '/og/og-project-student-news.png',
 		detail:
 			'A news-focused build for students, bringing updates into an easy-to-browse scroll. It explores how a familiar reading format can make discovering the world more approachable.',
 		color: 'yellow',
@@ -48,6 +52,7 @@ export const projects: IndieProject[] = [
 		detail:
 			'A wellness concept exploring what a Headspace-like experience could look like for India. This is an independent portfolio concept, not an official Headspace product or an affiliated service.',
 		color: 'rose',
+		image: '/og/og-project-headspace-india.png',
 	},
 	{
 		slug: 'data-engineer',
@@ -61,6 +66,7 @@ export const projects: IndieProject[] = [
 		color: 'sand',
 		liveUrl: '/de-agent/',
 		liveLabel: 'Open the DE//AGENT platform',
+		image: '/og/og-project-data-engineer.png',
 	},
 	{
 		slug: 'engineering-notebook',
@@ -74,6 +80,7 @@ export const projects: IndieProject[] = [
 		color: 'sand',
 		liveUrl: '/notebook/',
 		liveLabel: 'Open the Engineering Notebook',
+		image: '/og/og-project-engineering-notebook.png',
 	},
 	{
 		slug: 'autonomous-data-engineer',

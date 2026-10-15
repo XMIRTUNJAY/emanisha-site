@@ -174,6 +174,7 @@ const description =
 								<span class="bar-name">{project.name}</span>
 							</span>
 							<span class="bar-detail" aria-hidden="true">
+								<img class="bar-img" src={project.image ?? '/og/og-fallback.png'} alt="" loading="lazy" />
 								<span class="shelf-cat">{project.category}{project.slug === 'marathi-learning' && ' · LIVE'}</span>
 								<span class="bar-title">{project.name}</span>
 								<span class="bar-desc">{project.description}</span>
@@ -744,6 +745,6 @@ const description =
 <style>
 	/* premium bar motion (kept subtle: grow handles the drama) */
 	.shelf-grid .bar:hover {
-		border-color: #cfe2fc;
+		border-color: rgba(255, 255, 255, 0.35);
 	}
 </style>
