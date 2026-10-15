@@ -133,55 +133,58 @@ const description =
 			
 		</section>
 
-		<section class="work work-full reveal" id="work">
+		<section class="work rail reveal" id="work">
 			<div class="section-heading shelf-head">
 				<div><span class="eyebrow">THE PROJECT SHELF</span><h2>Built with a purpose.<span class="count">(0{projects.length})</span></h2></div>
 				<div class="shelf-nav">
-					<button type="button" id="shelf-prev" aria-label="Scroll projects back">←</button>
-					<button type="button" id="shelf-next" aria-label="Scroll projects forward">→</button>
+					<button type="button" id="shelf-prev" aria-label="Show previous project">←</button>
+					<button type="button" id="shelf-next" aria-label="Show next project">→</button>
 				</div>
 			</div>
-			<div class="filter-row" aria-label="Filter projects">
-				{['All builds', 'Education', 'Wellness', 'Web & data'].map((item) => (
-					<button type="button" aria-pressed={item === 'All builds'} class:list={[{ selected: item === 'All builds' }]} data-filter={item}>
-						{item}{item === 'All builds' && <span>{projects.length}</span>}
+			<div class="show-tabs" role="tablist" aria-label="Projects">
+				{projects.map((project, index) => (
+					<button type="button" role="tab" aria-selected={index === 0} class:list={[{ selected: index === 0 }]} data-tab={project.slug}>
+						{project.short}
 					</button>
 				))}
 			</div>
-			<div class="shelf-grid" tabindex="0" aria-label="Project shelf: hover to expand, tap to open">
+			<div class="show-stage">
 				{
 					projects.map((project, index) => (
-						<a class:list={['bar', 'reveal', project.color]} href={`/projects/${project.slug}/`} data-category={project.category} data-bar={project.slug}>
-							<span class="bar-rail" aria-hidden="true">
-								<span class="shelf-icon">
+						<article class:list={['show-panel', { active: index === 0 }, project.color]} data-panel={project.slug} aria-hidden={index !== 0}>
+							<a class="show-visual" href={`/projects/${project.slug}/`} tabindex="-1" aria-hidden="true">
+								<span class="browser">
+									<span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">emanisha.in/projects/{project.slug}/</span></span>
+									<img src={project.image ?? '/og/og-fallback.png'} alt="" loading="lazy" />
+									<span class="show-prompt"><span>{project.status ?? project.category}</span><span class="show-go">→</span></span>
+								</span>
+							</a>
+							<div class="show-copy">
+								<span class="shelf-icon" aria-hidden="true">
 									{project.kind === 'marathi' && (
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
 									)}
 									{project.kind === 'news' && (
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0V9"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0V9"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg>
 									)}
 									{project.kind === 'wellness' && (
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg>
 									)}
 									{project.kind === 'notes' && (
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
 									)}
 									{project.kind === 'data' && (
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
 									)}
 								</span>
-								<span class="bar-name">{project.name}</span>
-							</span>
-							<span class="bar-detail" aria-hidden="true">
-								<img class="bar-img" src={project.image ?? '/og/og-fallback.png'} alt="" loading="lazy" />
-								<span class="shelf-cat">{project.category}{project.slug === 'marathi-learning' && ' · LIVE'}</span>
-								<span class="bar-title">{project.name}</span>
-								<span class="bar-desc">{project.description}</span>
-								<span class="bar-go">Open project
-									<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-								</span>
-							</span>
-						</a>
+								<h3>{project.name}</h3>
+								<p>{project.description}</p>
+								<p class="show-meta">{project.category} · 0{index + 1} / 0{projects.length}{project.status ? ` · ${project.status}` : ''}</p>
+								<a class="show-link" href={`/projects/${project.slug}/`}>Open project
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+								</a>
+							</div>
+						</article>
 					))
 				}
 			</div>
@@ -505,61 +508,41 @@ const description =
 </IndieLayout>
 
 <script>
-	// project filter + expanding bars
-	const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-row button');
-	const bars = Array.from(document.querySelectorAll<HTMLAnchorElement>('.shelf-grid .bar'));
-	const shelf = document.querySelector<HTMLElement>('.shelf-grid');
-	const reduceMotionShelf =
-		typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	function visibleBars() {
-		return bars.filter((b) => b.style.display !== 'none');
+	// project tabs + showcase stage
+	const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.show-tabs [role="tab"]'));
+	const panels = Array.from(document.querySelectorAll<HTMLElement>('.show-panel'));
+	function showProject(slug: string | undefined) {
+		if (!slug) return;
+		for (const t of tabBtns) {
+			const on = t.dataset.tab === slug;
+			t.classList.toggle('selected', on);
+			t.setAttribute('aria-selected', String(on));
+		}
+		for (const p of panels) {
+			const on = p.dataset.panel === slug;
+			p.classList.toggle('active', on);
+			p.setAttribute('aria-hidden', String(!on));
+		}
 	}
-	function openBar(el: HTMLElement | undefined) {
-		if (!el) return;
-		for (const b of bars) b.classList.toggle('open', b === el);
-	}
-	function firstVisible() {
-		return visibleBars()[0];
-	}
-	openBar(firstVisible());
-	for (const btn of buttons) {
-		btn.addEventListener('click', () => {
-			const f = btn.dataset.filter;
-			for (const other of buttons) {
-				other.setAttribute('aria-pressed', String(other === btn));
-				other.classList.toggle('selected', other === btn);
-			}
-			for (const card of bars) {
-				card.style.display = f === 'All builds' || card.dataset.category === f ? '' : 'none';
-			}
-			openBar(firstVisible());
-			shelf?.scrollTo({ left: 0 });
+	for (const t of tabBtns) {
+		t.addEventListener('click', () => showProject(t.dataset.tab));
+		t.addEventListener('keydown', (e) => {
+			if ((e as KeyboardEvent).key !== 'ArrowRight' && (e as KeyboardEvent).key !== 'ArrowLeft') return;
+			e.preventDefault();
+			const i = tabBtns.indexOf(t);
+			const n = (i + ((e as KeyboardEvent).key === 'ArrowRight' ? 1 : -1) + tabBtns.length) % tabBtns.length;
+			tabBtns[n].focus();
+			showProject(tabBtns[n].dataset.tab);
 		});
 	}
-	for (const bar of bars) {
-		bar.addEventListener('mouseenter', () => openBar(bar));
-		bar.addEventListener('focusin', () => openBar(bar));
-		// Touch: first tap expands, second tap follows the link.
-		// (Desktop hover already opened it, so desktop clicks navigate.)
-		bar.addEventListener('click', (e) => {
-			if (!bar.classList.contains('open')) {
-				e.preventDefault();
-				openBar(bar);
-				bar.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduceMotionShelf ? 'auto' : 'smooth' });
-			}
-		});
+	function stepProject(dir: 1 | -1) {
+		const i = tabBtns.findIndex((t) => t.classList.contains('selected'));
+		const n = ((i < 0 ? 0 : i) + dir + tabBtns.length) % tabBtns.length;
+		showProject(tabBtns[n].dataset.tab);
+		tabBtns[n].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
 	}
-	shelf?.addEventListener('mouseleave', () => openBar(firstVisible()));
-	function stepBar(dir: 1 | -1) {
-		const vis = visibleBars();
-		if (!vis.length) return;
-		let i = vis.findIndex((b) => b.classList.contains('open'));
-		i = i < 0 ? 0 : (i + dir + vis.length) % vis.length;
-		openBar(vis[i]);
-		vis[i].scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduceMotionShelf ? 'auto' : 'smooth' });
-	}
-	document.getElementById('shelf-prev')?.addEventListener('click', () => stepBar(-1));
-	document.getElementById('shelf-next')?.addEventListener('click', () => stepBar(1));
+	document.getElementById('shelf-prev')?.addEventListener('click', () => stepProject(-1));
+	document.getElementById('shelf-next')?.addEventListener('click', () => stepProject(1));
 
 // hero slideshow: auto-rotating app bands, pause on hover/focus
 	const heroSlides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
@@ -741,8 +724,8 @@ const description =
 </style>
 
 <style>
-	/* premium bar motion (kept subtle: grow handles the drama) */
-	.shelf-grid .bar:hover {
-		border-color: rgba(255, 255, 255, 0.35);
-	}
+	/* showcase panel fade */
+	.show-panel { animation: none; }
+	.show-panel.active { animation: show-in 0.45s ease; }
+	@keyframes show-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 </style>
