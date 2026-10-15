@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#252d3d" stroke-width="1.2" opacity="0.4" />
+    </pattern>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#16181d" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#16181d" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+
+  <!-- Content Container -->
+  <!-- Eyebrow -->
+  <text x="100" y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#60a5fa">AUTONOMOUS DATA ENGINEER</text>
+
+  <!-- Headline -->
+  <text x="100" y="240" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-size="64" font-weight="700" letter-spacing="-1.5" fill="#ffffff">Agents with gates.</text>
+
+  <!-- Pipeline Flow: Plan -> Approve -> Execute -> Trace -->
+  <g transform="translate(100, 340)">
+    <!-- Node 1: Plan -->
+    <g transform="translate(0, 0)">
+      <rect width="180" height="72" rx="14" fill="#1f242d" stroke="#333b49" stroke-width="1.5" />
+      <circle cx="34" cy="36" r="6" fill="#10b981" />
+      <text x="56" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" fill="#f3f4f6">Plan</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path d="M 198 36 L 226 36 M 220 29 L 227 36 L 220 43" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Node 2: Approve -->
+    <g transform="translate(244, 0)">
+      <rect width="195" height="72" rx="14" fill="#1f242d" stroke="#333b49" stroke-width="1.5" />
+      <circle cx="34" cy="36" r="6" fill="#10b981" />
+      <text x="56" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" fill="#f3f4f6">Approve</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <path d="M 457 36 L 485 36 M 479 29 L 486 36 L 479 43" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Node 3: Execute -->
+    <g transform="translate(503, 0)">
+      <rect width="195" height="72" rx="14" fill="#1f242d" stroke="#333b49" stroke-width="1.5" />
+      <circle cx="34" cy="36" r="6" fill="#10b981" />
+      <text x="56" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" fill="#f3f4f6">Execute</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <path d="M 716 36 L 744 36 M 738 29 L 745 36 L 738 43" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Node 4: Trace -->
+    <g transform="translate(762, 0)">
+      <rect width="180" height="72" rx="14" fill="#1f242d" stroke="#333b49" stroke-width="1.5" />
+      <circle cx="34" cy="36" r="6" fill="#10b981" />
+      <text x="56" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" fill="#f3f4f6">Trace</text>
+    </g>
+  </g>
+
+  <!-- Subtext / Details bottom -->
+  <text x="100" y="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="500" fill="#94a3b8" letter-spacing="0.5">Deterministic Guardrails · Human-in-the-loop · Lineage &amp; Observability</text>
+</svg>
