@@ -680,9 +680,11 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .show-shot.peek-prev, .show-shot.peek-next { opacity: 0.55; z-index: 2; }
 .show-shot.peek-prev { transform: translate(-52px, -64px) scale(0.86); }
 .show-shot.peek-next { transform: translate(52px, -64px) scale(0.86); }
-.show-shot.enter-below { transform: translateY(130px) scale(0.94); opacity: 0; }
-.show-shot.enter-above { transform: translateY(-130px) scale(0.94); opacity: 0; }
-.show-progress-v { width: 2px; height: 34px; margin: 14px auto 0; background: #dfe3e8; border-radius: 2px; position: relative; overflow: hidden; }
+.show-shot.enter-below { transform: translateX(110px) scale(0.94); opacity: 0; }
+.show-shot.enter-above { transform: translateX(-110px) scale(0.94); opacity: 0; }
+.show-shot.peek-prev .browser-bar, .show-shot.peek-next .browser-bar,
+.show-shot.peek-prev .show-prompt, .show-shot.peek-next .show-prompt { opacity: 0; }
+.show-progress-v { position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 2px; height: 44px; background: #dfe3e8; border-radius: 2px; overflow: hidden; }
 .show-progress-v i { position: absolute; left: 0; top: 0; width: 100%; background: #0064e0; border-radius: 2px; height: 11%; transition: height 0.5s ease; display: block; }
 .browser { display: flex; flex-direction: column; height: 100%; background: #fff; border: 1px solid #e6e6e6; border-radius: 20px; box-shadow: 0 30px 70px rgba(15, 27, 45, 0.14); overflow: visible; padding-bottom: 40px; position: relative; }
 .browser-bar { display: flex; align-items: center; gap: 6px; padding: 14px 18px; flex-shrink: 0; }
@@ -703,7 +705,7 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .show-meta { font-size: 10px !important; font-weight: 800; letter-spacing: 1.4px; color: #5f6b7a !important; }
 .show-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 800; color: #0f0f0f; }
 .show-link:hover { color: #0064e0; }
-@media (max-width: 900px) {
+@media (max-width: 720px) {
 	.show-stage { grid-template-columns: 1fr; gap: 26px; }
 	.shelf-head { flex-wrap: wrap; }
 	.show-visual-stack { aspect-ratio: 16 / 12; }

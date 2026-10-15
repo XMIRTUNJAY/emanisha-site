@@ -161,8 +161,8 @@ const description =
 							</a>
 						))
 					}
+					<div class="show-progress-v" aria-hidden="true"><i id="show-progress-fill"></i></div>
 				</div>
-				<div class="show-progress-v" aria-hidden="true"><i id="show-progress-fill"></i></div>
 				{
 					projects.map((project, index) => (
 						<article class:list={['show-panel', { active: index === 0 }, project.color]} data-panel={project.slug} aria-hidden={index !== 0}>
