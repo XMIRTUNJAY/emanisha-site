@@ -1,6 +1,7 @@
 ---
 import IndieLayout from '../../layouts/IndieLayout.astro';
 import ProjectPreview from '../../components/indie/ProjectPreview.astro';
+import { existsSync } from 'node:fs';
 import { projects } from '../../data/indie-site';
 
 export function getStaticPaths() {
@@ -9,9 +10,12 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 const title = `${project.name} — eManisha`;
 const description = project.description;
+// Per-project share card when it exists, generic card otherwise.
+const ogFile = `public/og/og-project-${project.slug}.png`;
+const ogImage = existsSync(ogFile) ? `/og/og-project-${project.slug}.png` : '/og/og-fallback.png';
 ---
 
-<IndieLayout title={title} description={description} canonicalPath={`/projects/${project.slug}/`} image={`/og/og-project-${project.slug}.png`}>
+<IndieLayout title={title} description={description} canonicalPath={`/projects/${project.slug}/`} image={ogImage}>
 	<header class="site-header rail">
 		<a class="brand" href="/" aria-label="eManisha home"
 			><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12"></path><path d="M17.196 9 6.804 15"></path><path d="m6.804 9 10.392 6"></path></svg
@@ -53,17 +57,9 @@ const description = project.description;
 					>The image above is an illustrative concept preview, not a screenshot of the finished product. Further screenshots and live project links will be added here when available.</p
 				>
 				{
-					project.slug === 'marathi-learning' && (
-						<a class="button" href="/learn-marathi/" style="margin-bottom:22px;display:inline-flex">
-							Explore the live Marathi build
-							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
-						</a>
-					)
-				}
-				{
-					project.slug === 'data-engineer' && (
-						<a class="button" href="/de-agent/" style="margin-bottom:22px;display:inline-flex">
-							Open the DE//AGENT platform
+					project.liveUrl && (
+						<a class="button" href={project.liveUrl} style="margin-bottom:22px;display:inline-flex">
+							{project.liveLabel ?? 'Open live site'}
 							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
 						</a>
 					)

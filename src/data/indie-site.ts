@@ -1,5 +1,19 @@
 // Content for the main emanisha.in site (ported from the eManisha app).
-export const projects = [
+export interface IndieProject {
+	slug: string;
+	title: string;
+	name: string;
+	category: string;
+	kind: string;
+	description: string;
+	detail: string;
+	color: string;
+	/** Live URL (internal or external). Button renders only when set. */
+	liveUrl?: string;
+	/** Label for the live button. Defaults to 'Open live site'. */
+	liveLabel?: string;
+}
+export const projects: IndieProject[] = [
 	{
 		slug: 'marathi-learning',
 		title: 'Marathi, one word at a time.',
@@ -10,6 +24,8 @@ export const projects = [
 		detail:
 			'A language-learning build centered on Marathi. The idea is simple: make getting started feel less intimidating and give the language a welcoming digital home.',
 		color: 'peach',
+		liveUrl: '/learn-marathi/',
+		liveLabel: 'Explore the live Marathi build',
 	},
 	{
 		slug: 'student-news',
@@ -43,6 +59,8 @@ export const projects = [
 		detail:
 			'A website build centered on data engineering. It explores how to communicate technical work through a clear structure and a focused, readable digital experience.',
 		color: 'sand',
+		liveUrl: '/de-agent/',
+		liveLabel: 'Open the DE//AGENT platform',
 	},
 	{
 		slug: 'engineering-notebook',
@@ -54,10 +72,21 @@ export const projects = [
 		detail:
 			'A personal engineering publication: data-engineering case studies, multi-part tutorials, essays and hypothesis-first experiments — every claim backed by evidence, every decision recorded.',
 		color: 'sand',
+		liveUrl: '/notebook/',
+		liveLabel: 'Open the Engineering Notebook',
 	},
-] as const;
-
-export type IndieProject = (typeof projects)[number];
+	{
+		slug: 'autonomous-data-engineer',
+		title: 'Pipelines that run themselves.',
+		name: 'Autonomous Data Engineer',
+		category: 'Web & data',
+		kind: 'data',
+		description: 'An autonomous data engineering platform with typed tools, human approval gates, and full trace replay.',
+		detail:
+			'A production-grade autonomous data engineering system: state-machine orchestration, nine typed tools, human approval in schema, and trace replay — proven on real Indian government scheme data with a Next.js dashboard.',
+		color: 'sand',
+	},
+];
 
 export const posts = [
 	{

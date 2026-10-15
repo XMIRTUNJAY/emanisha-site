@@ -1,0 +1,255 @@
+---
+title: "Autonomous Data Engineer"
+description: "A task-running agent for data work: state machine, nine tools, human approval gates, and full trace replay — how it started, what broke, what was decided, and what the evidence says."
+repo: ""
+stack: ["Python 3.11", "FastAPI", "PostgreSQL + pgvector", "Polars", "DuckDB", "PySpark", "Next.js 13"]
+category: "Web & data"
+status: "Active"
+portfolioScore: 82
+featured: false
+draft: false
+language: "Python"
+focus: ["State-machine orchestration", "Human approval gates", "Trace everything, replay anything"]
+---
+
+import ProjectHero from '../../../components/notebook/case-study/ProjectHero.astro';
+import TechStack from '../../../components/notebook/case-study/TechStack.astro';
+import ProjectMetadata from '../../../components/notebook/case-study/ProjectMetadata.astro';
+import ArchitectureDiagram from '../../../components/notebook/case-study/ArchitectureDiagram.astro';
+import Callout from '../../../components/notebook/case-study/Callout.astro';
+import Decision from '../../../components/notebook/case-study/Decision.astro';
+import MetricsTable from '../../../components/notebook/case-study/MetricsTable.astro';
+import { siteUrl } from '../../../lib/notebook-site';
+
+<ProjectHero
+  title="Autonomous Data Engineer"
+  subtitle="Give it an objective in plain words; it plans, calls tools, waits for your approval where it matters, and leaves a trace you can replay — and the record of how it was reasoned into existence."
+  status="Active build"
+  category="Web & data"
+  meta={[
+    { label: 'Who it serves', value: 'One operator running data jobs' },
+    { label: 'Tools', value: '9 registered, all typed' },
+    { label: 'Gate', value: 'Human approval in schema' },
+    { label: 'Memory', value: 'States, steps, traces, replays' },
+  ]}
+/>
+
+## Two ways to read this page
+
+- **Understand the system:** The spark → The struggle → The decisions → How it works → Where it stands → Reflection.
+- **Build your own:** Constraints → Architecture → The contract rule → The approval pattern → Exercises at the end.
+
+> "An agent that cannot show its work is a rumor with an API key."
+
+The project began the day a data job failed silently for the third time and nobody could say what it had done, in what order, or why. Not a bigger model — a stricter machine: every run is a task, every task is steps, every step is recorded, and the dangerous steps wait for a human. If you take one thing from this page, take the order — accountability first, autonomy second.
+
+## The spark
+
+Data work fails in ways chatbots never see: a scraper that returns yesterday's table with today's date, a transform that silently drops rows, a 3 AM pipeline nobody watches. Each failure here is investigated the same way — what ran, what did it touch, what did it decide — and the tooling kept being rebuilt per incident. So the tooling became the project: one registry of typed tools, one state machine that runs them, one approval table that can stop them, one trace log that remembers them.
+
+The proving ground is real Indian government scheme data — `data/sample_schemes.csv` is 21 rows by 7 columns of the exact shape the scrapers chase (data.gov.in, PIB releases, budget documents, scheme portals, news). Synthetic rows would have made every demo pass and taught nothing; the sample is small enough to read and real enough to embarrass.
+
+## The struggle
+
+Three things went wrong enough to leave marks. All three are still visible in the repo, which is the point.
+
+**The tools had no contracts.** Early tools were bare functions — a scraper returning whatever shape it felt like, a profiler with no declared inputs. The fix was the registry: every tool is a `ToolDefinition` with typed inputs, and `verify_ade.py` asserts the exact set — nine names, from `list_files` to `scrape_news`. Add a tenth and the verifier fails until the contract exists. That friction is the feature.
+
+**The agent had no memory of itself.** The first orchestrator ran plans and forgot them — a retry repeated the mistake identically, and there was no way to ask what happened. The fix is the trace layer: OpenTelemetry spans plus a `traces/{run_id}` endpoint and an `agent/runs/{run_id}/replay` endpoint. A run can be re-walked step by step after the fact. Debugging stopped being archaeology.
+
+**Approval was a comment, not a constraint.** "Ask the user before destructive steps" lived in a docstring that nothing enforced. The fix is schema: `TaskStatus.WAITING_APPROVAL`, an `ApprovalStatus` enum, and an `approval_requests` table with types, statuses, and approver records. Awaiting tasks are queryable rows, not polite intentions.
+
+And one honest admission: the repo carries `debug_test.py` through `debug_test3.py` plus a stray `?TEMPhermes-verify-ade.py` at the root — the fossil record of late-night debugging that never got swept. The verification scripts (`verify_ade.py`, `verify_full.py`) are the grown-up versions of the same instinct: don't trust it, check it.
+
+## The decisions
+
+<Decision
+  title="State machine, not a chat loop"
+  problem="Long data jobs need resumability, inspection, and stopping points — a conversation transcript provides none of these."
+  options={["ReAct-style chat loop", "Explicit task/step state machine", "DAG workflow engine (Airflow-style)"]}
+  chosen="Task and TaskStep rows with status enums (IDLE, WAITING_APPROVAL, ...), driven by AgentOrchestrator in packages/agent/orchestrator.py."
+  why="Every run is queryable mid-flight; a failed step retries without replaying the world; approval is a state, not a hope."
+  tradeoffs="More machinery than a loop: states, transitions, and persistence for every hop. Cyclic or branching plans need the planner to stay simple — the machine executes, it does not improvise control flow."
+  result="Tasks, steps, approvals, and traces all live in Postgres; the Next.js dashboard reads the same rows the agent writes."
+/>
+
+<Decision
+  title="Approval as database rows"
+  problem="Destructive or expensive steps must wait for a human — and 'wait' must survive restarts, reloads, and forgetfulness."
+  options={["Docstring conventions", "In-memory pause flags", "approval_requests table + WAITING_APPROVAL state"]}
+  chosen="ApprovalRequest rows (type, status, approver, timestamps) and tasks parked in WAITING_APPROVAL until resolved."
+  why="A paused run is visible in the dashboard, resumable after a restart, and auditable afterward — the three things flags and comments cannot give."
+  tradeoffs="Every gated step pays a round trip through the human. Set the gate too wide and the 'autonomous' engineer becomes a notification engine that needs babysitting."
+  result="The schema enforces what the docstring only suggested; nothing destructive runs unapproved."
+/>
+
+<Decision
+  title="Polars and DuckDB first, PySpark behind glass"
+  problem="Govt data tasks range from 21-row samples to lake-scale dumps — one engine either wastes clusters or chokes locally."
+  options={["PySpark for everything", "Pandas everywhere", "Polars/DuckDB default, PySpark sandboxed for scale"]}
+  chosen="Polars 1.16 + DuckDB 1.1 for the default path; PySpark 3.5 + Delta for heavy jobs with sandboxed execution (test_pyspark.py probes the boundary)."
+  why="Small data stays instant and dependency-light; big data still has an escape hatch that cannot touch the host carelessly."
+  tradeoffs="Three compute idioms to maintain (eager frames, SQL, Spark). The sandbox boundary is probed by tests, not proven by audit — treat it as a fence, not a vault."
+  result="The 21×7 sample profiles in milliseconds; the architecture doesn't fall over when the sample grows up."
+/>
+
+| Decision | Option A | Option B | Chosen | Why |
+| -------- | -------- | -------- | ------ | --- |
+| Control | Chat loop | State machine | State machine | Resumable + inspectable |
+| Approval | Convention | Schema rows | Schema rows | Survives restarts |
+| Compute | One engine | Tiered (Polars/DuckDB → Spark) | Tiered | Fast default, safe scale |
+| Memory | Logs | States + traces + replay | States + traces | Debug by re-walking |
+
+Neither table is universal advice. Each row holds only under this project's constraints: one operator, real but small data, danger in the toolset. Change the constraints and the answers change — that is what makes them decisions rather than preferences.
+
+## How it works
+
+<TechStack items={['Python 3.11', 'FastAPI', 'PostgreSQL + pgvector', 'Polars', 'DuckDB', 'PySpark (sandboxed)', 'APScheduler', 'Great Expectations', 'Next.js 13']} />
+
+The whole system is one loop — objective, plan, approve, execute, trace, replay — drawn below as the machine sees it. Six terms, explained once and never again:
+
+- **API.** A menu of URLs. `POST /tasks` starts work, `POST /tasks/{id}/run` runs it, `GET /tasks/{id}` asks how it's going.
+- **Orchestrator.** The state machine in `packages/agent/orchestrator.py`: idle → planning → waiting_approval → executing → done, with every transition recorded.
+- **Tool registry.** Nine typed tools (`list_files`, `inspect_file`, `profile_dataset`, plus six gov-data scrapers). The LLM plans; only registered tools act.
+- **Approval gate.** Steps the planner flags land in `approval_requests`; the task parks in `WAITING_APPROVAL` until a human resolves them.
+- **Trace layer.** OpenTelemetry spans plus run records — `GET /traces/{run_id}` reads them, `POST /agent/runs/{run_id}/replay` re-walks them.
+- **Dashboard.** A single-page Next.js app (zustand + chart.js) reading the same Postgres rows — tasks, approvals, traces.
+
+<ArchitectureDiagram
+  title="One task through the machine"
+  chart={`flowchart TB
+    O["Objective in plain words"]
+    P["LLM planner: steps from registered tools only"]
+    G{"Gated step?"}
+    H["Human approves"]
+    E["Execute tool, record trace"]
+    D["Done: states, traces, replay"]
+    O --> P --> G
+    G -->|yes| H --> E
+    G -->|no| E
+    E --> D`}
+  caption="Plans come from the model; permission comes from the human; memory comes from the database. The three never substitute for each other."
+/>
+
+<ArchitectureDiagram
+  title="The approval gate, close up"
+  chart={`flowchart LR
+    T["Task executing"]
+    F{"Step flagged gated"}
+    W["WAITING_APPROVAL row"]
+    A["Human resolves"]
+    R["Resume or stop"]
+    T --> F --> W --> A --> R`}
+  caption="Parking is the feature: the row survives reloads, restarts, and weekends. An agent that waits in the database is one you can trust with the keys."
+/>
+
+Three chains connect requirements to what got built:
+
+**Jobs must be resumable → memory lives in rows, not RAM → task/step/approval/trace tables.** Kill the process mid-run and the dashboard still shows exactly where it stopped.
+
+**Tools must be trustworthy → nine typed definitions, asserted by name.** The verifier fails on the tenth tool until its contract exists — the registry grows deliberately or not at all.
+
+**Scale must not endanger the host → tiered compute.** Polars and DuckDB do the daily work; PySpark sits behind the sandbox probe for the day the data outgrows the laptop.
+
+<Callout type="decision" title="Why the model plans but never touches data">
+  The LLM writes plans from the nine registered tools and never executes anything itself. Every side effect passes through a typed tool, a recorded step, and — where flagged — a human. Capability without contact.
+</Callout>
+
+## The contract, then the code
+
+The screen and the backend agree on promises before either is built. Four real ones from `apps/api/main.py`:
+
+```bash
+# Start work: objective in, task id out
+curl -X POST http://localhost:8000/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"objective": "Profile the sample government schemes dataset"}'
+
+# Run it: POST /tasks/{task_id}/run → steps execute (gated ones wait)
+# Ask how it's going: GET /tasks/{task_id} → status, steps, approvals
+# Use a tool directly: POST /tools/profile_dataset/execute → typed result
+```
+
+Broken promises get honest codes: `400` malformed, `404` unknown task, `500` our bug. The shape never changes; only the data does.
+
+Follow one run end to end (module names real): the API creates the task row, the orchestrator plans with `planner/llm_planner`, gated steps land in `approval_requests`, tools execute through `tools/registry`, spans flow to the observability collector, and the dashboard polls the same rows. Handlers stay thin; the machine lives where the schema can see it.
+
+Who remembers what: Postgres holds everything that matters (tasks, approvals, traces — back it up). The `.env` points at Postgres on port 5434, database `ade`. The browser holds nothing important, which is why closing the dashboard mid-run costs nothing submitted.
+
+<ProjectMetadata rows={[
+  { label: 'Built with', value: 'Python + FastAPI backend, Next.js 13 dashboard, CLI in cli/de_agent.py' },
+  { label: 'Remembers', value: 'Postgres (tasks, approvals, traces, replays)' },
+  { label: 'Acts through', value: '9 typed tools: files, profiling, 6 gov-data scrapers' },
+  { label: 'Tests', value: 'unit + integration + evaluation suites, verify_ade.py + verify_full.py' },
+  { label: 'Quality bar', value: 'Great Expectations + 26 verification checks (from source)' },
+]} />
+
+## Where it stands
+
+| | |
+|---|---|
+| **Verified** (read from source) | 9 ToolDefinitions in packages/tools; ~20 focused packages; Task/ApprovalRequest/trace models in schema; 10 real API routes in apps/api/main.py; 26 checks in verify_full.py; sample data 21 rows × 7 cols; Next.js 13 single-page dashboard |
+| **Observed** (noticed, not benchmarked) | Single-page dashboard keeps the whole loop visible; debug fossils (debug_test*.py) suggest heavy interactive development; gov-scheme-tracker is a separate Next.js subproject |
+| **Intended** (designed, not yet proven) | 25/25-style verification passing; sandboxed PySpark at real scale; approval UX under load |
+| **Unknown** (not measured) | End-to-end run latency; trace volume growth; behavior past sample-scale data; reviewer load for approvals in continuous operation |
+
+<MetricsTable
+  title="Verification results"
+  headers={["Check", "Result", "Date"]}
+  rows={[
+    ["Registered tools (from source)", "9 / 9 named in verify_ade.py", "from source"],
+    ["Verification checks (from source)", "26 checks in verify_full.py", "from source"],
+    ["API routes (from source)", "10 routes incl. traces + replay", "from source"],
+    ["Approval schema (from source)", "WAITING_APPROVAL + approval_requests table", "from source"],
+    ["Packages (from source)", "~20 focused packages", "from source"],
+  ]}
+  caption="Counts were read from source for this case study, not executed. No test suite was run here; figures marked from source describe the repo, not a passing run."
+/>
+
+Running it costs the machine plus Postgres — containers or local services, no per-run model bill for the machine itself (the planner calls are the only model spend, per plan not per step). That shape is designed, not lucky: the expensive brain works once per plan, the cheap machine works every step.
+
+## How AI was actually used here
+
+The planner is an LLM and the loop around it is not: plans are proposed in words, executed as typed tool calls, gated by schema, judged by traces. What gets delegated: decomposition, tool choice, parameter filling. What doesn't: permission (human rows), memory (database rows), truth (typed results).
+
+Verification is mechanical, not hopeful: `verify_ade.py` for the loop, `verify_full.py` for the 26 checks, `pytest` unit/integration/evaluation suites underneath. New tools need contracts before they need implementations.
+
+<ArchitectureDiagram
+  title="The loop an agent works inside"
+  chart={`flowchart TB
+    S["Objective + registered tools"]
+    S --> P["LLM proposes plan"]
+    P --> G{"Gated?"}
+    G -->|yes| H["Human approves"]
+    G -->|no| E["Execute + trace"]
+    H --> E
+    E --> V["Verify (26 checks)"]
+    V -->|green| D["Done"]
+    V -->|red| F["Fix, re-trace"]
+    F --> V`}
+  caption="The model proposes; the gate disposes; the verifier judges. Each role is separate on purpose — merging any two is how agents go feral."
+/>
+
+One gap I'll name plainly: the `/tools/{name}/execute` endpoint lets any caller run any tool with no approval path — the gate covers planned runs, not direct execution. Direct calls are the operator's own hands, but the asymmetry is real: the front door has a guard, the side door has a sign.
+
+## Reflection
+
+**What worked.** Schema-first approval — parking in rows instead of pausing in RAM is the decision I'd defend anywhere. Typed tools with a named verifier. Traces plus replay turning debugging from archaeology into re-walking.
+
+**What didn't.** Debug fossils at the root (sweep them). The side-door execute endpoint with no gate (flagged above). Sample-scale confidence standing in for production evidence.
+
+**What surprised me.** How small the honest core is: nine tools, one state machine, one gate, one trace log. Everything else is honest plumbing around it.
+
+**What I'd change.** Gate direct tool execution the same as planned steps. Write the dimension contract for embeddings before the first vector lands (pgvector is imported; the discipline isn't demonstrated yet). Sweep the debug files.
+
+**What remains unsolved.** Whether approval scales — one operator approving occasional gates is pleasant; continuous operation is a queue with a human as the bottleneck. That experiment is scoped and waiting: measure reviewer load, then decide if gates need tiers.
+
+## Build your own
+
+Reproduce it exactly (install, `.env` with the Postgres URL, `verify_ade.py` — nine tools green is your checkpoint), then: add a tenth tool and watch the verifier demand its contract; park a task in WAITING_APPROVAL, restart everything, and confirm it waited; replay a run from its trace and find the step you'd have stopped; point a scraper at a live portal and see which assumption breaks first — write that one down, it becomes the project's next decision.
+
+Five things worth keeping: permission lives in rows, not comments. Nine typed tools beat ninety hopeful functions. Trace everything; replay beats recollection. The model plans, the machine permits. Small real data beats big synthetic data.
+
+## Go deeper
+
+The closest sibling is the <a href={siteUrl('/notebook/projects/data-eng-mastery/')}>Data Engineering Mastery platform</a> — same stack family (FastAPI, Postgres, Next.js), opposite philosophy (deterministic math, no agent at all). Read them as a pair: one trusts arithmetic, the other trusts gates. For the failure stories both philosophies produce, the <a href={siteUrl('/notebook/blog/de-browser-xp/')}>browser-awarded-XP investigation</a> and the <a href={siteUrl('/notebook/blog/de-nobody-could-log-in/')}>part-1 system story</a> show what happens when the machine trusts too much.

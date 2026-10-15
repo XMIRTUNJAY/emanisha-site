@@ -136,13 +136,13 @@ const description =
 
 		<section class="work rail reveal" id="work">
 			<div class="section-heading">
-				<div><span class="eyebrow">THE PROJECT SHELF</span><h2>Built with a purpose.<span class="count">(05)</span></h2></div>
+				<div><span class="eyebrow">THE PROJECT SHELF</span><h2>Built with a purpose.<span class="count">(0{projects.length})</span></h2></div>
 				<p>Different ideas. The same thoughtful approach.</p>
 			</div>
 			<div class="filter-row" aria-label="Filter projects">
 				{['All builds', 'Education', 'Wellness', 'Web & data'].map((item) => (
 					<button type="button" aria-pressed={item === 'All builds'} class:list={[{ selected: item === 'All builds' }]} data-filter={item}>
-						{item}{item === 'All builds' && <span>5</span>}
+						{item}{item === 'All builds' && <span>{projects.length}</span>}
 					</button>
 				))}
 			</div>
