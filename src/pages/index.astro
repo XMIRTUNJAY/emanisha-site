@@ -156,7 +156,7 @@ const description =
 								<span class="browser">
 									<span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">emanisha.in/projects/{project.slug}/</span></span>
 									<img src={project.image ?? '/og/og-fallback.png'} alt="" loading="lazy" />
-									<span class="show-prompt"><span>{project.status ?? project.category}</span><span class="show-go">→</span></span>
+									<span class="show-prompt"><span data-prompt={project.prompt ?? project.status ?? project.category}>{project.status ?? project.category}</span><span class="show-go">→</span></span>
 								</span>
 							</a>
 						))
@@ -523,6 +523,29 @@ const description =
 	const reduceMotionShowcase =
 		typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	let currentShow = 0;
+	let typeTimer: number | undefined;
+	function typePrompt(shot: HTMLElement | undefined) {
+		window.clearTimeout(typeTimer);
+		document.querySelectorAll('.show-prompt.typing').forEach((el) => el.classList.remove('typing'));
+		if (!shot || reduceMotionShowcase) return;
+		const target = shot.querySelector<HTMLElement>('.show-prompt > span:first-child');
+		const box = shot.querySelector('.show-prompt');
+		const full = target?.dataset.prompt;
+		if (!target || !box || !full) return;
+		target.textContent = '';
+		box.classList.add('typing');
+		let i = 0;
+		const step = () => {
+			i++;
+			target.textContent = full.slice(0, i);
+			if (i < full.length) {
+				typeTimer = window.setTimeout(step, 18);
+			} else {
+				box.classList.remove('typing');
+			}
+		};
+		typeTimer = window.setTimeout(step, 350);
+	}
 	function paintShow(n: number, dir: number) {
 		for (const t of tabBtns) {
 			const on = tabBtns.indexOf(t) === n;
@@ -554,6 +577,7 @@ const description =
 				s.classList.add('peek-next');
 			}
 		});
+		typePrompt(shots[n]);
 		if (progressFill) progressFill.style.height = `${Math.round(((n + 1) / shots.length) * 100)}%`;
 	}
 	function showProject(slug: string | undefined) {

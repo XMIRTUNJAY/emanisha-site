@@ -18,12 +18,15 @@ export interface IndieProject {
 	short: string;
 	/** Status line (e.g. LIVE NOW). Defaults to category. */
 	status?: string;
+	/** Prompt-box line, typed out on activation. Defaults to status. */
+	prompt?: string;
 }
 export const projects: IndieProject[] = [
 	{
 		slug: 'marathi-learning',
 		short: 'Marathi',
 		status: 'LIVE NOW',
+		prompt: 'Teach me Marathi from zero — a little every day.',
 		title: 'Marathi, one word at a time.',
 		name: 'Marathi language-learning app',
 		category: 'Education',
@@ -40,6 +43,7 @@ export const projects: IndieProject[] = [
 		slug: 'student-news',
 		short: 'Clarity',
 		status: 'CONCEPT',
+		prompt: 'Explain today’s news like I’m a curious student.',
 		title: 'A little scroll. A wider world.',
 		name: 'News scroll for students',
 		category: 'Education',
@@ -54,6 +58,7 @@ export const projects: IndieProject[] = [
 		slug: 'headspace-india',
 		short: 'Dhyaana',
 		status: 'IN DEVELOPMENT',
+		prompt: 'Guide a five-minute morning breathing session.',
 		title: 'A little more room to breathe.',
 		name: 'Headspace for India',
 		category: 'Wellness',
@@ -68,6 +73,7 @@ export const projects: IndieProject[] = [
 		slug: 'data-engineer',
 		short: 'DE/AGENT',
 		status: 'ON THE ROADMAP',
+		prompt: 'Run my data pipeline while I sleep.',
 		title: 'Making complex things clear.',
 		name: 'Data engineer site',
 		category: 'Web & data',
@@ -84,6 +90,7 @@ export const projects: IndieProject[] = [
 		slug: 'engineering-notebook',
 		short: 'Notebook',
 		status: 'LIVE',
+		prompt: 'Show me systems with receipts, not promises.',
 		title: 'Notes with receipts.',
 		name: 'Engineering Notebook',
 		category: 'Web & data',
@@ -100,6 +107,7 @@ export const projects: IndieProject[] = [
 		slug: 'autonomous-data-engineer',
 		short: 'Auto DE',
 		status: 'ACTIVE BUILD',
+		prompt: 'Profile this dataset — and wait for my approval.',
 		title: 'Pipelines that run themselves.',
 		name: 'Autonomous Data Engineer',
 		category: 'Web & data',
@@ -113,6 +121,7 @@ export const projects: IndieProject[] = [
 		slug: 'youtube-automation',
 		short: 'YouTube',
 		status: 'ACTIVE BUILD',
+		prompt: 'Plan this week’s videos — queue them for review.',
 		title: 'Content that compounds.',
 		name: 'YouTube Automation Agent',
 		category: 'Automation',
@@ -126,6 +135,7 @@ export const projects: IndieProject[] = [
 		slug: 'mf360',
 		short: 'MF360',
 		status: 'ACTIVE BUILD',
+		prompt: 'Decode my mutual fund statement — honestly.',
 		title: 'Mutual funds, decoded.',
 		name: 'MF360 — Mutual Fund Analytics',
 		category: 'Finance',
@@ -139,6 +149,7 @@ export const projects: IndieProject[] = [
 		slug: 'mf360-academy',
 		short: 'Academy',
 		status: 'CONCEPT',
+		prompt: 'Prep me for certification — zero fluff.',
 		title: 'Learn funds. Build wealth.',
 		name: 'MF360 Academy',
 		category: 'Education',
