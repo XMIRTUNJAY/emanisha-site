@@ -1,0 +1,260 @@
+---
+title: "YouTube Automation Agent"
+description: "An open-source agent that runs a YouTube channel end to end: seven specialist agents, approval-first publishing gates, evidence in SQLite, and growth experiments — how it started, what broke, what was decided, and what the evidence says."
+repo: "https://github.com/darkzOGx/youtube-automation-agent"
+stack: ["Node.js 18+", "Express", "SQLite", "LangGraph-style agents", "googleapis", "FFmpeg", "Playwright"]
+category: "Automation"
+status: "Active"
+portfolioScore: 84
+featured: false
+draft: false
+language: "JavaScript"
+focus: ["Approval-first publishing", "Seven specialist agents", "Evidence over vibes"]
+---
+
+import ProjectHero from '../../../components/notebook/case-study/ProjectHero.astro';
+import TechStack from '../../../components/notebook/case-study/TechStack.astro';
+import ProjectMetadata from '../../../components/notebook/case-study/ProjectMetadata.astro';
+import ArchitectureDiagram from '../../../components/notebook/case-study/ArchitectureDiagram.astro';
+import Callout from '../../../components/notebook/case-study/Callout.astro';
+import Decision from '../../../components/notebook/case-study/Decision.astro';
+import MetricsTable from '../../../components/notebook/case-study/MetricsTable.astro';
+import { siteUrl } from '../../../lib/notebook-site';
+
+<ProjectHero
+  title="YouTube Automation Agent"
+  subtitle="Research topics, write scripts, narrate, assemble video, optimize metadata, review, schedule, publish — then learn from analytics. A whole channel crew that refuses to ship without a human signature."
+  status="Active build"
+  category="Automation"
+  meta={[
+    { label: 'Who it serves', value: 'One operator running a channel' },
+    { label: 'Crew', value: '7 specialist agents' },
+    { label: 'Gate', value: 'Approval-first, by default' },
+    { label: 'Proof', value: '46-test suite + SQLite evidence' },
+  ]}
+/>
+
+## Two ways to read this page
+
+- **Understand the system:** The spark → The struggle → The decisions → How it works → Where it stands → Reflection.
+- **Build your own:** Constraints → Architecture → The gate rule → The experiment pattern → Exercises at the end.
+
+> "Automate everything except the judgment."
+
+The project began with the cheapest observation in the creator economy: consistency beats genius, and consistency is exactly what humans fail at. Upload schedules slip, metadata gets sloppy, analytics go unread. An agent doesn't get tired — but an unsupervised agent publishes garbage at machine speed. So this one was built backwards from the publish button: what must be true before anything goes public? Quality gates, rights checks, human review — then automate everything upstream of them.
+
+## The spark
+
+Every YouTube automation tool demoed the same trick: generate a video, upload it, walk away. The videos were unwatchable and the channels died within weeks — not for lack of automation, but for lack of *taste enforced by process*. Research without angles, scripts without retention structure, thumbnails without testing, publishing without review. Each stage is easy to automate badly and hard to automate well.
+
+So AgentTube splits the channel into seven specialist agents — strategy, script, thumbnail, SEO, production, publishing, analytics — each owning one stage with its own inputs, checks, and outputs. Specialists can be judged; a monolith can only be trusted. And nothing schedules until quality, rights, and human-review gates pass by default.
+
+## The struggle
+
+Three things went wrong enough to leave marks. All three are in the repo history, which is the point.
+
+**Narration repairs broke timing.** Regenerated narration kept the old scene duration, so rebuilt videos played correct words over stale timing — long silent gaps where scenes used to be. The fix: repairs recompute duration from the replacement audio. The September 2026 hotfixes record it. Silence is data too: a gap means the timing model lied.
+
+**The pipeline forced one visual style.** Scene generation and repair prompts hardcoded the `ethereal` look even when the channel configured another direction. The fix: prompts read the channel's visual direction instead of assuming one. Aesthetic defaults are decisions wearing camouflage — this one got caught.
+
+**External tools failed the whole run.** The DarkzSEO audit, Python checkouts, and narration providers each had failure modes that killed productions outright (`No module named darkzseo`, missing runtimes, broken configs). The fix is a boundary rule: bundled advisory audits are the default, external runtimes are JSON-only stdin/stdout with no shell and no inherited secrets, and anything missing falls back instead of failing. v2.10.0 made that boundary explicit.
+
+And one honest admission: internal CTA metadata and bracketed placeholders kept leaking into spoken narration — stage directions read aloud as dialogue. The fix excludes them, including mid-line placeholders. The embarrassment this prevents is left to the imagination.
+
+## The decisions
+
+<Decision
+  title="Seven specialists, not one agent"
+  problem="A channel has distinct crafts — strategy, writing, visuals, SEO, production, scheduling, analytics — each with different failure modes and quality bars."
+  options={["One monolithic agent", "Seven specialist agents", "Human crew with AI tools"]}
+  chosen="Seven agents (content-strategy, script-writer, thumbnail-designer, seo-optimizer, production-management, publishing-scheduling, analytics-optimization), each runnable standalone via npm scripts."
+  why="A bad thumbnail is diagnosable when the thumbnail agent owns it; in a monolith, blame diffuses everywhere. Standalone runs also make each stage testable and demoable alone."
+  tradeoffs="Seven interfaces to maintain, seven prompts to drift, handoffs between stages that can each garble context. The orchestrator tax is real — paid in integration tests."
+  result="Each agent runs alone (agent:script, agent:seo, ...) or as a pipeline; failures localize to a stage with a name."
+/>
+
+<Decision
+  title="Approval-first publishing"
+  problem="Automated publishing at machine speed produces machine-speed embarrassment: simulated videos, missing narration, unverified claims, unlicensed media."
+  options={["Auto-publish everything", "Human review of everything", "Gated pipeline: automate all, publish nothing unreviewed"]}
+  chosen="Safety gates block simulated video, missing narration, unresolved factual claims, and unconfirmed media rights; Review Studio holds scheduling, rescheduling, and immediate publish behind human action."
+  why="The gates encode every past embarrassment as a rule. Review Studio makes the human fast instead of making the machine unsupervised."
+  tradeoffs="Throughput caps at human review speed. A channel that needs daily uploads needs daily reviewers — autonomy scales, judgment doesn't."
+  result="46-test suite covers the gates; nothing scheduled until quality, rights, and review pass."
+/>
+
+<Decision
+  title="SQLite evidence, not vibes"
+  problem="Growth advice ('this title works') is folklore unless packaging, audits, decisions, and outcomes are recorded together and queryable."
+  options={["Analytics dashboard only", "Spreadsheets of experiments", "SQLite: rule IDs, severities, fingerprints, decisions, outcomes"]}
+  chosen="Audits persist stable rule IDs, severity, engine identity, fingerprints, and operator decisions; experiments rotate approved title/thumbnail arms and restore controls."
+  why="A dismissed false positive carries its reason into future audits; a winning thumbnail needs a separate decision before adoption. Memory compounds; dashboards merely display."
+  tradeoffs="Local SQLite, single operator. Multi-user channels would need the database this project deliberately avoids — one more system to run at 3 AM."
+  result="Growth experiments measure real intervals with controls; ROI Studio aligns spend against evidence instead of zeroes."
+/>
+
+| Decision | Option A | Option B | Chosen | Why |
+| -------- | -------- | -------- | ------ | --- |
+| Crew | Monolith | Specialists | 7 specialists | Blame localizes |
+| Publishing | Auto | Gated | Approval-first | Embarrassment is expensive |
+| Evidence | Dashboard | SQLite records | SQLite records | Memory compounds |
+| Providers | One vendor | Open endpoints | Provider-flexible | No single point of billing |
+
+Neither table is universal advice. Each row holds only under this project's constraints: one operator, reputation as the scarcest resource, open-source self-hosting. Change the constraints and the answers change — that is what makes them decisions rather than preferences.
+
+## How it works
+
+<TechStack items={['Node.js 18+', 'Express', 'SQLite', 'googleapis + OAuth loopback', 'FFmpeg', 'Playwright', 'Winston', 'node-cron']} />
+
+The whole system is one pipeline — research, script, narrate, assemble, optimize, review, schedule, publish, learn — drawn below as a video travels it. Six terms, explained once and never again:
+
+- **Specialist agents.** Seven scripts in `agents/`, each owning a stage. Strategy turns objectives into content plans; script writes with retention structure; thumbnail designs; SEO optimizes metadata; production assembles; publishing schedules; analytics reads the results back into the next cycle.
+- **Approval gates.** Simulated video, missing narration, unresolved claims, unconfirmed rights — each blocks scheduling until resolved, then a human still reviews in Review Studio.
+- **Evidence store.** SQLite holds audits (rule IDs, severities, fingerprints), decisions with reasons, experiment arms and intervals, activation milestones.
+- **Growth experiments.** Controlled title/thumbnail rotations with measured intervals and restored controls — no permanent change without a separate adoption decision.
+- **Scheduler.** `node-cron` daily automation plus Review Studio controls (reschedule, publish now, delete schedule without deleting content).
+- **Provider flexibility.** Gemini, OpenAI, OpenRouter, Kimi, and OpenAI-compatible endpoints for text; Seedance, MiniMax, Kling, Wan, or local FFmpeg for video. No vendor lock, no single bill.
+
+<ArchitectureDiagram
+  title="One video through the crew"
+  chart={`flowchart TB
+    R["Research topic + angle"]
+    S["Script with retention structure"]
+    N["Narration + visuals"]
+    A["Assemble + metadata"]
+    G{"Gates pass?"}
+    H["Human review"]
+    P["Schedule + publish"]
+    L["Analytics back into strategy"]
+    R --> S --> N --> A --> G
+    G -->|no| F["Fix, re-enter"]
+    F --> S
+    G -->|yes| H --> P --> L`}
+  caption="Every stage can reject back upstream; only the human releases downstream. The loop right of publish is what makes the tenth video better than the first."
+/>
+
+<ArchitectureDiagram
+  title="The experiment that proves a thumbnail"
+  chart={`flowchart LR
+    C["Control: current packaging"]
+    V["Variant: approved arm only"]
+    M["Measure real interval"]
+    D{"Adopt?"}
+    R["Restore control first"]
+    C --> V --> M --> D
+    D -->|yes, separate decision| A["Adopt winner"]
+    D -->|no| R`}
+  caption="Rotate one variable, measure honestly, restore the control. Adoption is a second decision, never an automatic one — that separation is the whole method."
+/>
+
+Three chains connect requirements to what got built:
+
+**Reputation must survive automation → gates before scheduling, humans before publishing.** Every past embarrassment is a standing rule; Review Studio keeps the human fast rather than bypassed.
+
+**Growth must be evidence, not folklore → SQLite records with stable IDs.** Dismissals carry reasons, experiments carry controls, outcomes carry intervals. The database remembers what the dashboard forgets.
+
+**Vendors must stay interchangeable → open endpoints everywhere.** Text, video, and narration each accept multiple providers behind the same interfaces. The channel cannot be held hostage by one bill.
+
+<Callout type="decision" title="Why the human stays in the loop">
+  Judgment doesn't scale, and that is the point. The machine proposes packaging, measures honestly, and restores controls; the operator decides what the channel stands for. Automate everything except the judgment.
+</Callout>
+
+## The contract, then the code
+
+The dashboard and the agents agree on jobs before either runs them. The daily driver is the scheduler plus standalone agent runs, all real from `package.json`:
+
+```bash
+# Daily channel operation: research → produce → review → schedule
+npm run scheduler
+
+# Run one specialist alone (each stage demoable in isolation)
+npm run agent:strategy
+npm run agent:script
+npm run agent:seo
+
+# Health check: 46-test system suite (gates included)
+npm test
+```
+
+Broken promises get honest behavior: missing runtimes fall back to bundled audits instead of failing; missing strategy context no longer crashes generation (null-safe); OAuth normalizes legacy callback settings instead of stranding authorization. The shape never changes; only the data does.
+
+Follow one video end to end (names real): the strategy agent turns the objective into a content plan, script-writer drafts with retention structure, narration generates (repaired timing included), production assembles with FFmpeg, SEO optimizes metadata, the DarkzSEO preflight audits discoverability, gates check quality/rights/claims, Review Studio schedules, publishing uploads with correct metadata, and analytics feeds interval evidence back into strategy. Each handoff is a file, a row, or a job — never a hope.
+
+Who remembers what: SQLite holds audits, decisions, experiments, and activation milestones (back it up). The `projects/`, `schedules/`, and `reports/` directories hold working state in the open. Credentials stay local and self-hosted — that is the whole pitch: your channel data never leaves your machine.
+
+<ProjectMetadata rows={[
+  { label: 'Built with', value: 'Node.js + Express dashboard, 7 agent scripts, node-cron scheduler' },
+  { label: 'Remembers', value: 'SQLite (audits, decisions, experiments, milestones)' },
+  { label: 'Acts through', value: 'googleapis uploads, FFmpeg assembly, provider-flexible generation' },
+  { label: 'Tests', value: '46-test system suite incl. gate coverage' },
+  { label: 'Runs via', value: 'npm start + scheduler; self-hosted, MIT licensed' },
+]} />
+
+## Where it stands
+
+| | |
+|---|---|
+| **Verified** (read from source) | 7 agent scripts; v2.10.0 with DarkzSEO preflight + Growth Experiments + ROI Studio; 46-test suite claim in README; approval gates named in source; SQLite evidence schema; Review Studio scheduling controls; provider lists in README |
+| **Observed** (noticed, not benchmarked) | Monorepo breadth (mcp/, oauth-server.js, modern-auth.js suggest active auth work); CHANGELOG discipline with dated hotfix entries; docs/ has style/contributing guides |
+| **Intended** (designed, not yet proven) | TikTok/Reels adapters (platform field retained for them); controlled growth proving packaging lifts; multi-user operation |
+| **Unknown** (not measured) | Test suite green right now (46 claimed, not executed here); real channel performance driven by it; cost per video at current provider mix |
+
+<MetricsTable
+  title="Verification results"
+  headers={["Check", "Result", "Date"]}
+  rows={[
+    ["Specialist agents (from source)", "7 scripts in agents/", "from source"],
+    ["Test suite claim (from README)", "46 tests", "2026-09-21 hotfix notes"],
+    ["OAuth + scheduling (from source)", "Loopback normalization + cron + Review Studio", "from source"],
+    ["Evidence schema (from source)", "Rule IDs, severities, fingerprints, decisions", "from source"],
+    ["License (from source)", "MIT, self-hosted", "from source"],
+  ]}
+  caption="Counts and claims were read from source for this case study, not executed. The 46-test figure is the README's claim as of the September hotfixes; the suite was not run here."
+/>
+
+Running it costs the machine plus provider calls per generation — scheduling, review, and evidence are all local and free. That shape is designed, not lucky: the expensive generation happens per video, everything else runs on SQLite and cron. Self-hosting keeps credentials, media, and channel data under one roof — which is also why there is no hosted bill to report.
+
+## How AI was actually used here
+
+The agents ARE the AI use, and the loop around them is not: models draft strategies, scripts, thumbnails, and metadata; gates, tests, SQLite, and humans judge. What gets delegated: research, drafting, assembly, measurement. What doesn't: the publish decision, rights confirmation, experiment adoption.
+
+Verification is mechanical, not hopeful: the 46-test suite covers gates and hotfix paths; Review Studio makes the human the last check, not the first victim; experiments need controls before claims.
+
+<ArchitectureDiagram
+  title="The loop an agent crew works inside"
+  chart={`flowchart TB
+    S["Objective + guardrails"]
+    S --> C["Crew produces"]
+    C --> G["Gates check"]
+    G -->|fail| F["Fix upstream"]
+    F --> C
+    G -->|pass| H["Human reviews"]
+    H --> P["Publish + measure"]
+    P --> E["Evidence recorded"]
+    E --> S`}
+  caption="Produce, gate, review, publish, record — then the record improves the next production. The crew learns because the database remembers."
+/>
+
+One gap I'll name plainly: the whole loop assumes the operator reviews well — tired reviewers rubber-stamp, and no gate in the repo measures review quality itself. Growth experiments guard the packaging; nothing guards the guardian.
+
+## Reflection
+
+**What worked.** Specialists over monolith — failures arrive with stage names attached. Approval-first as default rather than aspiration. The bundled-fallback boundary (v2.10.0) turning missing tools into degraded modes instead of dead runs.
+
+**What didn't.** Narration timing drift (fixed via repair recompute). Forced visual styles (fixed via channel direction). Bracketed placeholders spoken aloud (fixed via exclusion). Each was a default masquerading as a decision.
+
+**What surprised me.** How much of "automation" turned out to be review tooling — Review Studio, experiments, ROI alignment. The generating is easy; the trusting is the product.
+
+**What I'd change.** Measure review quality (the unguarded guardian). Collapse the seven handoff formats into fewer, stricter contracts. Version the prompts alongside the code they drive.
+
+**What remains unsolved.** Whether controlled experiments actually lift packaging performance in the wild — the machinery is built, the intervals are honest, but the wins are still ahead. That experiment is scoped and waiting: run arms, restore controls, publish numbers.
+
+## Build your own
+
+Reproduce it exactly (`npm install`, `npm run walkthrough`, `npm start` — the walkthrough is your checkpoint), then: run one specialist alone and read what it produces before judging the pipeline; break one gate on purpose and confirm nothing schedules; rotate one title arm in Growth Experiments and restore the control; point the strategy agent at your own niche and argue with its content plan — write down where it's wrong, that becomes the project's next prompt improvement.
+
+Five things worth keeping: specialists beat monoliths for blame. Gates encode past embarrassments as rules. Bundled defaults with graceful fallbacks beat hard dependencies. Experiments need controls and second decisions. Automate everything except the judgment.
+
+## Go deeper
+
+The closest sibling is the <a href={siteUrl('/notebook/projects/autonomous-data-engineer/')}>Autonomous Data Engineer</a> — same philosophy (machine proposes, human disposes, database remembers), different domain (data jobs, not videos). Read them as a pair: one gates pipelines, the other gates publishing. For the failure stories both philosophies produce, the <a href={siteUrl('/notebook/blog/de-nobody-could-log-in/')}>part-1 system story</a> shows what happens when the machine trusts too much — and the <a href={siteUrl('/notebook/projects/data-eng-mastery/')}>Mastery platform</a> shows the opposite bet: no agent at all.

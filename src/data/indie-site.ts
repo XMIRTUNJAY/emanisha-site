@@ -86,6 +86,17 @@ export const projects: IndieProject[] = [
 			'A production-grade autonomous data engineering system: state-machine orchestration, nine typed tools, human approval in schema, and trace replay — proven on real Indian government scheme data with a Next.js dashboard.',
 		color: 'sand',
 	},
+	{
+		slug: 'youtube-automation',
+		title: 'Content that compounds.',
+		name: 'YouTube Automation Agent',
+		category: 'Automation',
+		kind: 'data',
+		description: 'An AI crew that runs a YouTube channel end to end — with approval-first publishing gates.',
+		detail:
+			'Seven specialist agents (strategy, script, thumbnail, SEO, production, publishing, analytics) with gated publishing, SQLite evidence, and controlled growth experiments. Self-hosted, MIT licensed.',
+		color: 'yellow',
+	},
 ];
 
 export const posts = [
