@@ -674,14 +674,16 @@ input:focus, textarea:focus, select:focus { outline-color: #0064e0; border-color
 .show-tabs [role="tab"] { border: 0; background: none; color: #3c4450; border-radius: 999px; padding: 10px 20px; font-size: 12px; font-weight: 700; white-space: nowrap; cursor: pointer; }
 .show-tabs [role="tab"].selected { background: #0f0f0f; color: #fff; }
 .show-stage { margin-top: 34px; display: grid; grid-template-columns: 1.32fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-.show-visual-stack { position: relative; aspect-ratio: 16 / 10; }
-.show-shot { position: absolute; inset: 0; display: block; opacity: 0; transform: translateX(56px) scale(0.96); transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1); pointer-events: none; z-index: 1; }
+.show-visual-stack { position: relative; aspect-ratio: 16 / 13; padding-top: 64px; }
+.show-shot { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; display: block; opacity: 0; transform: translateY(48px) scale(0.96); transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1); pointer-events: none; z-index: 1; }
 .show-shot.active { opacity: 1; transform: none; pointer-events: auto; z-index: 3; }
-.show-shot.peek-prev, .show-shot.peek-next { opacity: 0.5; z-index: 2; }
-.show-shot.peek-prev { transform: translate(-36px, -28px) scale(0.9); }
-.show-shot.peek-next { transform: translate(36px, -28px) scale(0.9); }
-.show-shot.enter-left { transform: translateX(-100px) scale(0.96); opacity: 0; }
-.show-shot.enter-right { transform: translateX(100px) scale(0.96); opacity: 0; }
+.show-shot.peek-prev, .show-shot.peek-next { opacity: 0.55; z-index: 2; }
+.show-shot.peek-prev { transform: translate(-52px, -64px) scale(0.86); }
+.show-shot.peek-next { transform: translate(52px, -64px) scale(0.86); }
+.show-shot.enter-below { transform: translateY(130px) scale(0.94); opacity: 0; }
+.show-shot.enter-above { transform: translateY(-130px) scale(0.94); opacity: 0; }
+.show-progress-v { width: 2px; height: 34px; margin: 14px auto 0; background: #dfe3e8; border-radius: 2px; position: relative; overflow: hidden; }
+.show-progress-v i { position: absolute; left: 0; top: 0; width: 100%; background: #0064e0; border-radius: 2px; height: 11%; transition: height 0.5s ease; display: block; }
 .browser { display: flex; flex-direction: column; height: 100%; background: #fff; border: 1px solid #e6e6e6; border-radius: 20px; box-shadow: 0 30px 70px rgba(15, 27, 45, 0.14); overflow: visible; padding-bottom: 40px; position: relative; }
 .browser-bar { display: flex; align-items: center; gap: 6px; padding: 14px 18px; flex-shrink: 0; }
 .browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: #dfe3e8; }
