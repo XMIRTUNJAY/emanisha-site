@@ -458,7 +458,7 @@ const description =
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
 					</a>
 					<div class="contact-cards">
-						<a href="mailto:hello@emanisha.in"><b>Email me</b><span>hello@emanisha.in</span></a>
+						<a href="mailto:mrxubr@gmail.com"><b>Email me</b><span>mrxubr@gmail.com</span></a>
 						<a href="/book/"><b>Book a chat</b><span>Find a time that suits you</span></a>
 					</div>
 				</div>
@@ -756,17 +756,16 @@ const description =
 	}
 	if (routeItems.length) setRoute('bol');
 
-	// forms — static build: store to a configurable PocketBase when present,
-	// otherwise show a graceful offline message
-	const PB = ''; // set to e.g. 'https://db.emanisha.in' when PocketBase is live
-	async function post(collection: string, data: Record<string, unknown>) {
-		if (!PB) throw new Error('offline');
-		const res = await fetch(`${PB}/api/collections/${collection}/records`, {
+	// forms — POST to the bundled PHP endpoint (/api/contact.php), which mails
+	// the site owner. Same-origin + relative URL, so lift-and-shift safe.
+	async function postSite(data: Record<string, unknown>) {
+		const res = await fetch('/api/contact.php', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(data),
 		});
-		if (!res.ok) throw new Error('failed');
+		const body = await res.json().catch(() => ({ ok: false }));
+		if (!res.ok || !(body as { ok?: boolean }).ok) throw new Error('failed');
 	}
 	const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
 	contactForm?.addEventListener('submit', async (e) => {
@@ -774,12 +773,12 @@ const description =
 		const status = contactForm.querySelector<HTMLElement>('.form-status');
 		const data = Object.fromEntries(new FormData(contactForm));
 		try {
-			await post('enquiries', data);
-			if (status) status.textContent = 'Thanks for reaching out! Your message has been saved.';
+			await postSite({ kind: 'contact', ...data });
+			if (status) status.textContent = 'Thanks for reaching out! Your message has been sent.';
 			contactForm.reset();
 		} catch {
 			if (status)
-				status.textContent = 'Could not send right now — please email hello@emanisha.in and it will reach me.';
+				status.textContent = 'Could not send right now — please email mrxubr@gmail.com and it will reach me.';
 		}
 	});
 	const newsForm = document.getElementById('newsletter-form') as HTMLFormElement | null;
@@ -788,7 +787,7 @@ const description =
 		const status = newsForm.querySelector<HTMLElement>('[role="status"]');
 		const data = Object.fromEntries(new FormData(newsForm));
 		try {
-			await post('newsletter_contacts', { ...data, consent: true });
+			await postSite({ kind: 'newsletter', source: 'homepage', ...data, consent: true });
 			if (status) status.textContent = 'You\u2019re on the list. Thanks for joining!';
 			newsForm.reset();
 		} catch {

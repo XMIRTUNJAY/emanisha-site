@@ -19,12 +19,10 @@ export const BOL_MARATHI_APP = {
   // Used only when the app is live or in beta; otherwise pages fall
   // back to the waitlist form.
   deepLinkBase: 'bolmarathi://practice',
-  // Waitlist: footer CTA is an inline form posting here; everywhere
-  // else stays mailto (deliberate A/B split). Paste a Formspree
-  // endpoint (https://formspree.io → New Form → copy
-  // https://formspree.io/f/xxxxxx). Empty = footer shows mailto too.
-  // See README "Waitlist".
-  waitlistFormAction: 'https://formspree.io/f/xqpaeejw',
+  // Waitlist: every email capture posts here (bundled PHP endpoint that
+  // mails the site owner — no third party). Classic form posts redirect
+  // to _next; fetch posts get JSON. Empty = footer shows mailto too.
+  waitlistFormAction: '/api/contact.php',
   waitlistSubject: 'Notify me — Bol Marathi launch',
   // App walkthrough in tab-flow order: Learn → Practice → Progress → Profile.
   screenshots: [

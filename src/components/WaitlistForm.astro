@@ -2,9 +2,10 @@
 import { BOL_MARATHI_APP } from '../data/app';
 
 // ONE shared waitlist form. Every email capture on the site uses this.
-// Posts to Formspree (waitlistFormAction). No mailto anywhere: if the
-// endpoint is empty the build prints a warning (below) and the form
-// renders disabled with a contact link instead of a dead post.
+// Posts to the bundled PHP endpoint (/api/contact.php, kind=notify).
+// Classic posts redirect to _next; the endpoint answers JSON to fetch.
+// No mailto anywhere: if the endpoint is empty the build prints a warning
+// (below) and the form renders disabled with a contact link instead.
 type Props = {
 	context: string;
 	locale?: 'en' | 'hi';
@@ -59,12 +60,14 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 		data-funnel="waitlist_click"
 	/>
 	{showMessage && <textarea name="message" placeholder={t.message} rows="3" disabled={!action}></textarea>}
+	<input type="hidden" name="kind" value="notify" />
+	<input type="hidden" name="source" value={context} />
 	<input type="hidden" name="_subject" value={BOL_MARATHI_APP.waitlistSubject} />
 	<input type="hidden" name="_next" value={nextUrl} />
 	<input type="hidden" name="page" value={page} />
 	<input type="hidden" name="language" value={locale} />
 	<input type="hidden" name="referrer" value="" data-referrer />
-	<input type="text" name="_gotcha" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true" />
+	<input type="text" name="website" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true" />
 	<button type="submit" disabled={!action}>{buttonLabel ?? t.button}</button>
 	{!action && <p class="note">{t.disabled}</p>}
 </form>
