@@ -60,6 +60,14 @@ function walk(dir) {
 		s = s.split("'\/rss.xml'").join("'/de-agent/rss.xml'");
 		// 4. leftover Vercel origin
 		s = s.split(VERCEL).join(`${SITE}/de-agent`);
+		// 5. noindex for non-content routes (app screens, not editorial pages:
+		// admin, site search, dashboard, publisher claim flows)
+		const rel = path.relative(dist, p).replace(/\\/g, '/');
+		if (/\.html$/.test(p) && /^(admin|search|dashboard|publisher)\//.test(rel)) {
+			if (!/noindex/i.test(s)) {
+				s = s.replace(/<\/head>/i, '<meta name="robots" content="noindex, follow">\n</head>');
+			}
+		}
 		if (s !== o) {
 			fs.writeFileSync(p, s);
 			files++;

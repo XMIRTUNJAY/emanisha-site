@@ -9,10 +9,12 @@ export interface Props {
 	canonicalPath?: string;
 	/** Page-specific share-card path (served from /og/), defaults to the generic card. */
 	image?: string;
+	/** When true, emits a noindex meta (404, search, admin-type pages). */
+	noindex?: boolean;
 	/** Extra <head> JSON-LD blobs. */
 	jsonLd?: Record<string, unknown>;
 }
-const { title, description, canonicalPath = '/', image = '/og/og-fallback.png', jsonLd } = Astro.props;
+const { title, description, canonicalPath = '/', image = '/og/og-fallback.png', jsonLd, noindex = false } = Astro.props;
 const site = 'https://emanisha.in';
 const canonical = new URL(canonicalPath, site).toString();
 const ogImage = new URL(image, site).toString();
@@ -27,6 +29,7 @@ import '../styles/main-site.css';
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5034465484755647" crossorigin="anonymous"></script>
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex, follow" />}
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
