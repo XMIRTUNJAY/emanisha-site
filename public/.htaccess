@@ -1,3 +1,13 @@
+# Canonical host: one 301 to https + non-www for any other host form (www,
+# plain http). Keeps a single canonical host for search engines — matches the
+# canonical tags, robots.txt and both sitemaps, which all use https://emanisha.in.
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTP_HOST} ^www\.emanisha\.in$ [NC,OR]
+	RewriteCond %{HTTPS} off
+	RewriteRule ^(.*)$ https://emanisha.in/$1 [R=301,L]
+</IfModule>
+
 # emanisha.in cache policy (Apache + Hostinger hcdn).
 # Pages and feeds must revalidate every visit so updates show immediately;
 # fingerprinted build assets are safe to cache hard; media gets a day.
