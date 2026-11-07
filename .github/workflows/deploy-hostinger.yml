@@ -60,6 +60,13 @@ jobs:
           rm -f public/de-agent/robots.txt public/de-agent/sitemap-index.xml public/de-agent/sitemap-0.xml
           cp de-agent-platform/dist/sitemap-0.xml public/de-agent-sitemap.xml
 
+      - name: Build Dhyaana app
+        run: |
+          cd apps/dhyaana
+          npm ci
+          npm run build
+          cd ../..
+
       - name: Build site
         run: npm run build
 

@@ -57,17 +57,18 @@ export const projects: IndieProject[] = [
 	{
 		slug: 'headspace-india',
 		short: 'Dhyaana',
-		status: 'IN DEVELOPMENT',
+		status: 'LIVE NOW',
 		prompt: 'Guide a five-minute morning breathing session.',
 		title: 'A little more room to breathe.',
-		name: 'Headspace for India',
+		name: 'Dhyaana — Contemplative Platform',
 		category: 'Wellness',
 		kind: 'wellness',
-		description: 'Exploring a calmer digital space for wellness in an Indian context.',
+		description: 'Exploring a calmer digital space for meditation, breathwork, and Indian contemplative practices.',
 		detail:
-			'A wellness concept exploring what a Headspace-like experience could look like for India. This is an independent portfolio concept, not an official Headspace product or an affiliated service.',
+			'A contemplative web platform exploring Indian contemplative wisdom, guided meditation, breath awareness, sleep journeys, and reflective inquiry. Full-screen, offline-ready, and calm by design.',
 		color: 'rose',
 		image: '/og/og-project-headspace-india.png',
+		liveUrl: '/dhyaana/',
 	},
 	{
 		slug: 'data-engineer',

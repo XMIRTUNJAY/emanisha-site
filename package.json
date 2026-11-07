@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "build:dhyaana": "npm --prefix apps/dhyaana run build",
     "prebuild": "node ./tools/validate-content.mjs && node --experimental-strip-types ./tools/validate-games.mts && node ./tools/build-search-index.mjs",
     "build": "astro build",
     "preview": "astro preview",
