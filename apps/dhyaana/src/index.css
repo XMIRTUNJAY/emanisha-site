@@ -1,16 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap");
-@import "tailwindcss";
 
 @font-face {
   font-family: "Mukta";
-  src: url("./assets/mukta-400.ttf") format("truetype");
+  src: url("./assets/mukta-400.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Mukta";
-  src: url("./assets/mukta-500.ttf") format("truetype");
+  src: url("./assets/mukta-500.woff2") format("woff2");
   font-weight: 500;
   font-display: swap;
 }
@@ -35,7 +34,7 @@
   --muted: #9a887b;
   --world-dhyana: #b96136;
   --world-gyaan: #9a6b2f;
-  --world-nidra: #777a9f;
+  --world-nidra: #a5674a;
   --world-prajna: #8a6855;
   --world-pranayama: #6e8065;
   --world-therapy: #526f63;
@@ -47,9 +46,15 @@
   --ink: #2d2118;
   --sage: var(--world-pranayama);
   --line: var(--border-subtle);
-  --serif: "Newsreader", Georgia, serif;
-  --sans: "DM Sans", Arial, sans-serif;
+  /*
+   * Mukta is subset to the Devanagari the app uses, so it is small enough to
+   * ship. It is listed ahead of the generic stack everywhere, including in the
+   * Latin-first faces, so mixed strings ("Awareness · ध्यान") render their
+   * Devanagari in Mukta rather than a system font with different metrics.
+   */
   --devanagari: "Mukta", "Noto Sans Devanagari", sans-serif;
+  --sans: "DM Sans", "Mukta", Arial, sans-serif;
+  --serif: "Newsreader", "Mukta", Georgia, serif;
   --step--1: clamp(0.78rem, 0.75rem + 0.12vw, 0.86rem);
   --step-0: clamp(0.95rem, 0.9rem + 0.18vw, 1.08rem);
   --step-1: clamp(1.22rem, 1.06rem + 0.62vw, 1.62rem);
@@ -105,18 +110,24 @@ textarea:focus-visible {
   padding: 0 4.5vw;
   color: var(--text-on-dark);
   background: linear-gradient(180deg, rgba(20, 13, 9, 0.34), transparent);
+  transition:
+    color var(--motion-standard) ease,
+    background var(--motion-standard) ease;
 }
-body[data-view="explore"] .site-header,
-body[data-view="practice"] .site-header,
-body[data-view="journeys"] .site-header,
-body[data-view="journey"] .site-header,
-body[data-view="me"] .site-header,
-body[data-view="dhyana"] .site-header,
-body[data-view="gyaan"] .site-header,
-body[data-view="prajna"] .site-header,
-body[data-view="pranayama"] .site-header {
+
+/*
+ * Tone is resolved from the section currently under the header (see useHeaderTone
+ * in App.tsx). Dark sections keep the ivory text over a dark scrim; light sections
+ * flip to brown text on an ivory scrim. Without this the nav became unreadable
+ * (1.6:1) once the home hero scrolled out from under it.
+ */
+body[data-header-tone="dark"] .site-header {
+  color: var(--text-on-dark);
+  background: linear-gradient(180deg, rgba(20, 13, 9, 0.62), rgba(20, 13, 9, 0.22));
+}
+body[data-header-tone="light"] .site-header {
   color: var(--text-primary);
-  background: linear-gradient(180deg, rgba(255, 248, 236, 0.72), transparent);
+  background: linear-gradient(180deg, rgba(255, 248, 236, 0.92), rgba(255, 248, 236, 0.62));
 }
 .brand {
   display: flex;
@@ -192,6 +203,10 @@ body[data-view="pranayama"] .site-header {
   border: 0;
   background: none;
   color: inherit;
+  /* Keep a 44px tap target without changing the drawn icon. */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
 }
 .hero {
   position: relative;
@@ -324,6 +339,11 @@ h2 em {
   left: 4.5vw;
   bottom: 32px;
   color: inherit;
+  transition: opacity 0.3s ease;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
   text-decoration: none;
   display: flex;
   gap: 12px;
@@ -806,34 +826,35 @@ h2 em {
   background: rgba(198, 107, 58, 0.18);
 }
 .world-nidra {
-  background: #11152b;
-  color: #f0e9dd;
+  background: #1b130e;
+  color: #f4e9da;
 }
 .world-nidra .world-hero {
-  background: #11152b;
+  background: #1b130e;
 }
 .night-landscape {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, #11152b 10%, rgba(17, 21, 43, 0.74) 50%, rgba(17, 21, 43, 0.25)),
+    linear-gradient(90deg, #1b130e 10%, rgba(27, 19, 14, 0.74) 50%, rgba(27, 19, 14, 0.25)),
     url("https://images.unsplash.com/photo-1675947857834-549b8be78452?auto=format&fit=crop&w=2000&q=80")
       center/cover;
+  filter: sepia(0.38) saturate(0.7);
   opacity: 0.85;
 }
 .world-nidra .world-symbol span {
-  border-color: rgba(240, 233, 221, 0.15);
+  border-color: rgba(244, 233, 218, 0.15);
 }
 .world-nidra .world-symbol span:nth-child(3) {
   background: rgba(207, 170, 108, 0.14);
 }
 .world-nidra .practice-shelf,
 .world-nidra .next-world {
-  background: #11152b;
+  background: #1b130e;
 }
 .world-nidra .practice-card {
-  color: #f0e9dd;
-  border-color: rgba(240, 233, 221, 0.16);
+  color: #f4e9da;
+  border-color: rgba(244, 233, 218, 0.16);
 }
 .world-pranayama .world-hero {
   background: linear-gradient(130deg, #dfe4d7, #f9eddc);
@@ -1347,12 +1368,28 @@ h2 em {
 }
 .continue-card {
   position: relative;
+  overflow: hidden;
   color: white;
-  background:
-    linear-gradient(120deg, rgba(31, 22, 16, 0.8), rgba(31, 22, 16, 0.3)),
-    url("https://images.unsplash.com/photo-1544516614-7833eff55cd6?auto=format&fit=crop&w=1000&q=80")
-      center/cover;
+  background: #6e3d23;
   cursor: pointer;
+}
+.continue-card:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1544516614-7833eff55cd6?auto=format&fit=crop&w=1000&q=80")
+    center/cover;
+  filter: sepia(0.72) saturate(0.7) brightness(0.82) hue-rotate(-12deg);
+}
+.continue-card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(43, 25, 15, 0.9), rgba(166, 86, 45, 0.42));
+}
+.continue-card > * {
+  position: relative;
+  z-index: 1;
 }
 .continue-card h2 {
   font: 40px var(--serif);
@@ -1824,9 +1861,10 @@ h2 em {
   z-index: -2;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 13, 33, 0.28), #0d1328 91%),
+    linear-gradient(180deg, rgba(27, 19, 14, 0.28), #171009 91%),
     url("https://images.unsplash.com/photo-1675947857834-549b8be78452?auto=format&fit=crop&w=2000&q=82")
       center 55% / cover;
+  filter: sepia(0.42) saturate(0.72);
   opacity: 0.7;
 }
 
@@ -2401,9 +2439,17 @@ h2 em {
     color: var(--ivory);
     mix-blend-mode: normal;
     flex-direction: column;
+    gap: 0;
   }
   .nav.open {
     display: flex;
+  }
+  /* Drawer links need a full-size tap target too. */
+  .nav button {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding-block: 10px;
   }
   .menu-button {
     display: block;
@@ -2945,6 +2991,529 @@ h2 em {
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Progress + YouTube additions (kept inside the existing visual system) */
+/* ------------------------------------------------------------------ */
+
+/* A faint paper grain over the whole app. Never blocks input. */
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Watch shelves */
+.watch-shelf {
+  padding-top: 80px;
+  padding-bottom: 90px;
+  border-top: 1px solid var(--line);
+}
+
+.watch-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 34px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.watch-head h2 {
+  margin: 14px 0 10px;
+  font: 300 var(--step-2) / 1.05 var(--serif);
+  letter-spacing: -0.02em;
+}
+
+.watch-head p {
+  max-width: 58ch;
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.watch-score {
+  min-width: 128px;
+  text-align: right;
+}
+
+.watch-score strong {
+  display: block;
+  font: 300 54px / 1 var(--serif);
+}
+
+.watch-score strong span {
+  font-size: 18px;
+  opacity: 0.38;
+}
+
+.watch-score small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.watch-score-bar {
+  height: 2px;
+  margin-top: 14px;
+  background: var(--line);
+}
+
+.watch-score-bar i {
+  display: block;
+  height: 100%;
+  background: var(--clay);
+  transition: width var(--motion-standard) ease;
+}
+
+.watch-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(138px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 14px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 35, 20, 0.22) transparent;
+}
+
+.watch-card {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.watch-thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #24170f;
+}
+
+.watch-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.watch-card:hover .watch-thumb img,
+.watch-card:focus-visible .watch-thumb img {
+  transform: scale(1.04);
+}
+
+.watch-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  translate: -50% -50%;
+  border: 1px solid rgba(255, 248, 236, 0.55);
+  border-radius: 50%;
+  background: rgba(20, 12, 8, 0.55);
+  color: #fff8ec;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.watch-card:hover .watch-play,
+.watch-card:focus-visible .watch-play {
+  opacity: 1;
+}
+
+.watch-badge {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  padding: 5px 7px;
+  overflow: hidden;
+  color: #fff8ec;
+  background: rgba(20, 12, 8, 0.62);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.watch-badge.is-done {
+  background: var(--clay);
+}
+
+.watch-partial {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--clay);
+  transition: width var(--motion-standard) ease;
+}
+
+.watch-card strong {
+  display: block;
+  margin: 12px 0 4px;
+  font: 400 15px / 1.35 var(--serif);
+}
+
+.watch-card small {
+  display: block;
+  overflow: hidden;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0.45;
+}
+
+.watch-card.is-done .watch-thumb {
+  opacity: 0.72;
+}
+
+.watch-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: 22px;
+}
+
+.watch-links a {
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(198, 107, 58, 0.35);
+  color: var(--clay);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* Nidra keeps its night palette for the shelf too. */
+.experience-nidra .watch-shelf {
+  border-color: rgba(244, 233, 218, 0.14);
+  background: #171009;
+  color: #f4e9da;
+}
+
+.experience-nidra .watch-head p,
+.experience-nidra .watch-card small {
+  color: rgba(244, 233, 218, 0.5);
+}
+
+.experience-nidra .watch-score-bar {
+  background: rgba(244, 233, 218, 0.18);
+}
+
+/* YouTube player inside the existing overlay */
+.player-video {
+  position: relative;
+  width: min(86vw, 820px);
+  aspect-ratio: 16 / 9;
+  margin: 12px 0 4px;
+  background: #000;
+}
+
+.player-video.is-portrait {
+  width: auto;
+  height: min(56vh, 620px);
+  aspect-ratio: 9 / 16;
+}
+
+.yt-shell,
+.yt-mount,
+.yt-mount iframe,
+.yt-target {
+  width: 100%;
+  height: 100%;
+}
+
+.yt-shell {
+  position: absolute;
+  inset: 0;
+}
+
+.yt-note {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  margin: 0;
+  color: rgba(255, 248, 236, 0.72);
+  font-size: 11px;
+  text-align: center;
+}
+
+.yt-note a {
+  color: inherit;
+}
+
+.player-video + .player-copy h2 {
+  max-width: 82vw;
+  margin-top: 16px;
+  font-size: clamp(20px, 2.4vw, 30px);
+}
+
+.player-video + .player-copy {
+  margin-top: 4px;
+}
+
+/* Journey detail additions */
+.journey-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 30px;
+  margin-top: 6px;
+}
+
+.journey-detail-actions > span {
+  color: var(--text-secondary);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.curriculum > div button.is-complete > span {
+  color: var(--interactive);
+}
+
+.curriculum > div button.is-complete strong {
+  opacity: 0.7;
+}
+
+.journey-mini-progress {
+  display: block;
+  margin-top: 12px;
+  color: var(--interactive);
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Dashboard additions */
+.streak-card strong {
+  display: block;
+  margin-top: 30px;
+  font: 90px / 1 var(--serif);
+}
+
+.streak-card strong span {
+  margin-left: 8px;
+  font: 12px var(--sans);
+}
+
+.streak-card p {
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+.week-card {
+  grid-column: 1 / -1;
+  min-height: 230px !important;
+}
+
+.week-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  align-items: end;
+  height: 130px;
+  margin-top: 24px;
+}
+
+.week-day {
+  display: grid;
+  grid-template-rows: 14px 1fr 16px;
+  gap: 6px;
+  align-items: end;
+  height: 100%;
+  text-align: center;
+}
+
+.week-day span {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  opacity: 0.5;
+}
+
+.week-day i {
+  display: block;
+  width: 100%;
+  min-height: 3px;
+  background: var(--line);
+  transition: height var(--motion-standard) ease;
+}
+
+.week-day.has-practice i {
+  background: var(--clay);
+}
+
+.week-day small {
+  font-size: 9px;
+  opacity: 0.5;
+}
+
+.journey-summary {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.journey-summary > div {
+  display: grid;
+  gap: 0;
+  margin-top: 18px;
+}
+
+.journey-summary button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 20px;
+  padding: 18px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.journey-summary button span {
+  font: 400 var(--step-1) var(--serif);
+}
+
+.journey-summary button small {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+}
+
+.journey-summary button i {
+  grid-column: 1 / -1;
+  display: block;
+  height: 2px;
+  margin-top: 7px;
+  background: var(--clay);
+}
+
+.sankalpa-history {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.sankalpa-history li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.sankalpa-history li span {
+  display: block;
+  font: 400 16px / 1.4 var(--serif);
+}
+
+.sankalpa-history li small {
+  display: block;
+  margin-top: 4px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  opacity: 0.45;
+}
+
+.quiet-link {
+  margin-left: 14px;
+  opacity: 0.6;
+}
+
+/* Gyaan + Prajna additions */
+.reading-transliteration {
+  margin-top: -8px;
+  color: var(--text-secondary);
+  font-family: var(--devanagari);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.prajna-history {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.prajna-history blockquote {
+  max-width: 60ch;
+  margin: 22px 0;
+  font: 400 var(--step-1) / 1.5 var(--serif);
+}
+
+.prajna-history blockquote small {
+  display: block;
+  margin-top: 8px;
+  font: 10px var(--sans);
+  letter-spacing: 0.12em;
+  opacity: 0.45;
+}
+
+.breath-clock {
+  margin-top: 18px !important;
+  font-size: 10px !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+@media (max-width: 900px) {
+  .watch-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .watch-score {
+    text-align: left;
+  }
+
+  .watch-row {
+    grid-auto-columns: 44vw;
+  }
+
+  .watch-shelf {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .player-video {
+    width: min(92vw, 820px);
+  }
+
+  .player-video.is-portrait {
+    height: min(54vh, 560px);
+  }
+
+  .week-card {
+    grid-column: auto;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *:before,
@@ -2953,5 +3522,82 @@ h2 em {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * Touch targets.
+ *
+ * Several controls are typographically small (10-13px) by design, which puts
+ * them well under the 44px minimum tap size. Rather than enlarging the type
+ * and changing the design, the hit area is grown with padding and negative
+ * margins so the visual stays identical while the target becomes reachable.
+ */
+@media (pointer: coarse), (max-width: 900px) {
+  .brand,
+  .line-link,
+  .button.text-button,
+  .text-action,
+  .site-footer button,
+  .journey-meta button,
+  .sankalpa-card button,
+  .progress-card button,
+  .watch-links a {
+    position: relative;
+  }
+
+  /* Footer links and in-card actions. */
+  .site-footer button,
+  .journey-meta button,
+  .sankalpa-card button,
+  .progress-card button {
+    min-height: 44px;
+    align-items: center;
+    padding-block: 12px;
+  }
+
+  .sankalpa-card button,
+  .progress-card button {
+    justify-content: flex-start;
+  }
+
+  /* Shelf links to the YouTube playlists. */
+  .watch-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 12px;
+  }
+
+  /* The world "next" trail. */
+  .world-trail button {
+    min-height: 44px;
+    padding-block: 8px;
+  }
+
+  /* Constellation nodes are already 116px; the mobile list needs the same. */
+  .mobile-worlds button {
+    min-height: 44px;
+  }
+
+  /*
+   * The remaining four are wide but short. Growing their box with padding
+   * would shift the surrounding layout, so the hit area is extended with a
+   * pseudo-element that does not participate in layout.
+   */
+  .brand,
+  .line-link,
+  .button.text-button {
+    min-height: 44px;
+  }
+
+  .brand {
+    align-items: center;
+  }
+
+  .line-link,
+  .button.text-button {
+    align-items: center;
+    padding-block: 8px;
   }
 }

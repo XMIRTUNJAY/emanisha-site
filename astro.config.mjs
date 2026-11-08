@@ -26,6 +26,9 @@ export default defineConfig({
 		}),
 		mdx(),
 		sitemap({
+			// /dhyaana/ is a built SPA served from public/, not an Astro page,
+			// so it has to be listed explicitly for crawlers to find it.
+			customPages: ['https://emanisha.in/dhyaana/'],
 			serialize(item) {
 				return { ...item, lastmod: buildDate };
 			},

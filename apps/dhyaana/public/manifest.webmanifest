@@ -1,0 +1,22 @@
+{
+  "name": "Dhyaana — Contemplative Practice",
+  "short_name": "Dhyaana",
+  "description": "Guided meditation, breathwork, sleep journeys, and reflective inquiry for Indian contemplative wisdom.",
+  "start_url": "/dhyaana/",
+  "scope": "/dhyaana/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff8ec",
+  "theme_color": "#3b2314",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["health", "lifestyle", "education"],
+  "icons": [
+    {
+      "src": "/dhyaana/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

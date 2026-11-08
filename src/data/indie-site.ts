@@ -65,9 +65,9 @@ export const projects: IndieProject[] = [
 		kind: 'wellness',
 		description: 'Exploring a calmer digital space for meditation, breathwork, and Indian contemplative practices.',
 		detail:
-			'A contemplative web platform exploring Indian contemplative wisdom, guided meditation, breath awareness, sleep journeys, and reflective inquiry. Full-screen, offline-ready, and calm by design.',
+			'A contemplative web platform exploring Indian contemplative wisdom, guided meditation, breath awareness, sleep journeys, and reflective inquiry. Full-screen, installable, offline-capable, and calm by design.',
 		color: 'rose',
-		image: '/og/og-project-headspace-india.png',
+		image: '/og/og-dhyaana.png',
 		liveUrl: '/dhyaana/',
 	},
 	{
