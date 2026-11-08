@@ -7,7 +7,7 @@
  *
  * The precache list is injected at build time by tools/build-sw.mjs.
  */
-const CACHE = 'dhyaana-mw7rl8qi';
+const CACHE = 'dhyaana-4d6206d9440a';
 const PRECACHE = [
   "/dhyaana/assets/index-1oRNvK8t.css",
   "/dhyaana/assets/index-DFsLbkUs.js",
