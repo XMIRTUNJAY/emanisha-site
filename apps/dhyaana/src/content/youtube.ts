@@ -1,5 +1,5 @@
 import raw from "./youtube.json";
-import type { WorldId } from "../data";
+import type { WorldId } from "../content/content";
 
 type RawPlaylist = {
   slug: string;

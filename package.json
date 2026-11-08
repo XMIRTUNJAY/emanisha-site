@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build:dhyaana": "npm --prefix apps/dhyaana run build",
+    "dhyaana:content": "node ./tools/validate-dhyaana-content.mjs",
     "dhyaana:playlists": "node ./tools/sync-dhyaana-playlists.mjs",
     "dhyaana:playlists:check": "node ./tools/sync-dhyaana-playlists.mjs --check",
     "dhyaana:og": "node ./tools/make-og-dhyaana.mjs",

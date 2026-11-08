@@ -1,0 +1,251 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "updatedAt": "2026-11-08",
+  "worlds": [
+    {
+      "id": "dhyana",
+      "name": "Dhyana",
+      "devanagari": "ध्यान",
+      "essence": "Awareness",
+      "description": "Meditation, witnessing and quiet attention.",
+      "cue": "Enter stillness",
+      "color": "#C66B3A"
+    },
+    {
+      "id": "gyaan",
+      "name": "Gyaan",
+      "devanagari": "ज्ञान",
+      "essence": "Wisdom",
+      "description": "Explore ideas from Indian contemplative traditions.",
+      "cue": "Open the library",
+      "color": "#A87935"
+    },
+    {
+      "id": "nidra",
+      "name": "Nidra",
+      "devanagari": "निद्रा",
+      "essence": "Deep rest",
+      "description": "Sleep journeys, body scans and evening release.",
+      "cue": "Rest deeply",
+      "color": "#8E5B3F"
+    },
+    {
+      "id": "prajna",
+      "name": "Prajna",
+      "devanagari": "प्रज्ञा",
+      "essence": "Discernment",
+      "description": "Structured reflection and compassionate self-inquiry.",
+      "cue": "Begin inquiry",
+      "color": "#916F5A"
+    },
+    {
+      "id": "pranayama",
+      "name": "Pranayama",
+      "devanagari": "प्राणायाम",
+      "essence": "Vitality",
+      "description": "Guided breath awareness and foundational techniques.",
+      "cue": "Follow the breath",
+      "color": "#75846A"
+    },
+    {
+      "id": "therapy",
+      "name": "Therapy",
+      "devanagari": "विश्राम",
+      "essence": "Restoration",
+      "description": "Nature, sound and gentle restorative experiences.",
+      "cue": "Find restoration",
+      "color": "#577266"
+    }
+  ],
+  "journeys": [
+    {
+      "id": "vedic-reset",
+      "title": "21-Day Vedic Reset",
+      "eyebrow": "Foundation",
+      "days": 21,
+      "description": "A three-week return to steady attention, from the first minute to carrying it into ordinary days.",
+      "defaultWorld": "dhyana",
+      "defaultMinutes": 6
+    },
+    {
+      "id": "pancha-kosha",
+      "title": "10-Day Pancha Kosha",
+      "eyebrow": "Layers",
+      "days": 10,
+      "description": "Move through the five sheaths of existence, one at a time, noticing what each one asks of you.",
+      "defaultWorld": "dhyana",
+      "defaultMinutes": 7
+    },
+    {
+      "id": "dinacharya",
+      "title": "7-Day Dinacharya",
+      "eyebrow": "Rhythm",
+      "days": 7,
+      "description": "A daily rhythm from first light to sleep, built for a working life rather than a retreat.",
+      "defaultWorld": "dhyana",
+      "defaultMinutes": 5
+    },
+    {
+      "id": "mantra-japa",
+      "title": "7-Day Mantra Japa",
+      "eyebrow": "Sound",
+      "days": 7,
+      "description": "Seven mantras, each held for a week, moving from the root sound into silence.",
+      "defaultWorld": "gyaan",
+      "defaultMinutes": 6
+    },
+    {
+      "id": "sleep-yatra",
+      "title": "14-Night Sleep Yatra",
+      "eyebrow": "Rest",
+      "days": 14,
+      "description": "Two weeks of falling asleep deliberately, each night a little further than the last.",
+      "defaultWorld": "nidra",
+      "defaultMinutes": 12
+    },
+    {
+      "id": "one-minute-reset",
+      "title": "5-Minute One-Minute Reset",
+      "eyebrow": "Between",
+      "days": 5,
+      "description": "Five one-minute practices for the gap between one thing and the next.",
+      "defaultWorld": "dhyana",
+      "defaultMinutes": 1
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "sankalpa",
+      "term": "Sankalpa",
+      "devanagari": "संकल्प",
+      "transliteration": "saṅkalpa",
+      "meaning": "A considered intention",
+      "body": "In this modern practice context, a sankalpa is a concise intention that helps orient attention and action. It is not a promise of a particular outcome.",
+      "source": "Contemplative practice note",
+      "question": "What intention is small enough to keep today?",
+      "status": "available"
+    },
+    {
+      "id": "sakshi",
+      "term": "Sakshi",
+      "devanagari": "साक्षी",
+      "transliteration": "sākṣī",
+      "meaning": "The witness",
+      "body": "A useful lens for noticing experience without immediately becoming entangled in it. Here, we explore it as a contemplative idea rather than a fixed claim.",
+      "source": "Contemplative practice note",
+      "question": "What changes when you watch a feeling instead of becoming it?",
+      "status": "available"
+    },
+    {
+      "id": "pratyahara",
+      "term": "Pratyahara",
+      "devanagari": "प्रत्याहार",
+      "transliteration": "pratyāhāra",
+      "meaning": "Turning inward",
+      "body": "Often discussed as the fifth limb in Patañjali’s eightfold yoga, pratyahara concerns the relationship between awareness and sensory experience.",
+      "source": "Yoga Sutra 2.54–2.55 (orientation)",
+      "question": "Which input could you set down for one hour today?",
+      "status": "available"
+    },
+    {
+      "id": "chitta-vritti",
+      "term": "Chitta Vritti",
+      "devanagari": "चित्तवृत्ति",
+      "transliteration": "citta-vṛtti",
+      "meaning": "The movements of the mind",
+      "body": "The fluctuations that fill awareness: thoughts, memories, judgements and plans. Yoga begins not by stopping them but by seeing them clearly.",
+      "source": "Yoga Sutra 1.2 (orientation)",
+      "question": "Which movement of mind is loudest right now?",
+      "status": "available"
+    },
+    {
+      "id": "abhyasa",
+      "term": "Abhyasa",
+      "devanagari": "अभ्यास",
+      "transliteration": "abhyāsa",
+      "meaning": "Steady practice",
+      "body": "Practice is less a single effort than a direction returned to again and again. Continuity matters more than intensity.",
+      "source": "Yoga Sutra 1.13–1.14 (orientation)",
+      "question": "What would returning look like today, even briefly?",
+      "status": "available"
+    },
+    {
+      "id": "vairagya",
+      "term": "Vairagya",
+      "devanagari": "वैराग्य",
+      "transliteration": "vairāgya",
+      "meaning": "Non-clinging",
+      "body": "A quiet release of the demand that experience be different. It is not indifference; it is space around the grip.",
+      "source": "Yoga Sutra 1.15 (orientation)",
+      "question": "Where are you holding on a little too tightly?",
+      "status": "available"
+    },
+    {
+      "id": "dhyana",
+      "term": "Dhyana",
+      "devanagari": "ध्यान",
+      "transliteration": "dhyāna",
+      "meaning": "Sustained attention",
+      "body": "The seventh limb of Patañjali’s eightfold yoga: attention that stays with its object without repeated effort.",
+      "source": "Yoga Sutra 3.2 (orientation)",
+      "question": "What is worth your sustained attention?",
+      "status": "available"
+    },
+    {
+      "id": "pranayama",
+      "term": "Pranayama",
+      "devanagari": "प्राणायाम",
+      "transliteration": "prāṇāyāma",
+      "meaning": "Breath regulation",
+      "body": "The deliberate cultivation of breath rhythm. In this app we keep to gentle equal breathing and avoid retention.",
+      "source": "Yoga Sutra 2.49–2.51 (orientation)",
+      "question": "How does the breath feel before you try to change it?",
+      "status": "available"
+    },
+    {
+      "id": "santosha",
+      "term": "Santosha",
+      "devanagari": "संतोष",
+      "transliteration": "santoṣa",
+      "meaning": "Contentment",
+      "body": "One of the niyamas: a willingness to meet what is present without rehearsing lack. Not passivity, but a different starting point.",
+      "source": "Yoga Sutra 2.42 (orientation)",
+      "question": "What is already sufficient in this moment?",
+      "status": "available"
+    },
+    {
+      "id": "svadhyaya",
+      "term": "Svadhyaya",
+      "devanagari": "स्वाध्याय",
+      "transliteration": "svādhyāya",
+      "meaning": "Self-study",
+      "body": "Reading, reciting and studying that turns attention back toward the self. Study becomes a mirror rather than an accumulation.",
+      "source": "Yoga Sutra 2.44 (orientation)",
+      "question": "What are you learning about yourself, not just about the text?",
+      "status": "available"
+    },
+    {
+      "id": "yamas",
+      "term": "Yamas",
+      "devanagari": "यम",
+      "transliteration": "yama",
+      "meaning": "Ethical restraints",
+      "body": "The first limb: non-harming, truthfulness, non-stealing, moderation and non-possessiveness. Practice begins in how we treat others.",
+      "source": "Yoga Sutra 2.30 (orientation)",
+      "question": "Which restraint would change your day most?",
+      "status": "available"
+    },
+    {
+      "id": "niyamas",
+      "term": "Niyamas",
+      "devanagari": "नियम",
+      "transliteration": "niyama",
+      "meaning": "Observances",
+      "body": "The second limb: purity, contentment, discipline, study and surrender — the daily disciplines that keep practice alive.",
+      "source": "Yoga Sutra 2.43 (orientation)",
+      "question": "Which observance would you most easily keep for a month?",
+      "status": "available"
+    }
+  ]
+}

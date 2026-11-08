@@ -3,7 +3,7 @@ import { Icon } from "./components/Primitives";
 import { WorldExperience } from "./components/WorldExperiences";
 import { YoutubePlayer } from "./components/YoutubePlayer";
 import type { PlaylistVideo } from "./content/youtube";
-import { journeys, World, WorldId, worlds } from "./data";
+import { journeys, World, WorldId, worlds } from "./content/content";
 import {
   completedVideos,
   currentStreak,

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import type { World, WorldId } from "../data";
-import { knowledge, worlds } from "../data";
+import type { World, WorldId } from "../content/content";
+import { knowledge, worlds } from "../content/content";
 import type { LocalState, Reflection } from "../storage";
 import { Icon, SectionLabel } from "./Primitives";
 import { PlaylistShelf } from "./PlaylistShelf";

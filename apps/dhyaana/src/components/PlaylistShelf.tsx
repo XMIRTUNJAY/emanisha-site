@@ -1,4 +1,4 @@
-import type { WorldId } from "../data";
+import type { WorldId } from "../content/content";
 import type { LocalState } from "../storage";
 import {
   playlistUrl,

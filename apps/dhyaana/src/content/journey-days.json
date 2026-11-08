@@ -1,0 +1,82 @@
+{
+  "$schema": "./schema.json",
+  "version": 1,
+  "journeyDays": {
+    "vedic-reset": [
+      { "title": "Arrive", "practice": "Body awareness", "minutes": 5 },
+      { "title": "Make room", "practice": "Natural breath", "minutes": 7 },
+      { "title": "Notice", "practice": "Thoughts as events", "minutes": 6 },
+      { "title": "Choose", "practice": "A personal sankalpa", "minutes": 8, "world": "prajna" },
+      { "title": "Return", "practice": "Open awareness", "minutes": 10 },
+      { "title": "Ground", "practice": "Feet, seat, spine", "minutes": 5 },
+      { "title": "Breathe", "practice": "Equal breath 4-4", "minutes": 6, "world": "pranayama" },
+      { "title": "Listen", "practice": "Sound without naming", "minutes": 6, "world": "therapy" },
+      { "title": "Release", "practice": "Evening letting go", "minutes": 7, "world": "nidra" },
+      { "title": "Reflect", "practice": "Name what is here", "minutes": 8, "world": "prajna" },
+      { "title": "Soften", "practice": "Jaw, shoulders, belly", "minutes": 6 },
+      { "title": "Walk", "practice": "Attention in motion", "minutes": 7, "world": "therapy" },
+      { "title": "Study", "practice": "One sutra, one question", "minutes": 8, "world": "gyaan" },
+      { "title": "Rest", "practice": "Short Yoga Nidra", "minutes": 12, "world": "nidra" },
+      { "title": "Return", "practice": "Mindful re-entry", "minutes": 5 },
+      { "title": "Focus", "practice": "One-point attention", "minutes": 8 },
+      { "title": "Mantra", "practice": "Japa and listening", "minutes": 7, "world": "gyaan" },
+      { "title": "Gratitude", "practice": "A quiet reckoning", "minutes": 6, "world": "prajna" },
+      { "title": "Space", "practice": "Open awareness", "minutes": 10 },
+      { "title": "Integrate", "practice": "Practice in daily life", "minutes": 8, "world": "gyaan" },
+      { "title": "Continue", "practice": "Carry the thread", "minutes": 10 }
+    ],
+    "pancha-kosha": [
+      { "title": "Annamaya", "practice": "The physical body", "minutes": 6 },
+      { "title": "Annamaya", "practice": "Eating with attention", "minutes": 5 },
+      { "title": "Pranamaya", "practice": "The breath body", "minutes": 7, "world": "pranayama" },
+      { "title": "Pranamaya", "practice": "Extending the exhale", "minutes": 6, "world": "pranayama" },
+      { "title": "Manomaya", "practice": "The mental body", "minutes": 7 },
+      { "title": "Manomaya", "practice": "Watching a thought arrive", "minutes": 8 },
+      { "title": "Vijnanamaya", "practice": "The wisdom body", "minutes": 8, "world": "gyaan" },
+      { "title": "Vijnanamaya", "practice": "Who is noticing?", "minutes": 9, "world": "prajna" },
+      { "title": "Anandamaya", "practice": "The body of ease", "minutes": 10, "world": "nidra" },
+      { "title": "Anandamaya", "practice": "Rest without effort", "minutes": 10, "world": "nidra" }
+    ],
+    "dinacharya": [
+      { "title": "Brahma Muhurta", "practice": "Before the world wakes", "minutes": 6 },
+      { "title": "Morning", "practice": "Set one clear intention", "minutes": 5, "world": "prajna" },
+      { "title": "Midday", "practice": "Three-minute reset", "minutes": 3 },
+      { "title": "Afternoon", "practice": "Walk with attention", "minutes": 7, "world": "therapy" },
+      { "title": "Evening", "practice": "Release the working day", "minutes": 6, "world": "nidra" },
+      { "title": "Dusk", "practice": "A gentle transition", "minutes": 7, "world": "pranayama" },
+      { "title": "Night", "practice": "Rest and re-entry", "minutes": 10, "world": "nidra" }
+    ],
+    "mantra-japa": [
+      { "title": "Om", "practice": "The root sound", "minutes": 6 },
+      { "title": "So Ham", "practice": "Breath as mantra", "minutes": 6, "world": "pranayama" },
+      { "title": "Gayatri", "practice": "A steady rhythm", "minutes": 7 },
+      { "title": "Shanti", "practice": "Repeating peace", "minutes": 6 },
+      { "title": "Lokah", "practice": "Widening the wish", "minutes": 7 },
+      { "title": "Mrityunjaya", "practice": "Meeting fear gently", "minutes": 8 },
+      { "title": "Silence", "practice": "After the repetition", "minutes": 8 }
+    ],
+    "sleep-yatra": [
+      { "title": "Night one", "practice": "Arriving in bed", "minutes": 10 },
+      { "title": "Night two", "practice": "The weight of the body", "minutes": 11 },
+      { "title": "Night three", "practice": "Breath at the nostrils", "minutes": 10 },
+      { "title": "Night four", "practice": "Letting the day fall away", "minutes": 12 },
+      { "title": "Night five", "practice": "A slower body scan", "minutes": 14 },
+      { "title": "Night six", "practice": "Points of contact", "minutes": 12 },
+      { "title": "Night seven", "practice": "The space between sounds", "minutes": 13 },
+      { "title": "Night eight", "practice": "A sankalpa for rest", "minutes": 12 },
+      { "title": "Night nine", "practice": "Cooling the mind", "minutes": 14 },
+      { "title": "Night ten", "practice": "The long exhale", "minutes": 15 },
+      { "title": "Night eleven", "practice": "No effort left", "minutes": 16 },
+      { "title": "Night twelve", "practice": "Rest without watching", "minutes": 18 },
+      { "title": "Night thirteen", "practice": "Waking gently", "minutes": 10 },
+      { "title": "Night fourteen", "practice": "Carry the rest forward", "minutes": 12 }
+    ],
+    "one-minute-reset": [
+      { "title": "Pause", "practice": "One breath, nothing more", "minutes": 1 },
+      { "title": "Soften", "practice": "Release the jaw and shoulders", "minutes": 1 },
+      { "title": "Notice", "practice": "Name what is here", "minutes": 1, "world": "prajna" },
+      { "title": "Listen", "practice": "One sound, fully", "minutes": 1, "world": "therapy" },
+      { "title": "Return", "practice": "Feel the feet again", "minutes": 1 }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import type { Journey } from "./data";
+import type { Journey } from "./content/content";
 import type { LocalState, Session } from "./storage";
 
 export function dayKey(date: Date): string {
