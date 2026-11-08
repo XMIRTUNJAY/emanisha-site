@@ -32,13 +32,22 @@ const precache = assets
   .filter((a) => !a.endsWith('/.gitignore'))
   .sort();
 
-// Hash the asset names together with their contents: the names carry the
-// content hash already, but hashing sizes too keeps this robust if a name
-// ever stops changing with content.
+// Hash the asset names and their normalised contents. The names already carry
+// a content hash, but normalising line endings keeps the result stable across
+// platforms: git checks text out with CRLF on Windows and LF on CI, so a raw
+// byte hash would differ for identical content.
 const digest = createHash('sha256');
+const TEXT = /\.(html|css|js|json|webmanifest|svg)$/;
 for (const rel of precache) {
+  const file = join(outDir, rel.replace('/dhyaana/', ''));
   digest.update(rel);
-  digest.update(String(statSync(join(outDir, rel.replace('/dhyaana/', ''))).size));
+  const buf = readFileSync(file);
+  if (TEXT.test(rel)) {
+    // Collapse every line ending to LF, including mixed endings.
+    digest.update(buf.toString('utf8').replace(/\r\n/g, '\n').replace(/\r/g, '\n'));
+  } else {
+    digest.update(buf);
+  }
 }
 const version = digest.digest('hex').slice(0, 12);
 
