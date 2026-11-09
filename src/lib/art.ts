@@ -58,8 +58,8 @@ export function pageArt(route: string): string {
   return siteUrl(`/og/${base}.webp`);
 }
 
-// Social/OG card. JPEG: universally supported by preview crawlers and
-// ~10x smaller than the legacy 1200x630 PNGs (which are no longer shipped).
+// Social/OG card. JPEG: universally supported by preview crawlers, and the
+// PNG originals are never fetched by a browser (only crawlers read these).
 export function pageArtSocial(route: string): string {
   const base = routeToFile.get(route) ?? (route === '' ? 'og-home' : `og-${route.replace(/\//g, '-')}`);
   return siteUrl(`/og/${base}.jpg`);

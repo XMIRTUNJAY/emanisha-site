@@ -44,7 +44,7 @@ const ogImage = new URL(resolvedImage, Astro.site).toString();
 <link rel="icon" type="image/svg+xml" href={siteUrl('/favicon.svg')} />
 <link rel="apple-touch-icon" href={siteUrl('/icons/icon-192.png')} />
 <link rel="manifest" href={siteUrl('/manifest.webmanifest')} />
-<link rel="sitemap" href={siteUrl('/sitemap-index.xml')} />
+<link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title={`${BRAND.siteName} — ${BRAND.brandName}`} href={siteUrl('/rss.xml')} />
 <meta name="theme-color" content="#8e2d12" />
 <meta name="generator" content={Astro.generator} />

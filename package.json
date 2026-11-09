@@ -26,7 +26,10 @@
     "audit:images": "node ./tools/audit-images.mjs",
     "hero:audit": "node ./tools/hero-audit.mjs",
     "og:social": "node ./tools/optimize-og-social.mjs",
-    "og:check": "node ./tools/check-og-resolve.mjs"
+    "og:check": "node ./tools/check-og-resolve.mjs",
+    "og:webp": "node ./tools/ensure-og-webp.mjs",
+    "notebook:art": "node ./tools/make-notebook-project-art.mjs",
+    "notebook:covers": "node ./tools/make-notebook-covers.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.0",
