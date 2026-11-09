@@ -21,11 +21,11 @@ interface Props {
 	canonicalOverride?: string;
 }
 
+const { title, description, imageUrl, noindex = false, alternates = [], canonicalOverride } = Astro.props;
 const canonicalURL = canonicalOverride
 	? new URL(canonicalOverride, Astro.site)
 	: new URL(Astro.url.pathname, Astro.site);
 const base = '/learn-marathi/'.replace(/\/$/, '');
-const { title, description, imageUrl, noindex = false, alternates = [], canonicalOverride } = Astro.props;
 // Per-page share cards resolve through src/lib/art.ts — the single source of
 // truth for page art — so the social card always matches the visible hero.
 // Explicit imageUrl still wins; routes without art fall back to a section card.
