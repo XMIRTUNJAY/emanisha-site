@@ -1,13 +1,16 @@
-# Deploy via Git — https://emanisha.in
+# Build and publish deploy branch — https://emanisha.in
 #
 # On every push to main: build the site, then publish the finished dist/
-# contents to the `deploy` branch. Hostinger's Git integration (hPanel →
-# Git) is connected to that branch and pulls it into public_html — no FTP.
+# contents to the `deploy` branch. That single published branch feeds:
+#   1. GitHub Pages (Settings → Pages, source: branch `deploy`) — custom
+#      domain emanisha.in via public/CNAME, which Astro copies to dist/.
+#   2. Hostinger's Git integration (hPanel → Git), which historically pulled
+#      this branch into public_html — no FTP. This reference is kept until
+#      the Hostinger hosting subscription is cancelled; DNS for emanisha.in
+#      points to GitHub Pages, so Hostinger no longer receives web traffic.
 #
-# Hostinger Git settings:
-#   repository : XMIRTUNJAY/emanisha-site
-#   branch     : deploy
-#   target dir : public_html
+# DNS (at Hostinger): @ → 185.199.108-111.153 (GitHub), www → CNAME
+#   xmirtunjay.github.io. See docs in repo for the migration notes.
 
 name: Build and publish deploy branch
 
