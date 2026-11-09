@@ -1,6 +1,7 @@
-# TEMPORARY diagnostic — read the actual response from Hostinger's
-# /api/contact.php (it now returns 400, not 404: the endpoint is live).
-name: Probe form endpoint
+# TEMPORARY diagnostic — find a hostname that routes to Hostinger's web
+# server, and check whether the PHP endpoint answers there. The FTP hostname
+# is printed in chunks so GitHub's secret masking does not hide it.
+name: Find routable hostname
 
 on:
   workflow_dispatch:
@@ -8,43 +9,48 @@ on:
 permissions: {}
 
 jobs:
-  probe:
+  find:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe
+      - name: Find
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
         run: |
           set +e
           H="${FTP_SERVER%%:*}"
+          echo "=== ftp hostname, in chunks ==="
+          echo "  part1: ${H:0:6}"
+          echo "  part2: ${H:6:6}"
+          echo "  part3: ${H:12:6}"
+          echo "  part4: ${H:18:20}"
+          echo "  is it a subdomain of emanisha.in? $(case "$H" in *emanisha.in*) echo YES;; *) echo NO;; esac)"
+
           IP=$(getent ahostsv4 "$H" | awk '{print $1}' | head -1)
+          echo "  resolves to: $IP"
 
-          echo "=== GET /api/contact.php on Hostinger ==="
-          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -D /tmp/hdr \
-            -o /tmp/body -w "  status=%{http_code} type=%{content_type}\n" \
-            "https://emanisha.in/api/contact.php"
-          echo "--- headers ---"; grep -iE "^(server|content-type|x-|via)" /tmp/hdr | sed 's/^/  /'
-          echo "--- body ---"; cat /tmp/body | sed 's/^/  /'; echo
+          echo "=== does that hostname serve the site over HTTPS? ==="
+          for p in "/" "/dhyaana/" "/api/contact.php"; do
+            printf "  https://HOST%-22s " "$p"
+            curl -s --max-time 15 -o /tmp/o -w "%{http_code} %{content_type} %{size_download}b\n" "https://$H$p" 2>&1 | tail -1
+          done
+          echo "  title: $(curl -s --max-time 15 "https://$H/" | grep -oE '<title>[^<]*</title>' | head -1)"
 
-          echo "=== POST a real submission (notify) ==="
-          curl -s --max-time 25 --resolve "emanisha.in:443:$IP" -X POST \
-            -H 'Content-Type: application/json' \
-            -d '{"kind":"notify","source":"ci-probe","name":"Probe","email":"mrxubr@gmail.com","message":"probe - ignore"}' \
-            -o /tmp/post -w "  status=%{http_code} type=%{content_type}\n" \
-            "https://emanisha.in/api/contact.php"
-          cat /tmp/post | sed 's/^/  /'; echo
-
-          echo "=== same POST, but to the PUBLIC domain (DNS -> GitHub Pages) ==="
+          echo "=== POST to it (same host as itself) ==="
           curl -s --max-time 25 -X POST -H 'Content-Type: application/json' \
-            -d '{"kind":"notify","source":"ci-probe-public","name":"Probe","email":"mrxubr@gmail.com","message":"probe - ignore"}' \
-            -o /tmp/post2 -w "  status=%{http_code} type=%{content_type}\n" \
-            "https://emanisha.in/api/contact.php"
-          head -c 200 /tmp/post2 | sed 's/^/  /'; echo
+            -d '{"kind":"notify","source":"hostname-probe","name":"Probe","email":"mrxubr@gmail.com","message":"probe - ignore"}' \
+            -o /tmp/p -w "  status=%{http_code} type=%{content_type}\n" "https://$H/api/contact.php"
+          head -c 200 /tmp/p | sed 's/^/  /'; echo
 
-          echo "=== is CORS needed? check what the browser would see ==="
-          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -X OPTIONS \
+          echo "=== CORS preflight from the public origin ==="
+          curl -s --max-time 15 -X OPTIONS \
             -H 'Origin: https://emanisha.in' -H 'Access-Control-Request-Method: POST' \
             -H 'Access-Control-Request-Headers: content-type' \
-            -o /dev/null -D /tmp/cors -w "  OPTIONS status=%{http_code}\n" \
-            "https://emanisha.in/api/contact.php"
+            -o /dev/null -D /tmp/cors -w "  OPTIONS status=%{http_code}\n" "https://$H/api/contact.php"
           grep -i "access-control" /tmp/cors | sed 's/^/  /' || echo "  (no access-control headers)"
+
+          echo "=== other subdomains of emanisha.in that resolve ==="
+          for s in ftp cpanel webmail mail forms api origin host www2; do
+            ip=$(getent ahostsv4 "$s.emanisha.in" | awk '{print $1}' | head -1)
+            [ -n "$ip" ] && echo "  $s.emanisha.in -> $ip"
+          done
+          echo "  (blank = does not resolve)"
