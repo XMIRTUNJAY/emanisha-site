@@ -1,6 +1,5 @@
-# TEMPORARY diagnostic — find where Hostinger serves emanisha.in from, and
-# whether the api/ folder can be created. Uses the repo's FTP secrets.
-name: Find Hostinger docroot
+# TEMPORARY diagnostic — decisive check on Hostinger's state.
+name: Hostinger decisive check
 
 on:
   workflow_dispatch:
@@ -8,10 +7,10 @@ on:
 permissions: {}
 
 jobs:
-  find:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Find
+      - name: Check
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -19,30 +18,33 @@ jobs:
         run: |
           set +e
           H="${FTP_SERVER%%:*}"
-          echo "=== listing every directory we can see ==="
-          for d in "" "." "./" "domains/" "public_html/" "htdocs/" "www/" "home/"; do
-            echo "--- /$d ---"
-            curl -s --max-time 15 "ftp://$FTP_SERVER/$d" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -12
-          done
-
-          echo "=== which dirs are listable? ==="
-          for d in "domains/" "domains/emanisha.in/" "public_html/" "htdocs/" "www/" "home/"; do
-            printf "  %-26s " "/$d"
-            n=$(curl -s --max-time 12 "ftp://$FTP_SERVER/$d" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | wc -l)
-            echo "$n lines"
-          done
-
-          echo "=== can we create api/ ? (write test, then remove) ==="
-          printf '<?php echo "ok";' > /tmp/probe.php
-          curl -s --max-time 20 -T /tmp/probe.php "ftp://$FTP_SERVER/api/contact_probe.php" --user "$FTP_USERNAME:$FTP_PASSWORD" -w "upload=%{http_code}\n" 2>&1 | tail -2
-          echo "=== retry listing api/ after upload ==="
-          curl -s --max-time 12 "ftp://$FTP_SERVER/api/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -6
-
-          echo "=== HTTP: does the site answer on a vhost like www2 / origin? ==="
           IP=$(getent ahostsv4 "$H" | awk '{print $1}' | head -1)
-          for vh in emanisha.in; do
-            for p in "/" "/dhyaana/" "/api/contact.php"; do
-              printf "  %-22s " "$vh$p"
-              curl -s --max-time 12 --resolve "$vh:443:$IP" -o /dev/null -w "%{http_code}\n" "https://$vh$p"
-            done
+
+          echo "=== A. is Hostinger serving OUR deploy branch? compare 404 page ==="
+          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -o /tmp/h404.html \
+            -w "  /nonexistent-xyz/ -> %{http_code} %{size_download}b\n" "https://emanisha.in/nonexistent-xyz/"
+          echo "  our dist/404.html size: $(curl -s --resolve emanisha.in:443:$IP https://emanisha.in/404.html | wc -c)b"
+          echo "  404 body title: $(grep -oE '<title>[^<]*</title>' /tmp/h404.html | head -1)"
+
+          echo "=== B. is Hostinger's copy CURRENT? (file added in a recent commit) ==="
+          for f in "/de-agent-sitemap.xml" "/sitemap-index.xml" "/robots.txt" "/dhyaana/sw.js" "/api/contact.php"; do
+            printf "  %-24s " "$f"
+            curl -s --max-time 12 --resolve "emanisha.in:443:$IP" -o /dev/null -w "%{http_code} %{size_download}b\n" "https://emanisha.in$f"
           done
+
+          echo "=== C. deploy branch: when did api/contact.php last change? ==="
+          git log -1 --format="  %h %ad %s" --date=short origin/deploy -- api/contact.php
+          git ls-tree origin/deploy api/ | sed 's/^/  /'
+
+          echo "=== D. FTP write attempts on candidate docroots ==="
+          printf '<?php echo "probe";' > /tmp/probe.php
+          for d in "api" "public_html/api" "domains/emanisha.in/public_html/api" "domains/emanisha.in/api"; do
+            printf "  upload to /%-40s " "$d"
+            curl -s --max-time 15 -T /tmp/probe.php "ftp://$FTP_SERVER/$d/contact_probe.php" \
+              --user "$FTP_USERNAME:$FTP_PASSWORD" -w "%{http_code}\n" -o /dev/null 2>&1 | tail -1
+          done
+
+          echo "=== E. can we list with --ftp-method or passive off? ==="
+          curl -s --max-time 15 --ftp-pasv "ftp://$FTP_SERVER/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -8
+          echo "=== F. the .api_token suggests an API-token account; try passive + list ==="
+          curl -s --max-time 15 --disable-epsv "ftp://$FTP_SERVER/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -8
