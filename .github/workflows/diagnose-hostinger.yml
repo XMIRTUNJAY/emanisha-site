@@ -1,0 +1,48 @@
+# TEMPORARY diagnostic — checks whether Hostinger still serves this site and
+# whether its PHP endpoint executes. Uses the repo's existing FTP secrets only
+# to discover the server; no credentials are printed.
+name: Diagnose Hostinger PHP
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Hostinger
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set +e
+          echo "### host"
+          if [ -z "$FTP_SERVER" ]; then
+            echo "FTP_SERVER secret is empty"
+            exit 0
+          fi
+          IP=$(getent ahostsv4 "$FTP_SERVER" | awk '{print $1}' | head -1)
+          echo "resolved ip: ${IP:-none}"
+
+          echo "### content on hostinger (Host: emanisha.in)"
+          curl -s --max-time 20 --resolve "emanisha.in:443:$IP" "https://emanisha.in/dhyaana/" \
+            | grep -oE 'index-[A-Za-z0-9_-]+\.(js|css)' | head -3
+          echo "### php GET (is it executed, or served as source?)"
+          curl -s --max-time 20 --resolve "emanisha.in:443:$IP" -o /tmp/php.out \
+            -w "status=%{http_code} type=%{content_type}\n" \
+            "https://emanisha.in/api/contact.php"
+          head -c 100 /tmp/php.out; echo
+          echo "### php POST (does mail() actually run?)"
+          curl -s --max-time 25 --resolve "emanisha.in:443:$IP" -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"kind":"notify","source":"ci-diagnostic","name":"Diagnostic","email":"mrxubr@gmail.com","message":"diagnostic probe — ignore"}' \
+            -o /tmp/post.out -w "status=%{http_code} type=%{content_type}\n" \
+            "https://emanisha.in/api/contact.php"
+          head -c 200 /tmp/post.out; echo
+          echo "### ftp listing of public_html"
+          curl -s --max-time 25 "ftp://$FTP_SERVER/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -20
+          echo "### ftp listing of api/"
+          curl -s --max-time 25 "ftp://$FTP_SERVER/api/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -10
