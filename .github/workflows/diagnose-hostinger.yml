@@ -1,5 +1,6 @@
-# TEMPORARY diagnostic — decisive check on Hostinger's state.
-name: Hostinger decisive check
+# TEMPORARY diagnostic — read the actual response from Hostinger's
+# /api/contact.php (it now returns 400, not 404: the endpoint is live).
+name: Probe form endpoint
 
 on:
   workflow_dispatch:
@@ -7,44 +8,43 @@ on:
 permissions: {}
 
 jobs:
-  check:
+  probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Check
+      - name: Probe
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           set +e
           H="${FTP_SERVER%%:*}"
           IP=$(getent ahostsv4 "$H" | awk '{print $1}' | head -1)
 
-          echo "=== A. is Hostinger serving OUR deploy branch? compare 404 page ==="
-          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -o /tmp/h404.html \
-            -w "  /nonexistent-xyz/ -> %{http_code} %{size_download}b\n" "https://emanisha.in/nonexistent-xyz/"
-          echo "  our dist/404.html size: $(curl -s --resolve emanisha.in:443:$IP https://emanisha.in/404.html | wc -c)b"
-          echo "  404 body title: $(grep -oE '<title>[^<]*</title>' /tmp/h404.html | head -1)"
+          echo "=== GET /api/contact.php on Hostinger ==="
+          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -D /tmp/hdr \
+            -o /tmp/body -w "  status=%{http_code} type=%{content_type}\n" \
+            "https://emanisha.in/api/contact.php"
+          echo "--- headers ---"; grep -iE "^(server|content-type|x-|via)" /tmp/hdr | sed 's/^/  /'
+          echo "--- body ---"; cat /tmp/body | sed 's/^/  /'; echo
 
-          echo "=== B. is Hostinger's copy CURRENT? (file added in a recent commit) ==="
-          for f in "/de-agent-sitemap.xml" "/sitemap-index.xml" "/robots.txt" "/dhyaana/sw.js" "/api/contact.php"; do
-            printf "  %-24s " "$f"
-            curl -s --max-time 12 --resolve "emanisha.in:443:$IP" -o /dev/null -w "%{http_code} %{size_download}b\n" "https://emanisha.in$f"
-          done
+          echo "=== POST a real submission (notify) ==="
+          curl -s --max-time 25 --resolve "emanisha.in:443:$IP" -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"kind":"notify","source":"ci-probe","name":"Probe","email":"mrxubr@gmail.com","message":"probe - ignore"}' \
+            -o /tmp/post -w "  status=%{http_code} type=%{content_type}\n" \
+            "https://emanisha.in/api/contact.php"
+          cat /tmp/post | sed 's/^/  /'; echo
 
-          echo "=== C. deploy branch: when did api/contact.php last change? ==="
-          git log -1 --format="  %h %ad %s" --date=short origin/deploy -- api/contact.php
-          git ls-tree origin/deploy api/ | sed 's/^/  /'
+          echo "=== same POST, but to the PUBLIC domain (DNS -> GitHub Pages) ==="
+          curl -s --max-time 25 -X POST -H 'Content-Type: application/json' \
+            -d '{"kind":"notify","source":"ci-probe-public","name":"Probe","email":"mrxubr@gmail.com","message":"probe - ignore"}' \
+            -o /tmp/post2 -w "  status=%{http_code} type=%{content_type}\n" \
+            "https://emanisha.in/api/contact.php"
+          head -c 200 /tmp/post2 | sed 's/^/  /'; echo
 
-          echo "=== D. FTP write attempts on candidate docroots ==="
-          printf '<?php echo "probe";' > /tmp/probe.php
-          for d in "api" "public_html/api" "domains/emanisha.in/public_html/api" "domains/emanisha.in/api"; do
-            printf "  upload to /%-40s " "$d"
-            curl -s --max-time 15 -T /tmp/probe.php "ftp://$FTP_SERVER/$d/contact_probe.php" \
-              --user "$FTP_USERNAME:$FTP_PASSWORD" -w "%{http_code}\n" -o /dev/null 2>&1 | tail -1
-          done
-
-          echo "=== E. can we list with --ftp-method or passive off? ==="
-          curl -s --max-time 15 --ftp-pasv "ftp://$FTP_SERVER/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -8
-          echo "=== F. the .api_token suggests an API-token account; try passive + list ==="
-          curl -s --max-time 15 --disable-epsv "ftp://$FTP_SERVER/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -8
+          echo "=== is CORS needed? check what the browser would see ==="
+          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -X OPTIONS \
+            -H 'Origin: https://emanisha.in' -H 'Access-Control-Request-Method: POST' \
+            -H 'Access-Control-Request-Headers: content-type' \
+            -o /dev/null -D /tmp/cors -w "  OPTIONS status=%{http_code}\n" \
+            "https://emanisha.in/api/contact.php"
+          grep -i "access-control" /tmp/cors | sed 's/^/  /' || echo "  (no access-control headers)"
