@@ -1,0 +1,52 @@
+# TEMPORARY diagnostic — confirm whether Hostinger's FTP root is the served
+# document root, and whether the served /api/contact.php exists on disk.
+name: Confirm Hostinger document root
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set +e
+          IP=$(getent ahostsv4 "$FTP_SERVER" | awk '{print $1}' | head -1)
+
+          echo "=== HTTP: / (is the site actually served by this IP?) ==="
+          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -o /tmp/root.html \
+            -w "  status=%{http_code} type=%{content_type} size=%{size_download}\n" "https://emanisha.in/"
+          grep -oE '<title>[^<]*</title>' /tmp/root.html | head -1
+
+          echo "=== HTTP: a known static file that IS in the deploy branch ==="
+          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -o /dev/null \
+            -w "  /sitemap-index.xml -> %{http_code}\n" "https://emanisha.in/sitemap-index.xml"
+          curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -o /dev/null \
+            -w "  /dhyaana/        -> %{http_code}\n" "https://emanisha.in/dhyaana/"
+
+          echo "=== HTTP: the php endpoint, with and without /api ==="
+          for p in "/api/contact.php" "/contact.php" "/api/" ; do
+            printf "  %-20s " "$p"
+            curl -s --max-time 15 --resolve "emanisha.in:443:$IP" -o /tmp/o -w "%{http_code} %{content_type} %{size_download}b " "https://emanisha.in$p"
+            head -c 30 /tmp/o | tr -d '\n'; echo
+          done
+
+          echo "=== FTP: recursive-ish listing (depth 2) ==="
+          for d in "" "api" "assets" "dhyaana"; do
+            echo "--- /$d ---"
+            curl -s --max-time 20 "ftp://$FTP_SERVER/$d/" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | head -8
+          done
+
+          echo "=== FTP: does deploy branch content exist on disk? ==="
+          for f in "sitemap-index.xml" "dhyaana/index.html" ".htaccess"; do
+            printf "  %-24s " "$f"
+            curl -s --max-time 15 -o /dev/null -w "%{http_code} %{size_download}b\n" \
+              "ftp://$FTP_SERVER/$f" --user "$FTP_USERNAME:$FTP_PASSWORD" 2>&1 | tail -1
+          done
