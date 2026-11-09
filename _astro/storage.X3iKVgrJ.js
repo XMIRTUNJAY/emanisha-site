@@ -1,0 +1,1 @@
+function e(){let e=new Map;return{getItem:t=>e.has(t)?e.get(t):null,setItem:(t,n)=>{e.set(t,n)}}}function t(t=`bol-game-`,n){let r=n??(typeof localStorage<`u`?localStorage:e());return{get(n){try{return r.getItem(t+n)}catch{return r=e(),null}},set(n,i){try{r.setItem(t+n,i)}catch{r=e()}}}}export{t};

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE4D6"/>
+      <stop offset="100%" stop-color="#FFD4C1"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E2D12"/>
+      <stop offset="100%" stop-color="#A43716"/>
+    </linearGradient>
+    <linearGradient id="thoughtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E2D12"/>
+      <stop offset="100%" stop-color="#A43716"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#8E2D12" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Body -->
+  <ellipse cx="60" cy="88" rx="42" ry="35" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Head -->
+  <circle cx="60" cy="48" r="32" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Devanagari म on belly -->
+  <text x="60" y="95" font-family="'Noto Sans Devanagari', 'Mukta', sans-serif" font-size="48" font-weight="700" fill="url(#accentGrad)" text-anchor="middle" dominant-baseline="middle">म</text>
+  <!-- Eyes - looking up/thinking -->
+  <ellipse cx="48" cy="38" rx="6" ry="7" fill="#2D1B15"/>
+  <ellipse cx="49" cy="36" rx="2" ry="2" fill="#fff"/>
+  <ellipse cx="72" cy="38" rx="6" ry="7" fill="#2D1B15"/>
+  <ellipse cx="73" cy="36" rx="2" ry="2" fill="#fff"/>
+  <!-- Eyebrows - one raised, one normal (thinking) -->
+  <path d="M38 30 Q48 26 58 30" stroke="#2D1B15" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M62 32 Q72 34 82 32" stroke="#2D1B15" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Cheeks -->
+  <ellipse cx="38" cy="50" rx="4" ry="2.5" fill="#FFB3A0" opacity="0.4"/>
+  <ellipse cx="82" cy="50" rx="4" ry="2.5" fill="#FFB3A0" opacity="0.4"/>
+  <!-- Small thoughtful mouth -->
+  <path d="M50 58 Q60 56 70 58" stroke="#8E2D12" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Left arm down -->
+  <path d="M18 78 Q28 88 40 85" stroke="url(#bodyGrad)" stroke-width="18" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
+  <circle cx="18" cy="78" r="9" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Right hand on chin (thinking pose) -->
+  <path d="M102 78 Q90 70 82 62" stroke="url(#bodyGrad)" stroke-width="18" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
+  <circle cx="102" cy="78" r="9" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Hand on chin -->
+  <ellipse cx="78" cy="56" rx="10" ry="8" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Thought bubble -->
+  <g filter="url(#shadow)">
+    <path d="M85 30 Q95 22 100 20 Q105 22 110 28 Q115 35 115 45 Q115 50 110 55 Q95 50 85 48 Q80 45 80 38 Q80 32 85 30" fill="#fff" stroke="#E8DCC8" stroke-width="1.5"/>
+    <!-- Small bubbles -->
+    <circle cx="105" cy="22" r="4" fill="#fff" stroke="#E8DCC8" stroke-width="1">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="112" cy="16" r="3" fill="#fff" stroke="#E8DCC8" stroke-width="1">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+    <circle cx="115" cy="28" r="2.5" fill="#fff" stroke="#E8DCC8" stroke-width="1">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+    <!-- Devanagari अ in thought bubble -->
+    <text x="95" cy="38" font-family="'Noto Sans Devanagari', 'Mukta', sans-serif" font-size="18" font-weight="600" fill="url(#thoughtGrad)" text-anchor="middle" dominant-baseline="middle">
+      <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite"/>
+      अ
+    </text>
+    <text x="95" cy="48" font-family="'Noto Sans Devanagari', 'Mukta', sans-serif" font-size="14" font-weight="500" fill="#8E2D12" text-anchor="middle" dominant-baseline="middle" opacity="0.6">
+      आ?
+    </text>
+  </g>
+  <!-- Feet -->
+  <ellipse cx="42" cy="115" rx="12" ry="8" fill="url(#accentGrad)"/>
+  <ellipse cx="78" cy="115" rx="12" ry="8" fill="url(#accentGrad)"/>
+  <!-- Gentle sway animation -->
+  <animateTransform attributeName="transform" type="rotate" from="-1 60 60" to="1 60 60" dur="3s" repeatCount="indefinite" values="-1 60 60;1 60 60;-1 60 60" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+</svg>

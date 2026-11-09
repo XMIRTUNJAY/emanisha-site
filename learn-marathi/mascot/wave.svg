@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE4D6"/>
+      <stop offset="100%" stop-color="#FFD4C1"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E2D12"/>
+      <stop offset="100%" stop-color="#A43716"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#8E2D12" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Body -->
+  <ellipse cx="60" cy="85" rx="42" ry="35" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Head -->
+  <circle cx="60" cy="45" r="32" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Devanagari म on belly -->
+  <text x="60" y="92" font-family="'Noto Sans Devanagari', 'Mukta', sans-serif" font-size="48" font-weight="700" fill="url(#accentGrad)" text-anchor="middle" dominant-baseline="middle">म</text>
+  <!-- Eyes - happy/welcoming -->
+  <ellipse cx="48" cy="36" rx="7" ry="8" fill="#2D1B15"/>
+  <ellipse cx="45" cy="34" rx="2.5" ry="2.5" fill="#fff"/>
+  <ellipse cx="72" cy="36" rx="7" ry="8" fill="#2D1B15"/>
+  <ellipse cx="69" cy="34" rx="2.5" ry="2.5" fill="#fff"/>
+  <!-- Eyebrows raised -->
+  <path d="M38 28 Q48 24 58 28" stroke="#2D1B15" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M62 28 Q72 24 82 28" stroke="#2D1B15" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Cheeks -->
+  <ellipse cx="36" cy="48" rx="6" ry="4" fill="#FFB3A0" opacity="0.7"/>
+  <ellipse cx="84" cy="48" rx="6" ry="4" fill="#FFB3A0" opacity="0.7"/>
+  <!-- Big smile -->
+  <path d="M44 52 Q60 64 76 52" stroke="#8E2D12" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M46 56 Q60 62 74 56" stroke="#FFD4C1" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Left arm down -->
+  <path d="M18 75 Q28 85 40 82" stroke="url(#bodyGrad)" stroke-width="18" fill="none" stroke-linecap="round" filter="url(#shadow)"/>
+  <circle cx="18" cy="75" r="9" fill="url(#bodyGrad)" filter="url(#shadow)"/>
+  <!-- Right arm waving -->
+  <path d="M102 75 Q95 60 95 45" stroke="url(#bodyGrad)" stroke-width="18" fill="none" stroke-linecap="round" filter="url(#shadow)">
+    <animateTransform attributeName="transform" type="rotate" from="-15 102 75" to="15 102 75" dur="0.8s" repeatCount="indefinite" values="-15 102 75;15 102 75;-15 102 75" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </path>
+  <circle cx="102" cy="75" r="9" fill="url(#bodyGrad)" filter="url(#shadow)">
+    <animateTransform attributeName="transform" type="rotate" from="-15 102 75" to="15 102 75" dur="0.8s" repeatCount="indefinite" values="-15 102 75;15 102 75;-15 102 75" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+  </circle>
+  <!-- Feet -->
+  <ellipse cx="42" cy="112" rx="12" ry="8" fill="url(#accentGrad)"/>
+  <ellipse cx="78" cy="112" rx="12" ry="8" fill="url(#accentGrad)"/>
+  <!-- Wave lines -->
+  <g opacity="0.6" stroke="#8E2D12" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M108 50 Q115 45 118 55">
+      <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite" begin="0s"/>
+    </path>
+    <path d="M108 45 Q115 40 118 50">
+      <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite" begin="0.2s"/>
+    </path>
+    <path d="M108 55 Q115 50 118 60">
+      <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite" begin="0.4s"/>
+    </path>
+  </g>
+</svg>

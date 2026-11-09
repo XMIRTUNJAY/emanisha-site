@@ -1,0 +1,1 @@
+import{t as e}from"./analytics.Cc9SHUse.js";try{let t=window.location.pathname.split(`/`).filter(Boolean).pop()||`unknown`,n=document.querySelectorAll(`table.vocab tbody tr`).length;e.phraseView(t,n)}catch{}

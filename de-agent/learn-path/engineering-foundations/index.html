@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><script>
+      (function () {
+        try {
+          var t = localStorage.getItem('de-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+          // desktop rail collapse preference — applied pre-paint (no FOUC)
+          if (localStorage.getItem('de-sidebar') === 'collapsed') {
+            document.documentElement.setAttribute('data-sidebar', 'collapsed');
+          }
+        } catch (e) { /* keep default */ }
+      })();
+      // Platform-aware shortcut hints (audit P3: ⌘K assumed Mac)
+      (function () {
+        var mac = /Mac|iPhone|iPad/i.test(navigator.platform || navigator.userAgent);
+        document.documentElement.setAttribute('data-platform', mac ? 'mac' : 'other');
+      })();
+    </script><title>Engineering Foundations — guided learning path · DE//AGENT</title><meta name="description" content="Guided path · 1 stage · 4 resources. Sequenced by roadmap stage and score, with prerequisites, objectives and cautions — from the DE//AGENT registry."><link rel="canonical" href="https://emanisha.in/de-agent/learn-path/engineering-foundations/"><meta property="og:type" content="website"><meta property="og:site_name" content="DE//AGENT"><meta property="og:title" content="Engineering Foundations — guided learning path · DE//AGENT"><meta property="og:description" content="Guided path · 1 stage · 4 resources. Sequenced by roadmap stage and score, with prerequisites, objectives and cautions — from the DE//AGENT registry."><meta property="og:url" content="https://emanisha.in/de-agent/learn-path/engineering-foundations/"><meta property="og:image" content="https://emanisha.in/de-agent/og.svg"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Engineering Foundations — guided learning path · DE//AGENT"><meta name="twitter:description" content="Guided path · 1 stage · 4 resources. Sequenced by roadmap stage and score, with prerequisites, objectives and cautions — from the DE//AGENT registry."><meta name="twitter:image" content="https://emanisha.in/de-agent/og.svg"><link rel="alternate" type="application/rss+xml" title="DE//AGENT — newest resources" href="https://emanisha.in/rss.xml"><link rel="icon" href="/de-agent/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#0b0d0b" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)"><link rel="stylesheet" href="/de-agent/_astro/_slug_.DLa4iumz.css"><script type="module" src="/de-agent/_astro/page.sJrt8mpm.js"></script></head> <body> <a href="#main" class="skip-link">Skip to content</a> <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true"> <svg class="h-full w-full opacity-50"> <defs> <pattern id="rails" width="96" height="26" patternUnits="userSpaceOnUse"> <line x1="0.5" y1="0" x2="0.5" y2="26" stroke="var(--rail)" stroke-width="0.75" stroke-dasharray="1 7" stroke-linecap="round"></line> </pattern> </defs> <rect width="100%" height="100%" fill="url(#rails)"></rect> </svg> <div class="grid-lines-bg absolute inset-0 opacity-60"></div> <div class="absolute inset-x-0 top-0 h-[420px]" style="background: radial-gradient(120% 100% at 50% -20%, var(--accent-soft) 0%, transparent 62%);"></div> <div class="absolute inset-x-0 bottom-0 h-64" style="background: linear-gradient(to top, var(--shell) 10%, transparent);"></div> </div> <header class="sticky top-0 z-40 border-b border-line backdrop-blur-sm" style="background: color-mix(in oklab, var(--shell) 88%, transparent);"> <div class="mx-auto flex h-14 max-w-[1600px] items-center gap-3 px-4 sm:px-6"> <!-- nav toggle: same breadcrumb symbol opens/closes the drawer on mobile
+         and collapses/expands the rail on desktop (aria-expanded reflects both) --> <button type="button" data-sidebar-toggle class="btn-ghost -ml-1 grid h-9 w-9 place-items-center rounded-md" aria-label="Toggle navigation" aria-expanded="false"> <svg data-sidebar-icon="closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"></path></svg> <svg data-sidebar-icon="open" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m6 6 12 12M18 6 6 18" stroke-linecap="round"></path></svg> </button> <a href="/de-agent/" class="flex items-center gap-2 rounded-md pr-2" aria-label="DE//AGENT home"> <span class="inline-flex items-center gap-2 select-none"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0"> <rect x="1.25" y="1.25" width="21.5" height="21.5" rx="4" stroke="var(--accent)" stroke-width="1.5"></rect> <path d="M6 12h4.2l2-4.4 2 8.8 1.6-4.4H18" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <span class="font-mono text-[0.9rem] font-semibold tracking-tight text-fg">
+DE<span class="text-accent">//</span>AGENT
+</span> </span> </a> <!-- Full nav at lg+ only: at md (768px) the 4-6 items + right cluster
+         overflowed by 54px on every page (audit P0-2). --> <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation"> <a href="/de-agent/roadmap" class="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6" stroke-linecap="round"/></svg> Roadmap </a><a href="/de-agent/marketplace" class="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Marketplace </a><a href="/de-agent/categories" class="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg> Categories </a><a href="/de-agent/tutorials" class="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 6.5C10.5 5 8.5 4.5 6 4.5c-1.2 0-2.3.2-3 .5v13c.7-.3 1.8-.5 3-.5 2.5 0 4.5.5 6 2 1.5-1.5 3.5-2 6-2 1.2 0 2.3.2 3 .5v-13c-.7-.3-1.8-.5-3-.5-2.5 0-4.5.5-6 2Z"/><path d="M12 6.5v13" stroke-linecap="round"/></svg> Tutorials </a><a href="/de-agent/runbooks" class="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 12h4l2.5-7 5 14 2.5-7h4" stroke-linecap="round" stroke-linejoin="round"/></svg> Runbooks </a><a href="/de-agent/docs" class="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 font-mono text-sm transition-colors text-muted hover:text-fg hover:bg-surface-2"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h6" stroke-linecap="round"/></svg> Docs </a> </nav> <div class="ml-auto flex items-center gap-1.5"> <button type="button" data-cmd-palette-open class="btn btn-sm gap-1.5 text-muted" aria-label="Open command palette" title="Open command palette (Ctrl/⌘K)"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg> <span class="hidden xl:inline">Search</span> <span class="hidden items-center gap-0.5 xl:inline-flex"> <kbd class="kbd" data-platform-hint> <span class="kbd-mac">⌘K</span> <span class="kbd-other">Ctrl K</span> </kbd> </span> </button> <button type="button" data-theme-toggle class="btn-ghost grid h-9 w-9 place-items-center rounded-md" aria-label="Toggle color theme" title="Toggle theme"> <svg data-theme-icon="dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round"></path></svg> <svg data-theme-icon="light" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" stroke-linecap="round"></path></svg> </button> <a href="https://github.com/XMIRTUNJAY/de-agent-platform" target="_blank" rel="noopener" class="btn-ghost hidden h-9 w-9 place-items-center rounded-md sm:grid" aria-label="Source repository"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"></path></svg> </a> <a href="/de-agent/marketplace" class="btn btn-sm btn-accent">Explore</a> </div> </div> </header> <!-- Command Palette --> <div class="cmd-palette" id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette"> <div class="p-4 border-b border-line"> <input type="search" class="cmd-input" placeholder="Type a command or search..." aria-label="Command palette search" autocomplete="off" spellcheck="false"> </div> <div class="cmd-results" id="cmd-results" role="listbox"></div> <div class="px-4 py-2 border-t border-line text-xs text-dim font-mono"> <kbd class="kbd"><span class="kbd-mac">⌘K</span><span class="kbd-other">Ctrl K</span></kbd> to open · <kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> to navigate · <kbd class="kbd">Enter</kbd> to select · <kbd class="kbd">Esc</kbd> to close
+</div> </div> <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div> <div class="mx-auto flex max-w-[1600px]"> <nav id="sidebar" class="sidebar" aria-label="Site navigation"> <div class="px-3 pb-8"> <div class="mb-5"> <p class="mono-label px-2 pb-1.5">Get Started</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h14" stroke-linecap="round"/></svg> </span> <span class="truncate">Introduction</span> </span>  </a> </li><li> <a href="/de-agent/docs/how-it-works" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6L14.5 12l-2.5-2.5 2.7-3.2Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">How the platform works</span> </span>  </a> </li><li> <a href="/de-agent/roadmap" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6" stroke-linecap="round"/></svg> </span> <span class="truncate">The Learning Roadmap</span> </span>  </a> </li><li> <a href="/de-agent/docs/verification" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Verification Levels</span> </span>  </a> </li><li> <a href="/de-agent/docs/security" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Security &amp; Trust</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Learn</p> <ul class="space-y-px"> <li> <a href="/de-agent/taxonomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg> </span> <span class="truncate">Taxonomy</span> </span>  </a> </li><li> <a href="/de-agent/categories" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg> </span> <span class="truncate">All categories</span> </span>  </a> </li><li> <a href="/de-agent/tutorials" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 6.5C10.5 5 8.5 4.5 6 4.5c-1.2 0-2.3.2-3 .5v13c.7-.3 1.8-.5 3-.5 2.5 0 4.5.5 6 2 1.5-1.5 3.5-2 6-2 1.2 0 2.3.2 3 .5v-13c-.7-.3-1.8-.5-3-.5-2.5 0-4.5.5-6 2Z"/><path d="M12 6.5v13" stroke-linecap="round"/></svg> </span> <span class="truncate">Tutorials</span> </span>  </a> </li><li> <a href="/de-agent/guides" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h14" stroke-linecap="round"/></svg> </span> <span class="truncate">Guides</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Marketplace</p> <ul class="space-y-px"> <li> <a href="/de-agent/marketplace" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> </span> <span class="truncate">Browse all</span> </span>  </a> </li><li> <a href="/de-agent/skills" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6L14.5 12l-2.5-2.5 2.7-3.2Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Skills</span> </span>  </a> </li><li> <a href="/de-agent/mcp" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> </span> <span class="truncate">MCP servers</span> </span>  </a> </li><li> <a href="/de-agent/plugins" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> </span> <span class="truncate">Plugins</span> </span>  </a> </li><li> <a href="/de-agent/agents" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> </span> <span class="truncate">Agents</span> </span>  </a> </li><li> <a href="/de-agent/hooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> </span> <span class="truncate">Hooks</span> </span>  </a> </li><li> <a href="/de-agent/templates" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> </span> <span class="truncate">Templates &amp; starters</span> </span>  </a> </li><li> <a href="/de-agent/references" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h6" stroke-linecap="round"/></svg> </span> <span class="truncate">References</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Build</p> <ul class="space-y-px"> <li> <a href="/de-agent/projects" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> </span> <span class="truncate">Practical projects</span> </span>  </a> </li><li> <a href="/de-agent/patterns" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6" stroke-linecap="round"/></svg> </span> <span class="truncate">Architecture patterns</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Operate</p> <ul class="space-y-px"> <li> <a href="/de-agent/runbooks" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 12h4l2.5-7 5 14 2.5-7h4" stroke-linecap="round" stroke-linejoin="round"/></svg> </span> <span class="truncate">Production playbooks</span> </span>  </a> </li><li> <a href="/de-agent/agents/incident-assistant" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Incident assistant</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Agentic Data Engineering</p> <ul class="space-y-px"> <li> <a href="/de-agent/agentic" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6" stroke-linecap="round"/></svg> </span> <span class="truncate">Capabilities overview</span> </span>  </a> </li><li> <a href="/de-agent/docs/skill-anatomy" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h6" stroke-linecap="round"/></svg> </span> <span class="truncate">Skill anatomy</span> </span>  </a> </li><li> <a href="/de-agent/docs/tooling" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6L14.5 12l-2.5-2.5 2.7-3.2Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Tool &amp; MCP contract</span> </span>  </a> </li><li> <a href="/de-agent/docs/trust-rules" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Trust rule catalog</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Reference</p> <ul class="space-y-px"> <li> <a href="/de-agent/docs/content-model" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h6" stroke-linecap="round"/></svg> </span> <span class="truncate">Content object model</span> </span>  </a> </li><li> <a href="/de-agent/docs/scoring" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 12h4l2.5-7 5 14 2.5-7h4" stroke-linecap="round" stroke-linejoin="round"/></svg> </span> <span class="truncate">Source quality score</span> </span>  </a> </li><li> <a href="/de-agent/docs/ingestion" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6L14.5 12l-2.5-2.5 2.7-3.2Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Ingestion pipeline</span> </span>  </a> </li><li> <a href="/de-agent/docs/relationships" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg> </span> <span class="truncate">Relationships graph</span> </span>  </a> </li><li> <a href="/de-agent/docs/monetization" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Monetization policy</span> </span>  </a> </li><li> <a href="/de-agent/docs/measurement" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 12h4l2.5-7 5 14 2.5-7h4" stroke-linecap="round" stroke-linejoin="round"/></svg> </span> <span class="truncate">Measurement</span> </span>  </a> </li><li> <a href="/de-agent/docs/maintenance" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6L14.5 12l-2.5-2.5 2.7-3.2Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Maintenance</span> </span>  </a> </li> </ul> </div><div class="mb-5"> <p class="mono-label px-2 pb-1.5">Curation</p> <ul class="space-y-px"> <li> <a href="/de-agent/admin" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z" stroke-linejoin="round"/></svg> </span> <span class="truncate">Curation workflow</span> </span>  </a> </li><li> <a href="/de-agent/admin/queue" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h6" stroke-linecap="round"/></svg> </span> <span class="truncate">Review queue</span> </span>  </a> </li><li> <a href="/de-agent/admin/health" class="flex items-center justify-between gap-2 rounded-md px-2 py-2 font-mono text-sm leading-5 transition-colors text-muted hover:bg-surface-2 hover:text-fg"> <span class="flex min-w-0 items-center gap-2"> <span class="grid w-4 shrink-0 place-items-center text-dim"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class aria-hidden="true"><path d="M3 12h4l2.5-7 5 14 2.5-7h4" stroke-linecap="round" stroke-linejoin="round"/></svg> </span> <span class="truncate">Registry health</span> </span>  </a> </li> </ul> </div> </div> </nav> <main id="main" class="min-w-0 flex-1">  <section class="col section-sm" style="padding-top: 2.5rem; max-width: 76ch;"> <p class="kicker">Learning path</p> <h1 style="font-size: var(--text-2xl); font-weight: 500; margin-top: 0.5rem;">Engineering Foundations</h1> <p class="text-dim font-mono text-sm" style="margin-top: 0.4rem;">Guided path · 1 stage · 4 resources</p> <section id="path" style="margin-top: 2.25rem;"> <h2 style="font-size: var(--text-xl); font-weight: 500;">The guided path</h2> <div class="prose-de" style="margin-top: 0.6rem;"><p>Filesystems, encoding, memory vs disk, networks and the operating vocabulary behind every pipeline. This path sequences the category's <strong>4</strong> resources by roadmap stage and composite score — work top-down inside each step.</p><h3 style="margin-top:1.2rem;font-size:1.05rem;font-weight:600">Foundations</h3><ol><li><a href="/de-agent/tutorials/foundations-twelve-factor-pipelines">The twelve-factor vocabulary for pipeline jobs</a> <span class="font-mono text-dim text-xs">34.15</span> — The twelve-factor vocabulary for pipeline jobs</li><li><a href="/de-agent/tutorials/foundations-capstone-checklist">Capstone — the foundations checklist</a> <span class="font-mono text-dim text-xs">34.15</span> — Capstone — the foundations checklist</li><li><a href="/de-agent/references/twelve-factor">The Twelve-Factor App</a> <span class="font-mono text-dim text-xs">27.7</span> — The Twelve-Factor App</li><li><a href="/de-agent/references/fundamentals-of-data-engineering">Fundamentals of Data Engineering (O'Reilly)</a> <span class="font-mono text-dim text-xs">26.7</span> — Fundamentals of Data Engineering (O'Reilly)</li></ol></div> </section><section id="objectives" style="margin-top: 2.25rem;"> <h2 style="font-size: var(--text-xl); font-weight: 500;">What you will be able to do</h2> <div class="prose-de" style="margin-top: 0.6rem;"><ul><li>Name the twelve-factor principles that map onto pipeline jobs</li><li>Treat config, backing services, logs, and disposability as shared vocabulary</li><li>Connect the methodology to the data engineering lifecycle</li><li>Run a design review using the six sources' own claims</li><li>Assign each format its lane and each job its twelve-factor vocabulary</li><li>Know where to look when a claim needs verification</li></ul></div> </section><section id="cautions" style="margin-top: 2.25rem;"> <h2 style="font-size: var(--text-xl); font-weight: 500;">Before you start</h2> <div class="prose-de" style="margin-top: 0.6rem;"><p>Verification on these records: 4 community. Nothing here is independently audited — the <a href="/de-agent/docs/trust-rules">trust scan</a> and your own review are the controls.</p></div> </section><section id="context" style="margin-top: 2.25rem;"> <h2 style="font-size: var(--text-xl); font-weight: 500;">Where this sits</h2> <div class="prose-de" style="margin-top: 0.6rem;"><p>Phase 1 of the roadmap. Stage context: <a href="/stages/foundations">Foundations</a> · <a href="/compare/engineering-foundations">side-by-side comparison</a> · <a href="/learn">all learning topics</a></p></div> </section> <p style="margin-top: 2rem;"><a href="/de-agent/roadmap" class="link">← Roadmap</a> · <a href="/learn" class="link">All topics</a></p> </section>  </main> </div> <footer class="mt-24 border-t border-line"> <div class="mx-auto max-w-[1600px] px-4 py-12 sm:px-6"> <div class="grid gap-10 md:grid-cols-[1.4fr_repeat(4,1fr)]"> <div class="max-w-xs"> <span class="inline-flex items-center gap-2 select-none"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0"> <rect x="1.25" y="1.25" width="21.5" height="21.5" rx="4" stroke="var(--accent)" stroke-width="1.5"></rect> <path d="M6 12h4.2l2-4.4 2 8.8 1.6-4.4H18" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> <span class="font-mono text-[0.9rem] font-semibold tracking-tight text-fg">
+DE<span class="text-accent">//</span>AGENT
+</span> </span> <p class="mt-3 text-sm leading-relaxed text-muted"> An open registry and learning platform for modern Data Engineering: tutorials, architecture patterns, agent skills, MCP servers, agents, hooks and production runbooks — each with provenance, license, compatibility and verification status. </p> <p class="mono-label mt-4">Learn · Build · Install · Operate</p> </div> <div> <p class="mono-label pb-2">Product</p> <ul class="space-y-1.5"> <li> <a href="/de-agent/roadmap" class="text-sm text-muted transition-colors hover:text-fg">Roadmap</a> </li><li> <a href="/de-agent/marketplace" class="text-sm text-muted transition-colors hover:text-fg">Marketplace</a> </li><li> <a href="/de-agent/projects" class="text-sm text-muted transition-colors hover:text-fg">Projects</a> </li><li> <a href="/de-agent/runbooks" class="text-sm text-muted transition-colors hover:text-fg">Runbooks</a> </li> </ul> </div><div> <p class="mono-label pb-2">Registry</p> <ul class="space-y-1.5"> <li> <a href="/de-agent/skills" class="text-sm text-muted transition-colors hover:text-fg">Skills</a> </li><li> <a href="/de-agent/mcp" class="text-sm text-muted transition-colors hover:text-fg">MCP servers</a> </li><li> <a href="/de-agent/agents" class="text-sm text-muted transition-colors hover:text-fg">Agents</a> </li><li> <a href="/de-agent/hooks" class="text-sm text-muted transition-colors hover:text-fg">Hooks</a> </li> </ul> </div><div> <p class="mono-label pb-2">Reference</p> <ul class="space-y-1.5"> <li> <a href="/de-agent/taxonomy" class="text-sm text-muted transition-colors hover:text-fg">Taxonomy</a> </li><li> <a href="/de-agent/docs/content-model" class="text-sm text-muted transition-colors hover:text-fg">Content model</a> </li><li> <a href="/de-agent/docs/scoring" class="text-sm text-muted transition-colors hover:text-fg">Scoring</a> </li><li> <a href="/de-agent/docs/security" class="text-sm text-muted transition-colors hover:text-fg">Security</a> </li> </ul> </div><div> <p class="mono-label pb-2">Project</p> <ul class="space-y-1.5"> <li> <a href="https://github.com/XMIRTUNJAY/de-agent-platform" target="_blank" rel="noopener" class="text-sm text-muted transition-colors hover:text-fg">Source (GitHub)</a> </li><li> <a href="https://emanisha.in/" target="_blank" rel="noopener" class="text-sm text-muted transition-colors hover:text-fg">eManisha (home)</a> </li><li> <a href="/de-agent/docs/contributing" class="text-sm text-muted transition-colors hover:text-fg">Contribute a resource</a> </li><li> <a href="/de-agent/rss.xml" class="text-sm text-muted transition-colors hover:text-fg">RSS</a> </li><li> <a href="/sitemap-index.xml" class="text-sm text-muted transition-colors hover:text-fg">Sitemap</a> </li> </ul> </div> </div> <div class="mt-10 flex flex-col gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between"> <p class="font-mono text-2xs text-dim">
+© 2026 DE//AGENT · Registry data retains upstream provenance & license.
+</p> <p class="font-mono text-2xs text-dim">
+No fabricated verification. Every status links to its evidence.
+</p> </div> </div> </footer> <script>
+      (function () {
+        // theme toggle
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-theme-toggle]');
+          if (!t) return;
+          var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+          var next = cur === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('de-theme', next); } catch (err) {}
+          document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+            ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== next);
+          });
+        });
+        // sync icons on load
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        document.querySelectorAll('[data-theme-icon]').forEach(function (ic) {
+          ic.classList.toggle('hidden', ic.getAttribute('data-theme-icon') !== cur);
+        });
+
+        // nav toggle — drawer on mobile, rail collapse on desktop; one button
+        var sb = document.getElementById('sidebar');
+        var scrim = document.getElementById('sidebar-scrim');
+        var toggle = document.querySelector('[data-sidebar-toggle]');
+        var DESKTOP_MIN = 1024;
+        function isDesktop() { return window.innerWidth >= DESKTOP_MIN; }
+        function railVisible() {
+          return document.documentElement.getAttribute('data-sidebar') !== 'collapsed';
+        }
+        function syncToggleUi(navOpen) {
+          if (!toggle) return;
+          // navOpen: mobile drawer open OR desktop rail visible
+          toggle.setAttribute('aria-expanded', String(navOpen));
+          toggle.setAttribute('aria-label', navOpen ? 'Close navigation' : 'Open navigation');
+          toggle.querySelectorAll('[data-sidebar-icon]').forEach(function (ic) {
+            ic.classList.toggle('hidden', ic.getAttribute('data-sidebar-icon') === (navOpen ? 'closed' : 'open'));
+          });
+        }
+        function setSidebar(open) {
+          if (!sb) return;
+          sb.classList.toggle('open', open);
+          if (scrim) scrim.classList.toggle('visible', open);
+          syncToggleUi(open);
+          // visibility:hidden (CSS) removes the closed drawer from the a11y
+          // tree and tab order; focus management here.
+          if (open) {
+            var first = sb.querySelector('a');
+            if (first) first.focus();
+          } else if (document.activeElement && sb.contains(document.activeElement) && toggle) {
+            toggle.focus();
+          }
+        }
+        function setRail(visible) {
+          if (visible) {
+            document.documentElement.removeAttribute('data-sidebar');
+          } else {
+            document.documentElement.setAttribute('data-sidebar', 'collapsed');
+          }
+          try { localStorage.setItem('de-sidebar', visible ? 'expanded' : 'collapsed'); } catch (err) {}
+          syncToggleUi(visible);
+        }
+        if (toggle) toggle.addEventListener('click', function () {
+          if (isDesktop()) setRail(!railVisible());
+          else setSidebar(!sb.classList.contains('open'));
+        });
+        if (scrim) scrim.addEventListener('click', function () { setSidebar(false); });
+        // keep state coherent when the viewport crosses the breakpoint
+        window.addEventListener('resize', function () {
+          if (isDesktop()) { sb?.classList.remove('open'); scrim?.classList.remove('visible'); syncToggleUi(railVisible()); }
+        });
+        // initial state: desktop respects the persisted rail preference
+        syncToggleUi(isDesktop() ? railVisible() : false);
+
+        // Command Palette
+        var palette = document.getElementById('cmd-palette');
+        var paletteInput = palette?.querySelector('.cmd-input');
+        var paletteResults = document.getElementById('cmd-results');
+        var paletteOpen = false;
+
+        function openPalette() {
+          if (!palette || paletteOpen) return;
+          paletteOpen = true;
+          palette.classList.add('open');
+          paletteInput?.focus();
+          document.body.style.overflow = 'hidden';
+          renderResults('');
+        }
+        function closePalette() {
+          if (!palette || !paletteOpen) return;
+          paletteOpen = false;
+          palette.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-cmd-palette-open]');
+          if (t) { openPalette(); return; }
+          if (paletteOpen && !palette.contains(e.target)) closePalette();
+        });
+        document.addEventListener('keydown', function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (paletteOpen) closePalette(); else openPalette();
+          }
+          if (e.key === 'Escape') {
+            if (paletteOpen) closePalette();
+            setSidebar(false);
+          }
+          if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+            e.preventDefault();
+            openPalette();
+          }
+        });
+
+        // Selection state lives outside renderResults so typing keeps focus in
+        // the input: arrow keys move a VISUAL selection, Enter navigates from
+        // the input. Items never receive DOM focus (that was the bug that made
+        // full words untypeable — renderResults() stole focus per keystroke).
+        var currentUrls = [];
+        var selectedIdx = 0;
+
+        function updateSelection(next) {
+          selectedIdx = next;
+          if (!paletteResults) return;
+          var items = paletteResults.querySelectorAll('.cmd-item');
+          items.forEach(function (item, i) {
+            var on = i === selectedIdx;
+            item.classList.toggle('selected', on);
+            item.setAttribute('aria-selected', on ? 'true' : 'false');
+            if (on && item.scrollIntoView) item.scrollIntoView({ block: 'nearest' });
+          });
+          if (paletteInput) paletteInput.setAttribute('aria-activedescendant', 'cmd-item-' + selectedIdx);
+        }
+
+        function renderResults(query) {
+          if (!paletteResults) return;
+          var q = (query || '').trim().toLowerCase();
+          var registry = window.__DE_REGISTRY__ || [];
+          var terms = q.split(/\s+/).filter(Boolean);
+          var scored = registry
+            .map(function(r) {
+              var hay = (r.title + ' ' + (r.tagline || '') + ' ' + (r.description || '') + ' ' + (r.tags || []).join(' ') + ' ' + (r.categoryTitle || '') + ' ' + (r.keywords || '')).toLowerCase();
+              var score = 0;
+              for (var i = 0; i < terms.length; i++) {
+                if (r.title.toLowerCase().includes(terms[i])) score += 10;
+                if (r.tags?.some(function(tag) { return tag.toLowerCase().includes(terms[i]); })) score += 5;
+                if (hay.includes(terms[i])) score += 1;
+              }
+              return { r: r, score: score };
+            })
+            .filter(function(x) { return x.score > 0; })
+            .sort(function(a,b) { return b.score - a.score; });
+          // Empty query: list the first eligible resources so the palette is
+          // never a dead "No matches" screen on open. (Wrapped as {r, score}
+          // so both branches share the same render path.)
+          var results = (q ? scored : registry.filter(function(r) { return r.eligibility !== 'retired'; }).map(function(r) { return { r: r, score: 0 }; })).slice(0, 10);
+          currentUrls = results.map(function(x) { return x.r.url; });
+
+          if (!results.length) {
+            paletteResults.innerHTML = '<div class="px-4 py-8 text-center text-dim">No matches for "' + q.replace(/</g, '&lt;') + '"</div>';
+            return;
+          }
+
+          // escape then highlight matched terms in the title (audit S-palette)
+          function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+          function hl(text, terms) {
+            var safe = esc(text);
+            if (!terms.length) return safe;
+            try {
+              var re = new RegExp('(' + terms.map(function(t){ return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')', 'gi');
+              return safe.replace(re, '<mark>$1</mark>');
+            } catch (e) { return safe; }
+          }
+
+          // group by resource type with small category headers
+          var lastCat = null;
+          paletteResults.innerHTML = results.map(function(x, i) {
+            var r = x.r;
+            var verificationLabel = r.verification === 'verified' ? '✓ Verified' : r.verification === 'tested' ? '✓ Tested' : r.verification === 'reviewed' ? '✓ Reviewed' : 'Community';
+            var verificationColor = r.verification === 'verified' ? 'accent' : r.verification === 'tested' ? 'info' : r.verification === 'reviewed' ? 'warn' : 'dim';
+            var cat = (r.categoryTitle || r.typeLabel || '');
+            var catHeader = cat !== lastCat
+              ? '<div class="cmd-cat">' + esc(cat) + '</div>'
+              : '';
+            lastCat = cat;
+            return catHeader +
+              '<div class="cmd-item" id="cmd-item-' + i + '" data-url="' + r.url + '" role="option" aria-selected="false" tabindex="-1">' +
+              '<span class="chip">' + esc(r.typeLabel) + '</span>' +
+              '<span class="flex-1 min-w-0 truncate">' + hl(r.title, terms) + '</span>' +
+              '<span class="chip" style="color: var(--color-' + verificationColor + ')">' + verificationLabel + '</span>' +
+              '<kbd class="kbd ml-auto">Enter</kbd>' +
+            '</div>';
+          }).join('');
+
+          // mouse: click navigates, hover previews selection. DOM focus stays
+          // with the input so typing continues uninterrupted.
+          var items = paletteResults.querySelectorAll('.cmd-item');
+          items.forEach(function(item, i) {
+            item.addEventListener('click', function() {
+              window.location.href = item.dataset.url;
+              closePalette();
+            });
+            item.addEventListener('mousemove', function() {
+              if (selectedIdx !== i) updateSelection(i);
+            });
+          });
+          updateSelection(0);
+        }
+
+        if (paletteInput) {
+          paletteInput.addEventListener('input', function() { renderResults(this.value); });
+          paletteInput.addEventListener('keydown', function(e) {
+            var count = currentUrls.length;
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              if (count) updateSelection((selectedIdx + 1) % count);
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              if (count) updateSelection((selectedIdx - 1 + count) % count);
+            } else if (e.key === 'Enter') {
+              e.preventDefault();
+              if (currentUrls[selectedIdx]) {
+                window.location.href = currentUrls[selectedIdx];
+                closePalette();
+              }
+            }
+          });
+        }
+
+        // registry data for command palette
+        fetch('/de-agent/data/generated/search-index.json')
+          .then(function(r) { return r.json(); })
+          .then(function(d) { window.__DE_REGISTRY__ = d.entries || []; })
+          .catch(function() {});
+
+        // outbound-click hook: bounded in-memory log, no network, no cookies.
+        window.__DE_OUTBOUND__ = [];
+        document.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="http"]') : null;
+          if (!a) return;
+          window.__DE_OUTBOUND__.push({ href: a.href, at: new Date().toISOString() });
+          if (window.__DE_OUTBOUND__.length > 100) window.__DE_OUTBOUND__.shift();
+        });
+
+        // Scroll-triggered reveal animations
+        if ('IntersectionObserver' in window) {
+          var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+          document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+            revealObserver.observe(el);
+          });
+        }
+
+        // Analytics initialization
+        if (window.__DE_ANALYTICS_CONFIG__) {
+          var config = window.__DE_ANALYTICS_CONFIG__;
+          var queue = [];
+          var sessionId = sessionStorage.getItem('de_agent_session_id') || crypto.randomUUID();
+          sessionStorage.setItem('de_agent_session_id', sessionId);
+          var anonymousId = localStorage.getItem('de_agent_anonymous_id') || crypto.randomUUID();
+          localStorage.setItem('de_agent_anonymous_id', anonymousId);
+
+          function flush() {
+            if (!queue.length) return;
+            var events = queue.splice(0, config.batchSize);
+            fetch(config.endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ events, version: '1.0.0' }),
+              keepalive: true,
+            }).catch(function() { queue.unshift.apply(queue, events); });
+          }
+
+          window.trackEvent = function(event, properties) {
+            var base = {
+              session_id: sessionId,
+              anonymous_id: anonymousId,
+              context: {
+                user_agent: navigator.userAgent,
+                locale: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                screen_width: screen.width,
+                screen_height: screen.height,
+              },
+              page: {
+                path: window.location.pathname,
+                referrer: document.referrer || undefined,
+                title: document.title,
+              },
+            };
+            var fullEvent = Object.assign({}, base, { event, timestamp: new Date().toISOString(), properties });
+            queue.push(fullEvent);
+            if (queue.length >= config.batchSize) flush();
+          };
+
+          setInterval(flush, config.flushInterval);
+          window.addEventListener('beforeunload', flush);
+        }
+      })();
+    </script> </body> </html>

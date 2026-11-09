@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# AI answer engines may crawl and cite this site's Marathi-learning
+# content with attribution. (Note: on the GitHub Pages project site,
+# crawlers read the host-root robots.txt — see README Deploy.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://emanisha.in/sitemap-index.xml

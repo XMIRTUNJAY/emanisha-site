@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Off-white textured-feel editorial background -->
+  <rect width="1200" height="630" fill="#fbfaf7"/>
+
+  <!-- Editorial Margin Border Line (very subtle) -->
+  <rect x="60" y="50" width="1080" height="530" fill="none" stroke="#e3dfd7" stroke-width="1"/>
+
+  <!-- Left Content Column -->
+  <g transform="translate(130, 150)">
+    <!-- Eyebrow with blue accent -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="-14" width="8" height="8" fill="#1e40af"/>
+      <text x="22" y="-5" fill="#1e40af" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="700" letter-spacing="4">CLARITY · DAILY INSIGHT</text>
+    </g>
+
+    <!-- Thin Blue Rule Line -->
+    <line x1="0" y1="26" x2="940" y2="26" stroke="#2563eb" stroke-width="1.5"/>
+
+    <!-- Serif Headline (Editorial Magazine style) -->
+    <text x="0" y="140" fill="#111827" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="76" font-weight="700" letter-spacing="-1">Big ideas.</text>
+    <text x="0" y="225" fill="#111827" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="76" font-weight="700" letter-spacing="-1">Small scrolls.</text>
+
+    <!-- Editorial subhead / excerpt -->
+    <text x="0" y="295" fill="#4b5563" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="24" font-style="italic">Bite-sized synthesis of worldview-shaping journalism &amp; thought.</text>
+  </g>
+
+  <!-- Editorial Meta Footer -->
+  <g transform="translate(130, 525)">
+    <line x1="0" y1="-20" x2="940" y2="-20" stroke="#e3dfd7" stroke-width="1"/>
+    <text x="0" y="10" fill="#1f2937" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" letter-spacing="1">STUDENT NEWS BRIEFING</text>
+    <text x="270" y="10" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16">|</text>
+    <text x="290" y="10" fill="#6b7280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16">CURATED BY eMANISHA</text>
+    <text x="940" y="10" text-anchor="end" fill="#1e40af" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">EDITION 2025 →</text>
+  </g>
+</svg>

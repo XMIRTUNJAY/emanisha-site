@@ -1,0 +1,22 @@
+{
+ "generated_at": "2026-10-24T07:06:03.763Z",
+ "groups": [
+  {
+   "key": "fork:mcp",
+   "reason": "possible-fork",
+   "ids": [
+    "mcp-aws",
+    "mcp-snowflake"
+   ]
+  },
+  {
+   "key": "url:parquet.apache.org/docs",
+   "reason": "same-url",
+   "ids": [
+    "ref-parquet-docs",
+    "ref-parquet-format"
+   ]
+  }
+ ],
+ "checked": 300
+}

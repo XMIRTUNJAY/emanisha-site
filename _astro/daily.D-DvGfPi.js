@@ -1,0 +1,1 @@
+function e(e,t,n){if(n<=0)return 0;let r=e+`:`+t,i=2166136261;for(let e=0;e<r.length;e++)i^=r.charCodeAt(e),i=Math.imul(i,16777619);return(i>>>0)%n}function t(e=new Date){return e.toISOString().slice(0,10)}export{t as n,e as t};

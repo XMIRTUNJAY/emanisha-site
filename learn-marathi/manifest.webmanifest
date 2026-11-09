@@ -1,0 +1,18 @@
+{
+  "name": "Bol Marathi — Learn Marathi",
+  "short_name": "Bol Marathi",
+  "description": "Learn Marathi from Hindi or English. 156 free lessons, 1000+ words.",
+  "start_url": "/learn-marathi/",
+  "scope": "/learn-marathi/",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone"],
+  "background_color": "#fdfbf7",
+  "theme_color": "#8e2d12",
+  "icons": [
+    { "src": "/learn-marathi/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/learn-marathi/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["education", "books"],
+  "lang": "en",
+  "dir": "ltr"
+}
