@@ -15,6 +15,9 @@ type Props = {
 	about?: string;
 	meta?: string[];
 	alternates?: { lang: string; href: string }[];
+	/** Absolute path (with base) used as the canonical when this page is a
+	 *  consolidated duplicate of richer content elsewhere. */
+	canonicalOverride?: string;
 	h1?: string;
 	/** When the page renders its own <h1> (e.g. a rich header), suppress the layout's. */
 	hideHeading?: boolean;
@@ -22,14 +25,14 @@ type Props = {
 	faq?: { question: string; answer: string }[];
 };
 
-const { title, description, kicker, crumbs, canonicalPath, about, meta = [], alternates, h1, hideHeading = false, items, faq = [] } = Astro.props;
+const { title, description, kicker, crumbs, canonicalPath, about, meta = [], alternates, canonicalOverride, h1, hideHeading = false, items, faq = [] } = Astro.props;
 // Absolute URLs must include the base (e.g. /learn-marathi) — Astro.url.pathname has it, Astro.site does not.
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const abs = (href: string) => new URL(href, Astro.site).toString();
 const homeUrl = new URL('/learn-marathi/', Astro.site).toString();
 ---
 
-<Base title={title} description={description} alternates={alternates}>
+<Base title={title} description={description} alternates={alternates} canonicalOverride={canonicalOverride}>
 	<JsonLd
 		headline={title}
 		description={description}

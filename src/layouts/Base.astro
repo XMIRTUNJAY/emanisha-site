@@ -25,19 +25,21 @@ type Props = {
 	ogImage?: string;
 	noindex?: boolean;
 	alternates?: { lang: string; href: string }[];
+	/** Override the self-referencing canonical (consolidated duplicates). */
+	canonicalOverride?: string;
 	lang?: string;
 	crumbs?: { label: string; href: string }[];
 	/** Opt-in: let the page manage its own full-bleed sections (homepage / landing pages). */
 	wide?: boolean;
 };
 
-const { title, description, ogImage, noindex, alternates, lang = 'en', crumbs = [], wide = false } = Astro.props;
+const { title, description, ogImage, noindex, alternates, canonicalOverride, lang = 'en', crumbs = [], wide = false } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
-		<BaseHead title={title} description={description} imageUrl={ogImage} noindex={noindex} alternates={alternates} />
+		<BaseHead title={title} description={description} imageUrl={ogImage} noindex={noindex} alternates={alternates} canonicalOverride={canonicalOverride} />
 		{analyticsSrc && (
 			<script src={analyticsSrc} defer data-domain={analyticsDomain} {...analyticsAttrs}></script>
 		)}

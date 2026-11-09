@@ -12,11 +12,20 @@ interface Props {
 	imageUrl?: string;
 	noindex?: boolean;
 	alternates?: { lang: string; href: string }[];
+	/**
+	 * Absolute path (with the /learn-marathi base) to use as the canonical URL
+	 * instead of the self-referencing default. Used to consolidate pages that
+	 * target the same intent, e.g. /learn-marathi/how-to-say-X/ →
+	 * /learn-marathi/blog/how-to-say-X/.
+	 */
+	canonicalOverride?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = canonicalOverride
+	? new URL(canonicalOverride, Astro.site)
+	: new URL(Astro.url.pathname, Astro.site);
 const base = '/learn-marathi/'.replace(/\/$/, '');
-const { title, description, imageUrl, noindex = false, alternates = [] } = Astro.props;
+const { title, description, imageUrl, noindex = false, alternates = [], canonicalOverride } = Astro.props;
 // Per-page share cards resolve through src/lib/art.ts — the single source of
 // truth for page art — so the social card always matches the visible hero.
 // Explicit imageUrl still wins; routes without art fall back to a section card.
