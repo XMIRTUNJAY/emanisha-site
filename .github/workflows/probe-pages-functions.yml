@@ -1,0 +1,52 @@
+# TEMPORARY probe - determine where GitHub Pages expects function code.
+# Creates the same probe at several plausible paths so one deploy reveals
+# which layout the runtime picks up.
+name: Probe Pages Functions layout
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build probe tree
+        run: |
+          mkdir -p probe/functions/probe-a probe/functions/api probe/public/functions/probe-b probe/dist/functions/probe-c
+          node -e "
+            const fs=require('fs');
+            const src=\`export async function onRequest() {
+              return new Response(JSON.stringify({ ok: true, where: 'PROBE' }), {
+                status: 200,
+                headers: { 'content-type': 'application/json' },
+              });
+            }\`;
+            for (const p of ['probe/functions/probe-a/probe.js','probe/functions/api/probe.js','probe/public/functions/probe-b/probe.js','probe/dist/functions/probe-c/probe.js']) {
+              fs.writeFileSync(p, src);
+            }
+          "
+          find probe -type f | sed 's/^/  /'
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: probe
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+        with:
+          timeout: 1800000
