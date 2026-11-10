@@ -2,8 +2,9 @@
 import { BOL_MARATHI_APP } from '../data/app';
 
 // ONE shared waitlist form. Every email capture on the site uses this.
-// Posts to the bundled PHP endpoint (/api/contact.php, kind=notify).
-// Classic posts redirect to _next; the endpoint answers JSON to fetch.
+// Posts to the GitHub Pages Function (/api/contact, kind=notify), which
+// delivers to the site owner. The submit is handled in JS so the reader sees
+// a status message instead of the endpoint's JSON.
 // No mailto anywhere: if the endpoint is empty the build prints a warning
 // (below) and the form renders disabled with a contact link instead.
 type Props = {
@@ -70,6 +71,7 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 	<input type="text" name="website" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true" />
 	<button type="submit" disabled={!action}>{buttonLabel ?? t.button}</button>
 	{!action && <p class="note">{t.disabled}</p>}
+	<p class="waitlist-status" role="status" aria-live="polite" data-waitlist-status hidden></p>
 </form>
 
 <script is:inline>
@@ -80,6 +82,42 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 				el.value = document.referrer || '';
 			});
 		} catch (e) {}
+
+		// Submit through fetch so the reader gets a status message rather than
+		// the endpoint's JSON. Each form on the page handles itself.
+		document.querySelectorAll('form.waitlist-form').forEach((form) => {
+			const status = form.querySelector('[data-waitlist-status]');
+			const button = form.querySelector('button[type="submit"]');
+			if (!status || !button) return;
+
+			form.addEventListener('submit', async (event) => {
+				event.preventDefault();
+				const original = button.textContent;
+				button.disabled = true;
+				button.textContent = '…';
+				status.hidden = false;
+				status.textContent = 'Sending…';
+
+				const data = Object.fromEntries(new FormData(form));
+				try {
+					const res = await fetch(form.getAttribute('action') || '/api/contact', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(data),
+					});
+					const body = await res.json().catch(() => ({ ok: false }));
+					if (!res.ok || !body.ok) throw new Error(body.error || 'failed');
+					status.textContent = 'Thanks — you are on the list.';
+					form.reset();
+				} catch (error) {
+					status.textContent =
+						'Could not sign you up right now. Please try again, or email mrxubr@gmail.com.';
+				} finally {
+					button.disabled = false;
+					button.textContent = original;
+				}
+			});
+		});
 	})();
 </script>
 
@@ -139,6 +177,15 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 		font-size: 0.9rem;
 		color: rgb(var(--gray));
 		margin: 0.5em 0 0 0;
+	}
+	.waitlist-form .waitlist-status {
+		font-size: 0.9rem;
+		line-height: 1.4;
+		color: rgb(var(--gray-dark));
+		margin: 0.5em 0 0 0;
+	}
+	.waitlist-form .waitlist-status[hidden] {
+		display: none;
 	}
 	.vh {
 		position: absolute;

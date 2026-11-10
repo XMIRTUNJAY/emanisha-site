@@ -759,10 +759,10 @@ const description =
 	}
 	if (routeItems.length) setRoute('bol');
 
-	// forms — POST to the bundled PHP endpoint (/api/contact.php), which mails
-	// the site owner. Same-origin + relative URL, so lift-and-shift safe.
+	// forms — POST to the GitHub Pages Function (/api/contact), which delivers
+	// to the site owner. Same-origin + relative URL, so lift-and-shift safe.
 	async function postSite(data: Record<string, unknown>) {
-		const res = await fetch('/api/contact.php', {
+		const res = await fetch('/api/contact', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(data),

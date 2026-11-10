@@ -19,10 +19,10 @@ export const BOL_MARATHI_APP = {
   // Used only when the app is live or in beta; otherwise pages fall
   // back to the waitlist form.
   deepLinkBase: 'bolmarathi://practice',
-  // Waitlist: every email capture posts here (bundled PHP endpoint that
-  // mails the site owner — no third party). Classic form posts redirect
-  // to _next; fetch posts get JSON. Empty = footer shows mailto too.
-  waitlistFormAction: '/api/contact.php',
+  // Waitlist: every email capture posts here. The target is the GitHub Pages
+  // Function at /api/contact, which delivers to the site owner — no third
+  // party in the page, no secret in the repo. Empty = footer shows mailto too.
+  waitlistFormAction: '/api/contact',
   waitlistSubject: 'Notify me — Bol Marathi launch',
   // App walkthrough in tab-flow order: Learn → Practice → Progress → Profile.
   screenshots: [

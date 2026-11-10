@@ -1,18 +1,17 @@
-# Build and publish deploy branch — https://emanisha.in
+# Build and publish to GitHub Pages — https://emanisha.in
 #
-# On every push to main: build the site, then publish the finished dist/
-# contents to the `deploy` branch. That single published branch feeds:
-#   1. GitHub Pages (Settings → Pages, source: branch `deploy`) — custom
-#      domain emanisha.in via public/CNAME, which Astro copies to dist/.
-#   2. Hostinger's Git integration (hPanel → Git), which historically pulled
-#      this branch into public_html — no FTP. This reference is kept until
-#      the Hostinger hosting subscription is cancelled; DNS for emanisha.in
-#      points to GitHub Pages, so Hostinger no longer receives web traffic.
+# Hostinger provides the domain and DNS only; all content and all server-side
+# code are served by GitHub. On every push to main this workflow builds the
+# site and publishes it through the official Pages actions, which also carry
+# any Pages Functions (public/functions/) in the same artifact.
 #
 # DNS (at Hostinger): @ → 185.199.108-111.153 (GitHub), www → CNAME
 #   xmirtunjay.github.io. See docs in repo for the migration notes.
+#
+# Pages: Settings → Pages, source = "GitHub Actions" (build type: workflow).
+# The CNAME lives in public/CNAME, which Astro copies into dist/.
 
-name: Build and publish deploy branch
+name: Build and publish to GitHub Pages
 
 on:
   push:
@@ -20,10 +19,18 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time. In-progress runs are not cancelled: a half-written
+# site is worse than a slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -73,10 +80,22 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Publish dist/ to the deploy branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: deploy
-          force_orphan: true
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

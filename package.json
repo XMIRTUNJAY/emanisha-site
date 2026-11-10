@@ -12,7 +12,7 @@
     "dhyaana:playlists": "node ./tools/sync-dhyaana-playlists.mjs",
     "dhyaana:playlists:check": "node ./tools/sync-dhyaana-playlists.mjs --check",
     "dhyaana:og": "node ./tools/make-og-dhyaana.mjs",
-    "prebuild": "node ./tools/validate-content.mjs && node --experimental-strip-types ./tools/validate-games.mts && node ./tools/build-search-index.mjs",
+    "prebuild": "node ./tools/validate-content.mjs && node --experimental-strip-types ./tools/validate-games.mts && node ./tools/build-search-index.mjs && node ./tools/build-form-function.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "test": "node --test --experimental-strip-types \"tests/*.test.ts\"",
