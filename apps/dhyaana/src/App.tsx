@@ -4,6 +4,7 @@ import { WorldExperience } from "./components/WorldExperiences";
 import { YoutubePlayer } from "./components/YoutubePlayer";
 import type { PlaylistVideo } from "./content/youtube";
 import { journeys, World, WorldId, worlds } from "./content/content";
+import { earnsPartialCredit } from "./content/thresholds";
 import {
   completedVideos,
   currentStreak,
@@ -504,7 +505,9 @@ function Player({
       close();
       return;
     }
-    if (isVideo && elapsed >= 5) {
+    // Credit is proportional to the clip: a 10s short counts once ~4s has
+    // been watched, not at a flat 5s.
+    if (isVideo && earnsPartialCredit(elapsed, videoDuration)) {
       completeRef.current(elapsed, false, videoDuration);
     } else if (!isVideo && elapsed >= 30) {
       completeRef.current(elapsed, false);

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { isComplete } from "../content/thresholds";
 
 /* The YouTube IFrame API attaches itself to window. */
 declare global {
@@ -108,7 +109,9 @@ export function YoutubePlayer({ videoId, title, onProgress, onEnded }: Props) {
           const duration = Number(current.getDuration?.() ?? 0);
           const seconds = Number(current.getCurrentTime?.() ?? 0);
           callbacks.current.onProgress?.(seconds, duration);
-          if (duration > 0 && seconds / duration >= 0.9 && !endedRef.current) {
+          // Completion is proportional to the clip: a 10s short counts as
+          // watched once ~9s of it has played.
+          if (isComplete(seconds, duration) && !endedRef.current) {
             endedRef.current = true;
             callbacks.current.onEnded?.(seconds, duration);
           }

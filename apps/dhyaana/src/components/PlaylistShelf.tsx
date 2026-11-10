@@ -1,4 +1,5 @@
 import type { WorldId } from "../content/content";
+import { earnsPartialCredit } from "../content/thresholds";
 import type { LocalState } from "../storage";
 import {
   playlistUrl,
@@ -37,7 +38,9 @@ export function PlaylistShelf({ world, state, onPlay, heading, intro, tone = "li
         <div>
           <SectionLabel>Watch &amp; listen</SectionLabel>
           <h2>{heading ?? "From the Dhyaana channel."}</h2>
-          <p>{intro ?? "Short practices you can follow now. Completed videos are remembered on this device."}</p>
+          <p>
+            {intro ?? "Ten-second practices you can watch right here. What you watch is remembered on this device."}
+          </p>
         </div>
         <div className="watch-score">
           <strong>
@@ -55,7 +58,9 @@ export function PlaylistShelf({ world, state, onPlay, heading, intro, tone = "li
         {videos.map((video) => {
           const entry = state.videos[video.id];
           const done = entry?.completed ?? false;
-          const partial = !done && entry && entry.secondsWatched > 5;
+          // Partial progress is proportional to the clip length.
+          const partial =
+            !done && entry ? earnsPartialCredit(entry.secondsWatched, entry.duration) : false;
           // Real progress, so the bar reflects how far through the video you are.
           const watchedPercent = entry?.duration
             ? Math.min(100, Math.round((entry.secondsWatched / entry.duration) * 100))
@@ -93,7 +98,7 @@ export function PlaylistShelf({ world, state, onPlay, heading, intro, tone = "li
                   ? "Completed"
                   : partial
                     ? `${watchedPercent}% watched · ${video.playlistTitle}`
-                    : `${video.playlistTitle} · in-app`}
+                    : `${video.duration ? `${video.duration}s · ` : ""}${video.playlistTitle}`}
               </small>
             </button>
           );

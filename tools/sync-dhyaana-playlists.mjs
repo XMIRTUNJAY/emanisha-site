@@ -97,7 +97,34 @@ async function fetchPlaylist(id) {
     for (const value of Object.values(node)) walk(value);
   };
   walk(data);
+
+  // Fetch the real clip length so the app can show it and apply proportional
+  // completion rules without asking YouTube at runtime.
+  await Promise.all(
+    videos.map(async (video) => {
+      video.duration = await fetchDuration(video.id);
+    }),
+  );
+
   return videos;
+}
+
+/** Clip length in seconds, or 0 when it cannot be read. */
+async function fetchDuration(videoId) {
+  try {
+    const res = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+      headers: {
+        'user-agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36',
+      },
+      signal: AbortSignal.timeout(20000),
+    });
+    const html = await res.text();
+    const match = html.match(/"lengthSeconds":"(\d+)"/);
+    return match ? parseInt(match[1], 10) : 0;
+  } catch {
+    return 0;
+  }
 }
 
 const existing = JSON.parse(readFileSync(manifestPath, 'utf8'));

@@ -3,7 +3,7 @@ import type { WorldId } from "../content/content";
 
 type RawPlaylist = {
   slug: string;
-  videos: { id: string; title: string; thumb: string }[];
+  videos: { id: string; title: string; thumb: string; duration?: number }[];
 };
 
 const rawManifest = raw as Record<string, RawPlaylist>;
@@ -14,22 +14,22 @@ const PLAYLIST_META: Record<
 > = {
   "PLLGkwcqLguF0": {
     title: "Guided Meditation",
-    description: "Short voice-led sessions for beginners, daily stillness and mindful attention.",
+    description: "Ten-second pauses for breath, body and attention.",
     orientation: "portrait",
   },
   "PLXbdg1tmSWT4": {
     title: "Sleep & Yoga Nidra",
-    description: "Slow, voice-led practices for the end of the day.",
+    description: "Short cues for letting the day go.",
     orientation: "portrait",
   },
   "PLD4zM6EtlGR8": {
     title: "Mantra & Sacred Sound",
-    description: "Japa, chant and attentive listening.",
+    description: "Japa, chant and a moment of listening.",
     orientation: "portrait",
   },
   "PLdt6td6NsCOY": {
     title: "Breathwork & Pranayama",
-    description: "Gentle breath rhythms you can follow anywhere.",
+    description: "One breath cycle you can follow anywhere.",
     orientation: "portrait",
   },
   "PLTgSmnHmHk0I": {
@@ -39,7 +39,7 @@ const PLAYLIST_META: Record<
   },
   "PLej-dbaT8bdM": {
     title: "Yoga & Stretch",
-    description: "Slow movement for releasing the body.",
+    description: "A few seconds of movement to release the body.",
     orientation: "portrait",
   },
   "PLa3NfSBA3Ahs": {
@@ -60,7 +60,7 @@ export type Playlist = {
   title: string;
   description: string;
   orientation: "portrait" | "landscape";
-  videos: { id: string; title: string; thumb: string }[];
+  videos: { id: string; title: string; thumb: string; duration?: number }[];
 };
 
 export type PlaylistVideo = {
@@ -70,6 +70,8 @@ export type PlaylistVideo = {
   playlistId: string;
   playlistTitle: string;
   orientation: "portrait" | "landscape";
+  /** Clip length in seconds, when known. */
+  duration?: number;
 };
 
 export const playlists: Playlist[] = Object.entries(rawManifest).map(([id, value]) => {

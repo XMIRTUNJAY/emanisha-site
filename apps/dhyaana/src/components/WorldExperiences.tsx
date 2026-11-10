@@ -83,7 +83,7 @@ function Dhyana({
         state={state}
         onPlay={playVideo}
         heading="Sit with a voice."
-        intro="Short guided meditations from the Dhyaana channel. Watch one here and it is marked complete."
+        intro="Ten-second guided pauses from the Dhyaana channel. Watch one here and it joins your record."
       />
     </>
   );
@@ -149,7 +149,7 @@ function KnowledgeLibrary({
         state={state}
         onPlay={playVideo}
         heading="Wisdom, spoken."
-        intro="Short reflections on Vedic ideas. Each completed video adds to your study record."
+        intro="Ten-second reflections on Vedic ideas. Each one you watch adds to your study record."
       />
     </>
   );
@@ -236,7 +236,7 @@ function Nidra({
         onPlay={playVideo}
         tone="dark"
         heading="Let a voice carry you down."
-        intro="Short sleep and Yoga Nidra practices. Watch one in-app and it is remembered for tonight."
+        intro="Ten-second cues for sleep and Yoga Nidra. Watch one here and it is remembered for tonight."
       />
     </>
   );
@@ -322,7 +322,7 @@ function Prajna({
         state={state}
         onPlay={playVideo}
         heading="A question, then a pause."
-        intro="Short reflections to sit beside your own inquiry."
+        intro="Ten-second reflections to sit beside your own inquiry."
       />
     </>
   );
@@ -412,7 +412,7 @@ function Pranayama({
         state={state}
         onPlay={playVideo}
         heading="Breathe with a guide."
-        intro="Short breath practices from the channel. Completed videos join your practice record."
+        intro="Ten-second breath practices from the channel. What you watch joins your practice record."
       />
     </>
   );
