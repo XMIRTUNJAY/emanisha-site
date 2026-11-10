@@ -1,5 +1,6 @@
 ---
 import { BOL_MARATHI_APP } from '../data/app';
+import { formConfigured } from '../lib/form';
 
 // ONE shared waitlist form. Every email capture on the site uses this.
 // Posts to the GitHub Pages Function (/api/contact, kind=notify), which
@@ -17,9 +18,9 @@ type Props = {
 
 const { context, locale = 'en', layout = 'inline', showMessage = false, buttonLabel } = Astro.props;
 const action = BOL_MARATHI_APP.waitlistFormAction;
-if (!action) {
-	console.warn(`[waitlist] empty waitlistFormAction — form "${context}" renders disabled. Set it in src/data/app.ts.`);
-}
+// The form posts through src/lib/form.ts, so it is enabled whenever the form
+// endpoint is configured — not whenever a native action URL is set.
+const enabled = formConfigured;
 
 const t =
 	locale === 'hi'
@@ -57,10 +58,10 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 		placeholder={t.placeholder}
 		required
 		autocomplete="email"
-		disabled={!action}
+		disabled={!enabled}
 		data-funnel="waitlist_click"
 	/>
-	{showMessage && <textarea name="message" placeholder={t.message} rows="3" disabled={!action}></textarea>}
+	{showMessage && <textarea name="message" placeholder={t.message} rows="3" disabled={!enabled}></textarea>}
 	<input type="hidden" name="kind" value="notify" />
 	<input type="hidden" name="source" value={context} />
 	<input type="hidden" name="_subject" value={BOL_MARATHI_APP.waitlistSubject} />
@@ -69,8 +70,8 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 	<input type="hidden" name="language" value={locale} />
 	<input type="hidden" name="referrer" value="" data-referrer />
 	<input type="text" name="website" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true" />
-	<button type="submit" disabled={!action}>{buttonLabel ?? t.button}</button>
-	{!action && <p class="note">{t.disabled}</p>}
+	<button type="submit" disabled={!enabled}>{buttonLabel ?? t.button}</button>
+	{!enabled && <p class="note">{t.disabled}</p>}
 	<p class="waitlist-status" role="status" aria-live="polite" data-waitlist-status hidden></p>
 </form>
 
@@ -100,13 +101,15 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 
 				const data = Object.fromEntries(new FormData(form));
 				try {
-					const res = await fetch(form.getAttribute('action') || '/api/contact', {
-						method: 'POST',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify(data),
+					const { submitForm } = await import('/src/lib/form.ts');
+					const result = await submitForm({
+						kind: 'notify',
+						email: String(data.email ?? ''),
+						message: data.message ? String(data.message) : undefined,
+						source: String(data.source ?? ''),
+						website: data.website ? String(data.website) : undefined,
 					});
-					const body = await res.json().catch(() => ({ ok: false }));
-					if (!res.ok || !body.ok) throw new Error(body.error || 'failed');
+					if (!result.ok) throw new Error(result.error);
 					status.textContent = 'Thanks — you are on the list.';
 					form.reset();
 				} catch (error) {

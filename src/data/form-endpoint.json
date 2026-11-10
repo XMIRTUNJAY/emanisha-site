@@ -1,4 +1,0 @@
-{
-  "_comment": "Where form submissions are delivered. Hostinger provides the domain and DNS only, so there is no PHP to forward through; the /api/contact Pages Function posts here. Empty means delivery is not configured: the endpoint still validates submissions and returns an honest failure rather than a silent success. Set formspree to a Formspree form id (https://formspree.io/f/<id>) — create one at formspree.io and it forwards to mrxubr@gmail.com.",
-  "formspree": ""
-}

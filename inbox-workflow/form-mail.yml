@@ -1,0 +1,40 @@
+# Forward form submissions by email.
+#
+# The contact form creates an issue in this inbox repository. This workflow
+# forwards each submission to the site owner's inbox and then deletes the
+# issue, so the inbox stays empty and the browser-side token has nothing left
+# behind to abuse.
+name: Forward form submissions by email
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  forward:
+    # Only issues that carry the marker our form adds are real submissions.
+    if: contains(github.event.issue.body, 'dhyaana-form-submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install mailer
+        run: npm install --no-save nodemailer@10
+      - name: Forward by email
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node forward.mjs

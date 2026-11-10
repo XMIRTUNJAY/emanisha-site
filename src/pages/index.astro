@@ -759,16 +759,20 @@ const description =
 	}
 	if (routeItems.length) setRoute('bol');
 
-	// forms — POST to the GitHub Pages Function (/api/contact), which delivers
-	// to the site owner. Same-origin + relative URL, so lift-and-shift safe.
+	// forms — POST to the GitHub API, which opens an issue in the form inbox
+	// repo. A GitHub Actions workflow there emails it to the site owner and
+	// deletes the issue. See src/lib/form.ts.
 	async function postSite(data: Record<string, unknown>) {
-		const res = await fetch('/api/contact', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(data),
+		const { submitForm } = await import('/src/lib/form.ts');
+		const result = await submitSite({
+			kind: (data.kind as 'contact' | 'newsletter' | 'notify') ?? 'contact',
+			email: String(data.email ?? ''),
+			name: data.name ? String(data.name) : undefined,
+			message: data.message ? String(data.message) : undefined,
+			source: data.source ? String(data.source) : undefined,
+			website: data.website ? String(data.website) : undefined,
 		});
-		const body = await res.json().catch(() => ({ ok: false }));
-		if (!res.ok || !(body as { ok?: boolean }).ok) throw new Error('failed');
+		if (!result.ok) throw new Error(result.error);
 	}
 	const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
 	contactForm?.addEventListener('submit', async (e) => {
