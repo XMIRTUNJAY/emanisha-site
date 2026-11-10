@@ -99,3 +99,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          # The site is large (the image library alone is tens of MB), so the
+          # file sync needs longer than the 10 minute default.
+          timeout: 3600000
+          error_count: 30
