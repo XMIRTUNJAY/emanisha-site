@@ -75,53 +75,55 @@ const nextUrl = new URL('/app/#joined', Astro.site).toString();
 	<p class="waitlist-status" role="status" aria-live="polite" data-waitlist-status hidden></p>
 </form>
 
-<script is:inline>
-	(function () {
+<!--
+  Not is:inline — Astro bundles the form client import so the path is rewritten
+  to the built chunk. An inline script keeps the raw "/src/..." path, which
+  404s in production.
+-->
+<script>
+	import { submitForm } from '../lib/form';
+
+	document.querySelectorAll<HTMLFormElement>('form.waitlist-form').forEach((form) => {
 		// Fills the referrer field; form works without it.
 		try {
-			document.querySelectorAll('[data-referrer]').forEach((el) => {
+			form.querySelectorAll<HTMLInputElement>('[data-referrer]').forEach((el) => {
 				el.value = document.referrer || '';
 			});
 		} catch (e) {}
 
-		// Submit through fetch so the reader gets a status message rather than
-		// the endpoint's JSON. Each form on the page handles itself.
-		document.querySelectorAll('form.waitlist-form').forEach((form) => {
-			const status = form.querySelector('[data-waitlist-status]');
-			const button = form.querySelector('button[type="submit"]');
-			if (!status || !button) return;
+		const status = form.querySelector<HTMLElement>('[data-waitlist-status]');
+		const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+		if (!status || !button) return;
 
-			form.addEventListener('submit', async (event) => {
-				event.preventDefault();
-				const original = button.textContent;
-				button.disabled = true;
-				button.textContent = '…';
-				status.hidden = false;
-				status.textContent = 'Sending…';
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const original = button.textContent;
+			button.disabled = true;
+			button.textContent = '…';
+			status.hidden = false;
+			status.textContent = 'Sending…';
 
-				const data = Object.fromEntries(new FormData(form));
-				try {
-					const { submitForm } = await import('/src/lib/form.ts');
-					const result = await submitForm({
-						kind: 'notify',
-						email: String(data.email ?? ''),
-						message: data.message ? String(data.message) : undefined,
-						source: String(data.source ?? ''),
-						website: data.website ? String(data.website) : undefined,
-					});
-					if (!result.ok) throw new Error(result.error);
-					status.textContent = 'Thanks — you are on the list.';
-					form.reset();
-				} catch (error) {
-					status.textContent =
-						'Could not sign you up right now. Please try again, or email mrxubr@gmail.com.';
-				} finally {
-					button.disabled = false;
-					button.textContent = original;
-				}
-			});
+			const data = Object.fromEntries(new FormData(form));
+			try {
+				const result = await submitForm({
+					kind: 'notify',
+					email: String(data.email ?? ''),
+					message: data.message ? String(data.message) : undefined,
+					source: String(data.source ?? ''),
+					website: data.website ? String(data.website) : undefined,
+				});
+				if (!result.ok) throw new Error(result.error);
+				status.textContent = 'Thanks — you are on the list.';
+				form.reset();
+			} catch (error) {
+				status.textContent =
+					'Could not sign you up right now. Please try again, or email mrxubr@gmail.com.';
+			} finally {
+				button.disabled = false;
+				button.textContent = original;
+			}
 		});
-	})();
+	});
 </script>
 
 <style>

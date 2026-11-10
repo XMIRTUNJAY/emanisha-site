@@ -1,13 +1,11 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-	/** Repository that receives form submissions (owner/name). */
-	readonly PUBLIC_FORM_INBOX_REPO?: string;
 	/**
-	 * Token with Issues: write on the inbox repository only. It is public by
-	 * necessity, so it is scoped to one throwaway repository.
+	 * Formspree endpoint that receives submissions (https://formspree.io/f/<id>).
+	 * Empty means the form reports that it is not configured.
 	 */
-	readonly PUBLIC_FORM_INBOX_TOKEN?: string;
+	readonly PUBLIC_FORM_ENDPOINT?: string;
 }
 
 interface ImportMeta {

@@ -1,15 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 /**
- * The form client posts to the GitHub API to open an issue in the inbox
- * repository. These tests cover the parts that can be checked without a
- * network call: the payload shape and the validation rules.
+ * The form client posts to Formspree, which mails the site owner. These tests
+ * cover the parts that can be checked without a network call: the validation
+ * rules and the shape of the request.
  */
 
-const REPO = 'XMIRTUNJAY/emanisha-inbox';
-
-/** A local copy of the client, so the rules can be exercised directly. */
+/** A local copy of the client's validation, so the rules can be exercised. */
 function validate(payload: {
 	kind: string;
 	email?: string;
@@ -55,16 +54,29 @@ test('form client: newsletter only needs an email', () => {
 });
 
 test('form client: emails containing a and d survive validation', () => {
-	// The first port of the PHP sanitiser used a character class that also
+	// An earlier port of the PHP sanitiser used a character class that also
 	// stripped the letters a and d, so "a@b.co" became "@b.co".
 	for (const email of ['a@b.co', 'dave@example.com', 'mrxubr@gmail.com']) {
 		assert.equal(validate({ kind: 'newsletter', email }), null, `${email} should validate`);
 	}
 });
 
-test('form client: posts to the inbox repository issues endpoint', async () => {
-	const { readFileSync } = await import('node:fs');
+test('form client: posts to the configured Formspree endpoint', () => {
 	const source = readFileSync(new URL('../src/lib/form.ts', import.meta.url), 'utf8');
-	assert.match(source, new RegExp(`repos/\\$\\{inboxRepo\\}/issues`));
-	assert.match(source, new RegExp(REPO.replace('/', '\\/')));
+	assert.match(source, /PUBLIC_FORM_ENDPOINT/);
+	assert.match(source, /waitlistFormAction/);
+});
+
+test('form client: sends the fields Formspree expects', () => {
+	const source = readFileSync(new URL('../src/lib/form.ts', import.meta.url), 'utf8');
+	for (const field of ['email', '_subject', '_reply_to', 'message', 'name']) {
+		assert.match(source, new RegExp(`\\b${field}\\b`), `missing ${field}`);
+	}
+});
+
+test('form client: no GitHub API token is exposed to the browser', () => {
+	const source = readFileSync(new URL('../src/lib/form.ts', import.meta.url), 'utf8');
+	assert.doesNotMatch(source, /api\.github\.com/);
+	assert.doesNotMatch(source, /Authorization/);
+	assert.doesNotMatch(source, /PUBLIC_FORM_INBOX_TOKEN/);
 });

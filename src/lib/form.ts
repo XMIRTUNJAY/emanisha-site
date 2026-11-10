@@ -2,16 +2,16 @@
  * Form submission client.
  *
  * Hostinger provides the domain and DNS only, and GitHub Pages has no
- * server-side runtime, so submissions are sent to the GitHub API: each one
- * opens an issue in a private-purpose inbox repository. A GitHub Actions
- * workflow in that repo forwards the issue to the site owner's inbox by email
- * and then deletes it, so nothing accumulates.
+ * server-side runtime, so the form posts straight to Formspree, which mails
+ * the site owner. No token is exposed to the browser and no third-party code
+ * runs on the page.
  *
- * The token is injected at build time from PUBLIC_FORM_INBOX_TOKEN. It is
- * visible in the published JavaScript by necessity — it is therefore scoped to
- * a single repository with Issues: write and nothing else, and it is kept out
- * of git history.
+ * The endpoint is the one already configured for learn-marathi. Set
+ * PUBLIC_FORM_ENDPOINT to override it; empty means the form reports that it
+ * is not configured instead of failing silently.
  */
+
+import { BOL_MARATHI_APP } from '../data/app';
 
 export type FormKind = 'contact' | 'newsletter' | 'notify';
 
@@ -25,28 +25,21 @@ export type FormPayload = {
 	website?: string;
 };
 
-const inboxRepo = import.meta.env.PUBLIC_FORM_INBOX_REPO ?? 'XMIRTUNJAY/emanisha-inbox';
-const inboxToken = import.meta.env.PUBLIC_FORM_INBOX_TOKEN ?? '';
+const endpoint = (import.meta.env.PUBLIC_FORM_ENDPOINT ?? BOL_MARATHI_APP.waitlistFormAction ?? '').trim();
 
-export const formConfigured = Boolean(inboxToken);
-
-function endpoint(): string {
-	return `https://api.github.com/repos/${inboxRepo}/issues`;
-}
-
-/** Marker the mail workflow looks for before forwarding anything. */
-const MARKER = 'dhyaana-form-submission';
+export const formConfigured = Boolean(endpoint);
 
 export type SubmitResult = { ok: true } | { ok: false; error: string };
 
 export async function submitForm(payload: FormPayload): Promise<SubmitResult> {
-	if (!inboxToken) {
+	if (!endpoint) {
 		return { ok: false, error: 'the form is not configured yet' };
 	}
 	if (payload.website) {
 		// Honeypot: pretend it worked so bots do not learn.
 		return { ok: true };
 	}
+
 	const email = (payload.email ?? '').trim();
 	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 		return { ok: false, error: 'please give a valid email address' };
@@ -55,37 +48,39 @@ export async function submitForm(payload: FormPayload): Promise<SubmitResult> {
 		return { ok: false, error: 'please add your name and a few words' };
 	}
 
-	const body = {
-		...payload,
-		submittedAt: new Date().toISOString(),
+	const labels = {
+		contact: 'Contact message',
+		newsletter: 'Newsletter signup',
+		notify: 'Notify-me signup',
 	};
 
 	try {
-		const res = await fetch(endpoint(), {
+		const res = await fetch(endpoint, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Accept: 'application/vnd.github+json',
-				Authorization: `Bearer ${inboxToken}`,
-				'X-GitHub-Api-Version': '2022-11-28',
+				Accept: 'application/json',
 			},
 			body: JSON.stringify({
-				title: `${MARKER}: ${payload.kind}`,
-				body: [
-					MARKER,
-					'',
-					'```json',
-					JSON.stringify(body, null, 2),
-					'```',
-				].join('\n'),
-				labels: ['form-submission'],
+				email,
+				name: payload.name ?? '',
+				message: payload.message ?? '',
+				// _subject and _reply_to are Formspree's built-in fields; the
+				// reply goes to whoever wrote in.
+				_subject: `[emanisha.in] ${labels[payload.kind]}${payload.source ? ` (${payload.source})` : ''}`,
+				_reply_to: email,
+				kind: payload.kind,
+				source: payload.source ?? '',
 			}),
 		});
 		if (!res.ok) {
 			const detail = await res.json().catch(() => null);
 			const message =
+				detail?.errors?.[0]?.message ??
 				detail?.message ??
-				(res.status === 401 ? 'the form endpoint is not authorised' : 'delivery failed');
+				(res.status === 429
+					? 'too many attempts — please try again later'
+					: 'could not send right now');
 			return { ok: false, error: message };
 		}
 		return { ok: true };

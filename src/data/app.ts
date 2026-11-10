@@ -19,10 +19,10 @@ export const BOL_MARATHI_APP = {
   // Used only when the app is live or in beta; otherwise pages fall
   // back to the waitlist form.
   deepLinkBase: 'bolmarathi://practice',
-  // Waitlist: every email capture posts here. The target is the GitHub API,
-  // which opens an issue in the form inbox repo; a workflow there emails it to
-  // the site owner and deletes the issue. Empty = footer shows mailto too.
-  waitlistFormAction: '',
+  // Waitlist: every email capture posts here. The target is the Formspree
+  // endpoint that forwards to the site owner's inbox — no token in the page,
+  // no server-side runtime needed. Empty = footer shows mailto too.
+  waitlistFormAction: 'https://formspree.io/f/xqpaeejw',
   waitlistSubject: 'Notify me — Bol Marathi launch',
   // App walkthrough in tab-flow order: Learn → Practice → Progress → Profile.
   screenshots: [

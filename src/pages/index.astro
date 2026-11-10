@@ -518,6 +518,8 @@ const description =
 </IndieLayout>
 
 <script>
+	import { submitForm } from '../lib/form';
+
 	// project tabs + sliding visual stack (directional, neighbors peek)
 	const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.show-tabs [role="tab"]'));
 	const panels = Array.from(document.querySelectorAll<HTMLElement>('.show-panel'));
@@ -759,12 +761,10 @@ const description =
 	}
 	if (routeItems.length) setRoute('bol');
 
-	// forms — POST to the GitHub API, which opens an issue in the form inbox
-	// repo. A GitHub Actions workflow there emails it to the site owner and
-	// deletes the issue. See src/lib/form.ts.
+	// forms — POST to Formspree, which mails the site owner. Same JSON contract
+	// for every capture; see src/lib/form.ts.
 	async function postSite(data: Record<string, unknown>) {
-		const { submitForm } = await import('/src/lib/form.ts');
-		const result = await submitSite({
+		const result = await submitForm({
 			kind: (data.kind as 'contact' | 'newsletter' | 'notify') ?? 'contact',
 			email: String(data.email ?? ''),
 			name: data.name ? String(data.name) : undefined,
