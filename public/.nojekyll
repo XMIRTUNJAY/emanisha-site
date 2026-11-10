@@ -1,0 +1,3 @@
+# The Pages runtime needs this marker to serve files as-is (no Jekyll
+# processing). It is a dotfile, so the artifact uploader excludes it unless
+# include-hidden-files is set — see .github/workflows/deploy-hostinger.yml.

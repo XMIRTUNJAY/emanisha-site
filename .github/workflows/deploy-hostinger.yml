@@ -88,6 +88,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+          # .nojekyll is a dotfile and is skipped by default; Pages needs it to
+          # serve the tree verbatim.
+          include-hidden-files: true
 
   deploy:
     environment:
