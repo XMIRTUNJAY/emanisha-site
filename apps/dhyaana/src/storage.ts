@@ -120,6 +120,28 @@ export function saveState(state: LocalState) {
   }
 }
 
+/**
+ * Clear everything stored on this device: sessions, reflections, journey
+ * progress and watched videos. The reader keeps their sankalpa and its
+ * history, which are deliberately theirs rather than a record of practice.
+ */
+export function resetProgress(): LocalState {
+  const current = loadState();
+  const next: LocalState = {
+    ...emptyState(),
+    sankalpa: current.sankalpa,
+    sankalpaHistory: current.sankalpaHistory,
+  };
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    // Nothing to clear if storage is unavailable.
+  }
+  return next;
+}
+
+export const STORAGE_KEY = KEY;
+
 function id() {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;

@@ -3378,6 +3378,37 @@ body:after {
   border-top: 1px solid var(--line);
 }
 
+.reset-progress {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+.reset-progress button {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  padding: 11px 18px;
+  min-height: 44px;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease;
+}
+.reset-progress button:hover {
+  color: var(--text-primary);
+  border-color: var(--clay);
+}
+.reset-progress small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
 .journey-summary > div {
   display: grid;
   gap: 0;

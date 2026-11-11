@@ -2,6 +2,8 @@ import type { WorldId } from "../content/content";
 import { earnsPartialCredit } from "../content/thresholds";
 import type { LocalState } from "../storage";
 import {
+  CHANNEL_URL,
+  getPlaylist,
   playlistUrl,
   playlists,
   videosForWorld,
@@ -28,7 +30,7 @@ export function PlaylistShelf({ world, state, onPlay, heading, intro, tone = "li
   const percent = videos.length ? Math.round((completed / videos.length) * 100) : 0;
 
   const links = worldPlaylists[world]
-    .map((entry) => playlists.find((playlist) => playlist.id === entry.playlistId))
+    .map((entry) => getPlaylist(entry.playlistId))
     .filter((playlist): playlist is NonNullable<typeof playlist> => Boolean(playlist))
     .filter((playlist, index, all) => all.findIndex((item) => item.id === playlist.id) === index);
 
@@ -111,6 +113,9 @@ export function PlaylistShelf({ world, state, onPlay, heading, intro, tone = "li
             {playlist.title} on YouTube <span aria-hidden="true">↗</span>
           </a>
         ))}
+        <a href={CHANNEL_URL} target="_blank" rel="noreferrer">
+          The whole channel <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </section>
   );

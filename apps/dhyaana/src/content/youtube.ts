@@ -112,6 +112,10 @@ export const worldPlaylists: Record<WorldId, { playlistId: string; limit: number
 
 const playlistById = new Map(playlists.map((playlist) => [playlist.id, playlist]));
 
+export function getPlaylist(id: string): Playlist | undefined {
+  return playlistById.get(id);
+}
+
 export function videosForWorld(world: WorldId): PlaylistVideo[] {
   const seen = new Set<string>();
   const out: PlaylistVideo[] = [];
@@ -135,3 +139,9 @@ export function videosForWorld(world: WorldId): PlaylistVideo[] {
 export function playlistUrl(playlistId: string): string {
   return `https://www.youtube.com/playlist?list=${playlistId}`;
 }
+
+export function watchUrl(videoId: string): string {
+  return `https://www.youtube.com/watch?v=${videoId}`;
+}
+
+export const CHANNEL_URL = "https://www.youtube.com/@DhyaanaApp";

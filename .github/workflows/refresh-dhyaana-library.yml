@@ -1,0 +1,54 @@
+# Refresh the Dhyaana video library from the channel.
+#
+# The site's manifest (apps/dhyaana/src/content/youtube.json) is the source of
+# truth for what the shelf shows. This workflow refreshes it from the live
+# YouTube playlists and commits any change, which triggers the Pages deploy.
+#
+# The site never fetches YouTube itself: the manifest is committed, so if
+# YouTube is unreachable the library simply stays as it was rather than
+# breaking. The sync tool keeps the previous entry for any playlist it cannot
+# read.
+#
+# Weekly, on Sunday morning. Change to `cron:` for a different schedule.
+name: Refresh Dhyaana video library
+
+on:
+  schedule:
+    # Sundays at 06:20 UTC (11:50 IST).
+    - cron: '20 6 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dhyaana-library
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync playlists
+        run: node tools/sync-dhyaana-playlists.mjs
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- apps/dhyaana/src/content/youtube.json; then
+            echo "Library unchanged - nothing to commit."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add apps/dhyaana/src/content/youtube.json
+          git commit -m 'chore(dhyaana): refresh video library from the channel'
+          git push

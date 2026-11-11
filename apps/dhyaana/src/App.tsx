@@ -21,6 +21,7 @@ import {
   markJourneyDay,
   recordSession,
   recordVideo,
+  resetProgress,
   saveState,
   setSankalpa,
 } from "./storage";
@@ -1027,6 +1028,21 @@ function MePage({
                   );
                 })}
             </div>
+          </div>
+        )}
+        {(state.sessions.length > 0 || state.videos && Object.keys(state.videos).length > 0) && (
+          <div className="reset-progress">
+            <button
+              onClick={() => {
+                if (!confirm("Clear your practice history on this device? Your sankalpa is kept.")) return;
+                const next = resetProgress();
+                setState(next);
+                saveState(next);
+              }}
+            >
+              Clear my practice history
+            </button>
+            <small>Sessions, journeys and watched videos are removed. Your sankalpa stays.</small>
           </div>
         )}
       </section>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { isComplete } from "../content/thresholds";
+import { watchUrl } from "../content/youtube";
 
 /* The YouTube IFrame API attaches itself to window. */
 declare global {
@@ -142,7 +143,7 @@ export function YoutubePlayer({ videoId, title, onProgress, onEnded }: Props) {
       {state === "error" && (
         <p className="yt-note">
           This video could not be embedded.{" "}
-          <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noreferrer">
+          <a href={watchUrl(videoId)} target="_blank" rel="noreferrer">
             Watch it on YouTube
           </a>
           .
